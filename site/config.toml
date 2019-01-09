@@ -1,0 +1,35 @@
+baseURL = "https://kentxxq.com/"
+languageCode = "zh"
+title = "kentxxq's Blog"
+theme = "LeaveIt"
+
+
+[menu]
+  [[menu.main]]
+    name = "Blog"
+    url = "/posts/"
+    weight = 1
+  [[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 2
+  [[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 3
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 4
+
+[params]
+    since = 1993
+    author = "kentxxq"                           # Author's name
+    avatar = "/images/me/avatar.jpg"           # Author's avatar
+    subtitle = "Less is more"         # Subtitle
+
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
