@@ -19,5 +19,5 @@ git commit -am ‘first commit’
 #强制推送到远程库
 git push -f origin master
 #强制拉取，覆盖本地
-git reset —hard origin/master
+git reset -—hard origin/master
 ```
