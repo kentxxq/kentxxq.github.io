@@ -1,5 +1,7 @@
-echo "获取当前路径"
+echo "获取脚本路径"
 cur_path=$(cd `dirname $0`; pwd)
+echo "进入脚本路径"
+cd $cur_path
 echo "更新代码"
 git pull
 echo "打包"
