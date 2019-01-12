@@ -222,51 +222,78 @@ webhook服务
 
 ```python
 #! /home/kentxxq/.pyenv/shims/python
+# coding:utf-8
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 import logging
 import os
 import delegator
-from concurrent.futures import ThreadPoolExecutor
+import json
+import hmac
+import hashlib
+from threading import Thread
 
-executor = ThreadPoolExecutor(2)
+
+class deployThread(Thread):
+    def __init__(self, signature: str, data: bytes):
+        super().__init__()
+        self.signature = signature
+        self.data = data
+
+    def run(self):
+        print('进入部署')
+        blog_v = hmac.new(blog_token, self.data, hashlib.sha1).hexdigest()
+        wechat_v = hmac.new(wechat_token, self.data, hashlib.sha1).hexdigest()
+        try:
+            if self.signature == wechat_v:
+                logging.info('开始执行wechat命令')
+                result = delegator.run(
+                    'sh /home/kentxxq/wechat/deploy.sh')
+            elif self.signature == blog_v:
+                print("开始执行blog命令")
+                result = delegator.run(
+                    'sh /home/kentxxq/blog/deploy.sh')
+            print(result.out)
+        except Exception:
+            logging.info('请求错误')
 
 
 class Handler(SimpleHTTPRequestHandler):
     def do_POST(self):
         '''禁用post请求'''
-        pass
+        print('收到post请求', self.path, self.headers)
+
+        try:
+            sha1_flag, signature = self.headers['X-Hub-Signature'].split('=')
+            # 读取数据的时候，加上具体的长度，会加快非常多。。
+            data = self.rfile.read(int(self.headers['Content-Length']))
+            xx = deployThread(signature, data)
+            xx.start()
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+            # Send the html message
+            self.wfile.write(b"ok")
+            return
+        except Exception:
+            pass
 
     def do_GET(self):
-        print('收到get请求', self.path, self.headers)
-
+        '''禁用get请求'''
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
         # Send the html message
-        self.wfile.write(b"Hello World !")
-        executor.submit(self.deploy)
+        self.wfile.write(b"hello")
         return
-
-    def deploy(self):
-        try:
-            if self.headers['X-Gitlab-Event'] == 'Push Hook':
-                if self.headers['X-Gitlab-Token'] == os.environ['WECHAT_AUTH_TOKEN']:
-                    print("开始执行wechat命令")
-                    result = delegator.run(
-                        'sh /home/kentxxq/wechat_test/deploy.sh')
-                if self.headers['X-Gitlab-Token'] == os.environ['BLOG_AUTH_TOKEN']:
-                    print("开始执行blog命令")
-                    result = delegator.run(
-                        'sh /home/kentxxq/blog/deploy.sh')
-                print(result.out)
-        except expression as identifier:
-            pass
 
 
 if __name__ == '__main__':
-    addr = '0.0.0.0'
+    addr = '127.0.0.1'
     port = 8555
     httpd = HTTPServer((addr, port), Handler)
+    # 获取系统环境变量
+    wechat_token = os.environ['WECHAT_AUTH_TOKEN'].encode(encoding='ascii')
+    blog_token = os.environ['BLOG_AUTH_TOKEN'].encode(encoding='ascii')
     print('使用nohup python -u /usr/local/bin/docker-hook &，可以禁用缓存输出到nohup.out文件')
     httpd.serve_forever()
 
