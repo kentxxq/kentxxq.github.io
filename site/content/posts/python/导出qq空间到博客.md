@@ -10,6 +10,7 @@ tags: ["python"]
 1. 先用一个[老哥的开源代码](https://github.com/wwwpf/QzoneExporter)把数据跑下来
 2. 把照片都传到google相册
 3. 把留言板弄成md，然后把e101类似的表情手动对比替换了。。。主要是没有文档，还不如手动来得快
+
 ```python
 # coding:utf-8
 
@@ -55,4 +56,65 @@ with open('/Users/kentxxq/kent_code/blog/site/content/posts/lines/qq空间黑历
                 f.write('\n')
 
 ```
-4. 把说说制作成md文章
+**把说说制作成md文章,同时把``去掉**
+```python
+# coding:utf-8
+
+import os
+import json
+import arrow
+import re
+
+head = """
+---
+title:  qq空间说说
+date:   2019-01-15 00:00:00 +0800
+categories: ["黑历史"]
+tags: ["说说"]
+---
+"""
+
+path = '/Users/kentxxq/kent_code/QzoneExporter/805429509/shuoshuo'
+
+files = os.listdir(path)
+files = sorted(files)
+
+p_html = re.compile('\[.*?\]')
+
+
+with open('/Users/kentxxq/kent_code/blog/site/content/posts/life/qq空间说说.md', 'w') as f:
+    f.write(head)
+    f.write('\n')
+    f.write('\n')
+    for file in files:
+        if file.endswith('.json'):
+            with open(path + '/' + file, 'r') as m:
+                datas = json.load(m)['msglist']
+                for data in datas:
+                    createTime = data['createTime']
+                    f.write(createTime + '\n')
+                    f.write('===' + '\n')
+
+                    f.write('**')
+                    content = data['content']
+                    f.write(content)
+                    f.write('**')
+                    f.write('\n')
+                    f.write('\n')
+                    if 'lbs' in data.keys():
+                        if data['lbs'] is not None:
+                            f.write('`')
+                            f.write(data['lbs']['name'])
+                            f.write('`')
+                            f.write('\n')
+                    f.write('\n')
+                    f.write('\n')
+                    if 'commentlist' in data.keys():
+                        for comment in data['commentlist']:
+                            f.write('-=-=-=-=-'+comment['name'] + ':')
+                            f.write(comment['content'])
+                            f.write('\n')
+                            f.write('\n')
+                    f.write('\n')
+
+```

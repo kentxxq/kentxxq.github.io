@@ -1,6 +1,5 @@
-
 ---
-title:  qq空间黑历史
+title:  qq空间留言板
 date:   2019-01-14 00:00:00 +0800
 categories: ["黑历史"]
 tags: ["留言板"]
