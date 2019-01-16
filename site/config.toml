@@ -27,6 +27,8 @@ theme = "LeaveIt"
     author = "kentxxq"                           # Author's name
     avatar = "/images/me/avatar.jpg"           # Author's avatar
     subtitle = "Less is more"         # Subtitle
+    description = "kentxxq个人站点" # site description
+    keywords = "编码 生活 电影 音乐 过去 现在 将来" # site keywords
 
 
 [taxonomies]
