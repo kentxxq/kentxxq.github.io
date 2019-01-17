@@ -57,4 +57,29 @@ Query OK, 0 rows affected (0.00 sec)
 
 ```
 
+如果还是有登陆问题
+---
+```bash
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass4!';
 
+flush privileges;
+
+
+use mysql;
+
+update user set host='%' where user='root';
+
+flush privileges;
+
+
+ALTER USER 'root'@'%' IDENTIFIED BY 'Aa5227860!';
+
+flush privileges;
+
+
+一些兼容问题
+alter user 'root'@'%' identified with  mysql_native_password by 'password'
+
+flask-sqlacodegen  --flask mysql+pymysql://root:'password'@47.75.155.134/test
+
+```
