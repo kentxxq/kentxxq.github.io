@@ -26,7 +26,7 @@ v-show
 
 
 
-vm渲染完后执行:`this.nextTick(()=>{})`
+vm渲染完后执行:`this.$nextTick(()=>{})`
 
 
 
