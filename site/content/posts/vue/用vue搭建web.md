@@ -86,7 +86,7 @@ export default {
 </script>
 ```
 
-20190122
+20190122 00:00
 ===
 
 关于pwa
@@ -130,3 +130,40 @@ pwa: {
 关于修改主题
 ---
 关于安卓上的启动动画background_color和图片icon之类自己手动再替换一下吧，我改了好久好久都没成功。。
+
+20190123 01:20
+===
+加上了一个轮播图，轮播图的关键是`图片的大小比例要合适`，免得在各个机器上很麻烦的适配   
+关于首页，推荐使用`redirect`跳转
+```javascript
+export default new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: [
+    {
+      path: '/home',
+      name: 'home',
+      component: () => import('./views/Home.vue')
+    },
+    {
+      path: '/about',
+      name: 'about',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+    },
+    {
+      path: '/',
+      redirect: '/home'
+    }
+  ]
+})
+
+```
+
+
+todo
+===
+1. 首页的pwa加载以后，需要点一下，才会出来轮播图的图片。这个后面搞，先会走，再会跑。
+2. 后续部署vue的dist代码，需要修改manifest.json
