@@ -115,5 +115,15 @@ pwa: {
     // 其实最重要的是下面这两个，自己按需求定制
     // include: [/\.html$/, /\.js$/]
     // exclude: [/\.jpg$/, /\.png$/]
+    // 下面是具体资源的配置选项，用的时候最好参考官方文档
+    //runtimeCaching: [
+    //    {      // To match cross-origin requests, use a RegExp that matches
+    //        // the start of the origin:
+    //        urlPattern: new RegExp('^https://api'), handler: 'staleWhileRevalidate', options: {   //     // Configure which responses are considered cacheable.
+    //            cacheableResponse: {
+    //                statuses: [200]
+    //            }
+    //        }
+    //    },
   }
 ```
