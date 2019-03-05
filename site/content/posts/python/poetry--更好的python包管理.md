@@ -42,7 +42,9 @@ tags: ["python"]
 3. `pycharm不是你的常用首选工具`  
 
 为什么我加上第三点呢？  
-因为pycharm(vscode对它的支持个人觉得不实用)支持pipenv。在ide内安装包，很方便啊。而且我没有遇到速度慢的问题,不清楚是不是ide自己做了处理。
+因为pycharm(vscode对它的支持个人觉得不实用)支持pipenv。在ide内安装包，很方便啊。而且我没有遇到速度慢的问题,不清楚是不是ide自己做了处理。  
+pycharm默认的情况下，是使用virtualvenv，它和venv几乎没有什么区别。方便就好啊!  
+poetry在pycharm呢？去命令行里装。虽然更直接。但是你可能记不清具体的包名？想看看最新的版本号？pycharm都给你解决了
 
 
 杂谈
