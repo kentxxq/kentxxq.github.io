@@ -24,19 +24,21 @@ tags: ["python"]
 
 [venv](https://docs.python.org/3/library/venv.html)
 ---
-它是`python官方推荐`的工具。所以(pycharm，vscode等)对它的支持也会是最好的。虽然之前官方包`pyvenv被弃用`了。但是它只有一些基本的功能。
+它是`python官方推荐`的工具。所以(pycharm，vscode等)对它的支持也会是最好的。  
+虽然之前官方包`pyvenv被弃用`了。但是它支持最好，它只有一些基本的功能。
 
 [poetry](https://github.com/sdispater/poetry)
 ---
-使用的人不多，知名度也不高。但是没有pipenv的一些问题。这是我比较推荐的一个。  
+使用的人不多，知名度也不高。  
+但是没有pipenv的一些问题。这是我比较推荐的一个。  
 但也有一个问题。那就是`pycharm`等等工具是不支持的。
 
 最终选择
 ===
 使用`poetry`,要素:  
-1. 简单，`快速`
-2. 综合了`setup.py`，如果以后成为`事实标准`，对任何开发者都更加方便。
-3. `pycharm不是你的常用首选工具`
+1. 简单，`快速`  
+2. 综合了`setup.py`，如果以后成为`事实标准`，对任何开发者都更加方便。  
+3. `pycharm不是你的常用首选工具`  
 
 为什么我加上第三点呢？  
 因为pycharm(vscode对它的支持个人觉得不实用)支持pipenv。在ide内安装包，很方便啊。而且我没有遇到速度慢的问题,不清楚是不是ide自己做了处理
