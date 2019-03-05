@@ -3,7 +3,7 @@
     {{ with .Site.Params.avatar}}
     {{ $avatar := .}}
     <div class="avatar">
-        <a href="/posts/"> <img src="{{ (printf "%s%s" $cdn_url $avatar)}}"> </a>
+        <a href="/posts/"> <img src="{{ (printf "%s%s" $cdn_url $avatar)}}" alt="所有者"> </a>
     </div>
     {{ end }}
     {{ with .Site.Params.subtitle}}
