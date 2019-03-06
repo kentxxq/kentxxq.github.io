@@ -3,6 +3,8 @@ title:  js挖矿
 date:   2019-03-06 09:58:00 +0800
 categories: ["随记"]
 tags: ["js挖矿","门罗币"]
+keywords: ["js挖矿","门罗币","coinhive"]
+description: "前段时间有新闻说js挖矿，于是自己试了一下。写一写，留个印象"
 ---
 
 ![js挖矿-状态图](/images/lines/js挖矿-状态图.jpg)  

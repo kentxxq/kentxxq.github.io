@@ -3,6 +3,8 @@ title:  DML_Error_Logging特性
 date:   2017-07-19 00:00:00 +0800
 categories: ["笔记"]
 tags: ["oracle"]
+keywords: ["oracle","DML_Error_Logging","特性"]
+description: "oracle的DML_Error_Logging特性"
 ---
 
 

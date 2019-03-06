@@ -3,6 +3,8 @@ title:  node配置学习
 date:   2018-01-11 11:17:00 +0800
 categories: ["笔记"]
 tags: ["vue"]
+keywords: ["vue","node"]
+description: "node配置学习"
 ---
 
 > 以后可能会用到的知识

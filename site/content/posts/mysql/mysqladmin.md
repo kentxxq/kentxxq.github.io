@@ -3,6 +3,8 @@ title:  mysqladmin
 date:   2017-07-19 00:00:00 +0800
 categories: ["笔记"]
 tags: ["mysql"]
+keywords: ["mysql","mysqladmin"]
+description: "这是一个非常好用的mysql工具，可以查看各种状态。"
 ---
 
 

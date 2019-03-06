@@ -3,6 +3,8 @@ title:  复习vue的重点要记
 date:   2019-01-17 21:15:00 +0800
 categories: ["笔记"]
 tags: ["vue"]
+keywords: ["vue","重点要记"]
+description: "复习vue的重点要记"
 ---
 
 vue备忘录

@@ -3,6 +3,8 @@ title:  mysql-hugepages配置
 date:   2017-07-19 00:00:00 +0800
 categories: ["笔记"]
 tags: ["mysql"]
+keywords: ["mysql","hugepages配置"]
+description: "在linux中，内存一般是2kb-4kb每页，如果是大内存，那么pagetables将会非常大。cpu在查找使用内存的时候，会比较慢。使用hugepages，一个内存页可以设置为2MB-1GB。从而可以加快对内存的访问速度。2MB-4MB，是适用于100GB一下的内存。1GB则适用于TB级别的内存容量"
 ---
 
 

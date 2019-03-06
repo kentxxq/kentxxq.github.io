@@ -3,6 +3,8 @@ title:  poetry--更好的python包管理
 date:   2019-03-05 23:41:00 +0800
 categories: ["笔记"]
 tags: ["python"]
+keywords: ["python","pipenv","venv","poetry","包管理","pycharm"]
+description: "我在学习python过程中，一直想要寻求到最佳实践。因为它意味着当你拿到一份你没有见过的代码时，这种事实标准会帮助到你"
 ---
 
 > 我在学习python过程中，一直想要寻求到`最佳实践`。因为它意味着当你拿到一份你没有见过的代码时，这种事实标准会帮助到你。

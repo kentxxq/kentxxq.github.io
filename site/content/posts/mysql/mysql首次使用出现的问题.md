@@ -3,6 +3,8 @@ title:  mysql首次使用出现的问题
 date:   2017-07-19 00:00:00 +0800
 categories: ["笔记"]
 tags: ["mysql"]
+keywords: ["mysql","首次使用出现的问题"]
+description: "mysql首次使用出现的问题"
 ---
 
 

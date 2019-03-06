@@ -3,6 +3,8 @@ title:  调试安卓或者iphone上的网页
 date:   2018-12-21 00:00:00 +0800
 categories: ["笔记"]
 tags: ["mac"]
+keywords: ["安卓","mac","iphone","调试"]
+description: "开发的时候，电脑上chrome没问题，但是手机上访问有问题，那么就需要在手机上调试"
 ---
 
 

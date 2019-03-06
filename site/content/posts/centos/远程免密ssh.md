@@ -3,6 +3,8 @@ title:  远程免密ssh
 date:   2017-07-19 00:00:00 +0800
 categories: ["笔记"]
 tags: ["centos"]
+keywords: ["centos","ssh-keygen","远程免密","ssh","ssh-copy-id"]
+description: "远程免密ssh"
 ---
 
 

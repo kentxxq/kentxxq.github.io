@@ -3,6 +3,8 @@ title:  用vue搭建web
 date:   2019-01-21 20:23:00 +0800
 categories: ["笔记"]
 tags: ["vue"]
+keywords: ["vue","web"]
+description: "刚刚开始学习vue，把基础的用法学过了一遍。现在开始使用vue-cli搭建项目，以及使用了解相关router，vuex和webpack等等"
 ---
 
 

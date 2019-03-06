@@ -3,8 +3,6 @@ languageCode = "zh"
 title = "kentxxq's Blog"
 theme = "LeaveIt"
 
-[Permalinks]
- posts = "/:filename"
 
 [menu]
   [[menu.main]]

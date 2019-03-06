@@ -3,6 +3,8 @@ title:  yum的配置和使用
 date:   2017-07-19 00:00:00 +0800
 categories: ["笔记"]
 tags: ["centos"]
+keywords: ["centos","yum","wget"]
+description: "yum是用来安装、更新、卸载、管理软件包的工具。rpm安装包因为存在依赖其他rpm软件包的问题，yum用来更加方便的解决这些问题"
 ---
 
 

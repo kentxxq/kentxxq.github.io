@@ -3,6 +3,8 @@ title:  修改mac主机名
 date:   2017-07-19 00:00:00 +0800
 categories: ["笔记"]
 tags: ["mac"]
+keywords: ["mac","主机名"]
+description: "问题出现的原因是，我从城市A回到城市B的时候，打开我的mac终端，发现我前缀居然发生了变化"
 ---
 
 

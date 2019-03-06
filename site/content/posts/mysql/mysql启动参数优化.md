@@ -3,6 +3,8 @@ title:  mysql启动参数优化
 date:   2017-07-19 00:00:00 +0800
 categories: ["笔记"]
 tags: ["mysql"]
+keywords: ["mysql","启动参数","优化"]
+description: "mysql启动参数优化"
 ---
 
 
