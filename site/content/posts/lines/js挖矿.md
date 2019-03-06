@@ -5,7 +5,7 @@ categories: ["随记"]
 tags: ["js挖矿","门罗币"]
 ---
 
-![js挖矿-状态图](/images/lines/js挖矿-状态图.jpg)
+![js挖矿-状态图](/images/lines/js挖矿-状态图.jpg)  
 > 前段时间有新闻说js挖矿，于是自己试了一下。写一写，留个印象。
 
 什么是js挖矿
@@ -20,7 +20,7 @@ js挖矿就是把挖矿过程从**专用计算工具**搬到了**浏览器里**�
 
 任务管理器查看
 ---
-![js挖矿-cpu图](/images/lines/js挖矿-状态图.jpg)
+![js挖矿-cpu图](/images/lines/js挖矿-cpu图.jpg)
 
 页面代码查看
 ---
