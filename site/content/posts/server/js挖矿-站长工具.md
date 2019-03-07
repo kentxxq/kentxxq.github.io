@@ -1,9 +1,9 @@
 ---
-title:  js挖矿
+title:  js挖矿-站长工具
 date:   2019-03-06 09:58:00 +0800
 categories: ["随记"]
 tags: ["js挖矿","门罗币"]
-keywords: ["js挖矿","门罗币","coinhive"]
+keywords: ["js挖矿","门罗币","coinhive","站长","工具"]
 description: "前段时间有新闻说js挖矿，于是自己试了一下。写一写，留个印象"
 ---
 
