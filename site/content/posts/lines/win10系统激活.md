@@ -5,4 +5,5 @@ categories: ["随记"]
 tags: ["win10激活","kms"]
 keywords: ["win10激活","kms"]
 description: "win10系统激活"
+draft: true
 ---
