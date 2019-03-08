@@ -2,10 +2,9 @@
 title:  linux各个发行版本对比
 date:   2019-03-08 10:00:00 +0800
 categories: ["笔记"]
-tags: ["centos","linux"]
-keywords: ["centos","debian","arch","cockpit","桌面","驱动","vps","内核","兼容"]
+tags: ["centos","linux","发行版本对比"]
+keywords: ["centos","debian","arch","cockpit","桌面","驱动","vps","内核","兼容","滚动更新"]
 description: "纠结过很久这个问题，结论最终是选择centos。写一篇日志，如果以后改变了选择，那肯定是因为随着系统的迭代，优缺点出现了不同"
-draft: true
 ---
 
 
@@ -29,6 +28,7 @@ draft: true
 1. RHEL是最大的商业linux公司支持的。内核贡献度第一。技术实力强，`稳`。
 2. 文档最齐全，解决问题参考方案特别多。
 3. 企业用户量大，如果公司有钱，出问题一个电话给你商业支持。
+4. 兼容性好。如果有商业支持，会有各种神奇的补丁解决问题。
 
 **没钱**就用`centos`稳。**有钱人**就用`RHEL`，出问题有人接锅。   
 个人开发，追求内核更新速度，想**体验最新特性**用`Fedora`。  
