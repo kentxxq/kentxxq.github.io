@@ -30,9 +30,6 @@ theme = "LeaveIt"
     description = "kentxxq个人站点" # site description
     keywords = "编码 生活 电影 音乐 过去 现在 将来" # site keywords
 
-[permalinks]
-  posts = "/:filename/"  # short url
-
 [taxonomies]
   tag = "tags"
   category = "categories"
