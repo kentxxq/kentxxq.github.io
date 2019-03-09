@@ -16,9 +16,11 @@
   {{ with .Site.Params.author }}
   <meta name="author" content="{{ . }}">{{ end }}
 
-  <meta name="keywords" content="{{ if .IsPage }}{{ delimit .Page.Params.keywords " " }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-  
-  <meta name="description" content="{{ if .IsPage }}{{ .Page.Params.description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta name="keywords"
+    content="{{ if .IsPage }}{{ delimit .Page.Params.keywords " " }}{{ else }}{{ .Site.Params.keywords }}{{ end }}">
+
+  <meta name="description"
+    content="{{ if .IsPage }}{{ .Page.Params.description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 
 
 
