@@ -3,7 +3,7 @@ title:  转到hugo后的架构
 date:   2018-12-23 00:00:00 +0800
 categories: ["笔记"]
 tags: ["server"]
-keywords: ["hugo","架构"]
+keywords: ["hugo","架构","jekyll","github","微软","gitlab"]
 description: "趁着从jekyll转hugo，也重新来规划一下自己的个人网站以及代码部署架构"
 ---
 
