@@ -7,7 +7,7 @@ keywords: ["js挖矿","门罗币","coinhive","站长","工具"]
 description: "前段时间有新闻说js挖矿，于是自己试了一下。写一写，留个印象"
 ---
 
-![js挖矿-状态图](/images/lines/js挖矿-状态图.jpg)  
+![js挖矿-状态图](/images/server/js挖矿-状态图.jpg)  
 > 前段时间有新闻说js挖矿，于是自己试了一下。写一写，留个印象。
 
 什么是js挖矿
@@ -22,12 +22,12 @@ js挖矿就是把挖矿过程从**专用计算工具**搬到了**浏览器里**�
 
 任务管理器查看
 ---
-![js挖矿-cpu图](/images/lines/js挖矿-cpu图.jpg)
+![js挖矿-cpu图](/images/server/js挖矿-cpu图.jpg)
 
 页面代码查看
 ---
 如果没有**故意隐藏**的话，可以看到。否则还是看cpu更直接  
-![js挖矿-js图](/images/lines/js挖矿-js图.png)
+![js挖矿-js图](/images/server/js挖矿-js图.png)
 
 
 有什么危害？
@@ -53,7 +53,7 @@ js挖矿就是把挖矿过程从**专用计算工具**搬到了**浏览器里**�
 
 最新消息，coinhive停止服务
 ===
-![js挖矿-停止服务](/images/lines/js挖矿-停止服务.jpg)
+![js挖矿-停止服务](/images/server/js挖矿-停止服务.jpg)
 
 就在今天早上起来，我看了这则通知。  
 一句话概括：由于门罗币(monero)大跌了超过50%，几乎在崩溃的边缘。网费都要付不起了...掰掰，老子不玩了。  
