@@ -1,6 +1,6 @@
 ---
 title:  centos搭建vsftpd服务
-date:   2017-07-21 00:00:00 +0800
+date:   1993-07-06 00:00:00 +0800
 categories: ["笔记"]
 tags: ["centos"]
 keywords: ["centos","yum","vsftpd","anonymous","配置"]
