@@ -3,10 +3,6 @@ languageCode = "zh"
 title = "kentxxq's Blog"
 theme = "LeaveIt"
 
-
-[permalinks]
-  posts = "/contents/:filename/" 
-
 [menu]
   [[menu.main]]
     name = "Blog"
@@ -37,3 +33,5 @@ theme = "LeaveIt"
   tag = "tags"
   category = "categories"
 
+[permalinks]
+  posts = "/contents/:filename/" 
