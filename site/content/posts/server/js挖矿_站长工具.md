@@ -1,5 +1,5 @@
 ---
-title:  js挖矿-站长工具
+title:  js挖矿_站长工具
 date:   2019-03-06 09:58:00 +0800
 categories: ["笔记"]
 tags: ["js挖矿","门罗币"]

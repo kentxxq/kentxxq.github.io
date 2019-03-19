@@ -1,5 +1,5 @@
 ---
-title:  node配置学习
+title:  vue_node学习系列
 date:   2018-01-11 11:17:00 +0800
 categories: ["笔记"]
 tags: ["vue"]

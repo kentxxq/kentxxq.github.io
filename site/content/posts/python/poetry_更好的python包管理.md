@@ -1,5 +1,5 @@
 ---
-title:  poetry--更好的python包管理
+title:  poetry_更好的python包管理
 date:   2019-03-05 23:41:00 +0800
 categories: ["笔记"]
 tags: ["python"]
