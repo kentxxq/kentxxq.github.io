@@ -9,18 +9,18 @@
 {{ $lihtGallery_init := resources.Get "/js/lightGallery-init.js" }}
 {{ if .IsPage }}
 
-    {{ if $postHasImages }}
-     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
-     {{ $vendorscript := slice $jquery $lazysizes $prettify $dynamic $main $lihtGallery $lihtGallery_init | resources.Concat "/js/vendor_gallery.js" | resources.Minify }} 
-     <script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async="" ></script>
-    {{ else }}
-    {{ $vendorscript := slice $jquery $prettify $dynamic $main | resources.Concat "/js/vendor_no_gallery.js" | resources.Minify }}
-    <script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async=""></script>
-    {{ end }}
-  
+{{ if $postHasImages }}
+<link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">
+{{ $vendorscript := slice $jquery $lazysizes $prettify $dynamic $main $lihtGallery $lihtGallery_init | resources.Concat "/js/vendor_gallery.js" | resources.Minify }}
+<script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async=""></script>
 {{ else }}
-    {{ $main := slice  $jquery $main | resources.Concat "/js/vendor_main.js" | resources.Minify}}
-    <script src="{{ printf "%s%s" $cdn_url $main.RelPermalink }}" async=""></script>
+{{ $vendorscript := slice $jquery $prettify $dynamic $main | resources.Concat "/js/vendor_no_gallery.js" | resources.Minify }}
+<script src="{{ printf "%s%s" $cdn_url $vendorscript.RelPermalink }}" async=""></script>
+{{ end }}
+
+{{ else }}
+{{ $main := slice  $jquery $main | resources.Concat "/js/vendor_main.js" | resources.Minify}}
+<script src="{{ printf "%s%s" $cdn_url $main.RelPermalink }}" async=""></script>
 {{ end }}
 
 
@@ -34,3 +34,6 @@
      });
 </script>
 -->
+
+<!--用来制作流程图-->
+<script src="https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js"></script>
