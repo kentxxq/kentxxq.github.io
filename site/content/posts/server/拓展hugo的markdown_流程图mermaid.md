@@ -23,9 +23,9 @@ hugo的渲染
 
 shortcodes的演示
 ---
-: 使用`youtube 8HnLRrQ3RS4`的简短编写，即可完成如下youtube视频的展示。
+使用`youtube 8HnLRrQ3RS4`的简短编写，即可完成如下youtube视频的展示。
 
-: 想要自动播放的话，使用`youtube id="8HnLRrQ3RS4" autoplay="true"`即可。
+想要自动播放的话，使用`youtube id="8HnLRrQ3RS4" autoplay="true"`即可。
 
 {{< youtube 8HnLRrQ3RS4 >}}
 
@@ -33,9 +33,9 @@ shortcodes的演示
 ===
 关于mermaid
 ---
-: [mermaid](https://github.com/knsv/mermaid)是一个js库，用来渲染流程图用的。2w多的star，看了一下文档，觉得博客是肯定够了的。
+[mermaid](https://github.com/knsv/mermaid)是一个js库，用来渲染流程图用的。2w多的star，看了一下文档，觉得博客是肯定够了的。
 
-: **如果真的要求特别高，那不如用专业软件做出来，导出图片更好。**
+**如果真的要求特别高，那不如用专业软件做出来，导出图片更好。**
 
 拓展步骤
 ---
@@ -86,5 +86,6 @@ sequenceDiagram
 
 文档参考
 ===
-: [mermaid](https://mermaidjs.github.io/)
-: [hugo](https://gohugo.io/documentation/)
+[mermaid文档](https://mermaidjs.github.io/)
+
+[hugo文档](https://gohugo.io/documentation/)
