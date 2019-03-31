@@ -23,9 +23,9 @@ hugo的渲染
 
 shortcodes的演示
 ---
-使用`youtube 8HnLRrQ3RS4`的简短编写，即可完成如下youtube视频的展示。
+使用`{{</* youtube 8HnLRrQ3RS4 */>}}`的简短编写，即可完成如下youtube视频的展示。
 
-想要自动播放的话，使用`youtube id="8HnLRrQ3RS4" autoplay="true"`即可。
+想要自动播放的话，使用`{{</* youtube id="8HnLRrQ3RS4" autoplay="true" */>}}"`即可。
 
 {{< youtube 8HnLRrQ3RS4 >}}
 
@@ -57,6 +57,7 @@ shortcodes的演示
 ojbk，测试一下
 ---
 ```html
+{{</* mermaid */>}}
 sequenceDiagram
     participant Alice
     participant Bob
@@ -68,6 +69,7 @@ sequenceDiagram
     John-->Alice: Great!
     John->Bob: How about you?
     Bob-->John: Jolly good!
+{{</* /mermaid */>}}
 ```
 
 {{<mermaid>}}
