@@ -15,6 +15,9 @@
 </script>
 {{ end }}
 {{ if .IsPage }}
+<!--
+    publisher应该是Person的。但是会检测错误。所以暂时这样子
+-->
 <script type="application/ld+json">
 {
  "@context" : "http://schema.org",

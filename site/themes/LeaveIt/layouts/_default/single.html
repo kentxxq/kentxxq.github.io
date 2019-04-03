@@ -1,15 +1,15 @@
 {{ define "content" -}}
 {{ $cdn_url := .Scratch.Get "cdn_url" }}
-<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+<article class="post-warp">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">{{ .Title }}</h1>
+        <h1 class="post-title">{{ .Title }}</h1>
         <div class="post-meta">
-            Written by <a itemprop="author" href="{{.Site.BaseURL }}"
+            Written by <a href="{{.Site.BaseURL }}"
                 rel="author">{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}</a>
             with ♥
             <span class="post-time">
-                on <time datetime={{.Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}
-                    itemprop="datePublished">{{ .Date.Format (.Site.Params.dateFormatToUse | default "January 2, 2006") }}</time>
+                on <time
+                    datetime={{.Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}>{{ .Date.Format (.Site.Params.dateFormatToUse | default "January 2, 2006") }}</time>
             </span>
             in
             {{ with .Params.categories -}}
@@ -25,7 +25,7 @@
             {{- end }}
 
             |
-            <a href="#gitalk-container" itemprop="discussionUrl">
+            <a href="#gitalk-container">
                 <span class="gitalk-comment-count" itemprop="commentCount"></span>
             </a>
             {{ .Site.Params.gitalk.countSign }}
