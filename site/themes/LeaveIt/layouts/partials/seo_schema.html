@@ -31,7 +31,14 @@
     "inLanguage" : "{{ .Site.LanguageCode }}",
     "author" : "{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}",
     "creator" : "{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}",
-    "publisher": "{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}",
+    "publisher": {
+    "@type": "Organization",
+    "name": "kentxxq",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.BaseURL }}images/me/avatar.jpg"
+    }
+  }
     "accountablePerson" : "{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}",
     "copyrightHolder" : "{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}",
     "copyrightYear" : "{{ .Date.Format "2006" }}",
