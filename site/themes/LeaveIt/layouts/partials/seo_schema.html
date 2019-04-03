@@ -37,8 +37,8 @@
     "logo": {
       "@type": "ImageObject",
       "url": "{{ .Site.BaseURL }}images/me/avatar.jpg"
-    }
-  }
+      }
+    },
     "accountablePerson" : "{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}",
     "copyrightHolder" : "{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}",
     "copyrightYear" : "{{ .Date.Format "2006" }}",
