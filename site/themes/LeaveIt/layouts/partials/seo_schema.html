@@ -18,7 +18,8 @@
 <script type="application/ld+json">
 {
  "@context" : "http://schema.org",
-    "@type" : "BlogPosting",
+    "@type" : "WebSite",
+    "image" : "{{ .Site.BaseURL }}images/me/avatar.jpg",
     "mainEntityOfPage": {
          "@type": "WebPage",
          "@id": "{{ .Site.BaseURL }}"
@@ -37,7 +38,6 @@
     "datePublished": "{{ .Date }}",
     "dateModified" : "{{ .Date }}",
     "url" : "{{ .Permalink }}",
-    "wordCount" : "{{ .WordCount }}",
     "keywords" : [ {{ if isset .Params "tags" }}{{ range .Params.tags }}"{{ . }}",{{ end }}{{ end }} {{with .Site.Title}}"{{ .}}"{{ end }}]
 }
 </script>
