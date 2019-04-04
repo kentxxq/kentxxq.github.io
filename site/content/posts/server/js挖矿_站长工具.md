@@ -61,9 +61,9 @@ js挖矿就是把挖矿过程从**专用计算工具**搬到了**浏览器里**�
 
 影响
 ===
-`coinhive`的关闭，同类型的替代品还能坚持住吗？
+Coinhive的关闭，同类型的替代品还能坚持住吗？
 ---
-其实用`coinhive`只是图个方便。网站完全可以自己搭建一个专用服务，还没有手续费。同时也非常简单:  
+其实用Coinhive只是图个方便。网站完全可以自己搭建一个专用服务，还没有手续费。同时也非常简单:  
 
 1. [coinhive-stratum-mining-proxy](https://github.com/x25/coinhive-stratum-mining-proxy)一个python实现
 2. [coin-hive-stratum](https://github.com/cazala/coin-hive-stratum)typescript参考后也实现了一个

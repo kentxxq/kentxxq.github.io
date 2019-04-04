@@ -8,7 +8,9 @@ description: "有一段时间用有道云笔记来做笔记。里面有一个非
 ---
 
 
-> 有一段时间用有道云笔记来做笔记。里面有一个非常喜欢的功能就是流程图。让阅读文章的时候，体验更加的友好。同时我在看自己的站点过程中，觉得不够美观。更多的使用图表类似的功能，会让表达更加直观。所以今天就来动手做一下。
+> 有一段时间用有道云笔记来做笔记。里面有一个非常喜欢的功能就是流程图。
+>
+> 同时我在看自己的站点过程中，觉得不够美观。更多的使用图表类似的功能，会让表达更加直观。所以今天就来动手做一下。
 
 
 hugo的渲染
@@ -41,8 +43,12 @@ shortcodes的演示
 ---
 1. 在你使用的主题中，找到`yoursite/themes/themes_name/layouts`文件夹，如果没有`shortcodes`文件夹，就自己新建一个
 2. 把`mermaid的script标签`贴到`yoursite/themes/themes_name/layouts/partials/footer.html`的`footer外部`
-3. 在`shortcodes`目录下新建`mermaid.html`文件
+```html
+<!--head部分添加-->
+<script src="https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js"></script>
+```
 
+3. 在`shortcodes`目录下新建`mermaid.html`文件
 ```html
 <!--mermaid.html-->
 <div class="mermaid" align="{{ if .Get "align" }}
@@ -71,6 +77,8 @@ sequenceDiagram
     Bob-->John: Jolly good!
 {{</* /mermaid */>}}
 ```
+
+---
 
 {{<mermaid>}}
 sequenceDiagram
