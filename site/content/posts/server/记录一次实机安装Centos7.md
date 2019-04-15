@@ -3,7 +3,7 @@ title:  记录一次实机安装Centos7
 date:   2019-04-15 11:59:00 +0800
 categories: ["笔记"]
 tags: ["centos"]
-keywords: ["Centos7","grub2","timeout","rufus","UEFI","BIOS","GNOME","sudo","内核"]
+keywords: ["Centos7","grub2","timeout","rufus","UEFI","BIOS","GNOME","sudo","内核","fdisk","mkfs.xfs","blkid"]
 description: "之前安装centos，都是在阿里云，虚拟机，还有hp-gen6-380的服务器上面安装。也就是说实体机的操作经验，只有一个比较老的hp服务器。而这次使用普通pc机来安装，遇到了不少的问题。重装了大概有50次+吧，特意来记录一下"
 ---
 
@@ -132,6 +132,27 @@ netstat -ltn
 ### 如果不能远程访问，关闭防火墙
 systemctl stop firewalld.service
 ```
+
+自动挂载磁盘
+---
+```bash
+### fdisk分区硬盘后用xfs格式来格式化
+mkfs.xfs /dev/sdb1
+### 挂载到/data目录
+mkdir /data
+mount /dev/sdb1 /data
+### 查看磁盘uuid
+blkid
+### 在/etc/fstab下加上这个
+UUID=15f87ab4-176a-46a3-bc07-60ef5f2a4129 /                       xfs     defaults        0 0
+UUID=adfb7be3-85ce-49c7-992b-e5a0f299f3dd swap                    swap    defaults        0 0
+UUID=cd51618b-2615-4d6e-9abc-3a091c8fb820 /data                   xfs     defaults        0 0
+### 测试一下有没有问题
+mount -a
+### 没问题重启一下肯定也没问题了
+reboot
+```
+
 
 知识拓展
 ===
