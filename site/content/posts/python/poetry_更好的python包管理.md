@@ -19,7 +19,7 @@ description: "我在学习python过程中，一直想要寻求到最佳实践。
 2. 不同的项目要求不同的包版本，不能混乱
 3. py2和py3或者具体的小版本，区分开来
 
-`pipenv` vs `venv(py3)` vs `poetry`
+pipenv vs venv(py3) vs poetry
 ===
 [pipenv](https://github.com/pypa/pipenv)
 ---
