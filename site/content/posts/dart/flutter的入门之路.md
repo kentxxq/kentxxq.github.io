@@ -3,7 +3,7 @@ title:  flutter的入门之路
 date:   2019-05-19 17:30:00 +0800
 categories: ["笔记"]
 tags: ["dart","flutter"]
-keywords: ["dart","flutter","dart包管理","跨平台"]
+keywords: ["dart","flutter","dart包管理","跨平台","Future","async"]
 description: "之前了解了一下xamarin，也写过关于xamarin的一篇记录。而flutter的用途也一样是用于开发跨平台UI。flutter的编写语言是dart，爸爸是谷歌。所以推崇者比xamarin要多得多。大公司的跟进也更多。如果连一个hello world都没有写过的话，那怎么能去对比呢？就像现在网上的用户对比手机，连手机都没有，就去云评测？"
 ---
 
@@ -147,8 +147,16 @@ flutter主要有3种打包，或者说生成app的版本。
 
 `release`就是用来给用户的版本。
 
-记录一下自己常用的代码
+有用的一点记录
 ===
+
+1. snackBar可以用来提示用户更新成功等等类似的提示。
+2. initState用来初始化状态，记得第一行一般都要写super.initState()。
+3. setState来更新组件状态，刷新界面。
+4. tabController用来控制ListView。类要继承SingleTickerProviderStateMixin，TabBarView和TabBar共用这个controller，初始化用_tabController = new TabController(vsync: this, length: 3)，数量必须要一致。销毁的时候在dispose加上_tabController.dispose()
+5. 函数加上async，就一定返回的是Future。可以是`Future<void>`。
+6. GlobalKey来生成唯一的key，用这个key可以找到这个对象。然后_scaffoldKey.currentState.showSnackBar显示SnackBar
+
 
 总结
 ===
