@@ -171,3 +171,5 @@ ojbk!!!后面就慢慢自己深入学习吧！
 Android开发还是很方便的。就是iOS的开发太麻烦了。
 
 为了开发方便，vs的mac版本右边有一个模拟窗口。cpu占用也不高。windows版本则最好通过xamarin hotload插件来支持热重载。
+
+最后留一下自己的[demo地址](https://github.com/a805429509/kentxxq_app)
