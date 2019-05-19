@@ -2,7 +2,7 @@
 title:  入坑Xamarin初探
 date:   2019-05-10 00:46:00 +0800
 categories: ["笔记"]
-tags: ["C#"]
+tags: ["C#","Xamarin"]
 keywords: ["C#","Xamarin","iOS","Android","visual studio","微软","跨平台开发"]
 description: "在之前无意中了解到了linq，被超级方便的语法吸引到了。开始认真了解C#以及微软的现状。github被微软收购以后开放了免费的无限量私人仓库。C#自举且一系列生态代码完全开源。net core跨平台且目标是替代framework系列。浏览器开始使用chrome相同的内核且融合了ie模式，却被谷歌摆了一道。还有云平台，ide等等一系列的动作。这些做法让我对微软的好感度急剧攀升。无意间了解到Xamarin，更是让我不得不想叫一句：微软爸爸。"
 ---
