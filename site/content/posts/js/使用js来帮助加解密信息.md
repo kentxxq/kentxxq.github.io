@@ -62,7 +62,7 @@ document.write(strencode("Y31+QVcpMF49ISQcEQIVdn5TEn8xJyV6CBMJTiEHLgIYWSNwO1JWS3
 
 1. 把这一大段的js翻译成dart。缺点是耗时耗力，如果加密算法修改，你可能要重新来过。之前我的python爬虫就是这样的，不过那个加密算法才几行而已。
 2. 如果语言有工具支持运行js，那么就好办了。js自己跑js代码肯定没问题。而v8就是用c++写的，c++肯定有库可以调用。java1.8版本也有js引擎。c#则有jint。而python则是调用本机的node环境，速度不理想。而我写flutter没有找到这种方法。
-3. 是用无头浏览器来解析页面，然后把拿到最终结果。把地址解析出来。在flutter中也就是使用webview插件。缺点很慢很重。
+3. 用headless浏览器来解析页面，然后把拿到最终结果。把地址解析出来。在flutter中也就是使用webview插件。缺点很慢很重。
 
 于是我想到了远程api来执行代码。
 
