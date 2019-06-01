@@ -23,18 +23,18 @@ description: "开发以及运维的流程-docker"
 ---
 ```bash
 #官方的拓展库
-yum install epel-release 
+sudo yum install epel-release -y
 #Rpmfution只会分发red hat的规范不允许使用的库，它依赖于epel
-yum install https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
-yum install https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm
+sudo yum install https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+sudo yum install https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm
 #Elrepo    专注于硬件的驱动程序，比rpmfusion要多一些些，例如kmod同时还有内核，非常有用
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 rpm -Uvh https://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
 # 如果你需要超级高版本的git或者php之类的，可以看看这个库
 # 先默认用base里的，如果版本不能满足，那么就search一下，指不定能用上里面测试过的，兼容性好的包
-yum install centos-release-scl unzip
+sudo yum install centos-release-scl unzip -y
 # 更新到最新的版本
-yum update
+sudo yum update -y
 ```
 
 配置我所需要用到的服务
@@ -102,7 +102,7 @@ make install
 eval "$(direnv hook zsh)"
 
 #安装ss
-Yum install shadow socks-lib
+sudo yum install shadowsocks-libev -y
 #修改它的systemd文件，方便配置
 [Unit]
 Description=Shadowsocks-libev Default Server Service
