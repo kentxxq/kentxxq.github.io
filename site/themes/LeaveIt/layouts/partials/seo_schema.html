@@ -48,7 +48,7 @@
     "datePublished": "{{ .Date.Format "2006-01-02 15:04:05" }}",
     "dateModified" : "{{ .Date.Format "2006-01-02 15:04:05" }}",
     "url" : "{{ .Permalink }}",
-    "keywords" : [ {{ if isset .Params "tags" }}{{ range .Params.tags }}"{{ . }}",{{ end }}{{ end }} {{with .Site.Title}}"{{ .}}"{{ end }}]
+    "keywords" : {{ .Page.Keywords }}
 }
 </script>
 {{ end }}
