@@ -1,6 +1,6 @@
 ---
 title:  我对go语言的了解
-date:   2019-05-11 16:46:00 
+date:   2019-05-11 16:46:00 +0800
 categories: ["笔记"]
 tags: ["go"]
 keywords: ["go"]

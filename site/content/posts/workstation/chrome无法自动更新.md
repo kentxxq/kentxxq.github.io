@@ -1,6 +1,6 @@
 ---
 title:  chrome无法自动更新
-date:   1993-07-06 00:00:00 
+date:   1993-07-06 00:00:00 +0800
 categories: ["笔记"]
 tags: ["mac"]
 keywords: ["chrome","自动更新"]

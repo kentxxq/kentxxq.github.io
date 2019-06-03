@@ -1,6 +1,6 @@
 ---
 title:  拓展hugo的markdown_流程图mermaid
-date:   2019-03-30 21:59:00 
+date:   2019-03-30 21:59:00 +0800
 categories: ["笔记"]
 tags: ["hugo","markdown"]
 keywords: ["hugo","markdown","mermaid","拓展","shortcodes"]

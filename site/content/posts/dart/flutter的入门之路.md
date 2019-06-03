@@ -1,6 +1,6 @@
 ---
 title:  flutter的入门之路
-date:   2019-05-19 17:30:00 
+date:   2019-05-19 17:30:00 +0800
 categories: ["笔记"]
 tags: ["dart","flutter"]
 keywords: ["dart","flutter","dart包管理","跨平台","Future","async"]

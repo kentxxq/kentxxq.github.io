@@ -1,6 +1,6 @@
 ---
 title:  mac启用ftp
-date:   2017-07-17 00:00:00 
+date:   2017-07-17 00:00:00 +0800
 categories: ["笔记"]
 tags: ["mac"]
 keywords: ["mac","ftp"]
