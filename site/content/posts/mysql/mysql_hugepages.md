@@ -1,6 +1,6 @@
 ---
 title:  mysql_hugepages配置
-date:   1993-07-06 00:00:00 +0800
+date:   1993-07-06 00:00:00 
 categories: ["笔记"]
 tags: ["mysql"]
 keywords: ["mysql","hugepages配置"]

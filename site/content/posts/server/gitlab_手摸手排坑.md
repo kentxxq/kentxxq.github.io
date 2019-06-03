@@ -1,6 +1,6 @@
 ---
 title:  gitlab_手摸手排坑
-date:   2019-05-06 16:56:00 +0800
+date:   2019-05-06 16:56:00 
 categories: ["笔记"]
 tags: ["gitlab"]
 keywords: ["centos","gitlab","gitlab runner","gitlab ci","git","排坑"]

@@ -1,6 +1,6 @@
 ---
 title:  PowerShell常用命令
-date:   2019-03-12 14:57:00 +0800
+date:   2019-03-12 14:57:00 
 categories: ["笔记"]
 tags: ["PowerShell"]
 keywords: ["PowerShell","跨平台脚本","bash","zsh","fish"]

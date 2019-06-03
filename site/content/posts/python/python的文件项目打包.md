@@ -1,6 +1,6 @@
 ---
 title:  python的文件项目打包
-date:   2017-10-19 00:00:00 +0800
+date:   2017-10-19 00:00:00 
 categories: ["笔记"]
 tags: ["python"]
 keywords: ["python","项目打包"]

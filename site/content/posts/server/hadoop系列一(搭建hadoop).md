@@ -1,6 +1,6 @@
 ---
 title:  hadoop系列一(搭建hadoop)
-date:   2019-04-19 16:43:00 +0800
+date:   2019-04-19 16:43:00 
 categories: ["笔记"]
 tags: ["hadoop"]
 keywords: ["hadoop","docker","centos7","安装","jdk8","MapReduce","HDFS"]

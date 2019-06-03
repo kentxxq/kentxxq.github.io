@@ -1,6 +1,6 @@
 ---
 title:  win10系统激活(kms)
-date:   2019-03-07 21:27:00 +0800
+date:   2019-03-07 21:27:00 
 categories: ["笔记"]
 tags: ["win10激活"]
 keywords: ["win10激活","kms"]

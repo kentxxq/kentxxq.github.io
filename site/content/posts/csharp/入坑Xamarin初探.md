@@ -1,6 +1,6 @@
 ---
 title:  入坑Xamarin初探
-date:   2019-05-10 00:46:00 +0800
+date:   2019-05-10 00:46:00 
 categories: ["笔记"]
 tags: ["C#","Xamarin"]
 keywords: ["C#","Xamarin","iOS","Android","visual studio","微软","跨平台开发"]

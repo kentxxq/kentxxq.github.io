@@ -1,6 +1,6 @@
 ---
 title:  python的pip出现故障
-date:   2017-09-05 00:00:00 +0800
+date:   2017-09-05 00:00:00 
 categories: ["笔记"]
 tags: ["python"]
 keywords: ["python","pip","故障"]

@@ -1,6 +1,6 @@
 ---
 title:  About Me
-date:   2019-01-02 00:00:00 +0800
+date:   2019-01-02 00:00:00 
 keywords: ["About Me"]
 description: "About Me"
 ---

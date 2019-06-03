@@ -1,6 +1,6 @@
 ---
 title:  调试安卓或者iphone上的网页
-date:   2018-12-21 00:00:00 +0800
+date:   2018-12-21 00:00:00 
 categories: ["笔记"]
 tags: ["mac"]
 keywords: ["安卓","mac","iphone","调试"]

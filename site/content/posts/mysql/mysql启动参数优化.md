@@ -1,6 +1,6 @@
 ---
 title:  mysql启动参数优化
-date:   1993-07-06 00:00:00 +0800
+date:   1993-07-06 00:00:00 
 categories: ["笔记"]
 tags: ["mysql"]
 keywords: ["mysql","启动参数","优化"]

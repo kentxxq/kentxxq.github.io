@@ -1,6 +1,6 @@
 ---
 title:  linux各个发行版本对比
-date:   2019-03-08 10:00:00 +0800
+date:   2019-03-08 10:00:00 
 categories: ["笔记"]
 tags: ["server","Centos","linux"]
 keywords: ["server","Centos","Debian","arch","cockpit","桌面","驱动","vps","内核","兼容","滚动更新"]

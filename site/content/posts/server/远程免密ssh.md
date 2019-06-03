@@ -1,6 +1,6 @@
 ---
 title:  远程免密ssh
-date:   1993-07-06 00:00:00 +0800
+date:   1993-07-06 00:00:00 
 categories: ["笔记"]
 tags: ["centos"]
 keywords: ["centos","ssh-keygen","远程免密","ssh","ssh-copy-id"]

@@ -1,6 +1,6 @@
 ---
 title:  poetry_更好的python包管理
-date:   2019-03-05 23:41:00 +0800
+date:   2019-03-05 23:41:00 
 categories: ["笔记"]
 tags: ["python"]
 keywords: ["python","pipenv","venv","poetry","包管理","PyCharm"]

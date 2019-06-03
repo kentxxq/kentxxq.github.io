@@ -1,6 +1,6 @@
 ---
 title:  开发以及运维的流程-docker
-date:   2019-01-03 00:00:00 +0800
+date:   2019-01-03 00:00:00 
 categories: ["笔记"]
 tags: ["server"]
 keywords: ["server","流程","docker","python","pipenv","wget","centos","nginx","redis","yum"]

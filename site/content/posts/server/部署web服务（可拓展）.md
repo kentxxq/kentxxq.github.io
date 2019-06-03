@@ -1,6 +1,6 @@
 ---
 title:  centos部署web服务（可拓展）
-date:   2018-04-17 00:00:00 +0800
+date:   2018-04-17 00:00:00 
 categories: ["笔记"]
 tags: ["centos"]
 keywords: ["centos","gunicorn","flask","nginx","配置部署"]

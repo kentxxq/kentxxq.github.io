@@ -1,6 +1,6 @@
 ---
 title:  复习vue的重点要记
-date:   2019-01-17 21:15:00 +0800
+date:   2019-01-17 21:15:00 
 categories: ["笔记"]
 tags: ["vue"]
 keywords: ["vue","重点要记"]
