@@ -1,6 +1,6 @@
 baseURL = "https://kentxxq.com/"
 languageCode = "zh"
-title = "kentxxq's Blog"
+title = "kentxxq Blog"
 theme = "LeaveIt"
 
 [menu]
