@@ -4,7 +4,7 @@ date:   2019-04-15 11:59:00 +0800
 categories: ["笔记"]
 tags: ["centos"]
 keywords: ["Centos7","grub2","timeout","rufus","UEFI","BIOS","GNOME","sudo","内核","fdisk","mkfs.xfs","blkid"]
-description: "之前安装centos，都是在阿里云，虚拟机，还有hp-gen6-380的服务器上面安装。也就是说实体机的操作经验，只有一个比较老的hp服务器。而这次使用普通pc机来安装，遇到了不少的问题。重装了大概有50次+吧，特意来记录一下"
+description: "之前安装centos，都是在阿里云，虚拟机，还有hp-gen6-380的服务器上面安装。也就是说实体机的操作经验，只有一个比较老的hp服务器。而这次使用普通pc机来安装，遇到了不少的问题。重装了大概有50次以上吧，特意来记录一下"
 ---
 
 > 之前安装centos，都是在阿里云，虚拟机，还有hp-gen6-380的服务器上面安装。
