@@ -140,6 +140,12 @@ public BloggingContext(DbContextOptions<BloggingContext> options)
 
 只需要删除掉无参构造函数即可!
 
+sqlite的Models生成
+---
+```bash
+dotnet ef dbcontext  scaffold "Data Source=test.db" -o Models Microsoft.EntityFrameworkCore.Sqlite -c "TestDbContext" -f
+```
+
 
 总结
 ===
