@@ -146,6 +146,22 @@ sqlite的Models生成
 dotnet ef dbcontext  scaffold "Data Source=test.db" -o Models Microsoft.EntityFrameworkCore.Sqlite -c "TestDbContext" -f
 ```
 
+从Models生成数据库
+---
+
+cli
+```bash
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
+
+vs的pm包管理控制台
+```
+Add-Migration InitialCreate
+Update-Database
+```
+
+
 
 总结
 ===
