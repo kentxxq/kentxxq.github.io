@@ -144,6 +144,8 @@ sqlite的Models生成
 ---
 
 在使用的时候要注意netCore的2.2版本有ef命令，但是3开始就会分离出来。
+
+如果web项目无法运行(存在报错)，极有可能无法成功执行！
 ```bash
 dotnet ef dbcontext  scaffold "Data Source=test.db" -o Models Microsoft.EntityFrameworkCore.Sqlite -c "TestDbContext" -f
 ```
