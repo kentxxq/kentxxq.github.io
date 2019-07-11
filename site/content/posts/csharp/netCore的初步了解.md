@@ -142,6 +142,8 @@ public BloggingContext(DbContextOptions<BloggingContext> options)
 
 sqlite的Models生成
 ---
+
+在使用的时候要注意netCore的2.2版本有ef命令，但是3开始就会分离出来。
 ```bash
 dotnet ef dbcontext  scaffold "Data Source=test.db" -o Models Microsoft.EntityFrameworkCore.Sqlite -c "TestDbContext" -f
 ```
@@ -156,7 +158,7 @@ dotnet ef database update
 ```
 
 vs的pm包管理控制台
-```
+```bash
 Add-Migration InitialCreate
 Update-Database
 ```
