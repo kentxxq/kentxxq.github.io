@@ -165,6 +165,51 @@ Add-Migration InitialCreate
 Update-Database
 ```
 
+EF Core的使用
+---
+
+`EF Core`是c#的orm框架。支持查询语法和linq。非常好用！
+
+在我所了解到的语言中，我认为是完善度和易用性最高的了！几乎杜绝了我使用裸sql语句的可能！
+
+在我的web api中，我试着写了这么一段linq代码
+```c#
+[HttpGet]
+public async Task<ActionResult<IEnumerable<dynamic>>> GetUsers()
+{
+    var a = from user1 in _testDbContext.Users
+            join user2 in _testDbContext.TUsers
+            on new { username = user1.Username, password = user1.Password }
+            equals new { username = user2.Username, password = user2.Password }
+            select new
+            {
+                user1.Username,
+                user2.Password
+            };
+    // return await a.ToAsyncEnumerable(); 错误示例
+    // return await a.ToAsyncEnumerable().ToList(); 纠正
+    return await a.ToListAsync();
+}
+```
+
+先说明几点:
+
+1. 由于返回的数据是`select new`出来的对象，所以我的返回值使用了`dynamic`。方便以后更改字段。也不用再新建字段。
+2. `async`方法代表异步，后面必须要跟`Task`。而`ActionResult`代表返回特定的类型。而对比指定的类型返回有什么好处呢？它可以通过`IActionResult`简化操作。**并且**可以返回多个类型。比如存在数据则返回200，不存在则返回404错误，很明显它们两个的结构类型不一致。
+
+而我在编写这段代码的时候，产生了疑惑。我最开始是按照上面的注释代码写的。发现报错，怎么都不对。
+
+这里需要注意的是。我的返回类型是`IEnumerable<dynamic>`,所以我就写了`ToAsyncEnumerable`。而Enumerable的用法是循环取出数据。无法直接await后去返回。
+
+参考这[一篇博客](https://www.claudiobernasconi.ch/2013/07/22/when-to-use-ienumerable-icollection-ilist-and-list/)，总结一下使用方法。
+
+1. `public interface IEnumerable<out T> : IEnumerable`只能遍历使用
+2. `public interface ICollection<T> : IEnumerable<T>, IEnumerable`你关心它的大小
+3. `public interface IList<T> : ICollection<T>, IEnumerable<T>, IEnumerable`你要修改它并且需要排序
+4. `List<>`则是一个实现。
+
+List是继承于接口IEnumerable的，所以返回List是可以的。
+
 
 
 总结

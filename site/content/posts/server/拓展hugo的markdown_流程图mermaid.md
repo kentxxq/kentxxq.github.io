@@ -48,7 +48,7 @@ shortcodes的演示
 <script src="https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js"></script>
 ```
 
-3. 在`shortcodes`目录下新建`mermaid.html`文件
+在`shortcodes`目录下新建`mermaid.html`文件
 ```html
 <!--mermaid.html-->
 <div class="mermaid" align="{{ if .Get "align" }}
