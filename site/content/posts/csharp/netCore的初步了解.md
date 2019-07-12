@@ -204,8 +204,8 @@ public async Task<ActionResult<IEnumerable<dynamic>>> GetUsers()
 参考这[一篇博客](https://www.claudiobernasconi.ch/2013/07/22/when-to-use-ienumerable-icollection-ilist-and-list/)，总结一下使用方法。
 
 1. `public interface IEnumerable<out T> : IEnumerable`只能遍历使用
-2. `public interface ICollection<T> : IEnumerable<T>, IEnumerable`你关心它的大小
-3. `public interface IList<T> : ICollection<T>, IEnumerable<T>, IEnumerable`你要修改它并且需要排序
+2. `public interface ICollection<T> : IEnumerable<T>, IEnumerable`你关心它的大小,添加，删除，清空操作
+3. `public interface IList<T> : ICollection<T>, IEnumerable<T>, IEnumerable`你要修改它并且需要排序，例如插入指定位置，查找指定下标数据。
 4. `List<>`则是一个实现。
 
 List是继承于接口IEnumerable的，所以返回List是可以的。
