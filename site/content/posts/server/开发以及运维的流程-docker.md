@@ -41,7 +41,7 @@ sudo yum update -y
 ---
 ```bash
 #Nginx 我的http代理
-vi /etc/yum.repos.d/nginx.repo
+sudo vi /etc/yum.repos.d/nginx.repo
 
 [nginx]
 name=nginx repo
@@ -50,7 +50,7 @@ gpgcheck=0
 enabled=1
 
 #shadowsocks 翻墙工具c版本
-vi /etc/yum.repos.d/shadowsocks.repo
+sudo vi /etc/yum.repos.d/shadowsocks.repo
 
 [librehat-shadowsocks]
 name=Copr repo for shadowsocks owned by librehat
