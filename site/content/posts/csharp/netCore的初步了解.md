@@ -210,7 +210,11 @@ public async Task<ActionResult<IEnumerable<dynamic>>> GetUsers()
 
 List是继承于接口IEnumerable的，所以返回List是可以的。
 
-
+关于返回类型
+---
+`特定类型`没什么好说的。要返回啥就返回啥。
+`IActionResult`如果你通过int类型的id查询一个数据。如果存在就返回实体。但是用户输入的是string，则验证错误。需要手动返回一个500错误之类的提示。它是一个接口，可以返回所有实现类，例如view是视图，notfound是404.主要用于多种不同返回状态。
+`ActionResult<T>`对比IActionResult优势在于简化了使用。例如在`IActionResult`中需要返回`return new ObjectResult(T)`，而ActionResult隐式转换则直接`简化为了return T`。
 
 总结
 ===
