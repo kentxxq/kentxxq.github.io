@@ -216,6 +216,22 @@ List是继承于接口IEnumerable的，所以返回List是可以的。
 `IActionResult`如果你通过int类型的id查询一个数据。如果存在就返回实体。但是用户输入的是string，则验证错误。需要手动返回一个500错误之类的提示。它是一个接口，可以返回所有实现类，例如view是视图，notfound是404.主要用于多种不同返回状态。
 `ActionResult<T>`对比IActionResult优势在于简化了使用。例如在`IActionResult`中需要返回`return new ObjectResult(T)`，而ActionResult隐式转换则直接`简化为了return T`。
 
+
+asp.net core
+---
+
+在看asp.net core的文档。准备详细了解一下大概的东西。文档还是有点生涩的。准备用一句话来理解所有的概念。
+
+`Program`是main方法的所在，从这里启动程序。
+
+`Startup`里的`ConfigureServices`是用来注册服务的。例如你要用到数据库，那么数据库就在这里注册到app。
+
+`Startup`里的`Configure`则主要是用来配置app的。例如在处理进入到你的业务逻辑代码前，要经过什么样的处理。是否启动静态文件代理等等。
+
+`Startup`里的`IStartupFilter`则让你在进入管道之前或之后进行处理逻辑。请求先进入到这里，再进入中间件处理，再进入控制器。控制器是具体的业务代码。而中间件则也会存在有部分的业务逻辑代码。IStartupFilter则让你把业务无关的逻辑隔离出来。
+
+新请求大概的运作流程，IStartupFilter=>中间件=>filter=>mvc
+
 总结
 ===
 
@@ -225,5 +241,7 @@ List是继承于接口IEnumerable的，所以返回List是可以的。
 
 
 更新日志
----
+===
+
 20190713 00:32: 添加`ef core内容`
+20190716 00:00: 添加`asp.net core的部分`
