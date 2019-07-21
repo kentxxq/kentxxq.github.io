@@ -296,7 +296,7 @@ if __name__ == '__main__':
     # 获取系统环境变量
     wechat_token = os.environ['WECHAT_AUTH_TOKEN'].encode(encoding='ascii')
     blog_token = os.environ['BLOG_AUTH_TOKEN'].encode(encoding='ascii')
-    # 之前是ohup python -u /usr/local/bin/docker-hook &，如果没有感叹号zsh会出现警告，而无法exit
+    # 之前是nohup python -u /usr/local/bin/docker-hook &，如果没有感叹号zsh会出现警告，而无法exit
     print('使用nohup python -u /usr/local/bin/docker-hook &!，可以禁用缓存输出到nohup.out文件')
     httpd.serve_forever()
 
