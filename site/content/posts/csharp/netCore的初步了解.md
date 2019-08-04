@@ -54,6 +54,19 @@ C#的事件是特殊的委托。
 我所遇到的问题
 ===
 
+从oracle生成models
+---
+
+```bash
+Scaffold-DbContext "Data Source=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST = 192.168.0.220)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User ID=kentxxq;Password=java321;" Oracle.EntityFrameworkCore -OutputDir Models
+```
+
+如果上面的命令无法识别，执行下面的操作
+
+```bash
+Install-Package Microsoft.EntityFrameworkCore.Tools
+```
+
 测试API
 ---
 
@@ -244,4 +257,7 @@ asp.net core
 ===
 
 20190713 00:32: 添加`ef core内容`
+
 20190716 00:00: 添加`asp.net core的部分`
+
+20190802 14:03：添加`添加oracle的models生成`
