@@ -91,10 +91,10 @@ char c[]="C a";
 ```
 
 说几个常用的字符串函数吧
-1. `strcat`
-2. `strcpy`
-3. `strcmp`
-4. `strlen`
+1. `strcat`合并
+2. `strcpy`拷贝
+3. `strcmp`比较
+4. `strlen`拿到字符串长度
 
 
 总结
