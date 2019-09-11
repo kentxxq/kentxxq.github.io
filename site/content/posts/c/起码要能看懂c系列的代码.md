@@ -119,6 +119,33 @@ char c[]="C a";
 2. `#include "stdio.h"`引入头文件。一般都用双引号先从当前目录查找。
 3. `#ifdef #else #endif`用来判断执行。`#if`则非0则为true。
 
+编译
+===
+
+简单来说，编译就是使用`gcc`,`make`,`cmake`等工具来进行的。
+
+如果使用vs或者clion这样的工具，需要了解的是工具的使用方法。而下面我要简单说明的是手工编译。
+
+1. 在项目目录下新建build文件夹。
+2. 进入build文件夹使用`cmake ..`生成Makefile
+3. 运行make命令编译成功，找到输出文件即可。
+
+linux
+---
+我在centos7上运行`gcc`,`make`,`cmake`都可以正常使用。
+
+mac
+---
+用brew安装cmake后，也可以跑通。
+
+windows
+---
+安装最新的vs。下载`mingw-get`，然后安装`mingw32-make`。
+```bash
+cmake -G   "MinGW Makefiles" . # .为当前目录, "MinGW Makefiles"为makefile类型，如果编译器为vs的话使用"NMake Makefiles"
+```
+看到了Makefile后mingw32-make即可。
+
 总结
 ===
 
