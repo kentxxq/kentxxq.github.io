@@ -10,5 +10,5 @@ description: "About Me"
 [kentxxq,放着我的所有](https://kentxxq.com)
 
 1. wechat:`kentxxq`
-2. github:[a805429509](https://github.com/a805429509)
-3. google:[a805429509@gmail.com](mailto:a805429509@gmail.com)
+2. github:[kentxxq](https://github.com/kentxxq)
+3. email:[admin@kentxxq.com](mailto:admin@kentxxq.com)
