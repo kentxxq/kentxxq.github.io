@@ -123,7 +123,7 @@ kentxxq2.test()
 \_\_getattr\_\_(self, name)|self.name # name 不存在|访问一个不存在的属性时
 \_\_setattr\_\_(self, name, val)|self.name = val|对一个属性赋值时
 \_\_delattr\_\_(self, name)|del self.name|删除一个属性时
-\_\_getattribute(self, name)|self.name|访问任何属性时
+\_\_getattribute\_\_(self, name)|self.name|访问任何属性时
 \_\_getitem\_\_(self, key)|self[key]|使用索引访问元素时
 \_\_setitem\_\_(self, key, val)|self[key] = val|对某个索引值赋值时
 \_\_delitem\_\_(self, key)|del self[key]|删除某个索引值时
