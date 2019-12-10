@@ -1,5 +1,5 @@
 ---
-title:  gitlab_手摸手排坑
+title:  gitlab手摸手排坑
 date:   2019-05-06 16:56:00 +0800
 categories: ["笔记"]
 tags: ["gitlab"]
