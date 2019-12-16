@@ -3,7 +3,7 @@ title:  python技巧-类
 date:   2019-11-26 00:00:00 +0800
 categories: ["笔记"]
 tags: ["python"]
-keywords: ["python","元类"]
+keywords: ["python","元类","类方法","静态方法"]
 description: "最近把手上的事情都忙完了。准备来好好巩固自己的python知识。为什么标题是技巧呢，因为这部分是它和其他语言最大的不同，或者说特点。要玩得6，不熟这一些知识点，肯定是不行"
 ---
 
