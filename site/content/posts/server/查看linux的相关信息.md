@@ -84,3 +84,10 @@ dmidecode -t 11
 ```bash
 dmidecode | grep "Maximum Capacity" |sed  "s/^[ \t]*//"
 ```
+
+查看磁盘信息
+---
+
+```bash
+fdisk -l
+```
