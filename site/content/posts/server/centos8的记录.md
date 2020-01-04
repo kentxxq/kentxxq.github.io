@@ -3,7 +3,7 @@ title:  centos8的记录
 date:   2019-12-31 16:36:00 +0800
 categories: ["笔记"]
 tags: ["centos"]
-keywords: ["centos","yum","bbr","ss"]
+keywords: ["centos","yum","bbr","ss","新特性"]
 description: "centos7从我刚开始接触linux就开始用。所以在我使用的时候，老是不明白为什么会有人喜欢centos6。centos真是万年才更新一次大版本，导致许多的新特性不能使用。而我经常喜欢追热点。。所以这一次我要用上最新的centos8"
 ---
 
