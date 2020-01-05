@@ -17,20 +17,17 @@ description: "如果让我来搭建一个web项目。那我肯定采用前后端
 > 文章中很多都只是给到了文档的链接，是因为官方文档非常详细。自己抄过来没有意义，同时链接到的地址也会有最新变化。要学好编程，官方文档是必看的。哪怕是英文版
 
 
-安装所需工具
-===
+## 安装所需工具
 
 [Visual Studio](https://docs.microsoft.com/zh-cn/visualstudio)是宇宙第一ide这句话，大家也多多少少有过了解了。安装好以后，开发环境就弄好了。
 
 
-初步搭建
-===
+## 初步搭建
 
 看[官方文档的Web API](https://docs.microsoft.com/zh-cn/aspnet/core/web-api)就ok。
 
 
-C#开发的方便之处
-===
+## C#开发的方便之处
 
 1. models模块直接自动生成！直接可以配合linq使用。
 2. 新增控制器，直接把增删改查都做好了。只需要加入一丢丢的业务逻辑即可！
@@ -38,8 +35,7 @@ C#开发的方便之处
 
 上面的几点，让我觉得比python开发速度还要快。
 
-C#的委托
----
+### C#的委托
 
 根据一点基础的了解。我认为委托让C#有了**把函数作为参数传递**的解决方案。
 
@@ -51,11 +47,9 @@ C#的linq语法可以完全等价转换到箭头函数，也可以说是基于�
 
 C#的事件是特殊的委托。
 
-我所遇到的问题
-===
+## 我所遇到的问题
 
-从oracle生成models
----
+### 从oracle生成models
 
 ```bash
 Scaffold-DbContext "Data Source=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST = 192.168.0.220)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User ID=kentxxq;Password=java321;" Oracle.EntityFrameworkCore -OutputDir Models
@@ -67,8 +61,7 @@ Scaffold-DbContext "Data Source=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=T
 Install-Package Microsoft.EntityFrameworkCore.Tools
 ```
 
-测试API
----
+### 测试API
 
 一直用postman来对后端测试。老是切换来切换去。还得自己一个一个路径来写文档。
 
@@ -97,8 +90,7 @@ app.UseMvc();
 
 之后访问`https://localhost:5001/swagger`就能看到惊喜了！
 
-数据库连接池
----
+### 数据库连接池
 
 按照官方文档，我的Models文件夹是通过`Scaffold-DbContext`命令生成的。之后移除掉
 
@@ -153,8 +145,7 @@ public BloggingContext(DbContextOptions<BloggingContext> options)
 
 只需要删除掉无参构造函数即可!
 
-sqlite的Models生成
----
+### sqlite的Models生成
 
 在使用的时候要注意netCore的2.2版本有ef命令，但是3开始就会分离出来。
 
@@ -163,8 +154,7 @@ sqlite的Models生成
 dotnet ef dbcontext  scaffold "Data Source=test.db" -o Models Microsoft.EntityFrameworkCore.Sqlite -c "TestDbContext" -f
 ```
 
-从Models生成数据库
----
+### 从Models生成数据库
 
 cli
 ```bash
@@ -178,8 +168,7 @@ Add-Migration InitialCreate
 Update-Database
 ```
 
-EF Core的使用
----
+### EF Core的使用
 
 `EF Core`是c#的orm框架。支持查询语法和linq。非常好用！
 
@@ -223,15 +212,13 @@ public async Task<ActionResult<IEnumerable<dynamic>>> GetUsers()
 
 List是继承于接口IEnumerable的，所以返回List是可以的。
 
-关于返回类型
----
+### 关于返回类型
 `特定类型`没什么好说的。要返回啥就返回啥。
 `IActionResult`如果你通过int类型的id查询一个数据。如果存在就返回实体。但是用户输入的是string，则验证错误。需要手动返回一个500错误之类的提示。它是一个接口，可以返回所有实现类，例如view是视图，notfound是404.主要用于多种不同返回状态。
 `ActionResult<T>`对比IActionResult优势在于简化了使用。例如在`IActionResult`中需要返回`return new ObjectResult(T)`，而ActionResult隐式转换则直接`简化为了return T`。
 
 
-asp.net core
----
+### asp.net core
 
 在看asp.net core的文档。准备详细了解一下大概的东西。文档还是有点生涩的。准备用一句话来理解所有的概念。
 
@@ -245,16 +232,14 @@ asp.net core
 
 新请求大概的运作流程，IStartupFilter=>中间件=>filter=>mvc
 
-总结
-===
+## 总结
 
 现在学习一下netcore，以后net5统一平台后，估计我就要全面深入使用了。
 
 最近蛮堕落的。。没有写什么代码，也没有更新什么文章。就连电影都没怎么看。赶紧写完去撸我的app。
 
 
-更新日志
-===
+## 更新日志
 
 20190713 00:32: 添加`ef core内容`
 

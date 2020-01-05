@@ -9,8 +9,7 @@ description: "复习vue的重点要记"
 
 vue备忘录
 
-常用
----
+### 常用
 ```html
 v-model
 v-text

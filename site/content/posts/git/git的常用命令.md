@@ -9,8 +9,7 @@ description: "git的常用命令"
 
 
 
-去除所有的历史
----
+### 去除所有的历史
 ```bash
 #初始化连接到远程库
 git init

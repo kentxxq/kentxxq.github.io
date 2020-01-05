@@ -16,8 +16,7 @@ description: "编程语言多种多样。但是常见在视野中的，就那么
 > 但是你架不住它的确是web的标准。。再怎么不搭理它，你也要懂它。
 
 
-初衷
-===
+## 初衷
 
 最近是一直在看flutter，同时在学着做一个app。以后要是有需要，我起码也有个东西可以展示一下。
 
@@ -25,11 +24,9 @@ description: "编程语言多种多样。但是常见在视野中的，就那么
 
 出于学习的目的，我也就要迎难而上了。
 
-html代码被js加密
-===
+## html代码被js加密
 
-分析页面
----
+### 分析页面
 
 在`91porn`的**视频播放页**。
 
@@ -55,8 +52,7 @@ document.write(strencode("Y31+QVcpMF49ISQcEQIVdn5TEn8xJyV6CBMJTiEHLgIYWSNwO1JWS3
 
 
 
-解决办法
----
+### 解决办法
 
 到这里，一般有3种方法来继续你的工作
 
@@ -67,11 +63,9 @@ document.write(strencode("Y31+QVcpMF49ISQcEQIVdn5TEn8xJyV6CBMJTiEHLgIYWSNwO1JWS3
 于是我想到了远程api来执行代码。
 
 
-搭建基于nodejs的web服务
-===
+## 搭建基于nodejs的web服务
 
-web代码
----
+### web代码
 
 搜了一下，[express](https://expressjs.com/zh-cn/starter/hello-world.html)貌似在nodejs里是很火的web框架。
 
@@ -109,8 +103,7 @@ app.listen(3000, function () {
 ```
 
 
-解密代码
----
+### 解密代码
 
 这个是`decode.js`文件的代码,我包成了一个方法，补上了几个用到的的变量。
 
@@ -312,8 +305,7 @@ module.exports = function (data1, data2) {
 }
 ```
 
-测试
----
+### 测试
 
 把代码跑起来。测试成果ojbk！
 
@@ -321,8 +313,7 @@ module.exports = function (data1, data2) {
 
 
 
-总结
-===
+## 总结
 
 后续我就只要把页面的参数用正则表达式弄出来。然后发送给我自己的服务器，就能获得地址啦！
 

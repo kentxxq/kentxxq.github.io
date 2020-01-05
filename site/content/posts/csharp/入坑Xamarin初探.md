@@ -17,8 +17,8 @@ description: "在之前无意中了解到了linq，被超级方便的语法吸�
 > 这些做法让我对微软的好感度急剧攀升。无意间了解到Xamarin，更是让我不得不想叫一句：微软爸爸。
 
 
-为什么会有这篇文章
-===
+## 为什么会有这篇文章
+
 在最近了解了一系列微软的技术发展动态后，一个**不能停止学习**的程序员应该体会到，如果不去了解它(微软的技术栈)，沉溺在公司现有的技术栈，会导致视野越来越小。甚至几年以后，与公司外部世界技术脱轨。
 
 从技术方面来说，微软有这些值得注意的点:
@@ -37,8 +37,8 @@ description: "在之前无意中了解到了linq，被超级方便的语法吸�
 4. 对比js写的windows客户端，C#性能不用担心。
 
 
-Xamarin初步了解
-===
+## Xamarin初步了解
+
 **一个跨平台UI开发的解决方案**。
 
 对比原生语言。同时开发iOS，Android应用，且代码的复用率高。
@@ -49,19 +49,17 @@ Xamarin初步了解
 
 ![Xamarin_框架对比图](/images/csharp/Xamarin_框架对比图.png)
 
-前期准备工作
-===
+## 前期准备工作
+
 只需要傻瓜化安装vs，即可完成整个开发环境的搭建。[vs官方文档](https://docs.microsoft.com/zh-cn/visualstudio/products/?view=vs-2019)是最好的教程了。且中文！
 
 参见[Xamarin官方文档](https://docs.microsoft.com/zh-cn/xamarin/get-started/first-app/?pivots=windows)，数据线连接在安卓手机上开启debug模式。点击即可运行。
 
 而iOS则属于排坑之旅了。
 
-排坑之旅
-===
+## 排坑之旅
 
-iOS开发
----
+### iOS开发
 
 1. 你需要一个mac电脑。或者参考[云mac](https://www.macincloud.com/)，我没用过，也不推荐这样。
 2. 最好有一个iPhone，因为模拟器耗资源，且不方便操作。
@@ -81,12 +79,10 @@ iOS开发
 ![xcode签名ojbk](/images/csharp/Xamarin_xcode签名ojbk.png)
 8. 回到**vs=>左上角kentxxq_app.iOS=>Debug=>你的iPhone**,启动项目吧！
 
-生成apk
----
+### 生成apk
 在生成apk文件的时候，记得选择release来生成。否则apk的大小会非常惊人。
 
-笑容逐渐展露
-===
+## 笑容逐渐展露
 开始写代码。参考官方文档，试一下**闪光灯和语音功能**！
 
 为什么呢？因为我记得好久以前iPhone没有自带手电筒的功能，我是通过app下载的。而且一个调用了硬件，语音功能则调用了软件。
@@ -164,8 +160,7 @@ namespace kentxxq_app
 
 ojbk!!!后面就慢慢自己深入学习吧！
 
-总结
-===
+## 总结
 开发工具安装挺方便的，只是开发环境比较耗硬盘空间。
 
 Android开发还是很方便的。就是iOS的开发太麻烦了。

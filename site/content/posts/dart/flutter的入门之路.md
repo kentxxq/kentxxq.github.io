@@ -14,8 +14,7 @@ description: "之前了解了一下xamarin，也写过关于xamarin的一篇记�
 > 
 > 如果连一个hello world都没有写过的话，那怎么能去对比呢？就像现在网上的用户对比手机，连手机都没有，就去云评测？
 
-安装
-===
+## 安装
 
 请参考[flutter官网](flutter.dev)。我反正是一次性就弄好了。
 
@@ -24,15 +23,13 @@ description: "之前了解了一下xamarin，也写过关于xamarin的一篇记�
 说真的，开发环境都弄不好的话。说明你对操作系统和语言开发相关的知识太差了。
 
 
-移动开发的hello world
-===
+## 移动开发的hello world
 
 之前在[入坑xamarin初探](https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/)就有对比各个框架的优劣。
 
 既然是移动开发，那就照样写一个带控制闪光灯的hello world，没想到就坑到了。。
 
-使用现成的依赖包
----
+### 使用现成的依赖包
 
 谷歌搜了一下，发现lamp和torch这两个包可以满足我的需求。
 
@@ -45,8 +42,7 @@ flutter的这些工具包是如何跨平台的呢？
 
 而lamp也一样有坑。ios可以正常使用。Android中无响应。后面发现是因为用了老的api。所以找到了一个别人改进之后的版本。正常完成工作。
 
-添加依赖
----
+### 添加依赖
 `pubspec.yaml`文件中如下:
 
 ```yml
@@ -69,8 +65,7 @@ dependencies:
 
 而lamp则是直接导入我github上的地址。
 
-代码实例
----
+### 代码实例
 
 1. 首先引入了lamp包。
 2. 定义了2个void方法，实现了开灯和关灯。
@@ -116,8 +111,7 @@ class MyToolsPage extends StatelessWidget {
 
 ```
 
-权限问题
----
+### 权限问题
 在lamp的文档中写了在android里要加入权限的请求，但是我没有加，也能用。
 
 我的安卓测试机器是小米a1，属于国际版。系统是谷歌的android go，和国内的手机环境会有不一样。苹果用的是X。
@@ -132,8 +126,7 @@ class MyToolsPage extends StatelessWidget {
 <uses-feature android:name="android.hardware.camera.flash" />
 ```
 
-关于打包
----
+### 关于打包
 
 flutter主要有3种打包，或者说生成app的版本。
 
@@ -147,8 +140,7 @@ flutter主要有3种打包，或者说生成app的版本。
 
 `release`就是用来给用户的版本。
 
-有用的一点记录
-===
+## 有用的一点记录
 
 1. snackBar可以用来提示用户更新成功等等类似的提示。
 2. initState用来初始化状态，记得第一行一般都要写super.initState()。
@@ -158,8 +150,7 @@ flutter主要有3种打包，或者说生成app的版本。
 6. GlobalKey来生成唯一的key，用这个key可以找到这个对象。然后_scaffoldKey.currentState.showSnackBar显示SnackBar
 
 
-总结
-===
+## 总结
 flutter的上手速度还是比较快的。但是时间没有xamarin长，所以像lamp这样的包，还是会有bug的存在。需要自己排坑。
 
 js做的app是性能最差的。但是用的人最多。js火得不行，一些pwa，微信小程序，快应用等等快速发展。肯定是有前景的。

@@ -10,8 +10,7 @@ description: "刚刚开始学习vue，把基础的用法学过了一遍。现在
 
 > 刚刚开始学习vue，把基础的用法学过了一遍。现在开始使用vue-cli搭建项目，以及使用了解相关router，vuex和webpack等等。
 
-安装开发环境
----
+### 安装开发环境
 ```bash
 #安装node，vue-cli
 brew install node 
@@ -21,8 +20,7 @@ npm config set registry http://registry.npm.taobao.org/
 npm install -g @vue/cli
 ```
 
-vue-cli来初始化项目
----
+### vue-cli来初始化项目
 
 ```bash
 vue create wechat_web
@@ -38,8 +36,7 @@ npm run build
 npm run serve
 ```
 
-安装ui库
----
+### 安装ui库
 `pc端使用element-ui`     
 `mobile端使用vant`      
 ```bash
@@ -88,11 +85,9 @@ export default {
 </script>
 ```
 
-20190122 00:00
-===
+## 20190122 00:00
 
-关于pwa
----
+### 关于pwa
 > 看了很久的vue-pwa部分。记录一下吧。其实我对pwa的要求没那么高，毕竟不是一个离线应用。但是想要搞懂它。因为发现很多网站其实都用了这个技术，比如淘宝/bet365/twitter之类的。所以以后应该会常用到。
 
 `workbox`的[具体配置信息](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)    
@@ -164,10 +159,9 @@ export default new Router({
 
 ```
 
-20190126 00:04
-===
-关于前端页面的存放
----
+## 20190126 00:04
+
+### 关于前端页面的存放
 我现在是把主页的轮播图放到了vue项目里，但是后续的话。肯定是要存在服务器，然后通过ajax来获取路径，刷新页面的。  
 这就关系到了不少地方:  
 1. 前后端的接口要通过yapi来拟定好  
@@ -178,8 +172,7 @@ export default new Router({
 页面使用的图片(比如轮播图)，通过手动来替换就好了  
 
 
-todo
-===
+## todo
 1. 首页的pwa加载以后，需要点一下，才会出来轮播图的图片。这个后面搞，先会走，再会跑。
 2. 后续部署vue的dist代码，需要修改manifest.json
 3. 测试打包以后的性能，进行性能优化。当前的serve模式下面，无法准确得到性能状态

@@ -9,8 +9,7 @@ description: "node配置学习"
 
 > 以后可能会用到的知识
 
-npm使用中用到的命令
-===
+## npm使用中用到的命令
 ```bash
 # 我要使用element-ui
 # npm i和npm install 是一样的意思
