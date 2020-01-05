@@ -14,8 +14,8 @@ description: "oracle的DML_Error_Logging特性"
 1. 把合法的数据导入进入目标表
 2. 把不合法的数据插入一张指定的表，并且记录下原因
 
-需要用到dbms包(10gR2后版本支持)
----
+### 需要用到dbms包(10gR2后版本支持)
+
 ```sql
 SQL> DESC dbms_errlog.create_error_log
 Parameter           Type     Mode Default? 
@@ -29,8 +29,8 @@ SQL>
 --默认会创建ERR$_SOURCE表，在``第二个``参数可以自己输入表名 
 ```
 
-创建源表source的目标表dest
----
+### 创建源表source的目标表dest
+
 ```sql
 BEGIN
   DBMS_ERRLOG.create_error_log (dml_table_name => 'SOURCE');
@@ -38,8 +38,8 @@ END;
 ```
 
  
-在insert语句后按照固定格式填写
----
+### 在insert语句后按照固定格式填写
+
 ```sql
 INSERT INTO dest
 SELECT *

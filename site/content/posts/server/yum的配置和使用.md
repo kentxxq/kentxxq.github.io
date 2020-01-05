@@ -17,8 +17,8 @@ description: "yum是用来安装、更新、卸载、管理软件包的工具。
 3. yum.repos.d  配置从哪个源来对比进行操作
 
 
-常用命令
----
+### 常用命令
+
 ```bash
 # 安装
 yum install software
@@ -30,16 +30,16 @@ yum repolist
 yum repolist enable
 ```
 
-解决国外源,下载速度慢的问题,使用阿里云
----
+### 解决国外源,下载速度慢的问题,使用阿里云
+
 ```bash
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 
 # 163网易源 http://mirrors.163.com/.help/CentOS7-Base-163.repo
 ```
 
-只需要更新指定的安全补丁
----
+### 只需要更新指定的安全补丁
+
 ```bash
 # 老版本安装yum插件即可、新版本centos7直接使用
 yum install yum-security

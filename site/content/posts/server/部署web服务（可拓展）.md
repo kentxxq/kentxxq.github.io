@@ -12,8 +12,8 @@ description: "centos部署web服务（可拓展）"
 > 学习了一下如何搭建大型的web应用，可拓展到承接大量的请求
 
 
-架构说明
-===
+## 架构说明
+
 1. 第一层购买域名以及云dns解析
 2. 第二层在这一个服务器搭建nginx的服务器。反向代理这一个服务器集群提供的服务
 3. 第三层在每一台服务器使用gunicorn，开启多个进程来处理flask请求
@@ -25,8 +25,8 @@ description: "centos部署web服务（可拓展）"
 
 ![大概示意图](/images/centos/web拓扑图.png)
 
-安装环境
-===
+## 安装环境
+
 ```bash
 # 设置nginx包
 # root @ kentxxq in /etc/yum.repos.d [14:17:01]
@@ -54,8 +54,8 @@ pip install gunicorn
 ```
 
 
-配置文件
-===
+## 配置文件
+
 ```bash
 ########################
 # nginx配置文件
@@ -184,8 +184,8 @@ def hello_world():
 ```
 
 
-启动
-===
+## 启动
+
 ```bash
 # 按照指定的参数，启动flask
 gunicorn -c gunicorn.py

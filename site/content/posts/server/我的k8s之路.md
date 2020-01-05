@@ -15,8 +15,7 @@ description: "我现在服务器上的微信，博客笔记，redis等等服务�
 > 我就用大白话来说说自己的理解和使用吧。
 
 
-关于k8s
-===
+## 关于k8s
 
 每当出现一个问题，就会出现对应的解决方法。下面是我个人的理解的简化版。
 
@@ -29,14 +28,12 @@ description: "我现在服务器上的微信，博客笔记，redis等等服务�
 openstack是为了让vm无忧无虑的健康运行。k8s则是为你的docker提供完美的环境。
 
 
-
-概念
-===
+## 概念
 
 这里我仅列出来我暂时用到的概念。总不能一上来，把文档从头看到尾吧～
 
-Pod
----
+### Pod
+
 
 `Pod`是k8s的**最小计算单元**。最常用的情况就是一个docker容器（同时也是推荐用法）。
 
@@ -48,23 +45,19 @@ Pod
 
 pod中的Controller通过Template来创建pod。
 
-Service
----
+### Service
 
 `Service`是pod的逻辑集合。**对内进行pod的负载均衡。对外提供访问地址。**
 
-Volume
----
+### Volume
 
 `Volume`为pod提供**共享数据卷**。
 
-Lable
----
+### Lable
 
 `Lable`用来**区分service/pod等资源**。LableSelector用来service/pod之间的对应。
 
-Deployment
----
+### Deployment
 
 `Deployment`它**管理ReplicaSets和Pod**，并提供声明式更新等功能。
 
@@ -73,24 +66,21 @@ Deployment
 - web应用
 - win10的激活可以自己搭建kms服务器。而并不需要数据库来存储任何信息。
 
-StatefulSet
----
+### StatefulSet
 
 `StatefulSet`用于**持久性的应用程序**，有唯一的网络标识符（IP），持久存储，有序的部署、扩展、删除和滚动更新。
 
 - redis集群
 - 部署应用后一键回滚，且不影响运行中的应用
 
-Job
----
+### Job
 
 `Job`用来**执行一次性的任务**。可定时。
 
 - 比如开启100个pod来执行一个cpu密集型的应用。完了存到数据库以后，直接销毁。
 
 
-示例
----
+### 示例
 
 ```yml
 apiVersion: apps/v1
@@ -177,22 +167,19 @@ spec:
     app: azure-vote-front
 ```
 
-操作上手
-===
+## 操作上手
 
 其实这不是我第一次使用云厂商的k8s服务。第一次用的是华为云。而这一次用Azure来试试。体验一下不同点和共同点。日后也方便自己选择平台。
 
 Azure有专门的命令行工具。可以帮助你快速操作Azure，包括管理你的k8s集群。
 
-创建k8s集群
----
+### 创建k8s集群
 
 aks是azure k8s service的简写。
 
 这部分参考[官方文档](https://docs.microsoft.com/zh-cn/azure/aks/)比较好。且非常简单。
 
-kubectl操作
----
+### kubectl操作
 
 `kubectl`是一个让你连接到k8s集群的工具。
 
@@ -259,12 +246,11 @@ cordon先将node节点标记为不可再调度。drain挪走node节点上的pods
 **就到这了。我也就不做官网的搬运工了。。**
 
 
-还有后续。。。等完全理解完继续写。。
----
+### 还有后续。。。等完全理解完继续写。。
 
 
-总结
-===
+
+## 总结
 
 不得不说的是，微软的文档是我见过最棒的。之前我见过别人说为什么java有那么多的开源库和方案，而c#很少？因为C#官方文档好，且都是官方自己做轮子，集成到了标准库。不需要了呀。
 

@@ -12,10 +12,10 @@ description: "纠结过很久这个问题，结论最终是选择Centos。写一
 >
 > 写一篇日志，如果以后改变了选择，那肯定是因为随着系统的迭代，优缺点出现了不同。
 
-各大主流发行版
-===
-[Debian/Ubuntu](https://www.Debian.org)系列
----
+## 各大主流发行版
+
+### [Debian/Ubuntu](https://www.Debian.org)系列
+
 非常棒的发行版。用户量很大，更新也很及时。优点如下：  
 
 1. 包管理工具采用apt，**包数量很多**，非常方便。
@@ -26,8 +26,8 @@ description: "纠结过很久这个问题，结论最终是选择Centos。写一
 
 实在不知道为什么不用Debian。就为了一个官方版本的网易云音乐吗？
 
-[Centos/RHEL/Fedora](https://www.Centos.org/)系列
----
+### [Centos/RHEL/Fedora](https://www.Centos.org/)系列
+
 我见过用户量最大，文档最齐全(这里也包括博客等文档)的发行版。优点如下:   
 
 1. RHEL是最大的商业linux公司支持的。内核贡献度第一。技术实力强，**稳**。
@@ -38,8 +38,8 @@ description: "纠结过很久这个问题，结论最终是选择Centos。写一
 **没钱**就用`Centos`稳。**有钱人**就用`RHEL`，出问题有人接锅。   
 个人开发，追求内核更新速度，想**体验最新特性**用`Fedora`。  
 
-[arch](https://www.archlinux.org/)系列
----
+### [arch](https://www.archlinux.org/)系列
+
 爱折腾技术的极端分子。优点如下:  
 
 1. 永远**滚动更新**。
@@ -48,8 +48,8 @@ description: "纠结过很久这个问题，结论最终是选择Centos。写一
 
 ---
 
-linux各版本的取舍
-===
+## linux各版本的取舍
+
 抛开需求，谈取舍是完全没有意义的。所以我的选择过程，可以给读者作参考。  
 
 1. **人生苦短**，我用python。所以我就不会用arch系列....等哪天财务自由再说吧
@@ -57,17 +57,17 @@ linux各版本的取舍
 
 ---
 
-我遇到的问题
-===
-尝试Debian的原因
----
+## 我遇到的问题
+
+### 尝试Debian的原因
+
 1. vps里想要**bbr特性**，内核要上到4.9，总觉得Centos自己升级内核，没Debian的默认好。
 2. 使用testing或者unstale，类似**滚动更新**，一劳永逸啊！
 3. apt的**包多**啊，比如ss-libev直接一下就能搜到。Centos还要去加copr源，跟进也不够及时
 4. 以后linux来办公，那服务器和工作站就**相同环境**了呀，Centos可能不好看
 
-死心的原因
----
+### 死心的原因
+
 可能也是因为我太懒了，折腾不出来  
 
 1. 按照官方教程，**Cockpit**在Centos上完全正常。Debian上登陆以后空白，出现一个send_async(好像是这个)的错误。找了一下资料，无果...
@@ -76,23 +76,23 @@ linux各版本的取舍
 4. 驱动问题。Centos因为维护时间长，变化不大。只要安装好了显卡驱动，一次就能跑好多年。而如果用了Debian，我看了一些文档，说nvidia的驱动都要改动内核还是什么的。很有可能哪次更新内核，就会挂。 这一点只是我的担心，没有实际操作过
 5. 如果我使用桌面版本，**Fedora**似乎更新，桌面使用更加友好。**pipenv**这样的工具，在官方github上对Fedora也有特别照顾。同时redhat的许多工程师，都是在致力于Fedora的bug修复，稳定性我也觉得不会比Debian的差到哪去。  
 
-个人原因
----
+### 个人原因
+
 我一直以来都是接触的Centos,所以更加熟悉它。  
 服务器大量都是Centos系列，如果我客户端使用Fedora，对以后Centos服务器升级，也是有帮助的。这和我的工作内容有关。  
 
 ---
 
-读者可能遇到的问题
-===
-qq
----
+## 读者可能遇到的问题
+
+### qq
+
 推荐用chrome浏览器运行安卓版本qq就好了。或者参考[docker-qq](https://github.com/bestwu/docker-qq)
 
-听歌
----
+### 听歌
+
 推荐[listen1](https://github.com/listen1/listen1_desktop)，跨音乐平台收藏听歌！
 
-office
----
+### office
+
 [wps](http://www.wps.cn/)有linux版本了。

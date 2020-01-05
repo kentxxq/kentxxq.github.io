@@ -12,8 +12,7 @@ description: "在自己的机器还有服务器上面，都应该搭建好pyenv�
 > 网络上的教程太多了，但是说的又很乱。所以自己稍微整理一下。
 > 这次的目的是**写一个及其简单的过程**，所以如果有具体问题，请看官方文档。
 
-先看目录结构
----
+### 先看目录结构
 
 ```python
 $ tree
@@ -75,8 +74,7 @@ setup(
 ```
 
 
-运行打包
----
+### 运行打包
 
 ```bash
 python setup.py sdist
@@ -112,16 +110,16 @@ $ tree
 6 directories, 17 files
 ```
 
-开始安装
----
+### 开始安装
+
 在上面的文件中，只需要关注`dist/kentxxq-1.0.2.tar.gz`
 直接拷贝到目标机器，进行解压。
 ```bash
 python setup.py install
 ```
 
-安装完成后，查看安装结果
----
+### 安装完成后，查看安装结果
+
 ```bash
 $ tree kentxxq-1.0.2-py3.6.egg
 kentxxq-1.0.2-py3.6.egg

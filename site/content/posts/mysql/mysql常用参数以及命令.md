@@ -8,16 +8,16 @@ description: "mysql常用参数以及命令"
 ---
 
 
-参数
-===
+## 参数
+
 ```sql
 # 允许导出数据的文件路径
 secure-file-priv
 ```
 
 
-常用命令
-===
+## 常用命令
+
 ```sql
 # 查看当前mysql版本支持的存储引擎
 show engine

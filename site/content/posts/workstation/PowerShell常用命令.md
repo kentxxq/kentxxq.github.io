@@ -10,19 +10,19 @@ description: "因为公司电脑都是windows系统，然后ss的windows版本�
 > 因为公司电脑都是win10系统，然后ss的win版本客户端，没有直接生成命令行的按钮，那就自己来呗。结果。。。
 
 
-关于[PowerShell](https://github.com/PowerShell/PowerShell)
-===
+## 关于[PowerShell](https://github.com/PowerShell/PowerShell)
+
 由于我平时很少使用win10下的命令行写脚本，但是PowerShell现在完全**开源跨平台**了。  
 想想你写一个脚本，无论什么环境，都能跑。指不定以后能一统shell呢？！  
 而且它还有一个简短的名字`pwsh`,几乎就是再和**zsh，fish，bash**靠拢啊！超级容易让初学者入坑。
 
-使用习惯上的区别
-===
+## 使用习惯上的区别
+
 1. powershell许多的操作不需要**等号**，比如设置变量值！
 2. 如果开启了ss，就会系统级别的代理。你新开的会话窗口(powershell窗口)就已经被代理了。
 
-常用命令(支持tab补齐)
-===
+## 常用命令(支持tab补齐)
+
 ```bash
 # 查看配置文件，可以永久配置方法，别名
 $profile
@@ -62,8 +62,6 @@ function getlist {Get-ChildItem -Name}
 Set-Alias ls getlist
 ```
 
+## 资源
 
-
-资源
-===
 [官方参考文档](https://docs.microsoft.com/en-us/powershell)

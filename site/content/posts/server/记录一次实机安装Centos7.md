@@ -12,8 +12,8 @@ description: "之前安装centos，都是在阿里云，虚拟机，还有hp-gen
 > 也就是说实体机的操作经验，只有一个比较老的hp服务器。而这次使用普通pc机来安装，遇到了不少的问题。重装了大概有50次+吧，特意来记录一下。
 
 
-安装经验
-===
+## 安装经验
+
 交代一下安装linux的经验
 
 1. 阿里云，虚拟机(这两个都属于虚拟环境了)
@@ -22,11 +22,10 @@ description: "之前安装centos，都是在阿里云，虚拟机，还有hp-gen
 
 而这次安装在普通pc上，却遇到了问题。让我觉得还是很有必要系统性的了解一下。
 
-遇到的问题
-===
+## 遇到的问题
 
-grub2-timeout问题
----
+### grub2-timeout问题
+
 启动了开机按钮以后，一直卡住在这个界面，需要手动操作才能完成点击。
 
 ![内核卡住界面](/images/server/内核卡住界面.jpg)
@@ -95,8 +94,8 @@ tmpfs           1.6G     0  1.6G    0% /run/user/0
 `BIOS启动`则可以正常显示timeout，进入默认选中的内核。
 
 
-安装GNOME桌面
----
+### 安装GNOME桌面
+
 ```bash
 ### 安装命令
 yum groupinstall "GNOME Desktop" -y
@@ -119,8 +118,7 @@ loginctl show-session <SESSION_ID> -p Type
 yum groupremove "GNOME Desktop"
 ```
 
-开启远程桌面
----
+### 开启远程桌面
 
 ```bash
 ### 安装xrdp
@@ -133,8 +131,8 @@ netstat -ltn
 systemctl stop firewalld.service
 ```
 
-自动挂载磁盘
----
+### 自动挂载磁盘
+
 ```bash
 ### fdisk分区硬盘后用xfs格式来格式化
 mkfs.xfs /dev/sdb1
@@ -154,12 +152,12 @@ reboot
 ```
 
 
-知识拓展
-===
+## 知识拓展
+
 [grub2的配置文档](https://www.gnu.org/software/grub/manual/grub/html_node/Simple-configuration.html)
 
-efi和bios启动流程
----
+### efi和bios启动流程
+
 Boot Process under BIOS
 
 1. System switched on - Power On Self Test, or POST process
@@ -177,8 +175,7 @@ Boot Process under UEFI
 5. The launched UEFI application may launch another application (in case of UEFI Shell or a boot manager like rEFInd) or the kernel and initramfs (in case of a bootloader like GRUB) depending on how the UEFI application was configured.
 
 
-验证efi还是bios
----
+### 验证efi还是bios
 
 ```bash
 ### 进入/sys/firmware
@@ -186,8 +183,7 @@ cd /sys/firmware
 ### 如果有efi文件夹，就是efi。否则就是bios
 ```
 
-指定用户sudo免密码
----
+### 指定用户sudo免密码
 
 ```bash
 vi /etc/sudoers
@@ -195,8 +191,8 @@ vi /etc/sudoers
 your_user_name ALL=(ALL) NOPASSWD: ALL
 ```
 
-总结
-===
+## 总结
+
 UEFI可以有无限的分区。可以识别2TB以上的硬盘。
 
 bios只能弄一个拓展分区，然后无限拓展。一旦上层出现错误，就会导致不可用。不过够用了。

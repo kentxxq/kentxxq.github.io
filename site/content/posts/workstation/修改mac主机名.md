@@ -28,8 +28,8 @@ kent’s MacBook Pro:~ kentxxq$
 
 
 
-延伸部分
----
+### 延伸部分
+
 ```bash
 # 启用root用户并且创建密码
 sudo -i

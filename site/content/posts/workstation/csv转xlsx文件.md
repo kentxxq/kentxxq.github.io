@@ -13,11 +13,10 @@ description: "我的超级多学习资料，都是通过书签来进行保存的
 >
 > 于是就有了这个文章。
 
-python代码
-===
+## python代码
 
-pyexcel版本
----
+### pyexcel版本
+
 这个版本代码最简单的，缺点就是非常慢。100W行的数据[1,2,3,4][2,3,4,5]...需要2分钟！
 
 ```python
@@ -33,8 +32,8 @@ print(sheet.number_of_rows())
 print('ok')
 ```
 
-pyexcelerate版本
----
+### pyexcelerate版本
+
 这个看了一个它在测试，确实很快。大概60s。还是不太理想。
 
 ```python
@@ -77,11 +76,10 @@ if __name__ == '__main__':
     print('处理完成---------------------------------------'+str(duration))
 ```
 
-c#代码
-===
+## c#代码
 
-epplus版本
----
+### epplus版本
+
 这个我只用了很少的代码，但是只花了18s左右！
 ```c#
 var format = new ExcelTextFormat();
@@ -93,8 +91,8 @@ sheet.Cells["A1"].LoadFromText(new FileInfo(@"/Users/kentxxq/test.csv"), format,
 pck.Save();
 ```
 
-最后对比
-===
+## 最后对比
+
 我还用wps手动导入了一次这个csv文件，然后光导入就用了36s。保存估计还要花几秒。而且我的wps是台式机的i3-8100+固态。
 
 结果说明了python的性能确实不够。最好用的pyexcel需要120s很夸张。最快的pyexcelerate也要60s。**但我用python完成这些代码的过程最快，api好用**。
@@ -103,8 +101,8 @@ c#性能确实很强。代码量也不多，但是我花了最多的时间写出
 
 wps应该是c/c++写的，因为加上了gui等等原因，速度竟然不如c#，但还是会比python快不少。足以见得不是一个速度级别。
 
-总结
-===
+## 总结
+
 各个语言都是有自己的优势。我的抉择是选python。**除非我要做GUI界面**。
 
 我更喜欢用python来打造原型，完成功能。即使python最慢。现在流行云计算，可以去到云平台写函数，远程调用。

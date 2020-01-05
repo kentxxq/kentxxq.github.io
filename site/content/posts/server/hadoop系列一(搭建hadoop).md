@@ -15,16 +15,16 @@ draft: true
 > 下面就来一系列的笔记和记录，帮助自己系统得学习hadoop
 
 
-概览hadoop
-===
+## 概览hadoop
+
 `hadoop`个人理解是一个框架。就像是web一样。属于不同的体系。
 
 hadoop主要的思想是，把一个大问题，分解成很多的小问题。让每个集群节点进行处理。最后把汇总后的数据返回。
 
 特点是**所有的设计理念，都是针对于大量数据(起码是TB级别)**。如果没有那么大的数据量，是没有必要的。
 
-MapReduce
----
+### MapReduce
+
 **就是用来写处理逻辑的**。
 
 `Map`用来表示如何把一个大问题，分割成小的问题。
@@ -33,25 +33,24 @@ MapReduce
 
 因为提供了streaming接口，所以可以使用任意语言来进行编写，例如python或者c++。
 
-HDFS
----
+### HDFS
+
 **一个分布式文件系统**。
 
 把数据分割成一个一个的数据块。存储在不同的服务器上。
 
 同时有冗余设置。一旦发现机器不可用，可以从正常的服务器上复制新的数据到其他节点，保证数据的安全。
 
-YARN
----
+### YARN
+
 **一个任务调度服务**。
 
 它监控这每一个MapReduce，负责查看那个节点现在空闲-处于等待接受任务的状态。然后把具体的任务分发给各个节点。
 
-动手安装
-===
+## 动手安装
 
-安装前提
----
+### 安装前提
+
 **想要安装成什么架构？**
 
 一个namenode主节点，2个datanode做分布式计算。
@@ -88,12 +87,12 @@ docker中的root权限和宿主机的root并不是同样的root权限。不会�
 [hadooop对应jdk版本](https://cwiki.apache.org/confluence/display/HADOOP/Hadoop+Java+Versions)
 ![hadoop对应jdk版本](/images/server/hadoop对应jdk版本.png)
 
-docker的安装
----
+### docker的安装
+
 [按照官方文档来吧](https://docs.docker.com/install/linux/docker-ce/centos/)
 
-制作docker容器
----
+### 制作docker容器
+
 参数说明:
 
 - `--name`:容器的名字

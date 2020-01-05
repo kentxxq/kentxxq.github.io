@@ -12,8 +12,8 @@ description: "mysql备份恢复"
 2. mysqldump轮流进行锁表
 3. innobakcupex(暂时发现最好用的备份工具，且开源)
 
-into outfile---load infile
-===
+## into outfile---load infile
+
 ```sql
 # 导入到指定的文件位置
 select * into outfile 'secure_file_priv' fields terminated by ',' from test
@@ -27,8 +27,8 @@ load data infile '/var/lib/mysql-files/20170628' into table test fields terminat
 
 
 
-mysqldump导出为sql脚本，可以直接运行进行恢复
-===
+## mysqldump导出为sql脚本，可以直接运行进行恢复
+
 ```bash
 # 指定表
 mysqldump -u root -p databasename tablename > /tmp/20170628_databasename_tablename.sql
@@ -38,8 +38,8 @@ mysqldump -u root -p --databases databasename1 databasename2  > /tmp/20170628_da
 mysqldump -u root -p -all-databases  > /tmp/20170628_databasename.sql
 ```
 
-innobackupex的使用(这个是xtrabackup的封装，可以备份多种类的存储引擎文件)
-===
+## innobackupex的使用(这个是xtrabackup的封装，可以备份多种类的存储引擎文件)
+
 ```bash
 # 备份
 innobackupex --user=root --password=password /tmp/backups
@@ -69,8 +69,8 @@ innobackupex --apply-log --redo-only /tmp/backups/full_bak --incremental-dir=/tm
 7. 第六步中都保证了备份可用。
 
 
-冷备份
-===
+## 冷备份
+
 1. 关掉mysql
 2. 直接拷贝数据文件
 3. 到指定机器上面粘贴即可

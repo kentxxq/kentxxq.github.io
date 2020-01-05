@@ -8,13 +8,13 @@ description: "mysql首次使用出现的问题"
 ---
 
 
-关于中文问题
-===
+## 关于中文问题
+
 1. 默认安装后的sys库不进行修改
 2. 在新建数据库时,进行数据库字符集的设置,推荐utf8
 
-关于mysql引擎问题
-===
+## 关于mysql引擎问题
+
 1. 普遍使用innodb、myisam两种。前者支持事务、后者有更快的查询速度和索引
 2. 在建表后加**engine=utf8**
 2. 查看当前支持的mysql引擎
@@ -22,14 +22,14 @@ description: "mysql首次使用出现的问题"
 show engines
 ```
 
-查看mysql安装后的初始密码
-===
+## 查看mysql安装后的初始密码
+
 ```bash
 grep 'temporary password' /var/log/mysqld.log
 ```
 
-让指定用户可以进行远程连接
-===
+## 让指定用户可以进行远程连接
+
 ```bash
 [root@centos1 test]# mysql -uroot -p
 Enter password: 
@@ -59,8 +59,8 @@ Query OK, 0 rows affected (0.00 sec)
 
 ```
 
-如果还是有登陆问题
----
+### 如果还是有登陆问题
+
 ```bash
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass4!';
 

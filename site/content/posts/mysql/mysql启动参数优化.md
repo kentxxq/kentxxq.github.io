@@ -8,8 +8,8 @@ description: "mysql启动参数优化"
 ---
 
 
-参数文件
-===
+## 参数文件
+
 ```bash
 [mysqld]
 
@@ -130,8 +130,8 @@ target_dir = /tmp/backups
 
 
 
-随记
-===
+## 随记
+
 为了搞定这一系列的参数，真是花了好大力气，也加深了对`mysql`的了解
 ```
 2015-06-17 17:28:53 26720 [Warning] Buffered warning: Changed limits: max_connections: 5000 (requested 65535)

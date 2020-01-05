@@ -11,16 +11,16 @@ description: "开发以及运维的流程-docker"
 
 > 开发以及运维的流程-docker
 
-个人开发以及部署
-===
+## 个人开发以及部署
+
 1. github提交代码
 2. 触发webhook，通过脚本让服务器上的容器停止，清除，重新打包，部署
 
-从拿到centos服务器开始
-===
+## 从拿到centos服务器开始
 
-安装系统所需的repo
----
+
+### 安装系统所需的repo
+
 ```bash
 #官方的拓展库
 sudo yum install epel-release -y
@@ -37,8 +37,8 @@ sudo yum install centos-release-scl unzip -y
 sudo yum update -y
 ```
 
-配置我所需要用到的服务
----
+### 配置我所需要用到的服务
+
 ```bash
 #Nginx 我的http代理
 sudo vi /etc/yum.repos.d/nginx.repo
@@ -70,8 +70,8 @@ useradd kentxxq
 yourpassword
 ```
 
-安装我所需要的工具
----
+### 安装我所需要的工具
+
 ```bash
 #Ohmyzsh 好用的shell
 sudo yum install -y git zsh
@@ -115,8 +115,8 @@ ExecStart=/usr/bin/ss-server -c /etc/shadowsocks-libev/config.json -u
 WantedBy=multi-user.target
 ```
 
-可选操作
----
+### 可选操作
+
 ```bash
 #安装dnf包管理器
 wget http://springdale.math.ias.edu/data/puias/unsupported/7/x86_64/dnf-conf-0.6.4-2.sdl7.noarch.rpm
@@ -125,15 +125,14 @@ wget http://springdale.math.ias.edu/data/puias/unsupported/7/x86_64/python-dnf-0
 yum install python-dnf-0.6.4-2.sdl7.noarch.rpm  dnf-0.6.4-2.sdl7.noarch.rpm dnf-conf-0.6.4-2.sdl7.noarch.rpm
 ```
 
-开始部署自己的东西
-===
+## 开始部署自己的东西
 
-docker
----
+### docker
+
 参考[官方手册](https://www.docker.com/)比较好
 
-mongodb
----
+### mongodb
+
 参考[官方手册](https://www.mongodb.com/)比较好
 ```bash
 #初始化操作
@@ -142,15 +141,15 @@ use admin
 db.createUser({user: "dba",pwd: "dba",roles: [ { role:”root”, db: "admin" } ]} )
 ```
 
-mysql
----
+### mysql
+
 参考[官方手册](https://www.mysql.com/)比较好
 ```bash
 yum install mysql
 ```
 
-nginx
----
+### nginx
+
 ```bash
 server {
     listen       80;
@@ -178,8 +177,8 @@ server {
 
 
 
-redis
----
+### redis
+
 ```bash
 sudo docker run -d --name redis --rm -p 6379:6379 redis:alpine
 #使用redis-cli登陆来查看数据
@@ -199,8 +198,8 @@ sudo docker run -d --name redis --rm -p 6379:6379 redis:alpine
 
 
 
-个人部署脚本
----
+### 个人部署脚本
+
 进行容器关闭，镜像拉取，镜像清理，启动新容器  
 
 ```bash
@@ -219,8 +218,7 @@ echo '启动wechat_test镜像'
 sudo docker run -p 8080:8080 --rm --name wechat_test  -d $IMAGE
 ```
 
-webhook服务  
-===
+## webhook服务  
 
 ```python
 #! /home/kentxxq/.pyenv/shims/python
@@ -305,15 +303,15 @@ if __name__ == '__main__':
 使用`nohup python -u /usr/local/bin/docker-hook &`进行后台，可以把日志输出到nohup.out文件
 
 
-团队以及企业开发(上云k8s)
-===
+## 团队以及企业开发(上云k8s)
+
 1. 项目直接部署到云服务商的代码管理
 2. 开通k8s的产品服务，规划好要求
 3. 建立流水线，触发测试环境的自动部署
 4. 测试环境没有问题以后，人工触发生产环境的部署服务
 
-理清楚几个概念
----
+### 理清楚几个概念
+
 1. 设置集群的硬件需求
 2. 部署一个应用，就是一个负载。可以多个应用/负载
 3. 应用内的pod是k8s的最小控制单位。配置pod的replicas数量,来决定运行多少个容器提供服务。pod可以自动调节数量和故障节点切换

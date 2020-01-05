@@ -8,8 +8,8 @@ description: "mac显示隐藏文件"
 ---
 
 
-在终端下运行
----
+### 在终端下运行
+
 ```bash
 # 显示
 defaults write com.apple.finder AppleShowAllFiles -bool true

@@ -11,15 +11,13 @@ description: "最近把手上的事情都忙完了。准备来好好巩固自己
 > 最近把手上的事情都忙完了。准备来好好巩固自己的python知识。为什么标题是技巧呢，因为这部分是它和其他语言最大的不同，或者说特点。要玩得6，不熟这一些知识点，肯定是不行。
 
 
-python的类
-===
+## python的类
 
 python可以用函数式编程。也支持面向对象编程。
 
 在使用函数式编程的时候，多数都是用来写脚本。同时这也是python最开始发光发亮的点。但是在处理结构性数据以及架构项目的时候，面向对象的优势就会凸显出来。同时也有很多的黑魔法让你快速完成原型的构造。
 
-先说type函数
----
+### 先说type函数
 
 我们经常用type函数来查看对象的类型信息。但还有一个用法，就是用type来生成对象。当你在写python class代码的时候，解析器遇到class代码块，就会解析class结构，然后用type来构造对象。  
 ```python
@@ -27,8 +25,7 @@ python可以用函数式编程。也支持面向对象编程。
 type(name, base, attrs)
 ```
 
-type和元类
----
+### type和元类
 
 ```python
 class TMetaClass(type):
@@ -107,8 +104,7 @@ kentxxq2.test()
 
 当然还有很多的地方可以用上，关键在于你的需求。
 
-特殊的内部函数
----
+### 特殊的内部函数
 
 方法|调用方式|解释
 ---|---|---
@@ -138,8 +134,7 @@ kentxxq2.test()
 
 内部完整文档可以参考[官方](https://docs.python.org/zh-cn/3/reference/datamodel.html)
 
-类方法和静态方法
-===
+## 类方法和静态方法
 
 `classmethod`通常用来创造此类的实例。例如你需要通过别人的参数，来创造一个实例。但是参数可以包括对象、json等。
 
@@ -157,8 +152,6 @@ kentxxq2.test()
 2. 作为内部普通方法，却想不需要实例化就使用。
 3. 和类方法对比起来。却又不需要和类对象有任何关系。
 
-好的技巧资料
-===
+## 好的技巧资料
 
-[Python Cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/)
----
+### [Python Cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/)

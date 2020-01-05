@@ -11,16 +11,16 @@ description: "用iPhone拍出来的照片，传到mac上显示结尾是HEIC的�
 >
 > 所以找了一下方法，发现automator这个功能可以一劳永逸的实现。之前一直没有用过。所以记录一下。
 
-关于automator
-===
+## 关于automator
+
 如果想要了解详细的文档和资料，看下面的链接就好了。
 
 在iOS上有workflow(捷径)，那么automator就是macOS的workflow(自动操作)。
 
 [苹果automator的官方介绍](https://support.apple.com/zh-cn/guide/automator/welcome/mac)
 
-实际操作上手
-===
+## 实际操作上手
+
 演示一波**HEIC转JPG或PNG**
 
 1. Command+Space(空格)，输入automator,进入后点击新建文稿。
@@ -33,8 +33,8 @@ description: "用iPhone拍出来的照片，传到mac上显示结尾是HEIC的�
 ![图片转换操作](/images/workstation/图片转换操作.png)
 6. 快去看看你的桌面上出现了什么！
 
-总结
-===
+## 总结
+
 还有很多的小功能组合。感觉比iOS上好用多了，支持的功能数量不在一个量级。毕竟一个是手机，一个是电脑吧。
 
 

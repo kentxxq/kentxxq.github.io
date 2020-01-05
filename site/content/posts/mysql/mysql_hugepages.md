@@ -11,8 +11,8 @@ description: "在linux中，内存一般是2kb-4kb每页，如果是大内存，
 > 在linux中，内存一般是2kb-4kb每页，如果是大内存，那么pagetables将会非常大。cpu在查找使用内存的时候，会比较慢。使用hugepages，一个内存页可以设置为2MB-1GB。从而可以加快对内存的访问速度。2MB-4MB，是适用于100GB一下的内存。   1GB则适用于TB级别的内存容量。
 
 
-开始配置mysql适用hugepages
----
+### 开始配置mysql适用hugepages
+
 ```bash
 [mysql@centos1 ~]$ cat /proc/meminfo 
 MemTotal:        1016460 kB
@@ -62,8 +62,8 @@ DirectMap2M:     1015808 kB
 上面可以看出没有启用hugepages，默认hugepages每页大小为**2mb**。
 而当前的pagetables为**4344kB**
 
-centos系统设置
----
+### centos系统设置
+
 禁用thp，在各个数据库的官方文档中都明确指出了透明大页有可能出现各种问题。
 设置hugepages的个数。加入mysql所在的组(1000)
 因为是虚拟机，mac硬盘休眠，就会造成时间上面的不准确。所以加上了一个时间同步的命令
@@ -88,8 +88,8 @@ echo 1000 > /proc/sys/vm/hugetlb_shm_group
 /usr/sbin/hwclock -w >> /var/log/rc.log
 ```
 
-centos开启hugepages后的内存
----
+### centos开启hugepages后的内存
+
 pagetables减小不明显，但是确实减小了。我在看的时候，发现系统用到了swap内存，可能我的内存还是设置过大了
 在mysql日志中有初始化内存的大小显示。那就是要用到的hugepage大小
 ```bash
@@ -140,8 +140,8 @@ DirectMap2M:     1015808 kB
 ```
 
 
-验证是否成功
----
+### 验证是否成功
+
 如果报错，没有成功使用大页,错误日志中会有warning
 ```bash
 2017-07-12T14:47:00.662616Z 0 [Warning] InnoDB: Failed to allocate 138412032 bytes. errno 12

@@ -10,12 +10,11 @@ description: "公司准备趁着项目重写的契机，准备从svn切换到git
 > 公司准备趁着项目重写的契机，准备从svn切换到git。于是也出现了很多的坑。
 
 
-技术选型
-===
+## 技术选型
+
 之前写过一篇关于gitea的文章，但是这一次我选择了gitlab。
 
-资源占用
----
+### 资源占用
 
 先展示一下采用docker运行后的对比`sudo docker stats`
 
@@ -29,8 +28,8 @@ description: "公司准备趁着项目重写的契机，准备从svn切换到git
 
 进入到gitlab后台管理监控，直接吓尿。。
 
-为了ci，选了gitlab
----
+### 为了ci，选了gitlab
+
 ci有很多，`jenkins`,`gitlab ci`,`drone`,`travis ci`等等。
 
 jenkins的界面我是真的不喜欢。操作也比较繁琐，没有一个单独文件来的直观。虽然貌似功能(插件)很丰富？！**适合有过经验的人**
@@ -41,8 +40,7 @@ drone的缺点就是没有很好的集成到一起，文档也不够全面，再
 
 gitlab ci开源。有广大的用户群。文档完善。与gitlab集成非常好。**唯一缺点就是对硬件要求比较高**
 
-开始部署
-===
+## 开始部署
 
 1. [安装docker](https://docs.docker.com/install/linux/docker-ce/centos/)
 2. 安装运行gitlab。[根据官方文档](https://docs.gitlab.com/omnibus/docker/)，我修改了默认的端口。同时取消了22和443端口的映射。因为用不上啊。
@@ -63,11 +61,10 @@ sudo docker run --detach \
 3. [安装运行gitlab runner并且注册](https://docs.gitlab.com/runner/install/linux-repository.html)，推荐使用推荐的方法，也就是yum安装gitlab runner。这里需要注意的是，如果你需要构建docker镜像，推荐使用shell作为executor。
 4. 在项目中添加`.gitlab-ci.yml`文件，参考[ci配置文档](https://docs.gitlab.com/ee/ci/yaml/)
 
-排坑
-===
+## 排坑
 
-gitlab ci无法克隆
----
+### gitlab ci无法克隆
+
 默认配置文件在`/etc/gitlab-runner/config.toml`文件内。在**url**下加入`clone_url`即可重新设置拉取代码的url地址。
 ```bash
 [root@YHcentos7 gitlab-runner]# cat config.toml 
@@ -99,8 +96,8 @@ check_interval = 0
 ```
 
 
-no route to host
----
+### no route to host
+
 如果拉取代码报错提示no route to host，请检查防火墙！被坑了好久。。。
 
 `firewalld.service`或者`iptables`或者`selinux`！！！
