@@ -25,6 +25,14 @@ Release:	8.0.1905
 Codename:	Core
 ```
 
+系统os错误代码查询
+---
+
+```bash
+perror 24
+OS error code  24:  Too many open files
+```
+
 服务器硬件
 ===
 
@@ -91,3 +99,4 @@ dmidecode | grep "Maximum Capacity" |sed  "s/^[ \t]*//"
 ```bash
 fdisk -l
 ```
+
