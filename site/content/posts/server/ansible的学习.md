@@ -3,7 +3,7 @@ title:  ansible的学习
 date:   2020-01-11 23:46:00 +0800
 categories: ["笔记"]
 tags: ["server"]
-keywords: ["ansible"]
+keywords: ["ansible","教程"]
 description: "ansible是一个比较流行的服务器集群管理软件。在之前我有对比过监控软件，所以了解到ansible。但是因为监控较弱，加上网上所说的性能问题，没有继续研究下去。只知道基于ssh。所以不需要被控端多做操作。正好面试的公司现在是基于ansible运维，所以肯定要学学了"
 ---
 
