@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/blog@master
-    - name: Run a multi-line script
+    - uses: actions/checkout@master
+    - name: Build a docker
       run: |
         docker build -t myblog:hugo .
