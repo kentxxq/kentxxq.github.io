@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
+      with:
+        ref: master
     - name: Build a docker
       run: |
         docker build -t myblog:hugo .
