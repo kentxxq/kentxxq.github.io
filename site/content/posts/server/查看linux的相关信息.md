@@ -89,3 +89,44 @@ dmidecode | grep "Maximum Capacity" |sed  "s/^[ \t]*//"
 fdisk -l
 ```
 
+## 监控
+
+### 系统资源概况
+
+```bash
+top
+# glances界面更现代化，但centos需要yum安装，且当下20200206无法直接安装使用
+glances
+```
+
+### 硬盘监控
+
+```bash
+# io的top命令
+iotop
+```
+
+### 网络流量监控
+
+```bash
+# 用来进行查看各个网卡的总流量
+nload 
+# 用来监控各个进程的流量使用情况
+nethogs
+# 图形化的工具，可以查看具体的端口情况
+iptraf-ng
+```
+
+### 内存监控
+
+```bash
+# 查看内存使用状态
+free -m
+# 查看内存变化 vmstat 间隔 监控次数
+vmstat 2 2
+```
+
+
+## 更新
+
+**20200206**: 新增系统监控
