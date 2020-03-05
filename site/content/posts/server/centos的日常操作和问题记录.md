@@ -33,6 +33,25 @@ lsmod | grep bbr
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 ```
 
+### 终端中文显示
+
+#### 查看已有的字符编码集
+```bash
+locale -a
+```
+
+#### 如果没有zh_CN.UTF-8
+```bash
+sudo yum install -y langpacks-zh_CN
+```
+
+
+#### 使用中文
+
+```bash
+vim /etc/locale.conf
+LANG=zh_CN.UTF-8
+```
 
 ## 问题记录
 
