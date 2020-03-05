@@ -3,7 +3,7 @@ title:  centos的日常操作和问题记录
 date:   2020-03-05 16:10:00 +0800
 categories: ["笔记"]
 tags: ["centos"]
-keywords: ["centos","yum","bbr","mount"]
+keywords: ["centos","yum","bbr","mount","报错","问题"]
 description: "现在操作centos时间是越来越多，遇到的问题也是越来越多。做一个记录贴吧"
 ---
 
