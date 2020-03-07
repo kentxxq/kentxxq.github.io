@@ -55,6 +55,30 @@ LANG=zh_CN.UTF-8
 
 ## 问题记录
 
+### 服务无权限
+
+#### 报错
+在启动mysql、nginx等服务，提示没有权限。查看日志，我发现目录已经都设置成了chmod 777。
+
+90%是selinux的问题！
+
+#### 修复
+```bash
+setenforce 0
+```
+
+永久生效
+
+修改/etc/selinux/config中`SELINUX=disabled`
+
+#### 拓展知识
+
+apparmor
+
+修改/etc/apparmor.d/usr.sbin.mysqld中的对应服务配置
+
+重启apparmor服务
+
 ### 无法挂载远程目录
 
 ```bash
