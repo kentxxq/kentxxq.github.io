@@ -53,6 +53,12 @@ vim /etc/locale.conf
 LANG=zh_CN.UTF-8
 ```
 
+### 删除7天前的文件
+
+```bash
+find /data/weblog/ -name '*.log.*' -type f -mtime +7 -exec rm -f {} \;
+```
+
 ## 问题记录
 
 ### 服务无权限
