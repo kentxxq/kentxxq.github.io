@@ -60,8 +60,15 @@ Set-Alias list get-childitem
 function getlist {Get-ChildItem -Name}
 # 再来设置别名
 Set-Alias ls getlist
+
+# 解除powershell下载限制
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 ## 资源
 
 [官方参考文档](https://docs.microsoft.com/en-us/powershell)
+
+## 更新记录
+
+**20200401**: 新增`解除powershell下载限制`

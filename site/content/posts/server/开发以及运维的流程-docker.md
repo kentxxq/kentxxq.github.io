@@ -221,7 +221,7 @@ sudo docker run -p 8080:8080 --rm --name wechat_test  -d $IMAGE
 ## webhook服务  
 
 ```python
-#! /home/kentxxq/.pyenv/shims/python
+#! /usr/bin/python3
 # coding:utf-8
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 import logging
@@ -240,31 +240,31 @@ class deployThread(Thread):
         self.data = data
 
     def run(self):
-        print('进入部署')
+        print('deploy')
         blog_v = hmac.new(blog_token, self.data, hashlib.sha1).hexdigest()
         wechat_v = hmac.new(wechat_token, self.data, hashlib.sha1).hexdigest()
         try:
             if self.signature == wechat_v:
-                logging.info('开始执行wechat命令')
+                logging.info('begin wechat')
                 result = delegator.run(
                     'sh /home/kentxxq/wechat/deploy.sh')
             elif self.signature == blog_v:
-                print("开始执行blog命令")
+                print("begin blog")
                 result = delegator.run(
                     'sh /home/kentxxq/blog/deploy.sh')
             print(result.out)
         except Exception:
-            logging.info('请求错误')
+            logging.info('request error')
 
 
 class Handler(SimpleHTTPRequestHandler):
     def do_POST(self):
-        '''禁用post请求'''
-        print('收到post请求', self.path, self.headers)
+        '''disable post request'''
+        print('got post request', self.path, self.headers)
 
         try:
             sha1_flag, signature = self.headers['X-Hub-Signature'].split('=')
-            # 读取数据的时候，加上具体的长度，会加快非常多。。
+            # add length for speed faster
             data = self.rfile.read(int(self.headers['Content-Length']))
             xx = deployThread(signature, data)
             xx.start()
@@ -278,7 +278,7 @@ class Handler(SimpleHTTPRequestHandler):
             pass
 
     def do_GET(self):
-        '''禁用get请求'''
+        '''disable get request'''
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
@@ -291,13 +291,11 @@ if __name__ == '__main__':
     addr = '127.0.0.1'
     port = 8555
     httpd = HTTPServer((addr, port), Handler)
-    # 获取系统环境变量
+    # get system var
     wechat_token = os.environ['WECHAT_AUTH_TOKEN'].encode(encoding='ascii')
     blog_token = os.environ['BLOG_AUTH_TOKEN'].encode(encoding='ascii')
-    # 之前是nohup python -u /usr/local/bin/docker-hook &，如果没有感叹号zsh会出现警告，而无法exit
-    print('使用nohup python -u /usr/local/bin/docker-hook &!，可以禁用缓存输出到nohup.out文件')
+    print('nohup python3 -u /usr/local/bin/docker-hook &')
     httpd.serve_forever()
-
 ```
 
 使用`nohup python -u /usr/local/bin/docker-hook &`进行后台，可以把日志输出到nohup.out文件

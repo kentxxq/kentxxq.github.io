@@ -53,10 +53,20 @@ vim /etc/locale.conf
 LANG=zh_CN.UTF-8
 ```
 
+或`localectl  set-locale LANG=zh_CN.UTF8`
+
 ### 删除7天前的文件
 
 ```bash
 find /data/weblog/ -name '*.log.*' -type f -mtime +7 -exec rm -f {} \;
+```
+
+### 查看进程的启动时间
+
+```bash
+ps -eo pid,lstart,etime | grep 1310
+1310 Sat Aug 10 10:21:25 2019 242-07:26:58
+# 前面是启动时间，后面是启动了242天
 ```
 
 ## 问题记录
@@ -104,3 +114,5 @@ sudo yum -y install nfs-utils
 ## 更新记录
 
 **20200305**: 开篇
+
+**20200331**: 新增修改为中文显示

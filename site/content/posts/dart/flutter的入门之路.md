@@ -3,7 +3,7 @@ title:  flutter的入门之路
 date:   2019-05-19 17:30:00 +0800
 categories: ["笔记"]
 tags: ["dart","flutter"]
-keywords: ["dart","flutter","dart包管理","跨平台","Future","async"]
+keywords: ["dart","flutter","dart包管理","跨平台","Future","async","闪光灯"]
 description: "之前了解了一下xamarin，也写过关于xamarin的一篇记录。而flutter的用途也一样是用于开发跨平台UI。flutter的编写语言是dart，爸爸是谷歌。所以推崇者比xamarin要多得多。大公司的跟进也更多。如果连一个hello world都没有写过的话，那怎么能去对比呢？就像现在网上的用户对比手机，连手机都没有，就去云评测？"
 ---
 
@@ -167,3 +167,6 @@ flutter性能算是3个里面最好的。甚至能和原生来比。但是时间
 
 最后留一下自己[demo地址](https://github.com/a805429509/flutter_app)
 
+## 更新
+
+**20200330**: 这个项目发现跑不起来了。。明天研究一下kotlin，修复一下吧。。
