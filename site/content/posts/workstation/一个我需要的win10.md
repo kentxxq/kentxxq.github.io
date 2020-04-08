@@ -3,8 +3,7 @@ title:  一个我需要的win10
 date:   2020-03-29 17:24:00 +0800
 categories: ["笔记"]
 tags: ["笔记"]
-draft: true
-keywords: ["win10","开发环境"]
+keywords: ["win10","开发环境","macOS","新版edge","wsl2"]
 description: "把我的MacBook Pro2016带bar款咸鱼线下退掉了。入手了小新pro13的2020款。于是就操作了很多的东西，学到了很多。记录一下吧"
 ---
 
