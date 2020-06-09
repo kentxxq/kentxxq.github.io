@@ -4,11 +4,11 @@ date:   2020-01-04 23:27:00 +0800
 categories: ["笔记"]
 tags: ["centos"]
 keywords: ["centos","linux","cpu","内存",""]
-description: "自己记录一下常用的linux查询命令。免得每次导出找破头。主要是在centos上操作验证"
+description: "记录一下linux常用的系统监控命令"
 ---
 
 
-> 自己记录一下常用的linux查询命令。免得每次导出找破头。主要是在centos上操作验证。
+> 记录一下linux常用的系统监控命令。
 
 
 ## 系统相关
