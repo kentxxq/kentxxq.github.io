@@ -52,6 +52,62 @@ sudo bash -c ">file.txt"
 truncate -s 0 file.txt
 ```
 
+### 开启bbr
+
+bbr是一种浪费网络资源，提升网络速度和稳定性的通讯手段。
+
+centos8默认内核4.18，不用升级内核，即可启动。否则需要用升级内核。
+
+```bash
+echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+# 生效
+sysctl -p
+# 验证
+lsmod | grep bbr
+```
+
+### 使用yum镜像源
+
+```bash
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+```
+
+### 终端中文显示
+
+#### 查看已有的字符编码集
+```bash
+locale -a
+```
+
+#### 如果没有zh_CN.UTF-8
+```bash
+sudo yum install -y langpacks-zh_CN
+```
+
+#### 使用中文
+
+```bash
+vim /etc/locale.conf
+LANG=zh_CN.UTF-8
+```
+
+或`localectl  set-locale LANG=zh_CN.UTF8`
+
+### 删除7天前的文件
+
+```bash
+find /data/weblog/ -name '*.log.*' -type f -mtime +7 -exec rm -f {} \;
+```
+
+### 查看进程的启动时间
+
+```bash
+ps -eo pid,lstart,etime | grep 1310
+1310 Sat Aug 10 10:21:25 2019 242-07:26:58
+# 前面是启动时间，后面是启动了242天
+```
+
 ## 更新
 
 **20200609**: 初版
