@@ -3,7 +3,7 @@ title:  linux问题记录
 date:   2020-06-09 23:53:00 +0800
 categories: ["笔记"]
 tags: ["linux"]
-keywords: ["linux","yum","bbr","mount","报错","问题"]
+keywords: ["linux","selinux","nfs-utils","报错","问题"]
 description: "现在操作linux的时间是越来越多，遇到的问题也是越来越多。做一个记录贴吧"
 ---
 
