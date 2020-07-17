@@ -108,6 +108,15 @@ ps -eo pid,lstart,etime | grep 1310
 # 前面是启动时间，后面是启动了242天
 ```
 
+### 端口连接情况
+```bash
+# 查看监听的端口
+netstat -ltnp
+# 统计外部ip，端口连接数量
+netstat -ant |awk '{print $5}' | awk -F ':' '{count[$1]++;} END {for(i in count) {print i "\t" count[i]}}'
+```
+
 ## 更新
 
 **20200609**: 初版
+**20200717**：新增`端口连接情况`
