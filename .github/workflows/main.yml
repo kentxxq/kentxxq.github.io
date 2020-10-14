@@ -16,4 +16,4 @@ jobs:
       with:
         hugo-version: '0.75.1'
     - name: Build
-      run: hugo --minify
+      run: cd site && hugo --minify
