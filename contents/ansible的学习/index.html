@@ -1,0 +1,71 @@
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','UA-131319987-1');</script><meta name=author content="kentxxq"><meta name=keywords content="ansible 教程"><meta name=description content="ansible是一个比较流行的服务器集群管理软件。在之前我有对比过监控软件，所以了解到ansible。但是因为监控较弱，加上网上所说的性能问题，没有继续研究下去。只知道基于ssh。所以不需要被控端多做操作。正好面试的公司现在是基于ansible运维，所以肯定要学学了"><link rel=prev href=https://kentxxq.com/contents/oracle%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/><link rel=next href=https://kentxxq.com/contents/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/><link rel=canonical href=https://kentxxq.com/contents/ansible%E7%9A%84%E5%AD%A6%E4%B9%A0/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><link rel=icon type=image/png href=/favicon.png><title>ansible的学习 | kentxxq Blog</title><meta name=title content="ansible的学习 | kentxxq Blog"><link rel=stylesheet href=/font/iconfont.css><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","image":"https:\/\/kentxxq.com\/images/me/avatar.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/"},"articleSection":"posts","name":"ansible的学习","headline":"ansible的学习","description":"ansible是一个比较流行的服务器集群管理软件。在之前我有对比过监控软件，所以了解到ansible。但是因为监控较弱，加上网上所说的性能问题，没有继续研究下去。只知道基于ssh。所以不需要被控端多做操作。正好面试的公司现在是基于ansible运维，所以肯定要学学了","inLanguage":"zh","author":"kentxxq","creator":"kentxxq","publisher":{"@type":"Organization","name":"kentxxq","logo":{"@type":"ImageObject","url":"https:\/\/kentxxq.com\/images/me/avatar.jpg"}},"accountablePerson":"kentxxq","copyrightHolder":"kentxxq","copyrightYear":"2020","datePublished":"2020-01-11 23:46:00","dateModified":"2020-01-11 23:46:00","url":"https:\/\/kentxxq.com\/contents\/ansible%E7%9A%84%E5%AD%A6%E4%B9%A0\/","keywords":["ansible","教程"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a></div><div class="menu navbar-right"><a class=menu-item href=/posts/>Blog</a>
+<a class=menu-item href=/categories/>Categories</a>
+<a class=menu-item href=/tags/>Tags</a>
+<a class=menu-item href=/about/>About</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=/posts/>Blog</a>
+<a class=menu-item href=/categories/>Categories</a>
+<a class=menu-item href=/tags/>Tags</a>
+<a class=menu-item href=/about/>About</a></div></div></nav><main class=main><div class=container><article class=post-warp><header class=post-header><h1 class=post-title>ansible的学习</h1><div class=post-meta>Written by <a href=https://kentxxq.com/ rel=author>kentxxq</a>
+with ♥
+<span class=post-time>on <time datetime=2020-01-11>January 11, 2020</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
+|
+<a href=#gitalk-container><span class=gitalk-comment-count itemprop=commentCount></span></a></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#ansible概览>ansible概览</a></li><li><a href=#安装>安装</a></li><li><a href=#编写hosts文件>编写hosts文件</a></li><li><a href=#指定主机>指定主机</a></li><li><a href=#常用命令>常用命令</a></li><li><a href=#常用模块>常用模块</a></li><li><a href=#playbook>playbook</a></li><li><a href=#roles的使用>roles的使用</a></li><li><a href=#总结>总结</a></li></ul></nav></div></div><script type=text/javascript>window.onload=function(){var fix=$('.post-toc');var end=$('.post-comment');var fixTop=fix.offset().top,fixHeight=fix.height();var endTop,miss;var offsetTop=fix[0].offsetTop;$(window).scroll(function(){var docTop=Math.max(document.body.scrollTop,document.documentElement.scrollTop);if(end.length>0){endTop=end.offset().top;miss=endTop-docTop-fixHeight;}
+if(fixTop<docTop){fix.css({'position':'fixed'});if((end.length>0)&&(endTop<(docTop+fixHeight))){fix.css({top:miss});}else{fix.css({top:0});}}else{fix.css({'position':'absolute'});fix.css({top:offsetTop});}})}</script><div class=post-content><blockquote><p>ansible是一个比较流行的服务器集群管理软件。在之前我有对比过监控软件，所以了解到ansible。</p><p>但是因为监控较弱，加上网上所说的性能问题，没有继续研究下去。只知道基于ssh。所以不需要被控端多做操作。</p><p>正好面试的公司现在是基于ansible运维，所以肯定要学学了。</p></blockquote><h2 id=ansible概览>ansible概览</h2><p>ansible优点</p><ul><li>基于python。我也比较熟。</li><li>基于ssh实现服务，所以被控端不需要做操作。</li><li>有官方的维护，人数使用也多。所以社区庞大，各种模块更加好用。</li></ul><h2 id=安装>安装</h2><p>安装其实还是比较简单的。使用默认linux的包管理器就好。</p><p>其中macOS也可以使用brew安装。但是需要指出的是配置文件默认是没有的。</p><p>在linux下，默认配置文件都放在<code>/etc/ansible/ansible.cfg</code>目录下。</p><p>而macOS则默认没有。可以自建<code>.ansible.cfg</code>文件放到用户目录下。而在文件内有一句<code>inventory = /path/hosts</code>，就是用来指定主机列表的文件。</p><p>如果设定没有问题。你就可以使用<code>ansible --version</code>验证配置。</p><h2 id=编写hosts文件>编写hosts文件</h2><p>这个文件是用来存放主机清单的，其中<code>a=1</code>代表一个变量。是这个主机独享的变量。也可以设置组变量。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#f92672>[</span>webservers<span style=color:#f92672>]</span>
+1.1.1.1 a<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+1.1.1.2
+
+<span style=color:#f92672>[</span>webservers:vars<span style=color:#f92672>]</span>
+b<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>
+
+<span style=color:#f92672>[</span>dbservers<span style=color:#f92672>]</span>
+2.2.2.1
+2.2.2.2
+</code></pre></div><h2 id=指定主机>指定主机</h2><p>第一个参数通常用来指定使用主机。</p><ol><li>all代表所有主机</li><li>dbservers则代表数据库下面的所有主机清单</li><li>其中<code>:</code>代表与，<code>&</code>代表或，<code>!</code>代表非。也可以使用通配符和正则表达式。</li></ol><h2 id=常用命令>常用命令</h2><ol><li>ansible代表主程序，最常用。</li><li>ansible-doc查看文档。</li><li>ansible-playbook运行脚本。</li></ol><h2 id=常用模块>常用模块</h2><p>通过<code>-m</code>参数可以指定使用的模块。</p><p><code>ansible -m ping all</code>可以验证主机是否能联通。</p><ol><li><code>command</code>是默认模块，但是对通配符或者管道符不好。</li><li><code>shell</code>代表使用shell模块。通常shell命令用这个。</li><li><code>script</code>代表脚本模块。在本地写好一个shell文件，然后通过此模块在远程主机上执行，但是要注意目标版本是否和脚本兼容。</li><li><code>copy</code>代表拷贝文件。其中src参数指定文件或目录，dest代表远程目录，mode=000代表权限，owner代表文件所有者。</li><li><code>fetch</code>代表提取文件，相当于反向拷贝。</li><li><code>file</code>可以操作文件。path指定文件路径。state=link配合src和dest则可以设置软连接，absent递归删除，touch文件，directory代表文件夹。</li><li><code>cron</code>代表linux自己的定时任务。job指定命令，name指定名称且禁用的时候必须指定，默认新增、disabled=true可以关掉。</li><li><code>yum</code>安装包。通过name指定包名(可以是被控端的本地rpm)且可以逗号隔开。state默认安装、absent卸载。</li><li><code>service</code>管理服务。</li><li><code>user</code>管理用户。</li></ol><h2 id=playbook>playbook</h2><p>前面所说的都是通过单独的命令进行操作，而playbook则属于脚本。完成一系列的操作。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yml data-lang=yml>---
+- <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>all</span>
+  <span style=color:#f92672>remote_user</span>: <span style=color:#ae81ff>root</span>
+
+  <span style=color:#f92672>tasks</span>:
+  -  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>install some package</span>
+     <span style=color:#f92672>yum</span>: <span style=color:#ae81ff>name=sl state=latest</span>
+     <span style=color:#f92672>notify</span>: <span style=color:#ae81ff>updated some package</span>
+     <span style=color:#f92672>when</span>: <span style=color:#ae81ff>ansible_distribution_major_version == &#34;8&#34;</span>
+     <span style=color:#f92672>name</span>: <span style=color:#ae81ff>start some service</span>
+     <span style=color:#f92672>service</span>: <span style=color:#ae81ff>name=nginx state=started</span>
+
+  <span style=color:#f92672>handlers</span>:
+  -  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>updated some package</span>
+     <span style=color:#f92672>shell</span>: <span style=color:#ae81ff>echo &#34;updated sl package&#34;</span>
+</code></pre></div><p>上面包含了一个基本的playbook，采用的是yml语法。</p><ol><li>对所有主机进行操作</li><li>远程操作的用户名是root</li><li>有2个任务，一个是安装最新sl软件包。一个是启动nginx服务</li><li>如果使用新的sl版本，则会通知handler，进行对应的操作。</li><li>when字段代表符合一定条件的情况下，才会执行此task。</li></ol><h2 id=roles的使用>roles的使用</h2><p>roles其实就是playbook的模块化版本。参考<code>https://github.com/ansible/ansible-examples/blob/master/lamp_simple</code>，大概模式如下:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ tree -L <span style=color:#ae81ff>3</span>               
+.
+├── LICENSE.md
+├── README.md
+├── group_vars
+│   ├── all
+│   └── dbservers
+├── hosts
+├── roles
+│   ├── common
+│   │   ├── handlers
+│   │   ├── tasks
+│   │   └── templates
+│   ├── db
+│   │   ├── handlers
+│   │   ├── tasks
+│   │   └── templates
+│   └── web
+│       ├── handlers
+│       ├── tasks
+│       └── templates
+└── site.yml
+
+<span style=color:#ae81ff>14</span> directories, <span style=color:#ae81ff>6</span> files
+</code></pre></div><ol><li>新建一个项目文件夹lamp_simple，代表一个项目</li><li>二级目录存放<code>group_vars</code>文件夹用来存放全局变量、<code>site.xml</code>存放一个触发role方案脚本、<code>roles</code>内存放各个部分的执行方案(前端、后端)</li><li>方案内部存放tasks，templates，handlers。其中最主要的是要有main.yml文件，使用include来包含各个task文件，确保执行顺序。</li><li>模板文件其实就是一个普通的配置文件，通过j2文件结尾，在内部加上jinja2的语法，通过变量进行替换。</li></ol><h2 id=总结>总结</h2><p>暂时就写成这样吧。操作还是很简单的，关键就看实际工作中如何用好它了。</p><p>如果遇到难搞的需求，通过2次开发，应该也是一件很轻松的事情，毕竟ansible的模块化做的很好。</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>kentxxq</span></p><p class=copyright-item><span>Link:</span>
+<a href=https://kentxxq.com/contents/ansible%E7%9A%84%E5%AD%A6%E4%B9%A0/><script>document.write(decodeURI(location.origin+location.pathname))</script></a></p><p class="copyright-item lincese">本文采用<a rel=license href=http://creativecommons.org/licenses/by-nc/4.0/ target=_blank>知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://kentxxq.com/tags/server/>#server</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://kentxxq.com/>home</a></span></section></div><div class=post-nav><a href=https://kentxxq.com/contents/oracle%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/ class=prev rel=prev title=oracle数据导入导出><i class="iconfont icon-left"></i>&nbsp;oracle数据导入导出</a>
+<a href=https://kentxxq.com/contents/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/ class=next rel=next title=微信小程序自动化部署>微信小程序自动化部署&nbsp;<i class="iconfont icon-right"></i></a></div></article><div class=post-comment><div id=disqus_thread></div><script>var disqus_config=function(){this.page.title="ansible的学习"
+this.page.url="https://kentxxq.com/contents/ansible%E7%9A%84%E5%AD%A6%E4%B9%A0/"};(function(){var d=document,s=d.createElement('script');s.src='https://kentxxq.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript></div></div></main><footer class=footer></footer><script src=/js/vendor_no_gallery.min.js async></script><script src=https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js></script></div></body></html>
