@@ -61,6 +61,14 @@ apt install sshpass -y
 </code></pre></div><h2 id=部署>部署</h2><p>如果你使用的配置和我一样，那么应该是可以直接运行部署。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># -v 查看信息</span>
 <span style=color:#75715e># -b 如果不是使用root用户，那么应该带上这个参数。在官网文档首页有写</span>
 sudo ansible-playbook -i inventory/sample/inventory.ini cluster.yml -b -v
+
+<span style=color:#75715e># 去到master节点验证</span>
+kubectl get nodes
+<span style=color:#75715e># 部署一个应用试试？</span>
+kubectl create deployment hello-node --image<span style=color:#f92672>=</span>k8s.gcr.io/echoserver:1.4
+<span style=color:#75715e># 验证部署</span>
+kubectl get deployments
+kubectl get pods
 </code></pre></div><h2 id=镜像问题处理>镜像问题处理</h2><h3 id=具体操作>具体操作</h3><p><code>registry.cn-shanghai.aliyuncs.com/kentxxq</code>的含义解析。</p><ol><li><code>registry.cn-shanghai.aliyuncs.com</code>说明我使用了阿里云的镜像服务，而且地区是上海</li><li><code>kentxxq</code>代表的是我的命名空间</li></ol><p>同时你应该创建一个git仓库，里面存放git代码。类似于我这个<a href=https://github.com/kentxxq/kubespray.git>kentxxq/kubespray</a>。文件存放的目录结构和后续的操作紧密相关！！！</p><p>下面是阿里云上的具体操作</p><ol><li>在一个地区创建一个命名空间。我的地区是上海、命名空间是kentxxq。<br>所以最终的地址也就是registry.cn-shanghai.aliyuncs.com/kentxxq
 <img src=/images/server/%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4.png alt=命名空间></li><li>创建一个镜像仓库(因为有多个镜像无法访问，所以你理解了后，应该创建多个镜像仓库)
 <img src=/images/server/%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93.png alt=镜像仓库></li><li>仓库名应该是你镜像所对应的名称
