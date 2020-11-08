@@ -26,8 +26,8 @@ apt install sshpass -y
 <span style=color:#75715e># ip是集群直接互相能连通的内网地址。</span>
 <span style=color:#66d9ef>[all]</span>
 <span style=color:#a6e22e>kube-master-01     ansible_ssh_host</span><span style=color:#f92672>=</span><span style=color:#e6db74>192.168.0.100  ansible_ssh_user=root   ansible_ssh_pass=kentxxq  ip=192.168.0.100   mask=/24</span>
-<span style=color:#a6e22e>kube-node-01      ansible_ssh_host</span><span style=color:#f92672>=</span><span style=color:#e6db74>192.168.0.100   ansible_ssh_user=root   ansible_ssh_pass=kentxxq  ip=192.168.0.100   mask=/24</span>
-<span style=color:#a6e22e>kube-node-02      ansible_ssh_host</span><span style=color:#f92672>=</span><span style=color:#e6db74>192.168.0.100   ansible_ssh_user=root   ansible_ssh_pass=kentxxq  ip=192.168.0.100   mask=/24</span>
+<span style=color:#a6e22e>kube-node-01      ansible_ssh_host</span><span style=color:#f92672>=</span><span style=color:#e6db74>192.168.0.101   ansible_ssh_user=root   ansible_ssh_pass=kentxxq  ip=192.168.0.101   mask=/24</span>
+<span style=color:#a6e22e>kube-node-02      ansible_ssh_host</span><span style=color:#f92672>=</span><span style=color:#e6db74>192.168.0.102   ansible_ssh_user=root   ansible_ssh_pass=kentxxq  ip=192.168.0.102   mask=/24</span>
 
 <span style=color:#75715e># 指定master节点</span>
 <span style=color:#66d9ef>[kube-master]</span>
