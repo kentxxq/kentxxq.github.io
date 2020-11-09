@@ -58,9 +58,8 @@ apt install sshpass -y
 
 <span style=color:#75715e># quay image repo define</span>
 <span style=color:#f92672>quay_image_repo</span>: <span style=color:#e6db74>&#34;quay.mirrors.ustc.edu.cn&#34;</span>
-</code></pre></div><h2 id=部署>部署</h2><p>如果你使用的配置和我一样，那么应该是可以直接运行部署。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># -v 查看信息</span>
-<span style=color:#75715e># -b 如果不是使用root用户，那么应该带上这个参数。在官网文档首页有写</span>
-sudo ansible-playbook -i inventory/sample/inventory.ini cluster.yml -b -v
+</code></pre></div><h2 id=部署>部署</h2><p>如果你使用的配置和我一样，那么应该是可以直接运行部署。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># -v 查看部署详情信息</span>
+ansible-playbook -i inventory/sample/inventory.ini cluster.yml --become --become-user<span style=color:#f92672>=</span>root -v
 
 <span style=color:#75715e># 去到master节点验证</span>
 kubectl get nodes
