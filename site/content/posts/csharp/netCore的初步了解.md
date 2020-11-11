@@ -151,7 +151,15 @@ public BloggingContext(DbContextOptions<BloggingContext> options)
 
 如果web项目无法运行(存在报错)，极有可能无法成功执行！
 ```bash
+# sqlite
 dotnet ef dbcontext  scaffold "Data Source=test.db" -o Models Microsoft.EntityFrameworkCore.Sqlite -c "TestDbContext" -f
+# mysql
+dotnet ef dbcontext scaffold "server=localhost;port=3306;user=root;password=mypass;database=sakila" MySql.Data.EntityFrameworkCore -o sakila -f
+# 或者
+Scaffold-DbContext "server=localhost;port=3306;user=root;password=mypass;database=sakila" MySql.Data.EntityFrameworkCore -OutputDir sakila -f
+
+# oracle 
+Scaffold-DbContext "Data Source=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST = 192.168.0.220)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User ID=kentxxq;Password=java321;" Oracle.EntityFrameworkCore -OutputDir Models
 ```
 
 ### 从Models生成数据库
@@ -246,3 +254,5 @@ List是继承于接口IEnumerable的，所以返回List是可以的。
 20190716 00:00: 添加`asp.net core的部分`
 
 20190802 14:03：添加`添加oracle的models生成`
+
+20201112 02:23: 添加`mysql的models生成`
