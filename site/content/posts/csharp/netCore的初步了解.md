@@ -52,7 +52,7 @@ C#的事件是特殊的委托。
 ### 从oracle生成models
 
 ```bash
-Scaffold-DbContext "Data Source=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST = 192.168.0.220)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User ID=kentxxq;Password=java321;" Oracle.EntityFrameworkCore -OutputDir Models
+Scaffold-DbContext "Data Source=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST = db_host)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User ID=kentxxq;Password=123456;" Oracle.EntityFrameworkCore -OutputDir Models
 ```
 
 如果上面的命令无法识别，执行下面的操作
@@ -73,6 +73,13 @@ Install-Package Microsoft.EntityFrameworkCore.Tools
 services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+    // 还可以给openapi添加xml注释
+    // 什么是xml注释？就是函数的中文名、每个参数的含义等等。PS: 1591忽略没有写xml注释的警告
+    // 编辑< project_name>.csproj , 在PropertyGroup添加<GenerateDocumentationFile>true</GenerateDocumentationFile><NoWarn>$(NoWarn);1591</NoWarn>
+    // 放开下面的代码注释：
+    // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    // c.IncludeXmlComments(xmlPath);
 });
 
 ```
@@ -256,3 +263,5 @@ List是继承于接口IEnumerable的，所以返回List是可以的。
 20190802 14:03：添加`添加oracle的models生成`
 
 20201112 02:23: 添加`mysql的models生成`
+
+20210225 16:21：添加`openapi的xml注释`
