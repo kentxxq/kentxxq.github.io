@@ -23,10 +23,10 @@ socket=/var/lib/mysql/mysql.sock
 # 在linux中，文件可以进行ln，类似快捷方式。如果设置为1，则有可能会出现安全问题，默认配置中设置为0，进行关闭
 symbolic-links=0
 # 设置数据库字符集
-character_set_server=utf8
+character_set_server=utf8mb4
 # 禁止MySQL对外部连接进行DNS解析，使用这一选项可以消除MySQL进行DNS解析的时间。但需要注意，如果开启该选项，则所有远程主机连接授权都要使用IP地址方式，否则MySQL将无法正常处理连接请求
 skip-name-resolve
-character_set_filesystem=utf8
+character_set_filesystem=utf8mb4
 # 统一使用小写的表名
 lower_case_table_names = 1
 
