@@ -1,0 +1,74 @@
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1')</script><meta name=author content="kentxxq"><meta name=keywords content="python c# csv xlsx xlsx"><meta name=description content="我的超级多学习资料，都是通过书签来进行保存的。之前说过好好理一理python，所以打算从python书签开始。python的性能一直被诟病，有多方面的原因。而多进程是解决办法之一"><link rel=prev href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81%E8%B7%AF%E7%BA%BF/><link rel=next href=https://kentxxq.com/contents/centos8%E7%9A%84%E8%AE%B0%E5%BD%95/><link rel=canonical href=https://kentxxq.com/contents/csv%E8%BD%ACxlsx%E6%96%87%E4%BB%B6/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><link rel=icon type=image/png href=/favicon.png><title>csv转xlsx文件 | kentxxq Blog</title><meta name=title content="csv转xlsx文件 | kentxxq Blog"><link rel=stylesheet href=/font/iconfont.css><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","image":"https:\/\/kentxxq.com\/images/me/avatar.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/"},"articleSection":"posts","name":"csv转xlsx文件","headline":"csv转xlsx文件","description":"我的超级多学习资料，都是通过书签来进行保存的。之前说过好好理一理python，所以打算从python书签开始。python的性能一直被诟病，有多方面的原因。而多进程是解决办法之一","inLanguage":"zh","author":"kentxxq","creator":"kentxxq","publisher":{"@type":"Organization","name":"kentxxq","logo":{"@type":"ImageObject","url":"https:\/\/kentxxq.com\/images/me/avatar.jpg"}},"accountablePerson":"kentxxq","copyrightHolder":"kentxxq","copyrightYear":"2019","datePublished":"2019-12-17 11:45:00","dateModified":"2019-12-17 11:45:00","url":"https:\/\/kentxxq.com\/contents\/csv%E8%BD%ACxlsx%E6%96%87%E4%BB%B6\/","keywords":["python","c#","csv","xlsx","xlsx"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a></div><div class="menu navbar-right"><a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a></div></div></nav><main class=main><div class=container><article class=post-warp><header class=post-header><h1 class=post-title>csv转xlsx文件</h1><div class=post-meta>Written by <a href=https://kentxxq.com/ rel=author>kentxxq</a>
+with ♥
+<span class=post-time>on <time datetime=2019-12-17>December 17, 2019</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
+|
+<a href=#gitalk-container><span class=gitalk-comment-count itemprop=commentCount></span></a></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#python代码>python代码</a><ul><li><a href=#pyexcel版本>pyexcel版本</a></li><li><a href=#pyexcelerate版本>pyexcelerate版本</a></li></ul></li><li><a href=#c代码>c#代码</a><ul><li><a href=#epplus版本>epplus版本</a></li></ul></li><li><a href=#最后对比>最后对比</a></li><li><a href=#总结>总结</a></li></ul></nav></div></div><script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script><div class=post-content><blockquote><p>Excel是大家办公最常遇到的文件之一。一旦需要具体数据的时候，客户都要求这个文件。</p><p>而我用plsql从oracle数据库中查出来以后，一般都是直接导出csv文件。需要手动去wps导入csv，转换成xlsx文件。有时候文件实在是太多了，麻烦。</p><p>于是就有了这个文章。</p></blockquote><h2 id=python代码>python代码</h2><h3 id=pyexcel版本>pyexcel版本</h3><p>这个版本代码最简单的，缺点就是非常慢。100W行的数据[1,2,3,4][2,3,4,5]&mldr;需要2分钟！</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 你还需要安装pyexcel-xlsx</span>
+<span style=color:#f92672>from</span> pyexcel <span style=color:#f92672>import</span> get_sheet
+
+sheet <span style=color:#f92672>=</span> get_sheet(file_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;/Users/kentxxq/test.csv&#39;</span>)
+
+sheet<span style=color:#f92672>.</span>save_as(filename<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;/Users/kentxxq/test.xlsx&#39;</span>)
+
+<span style=color:#66d9ef>print</span>(sheet<span style=color:#f92672>.</span>number_of_rows())
+
+<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;ok&#39;</span>)
+</code></pre></div><h3 id=pyexcelerate版本>pyexcelerate版本</h3><p>这个看了一个它在测试，确实很快。大概60s。还是不太理想。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
+<span style=color:#f92672>import</span> time
+<span style=color:#f92672>from</span> pyexcelerate <span style=color:#f92672>import</span> Workbook
+<span style=color:#f92672>import</span> csv
+<span style=color:#f92672>import</span> os
+<span style=color:#f92672>from</span> multiprocessing.pool <span style=color:#f92672>import</span> Pool
+
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>csv_to_xlsx</span>(file):
+    start <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
+    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;开始处理:&#39;</span><span style=color:#f92672>+</span>os<span style=color:#f92672>.</span>path<span style=color:#f92672>.</span>split(file)[<span style=color:#ae81ff>1</span>])
+    <span style=color:#66d9ef>with</span> open(file, <span style=color:#e6db74>&#39;r&#39;</span>, encoding<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gbk&#39;</span>) <span style=color:#66d9ef>as</span> f:
+        lines <span style=color:#f92672>=</span> list(csv<span style=color:#f92672>.</span>reader(f))
+        wb <span style=color:#f92672>=</span> Workbook()
+        wb<span style=color:#f92672>.</span>new_sheet(<span style=color:#e6db74>&#39;sheet1&#39;</span>, data<span style=color:#f92672>=</span>lines)
+        wb<span style=color:#f92672>.</span>save(file <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;.xlsx&#39;</span>)
+    end <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
+    duration <span style=color:#f92672>=</span> end<span style=color:#f92672>-</span>start
+    <span style=color:#66d9ef>print</span>(os<span style=color:#f92672>.</span>path<span style=color:#f92672>.</span>split(file)[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;处理完成:&#39;</span> <span style=color:#f92672>+</span> str(duration) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;秒&#39;</span>)
+
+
+<span style=color:#66d9ef>if</span> __name__ <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;__main__&#39;</span>:
+    start <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
+    folder <span style=color:#f92672>=</span> os<span style=color:#f92672>.</span>path<span style=color:#f92672>.</span>dirname(__file__) <span style=color:#f92672>or</span> <span style=color:#e6db74>&#39;.&#39;</span>
+    <span style=color:#66d9ef>print</span>(folder)
+    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;处理开始---------------------------------------&#39;</span>)
+    p <span style=color:#f92672>=</span> Pool()
+    <span style=color:#66d9ef>for</span> root, dirs, files <span style=color:#f92672>in</span> os<span style=color:#f92672>.</span>walk(folder):
+        <span style=color:#66d9ef>for</span> name <span style=color:#f92672>in</span> files:
+            <span style=color:#66d9ef>if</span> os<span style=color:#f92672>.</span>path<span style=color:#f92672>.</span>splitext(name)[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;.csv&#39;</span>:
+                url <span style=color:#f92672>=</span> root <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;/&#39;</span> <span style=color:#f92672>+</span> name
+                p<span style=color:#f92672>.</span>apply_async(csv_to_xlsx, args<span style=color:#f92672>=</span>(url,))
+    p<span style=color:#f92672>.</span>close()
+    p<span style=color:#f92672>.</span>join()
+    end <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
+    duration <span style=color:#f92672>=</span> end<span style=color:#f92672>-</span>start
+    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;处理完成---------------------------------------&#39;</span><span style=color:#f92672>+</span>str(duration))
+</code></pre></div><h2 id=c代码>c#代码</h2><h3 id=epplus版本>epplus版本</h3><p>这个我只用了很少的代码，但是只花了18s左右！</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c# data-lang=c#><span style=color:#66d9ef>var</span> format = <span style=color:#66d9ef>new</span> ExcelTextFormat();
+format.Delimiter = <span style=color:#e6db74>&#39;,&#39;</span>;
+format.EOL = <span style=color:#e6db74>&#34;\n&#34;</span>;
+<span style=color:#66d9ef>var</span> pck = <span style=color:#66d9ef>new</span> ExcelPackage(<span style=color:#66d9ef>new</span> FileInfo(<span style=color:#e6db74>@&#34;/Users/kentxxq/xxxx.xlsx&#34;</span>));
+<span style=color:#66d9ef>var</span> sheet = pck.Workbook.Worksheets.Add(<span style=color:#e6db74>&#34;Test1&#34;</span>);
+sheet.Cells[<span style=color:#e6db74>&#34;A1&#34;</span>].LoadFromText(<span style=color:#66d9ef>new</span> FileInfo(<span style=color:#e6db74>@&#34;/Users/kentxxq/test.csv&#34;</span>), format,                                                      OfficeOpenXml.Table.TableStyles.None, <span style=color:#66d9ef>false</span>);
+pck.Save();
+</code></pre></div><h2 id=最后对比>最后对比</h2><p>我还用wps手动导入了一次这个csv文件，然后光导入就用了36s。保存估计还要花几秒。而且我的wps是台式机的i3-8100+固态。</p><p>结果说明了python的性能确实不够。最好用的pyexcel需要120s很夸张。最快的pyexcelerate也要60s。<strong>但我用python完成这些代码的过程最快，api好用</strong>。</p><p>c#性能确实很强。代码量也不多，但是我花了最多的时间写出来。文档什么的都太差了。我有想这写一个桌面工具来转换，<strong>我也肯定会用c#来处理</strong>。</p><p>wps应该是c/c++写的，因为加上了gui等等原因，速度竟然不如c#，但还是会比python快不少。足以见得不是一个速度级别。</p><h2 id=总结>总结</h2><p>各个语言都是有自己的优势。我的抉择是选python。<strong>除非我要做GUI界面</strong>。</p><p>我更喜欢用python来打造原型，完成功能。即使python最慢。现在流行云计算，可以去到云平台写函数，远程调用。</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>kentxxq</span></p><p class=copyright-item><span>Link:</span>
+<a href=https://kentxxq.com/contents/csv%E8%BD%ACxlsx%E6%96%87%E4%BB%B6/><script>document.write(decodeURI(location.origin+location.pathname))</script></a></p><p class="copyright-item lincese">本文采用<a rel=license href=http://creativecommons.org/licenses/by-nc/4.0/ target=_blank>知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://kentxxq.com/tags/python/>#python</a></span>
+<span class=tag><a href=https://kentxxq.com/tags/c/>#c#</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://kentxxq.com/>home</a></span></section></div><div class=post-nav><a href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81%E8%B7%AF%E7%BA%BF/ class=prev rel=prev title=我的个人电子产品路线><i class="iconfont icon-left"></i>&nbsp;我的个人电子产品路线</a>
+<a href=https://kentxxq.com/contents/centos8%E7%9A%84%E8%AE%B0%E5%BD%95/ class=next rel=next title=centos8的记录>centos8的记录&nbsp;<i class="iconfont icon-right"></i></a></div></article><div class=post-comment><div id=disqus_thread></div><script>var disqus_config=function(){this.page.title="csv转xlsx文件",this.page.url="https://kentxxq.com/contents/csv%E8%BD%ACxlsx%E6%96%87%E4%BB%B6/"};(function(){var a=document,b=a.createElement('script');b.src='https://kentxxq.disqus.com/embed.js',b.setAttribute('data-timestamp',+new Date),(a.head||a.body).appendChild(b)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript></div></div></main><footer class=footer><a href=https://beian.miit.gov.cn/ target=_blank rel="external nofollow">湘ICP备2021002319号-1</a></footer><script src=/js/vendor_no_gallery.min.js async></script><script src=https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js></script></div></body></html>

@@ -1,0 +1,91 @@
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1')</script><meta name=author content="kentxxq"><meta name=keywords content="C# Xamarin iOS Android visual studio 微软 跨平台开发"><meta name=description content="在之前无意中了解到了linq，被超级方便的语法吸引到了。开始认真了解C#以及微软的现状。github被微软收购以后开放了免费的无限量私人仓库。C#自举且一系列生态代码完全开源。net core跨平台且目标是替代framework系列。浏览器开始使用chrome相同的内核且融合了ie模式，却被谷歌摆了一道。还有云平台，ide等等一系列的动作。这些做法让我对微软的好感度急剧攀升。无意间了解到Xamarin，更是让我不得不想叫一句：微软爸爸。"><link rel=prev href=https://kentxxq.com/contents/gitlab%E6%89%8B%E6%91%B8%E6%89%8B%E6%8E%92%E5%9D%91/><link rel=next href=https://kentxxq.com/contents/%E6%88%91%E5%AF%B9go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%BA%86%E8%A7%A3/><link rel=canonical href=https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><link rel=icon type=image/png href=/favicon.png><title>入坑Xamarin初探 | kentxxq Blog</title><meta name=title content="入坑Xamarin初探 | kentxxq Blog"><link rel=stylesheet href=/font/iconfont.css><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","image":"https:\/\/kentxxq.com\/images/me/avatar.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/"},"articleSection":"posts","name":"入坑Xamarin初探","headline":"入坑Xamarin初探","description":"在之前无意中了解到了linq，被超级方便的语法吸引到了。开始认真了解C#以及微软的现状。github被微软收购以后开放了免费的无限量私人仓库。C#自举且一系列生态代码完全开源。net core跨平台且目标是替代framework系列。浏览器开始使用chrome相同的内核且融合了ie模式，却被谷歌摆了一道。还有云平台，ide等等一系列的动作。这些做法让我对微软的好感度急剧攀升。无意间了解到Xamarin，更是让我不得不想叫一句：微软爸爸。","inLanguage":"zh","author":"kentxxq","creator":"kentxxq","publisher":{"@type":"Organization","name":"kentxxq","logo":{"@type":"ImageObject","url":"https:\/\/kentxxq.com\/images/me/avatar.jpg"}},"accountablePerson":"kentxxq","copyrightHolder":"kentxxq","copyrightYear":"2019","datePublished":"2019-05-10 00:46:00","dateModified":"2019-05-10 00:46:00","url":"https:\/\/kentxxq.com\/contents\/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2\/","keywords":["C#","Xamarin","iOS","Android","visual studio","微软","跨平台开发"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a></div><div class="menu navbar-right"><a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a></div></div></nav><main class=main><div class=container><article class=post-warp><header class=post-header><h1 class=post-title>入坑Xamarin初探</h1><div class=post-meta>Written by <a href=https://kentxxq.com/ rel=author>kentxxq</a>
+with ♥
+<span class=post-time>on <time datetime=2019-05-10>May 10, 2019</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
+|
+<a href=#gitalk-container><span class=gitalk-comment-count itemprop=commentCount></span></a></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#为什么会有这篇文章>为什么会有这篇文章</a></li><li><a href=#xamarin初步了解>Xamarin初步了解</a></li><li><a href=#前期准备工作>前期准备工作</a></li><li><a href=#排坑之旅>排坑之旅</a><ul><li><a href=#ios开发>iOS开发</a></li><li><a href=#生成apk>生成apk</a></li></ul></li><li><a href=#笑容逐渐展露>笑容逐渐展露</a></li><li><a href=#总结>总结</a></li></ul></nav></div></div><script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script><div class=post-content><blockquote><p>在之前无意中了解到了linq，被超级方便的语法吸引到了。开始认真了解C#以及微软的现状。</p><p>github被微软收购以后开放了免费的无限量私人仓库。C#自举且一系列生态代码完全开源。net core跨平台且目标是替代framework系列。浏览器开始使用chrome相同的内核且融合了ie模式，却被谷歌摆了一道。还有云平台，ide等等一系列的动作。</p><p>这些做法让我对微软的好感度急剧攀升。无意间了解到Xamarin，更是让我不得不想叫一句：微软爸爸。</p></blockquote><h2 id=为什么会有这篇文章>为什么会有这篇文章</h2><p>在最近了解了一系列微软的技术发展动态后，一个<strong>不能停止学习</strong>的程序员应该体会到，如果不去了解它(微软的技术栈)，沉溺在公司现有的技术栈，会导致视野越来越小。甚至几年以后，与公司外部世界技术脱轨。</p><p>从技术方面来说，微软有这些值得注意的点:</p><ol><li>c#/c++/xaramin等等技术的全面开源。可以在使用微软技术栈的同时，更好的学习知识(或者排坑)。</li><li>积极拥抱社区，为Chromium内核项目提交代码。发布WSL2支持原生linux内核，秒级启动！同时支持docker技术！</li><li>从net5的blog来看，以后windows会放弃net framework，而使用net core。
+<img src=/images/csharp/Xamarin_dotnet5%E8%A7%84%E5%88%92.png alt=Xamarin_dotnet5规划></li><li>随着vs/vsc和微软服务绑定增多，开发越来越方便。vsc remote等理念非常前沿，甚至可以说是未来的开发模式！</li></ol><p>从上面可以得出，学好了微软技术栈在开发中可以有以下优势:</p><ol><li>类似java，可以跨平台运行。同时在windows上，可以不用安装运行环境！</li><li>对于普通用户来说，跨平台就是一个伪需求。在xp电脑上能双击打开的exe才是王道。</li><li>xaramin可以开发移动端app(iOS/Android)，且拥有庞大的社区。</li><li>对比js写的windows客户端，C#性能不用担心。</li></ol><h2 id=xamarin初步了解>Xamarin初步了解</h2><p><strong>一个跨平台UI开发的解决方案</strong>。</p><p>对比原生语言。同时开发iOS，Android应用，且代码的复用率高。</p><p>对比js跨平台。性能有优势。</p><p>对比flutter技术。dart是一个不主流的语言。且如果flutter胎死腹中(指fuchsia无法代替安卓)，那你学了dart语言以后，几乎没有用武之地！因为几乎没有公司用dart来编写除flutter以外的项目。</p><p><img src=/images/csharp/Xamarin_%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94%E5%9B%BE.png alt=Xamarin_框架对比图></p><h2 id=前期准备工作>前期准备工作</h2><p>只需要傻瓜化安装vs，即可完成整个开发环境的搭建。<a href="https://docs.microsoft.com/zh-cn/visualstudio/products/?view=vs-2019">vs官方文档</a>是最好的教程了。且中文！</p><p>参见<a href="https://docs.microsoft.com/zh-cn/xamarin/get-started/first-app/?pivots=windows">Xamarin官方文档</a>，数据线连接在安卓手机上开启debug模式。点击即可运行。</p><p>而iOS则属于排坑之旅了。</p><h2 id=排坑之旅>排坑之旅</h2><h3 id=ios开发>iOS开发</h3><ol><li>你需要一个mac电脑。或者参考<a href=https://www.macincloud.com/>云mac</a>，我没用过，也不推荐这样。</li><li>最好有一个iPhone，因为模拟器耗资源，且不方便操作。</li><li>装好xcode</li><li>新建跨平台应用的时候注意你的应用名称和组织标识符
+<img src=/images/csharp/Xamarin_%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE.png alt=新建项目></li><li>用Apple ID<a href=https://developer.apple.com/account/>申请成为开发者</a>。<strong>如果你有付费的开发者账号可以按照Xamarin官网的方法来，否则继续往下看</strong>。</li><li>Xcode随便新建一个项目，关键<code>Bundle Identifier</code>要一致。打开<strong>Xcode=>Preferences=>Accounts</strong>，。然后添加你自己的账号。Manage Certificates。
+<img src=/images/csharp/Xamarin_xcode%E7%99%BB%E9%99%86.png alt=xcode登陆></li></ol><hr><p><img src=/images/csharp/Xamarin_xcode%E8%AF%81%E4%B9%A6.png alt=xcode证书></p><hr><p><img src=/images/csharp/Xamarin_xcode%E5%AE%8C%E6%88%90%E7%AD%BE%E5%90%8D.png alt=xcode完成签名>
+7. 回到General，钩上自动signing。team选择自己personal team。等一会就ojbk了！
+<img src=/images/csharp/Xamarin_xcode%E7%AD%BE%E5%90%8Dojbk.png alt=xcode签名ojbk>
+8. 回到<strong>vs=>左上角kentxxq_app.iOS=>Debug=>你的iPhone</strong>,启动项目吧！</p><h3 id=生成apk>生成apk</h3><p>在生成apk文件的时候，记得选择release来生成。否则apk的大小会非常惊人。</p><h2 id=笑容逐渐展露>笑容逐渐展露</h2><p>开始写代码。参考官方文档，试一下<strong>闪光灯和语音功能</strong>！</p><p>为什么呢？因为我记得好久以前iPhone没有自带手电筒的功能，我是通过app下载的。而且一个调用了硬件，语音功能则调用了软件。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=color:#75715e>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span style=color:#f92672>&lt;ContentPage</span> <span style=color:#a6e22e>xmlns=</span><span style=color:#e6db74>&#34;http://xamarin.com/schemas/2014/forms&#34;</span> <span style=color:#a6e22e>xmlns:x=</span><span style=color:#e6db74>&#34;http://schemas.microsoft.com/winfx/2009/xaml&#34;</span> <span style=color:#a6e22e>xmlns:local=</span><span style=color:#e6db74>&#34;clr-namespace:kentxxq_app&#34;</span> <span style=color:#a6e22e>x:Class=</span><span style=color:#e6db74>&#34;kentxxq_app.MainPage&#34;</span><span style=color:#f92672>&gt;</span>
+    <span style=color:#f92672>&lt;StackLayout&gt;</span>
+        <span style=color:#75715e>&lt;!-- Place new controls here --&gt;</span>
+        <span style=color:#f92672>&lt;Label</span> <span style=color:#a6e22e>Text=</span><span style=color:#e6db74>&#34;Welcome to Xamarin.Forms!&#34;</span> <span style=color:#a6e22e>HorizontalOptions=</span><span style=color:#e6db74>&#34;Center&#34;</span> <span style=color:#a6e22e>VerticalOptions=</span><span style=color:#e6db74>&#34;CenterAndExpand&#34;</span> <span style=color:#f92672>/&gt;</span>
+        <span style=color:#f92672>&lt;Button</span> <span style=color:#a6e22e>Text=</span><span style=color:#e6db74>&#34;说话&#34;</span> <span style=color:#a6e22e>Clicked=</span><span style=color:#e6db74>&#34;Speak_Word&#34;</span><span style=color:#f92672>/&gt;</span>
+        <span style=color:#f92672>&lt;Button</span> <span style=color:#a6e22e>Text=</span><span style=color:#e6db74>&#34;开闪光灯&#34;</span> <span style=color:#a6e22e>Clicked=</span><span style=color:#e6db74>&#34;Open_Flashlight&#34;</span><span style=color:#f92672>/&gt;</span>
+        <span style=color:#f92672>&lt;Button</span> <span style=color:#a6e22e>Text=</span><span style=color:#e6db74>&#34;关闪光灯&#34;</span> <span style=color:#a6e22e>Clicked=</span><span style=color:#e6db74>&#34;Close_Flashlight&#34;</span><span style=color:#f92672>/&gt;</span>
+    <span style=color:#f92672>&lt;/StackLayout&gt;</span>
+<span style=color:#f92672>&lt;/ContentPage&gt;</span>
+</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cs data-lang=cs><span style=color:#66d9ef>using</span> System;
+<span style=color:#66d9ef>using</span> System.Collections.Generic;
+<span style=color:#66d9ef>using</span> System.ComponentModel;
+<span style=color:#66d9ef>using</span> System.Linq;
+<span style=color:#66d9ef>using</span> System.Text;
+<span style=color:#66d9ef>using</span> System.Threading.Tasks;
+<span style=color:#66d9ef>using</span> Xamarin.Forms;
+<span style=color:#66d9ef>using</span> Xamarin.Essentials;
+
+<span style=color:#66d9ef>namespace</span> kentxxq_app
+{
+    <span style=color:#75715e>// Learn more about making custom code visible in the Xamarin.Forms previewer
+</span><span style=color:#75715e></span>    <span style=color:#75715e>// by visiting https://aka.ms/xamarinforms-previewer
+</span><span style=color:#75715e></span><span style=color:#a6e22e>    [DesignTimeVisible(true)]</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>partial</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MainPage</span> : ContentPage
+    {
+        <span style=color:#66d9ef>public</span> MainPage()
+        {
+            InitializeComponent();
+        }
+
+        <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>void</span> Open_Flashlight(<span style=color:#66d9ef>object</span> sender,EventArgs e)
+        {
+            <span style=color:#66d9ef>try</span>
+            {
+                <span style=color:#75715e>// Turn On
+</span><span style=color:#75715e></span>                <span style=color:#66d9ef>await</span> Flashlight.TurnOnAsync();
+            }
+            <span style=color:#66d9ef>catch</span> (Exception ex)
+            {
+                
+            }
+        }
+
+        <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>void</span> Close_Flashlight(<span style=color:#66d9ef>object</span> sender, EventArgs e)
+        {
+            <span style=color:#66d9ef>try</span>
+            {
+                <span style=color:#75715e>// Turn On
+</span><span style=color:#75715e></span>                <span style=color:#66d9ef>await</span> Flashlight.TurnOffAsync();
+            }
+            <span style=color:#66d9ef>catch</span> (Exception ex)
+            {
+
+            }
+        }
+
+
+        <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>async</span> <span style=color:#66d9ef>void</span> Speak_Word(<span style=color:#66d9ef>object</span> sender, EventArgs e)
+        {
+            <span style=color:#66d9ef>await</span> TextToSpeech.SpeakAsync(<span style=color:#e6db74>&#34;Hello World&#34;</span>);
+        }
+
+    }
+}
+</code></pre></div><p>ojbk!!!后面就慢慢自己深入学习吧！</p><h2 id=总结>总结</h2><p>开发工具安装挺方便的，只是开发环境比较耗硬盘空间。</p><p>Android开发还是很方便的。就是iOS的开发太麻烦了。</p><p>为了开发方便，vs的mac版本右边有一个模拟窗口。cpu占用也不高。windows版本则最好通过xamarin hotload插件来支持热重载。</p><p>最后留一下自己的<a href=https://github.com/a805429509/kentxxq_app>demo地址</a></p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>kentxxq</span></p><p class=copyright-item><span>Link:</span>
+<a href=https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/><script>document.write(decodeURI(location.origin+location.pathname))</script></a></p><p class="copyright-item lincese">本文采用<a rel=license href=http://creativecommons.org/licenses/by-nc/4.0/ target=_blank>知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://kentxxq.com/tags/c/>#C#</a></span>
+<span class=tag><a href=https://kentxxq.com/tags/xamarin/>#Xamarin</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://kentxxq.com/>home</a></span></section></div><div class=post-nav><a href=https://kentxxq.com/contents/gitlab%E6%89%8B%E6%91%B8%E6%89%8B%E6%8E%92%E5%9D%91/ class=prev rel=prev title=gitlab手摸手排坑><i class="iconfont icon-left"></i>&nbsp;gitlab手摸手排坑</a>
+<a href=https://kentxxq.com/contents/%E6%88%91%E5%AF%B9go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%BA%86%E8%A7%A3/ class=next rel=next title=我对go语言的了解>我对go语言的了解&nbsp;<i class="iconfont icon-right"></i></a></div></article><div class=post-comment><div id=disqus_thread></div><script>var disqus_config=function(){this.page.title="入坑Xamarin初探",this.page.url="https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/"};(function(){var a=document,b=a.createElement('script');b.src='https://kentxxq.disqus.com/embed.js',b.setAttribute('data-timestamp',+new Date),(a.head||a.body).appendChild(b)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript></div></div></main><footer class=footer><a href=https://beian.miit.gov.cn/ target=_blank rel="external nofollow">湘ICP备2021002319号-1</a></footer><link href=//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css rel=stylesheet><script src=/js/vendor_gallery.min.js async></script><script src=https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js></script></div></body></html>
