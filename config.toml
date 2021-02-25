@@ -2,6 +2,7 @@ baseURL = "https://kentxxq.com/"
 languageCode = "zh"
 title = "kentxxq Blog"
 theme = "LeaveIt"
+enableGitInfo = true
 
 [menu]
   [[menu.main]]
