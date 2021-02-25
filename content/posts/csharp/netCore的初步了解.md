@@ -140,7 +140,7 @@ Microsoft.EntityFrameworkCore.Internal.DbContextPool<TContext>..ctor(DbContextOp
 public BloggingContext()
 {
 }
-//
+//其他的都不要动
 public BloggingContext(DbContextOptions<BloggingContext> options)
     : base(options)
 {
