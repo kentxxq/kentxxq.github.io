@@ -27,7 +27,7 @@ SEO我其实只会在乎GOOGLE的搜索排名，百度的竞价以及使用不�
 
 ### 如何验证
 
-打开我的这个[博客页面](https://kentxxq.com/contents/netcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3)  
+打开我的这个[博客页面](http://localhost:1313/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/)  
 1. 你的页面应该有一些基础信息。通常网站都会有![基础信息](/images/server/结构化数据示例2.png)
 2. 你的页面应该有完整的`application/ld+json`![ld+json](/images/server/结构化数据示例3.png)  
 而其中我觉得最重要的就是需要有发布时间和修改时间！虽然在sitemap里面有lastmod时间，但保险起见，单个页面应该也需要。![ld+json](/images/server/结构化数据示例4.png) 
