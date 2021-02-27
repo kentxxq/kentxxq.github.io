@@ -21,7 +21,7 @@
   <meta name="description"
     content="{{ if .IsPage }}{{ .Page.Params.description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 
-
+  {{ template "_internal/opengraph.html" . }}
 
   {{ if .PrevInSection }}
   <link rel="prev" href="{{.PrevInSection.Permalink}}" />{{end}}
@@ -60,5 +60,5 @@
 {{ with .Site.Params.cdn_url }}
 {{ $cdn_url = .}}
 {{ end }}
-{{ end  }}
+{{ end }}
 {{ .Scratch.Set "cdn_url" $cdn_url }}
