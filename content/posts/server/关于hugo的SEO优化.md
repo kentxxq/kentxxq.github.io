@@ -25,6 +25,11 @@ SEO我其实只会在乎GOOGLE的搜索排名，百度的竞价以及使用不�
 问题来了，为什么我没有弄这个快速链接呢，是因为这是谷歌自动生成的。可以参考[如何将我的网页标记为精选摘要](https://developers.google.com/search/docs/advanced/appearance/featured-snippets?visit_id=637500114156437621-3767625005&rd=1#how-can-i-mark-my-page-as-a-featured-snippet)。其实还是要你把网站内容做好，相关度做上去才行。
 3. **提交sitemap**。网上有很多的教程示例，可以参考[我的sitemap](https://kentxxq.com/sitemap.xml)
 
+### hugo相关配置
+
+1. 通常我们使用git来管理代码，所以我们需要[启用hugo的gitinfo](https://gohugo.io/variables/git/)。而如果没有使用git来管理，那么在每篇文章标记好lastmod字段即可。[官方默认读取顺序](https://gohugo.io/getting-started/configuration/#configure-front-matter)为`:git,lastmod,date,publishDate`。
+2. 站点地图默认hugo会通过自带的模板来生成，如果没有的话，需要参考[官方链接](https://gohugo.io/templates/sitemap-template/)。
+
 ### 如何验证
 
 打开我的这个[博客页面](http://localhost:1313/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/)  
