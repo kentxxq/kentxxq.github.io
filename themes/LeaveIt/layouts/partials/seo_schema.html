@@ -46,7 +46,7 @@
     "copyrightHolder" : "{{ if isset .Params "author" }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}",
     "copyrightYear" : "{{ .Date.Format "2006" }}",
     "datePublished": "{{ .Date.Format "2006-01-02 15:04:05" }}",
-    "dateModified" : "{{ .Date.Format "2006-01-02 15:04:05" }}",
+    "dateModified" : "{{ .Lastmod.Format "2006-01-02 15:04:05" }}",
     "url" : "{{ .Permalink }}",
     "keywords" : {{ .Page.Keywords }}
 }
