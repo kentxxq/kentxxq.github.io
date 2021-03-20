@@ -189,6 +189,12 @@ cd /sys/firmware
 vi /etc/sudoers
 ### 加到root用户下面
 your_user_name ALL=(ALL) NOPASSWD: ALL
+
+### ubuntu 20.04 LTS
+# 加在这个位置
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
+kentxxq ALL=(ALL)    NOPASSWD: ALL
 ```
 
 ## 总结
