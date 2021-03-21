@@ -3,7 +3,7 @@ title:  树莓派recalbox实践
 date:   2021-03-21 14:36:00 +0800
 categories: ["笔记"]
 tags: ["raspberry pi"]
-keywords: ["raspberry pi","recalbox","kodi","直播源"]
+keywords: ["raspberry pi","recalbox","kodi","直播源","nes"]
 description: "买了树莓派4b的4gb版本，就是因为哪怕是要吃灰了，我也可以把家里那个垃圾电视盒子给替换掉。那个电视盒子其实只是是一个运营商送的垃圾盒子，通过电视猫之类的app来看电视，还特别多的广告。所以有了今天先把这个吃灰救星给弄好。这次实践的目的是让这个盒子一定能跑起来，所以后续哪怕出现问题，我也会不定时更新，解决问题"
 ---
 
