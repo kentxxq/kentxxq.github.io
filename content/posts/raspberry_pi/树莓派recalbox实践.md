@@ -79,7 +79,14 @@ recalbox7.1.1是armv7l架构。arm64是64位，默认的话就是arm32。但是�
 
 再进一步，armv7应该是可以运行armv6程序的，同理armv8。
 
-可惜的是，net5还不支持armv6这一些架构，但是golang可以，我试过了。。对我这个对net下狠心的学习的人，真是太不友好了。。
+可惜的是，net5还不支持armv6这一些架构，但是golang可以，我试过了。。
+```bash
+# c#编译arm和arm64的执行结果。对我这个对net下狠心学习的人，真是太不友好了。。
+# ./TestBuild
+./TestBuild: error while loading shared libraries: libgssapi_krb5.so.2: cannot open shared object file: No such file or directory
+# ./TestBuild64
+-bash: ./TestBuild64: cannot execute binary file: Exec format error
+```
 ```go
 // golang编译命令
 CGO_ENABLED=0 GOOS=linux GOARCH=arm GOARM=7 go build x.go
