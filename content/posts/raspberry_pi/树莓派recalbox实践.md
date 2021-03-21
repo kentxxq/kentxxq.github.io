@@ -3,7 +3,7 @@ title:  树莓派recalbox实践
 date:   2021-03-21 14:36:00 +0800
 categories: ["笔记"]
 tags: ["raspberry pi"]
-keywords: ["raspberry pi","recalbox","kodi","直播源","nes"]
+keywords: ["raspberry pi","recalbox","kodi","直播源","nes","chmod","armv7l"]
 description: "买了树莓派4b的4gb版本，就是因为哪怕是要吃灰了，我也可以把家里那个垃圾电视盒子给替换掉。那个电视盒子其实只是是一个运营商送的垃圾盒子，通过电视猫之类的app来看电视，还特别多的广告。所以有了今天先把这个吃灰救星给弄好。这次实践的目的是让这个盒子一定能跑起来，所以后续哪怕出现问题，我也会不定时更新，解决问题"
 ---
 
@@ -68,6 +68,36 @@ recalbox是一个游戏模拟器的合集+kodi媒体中心！是的，都集成�
 
 进入电视就可以看是选台看电视了！
 
+
+## 疑难杂症
+
+### 操作系统架构问题
+
+recalbox7.1.1是armv7l架构。arm64是64位，默认的话就是arm32。但是一般的iot设备都用不上，所以recalbox是更特殊的armv7l架构。
+
+再进一步，看了一眼arm默认都是小端存储。armv7l就是后面的l就是小端的意思。
+
+再进一步，armv7应该是可以运行armv6程序的，同理armv8。
+
+可惜的是，net5还不支持armv6这一些架构，但是golang可以，我试过了。。对我这个对net下狠心的学习的人，真是太不友好了。。
+```go
+// golang编译命令
+CGO_ENABLED=0 GOOS=linux GOARCH=arm GOARM=7 go build x.go
+```
+
+### 无法chmod执行权限
+
+```bash
+# 重新挂载即可
+mount -o remount rw /
+# 然后拷贝到/下面
+cp x /x
+chmod +x x
+./x
+```
+
+
+
 ## todo
 
 ### 直播源工具
@@ -75,3 +105,10 @@ recalbox是一个游戏模拟器的合集+kodi媒体中心！是的，都集成�
 
 目标：抓取知名的直播源，进行测试。生成m3u文件。然后一直用这个源即可。程序预计是一条命令部署在recalbox主机上。
 
+
+
+## 更新日志
+
+**20210321**: `开篇`
+
+**20210322**: 添加`疑难杂症`
