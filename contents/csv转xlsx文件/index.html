@@ -8,7 +8,8 @@
 with ♥
 <span class=post-time>on <time datetime=2019-12-17>December 17, 2019</time></span>
 in
-<i class="iconfont icon-folder"></i><span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
+<i class="iconfont icon-folder"></i>
+<span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
 |
 <a href=#gitalk-container><span class=gitalk-comment-count itemprop=commentCount></span></a></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#python代码>python代码</a><ul><li><a href=#pyexcel版本>pyexcel版本</a></li><li><a href=#pyexcelerate版本>pyexcelerate版本</a></li></ul></li><li><a href=#c代码>c#代码</a><ul><li><a href=#epplus版本>epplus版本</a></li></ul></li><li><a href=#最后对比>最后对比</a></li><li><a href=#总结>总结</a></li></ul></nav></div></div><script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script><div class=post-content><blockquote><p>Excel是大家办公最常遇到的文件之一。一旦需要具体数据的时候，客户都要求这个文件。</p><p>而我用plsql从oracle数据库中查出来以后，一般都是直接导出csv文件。需要手动去wps导入csv，转换成xlsx文件。有时候文件实在是太多了，麻烦。</p><p>于是就有了这个文章。</p></blockquote><h2 id=python代码>python代码</h2><h3 id=pyexcel版本>pyexcel版本</h3><p>这个版本代码最简单的，缺点就是非常慢。100W行的数据[1,2,3,4][2,3,4,5]&mldr;需要2分钟！</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 你还需要安装pyexcel-xlsx</span>
 <span style=color:#f92672>from</span> pyexcel <span style=color:#f92672>import</span> get_sheet

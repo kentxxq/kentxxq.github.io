@@ -8,7 +8,8 @@
 with ♥
 <span class=post-time>on <time datetime=1993-07-06>July 6, 1993</time></span>
 in
-<i class="iconfont icon-folder"></i><span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
+<i class="iconfont icon-folder"></i>
+<span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
 |
 <a href=#gitalk-container><span class=gitalk-comment-count itemprop=commentCount></span></a></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><a href=#延伸部分>延伸部分</a></li></ul></li></ul></nav></div></div><script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script><div class=post-content><blockquote><p>问题出现的原因是，我从城市A回到城市B的时候，打开我的mac终端，发现我前缀居然发生了变化</p></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>192:~ kentxxq$ 
 </code></pre></div><p>很遗憾，之前是什么我都给忘了，应该是类似kentxxq&rsquo;s macbookpro类似的。肯定不是这个192,类似ip第一个占位的数字<br>通过下面的语句进行修正</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo -scutil --set HostName <span style=color:#e6db74>&#39;kent’s MacBook Pro&#39;</span>

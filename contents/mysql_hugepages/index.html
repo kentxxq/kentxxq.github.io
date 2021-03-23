@@ -8,7 +8,8 @@
 with ♥
 <span class=post-time>on <time datetime=1993-07-06>July 6, 1993</time></span>
 in
-<i class="iconfont icon-folder"></i><span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
+<i class="iconfont icon-folder"></i>
+<span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
 |
 <a href=#gitalk-container><span class=gitalk-comment-count itemprop=commentCount></span></a></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><a href=#开始配置mysql适用hugepages>开始配置mysql适用hugepages</a></li><li><a href=#centos系统设置>centos系统设置</a></li><li><a href=#centos开启hugepages后的内存>centos开启hugepages后的内存</a></li><li><a href=#验证是否成功>验证是否成功</a></li></ul></li></ul></nav></div></div><script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script><div class=post-content><blockquote><p>在linux中，内存一般是2kb-4kb每页，如果是大内存，那么pagetables将会非常大。cpu在查找使用内存的时候，会比较慢。使用hugepages，一个内存页可以设置为2MB-1GB。从而可以加快对内存的访问速度。2MB-4MB，是适用于100GB一下的内存。 1GB则适用于TB级别的内存容量。</p></blockquote><h3 id=开始配置mysql适用hugepages>开始配置mysql适用hugepages</h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#f92672>[</span>mysql@centos1 ~<span style=color:#f92672>]</span>$ cat /proc/meminfo 
 MemTotal:        <span style=color:#ae81ff>1016460</span> kB

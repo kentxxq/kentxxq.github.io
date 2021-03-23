@@ -8,7 +8,8 @@
 with ♥
 <span class=post-time>on <time datetime=2017-07-19>July 19, 2017</time></span>
 in
-<i class="iconfont icon-folder"></i><span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
+<i class="iconfont icon-folder"></i>
+<span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
 |
 <a href=#gitalk-container><span class=gitalk-comment-count itemprop=commentCount></span></a></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><a href=#需要用到dbms包10gr2后版本支持>需要用到dbms包(10gR2后版本支持)</a></li><li><a href=#创建源表source的目标表dest>创建源表source的目标表dest</a></li><li><a href=#在insert语句后按照固定格式填写>在insert语句后按照固定格式填写</a></li></ul></li></ul></nav></div></div><script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script><div class=post-content><blockquote><p>在工作中，常常要进行数据的临时备份，还有导入数据的需求。但是却因为在源数据中<strong>个别数据不合法</strong>，导致无法插入。
 功能效果：</p></blockquote><ol><li>把合法的数据导入进入目标表</li><li>把不合法的数据插入一张指定的表，并且记录下原因</li></ol><h3 id=需要用到dbms包10gr2后版本支持>需要用到dbms包(10gR2后版本支持)</h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=color:#66d9ef>SQL</span><span style=color:#f92672>&gt;</span> <span style=color:#66d9ef>DESC</span> dbms_errlog.create_error_log

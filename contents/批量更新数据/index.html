@@ -8,7 +8,8 @@
 with ♥
 <span class=post-time>on <time datetime=2019-01-05>January 5, 2019</time></span>
 in
-<i class="iconfont icon-folder"></i><span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
+<i class="iconfont icon-folder"></i>
+<span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
 |
 <a href=#gitalk-container><span class=gitalk-comment-count itemprop=commentCount></span></a></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#新增字段>新增字段</a></li><li><a href=#修改超级大表>修改超级大表</a></li></ul></nav></div></div><script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script><div class=post-content><blockquote><p>在工作中经常需要对已有的表结构进行改变，或者改动。所以总结了一些常用的技巧</p></blockquote><h2 id=新增字段>新增字段</h2><p><code>给定一个默认值</code>。这样会非常快的加好新字段。</p><h2 id=修改超级大表>修改超级大表</h2><p>下面是批量更新，delete操作也可以同理操作。这样可以让sql不会因为长时间执行，而出现各种网络问题干扰。且更好控制。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=color:#66d9ef>declare</span>
      <span style=color:#66d9ef>cursor</span> update_cursor <span style=color:#66d9ef>is</span> <span style=color:#66d9ef>select</span> a.<span style=color:#f92672>*</span>, a.rowid row_id <span style=color:#66d9ef>from</span> t_com_outpatient_info a <span style=color:#66d9ef>order</span> <span style=color:#66d9ef>by</span> a.rowid;

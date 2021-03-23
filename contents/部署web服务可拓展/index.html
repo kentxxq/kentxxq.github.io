@@ -8,7 +8,8 @@
 with ♥
 <span class=post-time>on <time datetime=2018-04-17>April 17, 2018</time></span>
 in
-<i class="iconfont icon-folder"></i><span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
+<i class="iconfont icon-folder"></i>
+<span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
 |
 <a href=#gitalk-container><span class=gitalk-comment-count itemprop=commentCount></span></a></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#架构说明>架构说明</a></li><li><a href=#安装环境>安装环境</a></li><li><a href=#配置文件>配置文件</a></li><li><a href=#启动>启动</a></li></ul></nav></div></div><script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script><div class=post-content><blockquote><p>学习了一下如何搭建大型的web应用，可拓展到承接大量的请求</p></blockquote><h2 id=架构说明>架构说明</h2><ol><li>第一层购买域名以及云dns解析</li><li>第二层在这一个服务器搭建nginx的服务器。反向代理这一个服务器集群提供的服务</li><li>第三层在每一台服务器使用gunicorn，开启多个进程来处理flask请求</li><li>第四层flask连接到云内部的数据库，同时也就不用担心数据库的同步问题了。（费用如果很高，那说明你需求量很高，很赚钱了啊）</li></ol><blockquote><p>现在是云时代。我喜欢所有的东西都放在云上。除非是大企业在机房自建，不然够用了
 域名部分我就不说了。。一般在对应的云上面找到，然后点点点就ok</p></blockquote><p><img src=/images/centos/web%E6%8B%93%E6%89%91%E5%9B%BE.png alt=大概示意图></p><h2 id=安装环境>安装环境</h2><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># 设置nginx包</span>

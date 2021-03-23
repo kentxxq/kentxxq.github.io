@@ -8,7 +8,8 @@
 with ♥
 <span class=post-time>on <time datetime=1993-07-06>July 6, 1993</time></span>
 in
-<i class="iconfont icon-folder"></i><span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
+<i class="iconfont icon-folder"></i>
+<span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
 |
 <a href=#gitalk-container><span class=gitalk-comment-count itemprop=commentCount></span></a></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><a href=#常用命令>常用命令</a></li><li><a href=#解决国外源下载速度慢的问题使用阿里云>解决国外源,下载速度慢的问题,使用阿里云</a></li><li><a href=#只需要更新指定的安全补丁>只需要更新指定的安全补丁</a></li></ul></li></ul></nav></div></div><script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script><div class=post-content><blockquote><p>yum是用来安装、更新、卸载、管理软件包的工具。rpm安装包因为存在依赖其他rpm软件包的问题，yum用来更加方便的解决这些问题。</p></blockquote><p>在/etc中存在有</p><ol><li>yum 版本以及插件信息</li><li>yum.conf 配置信息</li><li>yum.repos.d 配置从哪个源来对比进行操作</li></ol><h3 id=常用命令>常用命令</h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># 安装</span>
 yum install software
