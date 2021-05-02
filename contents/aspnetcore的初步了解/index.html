@@ -70,8 +70,8 @@ Update-Database
 </code></pre></div><h3 id=ef-core的使用>EF Core的使用</h3><p><code>EF Core</code>是c#的orm框架。支持查询语法和linq。非常好用！</p><p>在我所了解到的语言中，我认为是完善度和易用性最高的了！几乎杜绝了我使用裸sql语句的可能！</p><p>在我的web api中，我试着写了这么一段linq代码</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c# data-lang=c#><span style=color:#a6e22e>[HttpGet]</span>
 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>async</span> Task&lt;ActionResult&lt;IEnumerable&lt;<span style=color:#66d9ef>dynamic</span>&gt;&gt;&gt; GetUsers()
 {
-    <span style=color:#66d9ef>var</span> a = <span style=color:#66d9ef>from</span> user1 <span style=color:#66d9ef>in</span> _testDbContext.Users
-            <span style=color:#66d9ef>join</span> user2 <span style=color:#66d9ef>in</span> _testDbContext.TUsers
+    <span style=color:#66d9ef>var</span> a = <span style=color:#66d9ef>from</span> user1 <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>_</span>testDbContext.Users
+            <span style=color:#66d9ef>join</span> user2 <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>_</span>testDbContext.TUsers
             <span style=color:#66d9ef>on</span> <span style=color:#66d9ef>new</span> { username = user1.Username, password = user1.Password }
             <span style=color:#66d9ef>equals</span> <span style=color:#66d9ef>new</span> { username = user2.Username, password = user2.Password }
             <span style=color:#66d9ef>select</span> <span style=color:#66d9ef>new</span>
