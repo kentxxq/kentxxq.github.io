@@ -56,7 +56,7 @@ spec:
 
 原因：部分原因，前端和后端之间的连接采用的是长连接。而在容器销毁和扩容的过程中就会断开连接，造成无法保持长连接的问题。
 
-解决: 后端每次容器销毁前，让Header部分返回`Connection:close`,通知客户端处理完当前的请求后关闭连接，新的请求需要重新建立TCP连接。
+解决: 后端每次容器销毁前，让Header部分返回`Connection:close`,通知客户端处理完当前的请求后关闭连接，新的请求需要重新建立TCP连接。[腾讯云容器团队的参考链接](https://tencentcloudcontainerteam.github.io/2019/06/06/scale-keepalive-service/)
 
 ## 更新记录
 
