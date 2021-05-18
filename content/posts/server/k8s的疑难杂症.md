@@ -14,7 +14,7 @@ description: "k8s的疑难杂症，把日常遇到的k8s报错都总结一下"
 ## 疑难杂症
 
 ### endpoints default-http-backend not found
-```yaml
+```yml
 ❯ kubectl.exe describe ingress
 Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
 Name:             my-ingress-for-nginx
@@ -31,7 +31,7 @@ Rules:
 原因: 主要是我们看的博客、视频、文档都比较老。如果看的是最新的官方文档，其实不会有这个问题。主要是因为k8s的版本变化，检测yml文件中的字段有了变化。
 
 解决: 
-```yaml
+```yml
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
