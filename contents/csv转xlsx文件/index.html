@@ -18,9 +18,9 @@ sheet <span style=color:#f92672>=</span> get_sheet(file_name<span style=color:#f
 
 sheet<span style=color:#f92672>.</span>save_as(filename<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;/Users/kentxxq/test.xlsx&#39;</span>)
 
-<span style=color:#66d9ef>print</span>(sheet<span style=color:#f92672>.</span>number_of_rows())
+print(sheet<span style=color:#f92672>.</span>number_of_rows())
 
-<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;ok&#39;</span>)
+print(<span style=color:#e6db74>&#39;ok&#39;</span>)
 </code></pre></div><h3 id=pyexcelerate版本>pyexcelerate版本</h3><p>这个看了一个它在测试，确实很快。大概60s。还是不太理想。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
 <span style=color:#f92672>import</span> time
 <span style=color:#f92672>from</span> pyexcelerate <span style=color:#f92672>import</span> Workbook
@@ -31,7 +31,7 @@ sheet<span style=color:#f92672>.</span>save_as(filename<span style=color:#f92672
 
 <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>csv_to_xlsx</span>(file):
     start <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
-    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;开始处理:&#39;</span><span style=color:#f92672>+</span>os<span style=color:#f92672>.</span>path<span style=color:#f92672>.</span>split(file)[<span style=color:#ae81ff>1</span>])
+    print(<span style=color:#e6db74>&#39;开始处理:&#39;</span><span style=color:#f92672>+</span>os<span style=color:#f92672>.</span>path<span style=color:#f92672>.</span>split(file)[<span style=color:#ae81ff>1</span>])
     <span style=color:#66d9ef>with</span> open(file, <span style=color:#e6db74>&#39;r&#39;</span>, encoding<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gbk&#39;</span>) <span style=color:#66d9ef>as</span> f:
         lines <span style=color:#f92672>=</span> list(csv<span style=color:#f92672>.</span>reader(f))
         wb <span style=color:#f92672>=</span> Workbook()
@@ -39,14 +39,14 @@ sheet<span style=color:#f92672>.</span>save_as(filename<span style=color:#f92672
         wb<span style=color:#f92672>.</span>save(file <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;.xlsx&#39;</span>)
     end <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
     duration <span style=color:#f92672>=</span> end<span style=color:#f92672>-</span>start
-    <span style=color:#66d9ef>print</span>(os<span style=color:#f92672>.</span>path<span style=color:#f92672>.</span>split(file)[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;处理完成:&#39;</span> <span style=color:#f92672>+</span> str(duration) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;秒&#39;</span>)
+    print(os<span style=color:#f92672>.</span>path<span style=color:#f92672>.</span>split(file)[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;处理完成:&#39;</span> <span style=color:#f92672>+</span> str(duration) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;秒&#39;</span>)
 
 
 <span style=color:#66d9ef>if</span> __name__ <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;__main__&#39;</span>:
     start <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
     folder <span style=color:#f92672>=</span> os<span style=color:#f92672>.</span>path<span style=color:#f92672>.</span>dirname(__file__) <span style=color:#f92672>or</span> <span style=color:#e6db74>&#39;.&#39;</span>
-    <span style=color:#66d9ef>print</span>(folder)
-    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;处理开始---------------------------------------&#39;</span>)
+    print(folder)
+    print(<span style=color:#e6db74>&#39;处理开始---------------------------------------&#39;</span>)
     p <span style=color:#f92672>=</span> Pool()
     <span style=color:#66d9ef>for</span> root, dirs, files <span style=color:#f92672>in</span> os<span style=color:#f92672>.</span>walk(folder):
         <span style=color:#66d9ef>for</span> name <span style=color:#f92672>in</span> files:
@@ -57,7 +57,7 @@ sheet<span style=color:#f92672>.</span>save_as(filename<span style=color:#f92672
     p<span style=color:#f92672>.</span>join()
     end <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
     duration <span style=color:#f92672>=</span> end<span style=color:#f92672>-</span>start
-    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;处理完成---------------------------------------&#39;</span><span style=color:#f92672>+</span>str(duration))
+    print(<span style=color:#e6db74>&#39;处理完成---------------------------------------&#39;</span><span style=color:#f92672>+</span>str(duration))
 </code></pre></div><h2 id=c代码>c#代码</h2><h3 id=epplus版本>epplus版本</h3><p>这个我只用了很少的代码，但是只花了18s左右！</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c# data-lang=c#><span style=color:#66d9ef>var</span> format = <span style=color:#66d9ef>new</span> ExcelTextFormat();
 format.Delimiter = <span style=color:#e6db74>&#39;,&#39;</span>;
 format.EOL = <span style=color:#e6db74>&#34;\n&#34;</span>;

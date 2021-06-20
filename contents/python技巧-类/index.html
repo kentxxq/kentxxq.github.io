@@ -15,41 +15,41 @@ in
 type(name, base, attrs)
 </code></pre></div><h3 id=type和元类>type和元类</h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TMetaClass</span>(type):
     <span style=color:#66d9ef>def</span> __new__(cls, name, base, attrs):
-        <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;in TMetaClass new&#39;</span>)
+        print(<span style=color:#e6db74>&#39;in TMetaClass new&#39;</span>)
         <span style=color:#66d9ef>return</span> type<span style=color:#f92672>.</span>__new__(cls, name, base, attrs)
 
     <span style=color:#66d9ef>def</span> __init__(self, object_or_name, bases, dict):
-        <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;in TMetaClass init&#39;</span>)
+        print(<span style=color:#e6db74>&#39;in TMetaClass init&#39;</span>)
         super()<span style=color:#f92672>.</span>__init__(object_or_name, bases, dict)
 
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Person</span>(metaclass<span style=color:#f92672>=</span>TMetaClass):
     <span style=color:#66d9ef>def</span> __new__(cls):
-        <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;in Person&#39;</span>)
+        print(<span style=color:#e6db74>&#39;in Person&#39;</span>)
         <span style=color:#66d9ef>return</span> object<span style=color:#f92672>.</span>__new__(cls)
 
     <span style=color:#66d9ef>def</span> __init__(self):
-        <span style=color:#66d9ef>print</span>(self<span style=color:#f92672>.</span>__class__<span style=color:#f92672>.</span>__name__)
+        print(self<span style=color:#f92672>.</span>__class__<span style=color:#f92672>.</span>__name__)
         super()<span style=color:#f92672>.</span>__init__()
 
     <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>test</span>(self):
-        <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;Person test..&#39;</span>)
+        print(<span style=color:#e6db74>&#39;Person test..&#39;</span>)
 
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Man</span>(Person):
     <span style=color:#66d9ef>def</span> __new__(cls):
-        <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;in Man&#39;</span>)
+        print(<span style=color:#e6db74>&#39;in Man&#39;</span>)
         <span style=color:#66d9ef>return</span> object<span style=color:#f92672>.</span>__new__(cls)
 
     <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>test</span>(self):
-        <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;Man test..&#39;</span>)
+        print(<span style=color:#e6db74>&#39;Man test..&#39;</span>)
 
 
-<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;-&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>20</span>)
+print(<span style=color:#e6db74>&#39;-&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>20</span>)
 kentxxq1 <span style=color:#f92672>=</span> Person()
 kentxxq1<span style=color:#f92672>.</span>test()
 
-<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;-&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>20</span>)
+print(<span style=color:#e6db74>&#39;-&#39;</span><span style=color:#f92672>*</span><span style=color:#ae81ff>20</span>)
 kentxxq2 <span style=color:#f92672>=</span> Man()
 kentxxq2<span style=color:#f92672>.</span>test()
 <span style=color:#75715e># 结果</span>

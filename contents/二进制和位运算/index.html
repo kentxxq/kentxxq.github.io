@@ -25,31 +25,31 @@ in
 <span style=color:#f92672>~</span>   <span style=color:#75715e>#非</span>
 
 <span style=color:#f92672>&lt;&lt;</span>  <span style=color:#75715e>#左移</span>
-<span style=color:#960050;background-color:#1e0010>将所有的</span><span style=color:#ae81ff>0</span><span style=color:#960050;background-color:#1e0010>和</span><span style=color:#ae81ff>1</span><span style=color:#960050;background-color:#1e0010>的位置进行左移，移位之后将空位补</span><span style=color:#ae81ff>0</span> 
-<span style=color:#960050;background-color:#1e0010>左移操作相当于乘以</span><span style=color:#ae81ff>2</span><span style=color:#f92672>**</span>n<span style=color:#960050;background-color:#1e0010>，以</span><span style=color:#ae81ff>5</span> <span style=color:#f92672>&lt;&lt;</span> <span style=color:#ae81ff>3</span> <span style=color:#960050;background-color:#1e0010>为例，相当于</span><span style=color:#ae81ff>5</span>(<span style=color:#ae81ff>2</span><span style=color:#f92672>*</span><span style=color:#ae81ff>3</span>),<span style=color:#960050;background-color:#1e0010>结果为</span><span style=color:#ae81ff>40</span>
-<span style=color:#ae81ff>0b101</span> <span style=color:#960050;background-color:#1e0010>变成了</span> <span style=color:#ae81ff>0b101000</span>
+将所有的0和1的位置进行左移<span style=color:#960050;background-color:#1e0010>，</span>移位之后将空位补0 
+左移操作相当于乘以2<span style=color:#f92672>**</span>n<span style=color:#960050;background-color:#1e0010>，</span>以5 <span style=color:#f92672>&lt;&lt;</span> <span style=color:#ae81ff>3</span> 为例<span style=color:#960050;background-color:#1e0010>，</span>相当于5(<span style=color:#ae81ff>2</span><span style=color:#f92672>*</span><span style=color:#ae81ff>3</span>),结果为40
+<span style=color:#ae81ff>0b101</span> 变成了 <span style=color:#ae81ff>0b101000</span>
 <span style=color:#75715e># 一个int是4个字节，一个字节是8位(bit)，它存储的大小就是32位</span>
 <span style=color:#75715e># 如果加了0，超出了32位边界，那么就是溢出了</span>
 
 <span style=color:#f92672>&gt;&gt;</span>  <span style=color:#75715e>#右移</span>
-<span style=color:#960050;background-color:#1e0010>将所有的</span><span style=color:#ae81ff>0</span><span style=color:#960050;background-color:#1e0010>和</span><span style=color:#ae81ff>1</span><span style=color:#960050;background-color:#1e0010>的位置进行右移</span>(<span style=color:#960050;background-color:#1e0010>直接舍弃</span>)<span style=color:#960050;background-color:#1e0010>，空位正数补</span><span style=color:#ae81ff>0</span><span style=color:#960050;background-color:#1e0010>，负数补</span><span style=color:#ae81ff>1</span>
-<span style=color:#960050;background-color:#1e0010>右移操作相当于除以</span><span style=color:#ae81ff>2</span><span style=color:#f92672>**</span>n<span style=color:#960050;background-color:#1e0010>，</span><span style=color:#ae81ff>8</span> <span style=color:#f92672>&gt;&gt;</span> <span style=color:#ae81ff>3</span> <span style=color:#960050;background-color:#1e0010>相当于</span><span style=color:#ae81ff>8</span><span style=color:#f92672>/</span>(<span style=color:#ae81ff>2</span><span style=color:#f92672>**</span><span style=color:#ae81ff>3</span>)<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+将所有的0和1的位置进行右移(直接舍弃)<span style=color:#960050;background-color:#1e0010>，</span>空位正数补0<span style=color:#960050;background-color:#1e0010>，</span>负数补1
+右移操作相当于除以2<span style=color:#f92672>**</span>n<span style=color:#960050;background-color:#1e0010>，</span><span style=color:#ae81ff>8</span> <span style=color:#f92672>&gt;&gt;</span> <span style=color:#ae81ff>3</span> 相当于8<span style=color:#f92672>/</span>(<span style=color:#ae81ff>2</span><span style=color:#f92672>**</span><span style=color:#ae81ff>3</span>)<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
 
 <span style=color:#f92672>|</span>   <span style=color:#75715e>#位或 </span>
 <span style=color:#ae81ff>0b110</span> <span style=color:#f92672>|</span> <span style=color:#ae81ff>0b101</span>   <span style=color:#75715e>#输出7,即0b111</span>
-<span style=color:#960050;background-color:#1e0010>只要有一位有</span><span style=color:#ae81ff>1</span><span style=color:#960050;background-color:#1e0010>就为</span><span style=color:#ae81ff>1</span><span style=color:#960050;background-color:#1e0010>，可以用在综合条件</span>
+只要有一位有1就为1<span style=color:#960050;background-color:#1e0010>，</span>可以用在综合条件
 
 <span style=color:#f92672>&amp;</span>   <span style=color:#75715e>#位与</span>
 <span style=color:#ae81ff>0b110</span> <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0b011</span>   <span style=color:#75715e>#输出2，即0b010</span>
-<span style=color:#960050;background-color:#1e0010>相同的位才为</span><span style=color:#ae81ff>1</span><span style=color:#960050;background-color:#1e0010>，可以用在</span>linux权限
+相同的位才为1<span style=color:#960050;background-color:#1e0010>，</span>可以用在linux权限
 
 <span style=color:#f92672>^</span>   <span style=color:#75715e>#位异或</span>
 <span style=color:#ae81ff>0b1010</span> <span style=color:#f92672>^</span> <span style=color:#ae81ff>0b1111</span>  <span style=color:#75715e>#输出5，即0b0101</span>
-<span style=color:#960050;background-color:#1e0010>异或常用于将所有的位反转，相同的位置是</span><span style=color:#ae81ff>0</span><span style=color:#960050;background-color:#1e0010>，否则其他的位置变</span><span style=color:#ae81ff>1</span><span style=color:#960050;background-color:#1e0010>，</span>
+异或常用于将所有的位反转<span style=color:#960050;background-color:#1e0010>，</span>相同的位置是0<span style=color:#960050;background-color:#1e0010>，</span>否则其他的位置变1<span style=color:#960050;background-color:#1e0010>，</span>
 
 <span style=color:#f92672>~</span>   <span style=color:#75715e>#非</span>
 <span style=color:#f92672>~</span><span style=color:#ae81ff>0b101</span>  <span style=color:#75715e>#输出2，即0b010</span>
-<span style=color:#960050;background-color:#1e0010>这个是单独运算的，直接就把所有的反转了</span>
+这个是单独运算的<span style=color:#960050;background-color:#1e0010>，</span>直接就把所有的反转了
 </code></pre></div><h3 id=理解cv2waitkey1--0xff--ordq>理解<code>cv2.waitKey(1) & 0xFF == ord('q')</code></h3><ol><li>查看python结果</li></ol><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ python
 Python 3.6.3 <span style=color:#f92672>(</span>default, Oct <span style=color:#ae81ff>16</span> 2017, 17:26:31<span style=color:#f92672>)</span>
 <span style=color:#f92672>[</span>GCC 4.2.1 Compatible Apple LLVM 9.0.0 <span style=color:#f92672>(</span>clang-900.0.37<span style=color:#f92672>)]</span> on darwin
@@ -75,9 +75,9 @@ q <span style=color:#f92672>=</span> <span style=color:#ae81ff>113</span>
 Process exited with status <span style=color:#ae81ff>0</span>
 </code></pre></div><p>那么推算如下</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>cv2<span style=color:#f92672>.</span>waitKey(<span style=color:#ae81ff>1</span>) <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0xFF</span> <span style=color:#f92672>==</span> ord(<span style=color:#e6db74>&#39;q&#39;</span>)
 cv2<span style=color:#f92672>.</span>waitKey(<span style=color:#ae81ff>1</span>) <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>0xFF</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>113</span>
-<span style=color:#ae81ff>0xFF</span><span style=color:#960050;background-color:#1e0010>代表了你键盘上的所有按键都能匹配到</span>(<span style=color:#960050;background-color:#1e0010>包括一些系统自己拓展的特殊按键</span>)<span style=color:#960050;background-color:#1e0010>。</span>
-<span style=color:#960050;background-color:#1e0010>当我们按了</span><span style=color:#e6db74>`q`</span><span style=color:#960050;background-color:#1e0010>键</span>,cv2<span style=color:#f92672>.</span>waitKey(<span style=color:#ae81ff>1</span>)<span style=color:#960050;background-color:#1e0010>得到的就是</span><span style=color:#ae81ff>113</span><span style=color:#960050;background-color:#1e0010>的二进制，和</span><span style=color:#ae81ff>0xFF</span><span style=color:#960050;background-color:#1e0010>匹配出来的结果就是二进制的</span><span style=color:#ae81ff>113</span><span style=color:#960050;background-color:#1e0010>，在任何系统上转换为十进制，都会和右边的十进制</span><span style=color:#ae81ff>113</span><span style=color:#960050;background-color:#1e0010>相等。</span>
-<span style=color:#960050;background-color:#1e0010>避免了</span>bug
+<span style=color:#ae81ff>0xFF</span>代表了你键盘上的所有按键都能匹配到(包括一些系统自己拓展的特殊按键)<span style=color:#960050;background-color:#1e0010>。</span>
+当我们按了<span style=color:#960050;background-color:#1e0010>`</span>q<span style=color:#960050;background-color:#1e0010>`</span>键<span style=color:#960050;background-color:#1e0010></span>,cv2<span style=color:#f92672>.</span>waitKey(<span style=color:#ae81ff>1</span>)得到的就是113的二进制<span style=color:#960050;background-color:#1e0010>，</span>和0xFF匹配出来的结果就是二进制的113<span style=color:#960050;background-color:#1e0010>，</span>在任何系统上转换为十进制<span style=color:#960050;background-color:#1e0010>，</span>都会和右边的十进制113相等<span style=color:#960050;background-color:#1e0010>。</span>
+避免了bug
 </code></pre></div></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
 <span>kentxxq</span></p><p class=copyright-item><span>Link:</span>
 <a href=https://kentxxq.com/contents/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%92%8C%E4%BD%8D%E8%BF%90%E7%AE%97/><script>document.write(decodeURI(location.origin+location.pathname))</script></a></p><p class="copyright-item lincese">本文采用<a rel=license href=http://creativecommons.org/licenses/by-nc/4.0/ target=_blank>知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):

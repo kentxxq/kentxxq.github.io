@@ -38,11 +38,11 @@ in
     <span style=color:#75715e># 在这里进行判断是为了后续获取视频的宽高信息预留的  the condition here is for reserving space for getting the media data</span>
     <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_set_headers</span>(self, seek, type):
         <span style=color:#66d9ef>if</span> type <span style=color:#f92672>in</span> [<span style=color:#e6db74>&#39;moov&#39;</span>, <span style=color:#e6db74>&#39;duration&#39;</span>]:
-            self<span style=color:#f92672>.</span>s<span style=color:#f92672>.</span>headers[<span style=color:#e6db74>&#39;Range&#39;</span>] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;bytes={}-{}&#39;</span><span style=color:#f92672>.</span>format(seek, seek <span style=color:#f92672>+</span> <span style=color:#ae81ff>7</span>)
+            self<span style=color:#f92672>.</span>s<span style=color:#f92672>.</span>headers[<span style=color:#e6db74>&#39;Range&#39;</span>] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;bytes=</span><span style=color:#e6db74>{}</span><span style=color:#e6db74>-</span><span style=color:#e6db74>{}</span><span style=color:#e6db74>&#39;</span><span style=color:#f92672>.</span>format(seek, seek <span style=color:#f92672>+</span> <span style=color:#ae81ff>7</span>)
 
     <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_send_request</span>(self):
         <span style=color:#66d9ef>try</span>:
-            data <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>s<span style=color:#f92672>.</span>get(url<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>file, stream<span style=color:#f92672>=</span>True,
+            data <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>s<span style=color:#f92672>.</span>get(url<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>file, stream<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>,
                               timeout<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>timeout)<span style=color:#f92672>.</span>raw<span style=color:#f92672>.</span>read()
         <span style=color:#66d9ef>except</span> requests<span style=color:#f92672>.</span>Timeout:
             <span style=color:#66d9ef>raise</span> <span style=color:#e6db74>&#39;连接超时:超过6秒(默认)服务器没有响应任何数据！&#39;</span>  <span style=color:#75715e># timeout 6 seconds, the server fails to respond and assumes there is no data</span>
@@ -64,7 +64,7 @@ in
         <span style=color:#66d9ef>return</span> time_scale, duration
 
     <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_duration</span>(self):
-        <span style=color:#66d9ef>while</span> True:
+        <span style=color:#66d9ef>while</span> <span style=color:#66d9ef>True</span>:
             size, flag <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_find_moov_request()
             <span style=color:#66d9ef>if</span> flag <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;moov&#39;</span>:
                 time_scale, duration <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_find_duration_request()
@@ -78,7 +78,7 @@ in
     url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;http://tekeye.uk/html/images/Joren_Falls_Izu_Japan.mp4&#39;</span>
     file <span style=color:#f92672>=</span> Mp4info(url)
     a <span style=color:#f92672>=</span> file<span style=color:#f92672>.</span>get_duration()
-    <span style=color:#66d9ef>print</span>(a)
+    print(a)
 </code></pre></div><p>在代码中有几个关键点:</p><ul><li>requests用来请求数据。加上请求头信息防止服务器认为是无效访问。使用session是因为我们在过程中会有多次请求，介绍tcp连接的次数，加快连接速度。</li><li>struct是python的标准库之一，用来解析c结构类型的数据块。</li><li>可以看到这个类实现的功能非常单一。如果获取更多信息的需求，应该使用<a href=https://github.com/construct/construct>construct</a>来帮助你。</li></ul><p>另外说一句，我写了一个<a href=https://www.github.com/kentxxq/VideoInfo>VideoInfo</a>的库，你可以用pip进行安装使用。用的是construct来解析文件。通过少数几次的请求，来下载整个元数据(因此更注重网络带宽而不是连接速度)。来帮助你在需要获得更多信息的时候来使用。</p><h3 id=c>c#</h3><p>在完成了python版本以后，我学了一些c#的知识。</p><p>发现python作为一种高级、动态语言，是用纯c写的，且一直兼容这c-api。于是不但有了高级语言的oop特性，又有了通过c工具来操作数据的便利性。</p><p>而c#算是一个纯面向对象的语言了。很多底层的东西，你是需要完全改变思想来处理问题。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c# data-lang=c#><span style=color:#66d9ef>var</span> req = <span style=color:#66d9ef>new</span> HttpClient();
 req.DefaultRequestHeaders.Add(<span style=color:#e6db74>&#34;Range&#34;</span>, <span style=color:#e6db74>&#34;bytes=9737-9740&#34;</span>);
 <span style=color:#66d9ef>var</span> bytes = <span style=color:#66d9ef>await</span> req.GetByteArrayAsync(<span style=color:#e6db74>&#34;http://clips.vorwaerts-gmbh.debig_buck_bunny.mp4&#34;</span>);

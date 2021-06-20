@@ -158,7 +158,7 @@ sudo docker run -p 8080:8080 --rm --name wechat_test  -d $IMAGE
         self<span style=color:#f92672>.</span>data <span style=color:#f92672>=</span> data
 
     <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>run</span>(self):
-        <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;deploy&#39;</span>)
+        print(<span style=color:#e6db74>&#39;deploy&#39;</span>)
         blog_v <span style=color:#f92672>=</span> hmac<span style=color:#f92672>.</span>new(blog_token, self<span style=color:#f92672>.</span>data, hashlib<span style=color:#f92672>.</span>sha1)<span style=color:#f92672>.</span>hexdigest()
         wechat_v <span style=color:#f92672>=</span> hmac<span style=color:#f92672>.</span>new(wechat_token, self<span style=color:#f92672>.</span>data, hashlib<span style=color:#f92672>.</span>sha1)<span style=color:#f92672>.</span>hexdigest()
         <span style=color:#66d9ef>try</span>:
@@ -167,10 +167,10 @@ sudo docker run -p 8080:8080 --rm --name wechat_test  -d $IMAGE
                 result <span style=color:#f92672>=</span> delegator<span style=color:#f92672>.</span>run(
                     <span style=color:#e6db74>&#39;sh /home/kentxxq/wechat/deploy.sh&#39;</span>)
             <span style=color:#66d9ef>elif</span> self<span style=color:#f92672>.</span>signature <span style=color:#f92672>==</span> blog_v:
-                <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#34;begin blog&#34;</span>)
+                print(<span style=color:#e6db74>&#34;begin blog&#34;</span>)
                 result <span style=color:#f92672>=</span> delegator<span style=color:#f92672>.</span>run(
                     <span style=color:#e6db74>&#39;sh /home/kentxxq/blog/deploy.sh&#39;</span>)
-            <span style=color:#66d9ef>print</span>(result<span style=color:#f92672>.</span>out)
+            print(result<span style=color:#f92672>.</span>out)
         <span style=color:#66d9ef>except</span> <span style=color:#a6e22e>Exception</span>:
             logging<span style=color:#f92672>.</span>info(<span style=color:#e6db74>&#39;request error&#39;</span>)
 
@@ -178,7 +178,7 @@ sudo docker run -p 8080:8080 --rm --name wechat_test  -d $IMAGE
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Handler</span>(SimpleHTTPRequestHandler):
     <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>do_POST</span>(self):
         <span style=color:#e6db74>&#39;&#39;&#39;disable post request&#39;&#39;&#39;</span>
-        <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;got post request&#39;</span>, self<span style=color:#f92672>.</span>path, self<span style=color:#f92672>.</span>headers)
+        print(<span style=color:#e6db74>&#39;got post request&#39;</span>, self<span style=color:#f92672>.</span>path, self<span style=color:#f92672>.</span>headers)
 
         <span style=color:#66d9ef>try</span>:
             sha1_flag, signature <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>headers[<span style=color:#e6db74>&#39;X-Hub-Signature&#39;</span>]<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#39;=&#39;</span>)
@@ -212,7 +212,7 @@ sudo docker run -p 8080:8080 --rm --name wechat_test  -d $IMAGE
     <span style=color:#75715e># get system var</span>
     wechat_token <span style=color:#f92672>=</span> os<span style=color:#f92672>.</span>environ[<span style=color:#e6db74>&#39;WECHAT_AUTH_TOKEN&#39;</span>]<span style=color:#f92672>.</span>encode(encoding<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ascii&#39;</span>)
     blog_token <span style=color:#f92672>=</span> os<span style=color:#f92672>.</span>environ[<span style=color:#e6db74>&#39;BLOG_AUTH_TOKEN&#39;</span>]<span style=color:#f92672>.</span>encode(encoding<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ascii&#39;</span>)
-    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;nohup python3 -u /usr/local/bin/docker-hook &amp;&#39;</span>)
+    print(<span style=color:#e6db74>&#39;nohup python3 -u /usr/local/bin/docker-hook &amp;&#39;</span>)
     httpd<span style=color:#f92672>.</span>serve_forever()
 </code></pre></div><p>使用<code>nohup python -u /usr/local/bin/docker-hook &</code>进行后台，可以把日志输出到nohup.out文件</p><h2 id=团队以及企业开发上云k8s>团队以及企业开发(上云k8s)</h2><ol><li>项目直接部署到云服务商的代码管理</li><li>开通k8s的产品服务，规划好要求</li><li>建立流水线，触发测试环境的自动部署</li><li>测试环境没有问题以后，人工触发生产环境的部署服务</li></ol><h3 id=理清楚几个概念>理清楚几个概念</h3><ol><li>设置集群的硬件需求</li><li>部署一个应用，就是一个负载。可以多个应用/负载</li><li>应用内的pod是k8s的最小控制单位。配置pod的replicas数量,来决定运行多少个容器提供服务。pod可以自动调节数量和故障节点切换</li><li>创建一个service，它控制负载均衡当前应用所有的pods，并且对外提供访问</li><li>对于集群外的云数据库，可以使用endpoints。使其变成一个内部可以访问的service</li></ol></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
 <span>kentxxq</span></p><p class=copyright-item><span>Link:</span>

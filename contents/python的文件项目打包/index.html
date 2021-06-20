@@ -42,9 +42,9 @@ recursive-include myapp/txt *
 setup(
     name<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;kentxxq&#39;</span>,               <span style=color:#75715e># 项目名</span>
     version<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;1.0.2&#39;</span>,              <span style=color:#75715e># 版本号</span>
-    zip_safe<span style=color:#f92672>=</span>False,               <span style=color:#75715e># 因为部分工具不支持zip，推荐禁用</span>
+    zip_safe<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>,               <span style=color:#75715e># 因为部分工具不支持zip，推荐禁用</span>
     packages<span style=color:#f92672>=</span>find_packages(),     <span style=color:#75715e># 当前目录下所有的包</span>
-    include_package_data<span style=color:#f92672>=</span>True,    <span style=color:#75715e># 启用清单文件MANIFEST.in</span>
+    include_package_data<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>,    <span style=color:#75715e># 启用清单文件MANIFEST.in</span>
     install_requires<span style=color:#f92672>=</span>[    <span style=color:#75715e># 依赖列表</span>
         <span style=color:#e6db74>&#34;Scrapy&gt;=1.4.0&#34;</span>,
     ]
@@ -63,7 +63,7 @@ setup(
 <span style=color:#960050;background-color:#1e0010>├──</span> MANIFEST<span style=color:#f92672>.</span><span style=color:#f92672>in</span>
 <span style=color:#960050;background-color:#1e0010>├──</span> README<span style=color:#f92672>.</span>md
 <span style=color:#960050;background-color:#1e0010>├──</span> dist
-<span style=color:#960050;background-color:#1e0010>│</span>   <span style=color:#960050;background-color:#1e0010>└──</span> kentxxq<span style=color:#f92672>-</span><span style=color:#ae81ff>1.0</span><span style=color:#f92672>.</span><span style=color:#ae81ff>2.</span>tar<span style=color:#f92672>.</span>gz
+<span style=color:#960050;background-color:#1e0010>│</span>   <span style=color:#960050;background-color:#1e0010>└──</span> kentxxq<span style=color:#f92672>-</span><span style=color:#ae81ff>1.0.2</span><span style=color:#f92672>.</span>tar<span style=color:#f92672>.</span>gz
 <span style=color:#960050;background-color:#1e0010>├──</span> kentxxq<span style=color:#f92672>.</span>egg<span style=color:#f92672>-</span>info
 <span style=color:#960050;background-color:#1e0010>│</span>   <span style=color:#960050;background-color:#1e0010>├──</span> PKG<span style=color:#f92672>-</span>INFO
 <span style=color:#960050;background-color:#1e0010>│</span>   <span style=color:#960050;background-color:#1e0010>├──</span> SOURCES<span style=color:#f92672>.</span>txt
