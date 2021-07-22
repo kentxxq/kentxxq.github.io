@@ -1,24 +1,178 @@
-<!doctype html><html lang=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1')</script><meta name=author content="kentxxq"><meta name=keywords content="mac HEIC转JPG HEIC转PNG 图片转换"><meta name=description content="用iPhone拍出来的照片，传到mac上显示结尾是HEIC的图片文件。在markdown中不支持，同样在hugo的web页面里也不支持。所以找了一下方法，发现automator这个功能可以一劳永逸的实现。之前一直没有用过。所以记录一下"><meta property="og:title" content="在mac上HEIC转JPG或PNG"><meta property="og:description" content="用iPhone拍出来的照片，传到mac上显示结尾是HEIC的图片文件。在markdown中不支持，同样在hugo的web页面里也不支持。所以找了一下方法，发现automator这个功能可以一劳永逸的实现。之前一直没有用过。所以记录一下"><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/contents/%E5%9C%A8mac%E4%B8%8Aheic%E8%BD%ACjpg%E6%88%96png/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-04-15T08:59:00+08:00"><meta property="article:modified_time" content="2021-02-26T00:06:04+08:00"><link rel=prev href=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/><link rel=next href=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%AE%9E%E6%9C%BA%E5%AE%89%E8%A3%85centos7/><link rel=canonical href=https://kentxxq.com/contents/%E5%9C%A8mac%E4%B8%8Aheic%E8%BD%ACjpg%E6%88%96png/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><link rel=icon type=image/png href=/favicon.png><title>在mac上HEIC转JPG或PNG | kentxxq Blog</title><meta name=title content="在mac上HEIC转JPG或PNG | kentxxq Blog"><link rel=stylesheet href=/font/iconfont.css><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","image":"https:\/\/kentxxq.com\/images/me/avatar.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/"},"articleSection":"posts","name":"在mac上HEIC转JPG或PNG","headline":"在mac上HEIC转JPG或PNG","description":"用iPhone拍出来的照片，传到mac上显示结尾是HEIC的图片文件。在markdown中不支持，同样在hugo的web页面里也不支持。所以找了一下方法，发现automator这个功能可以一劳永逸的实现。之前一直没有用过。所以记录一下","inLanguage":"zh","author":"kentxxq","creator":"kentxxq","publisher":{"@type":"Organization","name":"kentxxq","logo":{"@type":"ImageObject","url":"https:\/\/kentxxq.com\/images/me/avatar.jpg"}},"accountablePerson":"kentxxq","copyrightHolder":"kentxxq","copyrightYear":"2019","datePublished":"2019-04-15 08:59:00","dateModified":"2021-02-26 00:06:04","url":"https:\/\/kentxxq.com\/contents\/%E5%9C%A8mac%E4%B8%8Aheic%E8%BD%ACjpg%E6%88%96png\/","keywords":["mac","HEIC转JPG","HEIC转PNG","图片转换"]}</script></head><body><div class=wrapper><nav class=navbar><div class=container><div class="navbar-header header-logo"><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a></div><div class="menu navbar-right"><a class=menu-item href=/posts/ title>Blog</a>
+<!doctype html><html lang=zh>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1')</script>
+<meta name=author content="kentxxq">
+<meta name=keywords content="mac HEIC转JPG HEIC转PNG 图片转换">
+<meta name=description content="用iPhone拍出来的照片，传到mac上显示结尾是HEIC的图片文件。在markdown中不支持，同样在hugo的web页面里也不支持。所以找了一下方法，发现automator这个功能可以一劳永逸的实现。之前一直没有用过。所以记录一下">
+<meta property="og:title" content="在mac上HEIC转JPG或PNG">
+<meta property="og:description" content="用iPhone拍出来的照片，传到mac上显示结尾是HEIC的图片文件。在markdown中不支持，同样在hugo的web页面里也不支持。所以找了一下方法，发现automator这个功能可以一劳永逸的实现。之前一直没有用过。所以记录一下">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kentxxq.com/contents/%E5%9C%A8mac%E4%B8%8Aheic%E8%BD%ACjpg%E6%88%96png/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2019-04-15T08:59:00+08:00">
+<meta property="article:modified_time" content="2021-02-26T00:06:04+08:00">
+<link rel=prev href=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/>
+<link rel=next href=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%AE%9E%E6%9C%BA%E5%AE%89%E8%A3%85centos7/>
+<link rel=canonical href=https://kentxxq.com/contents/%E5%9C%A8mac%E4%B8%8Aheic%E8%BD%ACjpg%E6%88%96png/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+<link rel=icon type=image/png href=/favicon.png>
+<title>
+在mac上HEIC转JPG或PNG | kentxxq Blog
+</title>
+<meta name=title content="在mac上HEIC转JPG或PNG | kentxxq Blog">
+<link rel=stylesheet href=/font/iconfont.css>
+<link rel=stylesheet href=/css/main.min.css>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","image":"https:\/\/kentxxq.com\/images/me/avatar.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/"},"articleSection":"posts","name":"在mac上HEIC转JPG或PNG","headline":"在mac上HEIC转JPG或PNG","description":"用iPhone拍出来的照片，传到mac上显示结尾是HEIC的图片文件。在markdown中不支持，同样在hugo的web页面里也不支持。所以找了一下方法，发现automator这个功能可以一劳永逸的实现。之前一直没有用过。所以记录一下","inLanguage":"zh","author":"kentxxq","creator":"kentxxq","publisher":{"@type":"Organization","name":"kentxxq","logo":{"@type":"ImageObject","url":"https:\/\/kentxxq.com\/images/me/avatar.jpg"}},"accountablePerson":"kentxxq","copyrightHolder":"kentxxq","copyrightYear":"2019","datePublished":"2019-04-15 08:59:00","dateModified":"2021-02-26 00:06:04","url":"https:\/\/kentxxq.com\/contents\/%E5%9C%A8mac%E4%B8%8Aheic%E8%BD%ACjpg%E6%88%96png\/","keywords":["mac","HEIC转JPG","HEIC转PNG","图片转换"]}</script>
+</head>
+<body>
+<div class=wrapper>
+<nav class=navbar>
+<div class=container>
+<div class="navbar-header header-logo">
+<a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a>
+</div>
+<div class="menu navbar-right">
+<a class=menu-item href=/posts/ title>Blog</a>
 <a class=menu-item href=/categories/ title>Categories</a>
 <a class=menu-item href=/tags/ title>Tags</a>
-<a class=menu-item href=/about/ title>About</a></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><div class=container><div class=navbar-header><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a></div><div class=menu-toggle><span></span><span></span><span></span></div></div><div class=menu id=mobile-menu><a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/about/ title>About</a>
+</div>
+</div>
+</nav>
+<nav class=navbar-mobile id=nav-mobile style=display:none>
+<div class=container>
+<div class=navbar-header>
+<div> <a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a></div>
+<div class=menu-toggle>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=mobile-menu>
+<a class=menu-item href=/posts/ title>Blog</a>
 <a class=menu-item href=/categories/ title>Categories</a>
 <a class=menu-item href=/tags/ title>Tags</a>
-<a class=menu-item href=/about/ title>About</a></div></div></nav><main class=main><div class=container><article class=post-warp><header class=post-header><h1 class=post-title>在mac上HEIC转JPG或PNG</h1><div class=post-meta>Written by <a href=https://kentxxq.com/ rel=author>kentxxq</a>
+<a class=menu-item href=/about/ title>About</a>
+</div>
+</div>
+</nav>
+<main class=main>
+<div class=container>
+<article class=post-warp>
+<header class=post-header>
+<h1 class=post-title>在mac上HEIC转JPG或PNG</h1>
+<div class=post-meta>
+Written by <a href=https://kentxxq.com/ rel=author>kentxxq</a>
 with ♥
-<span class=post-time>on <time datetime=2019-04-15>April 15, 2019</time></span>
+<span class=post-time>
+on <time datetime=2019-04-15>April 15, 2019</time>
+</span>
 in
 <i class="iconfont icon-folder"></i>
-<span class=post-category><a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/>笔记</a></span>
+<span class=post-category>
+<a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/> 笔记 </a>
+</span>
 |
-<a href=#gitalk-container><span class=gitalk-comment-count itemprop=commentCount></span></a></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#关于automator>关于automator</a></li><li><a href=#实际操作上手>实际操作上手</a></li><li><a href=#总结>总结</a></li></ul></nav></div></div><script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script><div class=post-content><blockquote><p>用iPhone拍出来的照片，传到mac上显示结尾是HEIC的图片文件。在markdown中不支持，同样在hugo的web页面里也不支持。</p><p>所以找了一下方法，发现automator这个功能可以一劳永逸的实现。之前一直没有用过。所以记录一下。</p></blockquote><h2 id=关于automator>关于automator</h2><p>如果想要了解详细的文档和资料，看下面的链接就好了。</p><p>在iOS上有workflow(捷径)，那么automator就是macOS的workflow(自动操作)。</p><p><a href=https://support.apple.com/zh-cn/guide/automator/welcome/mac>苹果automator的官方介绍</a></p><h2 id=实际操作上手>实际操作上手</h2><p>演示一波<strong>HEIC转JPG或PNG</strong></p><ol><li>Command+Space(空格)，输入automator,进入后点击新建文稿。
-<img src=/images/workstation/%E8%87%AA%E5%8A%A8%E6%93%8D%E4%BD%9C.png alt=automater></li><li>选择快速操作</li><li>把左边的步骤拖动到右边，调整后的页面如下
-<img src=/images/workstation/HEIC%E8%BD%ACJPEG.png alt=HEIC转JPEG></li><li>左上角文件->存储->保存名字HEIC转JPEG即可</li><li>在访达中使用即可
-<img src=/images/workstation/%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C.png alt=图片转换操作></li><li>快去看看你的桌面上出现了什么！</li></ol><h2 id=总结>总结</h2><p>还有很多的小功能组合。感觉比iOS上好用多了，支持的功能数量不在一个量级。毕竟一个是手机，一个是电脑吧。</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
-<span>kentxxq</span></p><p class=copyright-item><span>Link:</span>
-<a href=https://kentxxq.com/contents/%E5%9C%A8mac%E4%B8%8Aheic%E8%BD%ACjpg%E6%88%96png/><script>document.write(decodeURI(location.origin+location.pathname))</script></a></p><p class="copyright-item lincese">本文采用<a rel=license href=http://creativecommons.org/licenses/by-nc/4.0/ target=_blank>知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
-<span class=tag><a href=https://kentxxq.com/tags/mac/>#mac</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=https://kentxxq.com/>home</a></span></section></div><div class=post-nav><a href=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/ class=prev rel=prev title=记录一次解决电脑异响的过程><i class="iconfont icon-left"></i>&nbsp;记录一次解决电脑异响的过程</a>
-<a href=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%AE%9E%E6%9C%BA%E5%AE%89%E8%A3%85centos7/ class=next rel=next title=记录一次实机安装Centos7>记录一次实机安装Centos7&nbsp;<i class="iconfont icon-right"></i></a></div></article></div></main><footer class=footer><div style="text-align:center;width:600px;margin:0 auto;padding:20px 0"><a href=https://beian.miit.gov.cn/ target=_blank style=display:inline-block;text-decoration:none;height:20px;line-height:20px rel="external nofollow"><p style="float:left;height:20px;line-height:20px;margin:0 0 0 5px">湘ICP备2021002319号-1</p></a><a>&nbsp;&nbsp;&nbsp;&nbsp;</a>
-<a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934" style=display:inline-block;text-decoration:none;height:20px;line-height:20px><img src=/images/备案图标.png style=float:left><p style="float:left;height:20px;line-height:20px;margin:0 0 0 5px;color:#939393">湘公网安备
-43010402000934号</p></a></div></footer><link href=//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css rel=stylesheet><script src=/js/vendor_gallery.min.js async></script><script src=https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js></script></div></body></html>
+<a href=#gitalk-container>
+<span class=gitalk-comment-count itemprop=commentCount></span>
+</a>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title></h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#关于automator>关于automator</a></li>
+<li><a href=#实际操作上手>实际操作上手</a></li>
+<li><a href=#总结>总结</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script>
+<div class=post-content>
+<blockquote>
+<p>用iPhone拍出来的照片，传到mac上显示结尾是HEIC的图片文件。在markdown中不支持，同样在hugo的web页面里也不支持。</p>
+<p>所以找了一下方法，发现automator这个功能可以一劳永逸的实现。之前一直没有用过。所以记录一下。</p>
+</blockquote>
+<h2 id=关于automator>关于automator</h2>
+<p>如果想要了解详细的文档和资料，看下面的链接就好了。</p>
+<p>在iOS上有workflow(捷径)，那么automator就是macOS的workflow(自动操作)。</p>
+<p><a href=https://support.apple.com/zh-cn/guide/automator/welcome/mac>苹果automator的官方介绍</a></p>
+<h2 id=实际操作上手>实际操作上手</h2>
+<p>演示一波<strong>HEIC转JPG或PNG</strong></p>
+<ol>
+<li>Command+Space(空格)，输入automator,进入后点击新建文稿。
+<img src=/images/workstation/%E8%87%AA%E5%8A%A8%E6%93%8D%E4%BD%9C.png alt=automater></li>
+<li>选择快速操作</li>
+<li>把左边的步骤拖动到右边，调整后的页面如下
+<img src=/images/workstation/HEIC%E8%BD%ACJPEG.png alt=HEIC转JPEG></li>
+<li>左上角文件->存储->保存名字HEIC转JPEG即可</li>
+<li>在访达中使用即可
+<img src=/images/workstation/%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C.png alt=图片转换操作></li>
+<li>快去看看你的桌面上出现了什么！</li>
+</ol>
+<h2 id=总结>总结</h2>
+<p>还有很多的小功能组合。感觉比iOS上好用多了，支持的功能数量不在一个量级。毕竟一个是手机，一个是电脑吧。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span>Author:</span>
+<span>kentxxq </span>
+</p>
+<p class=copyright-item>
+<span>Link:</span>
+<a href=https://kentxxq.com/contents/%E5%9C%A8mac%E4%B8%8Aheic%E8%BD%ACjpg%E6%88%96png/>
+<script>document.write(decodeURI(location.origin+location.pathname))</script>
+</a>
+</p>
+<p class="copyright-item lincese">
+本文采用<a rel=license href=http://creativecommons.org/licenses/by-nc/4.0/ target=_blank>知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+</p>
+</div>
+<div class=post-tags>
+<section>
+<i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://kentxxq.com/tags/mac/>
+#mac</a></span>
+</section>
+<section>
+<a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://kentxxq.com/>home</a></span>
+</section>
+</div>
+<div class=post-nav>
+<a href=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/ class=prev rel=prev title=记录一次解决电脑异响的过程><i class="iconfont icon-left"></i>&nbsp;记录一次解决电脑异响的过程</a>
+<a href=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%AE%9E%E6%9C%BA%E5%AE%89%E8%A3%85centos7/ class=next rel=next title=记录一次实机安装Centos7>记录一次实机安装Centos7&nbsp;<i class="iconfont icon-right"></i></a>
+</div>
+</article>
+</div>
+</main>
+<footer class=footer>
+<div style="text-align:center;width:600px;margin:0 auto;padding:20px 0">
+<a href=https://beian.miit.gov.cn/ target=_blank style=display:inline-block;text-decoration:none;height:20px;line-height:20px rel="external nofollow">
+<p style="float:left;height:20px;line-height:20px;margin:0 0 0 5px">
+湘ICP备2021002319号-1</p>
+</a>
+<a>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+<a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934" style=display:inline-block;text-decoration:none;height:20px;line-height:20px>
+<img src=/images/备案图标.png style=float:left>
+<p style="float:left;height:20px;line-height:20px;margin:0 0 0 5px;color:#939393">湘公网安备
+43010402000934号</p>
+</a>
+</div>
+</footer>
+<link href=//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css rel=stylesheet>
+<script src=/js/vendor_gallery.min.js async></script>
+<script src=https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js></script>
+</div>
+</body>
+</html>
