@@ -1,11 +1,13 @@
 ---
 title:  benchmark的数学知识
-date:   2021-08-15 00:00:00 +0800
+date:   2021-08-14 10:00:00 +0800
 categories: ["笔记"]
 tags: ["csharp","benchmark"]
 keywords: ["C#","benchmark","性能","指标"]
 description: "程序性能总是一个永恒的话题。各个系统、编程语言、算法、io逻辑，总是不停的对比。今天在dotnet闲逛的时候，看到了官方做的一个性能评测库，但是指标我却看不懂。于是就看了一会儿相关知识，准备记录一下"
 ---
+
+
 
 
 > 程序性能总是一个永恒的话题。各个系统、编程语言、算法、io逻辑，总是不停的对比。今天在dotnet闲逛的时候，看到了官方做的一个性能评测库，但是指标我却看不懂。于是就看了一会儿相关知识，准备记录一下。
@@ -60,7 +62,7 @@ namespace Cli
 
 接下来就是查看我们的输出结果。
 
-```sh
+```bash
 BenchmarkDotNet=v0.13.1, OS=Windows 10.0.22000
 Intel Core i5-10210U CPU 1.60GHz, 1 CPU, 8 logical and 4 physical cores
 .NET SDK=5.0.400
