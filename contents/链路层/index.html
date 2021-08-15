@@ -1,94 +1,101 @@
-<!doctype html><html lang=zh>
+<!doctype html><html lang=zh-cn>
 <head>
 <meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="chrome=1">
 <meta name=viewport content="width=device-width,initial-scale=1">
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1')</script>
-<meta name=author content="kentxxq">
-<meta name=keywords content="网络知识 TCP/IP tcpip协议 链路层">
-<meta name=description content="买了一本TCP/IP详解:协议，有很多的新知识。但又有很多我其实并不感兴趣的超细节内容。准备整理记录一下自己想要弄懂和学到的东西">
-<meta property="og:title" content="链路层">
+<meta name=robots content="noodp">
+<title class=pjax-title>链路层 - kentxxq Blog</title><meta name=Description content="买了一本TCP/IP详解:协议，有很多的新知识。但又有很多我其实并不感兴趣的超细节内容。准备整理记录一下自己想要弄懂和学到的东西"><meta property="og:title" content="链路层">
 <meta property="og:description" content="买了一本TCP/IP详解:协议，有很多的新知识。但又有很多我其实并不感兴趣的超细节内容。准备整理记录一下自己想要弄懂和学到的东西">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://kentxxq.com/contents/%E9%93%BE%E8%B7%AF%E5%B1%82/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-03-28T02:04:00+00:00">
 <meta property="article:modified_time" content="2021-04-08T12:33:17+08:00">
-<link rel=prev href=https://kentxxq.com/contents/%E6%A0%91%E8%8E%93%E6%B4%BErecalbox%E5%AE%9E%E8%B7%B5/>
-<link rel=next href=https://kentxxq.com/contents/k8s%E7%9A%84%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/>
-<link rel=canonical href=https://kentxxq.com/contents/%E9%93%BE%E8%B7%AF%E5%B1%82/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="链路层">
+<meta name=twitter:description content="买了一本TCP/IP详解:协议，有很多的新知识。但又有很多我其实并不感兴趣的超细节内容。准备整理记录一下自己想要弄懂和学到的东西">
+<meta name=application-name content="kentxxq">
+<meta name=apple-mobile-web-app-title content="kentxxq">
+<meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<meta name=msapplication-TileColor content="#da532c">
-<meta name=theme-color content="#ffffff">
-<link rel=icon type=image/png href=/favicon.png>
-<title>
-链路层 | kentxxq Blog
-</title>
-<meta name=title content="链路层 | kentxxq Blog">
-<link rel=stylesheet href=/font/iconfont.css>
-<link rel=stylesheet href=/css/main.min.css>
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","image":"https:\/\/kentxxq.com\/images/me/avatar.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/"},"articleSection":"posts","name":"链路层","headline":"链路层","description":"买了一本TCP\/IP详解:协议，有很多的新知识。但又有很多我其实并不感兴趣的超细节内容。准备整理记录一下自己想要弄懂和学到的东西","inLanguage":"zh","author":"kentxxq","creator":"kentxxq","publisher":{"@type":"Organization","name":"kentxxq","logo":{"@type":"ImageObject","url":"https:\/\/kentxxq.com\/images/me/avatar.jpg"}},"accountablePerson":"kentxxq","copyrightHolder":"kentxxq","copyrightYear":"2021","datePublished":"2021-03-28 02:04:00","dateModified":"2021-04-08 12:33:17","url":"https:\/\/kentxxq.com\/contents\/%E9%93%BE%E8%B7%AF%E5%B1%82\/","keywords":["网络知识","TCP/IP","tcpip协议","链路层"]}</script>
-</head>
-<body>
-<div class=wrapper>
-<nav class=navbar>
-<div class=container>
-<div class="navbar-header header-logo">
-<a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E9%93%BE%E8%B7%AF%E5%B1%82/><link rel=prev href=https://kentxxq.com/contents/%E6%A0%91%E8%8E%93%E6%B4%BErecalbox%E5%AE%9E%E8%B7%B5/><link rel=next href=https://kentxxq.com/contents/k8s%E7%9A%84%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"链路层","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E9%93%BE%E8%B7%AF%E5%B1%82\/"},"genre":"posts","keywords":"网络知识","wordcount":623,"url":"https:\/\/kentxxq.com\/contents\/%E9%93%BE%E8%B7%AF%E5%B1%82\/","datePublished":"2021-03-28T02:04:00+00:00","dateModified":"2021-04-08T12:33:17+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"买了一本TCP/IP详解:协议，有很多的新知识。但又有很多我其实并不感兴趣的超细节内容。准备整理记录一下自己想要弄懂和学到的东西"}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let themeColorMeta=getMeta('theme-color');document.body.getAttribute('theme')!='light'&&(themeColorMeta.content='#000000')</script>
+<div id=back-to-top></div>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="kentxxq Blog">kentxxq Blog</a>
 </div>
-<div class="menu navbar-right">
-<a class=menu-item href=/posts/ title>Blog</a>
-<a class=menu-item href=/categories/ title>Categories</a>
-<a class=menu-item href=/tags/ title>Tags</a>
-<a class=menu-item href=/about/ title>About</a>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Blog </a><a class=menu-item href=/categories/> Categories </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/about/> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=# onclick=return!1 class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
 </div>
 </div>
-</nav>
-<nav class=navbar-mobile id=nav-mobile style=display:none>
-<div class=container>
-<div class=navbar-header>
-<div> <a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a></div>
-<div class=menu-toggle>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="kentxxq Blog">kentxxq Blog</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
 </div>
 </div>
-<div class=menu id=mobile-menu>
-<a class=menu-item href=/posts/ title>Blog</a>
-<a class=menu-item href=/categories/ title>Categories</a>
-<a class=menu-item href=/tags/ title>Tags</a>
-<a class=menu-item href=/about/ title>About</a>
-</div>
-</div>
-</nav>
-<main class=main>
-<div class=container>
-<article class=post-warp>
-<header class=post-header>
-<h1 class=post-title>链路层</h1>
-<div class=post-meta>
-Written by <a href=https://kentxxq.com/ rel=author>kentxxq</a>
-with ♥
-<span class=post-time>
-on <time datetime=2021-03-28>March 28, 2021</time>
-</span>
-in
-<i class="iconfont icon-folder"></i>
-<span class=post-category>
-<a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/> 笔记 </a>
-</span>
-|
-<a href=#gitalk-container>
-<span class=gitalk-comment-count itemprop=commentCount></span>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
 </a>
+<a href=# onclick=return!1 class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
 </div>
 </header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title></h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">链路层</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-03-28>2021-03-28</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-04-08>2021-04-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 623 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
 <li><a href=#网络模型>网络模型</a>
 <ul>
@@ -103,31 +110,14 @@ in
 </ul>
 </li>
 </ul>
-</nav>
-</div>
-</div>
-<script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script>
-<div class=post-content>
-<blockquote>
+</nav></div>
+</div><div class=content id=content><blockquote>
 <p>买了一本TCP/IP详解:协议，有很多的新知识。但又有很多我其实并不感兴趣的超细节内容。准备整理记录一下自己想要弄懂和学到的东西。</p>
 </blockquote>
 <h2 id=网络模型>网络模型</h2>
 <h3 id=我的分层>我的分层</h3>
 <p>我更习惯将网络部分分为4层:<code>链路层</code>、<code>网络层</code>、<code>协议层</code>、<code>应用层</code></p>
-<div class=mermaid align=center>
-graph LR;
-Ethernet-->ARP;
-Ethernet-->IPv4;
-Ethernet-->IPv6;
-IPv4-->ICMP;
-IPv4-->UDP;
-IPv4-->TCP;
-IPv4-->IGMP;
-IPv4-->...;
-TCP-->应用层(端口区分应用)
-TCP-->DNS
-UDP-->DNS
-</div>
+<div class=mermaid id=id-1></div>
 <p>每一层的数据通过解析得到标识符，从而知道应该如何处理里面的有效载荷(payload数据)。</p>
 <h2 id=ethernet链路层>Ethernet链路层</h2>
 <h3 id=ethernet要点>Ethernet要点</h3>
@@ -140,11 +130,47 @@ UDP-->DNS
 </ol>
 <h3 id=查看链路层信息>查看链路层信息</h3>
 <p>ethtool工具在linux下查看链路层状况，windows则在指定网卡的配置-高级。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#75715e># 查看指定网卡</span>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=c1># 查看指定网卡</span>
 root@kentxxq-desktop:~# ethtool eno1  
-Settings <span style=color:#66d9ef>for</span> eno1:
-	Supported ports: <span style=color:#f92672>[</span> TP <span style=color:#f92672>]</span>
-    <span style=color:#75715e># 支持的速率和模式</span>
+Settings <span class=k>for</span> eno1:
+	Supported ports: <span class=o>[</span> TP <span class=o>]</span>
+    <span class=c1># 支持的速率和模式</span>
 	Supported link modes:   10baseT/Half 10baseT/Full
 	                        100baseT/Half 100baseT/Full
 	                        1000baseT/Full
@@ -155,76 +181,63 @@ Settings <span style=color:#66d9ef>for</span> eno1:
 	                        100baseT/Half 100baseT/Full
 	                        1000baseT/Full
 	Advertised pause frame use: No
-    <span style=color:#75715e># 使用自动协商来控制传输速率</span>
+    <span class=c1># 使用自动协商来控制传输速率</span>
 	Advertised auto-negotiation: Yes
 	Advertised FEC modes: Not reported
-    <span style=color:#75715e># 速度</span>
+    <span class=c1># 速度</span>
 	Speed: 100Mb/s
-    <span style=color:#75715e># 全双工</span>
+    <span class=c1># 全双工</span>
 	Duplex: Full
 	Port: Twisted Pair
-	PHYAD: <span style=color:#ae81ff>1</span>
+	PHYAD: <span class=m>1</span>
 	Transceiver: internal
 	Auto-negotiation: on
-	MDI-X: on <span style=color:#f92672>(</span>auto<span style=color:#f92672>)</span>
+	MDI-X: on <span class=o>(</span>auto<span class=o>)</span>
 	Supports Wake-on: pumbg
 	Wake-on: g
-	Current message level: 0x00000007 <span style=color:#f92672>(</span>7<span style=color:#f92672>)</span>
+	Current message level: 0x00000007 <span class=o>(</span>7<span class=o>)</span>
 			       drv probe link
 	Link detected: yes
-</code></pre></div><h3 id=其他信息>其他信息</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=其他信息>其他信息</h3>
 <p>有一个Wake-up-On-Lan的功能wol，意思是电脑网卡接收到一个网络请求，会触发机器的启动。</p>
 <p>这个可能后续会在树莓派上来进行发送，触发家里的windows电脑开机。</p>
+</div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 2021-04-08</span>
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span>Author:</span>
-<span>kentxxq </span>
-</p>
-<p class=copyright-item>
-<span>Link:</span>
-<a href=https://kentxxq.com/contents/%E9%93%BE%E8%B7%AF%E5%B1%82/>
-<script>document.write(decodeURI(location.origin+location.pathname))</script>
-</a>
-</p>
-<p class="copyright-item lincese">
-本文采用<a rel=license href=http://creativecommons.org/licenses/by-nc/4.0/ target=_blank>知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
-</p>
+<div class=post-info-license></div>
 </div>
-<div class=post-tags>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span><a href=# onclick=return!1 title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/contents/%E9%93%BE%E8%B7%AF%E5%B1%82/ data-title=链路层 data-hashtags=网络知识><i class="fab fa-twitter fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/contents/%E9%93%BE%E8%B7%AF%E5%B1%82/ data-hashtag=网络知识><i class="fab fa-facebook-square fa-fw"></i></a><a href=# onclick=return!1 title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/contents/%E9%93%BE%E8%B7%AF%E5%B1%82/ data-title=链路层 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/contents/%E9%93%BE%E8%B7%AF%E5%B1%82/ data-title=链路层><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# onclick=return!1 title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/contents/%E9%93%BE%E8%B7%AF%E5%B1%82/ data-title=链路层><i class="fab fa-weibo fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/contents/%E9%93%BE%E8%B7%AF%E5%B1%82/ data-title=链路层 data-description=买了一本TCP/IP详解:协议，有很多的新知识。但又有很多我其实并不感兴趣的超细节内容。准备整理记录一下自己想要弄懂和学到的东西><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# onclick=return!1 title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/contents/%E9%93%BE%E8%B7%AF%E5%B1%82/ data-title=链路层 data-description=买了一本TCP/IP详解:协议，有很多的新知识。但又有很多我其实并不感兴趣的超细节内容。准备整理记录一下自己想要弄懂和学到的东西><i class="fab fa-blogger fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/contents/%E9%93%BE%E8%B7%AF%E5%B1%82/ data-title=链路层><i class="fab fa-evernote fa-fw"></i></a></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/>网络知识</a></section>
 <section>
-<i class="iconfont icon-tag"></i>Tag(s):
-<span class=tag><a href=https://kentxxq.com/tags/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/>
-#网络知识</a></span>
-</section>
-<section>
-<a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=https://kentxxq.com/>home</a></span>
+<span><a href=# onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
 </section>
 </div>
-<div class=post-nav>
-<a href=https://kentxxq.com/contents/%E6%A0%91%E8%8E%93%E6%B4%BErecalbox%E5%AE%9E%E8%B7%B5/ class=prev rel=prev title=树莓派recalbox实践><i class="iconfont icon-left"></i>&nbsp;树莓派recalbox实践</a>
-<a href=https://kentxxq.com/contents/k8s%E7%9A%84%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/ class=next rel=next title=k8s的疑难杂症>k8s的疑难杂症&nbsp;<i class="iconfont icon-right"></i></a>
+<div class=post-nav><a href=/contents/%E6%A0%91%E8%8E%93%E6%B4%BErecalbox%E5%AE%9E%E8%B7%B5/ class=prev rel=prev title=树莓派recalbox实践><i class="fas fa-angle-left fa-fw"></i>树莓派recalbox实践</a>
+<a href=/contents/k8s%E7%9A%84%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/ class=next rel=next title=k8s的疑难杂症>k8s的疑难杂症<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
-</article>
-</div>
-</main>
-<footer class=footer>
-<div style="text-align:center;width:600px;margin:0 auto;padding:20px 0">
-<a href=https://beian.miit.gov.cn/ target=_blank style=display:inline-block;text-decoration:none;height:20px;line-height:20px rel="external nofollow">
-<p style="float:left;height:20px;line-height:20px;margin:0 0 0 5px">
-湘ICP备2021002319号-1</p>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
+<span class=icp>湘ICP备2021002319号-1</span></div>
+</div></footer></div>
+<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
 </a>
-<a>&nbsp;&nbsp;&nbsp;&nbsp;</a>
-<a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934" style=display:inline-block;text-decoration:none;height:20px;line-height:20px>
-<img src=/images/备案图标.png style=float:left>
-<p style="float:left;height:20px;line-height:20px;margin:0 0 0 5px;color:#939393">湘公网安备
-43010402000934号</p>
-</a>
-</div>
-</footer>
-<script src=/js/vendor_no_gallery.min.js async></script>
-<script src=https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js></script>
-</div>
+</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
+<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript src=/lib/mermaid/mermaid.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{},data:{"id-1":"graph LR;\n    Ethernet--\u003eARP;\n    Ethernet--\u003eIPv4;\n    Ethernet--\u003eIPv6;\n    IPv4--\u003eICMP;\n    IPv4--\u003eUDP;\n    IPv4--\u003eTCP;\n    IPv4--\u003eIGMP;\n    IPv4--\u003e...;\n    TCP--\u003e应用层(端口区分应用)\n    TCP--\u003eDNS\n    UDP--\u003eDNS"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},mermaid:!0,search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><link rel=stylesheet href=/lib/mermaid/mermaid.min.css></div>
 </body>
 </html>

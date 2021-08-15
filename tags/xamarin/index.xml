@@ -1,18 +1,1 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Xamarin on kentxxq Blog</title><link>https://kentxxq.com/tags/xamarin/</link><description>Recent content in Xamarin on kentxxq Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Fri, 10 May 2019 00:46:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/xamarin/index.xml" rel="self" type="application/rss+xml"/><item><title>入坑Xamarin初探</title><link>https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/</link><pubDate>Fri, 10 May 2019 00:46:00 +0000</pubDate><guid>https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/</guid><description>在之前无意中了解到了linq，被超级方便的语法吸引到了。开始认真了解C#以及微软的现状。
-github被微软收购以后开放了免费的无限量私人仓库。C#自举且一系列生态代码完全开源。net core跨平台且目标是替代framework系列。浏览器开始使用chrome相同的内核且融合了ie模式，却被谷歌摆了一道。还有云平台，ide等等一系列的动作。
-这些做法让我对微软的好感度急剧攀升。无意间了解到Xamarin，更是让我不得不想叫一句：微软爸爸。
-为什么会有这篇文章 在最近了解了一系列微软的技术发展动态后，一个不能停止学习的程序员应该体会到，如果不去了解它(微软的技术栈)，沉溺在公司现有的技术栈，会导致视野越来越小。甚至几年以后，与公司外部世界技术脱轨。
-从技术方面来说，微软有这些值得注意的点:
-c#/c++/xaramin等等技术的全面开源。可以在使用微软技术栈的同时，更好的学习知识(或者排坑)。 积极拥抱社区，为Chromium内核项目提交代码。发布WSL2支持原生linux内核，秒级启动！同时支持docker技术！ 从net5的blog来看，以后windows会放弃net framework，而使用net core。 随着vs/vsc和微软服务绑定增多，开发越来越方便。vsc remote等理念非常前沿，甚至可以说是未来的开发模式！ 从上面可以得出，学好了微软技术栈在开发中可以有以下优势:
-类似java，可以跨平台运行。同时在windows上，可以不用安装运行环境！ 对于普通用户来说，跨平台就是一个伪需求。在xp电脑上能双击打开的exe才是王道。 xaramin可以开发移动端app(iOS/Android)，且拥有庞大的社区。 对比js写的windows客户端，C#性能不用担心。 Xamarin初步了解 一个跨平台UI开发的解决方案。
-对比原生语言。同时开发iOS，Android应用，且代码的复用率高。
-对比js跨平台。性能有优势。
-对比flutter技术。dart是一个不主流的语言。且如果flutter胎死腹中(指fuchsia无法代替安卓)，那你学了dart语言以后，几乎没有用武之地！因为几乎没有公司用dart来编写除flutter以外的项目。
-前期准备工作 只需要傻瓜化安装vs，即可完成整个开发环境的搭建。vs官方文档是最好的教程了。且中文！
-参见Xamarin官方文档，数据线连接在安卓手机上开启debug模式。点击即可运行。
-而iOS则属于排坑之旅了。
-排坑之旅 iOS开发 你需要一个mac电脑。或者参考云mac，我没用过，也不推荐这样。 最好有一个iPhone，因为模拟器耗资源，且不方便操作。 装好xcode 新建跨平台应用的时候注意你的应用名称和组织标识符 用Apple ID申请成为开发者。如果你有付费的开发者账号可以按照Xamarin官网的方法来，否则继续往下看。 Xcode随便新建一个项目，关键Bundle Identifier要一致。打开Xcode=&amp;gt;Preferences=&amp;gt;Accounts，。然后添加你自己的账号。Manage Certificates。 7. 回到General，钩上自动signing。team选择自己personal team。等一会就ojbk了！ 8. 回到vs=&amp;gt;左上角kentxxq_app.iOS=&amp;gt;Debug=&amp;gt;你的iPhone,启动项目吧！
-生成apk 在生成apk文件的时候，记得选择release来生成。否则apk的大小会非常惊人。
-笑容逐渐展露 开始写代码。参考官方文档，试一下闪光灯和语音功能！
-为什么呢？因为我记得好久以前iPhone没有自带手电筒的功能，我是通过app下载的。而且一个调用了硬件，语音功能则调用了软件。
-&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt; &amp;lt;ContentPage xmlns=&amp;#34;http://xamarin.com/schemas/2014/forms&amp;#34; xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2009/xaml&amp;#34; xmlns:local=&amp;#34;clr-namespace:kentxxq_app&amp;#34; x:Class=&amp;#34;kentxxq_app.MainPage&amp;#34;&amp;gt; &amp;lt;StackLayout&amp;gt; &amp;lt;!</description></item></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Xamarin - 标签 - kentxxq Blog</title><link>https://kentxxq.com/tags/xamarin/</link><description>Xamarin - 标签 - kentxxq Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>admin@kentxxq.com (kentxxq)</managingEditor><webMaster>admin@kentxxq.com (kentxxq)</webMaster><lastBuildDate>Fri, 10 May 2019 00:46:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/xamarin/" rel="self" type="application/rss+xml"/><item><title>入坑Xamarin初探</title><link>https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/</link><pubDate>Fri, 10 May 2019 00:46:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/</guid><description>在之前无意中了解到了linq，被超级方便的语法吸引到了。开始认真了解C#以及微软的现状。 github被微软收购以后开放了免费的无限量私人仓库</description></item></channel></rss>

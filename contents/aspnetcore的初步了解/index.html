@@ -1,94 +1,101 @@
-<!doctype html><html lang=zh>
+<!doctype html><html lang=zh-cn>
 <head>
 <meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="chrome=1">
 <meta name=viewport content="width=device-width,initial-scale=1">
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1')</script>
-<meta name=author content="kentxxq">
-<meta name=keywords content="C# AspNetCore visual studio 微软 跨平台开发 委托 事件 匿名函数 linq">
-<meta name=description content="应用无论实现了怎样的效果，总是需要展示的。而web是最方便的展示方法。让我来搭建一个web项目。那我肯定采用前后端分离。如果要选择用什么语言来进行后端开发。快速开发我一定选择python。而需要性能且服务器数量少的时候，静态语言我会选c#。所以就选择来初步了解一下net core以及一些语法特性。文章中很多都只是给到了文档的链接，是因为官方文档非常详细。自己抄过来没有意义，同时链接到的地址也会有最新变化。要学好编程，官方文档是必看的。哪怕是英文版">
-<meta property="og:title" content="AspNetCore的初步了解">
+<meta name=robots content="noodp">
+<title class=pjax-title>AspNetCore的初步了解 - kentxxq Blog</title><meta name=Description content="应用无论实现了怎样的效果，总是需要展示的。而web是最方便的展示方法。让我来搭建一个web项目。那我肯定采用前后端分离。如果要选择用什么语言来进行后端开发。快速开发我一定选择python。而需要性能且服务器数量少的时候，静态语言我会选c#。所以就选择来初步了解一下net core以及一些语法特性。文章中很多都只是给到了文档的链接，是因为官方文档非常详细。自己抄过来没有意义，同时链接到的地址也会有最新变化。要学好编程，官方文档是必看的。哪怕是英文版"><meta property="og:title" content="AspNetCore的初步了解">
 <meta property="og:description" content="应用无论实现了怎样的效果，总是需要展示的。而web是最方便的展示方法。让我来搭建一个web项目。那我肯定采用前后端分离。如果要选择用什么语言来进行后端开发。快速开发我一定选择python。而需要性能且服务器数量少的时候，静态语言我会选c#。所以就选择来初步了解一下net core以及一些语法特性。文章中很多都只是给到了文档的链接，是因为官方文档非常详细。自己抄过来没有意义，同时链接到的地址也会有最新变化。要学好编程，官方文档是必看的。哪怕是英文版">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://kentxxq.com/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2019-06-13T10:21:00+00:00">
 <meta property="article:modified_time" content="2021-08-15T03:08:51+08:00">
-<link rel=prev href=https://kentxxq.com/contents/%E4%BD%BF%E7%94%A8js%E6%9D%A5%E5%B8%AE%E5%8A%A9%E5%8A%A0%E8%A7%A3%E5%AF%86%E4%BF%A1%E6%81%AF/>
-<link rel=next href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/>
-<link rel=canonical href=https://kentxxq.com/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="AspNetCore的初步了解">
+<meta name=twitter:description content="应用无论实现了怎样的效果，总是需要展示的。而web是最方便的展示方法。让我来搭建一个web项目。那我肯定采用前后端分离。如果要选择用什么语言来进行后端开发。快速开发我一定选择python。而需要性能且服务器数量少的时候，静态语言我会选c#。所以就选择来初步了解一下net core以及一些语法特性。文章中很多都只是给到了文档的链接，是因为官方文档非常详细。自己抄过来没有意义，同时链接到的地址也会有最新变化。要学好编程，官方文档是必看的。哪怕是英文版">
+<meta name=application-name content="kentxxq">
+<meta name=apple-mobile-web-app-title content="kentxxq">
+<meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<meta name=msapplication-TileColor content="#da532c">
-<meta name=theme-color content="#ffffff">
-<link rel=icon type=image/png href=/favicon.png>
-<title>
-AspNetCore的初步了解 | kentxxq Blog
-</title>
-<meta name=title content="AspNetCore的初步了解 | kentxxq Blog">
-<link rel=stylesheet href=/font/iconfont.css>
-<link rel=stylesheet href=/css/main.min.css>
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","image":"https:\/\/kentxxq.com\/images/me/avatar.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/"},"articleSection":"posts","name":"AspNetCore的初步了解","headline":"AspNetCore的初步了解","description":"应用无论实现了怎样的效果，总是需要展示的。而web是最方便的展示方法。让我来搭建一个web项目。那我肯定采用前后端分离。如果要选择用什么语言来进行后端开发。快速开发我一定选择python。而需要性能且服务器数量少的时候，静态语言我会选c#。所以就选择来初步了解一下net core以及一些语法特性。文章中很多都只是给到了文档的链接，是因为官方文档非常详细。自己抄过来没有意义，同时链接到的地址也会有最新变化。要学好编程，官方文档是必看的。哪怕是英文版","inLanguage":"zh","author":"kentxxq","creator":"kentxxq","publisher":{"@type":"Organization","name":"kentxxq","logo":{"@type":"ImageObject","url":"https:\/\/kentxxq.com\/images/me/avatar.jpg"}},"accountablePerson":"kentxxq","copyrightHolder":"kentxxq","copyrightYear":"2019","datePublished":"2019-06-13 10:21:00","dateModified":"2021-08-15 03:08:51","url":"https:\/\/kentxxq.com\/contents\/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3\/","keywords":["C#","AspNetCore","visual studio","微软","跨平台开发","委托","事件","匿名函数","linq"]}</script>
-</head>
-<body>
-<div class=wrapper>
-<nav class=navbar>
-<div class=container>
-<div class="navbar-header header-logo">
-<a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/><link rel=prev href=https://kentxxq.com/contents/%E4%BD%BF%E7%94%A8js%E6%9D%A5%E5%B8%AE%E5%8A%A9%E5%8A%A0%E8%A7%A3%E5%AF%86%E4%BF%A1%E6%81%AF/><link rel=next href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"AspNetCore的初步了解","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3\/"},"genre":"posts","keywords":"csharp, AspNetCore","wordcount":3238,"url":"https:\/\/kentxxq.com\/contents\/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3\/","datePublished":"2019-06-13T10:21:00+00:00","dateModified":"2021-08-15T03:08:51+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"应用无论实现了怎样的效果，总是需要展示的。而web是最方便的展示方法。让我来搭建一个web项目。那我肯定采用前后端分离。如果要选择用什么语言来进行后端开发。快速开发我一定选择python。而需要性能且服务器数量少的时候，静态语言我会选c#。所以就选择来初步了解一下net core以及一些语法特性。文章中很多都只是给到了文档的链接，是因为官方文档非常详细。自己抄过来没有意义，同时链接到的地址也会有最新变化。要学好编程，官方文档是必看的。哪怕是英文版"}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let themeColorMeta=getMeta('theme-color');document.body.getAttribute('theme')!='light'&&(themeColorMeta.content='#000000')</script>
+<div id=back-to-top></div>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="kentxxq Blog">kentxxq Blog</a>
 </div>
-<div class="menu navbar-right">
-<a class=menu-item href=/posts/ title>Blog</a>
-<a class=menu-item href=/categories/ title>Categories</a>
-<a class=menu-item href=/tags/ title>Tags</a>
-<a class=menu-item href=/about/ title>About</a>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Blog </a><a class=menu-item href=/categories/> Categories </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/about/> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=# onclick=return!1 class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
 </div>
 </div>
-</nav>
-<nav class=navbar-mobile id=nav-mobile style=display:none>
-<div class=container>
-<div class=navbar-header>
-<div> <a href=javascript:void(0); class=theme-switch><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href=https://kentxxq.com/>kentxxq Blog</a></div>
-<div class=menu-toggle>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="kentxxq Blog">kentxxq Blog</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
 </div>
 </div>
-<div class=menu id=mobile-menu>
-<a class=menu-item href=/posts/ title>Blog</a>
-<a class=menu-item href=/categories/ title>Categories</a>
-<a class=menu-item href=/tags/ title>Tags</a>
-<a class=menu-item href=/about/ title>About</a>
-</div>
-</div>
-</nav>
-<main class=main>
-<div class=container>
-<article class=post-warp>
-<header class=post-header>
-<h1 class=post-title>AspNetCore的初步了解</h1>
-<div class=post-meta>
-Written by <a href=https://kentxxq.com/ rel=author>kentxxq</a>
-with ♥
-<span class=post-time>
-on <time datetime=2019-06-13>June 13, 2019</time>
-</span>
-in
-<i class="iconfont icon-folder"></i>
-<span class=post-category>
-<a href=https://kentxxq.com/categories/%E7%AC%94%E8%AE%B0/> 笔记 </a>
-</span>
-|
-<a href=#gitalk-container>
-<span class=gitalk-comment-count itemprop=commentCount></span>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
 </a>
+<a href=# onclick=return!1 class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
 </div>
 </header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title></h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">AspNetCore的初步了解</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-06-13>2019-06-13</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-15>2021-08-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3238 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
 <li><a href=#安装所需工具>安装所需工具</a></li>
 <li><a href=#初步搭建>初步搭建</a></li>
@@ -112,21 +119,17 @@ in
 <li><a href=#总结>总结</a></li>
 <li><a href=#更新日志>更新日志</a></li>
 </ul>
-</nav>
-</div>
-</div>
-<script type=text/javascript>window.onload=function(){var a=$('.post-toc'),b=$('.post-comment'),f=a.offset().top,d=a.height(),g=a[0].offsetTop,e,c;$(window).scroll(function(){var h=Math.max(document.body.scrollTop,document.documentElement.scrollTop);b.length>0&&(c=b.offset().top,e=c-h-d),f<h?(a.css({position:'fixed'}),b.length>0&&c<h+d?a.css({top:e}):a.css({top:0})):(a.css({position:'absolute'}),a.css({top:g}))})}</script>
-<div class=post-content>
-<blockquote>
+</nav></div>
+</div><div class=content id=content><blockquote>
 <p>应用无论实现了怎样的效果，总是需要展示的。而web是最方便的展示方法。让我来搭建一个web项目。那我肯定采用前后端分离。<br>
 如果要选择用什么语言来进行后端开发。快速开发我一定选择python。而需要性能且服务器数量少的时候，静态语言我会选c#。<br>
 所以就选择来初步了解一下net core以及一些语法特性。<br>
 文章中很多都只是给到了文档的链接，是因为官方文档非常详细。自己抄过来没有意义，同时链接到的地址也会有最新变化。要学好编程，官方文档是必看的。哪怕是英文版</p>
 </blockquote>
 <h2 id=安装所需工具>安装所需工具</h2>
-<p><a href=https://docs.microsoft.com/zh-cn/visualstudio>Visual Studio</a>是宇宙第一ide这句话，大家也多多少少有过了解了。安装好以后，开发环境就弄好了。</p>
+<p><a href=https://docs.microsoft.com/zh-cn/visualstudio target=_blank rel="noopener noreffer">Visual Studio</a>是宇宙第一ide这句话，大家也多多少少有过了解了。安装好以后，开发环境就弄好了。</p>
 <h2 id=初步搭建>初步搭建</h2>
-<p>看<a href=https://docs.microsoft.com/zh-cn/aspnet/core/web-api>官方文档的Web API</a>就ok。</p>
+<p>看<a href=https://docs.microsoft.com/zh-cn/aspnet/core/web-api target=_blank rel="noopener noreffer">官方文档的Web API</a>就ok。</p>
 <h2 id=c开发的方便之处>C#开发的方便之处</h2>
 <ol>
 <li>models模块直接自动生成！直接可以配合linq使用。</li>
@@ -142,114 +145,252 @@ in
 <p>C#的事件是特殊的委托。</p>
 <h2 id=我所遇到的问题>我所遇到的问题</h2>
 <h3 id=从oracle生成models>从oracle生成models</h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>Scaffold-DbContext <span style=color:#e6db74>&#34;Data Source=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST = db_host)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User ID=kentxxq;Password=123456;&#34;</span> Oracle.EntityFrameworkCore -OutputDir Models
-</code></pre></div><p>如果上面的命令无法识别，执行下面的操作</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>Install-Package Microsoft.EntityFrameworkCore.Tools
-</code></pre></div><h3 id=测试api>测试API</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>Scaffold-DbContext <span class=s2>&#34;Data Source=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST = db_host)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User ID=kentxxq;Password=123456;&#34;</span> Oracle.EntityFrameworkCore -OutputDir Models
+</code></pre></td></tr></table>
+</div>
+</div><p>如果上面的命令无法识别，执行下面的操作</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>Install-Package Microsoft.EntityFrameworkCore.Tools
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=测试api>测试API</h3>
 <p>一直用postman来对后端测试。老是切换来切换去。还得自己一个一个路径来写文档。</p>
-<p>然后发现有<a href=https://swagger.io/tools/swagger-ui/>Swagger</a>。神器啊！</p>
+<p>然后发现有<a href=https://swagger.io/tools/swagger-ui/ target=_blank rel="noopener noreffer">Swagger</a>。神器啊！</p>
 <p>用Nuget安装依赖Swashbuckle.AspNetCore后，在<code>Startup.cs</code>的<strong>ConfigureServices</strong>加入代码</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cs data-lang=cs>services.AddSwaggerGen(c =&gt;
-{
-    c.SwaggerDoc(<span style=color:#e6db74>&#34;v1&#34;</span>, <span style=color:#66d9ef>new</span> Info { Title = <span style=color:#e6db74>&#34;My API&#34;</span>, Version = <span style=color:#e6db74>&#34;v1&#34;</span> });
-    <span style=color:#75715e>// 还可以给openapi添加xml注释
-</span><span style=color:#75715e></span>    <span style=color:#75715e>// 什么是xml注释？就是函数的中文名、每个参数的含义等等。PS: 1591忽略没有写xml注释的警告
-</span><span style=color:#75715e></span>    <span style=color:#75715e>// 编辑&lt; project_name&gt;.csproj , 在PropertyGroup添加&lt;GenerateDocumentationFile&gt;true&lt;/GenerateDocumentationFile&gt;&lt;NoWarn&gt;$(NoWarn);1591&lt;/NoWarn&gt;
-</span><span style=color:#75715e></span>    <span style=color:#75715e>// 放开下面的代码注释：
-</span><span style=color:#75715e></span>    <span style=color:#75715e>// var xmlFile = $&#34;{Assembly.GetExecutingAssembly().GetName().Name}.xml&#34;;
-</span><span style=color:#75715e></span>    <span style=color:#75715e>// var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-</span><span style=color:#75715e></span>    <span style=color:#75715e>// c.IncludeXmlComments(xmlPath);
-</span><span style=color:#75715e></span>});
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-cs data-lang=cs><span class=n>services</span><span class=p>.</span><span class=n>AddSwaggerGen</span><span class=p>(</span><span class=n>c</span> <span class=p>=&gt;</span>
+<span class=p>{</span>
+    <span class=n>c</span><span class=p>.</span><span class=n>SwaggerDoc</span><span class=p>(</span><span class=s>&#34;v1&#34;</span><span class=p>,</span> <span class=k>new</span> <span class=n>Info</span> <span class=p>{</span> <span class=n>Title</span> <span class=p>=</span> <span class=s>&#34;My API&#34;</span><span class=p>,</span> <span class=n>Version</span> <span class=p>=</span> <span class=s>&#34;v1&#34;</span> <span class=p>});</span>
+    <span class=c1>// 还可以给openapi添加xml注释
+</span><span class=c1></span>    <span class=c1>// 什么是xml注释？就是函数的中文名、每个参数的含义等等。PS: 1591忽略没有写xml注释的警告
+</span><span class=c1></span>    <span class=c1>// 编辑&lt; project_name&gt;.csproj , 在PropertyGroup添加&lt;GenerateDocumentationFile&gt;true&lt;/GenerateDocumentationFile&gt;&lt;NoWarn&gt;$(NoWarn);1591&lt;/NoWarn&gt;
+</span><span class=c1></span>    <span class=c1>// 放开下面的代码注释：
+</span><span class=c1></span>    <span class=c1>// var xmlFile = $&#34;{Assembly.GetExecutingAssembly().GetName().Name}.xml&#34;;
+</span><span class=c1></span>    <span class=c1>// var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+</span><span class=c1></span>    <span class=c1>// c.IncludeXmlComments(xmlPath);
+</span><span class=c1></span><span class=p>});</span>
 
-</code></pre></div><p>Configure的<code>app.UseMvc()</code>前加入代码</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cs data-lang=cs>app.UseSwagger();
-app.UseSwaggerUI(c =&gt;
-{
-    c.SwaggerEndpoint(<span style=color:#e6db74>&#34;/swagger/v1/swagger.json&#34;</span>, <span style=color:#e6db74>&#34;My API V1&#34;</span>);
-});
-app.UseMvc();
-</code></pre></div><p>之后访问<code>https://localhost:5001/swagger</code>就能看到惊喜了！</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>Configure的<code>app.UseMvc()</code>前加入代码</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-cs data-lang=cs><span class=n>app</span><span class=p>.</span><span class=n>UseSwagger</span><span class=p>();</span>
+<span class=n>app</span><span class=p>.</span><span class=n>UseSwaggerUI</span><span class=p>(</span><span class=n>c</span> <span class=p>=&gt;</span>
+<span class=p>{</span>
+    <span class=n>c</span><span class=p>.</span><span class=n>SwaggerEndpoint</span><span class=p>(</span><span class=s>&#34;/swagger/v1/swagger.json&#34;</span><span class=p>,</span> <span class=s>&#34;My API V1&#34;</span><span class=p>);</span>
+<span class=p>});</span>
+<span class=n>app</span><span class=p>.</span><span class=n>UseMvc</span><span class=p>();</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>之后访问<code>https://localhost:5001/swagger</code>就能看到惊喜了！</p>
 <h3 id=数据库连接池>数据库连接池</h3>
 <p>按照官方文档，我的Models文件夹是通过<code>Scaffold-DbContext</code>命令生成的。之后移除掉</p>
 <p>在<code>appsettings.json</code>中加入<strong>连接字符串</strong></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
-  <span style=color:#f92672>&#34;Logging&#34;</span>: {
-    <span style=color:#f92672>&#34;LogLevel&#34;</span>: {
-      <span style=color:#f92672>&#34;Default&#34;</span>: <span style=color:#e6db74>&#34;Warning&#34;</span>
-    }
-  },
-  <span style=color:#f92672>&#34;AllowedHosts&#34;</span>: <span style=color:#e6db74>&#34;*&#34;</span>,
-  <span style=color:#f92672>&#34;ConnectionStrings&#34;</span>: {
-    <span style=color:#f92672>&#34;BloggingDatabase&#34;</span>: <span style=color:#e6db74>&#34;Data Source=your_server_ip;Database=your_database_name;User ID=your_username;Min Pool Size=10;Password=your_password;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False&#34;</span>
-  }
-}
-</code></pre></div><p>在<code>Startup.cs</code>的<strong>ConfigureServices中移除AddDbContext</strong>，加入代码</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cs data-lang=cs>services.AddDbContextPool&lt;BloggingContext&gt;(
-    options =&gt; { options.UseSqlServer(Configuration.GetConnectionString(<span style=color:#e6db74>&#34;BloggingDatabase&#34;</span>)); },poolSize:<span style=color:#ae81ff>64</span>
-) ;
-</code></pre></div><p>请求<code>https://localhost:5001/api/blogs</code>,报错</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span>
+  <span class=nt>&#34;Logging&#34;</span><span class=p>:</span> <span class=p>{</span>
+    <span class=nt>&#34;LogLevel&#34;</span><span class=p>:</span> <span class=p>{</span>
+      <span class=nt>&#34;Default&#34;</span><span class=p>:</span> <span class=s2>&#34;Warning&#34;</span>
+    <span class=p>}</span>
+  <span class=p>},</span>
+  <span class=nt>&#34;AllowedHosts&#34;</span><span class=p>:</span> <span class=s2>&#34;*&#34;</span><span class=p>,</span>
+  <span class=nt>&#34;ConnectionStrings&#34;</span><span class=p>:</span> <span class=p>{</span>
+    <span class=nt>&#34;BloggingDatabase&#34;</span><span class=p>:</span> <span class=s2>&#34;Data Source=your_server_ip;Database=your_database_name;User ID=your_username;Min Pool Size=10;Password=your_password;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False&#34;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在<code>Startup.cs</code>的<strong>ConfigureServices中移除AddDbContext</strong>，加入代码</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-cs data-lang=cs><span class=n>services</span><span class=p>.</span><span class=n>AddDbContextPool</span><span class=p>&lt;</span><span class=n>BloggingContext</span><span class=p>&gt;(</span>
+    <span class=n>options</span> <span class=p>=&gt;</span> <span class=p>{</span> <span class=n>options</span><span class=p>.</span><span class=n>UseSqlServer</span><span class=p>(</span><span class=n>Configuration</span><span class=p>.</span><span class=n>GetConnectionString</span><span class=p>(</span><span class=s>&#34;BloggingDatabase&#34;</span><span class=p>));</span> <span class=p>},</span><span class=n>poolSize</span><span class=p>:</span><span class=m>64</span>
+<span class=p>)</span> <span class=p>;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>请求<code>https://localhost:5001/api/blogs</code>,报错</p>
 <p>An unhandled exception occurred while processing the request.</p>
 <p>InvalidOperationException: The DbContext of type &lsquo;BloggingContext&rsquo; cannot be pooled because it does not have a single public constructor accepting a single parameter of type DbContextOptions.</p>
-<p>Microsoft.EntityFrameworkCore.Internal.DbContextPool..ctor(DbContextOptions options)</p>
+<p>Microsoft.EntityFrameworkCore.Internal.DbContextPool<tcontext>..ctor(DbContextOptions options)</p>
 <p>百思不得其解。解决办法是</p>
 <p>在<code>BloggingContext</code>的代码中，BloggingContext有两个构造函数。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cs data-lang=cs><span style=color:#75715e>//删掉我
-</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> BloggingContext()
-{
-}
-<span style=color:#75715e>//其他的都不要动哦
-</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> BloggingContext(DbContextOptions&lt;BloggingContext&gt; options)
-    : <span style=color:#66d9ef>base</span>(options)
-{
-}
-</code></pre></div><p>只需要删除掉无参构造函数即可!</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-cs data-lang=cs><span class=c1>//删掉我
+</span><span class=c1></span><span class=k>public</span> <span class=n>BloggingContext</span><span class=p>()</span>
+<span class=p>{</span>
+<span class=p>}</span>
+<span class=c1>//其他的都不要动哦
+</span><span class=c1></span><span class=k>public</span> <span class=n>BloggingContext</span><span class=p>(</span><span class=n>DbContextOptions</span><span class=p>&lt;</span><span class=n>BloggingContext</span><span class=p>&gt;</span> <span class=n>options</span><span class=p>)</span>
+    <span class=p>:</span> <span class=k>base</span><span class=p>(</span><span class=n>options</span><span class=p>)</span>
+<span class=p>{</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>只需要删除掉无参构造函数即可!</p>
 <h3 id=sqlite的models生成>sqlite的Models生成</h3>
 <p>在使用的时候要注意netCore的2.2版本有ef命令，但是3开始就会分离出来。</p>
 <p>如果web项目无法运行(存在报错)，极有可能无法成功执行！</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># sqlite</span>
-dotnet ef dbcontext  scaffold <span style=color:#e6db74>&#34;Data Source=test.db&#34;</span> -o Models Microsoft.EntityFrameworkCore.Sqlite -c <span style=color:#e6db74>&#34;TestDbContext&#34;</span> -f
-<span style=color:#75715e># mysql</span>
-dotnet ef dbcontext scaffold <span style=color:#e6db74>&#34;server=localhost;port=3306;user=root;password=mypass;database=sakila&#34;</span> MySql.Data.EntityFrameworkCore -o sakila -f
-<span style=color:#75715e># 或者</span>
-Scaffold-DbContext <span style=color:#e6db74>&#34;server=localhost;port=3306;user=root;password=mypass;database=sakila&#34;</span> MySql.Data.EntityFrameworkCore -OutputDir sakila -f
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># sqlite</span>
+dotnet ef dbcontext  scaffold <span class=s2>&#34;Data Source=test.db&#34;</span> -o Models Microsoft.EntityFrameworkCore.Sqlite -c <span class=s2>&#34;TestDbContext&#34;</span> -f
+<span class=c1># mysql</span>
+dotnet ef dbcontext scaffold <span class=s2>&#34;server=localhost;port=3306;user=root;password=mypass;database=sakila&#34;</span> MySql.Data.EntityFrameworkCore -o sakila -f
+<span class=c1># 或者</span>
+Scaffold-DbContext <span class=s2>&#34;server=localhost;port=3306;user=root;password=mypass;database=sakila&#34;</span> MySql.Data.EntityFrameworkCore -OutputDir sakila -f
 
-<span style=color:#75715e># oracle </span>
-Scaffold-DbContext <span style=color:#e6db74>&#34;Data Source=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST = 192.168.0.220)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User ID=kentxxq;Password=java321;&#34;</span> Oracle.EntityFrameworkCore -OutputDir Models
-</code></pre></div><h3 id=从models生成数据库>从Models生成数据库</h3>
+<span class=c1># oracle </span>
+Scaffold-DbContext <span class=s2>&#34;Data Source=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST = 192.168.0.220)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl)));User ID=kentxxq;Password=java321;&#34;</span> Oracle.EntityFrameworkCore -OutputDir Models
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=从models生成数据库>从Models生成数据库</h3>
 <p>cli</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>dotnet ef migrations add InitialCreate
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>dotnet ef migrations add InitialCreate
 dotnet ef database update
-</code></pre></div><p>vs的pm包管理控制台</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>Add-Migration InitialCreate
+</code></pre></td></tr></table>
+</div>
+</div><p>vs的pm包管理控制台</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>Add-Migration InitialCreate
 Update-Database
-</code></pre></div><h3 id=ef-core的使用>EF Core的使用</h3>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=ef-core的使用>EF Core的使用</h3>
 <p><code>EF Core</code>是c#的orm框架。支持查询语法和linq。非常好用！</p>
 <p>在我所了解到的语言中，我认为是完善度和易用性最高的了！几乎杜绝了我使用裸sql语句的可能！</p>
 <p>在我的web api中，我试着写了这么一段linq代码</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c# data-lang=c#><span style=color:#a6e22e>[HttpGet]</span>
-<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>async</span> Task&lt;ActionResult&lt;IEnumerable&lt;<span style=color:#66d9ef>dynamic</span>&gt;&gt;&gt; GetUsers()
-{
-    <span style=color:#66d9ef>var</span> a = <span style=color:#66d9ef>from</span> user1 <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>_</span>testDbContext.Users
-            <span style=color:#66d9ef>join</span> user2 <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>_</span>testDbContext.TUsers
-            <span style=color:#66d9ef>on</span> <span style=color:#66d9ef>new</span> { username = user1.Username, password = user1.Password }
-            <span style=color:#66d9ef>equals</span> <span style=color:#66d9ef>new</span> { username = user2.Username, password = user2.Password }
-            <span style=color:#66d9ef>select</span> <span style=color:#66d9ef>new</span>
-            {
-                user1.Username,
-                user2.Password
-            };
-    <span style=color:#75715e>// return await a.ToAsyncEnumerable(); 错误示例
-</span><span style=color:#75715e></span>    <span style=color:#75715e>// return await a.ToAsyncEnumerable().ToList(); 纠正
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>await</span> a.ToListAsync();
-}
-</code></pre></div><p>先说明几点:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=na>[HttpGet]</span>
+<span class=k>public</span> <span class=k>async</span> <span class=n>Task</span><span class=p>&lt;</span><span class=n>ActionResult</span><span class=p>&lt;</span><span class=n>IEnumerable</span><span class=p>&lt;</span><span class=kt>dynamic</span><span class=p>&gt;&gt;&gt;</span> <span class=n>GetUsers</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=kt>var</span> <span class=n>a</span> <span class=p>=</span> <span class=k>from</span> <span class=n>user1</span> <span class=k>in</span> <span class=m>_</span><span class=n>testDbContext</span><span class=p>.</span><span class=n>Users</span>
+            <span class=k>join</span> <span class=n>user2</span> <span class=k>in</span> <span class=m>_</span><span class=n>testDbContext</span><span class=p>.</span><span class=n>TUsers</span>
+            <span class=k>on</span> <span class=k>new</span> <span class=p>{</span> <span class=n>username</span> <span class=p>=</span> <span class=n>user1</span><span class=p>.</span><span class=n>Username</span><span class=p>,</span> <span class=n>password</span> <span class=p>=</span> <span class=n>user1</span><span class=p>.</span><span class=n>Password</span> <span class=p>}</span>
+            <span class=k>equals</span> <span class=k>new</span> <span class=p>{</span> <span class=n>username</span> <span class=p>=</span> <span class=n>user2</span><span class=p>.</span><span class=n>Username</span><span class=p>,</span> <span class=n>password</span> <span class=p>=</span> <span class=n>user2</span><span class=p>.</span><span class=n>Password</span> <span class=p>}</span>
+            <span class=k>select</span> <span class=k>new</span>
+            <span class=p>{</span>
+                <span class=n>user1</span><span class=p>.</span><span class=n>Username</span><span class=p>,</span>
+                <span class=n>user2</span><span class=p>.</span><span class=n>Password</span>
+            <span class=p>};</span>
+    <span class=c1>// return await a.ToAsyncEnumerable(); 错误示例
+</span><span class=c1></span>    <span class=c1>// return await a.ToAsyncEnumerable().ToList(); 纠正
+</span><span class=c1></span>    <span class=k>return</span> <span class=k>await</span> <span class=n>a</span><span class=p>.</span><span class=n>ToListAsync</span><span class=p>();</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>先说明几点:</p>
 <ol>
 <li>由于返回的数据是<code>select new</code>出来的对象，所以我的返回值使用了<code>dynamic</code>。方便以后更改字段。也不用再新建字段。</li>
 <li><code>async</code>方法代表异步，后面必须要跟<code>Task</code>。而<code>ActionResult</code>代表返回特定的类型。而对比指定的类型返回有什么好处呢？它可以通过<code>IActionResult</code>简化操作。<strong>并且</strong>可以返回多个类型。比如存在数据则返回200，不存在则返回404错误，很明显它们两个的结构类型不一致。</li>
 </ol>
 <p>而我在编写这段代码的时候，产生了疑惑。我最开始是按照上面的注释代码写的。发现报错，怎么都不对。</p>
 <p>这里需要注意的是。我的返回类型是<code>IEnumerable&lt;dynamic></code>,所以我就写了<code>ToAsyncEnumerable</code>。而Enumerable的用法是循环取出数据。无法直接await后去返回。</p>
-<p>参考这<a href=https://www.claudiobernasconi.ch/2013/07/22/when-to-use-ienumerable-icollection-ilist-and-list/>一篇博客</a>，总结一下使用方法。</p>
+<p>参考这<a href=https://www.claudiobernasconi.ch/2013/07/22/when-to-use-ienumerable-icollection-ilist-and-list/ target=_blank rel="noopener noreffer">一篇博客</a>，总结一下使用方法。</p>
 <ol>
 <li><code>public interface IEnumerable&lt;out T> : IEnumerable</code>只能遍历使用</li>
 <li><code>public interface ICollection&lt;T> : IEnumerable&lt;T>, IEnumerable</code>你关心它的大小,添加，删除，清空操作</li>
@@ -278,58 +419,41 @@ Update-Database
 <p>20201112 02:23: 添加<code>mysql的models生成</code></p>
 <p>20210225 16:21：添加<code>openapi的xml注释</code></p>
 <p>20210227 18:34: 感觉文章写得是AspNetCore，所以改一下文章</p>
+</div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 2021-08-15</span>
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span>Author:</span>
-<span>kentxxq </span>
-</p>
-<p class=copyright-item>
-<span>Link:</span>
-<a href=https://kentxxq.com/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/>
-<script>document.write(decodeURI(location.origin+location.pathname))</script>
-</a>
-</p>
-<p class="copyright-item lincese">
-本文采用<a rel=license href=http://creativecommons.org/licenses/by-nc/4.0/ target=_blank>知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
-</p>
+<div class=post-info-license></div>
 </div>
-<div class=post-tags>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span><a href=# onclick=return!1 title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/ data-title=AspNetCore的初步了解 data-hashtags=csharp,AspNetCore><i class="fab fa-twitter fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/ data-hashtag=csharp><i class="fab fa-facebook-square fa-fw"></i></a><a href=# onclick=return!1 title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/ data-title=AspNetCore的初步了解 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/ data-title=AspNetCore的初步了解><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# onclick=return!1 title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/ data-title=AspNetCore的初步了解><i class="fab fa-weibo fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/ data-title=AspNetCore的初步了解 data-description="应用无论实现了怎样的效果，总是需要展示的。而web是最方便的展示方法。让我来搭建一个web项目。那我肯定采用前后端分离。如果要选择用什么语言来进行后端开发。快速开发我一定选择python。而需要性能且服务器数量少的时候，静态语言我会选c#。所以就选择来初步了解一下net core以及一些语法特性。文章中很多都只是给到了文档的链接，是因为官方文档非常详细。自己抄过来没有意义，同时链接到的地址也会有最新变化。要学好编程，官方文档是必看的。哪怕是英文版"><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# onclick=return!1 title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/ data-title=AspNetCore的初步了解 data-description="应用无论实现了怎样的效果，总是需要展示的。而web是最方便的展示方法。让我来搭建一个web项目。那我肯定采用前后端分离。如果要选择用什么语言来进行后端开发。快速开发我一定选择python。而需要性能且服务器数量少的时候，静态语言我会选c#。所以就选择来初步了解一下net core以及一些语法特性。文章中很多都只是给到了文档的链接，是因为官方文档非常详细。自己抄过来没有意义，同时链接到的地址也会有最新变化。要学好编程，官方文档是必看的。哪怕是英文版"><i class="fab fa-blogger fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/contents/aspnetcore%E7%9A%84%E5%88%9D%E6%AD%A5%E4%BA%86%E8%A7%A3/ data-title=AspNetCore的初步了解><i class="fab fa-evernote fa-fw"></i></a></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/csharp/>csharp</a>,&nbsp;<a href=/tags/aspnetcore/>AspNetCore</a></section>
 <section>
-<i class="iconfont icon-tag"></i>Tag(s):
-<span class=tag><a href=https://kentxxq.com/tags/csharp/>
-#csharp</a></span>
-<span class=tag><a href=https://kentxxq.com/tags/aspnetcore/>
-#AspNetCore</a></span>
-</section>
-<section>
-<a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=https://kentxxq.com/>home</a></span>
+<span><a href=# onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
 </section>
 </div>
-<div class=post-nav>
-<a href=https://kentxxq.com/contents/%E4%BD%BF%E7%94%A8js%E6%9D%A5%E5%B8%AE%E5%8A%A9%E5%8A%A0%E8%A7%A3%E5%AF%86%E4%BF%A1%E6%81%AF/ class=prev rel=prev title=使用js来帮助加解密信息><i class="iconfont icon-left"></i>&nbsp;使用js来帮助加解密信息</a>
-<a href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/ class=next rel=next title=我的k8s之路1-基本概念>我的k8s之路1-基本概念&nbsp;<i class="iconfont icon-right"></i></a>
+<div class=post-nav><a href=/contents/%E4%BD%BF%E7%94%A8js%E6%9D%A5%E5%B8%AE%E5%8A%A9%E5%8A%A0%E8%A7%A3%E5%AF%86%E4%BF%A1%E6%81%AF/ class=prev rel=prev title=使用js来帮助加解密信息><i class="fas fa-angle-left fa-fw"></i>使用js来帮助加解密信息</a>
+<a href=/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/ class=next rel=next title=我的k8s之路1-基本概念>我的k8s之路1-基本概念<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
-</article>
-</div>
-</main>
-<footer class=footer>
-<div style="text-align:center;width:600px;margin:0 auto;padding:20px 0">
-<a href=https://beian.miit.gov.cn/ target=_blank style=display:inline-block;text-decoration:none;height:20px;line-height:20px rel="external nofollow">
-<p style="float:left;height:20px;line-height:20px;margin:0 0 0 5px">
-湘ICP备2021002319号-1</p>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
+<span class=icp>湘ICP备2021002319号-1</span></div>
+</div></footer></div>
+<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
 </a>
-<a>&nbsp;&nbsp;&nbsp;&nbsp;</a>
-<a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934" style=display:inline-block;text-decoration:none;height:20px;line-height:20px>
-<img src=/images/备案图标.png style=float:left>
-<p style="float:left;height:20px;line-height:20px;margin:0 0 0 5px;color:#939393">湘公网安备
-43010402000934号</p>
-</a>
-</div>
-</footer>
-<script src=/js/vendor_no_gallery.min.js async></script>
-<script src=https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js></script>
-</div>
+</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
+<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
 </body>
 </html>
