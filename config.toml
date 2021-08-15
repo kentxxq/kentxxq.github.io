@@ -1,7 +1,9 @@
 baseURL = "https://kentxxq.com/"
-languageCode = "zh"
+defaultContentLanguage = "zh-cn"
+languageCode = "zh-CN"
+hasCJKLanguage = true
 title = "kentxxq Blog"
-theme = "LeaveIt"
+theme = "DoIt"
 enableGitInfo = true
 
 [menu]
@@ -22,21 +24,500 @@ enableGitInfo = true
     url = "/about/"
     weight = 4
 
+
+# 上面是全局配置和菜单配置
+# 下面是主题配置
+
+
 [params]
+  since = 1993
+  author = "kentxxq"                          
+  avatar = "/images/me/avatar.jpg"           
+  subtitle = "Less is more"         
+  description = "kentxxq个人站点" 
+  keywords = ["编码","生活","电影","音乐","过去","现在","将来"]
+  
+  version = "0.2.X"
+  license= '本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可'
+
+  [params.app]
+    # 当添加到 iOS 主屏幕或者 Android 启动器时的标题, 覆盖默认标题
+    title = "kentxxq"
+    # 是否隐藏网站图标资源链接
+    noFavicon = false
+    # 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件
+    svgFavicon = ""
+    # Safari 图标颜色
+    iconColor = "#5bbad5"
+    # Windows v8-10磁贴颜色
+    tileColor = "#da532c"
+
+
+
+  [params.search]
+    enable = true
+    # 搜索引擎的类型 ("lunr", "algolia", "fuse")
+    type = "fuse"
+    # 文章内容最长索引长度
+    contentLength = 4000
+    # 搜索框的占位提示语
+    placeholder = ""
+    # DoIt 新增 | 0.2.1 最大结果数目
+    maxResultLength = 10
+    # DoIt 新增 | 0.2.3 结果内容片段长度
+    snippetLength = 50
+    # DoIt 新增 | 0.2.1 搜索结果中高亮部分的 HTML 标签
+    highlightTag = "em"
+    # DoIt 新增 | 0.2.4 是否在搜索索引中使用基于 baseURL 的绝对路径
+    absoluteURL = false
+    [params.search.algolia]
+      index = ""
+      appID = ""
+      searchKey = ""
+    [params.search.fuse]
+      # DoIt 新增 | 0.2.12 https://fusejs.io/api/options.html
+      isCaseSensitive = false
+      minMatchCharLength = 2
+      findAllMatches = false
+      location = 0
+      threshold = 0.3
+      distance = 100
+      ignoreLocation = false
+      useExtendedSearch = false
+      ignoreFieldNorm = false
+
+  # 页面头部导航栏配置
+  [params.header]
+    # 桌面端导航栏模式 ("fixed", "normal", "auto")
+    desktopMode = "fixed"
+    # 移动端导航栏模式 ("fixed", "normal", "auto")
+    mobileMode = "auto"
+    # DoIt 新增 | 0.2.11 主题切换模式
+    # 主题切换模式 ("switch", "select")
+    themeChangeMode = "switch"
+    # DoIt 新增 | 0.2.0 页面头部导航栏标题配置
+    [params.header.title]
+      # LOGO 的 URL
+      logo = ""
+      # 标题名称
+      name = "kentxxq Blog"
+      # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
+      pre = ""
+      # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
+      post = ""
+      # DoIt 新增 | 0.2.5 是否为标题显示打字机动画
+      typeit = false
+
+  # 页面底部信息配置
+  [params.footer]
+    enable = true
+    # DoIt 新增 | 0.2.0 自定义内容 (支持 HTML 格式)
+    custom = ''
+    # DoIt 新增 | 0.2.0 是否显示 Hugo 和主题信息
+    hugo = false
+    # DoIt 新增 | 0.2.0 是否显示版权信息
+    copyright = true
+    # DoIt 新增 | 0.2.0 是否显示作者
+    author = true
+    # 网站创立年份
     since = 1993
-    author = "kentxxq"                           # Author's name
-    avatar = "/images/me/avatar.jpg"           # Author's avatar
-    subtitle = "Less is more"         # Subtitle
-    description = "kentxxq个人站点" # site description
-    keywords = "编码 生活 电影 音乐 过去 现在 将来" # site keywords
+    # ICP 备案信息, 仅在中国使用 (支持 HTML 格式)
+    icp = "湘ICP备2021002319号-1"
+    # 许可协议信息 (支持 HTML 格式)
+    license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a> | <a target="_blank"href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src="/备案图标.png" style="display: inline-block;"/>湘公网安备 43010402000934号</a>'
 
-    comments = false
+  [params.section]
+    # section 页面每页显示文章数量
+    paginate = 20
+    # 日期格式 (月和日)
+    dateFormat = "01-02"
+    # RSS 文章数目
+    rss = 10
 
-    license= '本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可'
+  # DoIt 新增 | 0.2.0 List (目录或标签) 页面配置
+  [params.list]
+    # list 页面每页显示文章数量
+    paginate = 20
+    # 日期格式 (月和日)
+    dateFormat = "01-02"
+    # RSS 文章数目
+    rss = 10
 
+  # 主页配置
+  [params.home]
+    # DoIt 新增 | 0.2.0 RSS 文章数目
+    rss = 10
+    # 主页个人信息
+    [params.home.profile]
+      enable = true
+      # Gravatar 邮箱, 用于优先在主页显示的头像
+      gravatarEmail = ""
+      # 主页显示头像的 URL
+      # 将你的头像文件放置于 static 或者 assets 目录下
+      # 文件路径是相对于 static 或者 assets 目录的
+      avatarURL = "/avatar.jpg"
+      # DoIt 更改 | 0.2.7 主页显示的网站标题 (支持 HTML 格式)
+      title = ""
+      # 主页显示的网站副标题
+      subtitle = "Less is more"
+      # 是否为副标题显示打字机动画
+      typeit = true
+      # 是否显示社交账号
+      social = true
+      # DoIt 新增 | 0.2.0 免责声明 (支持 HTML 格式)
+      disclaimer = ""
+    # 主页文章列表
+    [params.home.posts]
+      enable = true
+      # 主页每页显示文章数量
+      paginate = 3
+      # DoIt 删除 | 0.2.0 被 params.page 中的 hiddenFromHomePage 替代
+      # 当你没有在文章前置参数中设置 "hiddenFromHomePage" 时的默认行为
+      defaultHiddenFromHomePage = false
+
+  # 作者的社交信息设置
+  [params.social]
+    GitHub = "kentxxq"
+    Linkedin = ""
+    Twitter = ""
+    Instagram = ""
+    Facebook = ""
+    Telegram = ""
+    Medium = ""
+    Gitlab = ""
+    Youtubelegacy = ""
+    Youtubecustom = ""
+    Youtubechannel = ""
+    Tumblr = ""
+    Quora = ""
+    Keybase = ""
+    Pinterest = ""
+    Reddit = ""
+    Codepen = ""
+    FreeCodeCamp = ""
+    Bitbucket = ""
+    Stackoverflow = ""
+    Weibo = ""
+    Odnoklassniki = ""
+    VK = ""
+    Flickr = ""
+    Xing = ""
+    Snapchat = ""
+    Soundcloud = ""
+    Spotify = ""
+    Bandcamp = ""
+    Paypal = ""
+    Fivehundredpx = ""
+    Mix = ""
+    Goodreads = ""
+    Lastfm = ""
+    Foursquare = ""
+    Hackernews = ""
+    Kickstarter = ""
+    Patreon = ""
+    Steam = ""
+    Twitch = ""
+    Strava = ""
+    Skype = ""
+    Whatsapp = ""
+    Zhihu = "kentxxq"
+    Douban = ""
+    Angellist = ""
+    Slidershare = ""
+    Jsfiddle = ""
+    Deviantart = ""
+    Behance = ""
+    Dribbble = ""
+    Wordpress = ""
+    Vine = ""
+    Googlescholar = ""
+    Researchgate = ""
+    Mastodon = ""
+    Thingiverse = ""
+    Devto = ""
+    Gitea = ""
+    XMPP = ""
+    Matrix = ""
+    Bilibili = "7892913"
+    ORCID = ""
+    Liberapay = ""
+    Ko-Fi = ""
+    Email = "admin@kentxxq.com"
+    RSS = true
+
+  [params.page]
+    # DoIt 新增 | 0.2.0 是否在主页隐藏一篇文章
+    hiddenFromHomePage = false
+    # DoIt 新增 | 0.2.0 是否在搜索结果中隐藏一篇文章
+    hiddenFromSearch = false
+    # DoIt 新增 | 0.2.0 是否使用 twemoji
+    twemoji = true
+    # 是否使用 lightgallery
+    lightgallery = false
+    # DoIt 新增 | 0.2.0 是否使用 ruby 扩展语法
+    ruby = true
+    # DoIt 新增 | 0.2.0 是否使用 fraction 扩展语法
+    fraction = true
+    # DoIt 新增 | 0.2.0 是否使用 fontawesome 扩展语法
+    fontawesome = true
+    # 是否在文章页面显示原始 Markdown 文档链接
+    linkToMarkdown = true
+    # DoIt 新增 | 0.2.4 是否在 RSS 中显示全文内容
+    rssFullText = false
+    # DoIt 新增 | 0.2.11 页面样式 ("normal", "wide")
+    pageStyle = "wide"
+    
+    [params.page.toc]
+      # 是否使用目录
+      enable = true
+      # DoIt 新增 | 0.2.9 是否保持使用文章前面的静态目录
+      keepStatic = false
+      # 是否使侧边目录自动折叠展开
+      auto = true
+  
+    # DoIt 新增 | 0.2.0 代码配置
+    [params.page.code]
+      # 是否显示代码块的复制按钮
+      copy = true
+      # 默认展开显示的代码行数
+      maxShownLines = 10
+
+    [params.page.math]
+      enable = true
+      # 默认块定界符是 $$ ... $$ 和 \\[ ... \\]
+      blockLeftDelimiter = ""
+      blockRightDelimiter = ""
+      # 默认行内定界符是 $ ... $ 和 \\( ... \\)
+      inlineLeftDelimiter = ""
+      inlineRightDelimiter = ""
+      # KaTeX 插件 copy_tex
+      copyTex = true
+      # KaTeX 插件 mhchem
+      mhchem = true
+
+    [params.page.share]
+      enable = true
+      Twitter = true
+      Facebook = true
+      Linkedin = false
+      Whatsapp = true
+      Pinterest = false
+      Tumblr = false
+      HackerNews = false
+      Reddit = false
+      VK = false
+      Buffer = false
+      Xing = false
+      Line = true
+      Instapaper = false
+      Pocket = false
+      Digg = false
+      Stumbleupon = false
+      Flipboard = false
+      Weibo = true
+      Renren = false
+      Myspace = true
+      Blogger = true
+      Baidu = false
+      Odnoklassniki = false
+      Evernote = true
+      Skype = false
+      Trello = false
+      Mix = false
+
+   [params.page.comment]
+      enable = false
+      # Disqus 评论系统设置
+      [params.page.comment.disqus]
+        # DoIt 新增 | 0.1.1
+        enable = false
+        # Disqus 的 shortname, 用来在文章中启用 Disqus 评论系统
+        shortname = ""
+      # Gitalk 评论系统设置
+      [params.page.comment.gitalk]
+        # DoIt 新增 | 0.1.1
+        enable = false
+        owner = ""
+        repo = ""
+        clientId = ""
+        clientSecret = ""
+      # Valine 评论系统设置
+      [params.page.comment.valine]
+        enable = false
+        appId = ""
+        appKey = ""
+        placeholder = ""
+        avatar = "mp"
+        meta= ""
+        pageSize = 10
+        lang = ""
+        visitor = true
+        recordIP = true
+        highlight = true
+        enableQQ = false
+        serverURLs = ""
+        # DoIt 新增 | 0.2.6 emoji 数据文件名称, 默认是 "google.yml"
+        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # 位于 "themes/DoIt/assets/data/emoji/" 目录
+        # 可以在你的项目下相同路径存放你自己的数据文件:
+        # "assets/data/emoji/"
+        emoji = ""
+      # Waline 评论系统设置
+      [params.page.comment.waline]
+        # DoIt 新增 | 0.2.11
+        enable = false
+        serverURL = ""
+        placeholder = "Just Go Go."
+        wordLimit = 0
+        avatar = "mp"
+        meta = ["nick", "mail", "link"]
+        pageSize = 10
+        lang = "en"
+        visitor = true
+        highlight = true
+        avatarCDN = ""
+        avatarForce = false
+        emojiCDN = ""
+        emojiMaps = ""
+        requiredFields = []
+        anonymous = false
+      # Facebook 评论系统设置
+      [params.page.comment.facebook]
+        enable = false
+        width = "100%"
+        numPosts = 10
+        appId = ""
+        languageCode = "zh_CN"
+      # DoIt 新增 | 0.2.0 Telegram Comments 评论系统设置
+      [params.page.comment.telegram]
+        enable = false
+        siteID = ""
+        limit = 5
+        height = ""
+        color = ""
+        colorful = true
+        dislikes = false
+        outlined = false
+        dark = false
+      # DoIt 新增 | 0.2.0 Commento 评论系统设置
+      [params.page.comment.commento]
+        enable = false
+      # DoIt 新增 | 0.2.5 Utterances 评论系统设置
+      [params.page.comment.utterances]
+        enable = false
+        # owner/repo
+        repo = ""
+        issueTerm = "pathname"
+        label = ""
+        lightTheme = "github-light"
+        darkTheme = "github-dark"
+      # DoIt 新增 | 0.2.12 Twikoo 评论系统设置
+      [params.page.comment.twikoo]
+        enable = false
+        envId = ""
+        region = ""
+        path = ""
+        visitor = true
+      # DoIt 新增 | 0.2.12 Vssue 评论系统设置
+      [params.page.comment.vssue]
+        enable = false
+        platform = "" # ("bitbucket", "gitea", "gitee", "github", "gitlab")
+        owner = ""
+        repo = ""
+        clientId = ""
+        clientSecret = ""
+    # DoIt 新增 | 0.2.7 第三方库配置
+    [params.page.library]
+      [params.page.library.css]
+        # someCSS = "some.css"
+        # 位于 "assets/"
+        # 或者
+        # someCSS = "https://cdn.example.com/some.css"
+      [params.page.library.js]
+        # someJavascript = "some.js"
+        # 位于 "assets/"
+        # 或者
+        # someJavascript = "https://cdn.example.com/some.js"
+    # DoIt 更改 | 0.2.10 页面 SEO 配置
+    [params.page.seo]
+      # 图片 URL
+      images = []
+      # 出版者信息
+      [params.page.seo.publisher]
+        name = ""
+        logoUrl = ""
+
+  [params.typeit]
+    # 每一步的打字速度 (单位是毫秒)
+    speed = 100
+    # 光标的闪烁速度 (单位是毫秒)
+    cursorSpeed = 1000
+    # 光标的字符 (支持 HTML 格式)
+    cursorChar = "|"
+    # 打字结束之后光标的持续时间 (单位是毫秒, "-1" 代表无限大)
+    duration = -1
+
+  [params.analytics]
+    enable = true
+    # Google Analytics
+    [params.analytics.google]
+      id = "UA-131319987-1"
+      # 是否匿名化用户 IP
+      anonymizeIP = true
+    # Fathom Analytics
+    [params.analytics.fathom]
+      id = ""
+      # 自行托管追踪器时的主机路径
+      server = ""
+
+[author]
+  name = "kentxxq"
+  email = "admin@kentxxq.com"
+  link = "https://kentxxq.com"
+
+# 网站地图配置
+[sitemap]
+  changefreq = "daily"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# 分类配置
 [taxonomies]
   tag = "tags"
   category = "categories"
+  series = "series"
 
+# 地址导航配置
 [permalinks]
   posts = "/contents/:filename/" 
+
+# Hugo 解析文档的配置
+[markup]
+  # 语法高亮设置
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    lineNumbersInTable = true
+    # false 是必要的设置
+    # (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false
+  # Goldmark 是 Hugo 0.60 以来的默认 Markdown 解析库
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = true
+    [markup.goldmark.renderer]
+      # 是否在文档中直接使用 HTML 标签
+      unsafe = true
+  # 目录设置
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
+
+
