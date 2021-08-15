@@ -5,7 +5,9 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    strategy:
+      fail-fast: false
+      
     steps:
       - name: Set core.quotePath false
         run: git config --global core.quotepath false
