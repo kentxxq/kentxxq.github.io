@@ -1,6 +1,6 @@
 ---
 title:  k8s的疑难杂症
-date:   2021-05-16 11:38:00 +0800
+date:   2021-05-16 11:38:00+08:00
 categories: ["笔记"]
 tags: ["k8s"]
 keywords: ["k8s"]

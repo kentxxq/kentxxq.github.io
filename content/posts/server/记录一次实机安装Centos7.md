@@ -1,6 +1,6 @@
 ---
 title:  记录一次实机安装Centos7
-date:   2019-04-15 11:59:00 +0800
+date:   2019-04-15 11:59:00+08:00
 categories: ["笔记"]
 tags: ["centos"]
 keywords: ["Centos7","grub2","timeout","rufus","UEFI","BIOS","GNOME","sudo","内核","fdisk","mkfs.xfs","blkid"]

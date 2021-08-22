@@ -1,6 +1,6 @@
 ---
 title:  一个我需要的win10
-date:   2020-03-29 17:24:00 +0800
+date:   2020-03-29 17:24:00+08:00
 categories: ["笔记"]
 tags: ["笔记"]
 keywords: ["win10","开发环境","macOS","新版edge","wsl2"]

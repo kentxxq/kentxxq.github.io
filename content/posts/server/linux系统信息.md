@@ -1,6 +1,6 @@
 ---
 title:  查看linux的相关信息
-date:   2020-01-04 23:27:00 +0800
+date:   2020-01-04 23:27:00+08:00
 categories: ["笔记"]
 tags: ["centos"]
 keywords: ["centos","linux","cpu","内存",""]

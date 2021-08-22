@@ -1,6 +1,6 @@
 ---
 title:  AspNetCore的初步了解
-date:   2019-06-13 10:21:00 +0800
+date:   2019-06-13 10:21:00+08:00
 categories: ["笔记"]
 tags: ["csharp","AspNetCore"]
 keywords: ["C#","AspNetCore","visual studio","微软","跨平台开发","委托","事件","匿名函数","linq"]

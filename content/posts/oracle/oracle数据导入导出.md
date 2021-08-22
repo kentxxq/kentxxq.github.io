@@ -1,6 +1,6 @@
 ---
 title:  oracle数据导入导出
-date:   2020-01-05 15:42:00 +0800
+date:   2020-01-05 15:42:00+08:00
 categories: ["笔记"]
 tags: ["oracle"]
 keywords: ["oracle","expdp","impdp","imp","exp","csv","文本导入"]

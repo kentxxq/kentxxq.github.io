@@ -1,6 +1,6 @@
 ---
 title:  js挖矿
-date:   2019-03-06 09:58:00 +0800
+date:   2019-03-06 09:58:00+08:00
 categories: ["笔记"]
 tags: ["js"]
 keywords: ["js挖矿","门罗币","coinhive","站长","工具"]

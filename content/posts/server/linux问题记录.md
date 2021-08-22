@@ -1,6 +1,6 @@
 ---
 title:  linux问题记录
-date:   2020-06-09 23:53:00 +0800
+date:   2020-06-09 23:53:00+08:00
 categories: ["笔记"]
 tags: ["linux"]
 keywords: ["linux","selinux","nfs-utils","报错","问题"]

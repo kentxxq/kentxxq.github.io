@@ -1,6 +1,6 @@
 ---
 title:  关于hugo的SEO优化
-date:   2021-02-27 15:46:00 +0800
+date:   2021-02-27 15:46:00+08:00
 categories: ["笔记"]
 tags: ["hugo"]
 keywords: ["hugo","SEO","优化","结构化数据","kentxxq"]

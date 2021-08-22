@@ -1,6 +1,6 @@
 ---
 title:  linux之limit限制
-date:   2020-06-20 16:05:00 +0800
+date:   2020-06-20 16:05:00+08:00
 categories: ["笔记"]
 tags: ["centos"]
 keywords: ["centos","file-max","nr_open","nofile","nproc"]

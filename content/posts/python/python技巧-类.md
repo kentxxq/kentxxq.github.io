@@ -1,6 +1,6 @@
 ---
 title:  python技巧-类
-date:   2019-11-26 00:00:00 +0800
+date:   2019-11-26 00:00:00+08:00
 categories: ["笔记"]
 tags: ["python"]
 keywords: ["python","元类","类方法","静态方法"]

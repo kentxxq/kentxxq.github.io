@@ -1,6 +1,6 @@
 ---
 title:  用vue搭建web
-date:   2019-01-21 20:23:00 +0800
+date:   2019-01-21 20:23:00+08:00
 categories: ["笔记"]
 tags: ["vue"]
 keywords: ["vue","web"]

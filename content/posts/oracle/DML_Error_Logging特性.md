@@ -1,6 +1,6 @@
 ---
 title:  DML_Error_Logging特性
-date:   2017-07-19 00:00:00 +0800
+date:   2017-07-19 00:00:00+08:00
 categories: ["笔记"]
 tags: ["oracle"]
 keywords: ["oracle","DML_Error_Logging","特性"]

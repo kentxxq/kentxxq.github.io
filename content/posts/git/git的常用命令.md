@@ -1,6 +1,6 @@
 ---
 title:  git的常用命令
-date:   2019-01-04 00:00:00 +0800
+date:   2019-01-04 00:00:00+08:00
 categories: ["笔记"]
 tags: ["git"]
 keywords: ["git","常用命令"]

@@ -1,6 +1,6 @@
 ---
 title:  ansible的学习
-date:   2020-01-11 23:46:00 +0800
+date:   2020-01-11 23:46:00+08:00
 categories: ["笔记"]
 tags: ["server"]
 keywords: ["ansible","教程"]

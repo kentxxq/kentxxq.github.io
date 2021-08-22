@@ -1,6 +1,6 @@
 ---
 title:  gitea_搭建超简单的git代码管理服务
-date:   2019-03-19 17:35:00 +0800
+date:   2019-03-19 17:35:00+08:00
 categories: ["笔记"]
 tags: ["gogs","git"]
 keywords: ["gogs","go","git","代码管理服务","gitea"]

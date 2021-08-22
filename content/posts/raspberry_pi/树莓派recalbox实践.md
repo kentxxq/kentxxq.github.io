@@ -1,6 +1,6 @@
 ---
 title:  树莓派recalbox实践
-date:   2021-03-21 14:36:00 +0800
+date:   2021-03-21 14:36:00+08:00
 categories: ["笔记"]
 tags: ["raspberry pi"]
 keywords: ["raspberry pi","recalbox","kodi","直播源","nes","chmod","armv7l"]

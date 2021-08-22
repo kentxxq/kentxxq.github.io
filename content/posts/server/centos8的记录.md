@@ -1,6 +1,6 @@
 ---
 title:  centos8的记录
-date:   2019-12-31 16:36:00 +0800
+date:   2019-12-31 16:36:00+08:00
 categories: ["笔记"]
 tags: ["centos"]
 keywords: ["centos","yum","bbr","ss","新特性"]

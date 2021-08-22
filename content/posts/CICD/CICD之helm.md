@@ -1,6 +1,6 @@
 ---
 title:  CICD之helm
-date:   2021-07-07 17:41:00 +0800
+date:   2021-07-07 17:41:00+08:00
 categories: ["笔记"]
 tags: ["CICD","helm"]
 keywords: ["CICD","helm"]

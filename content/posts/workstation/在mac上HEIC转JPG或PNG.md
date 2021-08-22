@@ -1,6 +1,6 @@
 ---
 title:  在mac上HEIC转JPG或PNG
-date:   2019-04-15 08:59:00 +0800
+date:   2019-04-15 08:59:00+08:00
 categories: ["笔记"]
 tags: ["mac"]
 keywords: ["mac","HEIC转JPG","HEIC转PNG","图片转换"]

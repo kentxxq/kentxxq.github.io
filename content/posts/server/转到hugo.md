@@ -1,6 +1,6 @@
 ---
 title:  转到hugo后的架构
-date:   2018-12-23 00:00:00 +0800
+date:   2018-12-23 00:00:00+08:00
 categories: ["笔记"]
 tags: ["server"]
 keywords: ["hugo","架构","jekyll","github","微软","gitlab"]

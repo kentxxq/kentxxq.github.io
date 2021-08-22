@@ -1,6 +1,6 @@
 ---
 title:  linux常用命令
-date:   2020-06-09 23:47:00 +0800
+date:   2020-06-09 23:47:00+08:00
 categories: ["笔记"]
 tags: ["linux"]
 keywords: ["linux","tar","ntpdate","truncate"]
