@@ -248,7 +248,7 @@ enableGitInfo = true
 
   [params.page]
     # DoIt 新增 | 0.2.0 是否在主页隐藏一篇文章
-    hiddenFromHomePage = false
+    hiddenFromHomePage = true
     # DoIt 新增 | 0.2.0 是否在搜索结果中隐藏一篇文章
     hiddenFromSearch = false
     # DoIt 新增 | 0.2.0 是否使用 twemoji

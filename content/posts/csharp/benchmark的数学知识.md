@@ -1,4 +1,5 @@
 ---
+hiddenFromHomePage: false
 title:  benchmark的数学知识
 date:   2021-08-14
 categories: ["笔记"]
