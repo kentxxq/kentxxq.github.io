@@ -1,0 +1,262 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<title class=pjax-title>网络命令行工具-ken - kentxxq Blog</title><meta name=Description content="在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个"><meta property="og:title" content="网络命令行工具-ken">
+<meta property="og:description" content="在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-08-30T17:42:00+08:00">
+<meta property="article:modified_time" content="2021-08-30T23:13:39+08:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="网络命令行工具-ken">
+<meta name=twitter:description content="在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个">
+<meta name=application-name content="kentxxq">
+<meta name=apple-mobile-web-app-title content="kentxxq">
+<meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/><link rel=prev href=https://kentxxq.com/contents/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%97%A5%E8%AE%B0/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"网络命令行工具-ken","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken\/"},"genre":"posts","keywords":"csharp, tools","wordcount":713,"url":"https:\/\/kentxxq.com\/contents\/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken\/","datePublished":"2021-08-30T17:42:00+08:00","dateModified":"2021-08-30T23:13:39+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个"}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let themeColorMeta=getMeta('theme-color');document.body.getAttribute('theme')!='light'&&(themeColorMeta.content='#000000')</script>
+<div id=back-to-top></div>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="kentxxq Blog">kentxxq Blog</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Blog </a><a class=menu-item href=/categories/> Categories </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/about/> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=# onclick=return!1 class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="kentxxq Blog">kentxxq Blog</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=# onclick=return!1 class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">网络命令行工具-ken</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-08-30>2021-08-30</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-30>2021-08-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 713 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#简介>简介</a></li>
+<li><a href=#如何使用>如何使用</a></li>
+<li><a href=#更新日志>更新日志</a></li>
+</ul>
+</nav></div>
+</div><div class=content id=content><blockquote>
+<p>在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个。</p>
+</blockquote>
+<h2 id=简介>简介</h2>
+<p><code>ken</code>的由来: 我一直以来用的都是名字kentxxq。而在日常生活中需要一个简短好用的名字，于是就用了ken。同时也因为命令行需要足够简短，所以也就用了这个名字。<br>
+<a href=https://github.com/kentxxq/kentxxq.Cli target=_blank rel="noopener noreffer">代码都是开源</a>的，采用c#编写。使用了微软自己的<code>System.Commandline</code>。</p>
+<p><strong>因为现在net6还没有发布，所以暂时只发布linux-x64版本，会加上其他的版本。</strong></p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># linux 下载到程序路径，同时赋权</span>
+curl -L -o /usr/local/bin/ken https://github.com/kentxxq/kentxxq.Cli/releases/latest/download/ken-linux-x64
+chmod +x /usr/local/bin/ken
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=如何使用>如何使用</h2>
+<ol>
+<li>两个子命令<code>sp</code>和<code>ws</code>。如果命令返回状态非0，则代表异常退出。</li>
+<li><code>sp</code>代表socketping，之前一直都是用的<code>telnet</code>。但是只能一次性请求，而sp可以设置<strong>连接超时时间、重试次数、连接成功后退出</strong>。</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>Usage:
+  ken <span class=o>[</span>options<span class=o>]</span> sp &lt;url&gt;
+
+Arguments:
+  &lt;url&gt;  url: kentxxq.com:443
+
+Options:
+  -n, --retryTimes &lt;retryTimes&gt;  default:0,retry forever <span class=o>[</span>default: 0<span class=o>]</span>
+  -t, --timeout &lt;timeout&gt;        default:2 seconds <span class=o>[</span>default: 2<span class=o>]</span>
+  -q, --quit                     Quit after connection succeeded <span class=o>[</span>default: False<span class=o>]</span>
+  -?, -h, --help                 Show <span class=nb>help</span> and usage information
+
+<span class=c1># 请求2次</span>
+ken sp kentxxq.com:443 -n <span class=m>2</span>
+request successed. waited <span class=m>137</span> ms
+request successed. waited <span class=m>1117</span> ms
+<span class=c1># 请求2次，一旦成功就退出</span>
+ken sp kentxxq.com:443 -n <span class=m>2</span> -q
+request successed. waited <span class=m>96</span> ms
+<span class=c1># 请求失败的情况，同时设置超时时间</span>
+ken sp kentxxq.com:444 -t <span class=m>3</span> -n <span class=m>2</span> -q
+request failed. waited <span class=m>3016</span> ms
+request failed. waited <span class=m>3013</span> ms
+<span class=c1># 解析失败的情况</span>
+ken sp kentxxq:443 -t <span class=m>3</span> -n <span class=m>2</span> -q
+parse error:不知道这样的主机。
+</code></pre></td></tr></table>
+</div>
+</div><ol start=3>
+<li><code>ws</code>代表连接websocket。之前一直用wscat，但是<strong>wscat依赖nodejs</strong>。每次使用的时候都觉得有点大材小用了。</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>Usage:
+  ken <span class=o>[</span>options<span class=o>]</span> ws &lt;wsUrl&gt;
+
+Arguments:
+  &lt;wsUrl&gt;  wsUrl: wss://ws.kentxxq.com/ws
+
+<span class=c1># 连接websocket</span>
+ken ws wss://ws.kentxxq.com/ws
+&gt;&gt; ls
+&lt;&lt; ls
+&gt;&gt; <span class=nb>pwd</span>
+&lt;&lt; <span class=nb>pwd</span>
+&gt;&gt; 你好
+&lt;&lt; 你好
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=更新日志>更新日志</h2>
+<p><strong>20210830</strong>: 开篇</p>
+</div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 2021-08-30</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span><a href=# onclick=return!1 title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken data-hashtags=csharp,tools><i class="fab fa-twitter fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-hashtag=csharp><i class="fab fa-facebook-square fa-fw"></i></a><a href=# onclick=return!1 title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# onclick=return!1 title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken><i class="fab fa-weibo fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken data-description=在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# onclick=return!1 title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken data-description=在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个><i class="fab fa-blogger fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken><i class="fab fa-evernote fa-fw"></i></a></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/csharp/>csharp</a>,&nbsp;<a href=/tags/tools/>tools</a></section>
+<section>
+<span><a href=# onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/contents/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%97%A5%E8%AE%B0/ class=prev rel=prev title=一句话日记><i class="fas fa-angle-left fa-fw"></i>一句话日记</a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
+<span class=icp>湘ICP备2021002319号-1</span></div>
+</div><script>'serviceWorker'in navigator&&(navigator.serviceWorker.register('/sw.min.js',{scope:'/'}).then(function(a){}),navigator.serviceWorker.ready.then(function(a){}))</script></footer></div>
+<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
+<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
+</body>
+</html>
