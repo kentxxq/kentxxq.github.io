@@ -24,8 +24,8 @@ description: "在日常的使用场景中，总是不得不接触各种各样的
 # 现支持的所有linux版本: linux-x64/linux-arm64/linux-arm/linux-musl-x64
 # linux-x64 下载到程序路径
 curl -L -o /usr/local/bin/ken https://github.com/kentxxq/kentxxq.Cli/releases/latest/download/ken-linux-x64
-# 国内的加速地址如下
-curl -L -o /usr/local/bin/ken https://ken.kentxxq.workers.dev/https://github.com/kentxxq/kentxxq.Cli/releases/latest/download/ken-linux-x64
+# 如果是国内网络不行的话，可以使用七牛云cdn下载
+curl -L -o /usr/local/bin/ken http://tools.kentxxq.com/ken-linux-x64
 # 赋权
 chmod +x /usr/local/bin/ken
 ```
@@ -86,4 +86,4 @@ ken ws wss://ws.kentxxq.com/ws
 
 **20210901**: 补全所有可以支持的linux版本
 
-**20210905**: 新增cloudflare的镜像地址，加速国内的下载
+**20210905**: 使用七牛云免费套餐，加速国内的下载
