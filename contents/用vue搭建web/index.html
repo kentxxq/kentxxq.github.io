@@ -310,33 +310,33 @@ npm i babel-plugin-import -D
 <td class=lntd>
 <pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=err>pwa:</span> <span class=p>{</span>
     <span class=err>name:</span> <span class=err>&#39;kentxxq&#39;,</span>
-    <span class=err>//</span> <span class=err>由于谷歌国内不稳定，所以改成local</span>
-    <span class=err>workboxOptions:</span> <span class=err>{</span>
+    <span class=c1>// 由于谷歌国内不稳定，所以改成local
+</span><span class=c1></span>    <span class=err>workboxOptions:</span> <span class=err>{</span>
       <span class=err>importWorkboxFrom:</span> <span class=err>&#39;local&#39;</span>
     <span class=p>}</span>
-    <span class=err>//</span> <span class=err>下面这是默认排除掉的文件类型</span>
-    <span class=err>//const</span> <span class=err>defaultOptions</span> <span class=err>=</span> <span class=p>{</span>
-    <span class=err>//</span>    <span class=err>exclude:</span> <span class=err>[</span>
-    <span class=err>//</span>      <span class=err>/\.map$/,</span>
-    <span class=err>//</span>      <span class=err>/img\/icons\//,</span>
-    <span class=err>//</span>      <span class=err>/favicon\.ico$/,</span>
-    <span class=err>//</span>      <span class=err>/manifest\.json$/</span>
-    <span class=err>//</span>    <span class=err>]</span>
-    <span class=err>//</span>  <span class=p>}</span>
-    <span class=err>//</span> <span class=err>其实最重要的是下面这两个，自己按需求定制</span>
-    <span class=err>//</span> <span class=err>include:</span> <span class=p>[</span><span class=err>/\.html$/</span><span class=p>,</span> <span class=err>/\.js$/</span><span class=p>]</span>
-    <span class=err>//</span> <span class=err>exclude:</span> <span class=p>[</span><span class=err>/\.jpg$/</span><span class=p>,</span> <span class=err>/\.png$/</span><span class=p>]</span>
-    <span class=err>//</span> <span class=err>下面是具体资源的配置选项，用的时候最好参考官方文档</span>
-    <span class=err>//runtimeCaching:</span> <span class=p>[</span>
-    <span class=err>//</span>    <span class=p>{</span>      <span class=err>//</span> <span class=err>To</span> <span class=err>match</span> <span class=err>cross-origin</span> <span class=err>requests,</span> <span class=err>use</span> <span class=err>a</span> <span class=err>RegExp</span> <span class=err>that</span> <span class=err>matches</span>
-    <span class=err>//</span>        <span class=err>//</span> <span class=err>the</span> <span class=err>start</span> <span class=err>of</span> <span class=err>the</span> <span class=err>origin:</span>
-    <span class=err>//</span>        <span class=err>urlPattern:</span> <span class=err>new</span> <span class=err>RegExp(&#39;^https://api&#39;),</span> <span class=err>handler:</span> <span class=err>&#39;staleWhileRevalidate&#39;,</span> <span class=err>options:</span> <span class=err>{</span>   <span class=err>//</span>     <span class=err>//</span> <span class=err>Configure</span> <span class=err>which</span> <span class=err>responses</span> <span class=err>are</span> <span class=err>considered</span> <span class=err>cacheable.</span>
-    <span class=err>//</span>            <span class=err>cacheableResponse:</span> <span class=err>{</span>
-    <span class=err>//</span>                <span class=err>statuses:</span> <span class=err>[200]</span>
-    <span class=err>//</span>            <span class=p>}</span>
-    <span class=err>//</span>        <span class=err>}</span>
-    <span class=err>//</span>    <span class=err>}</span><span class=p>,</span>
-  <span class=err>}</span>
+    <span class=c1>// 下面这是默认排除掉的文件类型
+</span><span class=c1></span>    <span class=c1>//const defaultOptions = {
+</span><span class=c1></span>    <span class=c1>//    exclude: [
+</span><span class=c1></span>    <span class=c1>//      /\.map$/,
+</span><span class=c1></span>    <span class=c1>//      /img\/icons\//,
+</span><span class=c1></span>    <span class=c1>//      /favicon\.ico$/,
+</span><span class=c1></span>    <span class=c1>//      /manifest\.json$/
+</span><span class=c1></span>    <span class=c1>//    ]
+</span><span class=c1></span>    <span class=c1>//  }
+</span><span class=c1></span>    <span class=c1>// 其实最重要的是下面这两个，自己按需求定制
+</span><span class=c1></span>    <span class=c1>// include: [/\.html$/, /\.js$/]
+</span><span class=c1></span>    <span class=c1>// exclude: [/\.jpg$/, /\.png$/]
+</span><span class=c1></span>    <span class=c1>// 下面是具体资源的配置选项，用的时候最好参考官方文档
+</span><span class=c1></span>    <span class=c1>//runtimeCaching: [
+</span><span class=c1></span>    <span class=c1>//    {      // To match cross-origin requests, use a RegExp that matches
+</span><span class=c1></span>    <span class=c1>//        // the start of the origin:
+</span><span class=c1></span>    <span class=c1>//        urlPattern: new RegExp(&#39;^https://api&#39;), handler: &#39;staleWhileRevalidate&#39;, options: {   //     // Configure which responses are considered cacheable.
+</span><span class=c1></span>    <span class=c1>//            cacheableResponse: {
+</span><span class=c1></span>    <span class=c1>//                statuses: [200]
+</span><span class=c1></span>    <span class=c1>//            }
+</span><span class=c1></span>    <span class=c1>//        }
+</span><span class=c1></span>    <span class=c1>//    },
+</span><span class=c1></span>  <span class=err>}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id=关于修改主题>关于修改主题</h3>
