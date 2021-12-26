@@ -18,7 +18,8 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E6%93%8D%E4%BD%9C/><link rel=prev href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/><link rel=next href=https://kentxxq.com/contents/%E5%85%B3%E4%BA%8Ehugo%E7%9A%84seo%E4%BC%98%E5%8C%96/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"我的k8s之路0-集群操作","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E6%93%8D%E4%BD%9C\/"},"genre":"posts","keywords":"k8s","wordcount":918,"url":"https:\/\/kentxxq.com\/contents\/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E6%93%8D%E4%BD%9C\/","datePublished":"2020-11-09T15:40:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"前面写了基本的部署，现在来使用kubespray进行收缩扩容"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"我的k8s之路0-集群操作","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E6%93%8D%E4%BD%9C\/"},"genre":"posts","keywords":"k8s","wordcount":918,"url":"https:\/\/kentxxq.com\/contents\/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E6%93%8D%E4%BD%9C\/","datePublished":"2020-11-09T15:40:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"前面写了基本的部署，现在来使用kubespray进行收缩扩容"}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -83,19 +84,7 @@
 <main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">我的k8s之路0-集群操作</h1><div class=post-meta>
-<div class=post-meta-line>
-<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-11-09>2020-11-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 918 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
 <li><a href=#前提>前提</a></li>
 <li><a href=#worker节点扩容替换>worker节点扩容/替换</a></li>
@@ -108,16 +97,28 @@
 </li>
 </ul>
 </nav></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">我的k8s之路0-集群操作</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-11-09>2020-11-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 918 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static></div>
 </div><div class=content id=content><blockquote>
 <p>前面写了基本的部署，现在来使用kubespray进行收缩扩容。</p>
 </blockquote>
-<h2 id=前提>前提</h2>
-<ol>
+<h2 id=前提 class=headerLink>
+<a href=#%e5%89%8d%e6%8f%90 class=header-mark></a>前提</h2><ol>
 <li>参考<a href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/#%E9%9B%86%E7%BE%A4%E6%9C%BA%E5%99%A8%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87 target=_blank rel="noopener noreffer">集群部署中的准备工作</a></li>
 <li>移除kube-master和etcd-master节点。节点配置不能放在hosts中的第一个。例如移除node1，则顺序应为nodeX,node1。</li>
 </ol>
-<h2 id=worker节点扩容替换>worker节点扩容/替换</h2>
-<ol>
+<h2 id=worker节点扩容替换 class=headerLink>
+<a href=#worker%e8%8a%82%e7%82%b9%e6%89%a9%e5%ae%b9%e6%9b%bf%e6%8d%a2 class=header-mark></a>worker节点扩容/替换</h2><ol>
 <li>文件路径<code>kubespray/inventory/mycluster/hosts.ini</code>，添加对应的机器信息</li>
 <li>增加节点<code>scale.yml</code></li>
 </ol>
@@ -149,8 +150,8 @@ sudo ansible-playbook -i inventory/mycluster/inventory.ini remove-node.yml -b -v
 </div><ol start=4>
 <li>把hosts文件中被移除节点信息去掉</li>
 </ol>
-<h2 id=master节点扩容替换>master节点扩容/替换</h2>
-<ol>
+<h2 id=master节点扩容替换 class=headerLink>
+<a href=#master%e8%8a%82%e7%82%b9%e6%89%a9%e5%ae%b9%e6%9b%bf%e6%8d%a2 class=header-mark></a>master节点扩容/替换</h2><ol>
 <li>文件路径<code>kubespray/inventory/mycluster/hosts.ini</code>，添加对应的机器信息</li>
 <li>增加节点<code>cluster.yml</code></li>
 </ol>
@@ -195,10 +196,10 @@ sudo ansible-playbook -i inventory/mycluster/inventory.ini remove-node.yml -b -v
 </div><ol start=5>
 <li>把hosts文件中被移除节点信息去掉</li>
 </ol>
-<h2 id=etcd节点扩容替换>etcd节点扩容/替换</h2>
-<p><strong>应该保证etcd节点数量为奇数。否则的选择leader的时候，会有尬住哟。</strong></p>
-<h3 id=etcd节点增加>etcd节点增加</h3>
-<ol>
+<h2 id=etcd节点扩容替换 class=headerLink>
+<a href=#etcd%e8%8a%82%e7%82%b9%e6%89%a9%e5%ae%b9%e6%9b%bf%e6%8d%a2 class=header-mark></a>etcd节点扩容/替换</h2><p><strong>应该保证etcd节点数量为奇数。否则的选择leader的时候，会有尬住哟。</strong></p>
+<h3 id=etcd节点增加 class=headerLink>
+<a href=#etcd%e8%8a%82%e7%82%b9%e5%a2%9e%e5%8a%a0 class=header-mark></a>etcd节点增加</h3><ol>
 <li>文件路径<code>kubespray/inventory/mycluster/hosts.ini</code>，添加对应的机器信息</li>
 <li>运行<code>cluster.yml</code></li>
 </ol>
@@ -227,8 +228,8 @@ sudo ansible-playbook -i inventory/mycluster/inventory.ini cluster.yml -b -v --l
 sudo ansible-playbook -i inventory/mycluster/inventory.ini upgrade-cluster.yml -b -v --limit<span class=o>=</span>etcd,kube-master -e <span class=nv>ignore_assert_errors</span><span class=o>=</span>yes
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=etcd节点删减>etcd节点删减</h3>
-<ol>
+</div><h3 id=etcd节点删减 class=headerLink>
+<a href=#etcd%e8%8a%82%e7%82%b9%e5%88%a0%e5%87%8f class=header-mark></a>etcd节点删减</h3><ol>
 <li>移除节点<code>remove-node.yml</code></li>
 </ol>
 <div class=highlight><div class=chroma>
@@ -296,8 +297,6 @@ sudo ansible-playbook -i inventory/mycluster/inventory.ini remove-node.yml -b -v
 <i class="fas fa-comment fa-fw"></i>
 </a>
 </div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/katex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/katex.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/copy-tex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript></div>
+<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
 </body>
 </html>

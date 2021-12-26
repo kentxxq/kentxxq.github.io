@@ -18,7 +18,8 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/ansible%E7%9A%84%E5%AD%A6%E4%B9%A0/><link rel=prev href=https://kentxxq.com/contents/oracle%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/><link rel=next href=https://kentxxq.com/contents/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"ansible的学习","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/ansible%E7%9A%84%E5%AD%A6%E4%B9%A0\/"},"genre":"posts","keywords":"server","wordcount":1923,"url":"https:\/\/kentxxq.com\/contents\/ansible%E7%9A%84%E5%AD%A6%E4%B9%A0\/","datePublished":"2020-01-11T23:46:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"ansible是一个比较流行的服务器集群管理软件。在之前我有对比过监控软件，所以了解到ansible。但是因为监控较弱，加上网上所说的性能问题，没有继续研究下去。只知道基于ssh。所以不需要被控端多做操作。正好面试的公司现在是基于ansible运维，所以肯定要学学了"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"ansible的学习","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/ansible%E7%9A%84%E5%AD%A6%E4%B9%A0\/"},"genre":"posts","keywords":"server","wordcount":1930,"url":"https:\/\/kentxxq.com\/contents\/ansible%E7%9A%84%E5%AD%A6%E4%B9%A0\/","datePublished":"2020-01-11T23:46:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"ansible是一个比较流行的服务器集群管理软件。在之前我有对比过监控软件，所以了解到ansible。但是因为监控较弱，加上网上所说的性能问题，没有继续研究下去。只知道基于ssh。所以不需要被控端多做操作。正好面试的公司现在是基于ansible运维，所以肯定要学学了"}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -83,19 +84,7 @@
 <main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ansible的学习</h1><div class=post-meta>
-<div class=post-meta-line>
-<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-01-11>2020-01-11</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1923 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
 <li><a href=#ansible概览>ansible概览</a></li>
 <li><a href=#安装>安装</a></li>
@@ -108,26 +97,38 @@
 <li><a href=#总结>总结</a></li>
 </ul>
 </nav></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ansible的学习</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-01-11>2020-01-11</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1930 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static></div>
 </div><div class=content id=content><blockquote>
 <p>ansible是一个比较流行的服务器集群管理软件。在之前我有对比过监控软件，所以了解到ansible。</p>
 <p>但是因为监控较弱，加上网上所说的性能问题，没有继续研究下去。只知道基于ssh。所以不需要被控端多做操作。</p>
 <p>正好面试的公司现在是基于ansible运维，所以肯定要学学了。</p>
 </blockquote>
-<h2 id=ansible概览>ansible概览</h2>
-<p>ansible优点</p>
+<h2 id=ansible概览 class=headerLink>
+<a href=#ansible%e6%a6%82%e8%a7%88 class=header-mark></a>ansible概览</h2><p>ansible优点</p>
 <ul>
 <li>基于python。我也比较熟。</li>
 <li>基于ssh实现服务，所以被控端不需要做操作。</li>
 <li>有官方的维护，人数使用也多。所以社区庞大，各种模块更加好用。</li>
 </ul>
-<h2 id=安装>安装</h2>
-<p>安装其实还是比较简单的。使用默认linux的包管理器就好。</p>
+<h2 id=安装 class=headerLink>
+<a href=#%e5%ae%89%e8%a3%85 class=header-mark></a>安装</h2><p>安装其实还是比较简单的。使用默认linux的包管理器就好。</p>
 <p>其中macOS也可以使用brew安装。但是需要指出的是配置文件默认是没有的。</p>
 <p>在linux下，默认配置文件都放在<code>/etc/ansible/ansible.cfg</code>目录下。</p>
 <p>而macOS则默认没有。可以自建<code>.ansible.cfg</code>文件放到用户目录下。而在文件内有一句<code>inventory = /path/hosts</code>，就是用来指定主机列表的文件。</p>
 <p>如果设定没有问题。你就可以使用<code>ansible --version</code>验证配置。</p>
-<h2 id=编写hosts文件>编写hosts文件</h2>
-<p>这个文件是用来存放主机清单的，其中<code>a=1</code>代表一个变量。是这个主机独享的变量。也可以设置组变量。</p>
+<h2 id=编写hosts文件 class=headerLink>
+<a href=#%e7%bc%96%e5%86%99hosts%e6%96%87%e4%bb%b6 class=header-mark></a>编写hosts文件</h2><p>这个文件是用来存放主机清单的，其中<code>a=1</code>代表一个变量。是这个主机独享的变量。也可以设置组变量。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -154,21 +155,21 @@
 2.2.2.2
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=指定主机>指定主机</h2>
-<p>第一个参数通常用来指定使用主机。</p>
+</div><h2 id=指定主机 class=headerLink>
+<a href=#%e6%8c%87%e5%ae%9a%e4%b8%bb%e6%9c%ba class=header-mark></a>指定主机</h2><p>第一个参数通常用来指定使用主机。</p>
 <ol>
 <li>all代表所有主机</li>
 <li>dbservers则代表数据库下面的所有主机清单</li>
 <li>其中<code>:</code>代表与，<code>&</code>代表或，<code>!</code>代表非。也可以使用通配符和正则表达式。</li>
 </ol>
-<h2 id=常用命令>常用命令</h2>
-<ol>
+<h2 id=常用命令 class=headerLink>
+<a href=#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4 class=header-mark></a>常用命令</h2><ol>
 <li>ansible代表主程序，最常用。</li>
 <li>ansible-doc查看文档。</li>
 <li>ansible-playbook运行脚本。</li>
 </ol>
-<h2 id=常用模块>常用模块</h2>
-<p>通过<code>-m</code>参数可以指定使用的模块。</p>
+<h2 id=常用模块 class=headerLink>
+<a href=#%e5%b8%b8%e7%94%a8%e6%a8%a1%e5%9d%97 class=header-mark></a>常用模块</h2><p>通过<code>-m</code>参数可以指定使用的模块。</p>
 <p><code>ansible -m ping all</code>可以验证主机是否能联通。</p>
 <ol>
 <li><code>command</code>是默认模块，但是对通配符或者管道符不好。</li>
@@ -182,8 +183,8 @@
 <li><code>service</code>管理服务。</li>
 <li><code>user</code>管理用户。</li>
 </ol>
-<h2 id=playbook>playbook</h2>
-<p>前面所说的都是通过单独的命令进行操作，而playbook则属于脚本。完成一系列的操作。</p>
+<h2 id=playbook class=headerLink>
+<a href=#playbook class=header-mark></a>playbook</h2><p>前面所说的都是通过单独的命令进行操作，而playbook则属于脚本。完成一系列的操作。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -228,8 +229,8 @@
 <li>如果使用新的sl版本，则会通知handler，进行对应的操作。</li>
 <li>when字段代表符合一定条件的情况下，才会执行此task。</li>
 </ol>
-<h2 id=roles的使用>roles的使用</h2>
-<p>roles其实就是playbook的模块化版本。参考<code>https://github.com/ansible/ansible-examples/blob/master/lamp_simple</code>，大概模式如下:</p>
+<h2 id=roles的使用 class=headerLink>
+<a href=#roles%e7%9a%84%e4%bd%bf%e7%94%a8 class=header-mark></a>roles的使用</h2><p>roles其实就是playbook的模块化版本。参考<code>https://github.com/ansible/ansible-examples/blob/master/lamp_simple</code>，大概模式如下:</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -290,8 +291,8 @@
 <li>方案内部存放tasks，templates，handlers。其中最主要的是要有main.yml文件，使用include来包含各个task文件，确保执行顺序。</li>
 <li>模板文件其实就是一个普通的配置文件，通过j2文件结尾，在内部加上jinja2的语法，通过变量进行替换。</li>
 </ol>
-<h2 id=总结>总结</h2>
-<p>暂时就写成这样吧。操作还是很简单的，关键就看实际工作中如何用好它了。</p>
+<h2 id=总结 class=headerLink>
+<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>暂时就写成这样吧。操作还是很简单的，关键就看实际工作中如何用好它了。</p>
 <p>如果遇到难搞的需求，通过2次开发，应该也是一件很轻松的事情，毕竟ansible的模块化做的很好。</p>
 </div>
 <div class=post-footer id=post-footer>
@@ -329,8 +330,6 @@
 <i class="fas fa-comment fa-fw"></i>
 </a>
 </div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/katex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/katex.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/copy-tex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript></div>
+<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
 </body>
 </html>

@@ -18,7 +18,8 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E5%BC%80%E5%8F%91%E4%BB%A5%E5%8F%8A%E8%BF%90%E7%BB%B4%E7%9A%84%E6%B5%81%E7%A8%8B-docker/><link rel=prev href=https://kentxxq.com/contents/%E8%BD%AC%E5%88%B0hugo/><link rel=next href=https://kentxxq.com/contents/git%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"开发以及运维的流程-docker","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E5%BC%80%E5%8F%91%E4%BB%A5%E5%8F%8A%E8%BF%90%E7%BB%B4%E7%9A%84%E6%B5%81%E7%A8%8B-docker\/"},"genre":"posts","keywords":"server","wordcount":1746,"url":"https:\/\/kentxxq.com\/contents\/%E5%BC%80%E5%8F%91%E4%BB%A5%E5%8F%8A%E8%BF%90%E7%BB%B4%E7%9A%84%E6%B5%81%E7%A8%8B-docker\/","datePublished":"2019-01-03T00:00:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"开发以及运维的流程-docker"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"开发以及运维的流程-docker","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E5%BC%80%E5%8F%91%E4%BB%A5%E5%8F%8A%E8%BF%90%E7%BB%B4%E7%9A%84%E6%B5%81%E7%A8%8B-docker\/"},"genre":"posts","keywords":"server","wordcount":1759,"url":"https:\/\/kentxxq.com\/contents\/%E5%BC%80%E5%8F%91%E4%BB%A5%E5%8F%8A%E8%BF%90%E7%BB%B4%E7%9A%84%E6%B5%81%E7%A8%8B-docker\/","datePublished":"2019-01-03T00:00:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"开发以及运维的流程-docker"}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -83,19 +84,7 @@
 <main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">开发以及运维的流程-docker</h1><div class=post-meta>
-<div class=post-meta-line>
-<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-01-03>2019-01-03</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1746 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
 <li><a href=#个人开发以及部署>个人开发以及部署</a></li>
 <li><a href=#从拿到centos服务器开始>从拿到centos服务器开始</a>
@@ -124,17 +113,29 @@
 </li>
 </ul>
 </nav></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">开发以及运维的流程-docker</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-01-03>2019-01-03</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1759 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static></div>
 </div><div class=content id=content><blockquote>
 <p>开发以及运维的流程-docker</p>
 </blockquote>
-<h2 id=个人开发以及部署>个人开发以及部署</h2>
-<ol>
+<h2 id=个人开发以及部署 class=headerLink>
+<a href=#%e4%b8%aa%e4%ba%ba%e5%bc%80%e5%8f%91%e4%bb%a5%e5%8f%8a%e9%83%a8%e7%bd%b2 class=header-mark></a>个人开发以及部署</h2><ol>
 <li>github提交代码</li>
 <li>触发webhook，通过脚本让服务器上的容器停止，清除，重新打包，部署</li>
 </ol>
-<h2 id=从拿到centos服务器开始>从拿到centos服务器开始</h2>
-<h3 id=安装系统所需的repo>安装系统所需的repo</h3>
-<div class=highlight><div class=chroma>
+<h2 id=从拿到centos服务器开始 class=headerLink>
+<a href=#%e4%bb%8e%e6%8b%bf%e5%88%b0centos%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%bc%80%e5%a7%8b class=header-mark></a>从拿到centos服务器开始</h2><h3 id=安装系统所需的repo class=headerLink>
+<a href=#%e5%ae%89%e8%a3%85%e7%b3%bb%e7%bb%9f%e6%89%80%e9%9c%80%e7%9a%84repo class=header-mark></a>安装系统所需的repo</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -166,8 +167,8 @@ sudo yum install centos-release-scl unzip -y
 sudo yum update -y
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=配置我所需要用到的服务>配置我所需要用到的服务</h3>
-<div class=highlight><div class=chroma>
+</div><h3 id=配置我所需要用到的服务 class=headerLink>
+<a href=#%e9%85%8d%e7%bd%ae%e6%88%91%e6%89%80%e9%9c%80%e8%a6%81%e7%94%a8%e5%88%b0%e7%9a%84%e6%9c%8d%e5%8a%a1 class=header-mark></a>配置我所需要用到的服务</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -229,8 +230,8 @@ useradd kentxxq
 yourpassword
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=安装我所需要的工具>安装我所需要的工具</h3>
-<div class=highlight><div class=chroma>
+</div><h3 id=安装我所需要的工具 class=headerLink>
+<a href=#%e5%ae%89%e8%a3%85%e6%88%91%e6%89%80%e9%9c%80%e8%a6%81%e7%9a%84%e5%b7%a5%e5%85%b7 class=header-mark></a>安装我所需要的工具</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -316,8 +317,8 @@ sudo yum install shadowsocks-libev -y
 <span class=nv>WantedBy</span><span class=o>=</span>multi-user.target
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=可选操作>可选操作</h3>
-<div class=highlight><div class=chroma>
+</div><h3 id=可选操作 class=headerLink>
+<a href=#%e5%8f%af%e9%80%89%e6%93%8d%e4%bd%9c class=header-mark></a>可选操作</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -333,11 +334,11 @@ wget http://springdale.math.ias.edu/data/puias/unsupported/7/x86_64/python-dnf-0
 yum install python-dnf-0.6.4-2.sdl7.noarch.rpm  dnf-0.6.4-2.sdl7.noarch.rpm dnf-conf-0.6.4-2.sdl7.noarch.rpm
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=开始部署自己的东西>开始部署自己的东西</h2>
-<h3 id=docker>docker</h3>
-<p>参考<a href=https://www.docker.com/ target=_blank rel="noopener noreffer">官方手册</a>比较好</p>
-<h3 id=mongodb>mongodb</h3>
-<p>参考<a href=https://www.mongodb.com/ target=_blank rel="noopener noreffer">官方手册</a>比较好</p>
+</div><h2 id=开始部署自己的东西 class=headerLink>
+<a href=#%e5%bc%80%e5%a7%8b%e9%83%a8%e7%bd%b2%e8%87%aa%e5%b7%b1%e7%9a%84%e4%b8%9c%e8%a5%bf class=header-mark></a>开始部署自己的东西</h2><h3 id=docker class=headerLink>
+<a href=#docker class=header-mark></a>docker</h3><p>参考<a href=https://www.docker.com/ target=_blank rel="noopener noreffer">官方手册</a>比较好</p>
+<h3 id=mongodb class=headerLink>
+<a href=#mongodb class=header-mark></a>mongodb</h3><p>参考<a href=https://www.mongodb.com/ target=_blank rel="noopener noreffer">官方手册</a>比较好</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -352,8 +353,8 @@ use admin
 db.createUser<span class=o>({</span>user: <span class=s2>&#34;dba&#34;</span>,pwd: <span class=s2>&#34;dba&#34;</span>,roles: <span class=o>[</span> <span class=o>{</span> role:”root”, db: <span class=s2>&#34;admin&#34;</span> <span class=o>}</span> <span class=o>]}</span> <span class=o>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=mysql>mysql</h3>
-<p>参考<a href=https://www.mysql.com/ target=_blank rel="noopener noreffer">官方手册</a>比较好</p>
+</div><h3 id=mysql class=headerLink>
+<a href=#mysql class=header-mark></a>mysql</h3><p>参考<a href=https://www.mysql.com/ target=_blank rel="noopener noreffer">官方手册</a>比较好</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -362,8 +363,8 @@ db.createUser<span class=o>({</span>user: <span class=s2>&#34;dba&#34;</span>,pw
 <pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum install mysql
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=nginx>nginx</h3>
-<div class=highlight><div class=chroma>
+</div><h3 id=nginx class=headerLink>
+<a href=#nginx class=header-mark></a>nginx</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -413,8 +414,8 @@ server <span class=o>{</span>
 <span class=o>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=redis>redis</h3>
-<div class=highlight><div class=chroma>
+</div><h3 id=redis class=headerLink>
+<a href=#redis class=header-mark></a>redis</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -424,8 +425,8 @@ server <span class=o>{</span>
 <span class=c1>#使用redis-cli登陆来查看数据</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=个人部署脚本>个人部署脚本</h3>
-<p>进行容器关闭，镜像拉取，镜像清理，启动新容器</p>
+</div><h3 id=个人部署脚本 class=headerLink>
+<a href=#%e4%b8%aa%e4%ba%ba%e9%83%a8%e7%bd%b2%e8%84%9a%e6%9c%ac class=header-mark></a>个人部署脚本</h3><p>进行容器关闭，镜像拉取，镜像清理，启动新容器</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -458,8 +459,8 @@ sudo docker images <span class=p>|</span> grep <span class=s1>&#39;none&#39;</sp
 sudo docker run -p 8080:8080 --rm --name wechat_test  -d <span class=nv>$IMAGE</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=webhook服务>webhook服务</h2>
-<div class=highlight><div class=chroma>
+</div><h2 id=webhook服务 class=headerLink>
+<a href=#webhook%e6%9c%8d%e5%8a%a1 class=header-mark></a>webhook服务</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -616,15 +617,15 @@ sudo docker run -p 8080:8080 --rm --name wechat_test  -d <span class=nv>$IMAGE</
 </code></pre></td></tr></table>
 </div>
 </div><p>使用<code>nohup python -u /usr/local/bin/docker-hook &</code>进行后台，可以把日志输出到nohup.out文件</p>
-<h2 id=团队以及企业开发上云k8s>团队以及企业开发(上云k8s)</h2>
-<ol>
+<h2 id=团队以及企业开发上云k8s class=headerLink>
+<a href=#%e5%9b%a2%e9%98%9f%e4%bb%a5%e5%8f%8a%e4%bc%81%e4%b8%9a%e5%bc%80%e5%8f%91%e4%b8%8a%e4%ba%91k8s class=header-mark></a>团队以及企业开发(上云k8s)</h2><ol>
 <li>项目直接部署到云服务商的代码管理</li>
 <li>开通k8s的产品服务，规划好要求</li>
 <li>建立流水线，触发测试环境的自动部署</li>
 <li>测试环境没有问题以后，人工触发生产环境的部署服务</li>
 </ol>
-<h3 id=理清楚几个概念>理清楚几个概念</h3>
-<ol>
+<h3 id=理清楚几个概念 class=headerLink>
+<a href=#%e7%90%86%e6%b8%85%e6%a5%9a%e5%87%a0%e4%b8%aa%e6%a6%82%e5%bf%b5 class=header-mark></a>理清楚几个概念</h3><ol>
 <li>设置集群的硬件需求</li>
 <li>部署一个应用，就是一个负载。可以多个应用/负载</li>
 <li>应用内的pod是k8s的最小控制单位。配置pod的replicas数量,来决定运行多少个容器提供服务。pod可以自动调节数量和故障节点切换</li>
@@ -667,8 +668,6 @@ sudo docker run -p 8080:8080 --rm --name wechat_test  -d <span class=nv>$IMAGE</
 <i class="fas fa-comment fa-fw"></i>
 </a>
 </div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/katex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/katex.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/copy-tex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript></div>
+<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
 </body>
 </html>

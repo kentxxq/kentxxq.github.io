@@ -18,7 +18,8 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/gitea_%E6%90%AD%E5%BB%BA%E8%B6%85%E7%AE%80%E5%8D%95%E7%9A%84git%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1/><link rel=prev href=https://kentxxq.com/contents/%E7%94%B5%E5%BD%B1_%E9%9D%A9%E5%91%BD%E4%B9%8B%E8%B7%AF/><link rel=next href=https://kentxxq.com/contents/%E5%85%B3%E4%BA%8E%E8%BF%B7%E8%8C%AB/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"gitea_搭建超简单的git代码管理服务","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/gitea_%E6%90%AD%E5%BB%BA%E8%B6%85%E7%AE%80%E5%8D%95%E7%9A%84git%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1\/"},"genre":"posts","keywords":"gogs, git","wordcount":865,"url":"https:\/\/kentxxq.com\/contents\/gitea_%E6%90%AD%E5%BB%BA%E8%B6%85%E7%AE%80%E5%8D%95%E7%9A%84git%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1\/","datePublished":"2019-03-19T17:35:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"一直管理着公司的svn。但是我的个人代码和项目都是用的git，代码也全部托管在github。之前就听说过gogs了。今天心想，要是以后公司用git管理，我应该就会选择gogs"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"gitea_搭建超简单的git代码管理服务","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/gitea_%E6%90%AD%E5%BB%BA%E8%B6%85%E7%AE%80%E5%8D%95%E7%9A%84git%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1\/"},"genre":"posts","keywords":"gogs, git","wordcount":865,"url":"https:\/\/kentxxq.com\/contents\/gitea_%E6%90%AD%E5%BB%BA%E8%B6%85%E7%AE%80%E5%8D%95%E7%9A%84git%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1\/","datePublished":"2019-03-19T17:35:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"一直管理着公司的svn。但是我的个人代码和项目都是用的git，代码也全部托管在github。之前就听说过gogs了。今天心想，要是以后公司用git管理，我应该就会选择gogs"}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -83,19 +84,7 @@
 <main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">gitea_搭建超简单的git代码管理服务</h1><div class=post-meta>
-<div class=post-meta-line>
-<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-03-19>2019-03-19</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 865 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
 <li><a href=#如何选择git托管服务器>如何选择git托管服务器</a>
 <ul>
@@ -107,28 +96,40 @@
 <li><a href=#docker安装>docker安装</a></li>
 </ul>
 </nav></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">gitea_搭建超简单的git代码管理服务</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-03-19>2019-03-19</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 865 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static></div>
 </div><div class=content id=content><blockquote>
 <p>一直管理着公司的svn。但是我的个人代码和项目都是用的git，代码也全部托管在github。之前就听说过gogs了。今天心想，要是以后公司用git管理，我应该就会选择gitea。</p>
 </blockquote>
-<h2 id=如何选择git托管服务器>如何选择git托管服务器</h2>
-<p>现在我接触过的，也就只有<code>gitlab</code>，<code>gogs</code>，<code>gitea</code>。其他的我都觉得打不过gitlab。<br>
+<h2 id=如何选择git托管服务器 class=headerLink>
+<a href=#%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9git%e6%89%98%e7%ae%a1%e6%9c%8d%e5%8a%a1%e5%99%a8 class=header-mark></a>如何选择git托管服务器</h2><p>现在我接触过的，也就只有<code>gitlab</code>，<code>gogs</code>，<code>gitea</code>。其他的我都觉得打不过gitlab。<br>
 当然,不谈场景就来选择，这是最错误的做法。</p>
-<h3 id=大公司场景>大公司场景</h3>
-<p>推荐使用<code>gitlab</code>:</p>
+<h3 id=大公司场景 class=headerLink>
+<a href=#%e5%a4%a7%e5%85%ac%e5%8f%b8%e5%9c%ba%e6%99%af class=header-mark></a>大公司场景</h3><p>推荐使用<code>gitlab</code>:</p>
 <ol>
 <li>拥有超多的用户，没什么坑。保证持续稳定的运行。即使出现故障也容易找到解决方案。</li>
 <li>功能齐全，ci/cd等等功能一应俱全。大公司一般都用到ci/cd等等工具保证流程化运转。</li>
 </ol>
 <p>gitlab其实在速度，部署便捷性等等方面没有优势。但是性能不够，机器来凑。</p>
-<h3 id=小型公司场景>小型公司场景</h3>
-<p>推荐<code>gogs</code>或<code>gitea</code>:</p>
+<h3 id=小型公司场景 class=headerLink>
+<a href=#%e5%b0%8f%e5%9e%8b%e5%85%ac%e5%8f%b8%e5%9c%ba%e6%99%af class=header-mark></a>小型公司场景</h3><p>推荐<code>gogs</code>或<code>gitea</code>:</p>
 <ol>
 <li>go语言编写，性能比ruby好。同样的，也对机器性能要求低。</li>
 <li>部署，迁移过程非常方便。</li>
 </ol>
 <p>一个代码服务器。10个开发人员，一天可能就200次提交？一个树莓派就搞定了的事情。</p>
-<h2 id=对比gogs和gitea>对比<code>gogs</code>和<code>gitea</code></h2>
-<p>gitea是gogs的一个分支。但是分支很早(大概2016年)，已经有了很大的区别。</p>
+<h2 id=对比gogs和gitea class=headerLink>
+<a href=#%e5%af%b9%e6%af%94gogs%e5%92%8cgitea class=header-mark></a>对比<code>gogs</code>和<code>gitea</code></h2><p>gitea是gogs的一个分支。但是分支很早(大概2016年)，已经有了很大的区别。</p>
 <p>为什么我使用gitea呢？<strong>虽然我听歌爱听原曲，系统爱用原生，但是我使用gitea</strong>。特性如下:</p>
 <ol>
 <li>更多的特性以及功能(比如仓库内代码搜索)。</li>
@@ -136,8 +137,8 @@
 <li>更加积极的开发(20190319日-贡献者更多)。</li>
 <li>如果上面3点都对你没什么帮助。那你就gogs啊。</li>
 </ol>
-<h2 id=docker安装>docker安装</h2>
-<p>作为一个docker的忠实拥簇，写一下docker的使用</p>
+<h2 id=docker安装 class=headerLink>
+<a href=#docker%e5%ae%89%e8%a3%85 class=header-mark></a>docker安装</h2><p>作为一个docker的忠实拥簇，写一下docker的使用</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -205,8 +206,6 @@ sudo docker run -d --rm --name<span class=o>=</span>gitea -p 10022:22 -p 10080:3
 <i class="fas fa-comment fa-fw"></i>
 </a>
 </div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/katex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/katex.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/copy-tex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript></div>
+<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
 </body>
 </html>

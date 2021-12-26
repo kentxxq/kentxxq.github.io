@@ -18,7 +18,8 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/><link rel=prev href=https://kentxxq.com/contents/%E5%85%B3%E4%BA%8Ehugo%E7%9A%84seo%E4%BC%98%E5%8C%96/><link rel=next href=https://kentxxq.com/contents/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E6%88%91%E6%B7%8C%E7%9A%84%E5%9D%91/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"树莓派初始化","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96\/"},"genre":"posts","keywords":"raspberry pi","wordcount":1603,"url":"https:\/\/kentxxq.com\/contents\/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96\/","datePublished":"2021-03-13T21:36:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"老早以前就对树莓派有了一定的了解，但是觉得也不算特别便宜，就没买。最近因为听说苹果的m1芯片很厉害，于是对arm架构的东西又有了兴趣。未来很多东西都会在云上运行，用户端方面arm的节能和高效就非常厉害了。于是一狠心，开始折腾自己..."}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"树莓派初始化","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96\/"},"genre":"posts","keywords":"raspberry pi","wordcount":1613,"url":"https:\/\/kentxxq.com\/contents\/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96\/","datePublished":"2021-03-13T21:36:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"老早以前就对树莓派有了一定的了解，但是觉得也不算特别便宜，就没买。最近因为听说苹果的m1芯片很厉害，于是对arm架构的东西又有了兴趣。未来很多东西都会在云上运行，用户端方面arm的节能和高效就非常厉害了。于是一狠心，开始折腾自己..."}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -83,19 +84,7 @@
 <main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">树莓派初始化</h1><div class=post-meta>
-<div class=post-meta-line>
-<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-03-13>2021-03-13</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1603 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
 <li><a href=#硬件方面>硬件方面</a></li>
 <li><a href=#刷机>刷机</a>
@@ -133,11 +122,23 @@
 <li><a href=#更新日志>更新日志</a></li>
 </ul>
 </nav></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">树莓派初始化</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-03-13>2021-03-13</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1613 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static></div>
 </div><div class=content id=content><blockquote>
 <p>老早以前就对树莓派有了一定的了解，但是觉得也不算特别便宜，就没买。最近因为听说苹果的m1芯片很厉害，于是对arm架构的东西又有了兴趣。未来很多东西都会在云上运行，用户端方面arm的节能和高效就非常厉害了。于是一狠心，开始折腾自己&mldr;</p>
 </blockquote>
-<h2 id=硬件方面>硬件方面</h2>
-<ol>
+<h2 id=硬件方面 class=headerLink>
+<a href=#%e7%a1%ac%e4%bb%b6%e6%96%b9%e9%9d%a2 class=header-mark></a>硬件方面</h2><ol>
 <li><strong>树莓派4b 4gb</strong></li>
 <li><strong>32GB的tf存储卡</strong>，做硬盘用</li>
 <li><strong>读卡器</strong>，给tf卡写数据和备份用的</li>
@@ -145,20 +146,20 @@
 <li><strong>一根网线，网口支持千兆哟</strong>。我是比较推荐初期先用网线的。网线的稳定性是wifi不能比的，我笔记本宁愿插个转接头都要用网线</li>
 <li>上面都是必需品，其他的话例如外壳、风扇、散热片、hdmi线都看情况吧。</li>
 </ol>
-<h2 id=刷机>刷机</h2>
-<h3 id=使用imager刷机ubuntu>使用imager刷机ubuntu</h3>
-<p>网上有很多资料都是树莓派自制的系统，但是我比较喜欢统一linux发行版，减小出错概率。所以得刷成<code>ubuntu server 20.04 LTS</code>版本。</p>
+<h2 id=刷机 class=headerLink>
+<a href=#%e5%88%b7%e6%9c%ba class=header-mark></a>刷机</h2><h3 id=使用imager刷机ubuntu class=headerLink>
+<a href=#%e4%bd%bf%e7%94%a8imager%e5%88%b7%e6%9c%baubuntu class=header-mark></a>使用imager刷机ubuntu</h3><p>网上有很多资料都是树莓派自制的系统，但是我比较喜欢统一linux发行版，减小出错概率。所以得刷成<code>ubuntu server 20.04 LTS</code>版本。</p>
 <p>直接去<a href=https://www.raspberrypi.org/software/ target=_blank rel="noopener noreffer">官网下载</a>imager，然后安装后。就可以通过图形界面选择需要的系统了。但是因为网络太慢，所以我直接去<a href=https://ubuntu.com/download/server/arm target=_blank rel="noopener noreffer">ubuntu官网下载</a>镜像文件，然后<code>use custom</code>写入tf卡。</p>
-<h3 id=关于recalbox>关于RecalBox</h3>
-<p>RecalBox是一个独立的系统。支持很多的模拟器，例如psp、Game boy等等。同时重要的一点是<strong>内置有kodi</strong>。这就变成了一个游戏机+媒体中心。我后面是肯定会刷来玩玩的，家里的电视是通过app来观看的，体验很不好。有想法自己折腾一下。</p>
-<h2 id=初始化配置>初始化配置</h2>
-<h3 id=ssh>ssh</h3>
-<ol>
+<h3 id=关于recalbox class=headerLink>
+<a href=#%e5%85%b3%e4%ba%8erecalbox class=header-mark></a>关于RecalBox</h3><p>RecalBox是一个独立的系统。支持很多的模拟器，例如psp、Game boy等等。同时重要的一点是<strong>内置有kodi</strong>。这就变成了一个游戏机+媒体中心。我后面是肯定会刷来玩玩的，家里的电视是通过app来观看的，体验很不好。有想法自己折腾一下。</p>
+<h2 id=初始化配置 class=headerLink>
+<a href=#%e5%88%9d%e5%a7%8b%e5%8c%96%e9%85%8d%e7%bd%ae class=header-mark></a>初始化配置</h2><h3 id=ssh class=headerLink>
+<a href=#ssh class=header-mark></a>ssh</h3><ol>
 <li>通过路由器或者ip扫描工具拿到ip，然后ssh上去会提示修改密码</li>
 <li>默认密码是ubuntu</li>
 </ol>
-<h3 id=替换国内源>替换国内源</h3>
-<p>文件位置<code>/etc/apt/sources.list</code>。</p>
+<h3 id=替换国内源 class=headerLink>
+<a href=#%e6%9b%bf%e6%8d%a2%e5%9b%bd%e5%86%85%e6%ba%90 class=header-mark></a>替换国内源</h3><p>文件位置<code>/etc/apt/sources.list</code>。</p>
 <p>可以把之前的备份掉( sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak )，然后手工创建( sudo vi /etc/apt/sources.list )。内容如下</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -176,8 +177,8 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-security main restr
 </div>
 </div><p><strong>更新</strong>: sudo apt update -y<br>
 <strong>升级</strong>: sudo apt upgrade -y</p>
-<h3 id=wifi配置>wifi配置</h3>
-<p>进行配置<code>vim /etc/netplan/50-cloud-init.yaml</code>。</p>
+<h3 id=wifi配置 class=headerLink>
+<a href=#wifi%e9%85%8d%e7%bd%ae class=header-mark></a>wifi配置</h3><p>进行配置<code>vim /etc/netplan/50-cloud-init.yaml</code>。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -211,9 +212,9 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-security main restr
 </code></pre></td></tr></table>
 </div>
 </div><p>但是wifi每次获取到的ip可能是不一样的，所以我们应该在路由里面把ip和mac地址进行绑定，保证ip地址不被会其他机器占用！！</p>
-<h2 id=安装需要的软件>安装需要的软件</h2>
-<h3 id=温度监控>温度监控</h3>
-<div class=highlight><div class=chroma>
+<h2 id=安装需要的软件 class=headerLink>
+<a href=#%e5%ae%89%e8%a3%85%e9%9c%80%e8%a6%81%e7%9a%84%e8%bd%af%e4%bb%b6 class=header-mark></a>安装需要的软件</h2><h3 id=温度监控 class=headerLink>
+<a href=#%e6%b8%a9%e5%ba%a6%e7%9b%91%e6%8e%a7 class=header-mark></a>温度监控</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -225,8 +226,8 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-security main restr
 watch sensors
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=安装snap-store商店>安装snap-store商店</h3>
-<div class=highlight><div class=chroma>
+</div><h3 id=安装snap-store商店 class=headerLink>
+<a href=#%e5%ae%89%e8%a3%85snap-store%e5%95%86%e5%ba%97 class=header-mark></a>安装snap-store商店</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
@@ -234,8 +235,8 @@ watch sensors
 <pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>sudo snap install snap-store
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=wifi工具>wifi工具</h3>
-<div class=highlight><div class=chroma>
+</div><h3 id=wifi工具 class=headerLink>
+<a href=#wifi%e5%b7%a5%e5%85%b7 class=header-mark></a>wifi工具</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -247,8 +248,8 @@ watch sensors
 iwconfig
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=流量监控>流量监控</h3>
-<div class=highlight><div class=chroma>
+</div><h3 id=流量监控 class=headerLink>
+<a href=#%e6%b5%81%e9%87%8f%e7%9b%91%e6%8e%a7 class=header-mark></a>流量监控</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -260,8 +261,8 @@ iwconfig
 nload
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=安装桌面>安装桌面</h3>
-<div class=highlight><div class=chroma>
+</div><h3 id=安装桌面 class=headerLink>
+<a href=#%e5%ae%89%e8%a3%85%e6%a1%8c%e9%9d%a2 class=header-mark></a>安装桌面</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -283,8 +284,8 @@ sudo tasksel install ubuntu-desktop
 reboot
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=安装net5>安装net5</h3>
-<div class=highlight><div class=chroma>
+</div><h3 id=安装net5 class=headerLink>
+<a href=#%e5%ae%89%e8%a3%85net5 class=header-mark></a>安装net5</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -316,8 +317,8 @@ chmod +x dotnet-install.sh
 dotnet --version
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=vnc安装和配置>vnc安装和配置</h3>
-<p>这个东西不太熟悉，但是按我这样操作是没问题。自己也可以试试，主要是xstartup文件要自己参考资料。</p>
+</div><h3 id=vnc安装和配置 class=headerLink>
+<a href=#vnc%e5%ae%89%e8%a3%85%e5%92%8c%e9%85%8d%e7%bd%ae class=header-mark></a>vnc安装和配置</h3><p>这个东西不太熟悉，但是按我这样操作是没问题。自己也可以试试，主要是xstartup文件要自己参考资料。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -390,10 +391,10 @@ tightvncserver :0 -geometry 1280x720 -depth <span class=m>24</span> -dpi <span c
 </code></pre></td></tr></table>
 </div>
 </div><p>现在就可以用<code>vncviewer</code>连接ip:5900端口进行远程了，记得输入刚才的密码哟~</p>
-<h2 id=代理配置>代理配置</h2>
-<p>下面的命令推荐使用<code>alias</code>来简写，一直手敲太累了。。。</p>
-<h3 id=shell代理配置>shell代理配置</h3>
-<div class=highlight><div class=chroma>
+<h2 id=代理配置 class=headerLink>
+<a href=#%e4%bb%a3%e7%90%86%e9%85%8d%e7%bd%ae class=header-mark></a>代理配置</h2><p>下面的命令推荐使用<code>alias</code>来简写，一直手敲太累了。。。</p>
+<h3 id=shell代理配置 class=headerLink>
+<a href=#shell%e4%bb%a3%e7%90%86%e9%85%8d%e7%bd%ae class=header-mark></a>shell代理配置</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -403,13 +404,13 @@ tightvncserver :0 -geometry 1280x720 -depth <span class=m>24</span> -dpi <span c
 <span class=nb>export</span> <span class=nv>https_proxy</span><span class=o>=</span>http://clash_ip:7890
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=clash代理>clash代理</h3>
-<ol>
+</div><h3 id=clash代理 class=headerLink>
+<a href=#clash%e4%bb%a3%e7%90%86 class=header-mark></a>clash代理</h3><ol>
 <li>允许Allow Lan</li>
 <li>防火墙允许通过应用。windows安全中心=》防火墙和网络保护=》允许应用通过防火墙=》<img class=lazyload data-src=/images/raspberry_pi/%e9%98%b2%e7%81%ab%e5%a2%99.png data-srcset="/images/raspberry_pi/%e9%98%b2%e7%81%ab%e5%a2%99.png, /images/raspberry_pi/%e9%98%b2%e7%81%ab%e5%a2%99.png 1.5x, /images/raspberry_pi/%e9%98%b2%e7%81%ab%e5%a2%99.png 2x" data-sizes=auto alt=/images/raspberry_pi/防火墙.png title=配置图></li>
 </ol>
-<h3 id=snap代理>snap代理</h3>
-<div class=highlight><div class=chroma>
+<h3 id=snap代理 class=headerLink>
+<a href=#snap%e4%bb%a3%e7%90%86 class=header-mark></a>snap代理</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -419,10 +420,10 @@ tightvncserver :0 -geometry 1280x720 -depth <span class=m>24</span> -dpi <span c
 sudo snap <span class=nb>set</span> system proxy.https<span class=o>=</span><span class=s2>&#34;http://clash_ip:7890&#34;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=待续>待续</h2>
-<p>后续可能还会调整vnc部分，尽量完善一下。。。</p>
-<h2 id=更新日志>更新日志</h2>
-<p><strong>20210328</strong>: 增加wifi配置</p>
+</div><h2 id=待续 class=headerLink>
+<a href=#%e5%be%85%e7%bb%ad class=header-mark></a>待续</h2><p>后续可能还会调整vnc部分，尽量完善一下。。。</p>
+<h2 id=更新日志 class=headerLink>
+<a href=#%e6%9b%b4%e6%96%b0%e6%97%a5%e5%bf%97 class=header-mark></a>更新日志</h2><p><strong>20210328</strong>: 增加wifi配置</p>
 </div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
@@ -459,8 +460,6 @@ sudo snap <span class=nb>set</span> system proxy.https<span class=o>=</span><spa
 <i class="fas fa-comment fa-fw"></i>
 </a>
 </div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/katex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/katex.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/copy-tex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript></div>
+<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
 </body>
 </html>

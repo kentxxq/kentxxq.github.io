@@ -18,7 +18,8 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86/><link rel=prev href=https://kentxxq.com/contents/%E8%B5%B7%E7%A0%81%E8%A6%81%E8%83%BD%E7%9C%8B%E6%87%82c%E7%B3%BB%E5%88%97%E7%9A%84%E4%BB%A3%E7%A0%81/><link rel=next href=https://kentxxq.com/contents/%E5%B8%B8%E7%94%A8%E7%9A%84%E4%BF%A1%E6%81%AF%E6%89%8B%E5%86%8C/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"补充一些数据结构的知识","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86\/"},"genre":"posts","keywords":"笔记, c","wordcount":2572,"url":"https:\/\/kentxxq.com\/contents\/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86\/","datePublished":"2019-11-04T01:10:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"在之前做爬虫练手的时候，去爬的Porn网站。影片简介其中有一项就是影片时长。而在我后来的一段时间，发现很多影片网站是没有时长信息的。要知道影片的时长信息其实是非常重要的，需要作为一个筛选的条件。于是开始尝试自己来用python编写获取在线视频时长的工具。而后这段时间在看了c和c#相关的知识后，开始有了更为深入的了解。也遇到了一些在python中没有详细了解过的问题"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"补充一些数据结构的知识","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86\/"},"genre":"posts","keywords":"笔记, c","wordcount":2578,"url":"https:\/\/kentxxq.com\/contents\/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86\/","datePublished":"2019-11-04T01:10:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"在之前做爬虫练手的时候，去爬的Porn网站。影片简介其中有一项就是影片时长。而在我后来的一段时间，发现很多影片网站是没有时长信息的。要知道影片的时长信息其实是非常重要的，需要作为一个筛选的条件。于是开始尝试自己来用python编写获取在线视频时长的工具。而后这段时间在看了c和c#相关的知识后，开始有了更为深入的了解。也遇到了一些在python中没有详细了解过的问题"}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -83,19 +84,7 @@
 <main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">补充一些数据结构的知识</h1><div class=post-meta>
-<div class=post-meta-line>
-<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-11-04>2019-11-04</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2572 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
 <li><a href=#在线视频现状>在线视频现状</a></li>
 <li><a href=#我的解决方案>我的解决方案</a>
@@ -108,18 +97,30 @@
 <li><a href=#总结>总结</a></li>
 </ul>
 </nav></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">补充一些数据结构的知识</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-11-04>2019-11-04</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2578 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static></div>
 </div><div class=content id=content><blockquote>
 <p>在之前做爬虫练手的时候，去爬的Porn网站。影片简介其中有一项就是影片时长。而在我后来的一段时间，发现很多影片网站是没有时长信息的。要知道影片的时长信息其实是非常重要的，需要作为一个筛选的条件。</p>
 <p>于是开始尝试自己来用python编写获取在线视频时长的工具。而后这段时间在看了c和c#相关的知识后，开始有了更为深入的了解。也遇到了一些在python中没有详细了解过的问题。</p>
 </blockquote>
-<h2 id=在线视频现状>在线视频现状</h2>
-<p>现在html5越来越流行，flash则已经确定在2020年后不再更新支持，每次打开chrome都会提醒我这一点。</p>
+<h2 id=在线视频现状 class=headerLink>
+<a href=#%e5%9c%a8%e7%ba%bf%e8%a7%86%e9%a2%91%e7%8e%b0%e7%8a%b6 class=header-mark></a>在线视频现状</h2><p>现在html5越来越流行，flash则已经确定在2020年后不再更新支持，每次打开chrome都会提醒我这一点。</p>
 <p>而html5钦定的视频文件格式，就是mp4文件。所以从mp4文件来入手是非常好的。</p>
 <p>mp4是一种文件格式。通过规范后的数据结构编排，生成文件。而软件则通过规范来解码文件，进行画面的绘制和输出。几乎所有的文件都是用c/c++的结构体来进行组装的。所以学习c语言对理解文件结构很有帮助。</p>
 <p>可以参考苹果网站的文档<a href=https://developer.apple.com/library/archive/documentation/QuickTime/QTFF/QTFFPreface/qtffPreface.html target=_blank rel="noopener noreffer">查阅规范</a></p>
-<h2 id=我的解决方案>我的解决方案</h2>
-<h3 id=python>python</h3>
-<p>一开始我搜索已有的解决方案。</p>
+<h2 id=我的解决方案 class=headerLink>
+<a href=#%e6%88%91%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88 class=header-mark></a>我的解决方案</h2><h3 id=python class=headerLink>
+<a href=#python class=header-mark></a>python</h3><p>一开始我搜索已有的解决方案。</p>
 <p>ffmpeg是一个很强的工具。跨平台且可以解析各种文件，但是ffmpeg需要单独部署，且不方便代码移植。我在用python通过命令行来调用的时候，发现速度奇慢。2小时才解析了200多条信息，且会无故hang住。对程序来说，也算是一个黑箱操作。无法调试。</p>
 <p><img class=lazyload data-src=/images/c/ffmpeg.jpg data-srcset="/images/c/ffmpeg.jpg, /images/c/ffmpeg.jpg 1.5x, /images/c/ffmpeg.jpg 2x" data-sizes=auto alt=/images/c/ffmpeg.jpg title=使用ffmpeg工具解析></p>
 <p>随后发现<a href=https://github.com/kkroening/ffmpeg-python target=_blank rel="noopener noreffer">ffmpeg-python</a>这个库可以帮我操作，但还是觉得麻烦。我需要了解一套新的api，以及它所对应到的ffmpeg接口。</p>
@@ -282,8 +283,8 @@
 <li>可以看到这个类实现的功能非常单一。如果获取更多信息的需求，应该使用<a href=https://github.com/construct/construct target=_blank rel="noopener noreffer">construct</a>来帮助你。</li>
 </ul>
 <p>另外说一句，我写了一个<a href=https://www.github.com/kentxxq/VideoInfo target=_blank rel="noopener noreffer">VideoInfo</a>的库，你可以用pip进行安装使用。用的是construct来解析文件。通过少数几次的请求，来下载整个元数据(因此更注重网络带宽而不是连接速度)。来帮助你在需要获得更多信息的时候来使用。</p>
-<h3 id=c>c#</h3>
-<p>在完成了python版本以后，我学了一些c#的知识。</p>
+<h3 id=c class=headerLink>
+<a href=#c class=header-mark></a>c#</h3><p>在完成了python版本以后，我学了一些c#的知识。</p>
 <p>发现python作为一种高级、动态语言，是用纯c写的，且一直兼容这c-api。于是不但有了高级语言的oop特性，又有了通过c工具来操作数据的便利性。</p>
 <p>而c#算是一个纯面向对象的语言了。很多底层的东西，你是需要完全改变思想来处理问题。</p>
 <div class=highlight><div class=chroma>
@@ -314,8 +315,8 @@
 <li>补充了大小端的知识。之前只知道使用大端来转换数据。而不知道其实是按照byte字节来排序的。而不是用二进制的bit。所以在转换的时候直接转换bytes数组，而不是单独的bit。</li>
 <li>如果你需要转换成8位的int，直接拿到byte后进行tostring来转成十进制即可。而int16和int32等格式需要用到BitConverter。</li>
 </ul>
-<h3 id=20191118日补充>20191118日补充</h3>
-<p>之前用c#写的解析部分，相比python而言，麻烦了很多。于是有了新的方法。</p>
+<h3 id=20191118日补充 class=headerLink>
+<a href=#20191118%e6%97%a5%e8%a1%a5%e5%85%85 class=header-mark></a>20191118日补充</h3><p>之前用c#写的解析部分，相比python而言，麻烦了很多。于是有了新的方法。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -393,8 +394,8 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>关于大小端的问题，在<a href=https://stackoverflow.com/questions/2480116/marshalling-a-big-endian-byte-collection-into-a-struct-in-order-to-pull-out-valu target=_blank rel="noopener noreffer">stackoverflow</a>的这个回答里也有解决方案。</p>
-<h2 id=总结>总结</h2>
-<p>写日志真的是一个巩固知识，以及加深理解的好方法。哪怕只是半桶水，也会比某些人的那半桶水要好。</p>
+<h2 id=总结 class=headerLink>
+<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>写日志真的是一个巩固知识，以及加深理解的好方法。哪怕只是半桶水，也会比某些人的那半桶水要好。</p>
 <p>可以看到python的construct非常好用。而c#这样完全自举且面向对象的语言,则麻烦不少。对于不定长的字段以及嵌套的数据结构，更加麻烦。</p>
 </div>
 <div class=post-footer id=post-footer>
@@ -432,8 +433,6 @@
 <i class="fas fa-comment fa-fw"></i>
 </a>
 </div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/katex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/katex.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/copy-tex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript></div>
+<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
 </body>
 </html>

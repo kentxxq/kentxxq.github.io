@@ -18,7 +18,8 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/csv%E8%BD%ACxlsx%E6%96%87%E4%BB%B6/><link rel=prev href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81%E8%B7%AF%E7%BA%BF/><link rel=next href=https://kentxxq.com/contents/centos8%E7%9A%84%E8%AE%B0%E5%BD%95/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"csv转xlsx文件","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/csv%E8%BD%ACxlsx%E6%96%87%E4%BB%B6\/"},"genre":"posts","keywords":"python, c#","wordcount":1079,"url":"https:\/\/kentxxq.com\/contents\/csv%E8%BD%ACxlsx%E6%96%87%E4%BB%B6\/","datePublished":"2019-12-17T11:45:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"我的超级多学习资料，都是通过书签来进行保存的。之前说过好好理一理python，所以打算从python书签开始。python的性能一直被诟病，有多方面的原因。而多进程是解决办法之一"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"csv转xlsx文件","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/csv%E8%BD%ACxlsx%E6%96%87%E4%BB%B6\/"},"genre":"posts","keywords":"python, c#","wordcount":1079,"url":"https:\/\/kentxxq.com\/contents\/csv%E8%BD%ACxlsx%E6%96%87%E4%BB%B6\/","datePublished":"2019-12-17T11:45:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"我的超级多学习资料，都是通过书签来进行保存的。之前说过好好理一理python，所以打算从python书签开始。python的性能一直被诟病，有多方面的原因。而多进程是解决办法之一"}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -83,19 +84,7 @@
 <main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">csv转xlsx文件</h1><div class=post-meta>
-<div class=post-meta-line>
-<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-12-17>2019-12-17</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1079 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
 <li><a href=#python代码>python代码</a>
 <ul>
@@ -112,14 +101,26 @@
 <li><a href=#总结>总结</a></li>
 </ul>
 </nav></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">csv转xlsx文件</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-12-17>2019-12-17</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1079 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static></div>
 </div><div class=content id=content><blockquote>
 <p>Excel是大家办公最常遇到的文件之一。一旦需要具体数据的时候，客户都要求这个文件。</p>
 <p>而我用plsql从oracle数据库中查出来以后，一般都是直接导出csv文件。需要手动去wps导入csv，转换成xlsx文件。有时候文件实在是太多了，麻烦。</p>
 <p>于是就有了这个文章。</p>
 </blockquote>
-<h2 id=python代码>python代码</h2>
-<h3 id=pyexcel版本>pyexcel版本</h3>
-<p>这个版本代码最简单的，缺点就是非常慢。100W行的数据[1,2,3,4][2,3,4,5]&mldr;需要2分钟！</p>
+<h2 id=python代码 class=headerLink>
+<a href=#python%e4%bb%a3%e7%a0%81 class=header-mark></a>python代码</h2><h3 id=pyexcel版本 class=headerLink>
+<a href=#pyexcel%e7%89%88%e6%9c%ac class=header-mark></a>pyexcel版本</h3><p>这个版本代码最简单的，缺点就是非常慢。100W行的数据[1,2,3,4][2,3,4,5]&mldr;需要2分钟！</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -146,8 +147,8 @@
 <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;ok&#39;</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=pyexcelerate版本>pyexcelerate版本</h3>
-<p>这个看了一个它在测试，确实很快。大概60s。还是不太理想。</p>
+</div><h3 id=pyexcelerate版本 class=headerLink>
+<a href=#pyexcelerate%e7%89%88%e6%9c%ac class=header-mark></a>pyexcelerate版本</h3><p>这个看了一个它在测试，确实很快。大概60s。还是不太理想。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -228,9 +229,9 @@
     <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;处理完成---------------------------------------&#39;</span><span class=o>+</span><span class=nb>str</span><span class=p>(</span><span class=n>duration</span><span class=p>))</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=c代码>c#代码</h2>
-<h3 id=epplus版本>epplus版本</h3>
-<p>这个我只用了很少的代码，但是只花了18s左右！</p>
+</div><h2 id=c代码 class=headerLink>
+<a href=#c%e4%bb%a3%e7%a0%81 class=header-mark></a>c#代码</h2><h3 id=epplus版本 class=headerLink>
+<a href=#epplus%e7%89%88%e6%9c%ac class=header-mark></a>epplus版本</h3><p>这个我只用了很少的代码，但是只花了18s左右！</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -251,13 +252,13 @@
 <span class=n>pck</span><span class=p>.</span><span class=n>Save</span><span class=p>();</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=最后对比>最后对比</h2>
-<p>我还用wps手动导入了一次这个csv文件，然后光导入就用了36s。保存估计还要花几秒。而且我的wps是台式机的i3-8100+固态。</p>
+</div><h2 id=最后对比 class=headerLink>
+<a href=#%e6%9c%80%e5%90%8e%e5%af%b9%e6%af%94 class=header-mark></a>最后对比</h2><p>我还用wps手动导入了一次这个csv文件，然后光导入就用了36s。保存估计还要花几秒。而且我的wps是台式机的i3-8100+固态。</p>
 <p>结果说明了python的性能确实不够。最好用的pyexcel需要120s很夸张。最快的pyexcelerate也要60s。<strong>但我用python完成这些代码的过程最快，api好用</strong>。</p>
 <p>c#性能确实很强。代码量也不多，但是我花了最多的时间写出来。文档什么的都太差了。我有想这写一个桌面工具来转换，<strong>我也肯定会用c#来处理</strong>。</p>
 <p>wps应该是c/c++写的，因为加上了gui等等原因，速度竟然不如c#，但还是会比python快不少。足以见得不是一个速度级别。</p>
-<h2 id=总结>总结</h2>
-<p>各个语言都是有自己的优势。我的抉择是选python。<strong>除非我要做GUI界面</strong>。</p>
+<h2 id=总结 class=headerLink>
+<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>各个语言都是有自己的优势。我的抉择是选python。<strong>除非我要做GUI界面</strong>。</p>
 <p>我更喜欢用python来打造原型，完成功能。即使python最慢。现在流行云计算，可以去到云平台写函数，远程调用。</p>
 </div>
 <div class=post-footer id=post-footer>
@@ -295,8 +296,6 @@
 <i class="fas fa-comment fa-fw"></i>
 </a>
 </div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/katex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/katex.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/copy-tex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript></div>
+<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
 </body>
 </html>

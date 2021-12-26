@@ -18,7 +18,8 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/><link rel=prev href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2/><link rel=next href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E6%93%8D%E4%BD%9C/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"我的k8s之路0-集群部署","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2\/"},"genre":"posts","keywords":"k8s","wordcount":1958,"url":"https:\/\/kentxxq.com\/contents\/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2\/","datePublished":"2020-11-07T20:12:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"之前写了一些k8s的概念和使用，都是操作级别的。而没有自己安装过。这次就来操作一下。同时网上的中文教程都是坑，拍坑是这篇文章一个要点"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"我的k8s之路0-集群部署","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2\/"},"genre":"posts","keywords":"k8s","wordcount":1958,"url":"https:\/\/kentxxq.com\/contents\/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2\/","datePublished":"2020-11-07T20:12:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"之前写了一些k8s的概念和使用，都是操作级别的。而没有自己安装过。这次就来操作一下。同时网上的中文教程都是坑，拍坑是这篇文章一个要点"}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -83,19 +84,7 @@
 <main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">我的k8s之路0-集群部署</h1><div class=post-meta>
-<div class=post-meta-line>
-<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-11-07>2020-11-07</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1958 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
 <li><a href=#简单介绍>简单介绍</a></li>
 <li><a href=#准备工作>准备工作</a>
@@ -121,15 +110,27 @@
 <li><a href=#总结>总结</a></li>
 </ul>
 </nav></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">我的k8s之路0-集群部署</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-11-07>2020-11-07</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1958 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static></div>
 </div><div class=content id=content><blockquote>
 <p>之前写了一些k8s的概念和使用，都是操作级别的。而没有自己安装过。这次就来操作一下。同时网上的中文教程都是坑，拍坑是这篇文章一个要点。</p>
 </blockquote>
-<h2 id=简单介绍>简单介绍</h2>
-<p>虽然说是集群安装教程，但是我还是使用工具来安装。因为这样其实更贴近生产环境的使用。<br>
+<h2 id=简单介绍 class=headerLink>
+<a href=#%e7%ae%80%e5%8d%95%e4%bb%8b%e7%bb%8d class=header-mark></a>简单介绍</h2><p>虽然说是集群安装教程，但是我还是使用工具来安装。因为这样其实更贴近生产环境的使用。<br>
 如果想要了解如何手动部署。那么理解ansible脚本后，自己优化改进脚本会更有帮助。例如不同的linux发行版会有不同的包名、配置等等。这是你在部署时候要注意到的(都在ansible脚本中能找到)。</p>
-<h2 id=准备工作>准备工作</h2>
-<h3 id=机器准备>机器准备</h3>
-<ol>
+<h2 id=准备工作 class=headerLink>
+<a href=#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c class=header-mark></a>准备工作</h2><h3 id=机器准备 class=headerLink>
+<a href=#%e6%9c%ba%e5%99%a8%e5%87%86%e5%a4%87 class=header-mark></a>机器准备</h3><ol>
 <li>3台机器作为集群。
 <table>
 <thead>
@@ -160,14 +161,14 @@
 </li>
 <li>本机或者另外一台linux作为部署机。如果和我一样使用的是windows，可以使用<code>wsl</code>解决。</li>
 </ol>
-<h3 id=部署机环境准备>部署机环境准备</h3>
-<ol>
+<h3 id=部署机环境准备 class=headerLink>
+<a href=#%e9%83%a8%e7%bd%b2%e6%9c%ba%e7%8e%af%e5%a2%83%e5%87%86%e5%a4%87 class=header-mark></a>部署机环境准备</h3><ol>
 <li><a href=https://kentxxq.com/contents/%E8%BF%9C%E7%A8%8B%E5%85%8D%E5%AF%86ssh/ target=_blank rel="noopener noreffer">生成ssh秘钥并免密登录</a>、<a href=https://www.python.org/ target=_blank rel="noopener noreffer">安装python</a>、<a href=https://www.ansible.com/ target=_blank rel="noopener noreffer">安装ansible</a></li>
 <li>在部署机clone当前最新版(release-2.14)<a href=https://github.com/kubernetes-sigs/kubespray/ target=_blank rel="noopener noreffer">kubespray仓库</a></li>
 <li>进入<code>kubespray</code>文件夹，安装依赖(<code>pip install -r requirements.txt</code>)</li>
 </ol>
-<h3 id=集群机器环境准备>集群机器环境准备</h3>
-<div class=highlight><div class=chroma>
+<h3 id=集群机器环境准备 class=headerLink>
+<a href=#%e9%9b%86%e7%be%a4%e6%9c%ba%e5%99%a8%e7%8e%af%e5%a2%83%e5%87%86%e5%a4%87 class=header-mark></a>集群机器环境准备</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -191,10 +192,10 @@ swapoff -a
 apt install sshpass -y
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=修改ansible脚本>修改ansible脚本</h2>
-<p>其实最大的坑就是在这里了。如果不了解ansible和具体部署细节，在大陆地区完全无法正常使用。</p>
-<h3 id=修改hosts>修改hosts</h3>
-<p>什么是hosts？<br>
+</div><h2 id=修改ansible脚本 class=headerLink>
+<a href=#%e4%bf%ae%e6%94%b9ansible%e8%84%9a%e6%9c%ac class=header-mark></a>修改ansible脚本</h2><p>其实最大的坑就是在这里了。如果不了解ansible和具体部署细节，在大陆地区完全无法正常使用。</p>
+<h3 id=修改hosts class=headerLink>
+<a href=#%e4%bf%ae%e6%94%b9hosts class=header-mark></a>修改hosts</h3><p>什么是hosts？<br>
 hosts其实就是需要部署的机器。里面存放着哪些服务应该放到哪台机器上。<br>
 文件路径<code>kubespray/inventory/sample/hosts.ini</code></p>
 <div class=highlight><div class=chroma>
@@ -255,8 +256,8 @@ hosts其实就是需要部署的机器。里面存放着哪些服务应该放到
 <span class=na>kube-node</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=修改请求地址>修改请求地址</h3>
-<ol>
+</div><h3 id=修改请求地址 class=headerLink>
+<a href=#%e4%bf%ae%e6%94%b9%e8%af%b7%e6%b1%82%e5%9c%b0%e5%9d%80 class=header-mark></a>修改请求地址</h3><ol>
 <li><strong>为什么要修改地址呢？</strong><br>
 因为<code>kube_image_repo</code>和<code>gcr_image_repo</code>在国内是无法访问的！可能是因为下载量太大的原因，就连azure也只能在azure内部使用(外部访问403)!!!</li>
 <li><strong>为什么要修改<code>docker_image_repo</code>和<code>quay_image_repo</code>呢？</strong><br>
@@ -300,8 +301,8 @@ hosts其实就是需要部署的机器。里面存放着哪些服务应该放到
 </span><span class=w></span><span class=nt>quay_image_repo</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;quay.mirrors.ustc.edu.cn&#34;</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
-</div><h2 id=部署>部署</h2>
-<p>如果你使用的配置和我一样，那么应该是可以直接运行部署。</p>
+</div><h2 id=部署 class=headerLink>
+<a href=#%e9%83%a8%e7%bd%b2 class=header-mark></a>部署</h2><p>如果你使用的配置和我一样，那么应该是可以直接运行部署。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -328,9 +329,9 @@ kubectl get deployments
 kubectl get pods
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=镜像问题处理>镜像问题处理</h2>
-<h3 id=具体操作>具体操作</h3>
-<p><code>registry.cn-shanghai.aliyuncs.com/kentxxq</code>的含义解析。</p>
+</div><h2 id=镜像问题处理 class=headerLink>
+<a href=#%e9%95%9c%e5%83%8f%e9%97%ae%e9%a2%98%e5%a4%84%e7%90%86 class=header-mark></a>镜像问题处理</h2><h3 id=具体操作 class=headerLink>
+<a href=#%e5%85%b7%e4%bd%93%e6%93%8d%e4%bd%9c class=header-mark></a>具体操作</h3><p><code>registry.cn-shanghai.aliyuncs.com/kentxxq</code>的含义解析。</p>
 <ol>
 <li><code>registry.cn-shanghai.aliyuncs.com</code>说明我使用了阿里云的镜像服务，而且地区是上海</li>
 <li><code>kentxxq</code>代表的是我的命名空间</li>
@@ -352,8 +353,8 @@ kubectl get pods
 <li>找到仓库的公开地址，参照修改ansible脚本
 <img class=lazyload data-src=/images/server/%e9%95%9c%e5%83%8f%e4%bb%93%e5%ba%93%e7%bb%86%e8%8a%824.png data-srcset="/images/server/%e9%95%9c%e5%83%8f%e4%bb%93%e5%ba%93%e7%bb%86%e8%8a%824.png, /images/server/%e9%95%9c%e5%83%8f%e4%bb%93%e5%ba%93%e7%bb%86%e8%8a%824.png 1.5x, /images/server/%e9%95%9c%e5%83%8f%e4%bb%93%e5%ba%93%e7%bb%86%e8%8a%824.png 2x" data-sizes=auto alt=/images/server/镜像仓库细节4.png title=镜像仓库细节4></li>
 </ol>
-<h3 id=gcr镜像仓库列表>gcr镜像仓库列表</h3>
-<div class=highlight><div class=chroma>
+<h3 id=gcr镜像仓库列表 class=headerLink>
+<a href=#gcr%e9%95%9c%e5%83%8f%e4%bb%93%e5%ba%93%e5%88%97%e8%a1%a8 class=header-mark></a>gcr镜像仓库列表</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -375,8 +376,8 @@ kubectl get pods
 </span><span class=w></span><span class=l>registry.cn-shanghai.aliyuncs.com/kentxxq/pause                                   3.2</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
-</div><h2 id=总结>总结</h2>
-<p>真是无法理解为什么一些镜像不能放到dockerhub里，而要指定位置去拉取？<br>
+</div><h2 id=总结 class=headerLink>
+<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>真是无法理解为什么一些镜像不能放到dockerhub里，而要指定位置去拉取？<br>
 从中获得的价值，比起使用的便利性来说，真的那么重要吗？</p>
 <p>这一片文章，希望能帮助到大家吧。</p>
 </div>
@@ -415,8 +416,6 @@ kubectl get pods
 <i class="fas fa-comment fa-fw"></i>
 </a>
 </div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/katex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/katex.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/copy-tex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript></div>
+<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
 </body>
 </html>

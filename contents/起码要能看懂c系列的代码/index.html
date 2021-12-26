@@ -18,7 +18,8 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E8%B5%B7%E7%A0%81%E8%A6%81%E8%83%BD%E7%9C%8B%E6%87%82c%E7%B3%BB%E5%88%97%E7%9A%84%E4%BB%A3%E7%A0%81/><link rel=prev href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/><link rel=next href=https://kentxxq.com/contents/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"起码要能看懂c系列的代码","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E8%B5%B7%E7%A0%81%E8%A6%81%E8%83%BD%E7%9C%8B%E6%87%82c%E7%B3%BB%E5%88%97%E7%9A%84%E4%BB%A3%E7%A0%81\/"},"genre":"posts","keywords":"c","wordcount":7893,"url":"https:\/\/kentxxq.com\/contents\/%E8%B5%B7%E7%A0%81%E8%A6%81%E8%83%BD%E7%9C%8B%E6%87%82c%E7%B3%BB%E5%88%97%E7%9A%84%E4%BB%A3%E7%A0%81\/","datePublished":"2019-08-29T11:35:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"之前在一些文章里面就有说过。程序员是绕不过JavaScript的，即使有时候会恶心到人。。而很多硬件的嵌入式开发，算法工程师，底层开发人员则真的可以做一辈子，而免疫JavaScript的侵扰。而JavaScript的每一个改动，都多多少少与c/c++有关。可以说大神们用c/c++构建了现在数字化的底层逻辑。比c更底层的，晦涩难懂且开发效率低下，甚至人写的代码经常不如c编译器优化后的代码。比c高级的，性能下降且概念繁多。和c同级别的，都没有c混得好。c是事实标准"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"起码要能看懂c系列的代码","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E8%B5%B7%E7%A0%81%E8%A6%81%E8%83%BD%E7%9C%8B%E6%87%82c%E7%B3%BB%E5%88%97%E7%9A%84%E4%BB%A3%E7%A0%81\/"},"genre":"posts","keywords":"c","wordcount":7911,"url":"https:\/\/kentxxq.com\/contents\/%E8%B5%B7%E7%A0%81%E8%A6%81%E8%83%BD%E7%9C%8B%E6%87%82c%E7%B3%BB%E5%88%97%E7%9A%84%E4%BB%A3%E7%A0%81\/","datePublished":"2019-08-29T11:35:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"之前在一些文章里面就有说过。程序员是绕不过JavaScript的，即使有时候会恶心到人。。而很多硬件的嵌入式开发，算法工程师，底层开发人员则真的可以做一辈子，而免疫JavaScript的侵扰。而JavaScript的每一个改动，都多多少少与c/c++有关。可以说大神们用c/c++构建了现在数字化的底层逻辑。比c更底层的，晦涩难懂且开发效率低下，甚至人写的代码经常不如c编译器优化后的代码。比c高级的，性能下降且概念繁多。和c同级别的，都没有c混得好。c是事实标准"}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -83,19 +84,7 @@
 <main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">起码要能看懂c系列的代码</h1><div class=post-meta>
-<div class=post-meta-line>
-<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-08-29>2019-08-29</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7893 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 16 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
 <li><a href=#前言>前言</a></li>
 <li><a href=#基本了解>基本了解</a>
@@ -133,17 +122,29 @@
 <li><a href=#总结>总结</a></li>
 </ul>
 </nav></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">起码要能看懂c系列的代码</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-08-29>2019-08-29</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7911 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 16 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static></div>
 </div><div class=content id=content><blockquote>
 <p>之前在一些文章里面就有说过。程序员是绕不过JavaScript的，即使有时候会恶心到人。。</p>
 <p>而很多硬件的嵌入式开发，算法工程师，底层开发人员则真的可以做一辈子，而免疫JavaScript的侵扰。而JavaScript的每一个改动，都多多少少与c/c++有关。</p>
 <p>可以说大神们用c/c++构建了现在数字化的底层逻辑。比c更底层的，晦涩难懂且开发效率低下，甚至人写的代码经常不如c编译器优化后的代码。比c高级的，性能下降概念繁多。和c同级别的，都没有c混得好。事实上c是事实标准。</p>
 </blockquote>
-<h2 id=前言>前言</h2>
-<p>如果你从来没有了解过编程，而想学习c。那么去搜新手教程慢慢上手。</p>
+<h2 id=前言 class=headerLink>
+<a href=#%e5%89%8d%e8%a8%80 class=header-mark></a>前言</h2><p>如果你从来没有了解过编程，而想学习c。那么去搜新手教程慢慢上手。</p>
 <p>如果你有其他编程的基础。这篇文章能用来让你快速了解c代码。可以在你不得不去看c代码的时候，看懂他的意图。</p>
-<h2 id=基本了解>基本了解</h2>
-<h3 id=类型>类型</h3>
-<p>二进制的c表达，需要用代码实现</p>
+<h2 id=基本了解 class=headerLink>
+<a href=#%e5%9f%ba%e6%9c%ac%e4%ba%86%e8%a7%a3 class=header-mark></a>基本了解</h2><h3 id=类型 class=headerLink>
+<a href=#%e7%b1%bb%e5%9e%8b class=header-mark></a>类型</h3><p>二进制的c表达，需要用代码实现</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -238,16 +239,16 @@
 <li><code>strcmp</code>比较</li>
 <li><code>strlen</code>拿到字符串长度</li>
 </ol>
-<h3 id=函数部分>函数部分</h3>
-<ol>
+<h3 id=函数部分 class=headerLink>
+<a href=#%e5%87%bd%e6%95%b0%e9%83%a8%e5%88%86 class=header-mark></a>函数部分</h3><ol>
 <li>函数其实没什么好说的。记得除了库函数(自带标准库),都要定义一下。才能用。</li>
 <li>全局变量默认在静态存储区。</li>
 <li>加了<code>static</code>的局部变量也在静态存储区。</li>
 <li><code>register</code>的变量会放在寄存器，会提高性能。</li>
 <li>外部变量用<code>extern</code>声明，则可以在代码中使用。</li>
 </ol>
-<h3 id=预处理命令>预处理命令</h3>
-<ol>
+<h3 id=预处理命令 class=headerLink>
+<a href=#%e9%a2%84%e5%a4%84%e7%90%86%e5%91%bd%e4%bb%a4 class=header-mark></a>预处理命令</h3><ol>
 <li><code>#define PI 3.1415</code>用PI替代代码中的3.1415。<code>#undef PI</code>取消。</li>
 </ol>
 <div class=highlight><div class=chroma>
@@ -268,8 +269,8 @@
 <li><code>#include "stdio.h"</code>引入头文件。一般都用双引号先从当前目录查找。</li>
 <li><code>#ifdef #else #endif</code>用来判断执行。<code>#if</code>则非0则为true。</li>
 </ol>
-<h3 id=指针>指针</h3>
-<p>示例代码</p>
+<h3 id=指针 class=headerLink>
+<a href=#%e6%8c%87%e9%92%88 class=header-mark></a>指针</h3><p>示例代码</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -342,8 +343,8 @@
 </tbody>
 </table>
 <p>优先级为：()>[]>*。然后从左往右看。</p>
-<h3 id=结构体>结构体</h3>
-<p>如果你理解了前面所说的指针，那么指针就会很好理解。其实就是一系列的基本类型放在一个连续的内存段中。</p>
+<h3 id=结构体 class=headerLink>
+<a href=#%e7%bb%93%e6%9e%84%e4%bd%93 class=header-mark></a>结构体</h3><p>如果你理解了前面所说的指针，那么指针就会很好理解。其实就是一系列的基本类型放在一个连续的内存段中。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -416,8 +417,8 @@
 数组类似普通数组:boy[i].num
 指针:struct human *ph
 指针取值:ph->num或(*ph).num</p>
-<h3 id=动态分配>动态分配</h3>
-<p>很多时候不确定需要多大空间的时候，通过传参来实现。</p>
+<h3 id=动态分配 class=headerLink>
+<a href=#%e5%8a%a8%e6%80%81%e5%88%86%e9%85%8d class=header-mark></a>动态分配</h3><p>很多时候不确定需要多大空间的时候，通过传参来实现。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -438,8 +439,8 @@
 <span class=n>free</span><span class=p>(</span><span class=n>ps</span><span class=p>);</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=typedef>typedef</h3>
-<p>用typedef加在struct前面，变量名写HUMAN，就可以用HUMAN h1,h2来声明变量了！简洁明了。</p>
+</div><h3 id=typedef class=headerLink>
+<a href=#typedef class=header-mark></a>typedef</h3><p>用typedef加在struct前面，变量名写HUMAN，就可以用HUMAN h1,h2来声明变量了！简洁明了。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -460,10 +461,10 @@
 </span><span class=c1></span><span class=kt>char</span> <span class=n>a1</span><span class=p>[</span><span class=mi>20</span><span class=p>],</span><span class=n>a2</span><span class=p>[</span><span class=mi>20</span><span class=p>],</span><span class=n>s1</span><span class=p>[</span><span class=mi>20</span><span class=p>],</span><span class=n>s2</span><span class=p>[</span><span class=mi>20</span><span class=p>]</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=位运算>位运算</h3>
-<p>位运算方面其实和其他语言的区别不大。看到应用最多的地方是权限方面的。自己对着文档看吧。我反正是觉得不好理解，不爱用。</p>
-<h3 id=文件操作>文件操作</h3>
-<p>其实到了文件操作部分，就开始用前面学到的知识来进行延伸了。</p>
+</div><h3 id=位运算 class=headerLink>
+<a href=#%e4%bd%8d%e8%bf%90%e7%ae%97 class=header-mark></a>位运算</h3><p>位运算方面其实和其他语言的区别不大。看到应用最多的地方是权限方面的。自己对着文档看吧。我反正是觉得不好理解，不爱用。</p>
+<h3 id=文件操作 class=headerLink>
+<a href=#%e6%96%87%e4%bb%b6%e6%93%8d%e4%bd%9c class=header-mark></a>文件操作</h3><p>其实到了文件操作部分，就开始用前面学到的知识来进行延伸了。</p>
 <ul>
 <li><code>File *fp;</code>声明一个指针变量，文件类型。这并不是一个特殊的语法。我的mac上可以看到定义，是一个结构体。</li>
 </ul>
@@ -573,20 +574,20 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 <p><strong>最后说明</strong>EOF是一个隐藏字符。在读取完了数据以后，才会遇到EOF。</p>
 <p>而feof()是通过返回错误来判断是否结束。所以需要先取值，后判断。遇到了EOF(即-1)就会出错。停止下一个循环。</p>
 <p>0是false，非0位true。</p>
-<h2 id=编译>编译</h2>
-<p>简单来说，编译就是使用<code>gcc</code>,<code>make</code>,<code>cmake</code>等工具来进行的。</p>
+<h2 id=编译 class=headerLink>
+<a href=#%e7%bc%96%e8%af%91 class=header-mark></a>编译</h2><p>简单来说，编译就是使用<code>gcc</code>,<code>make</code>,<code>cmake</code>等工具来进行的。</p>
 <p>如果使用vs或者clion这样的工具，需要了解的是工具的使用方法。而下面我要简单说明的是手工编译。</p>
 <ol>
 <li>在项目目录下新建build文件夹。</li>
 <li>进入build文件夹使用<code>cmake ..</code>生成Makefile</li>
 <li>运行make命令编译成功，找到输出文件即可。</li>
 </ol>
-<h3 id=linux>linux</h3>
-<p>我在centos7上运行<code>gcc</code>,<code>make</code>,<code>cmake</code>都可以正常使用。</p>
-<h3 id=mac>mac</h3>
-<p>用brew安装cmake后，也可以跑通。</p>
-<h3 id=windows>windows</h3>
-<p>我是用的<a href=https://scoop.sh/ target=_blank rel="noopener noreffer">scoop</a>安装cmake。</p>
+<h3 id=linux class=headerLink>
+<a href=#linux class=header-mark></a>linux</h3><p>我在centos7上运行<code>gcc</code>,<code>make</code>,<code>cmake</code>都可以正常使用。</p>
+<h3 id=mac class=headerLink>
+<a href=#mac class=header-mark></a>mac</h3><p>用brew安装cmake后，也可以跑通。</p>
+<h3 id=windows class=headerLink>
+<a href=#windows class=header-mark></a>windows</h3><p>我是用的<a href=https://scoop.sh/ target=_blank rel="noopener noreffer">scoop</a>安装cmake。</p>
 <p>然后安装最新的vs。下载<code>mingw-get</code>，然后安装<code>mingw32-make</code>。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -597,18 +598,18 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 </code></pre></td></tr></table>
 </div>
 </div><p>看到了Makefile后mingw32-make即可。</p>
-<h2 id=难点>难点</h2>
-<p>记录一下难以理解的地方。</p>
-<h3 id=指针数组和数组指针>指针数组和数组指针</h3>
-<p>在看书的时候，了解到main函数可以接受2个参数。而main函数不能被其他函数调用(有一些编译器不管你这么多，也能编译通过。但是制定标准的委员会明确表明了<strong>不行</strong>)。</p>
+<h2 id=难点 class=headerLink>
+<a href=#%e9%9a%be%e7%82%b9 class=header-mark></a>难点</h2><p>记录一下难以理解的地方。</p>
+<h3 id=指针数组和数组指针 class=headerLink>
+<a href=#%e6%8c%87%e9%92%88%e6%95%b0%e7%bb%84%e5%92%8c%e6%95%b0%e7%bb%84%e6%8c%87%e9%92%88 class=header-mark></a>指针数组和数组指针</h3><p>在看书的时候，了解到main函数可以接受2个参数。而main函数不能被其他函数调用(有一些编译器不管你这么多，也能编译通过。但是制定标准的委员会明确表明了<strong>不行</strong>)。</p>
 <p><code>int argc</code>代表单数的个数。包括程序自己本身。</p>
 <p><code>char *argv[]</code>代表一个指向字符串的指针数组。</p>
 <p>先说一下我之前的<strong>错误想法</strong>吧。</p>
 <p>一个指针数组。那么我拿到的就是一个数组。</p>
 <p>那么我应该先用<code>argv[i]</code>拿到数组中的第i个指针。然后如何取值呢？用<code>*(argv[i])</code>取第一个值。可是报错了。</p>
 <p>那么我的理解错误在哪呢？下面用<code>./helloworld a=1</code>来举例。</p>
-<h3 id=第一点c中没有字符串类型字符串是由字符数组组成以0结尾字符串又有2个声明的方式>第一点，c中没有字符串类型。字符串是由字符数组组成，以\0结尾。字符串又有2个声明的方式。</h3>
-<div class=highlight><div class=chroma>
+<h3 id=第一点c中没有字符串类型字符串是由字符数组组成以0结尾字符串又有2个声明的方式 class=headerLink>
+<a href=#%e7%ac%ac%e4%b8%80%e7%82%b9c%e4%b8%ad%e6%b2%a1%e6%9c%89%e5%ad%97%e7%ac%a6%e4%b8%b2%e7%b1%bb%e5%9e%8b%e5%ad%97%e7%ac%a6%e4%b8%b2%e6%98%af%e7%94%b1%e5%ad%97%e7%ac%a6%e6%95%b0%e7%bb%84%e7%bb%84%e6%88%90%e4%bb%a50%e7%bb%93%e5%b0%be%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%8f%88%e6%9c%892%e4%b8%aa%e5%a3%b0%e6%98%8e%e7%9a%84%e6%96%b9%e5%bc%8f class=header-mark></a>第一点，c中没有字符串类型。字符串是由字符数组组成，以\0结尾。字符串又有2个声明的方式。</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -626,8 +627,8 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 <p>在c语言中，指向字符和指向字符串的区别只是在于取值，根本就没有指向字符串的指针。从字符串(字符数组)的首地址开始取值，一直到\0结束，那么这个字符串就读完了。</p>
 <p>于是根据例子，系统传递给main函数的就是2个字符数组。也就变成了传递1个包含有2个char*类型指针的指针数组即可。取第n个值，就从数组中第n个指针所指向的地址取值到\0即可。</p>
 <p>所以<code>printf("%s",*a)</code>中。*a取到的值&rsquo;h'。而printf中指明了要取一个字符串。所以它打印的结果会一直读到\0才会停止。</p>
-<h3 id=第二点要彻底了解的是数组作为参数的传递>第二点，要彻底了解的是<strong>数组作为参数的传递</strong>。</h3>
-<ol>
+<h3 id=第二点要彻底了解的是数组作为参数的传递 class=headerLink>
+<a href=#%e7%ac%ac%e4%ba%8c%e7%82%b9%e8%a6%81%e5%bd%bb%e5%ba%95%e4%ba%86%e8%a7%a3%e7%9a%84%e6%98%af%e6%95%b0%e7%bb%84%e4%bd%9c%e4%b8%ba%e5%8f%82%e6%95%b0%e7%9a%84%e4%bc%a0%e9%80%92 class=header-mark></a>第二点，要彻底了解的是<strong>数组作为参数的传递</strong>。</h3><ol>
 <li>我的main会得到一个长度为2的数组。如果用户还输入了b=2，c=3呢？我的的程序是无法预测到用户参数的具体个数。所以main函数无法写死数组长度，所以还会有一个<code>int argc</code>参数告诉我才行。</li>
 <li>数组在传递的时候，传递的只是首地址。用一小段代码来理解一下发生了什么。</li>
 </ol>
@@ -751,15 +752,15 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 <span class=c1>// 说明要分情况的，char **qt不等同于char *qt[]
 </span></code></pre></td></tr></table>
 </div>
-</div><h3 id=第三点再来说一下我自己理解错误>第三点，再来说一下我自己理解错误。</h3>
-<p>由于之前所接触到的语言，基本的逻辑都是面向对象且没有指针。都是值传递，而不是地址传递。</p>
+</div><h3 id=第三点再来说一下我自己理解错误 class=headerLink>
+<a href=#%e7%ac%ac%e4%b8%89%e7%82%b9%e5%86%8d%e6%9d%a5%e8%af%b4%e4%b8%80%e4%b8%8b%e6%88%91%e8%87%aa%e5%b7%b1%e7%90%86%e8%a7%a3%e9%94%99%e8%af%af class=header-mark></a>第三点，再来说一下我自己理解错误。</h3><p>由于之前所接触到的语言，基本的逻辑都是面向对象且没有指针。都是值传递，而不是地址传递。</p>
 <p>写过一篇go语言的文章，可我没有深入了解过它的指针。经过翻查，发现go在数组传递的时候也是值传递。在go中，指针是为了减少性能开销存在的。而很少见到有人做指针运算。</p>
 <p>而c的指针贯穿了整个语言。在进行值传递的时候，形参可以拿到所有信息，因为要进行赋值操作。值传递会让变量名直接取到值。</p>
 <p>而地址传递只有一个地址和类型，需要用到取值符*。且在一个指针指向数组的时候*p和p[0]等价。</p>
 <p>只有搞清楚传递的过程中是值还是地址，才能正确的分析问题。</p>
-<h3 id=文件读取>文件读取</h3>
-<h3 id=代码示例>代码示例</h3>
-<div class=highlight><div class=chroma>
+<h3 id=文件读取 class=headerLink>
+<a href=#%e6%96%87%e4%bb%b6%e8%af%bb%e5%8f%96 class=header-mark></a>文件读取</h3><h3 id=代码示例 class=headerLink>
+<a href=#%e4%bb%a3%e7%a0%81%e7%a4%ba%e4%be%8b class=header-mark></a>代码示例</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -851,8 +852,8 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 <span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=eof和feof>EOF和feof</h3>
-<p>EOF和foef什么时候用呢？</p>
+</div><h3 id=eof和feof class=headerLink>
+<a href=#eof%e5%92%8cfeof class=header-mark></a>EOF和feof</h3><p>EOF和foef什么时候用呢？</p>
 <p>EOF主要用于文本文件进行判断结尾。不适合或者说不适用于读取二进制文件。</p>
 <p>foef则都可以使用。</p>
 <p><strong>那么我到底应该怎么读取文件呢？</strong></p>
@@ -907,8 +908,8 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 <span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=静态库和动态库>静态库和动态库</h3>
-<p>其实我来学c相关的知识，最大的动力就是性能以及c/c++有很多的轮子。而我爱用Python，它与c结合非常紧密。</p>
+</div><h3 id=静态库和动态库 class=headerLink>
+<a href=#%e9%9d%99%e6%80%81%e5%ba%93%e5%92%8c%e5%8a%a8%e6%80%81%e5%ba%93 class=header-mark></a>静态库和动态库</h3><p>其实我来学c相关的知识，最大的动力就是性能以及c/c++有很多的轮子。而我爱用Python，它与c结合非常紧密。</p>
 <p><code>静态库</code>编译完成以后就不需要lib和头文件了，所以是打包到了一起。不方便增量更新、且编译速度会慢一些。</p>
 <p><code>动态库</code>编译完成以后其实还是需要从指定的路径取引用库文件。二进制分发的你在通过包管理工具安装以后(例如sqlite)会在系统的include和lib之类的文件夹存放。源码则可以你自己通过编译放在系统或者自己指定的文件夹内。只要能引用到就好了。</p>
 <p>windows下的静态库为<code>.lib</code>文件。如果需要使用它，就包含它的头文件。然后<code>#pragma comment(lib,"xxx.lib")</code>即可直接通过函数名调用。打包后的文件不再lib静态库。这是标准做法。</p>
@@ -933,8 +934,8 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 <li>有源码就下载下来，编译以后你用静态库或者动态库的方式都取决于你。</li>
 <li>别人通过二进制分发(注意选择对应平台的包)，除了dll也都会提供.h的头文件。如果只有一个dll呢？那你就对着文档写就一个头文件或者函数指针用。头文件其实和typedef函数指针的目的是一样的，让c/c++的代码能获取到函数的相关信息，从而正确编译。因此调用dll不用包含头文件也是可以的。只是如果别人做好了库给你用，肯定也会提供给你这个库的调用方法，不提供h头文件是他懒！</li>
 </ol>
-<h2 id=总结>总结</h2>
-<p>在写这篇文章之前。好久没有写博客了。。偶尔更新一些影片记录而已。</p>
+<h2 id=总结 class=headerLink>
+<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>在写这篇文章之前。好久没有写博客了。。偶尔更新一些影片记录而已。</p>
 <p>最近也弄了一个域名邮箱，把联系地址改成了邮箱地址。</p>
 <p>我大概看了1个月的c相关的东西。。才写完这点点东西。过程感觉还是很痛苦的，c语言很简单，但是经常会涉及到系统、编译、环境、调试方面的问题。但是写完以后觉得豁然开朗。对以后的编码也有了更加清晰的理解。</p>
 <p>不得不说一句，微软的文档是真的强。。我正在准备彻底抛弃苹果，面向微软。。如果你看不懂这篇文章，取参考微软的文档。毕竟那是windows的标准文档啊，绝不会错！</p>
@@ -974,8 +975,6 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 <i class="fas fa-comment fa-fw"></i>
 </a>
 </div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/katex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/katex.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/copy-tex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript></div>
+<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
 </body>
 </html>

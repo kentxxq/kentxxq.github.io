@@ -18,7 +18,8 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/mysql%E9%A6%96%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/><link rel=prev href=https://kentxxq.com/contents/yum%E7%9A%84%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BD%BF%E7%94%A8/><link rel=next href=https://kentxxq.com/contents/mysql%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E4%BB%A5%E5%8F%8A%E5%91%BD%E4%BB%A4/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"mysql首次使用出现的问题","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/mysql%E9%A6%96%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98\/"},"genre":"posts","keywords":"mysql","wordcount":407,"url":"https:\/\/kentxxq.com\/contents\/mysql%E9%A6%96%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98\/","datePublished":"1993-07-06T00:00:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"mysql首次使用出现的问题"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"mysql首次使用出现的问题","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/mysql%E9%A6%96%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98\/"},"genre":"posts","keywords":"mysql","wordcount":407,"url":"https:\/\/kentxxq.com\/contents\/mysql%E9%A6%96%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98\/","datePublished":"1993-07-06T00:00:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"mysql首次使用出现的问题"}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -83,19 +84,7 @@
 <main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">mysql首次使用出现的问题</h1><div class=post-meta>
-<div class=post-meta-line>
-<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=1993-07-06>1993-07-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 407 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
 <li><a href=#关于中文问题>关于中文问题</a></li>
 <li><a href=#关于mysql引擎问题>关于mysql引擎问题</a></li>
@@ -107,13 +96,25 @@
 </li>
 </ul>
 </nav></div>
-</div><div class=content id=content><h2 id=关于中文问题>关于中文问题</h2>
-<ol>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">mysql首次使用出现的问题</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=1993-07-06>1993-07-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 407 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static></div>
+</div><div class=content id=content><h2 id=关于中文问题 class=headerLink>
+<a href=#%e5%85%b3%e4%ba%8e%e4%b8%ad%e6%96%87%e9%97%ae%e9%a2%98 class=header-mark></a>关于中文问题</h2><ol>
 <li>默认安装后的sys库不进行修改</li>
 <li>在新建数据库时,进行数据库字符集的设置,推荐utf8</li>
 </ol>
-<h2 id=关于mysql引擎问题>关于mysql引擎问题</h2>
-<ol>
+<h2 id=关于mysql引擎问题 class=headerLink>
+<a href=#%e5%85%b3%e4%ba%8emysql%e5%bc%95%e6%93%8e%e9%97%ae%e9%a2%98 class=header-mark></a>关于mysql引擎问题</h2><ol>
 <li>普遍使用innodb、myisam两种。前者支持事务、后者有更快的查询速度和索引</li>
 <li>在建表后加<strong>engine=utf8</strong></li>
 <li>查看当前支持的mysql引擎</li>
@@ -126,8 +127,8 @@
 <pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>show</span><span class=w> </span><span class=n>engines</span><span class=w>
 </span></code></pre></td></tr></table>
 </div>
-</div><h2 id=查看mysql安装后的初始密码>查看mysql安装后的初始密码</h2>
-<div class=highlight><div class=chroma>
+</div><h2 id=查看mysql安装后的初始密码 class=headerLink>
+<a href=#%e6%9f%a5%e7%9c%8bmysql%e5%ae%89%e8%a3%85%e5%90%8e%e7%9a%84%e5%88%9d%e5%a7%8b%e5%af%86%e7%a0%81 class=header-mark></a>查看mysql安装后的初始密码</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
@@ -135,8 +136,8 @@
 <pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>grep <span class=s1>&#39;temporary password&#39;</span> /var/log/mysqld.log
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=让指定用户可以进行远程连接>让指定用户可以进行远程连接</h2>
-<div class=highlight><div class=chroma>
+</div><h2 id=让指定用户可以进行远程连接 class=headerLink>
+<a href=#%e8%ae%a9%e6%8c%87%e5%ae%9a%e7%94%a8%e6%88%b7%e5%8f%af%e4%bb%a5%e8%bf%9b%e8%a1%8c%e8%bf%9c%e7%a8%8b%e8%bf%9e%e6%8e%a5 class=header-mark></a>让指定用户可以进行远程连接</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -194,8 +195,8 @@ Query OK, <span class=m>0</span> rows affected <span class=o>(</span>0.00 sec<sp
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=如果还是有登陆问题>如果还是有登陆问题</h3>
-<div class=highlight><div class=chroma>
+</div><h3 id=如果还是有登陆问题 class=headerLink>
+<a href=#%e5%a6%82%e6%9e%9c%e8%bf%98%e6%98%af%e6%9c%89%e7%99%bb%e9%99%86%e9%97%ae%e9%a2%98 class=header-mark></a>如果还是有登陆问题</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -281,8 +282,6 @@ flask-sqlacodegen  --flask mysql+pymysql://root:<span class=s1>&#39;password&#39
 <i class="fas fa-comment fa-fw"></i>
 </a>
 </div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript src=/lib/twemoji/twemoji.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/katex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/katex.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/katex/copy-tex.min.css>
-<noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript></div>
+<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
 </body>
 </html>
