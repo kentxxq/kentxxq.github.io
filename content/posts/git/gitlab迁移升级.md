@@ -115,3 +115,5 @@ nginx['enable'] = false
 nginx方面的配置如下：
 1. nginx 把http代理到gitlab-80端口
 2. nginx 配置stream，把10222端口tcp代理到gitlab-22端口
+
+PS:nginx默认没有编译tcp代理模块，需要手动编译。参考我的[nginx编译](https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/)即可
