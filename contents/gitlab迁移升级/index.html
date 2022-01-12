@@ -1,0 +1,303 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<title class=pjax-title>gitlab-迁移-升级-代理 - kentxxq Blog</title><meta name=Description content="最开始只是使用gitlab作为仓库存储，随着cicd等功能的深入使用，需要对gitlab有更加细节的了解。因此开始记录gitlab相关的配置操作，方便后续的运维操作"><meta property="og:title" content="gitlab-迁移-升级-代理">
+<meta property="og:description" content="最开始只是使用gitlab作为仓库存储，随着cicd等功能的深入使用，需要对gitlab有更加细节的了解。因此开始记录gitlab相关的配置操作，方便后续的运维操作">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-01-12T10:56:00+08:00">
+<meta property="article:modified_time" content="2022-01-12T11:38:34+08:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="gitlab-迁移-升级-代理">
+<meta name=twitter:description content="最开始只是使用gitlab作为仓库存储，随着cicd等功能的深入使用，需要对gitlab有更加细节的了解。因此开始记录gitlab相关的配置操作，方便后续的运维操作">
+<meta name=application-name content="kentxxq">
+<meta name=apple-mobile-web-app-title content="kentxxq">
+<meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/><link rel=prev href=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"gitlab-迁移-升级-代理","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7\/"},"genre":"posts","keywords":"gitlab","wordcount":1130,"url":"https:\/\/kentxxq.com\/contents\/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7\/","datePublished":"2022-01-12T10:56:00+08:00","dateModified":"2022-01-12T11:38:34+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"最开始只是使用gitlab作为仓库存储，随着cicd等功能的深入使用，需要对gitlab有更加细节的了解。因此开始记录gitlab相关的配置操作，方便后续的运维操作"}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
+<div id=back-to-top></div>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="kentxxq Blog">kentxxq Blog</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Blog </a><a class=menu-item href=/categories/> Categories </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/about/> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=# onclick=return!1 class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="kentxxq Blog">kentxxq Blog</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=# onclick=return!1 class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#相关>相关</a></li>
+</ul>
+</li>
+<li><a href=#相关操作>相关操作</a>
+<ul>
+<li><a href=#备份>备份</a></li>
+<li><a href=#恢复>恢复</a></li>
+<li><a href=#升级>升级</a></li>
+</ul>
+</li>
+<li><a href=#nginx代理内网gitlab>nginx代理内网gitlab</a></li>
+</ul>
+</nav></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">gitlab-迁移-升级-代理</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-12>2022-01-12</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-12>2022-01-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1130 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static></div>
+</div><div class=content id=content><blockquote>
+<p>最开始只是使用gitlab作为仓库存储，随着cicd等功能的深入使用，需要对gitlab有更加细节的了解。因此开始记录gitlab相关的配置操作，方便后续的运维操作。</p>
+</blockquote>
+<h3 id=相关 class=headerLink>
+<a href=#%e7%9b%b8%e5%85%b3 class=header-mark></a>相关</h3><p>要对gitlab进行操作，最好还是看官方文档为主。可以用网上的其他博主资料作参考，用于快速定位配置项。</p>
+<ol>
+<li><a href=https://docs.gitlab.com/ee/update/index.html target=_blank rel="noopener noreffer">gitlab升级路线文档</a></li>
+<li><a href=https://docs.gitlab.com/ee/raketasks/backup_restore.htm target=_blank rel="noopener noreffer">gitlab备份恢复文档</a></li>
+<li><a href=https://hub.docker.com/r/gitlab/gitlab-ce/tags target=_blank rel="noopener noreffer">gitlab相关版本搜索</a></li>
+</ol>
+<h2 id=相关操作 class=headerLink>
+<a href=#%e7%9b%b8%e5%85%b3%e6%93%8d%e4%bd%9c class=header-mark></a>相关操作</h2><h3 id=备份 class=headerLink>
+<a href=#%e5%a4%87%e4%bb%bd class=header-mark></a>备份</h3><ol>
+<li><code>gitlab-backup create</code>：大概观察一下备份结果。备份文件xxx.tar.gz会放在数据目录的backups下。</li>
+<li>备份<code>gitlab.rb</code>、<code>gitlab-secrets.json</code></li>
+</ol>
+<h3 id=恢复 class=headerLink>
+<a href=#%e6%81%a2%e5%a4%8d class=header-mark></a>恢复</h3><p><strong>一定要与备份时候的gitlab版本号完全一致！！！</strong></p>
+<ol>
+<li>在新机器上起一个gitlab</li>
+<li>拷贝xxx.tar.gz文件到backups文件夹</li>
+<li><code>gitlab-ctl stop puma</code></li>
+<li><code>gitlab-ctl stop sidekiq</code></li>
+<li><code>gitlab-backup restore BACKUP=xxx</code>:这里xxx是代表备份的文件名</li>
+<li><code>gitlab-ctl stop</code>停止所有服务</li>
+<li>拷贝<code>gitlab.rb</code>、<code>gitlab-secrets.json</code>到config目录</li>
+<li><code>gitlab-ctl reconfigure</code></li>
+<li><code>gitlab-ctl restart</code></li>
+</ol>
+<h3 id=升级 class=headerLink>
+<a href=#%e5%8d%87%e7%ba%a7 class=header-mark></a>升级</h3><p>如果发现数据丢失的情况，肯定是没有按照官方文档的特定顺序操作！！</p>
+<p>升级路线参考</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># 从13.0.4开始升级，那么升级路线是</span>
+gitlab/gitlab-ce:13.0.14-ce.0
+gitlab/gitlab-ce:13.1.11-ce.0
+gitlab/gitlab-ce:13.8.8-ce.0
+gitlab/gitlab-ce:13.12.15-ce.0
+gitlab/gitlab-ce:14.0.12-ce.0
+gitlab/gitlab-ce:14.1.8-ce.0
+gitlab/gitlab-ce:14.6.1-ce.0
+
+<span class=c1># 启动命令</span>
+docker run <span class=se>\
+</span><span class=se></span>--privileged<span class=o>=</span><span class=nb>true</span> <span class=se>\
+</span><span class=se></span>--hostname xxx.kentxxq.com <span class=se>\
+</span><span class=se></span>--detach <span class=se>\
+</span><span class=se></span>--publish 80:80 <span class=se>\
+</span><span class=se></span>--publish 443:443 <span class=se>\
+</span><span class=se></span>--publish 222:22 <span class=se>\
+</span><span class=se></span>--name gitlab <span class=se>\
+</span><span class=se></span>--restart unless-stopped <span class=se>\
+</span><span class=se></span>--volume /home/gitlab/config:/etc/gitlab <span class=se>\
+</span><span class=se></span>--volume /home/gitlab/logs:/var/log/gitlab <span class=se>\
+</span><span class=se></span>--volume /home/gitlab/data:/var/opt/gitlab <span class=se>\
+</span><span class=se></span>gitlab/gitlab-ce:13.0.14-ce.0
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>新版容器启动</li>
+<li>exec进入容器gitlab-ctl stop停止容器</li>
+<li>stop容器</li>
+<li>rm容器</li>
+<li>循环第一步</li>
+</ol>
+<h2 id=nginx代理内网gitlab class=headerLink>
+<a href=#nginx%e4%bb%a3%e7%90%86%e5%86%85%e7%bd%91gitlab class=header-mark></a>nginx代理内网gitlab</h2><p><code>vim /etc/gitlab/gitlab.rb</code>编辑配置文件</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=c># 配置域名地址</span><span class=w>
+</span><span class=w></span><span class=l>external_url &#39;https://xxx.kentxxq.com&#39;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 配置 ssh 地址</span><span class=w>
+</span><span class=w></span><span class=l>gitlab_rails[&#39;gitlab_ssh_host&#39;] = &#39;xxx.kentxxq.com&#39;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Nginx 授信地址</span><span class=w>
+</span><span class=w></span><span class=l>gitlab_rails[&#39;trusted_proxies&#39;] = [&#39;nginx的ip地址&#39;]</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># SSH 端口</span><span class=w>
+</span><span class=w></span><span class=l>gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 10022</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 服务监听方式</span><span class=w>
+</span><span class=w></span><span class=l>gitlab_workhorse[&#39;listen_network&#39;] = &#34;tcp&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 服务监听地址</span><span class=w>
+</span><span class=w></span><span class=l>gitlab_workhorse[&#39;listen_addr&#39;] = &#34;0.0.0.0:80&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 禁用自带的 nginx</span><span class=w>
+</span><span class=w></span><span class=l>nginx[&#39;enable&#39;] = false</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><p><code>gitlab-ctl reconfigure && gitlab-ctl restart</code> 重新配置gitlab并启动，此时的端口情况如下：</p>
+<ol>
+<li>22端口：git-ssh方式拉取的端口</li>
+<li>10022端口：在gitlab上显示的git-ssh拉取端口</li>
+<li>80端口：关闭gitlab自带的nginx转发，直接把web界面设置到80端口上</li>
+</ol>
+<p>nginx方面的配置如下：</p>
+<ol>
+<li>nginx 把http代理到gitlab-80端口</li>
+<li>nginx 配置stream，把10222端口tcp代理到gitlab-22端口</li>
+</ol>
+</div>
+<div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 2022-01-12</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span><a href=# onclick=return!1 title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/ data-title=gitlab-迁移-升级-代理 data-hashtags=gitlab><i class="fab fa-twitter fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/ data-hashtag=gitlab><i class="fab fa-facebook-square fa-fw"></i></a><a href=# onclick=return!1 title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/ data-title=gitlab-迁移-升级-代理 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/ data-title=gitlab-迁移-升级-代理><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# onclick=return!1 title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/ data-title=gitlab-迁移-升级-代理><i class="fab fa-weibo fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/ data-title=gitlab-迁移-升级-代理 data-description=最开始只是使用gitlab作为仓库存储，随着cicd等功能的深入使用，需要对gitlab有更加细节的了解。因此开始记录gitlab相关的配置操作，方便后续的运维操作><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# onclick=return!1 title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/ data-title=gitlab-迁移-升级-代理 data-description=最开始只是使用gitlab作为仓库存储，随着cicd等功能的深入使用，需要对gitlab有更加细节的了解。因此开始记录gitlab相关的配置操作，方便后续的运维操作><i class="fab fa-blogger fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/ data-title=gitlab-迁移-升级-代理><i class="fab fa-evernote fa-fw"></i></a></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/gitlab/>gitlab</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ class=prev rel=prev title=网络命令行工具-ken><i class="fas fa-angle-left fa-fw"></i>网络命令行工具-ken</a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
+<span class=icp>湘ICP备2021002319号-1</span></div>
+</div><script>'serviceWorker'in navigator&&(navigator.serviceWorker.register('/sw.min.js',{scope:'/'}).then(function(a){}),navigator.serviceWorker.ready.then(function(a){}))</script></footer></div>
+<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
+<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
+</body>
+</html>
