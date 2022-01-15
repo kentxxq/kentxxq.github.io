@@ -133,7 +133,44 @@
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
 </div>
-<div class="details-content toc-content" id=toc-content-static></div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#前言>前言</a></li>
+<li><a href=#基本了解>基本了解</a>
+<ul>
+<li><a href=#类型>类型</a></li>
+<li><a href=#函数部分>函数部分</a></li>
+<li><a href=#预处理命令>预处理命令</a></li>
+<li><a href=#指针>指针</a></li>
+<li><a href=#结构体>结构体</a></li>
+<li><a href=#动态分配>动态分配</a></li>
+<li><a href=#typedef>typedef</a></li>
+<li><a href=#位运算>位运算</a></li>
+<li><a href=#文件操作>文件操作</a></li>
+</ul>
+</li>
+<li><a href=#编译>编译</a>
+<ul>
+<li><a href=#linux>linux</a></li>
+<li><a href=#mac>mac</a></li>
+<li><a href=#windows>windows</a></li>
+</ul>
+</li>
+<li><a href=#难点>难点</a>
+<ul>
+<li><a href=#指针数组和数组指针>指针数组和数组指针</a></li>
+<li><a href=#第一点c中没有字符串类型字符串是由字符数组组成以0结尾字符串又有2个声明的方式>第一点，c中没有字符串类型。字符串是由字符数组组成，以\0结尾。字符串又有2个声明的方式。</a></li>
+<li><a href=#第二点要彻底了解的是数组作为参数的传递>第二点，要彻底了解的是<strong>数组作为参数的传递</strong>。</a></li>
+<li><a href=#第三点再来说一下我自己理解错误>第三点，再来说一下我自己理解错误。</a></li>
+<li><a href=#文件读取>文件读取</a></li>
+<li><a href=#代码示例>代码示例</a></li>
+<li><a href=#eof和feof>EOF和feof</a></li>
+<li><a href=#静态库和动态库>静态库和动态库</a></li>
+</ul>
+</li>
+<li><a href=#总结>总结</a></li>
+</ul>
+</nav></div>
 </div><div class=content id=content><blockquote>
 <p>之前在一些文章里面就有说过。程序员是绕不过JavaScript的，即使有时候会恶心到人。。</p>
 <p>而很多硬件的嵌入式开发，算法工程师，底层开发人员则真的可以做一辈子，而免疫JavaScript的侵扰。而JavaScript的每一个改动，都多多少少与c/c++有关。</p>
@@ -968,6 +1005,9 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 </main><footer class=footer>
 <div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
 <span class=icp>湘ICP备2021002319号-1</span></div>
+<div class=footer-line></div>
+<div class=footer-line>
+</div>
 </div><script>'serviceWorker'in navigator&&(navigator.serviceWorker.register('/sw.min.js',{scope:'/'}).then(function(a){}),navigator.serviceWorker.ready.then(function(a){}))</script></footer></div>
 <div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>

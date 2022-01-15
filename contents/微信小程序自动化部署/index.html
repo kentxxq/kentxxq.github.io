@@ -116,7 +116,27 @@
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
 </div>
-<div class="details-content toc-content" id=toc-content-static></div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#基本环境介绍>基本环境介绍</a>
+<ul>
+<li><a href=#远程操控端ubuntu环境搭建>远程操控端Ubuntu环境搭建</a></li>
+<li><a href=#win10被控端环境搭建>win10被控端环境搭建</a></li>
+<li><a href=#在ansible脚本内配置变量>在ansible脚本内配置变量</a></li>
+</ul>
+</li>
+<li><a href=#具体流程>具体流程</a></li>
+<li><a href=#问题处理>问题处理</a>
+<ul>
+<li><a href=#npm-i的安装问题>npm i的安装问题</a></li>
+<li><a href=#mini-deploy的问题>mini-deploy的问题</a></li>
+<li><a href=#无法删除dist最终代码文件夹>无法删除dist，最终代码文件夹</a></li>
+<li><a href=#微信机器人base64的问题>微信机器人base64的问题</a></li>
+</ul>
+</li>
+<li><a href=#补充说明>补充说明</a></li>
+</ul>
+</nav></div>
 </div><div class=content id=content><blockquote>
 <p>公司先阶段使用的是通过ansible来进行多服务器的部署。而微信小程序开发者工具官方只放出来了windows和mac版本。</p>
 <p>macOS老早就听说虚拟机需要超高的配置，而且也会很卡。自己也没有操作过，对mac的虚拟机没什么兴趣。估计以后也用不大上。否则也不会有那么多人去用黑苹果了。</p>
@@ -319,6 +339,9 @@
 </main><footer class=footer>
 <div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
 <span class=icp>湘ICP备2021002319号-1</span></div>
+<div class=footer-line></div>
+<div class=footer-line>
+</div>
 </div><script>'serviceWorker'in navigator&&(navigator.serviceWorker.register('/sw.min.js',{scope:'/'}).then(function(a){}),navigator.serviceWorker.ready.then(function(a){}))</script></footer></div>
 <div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>

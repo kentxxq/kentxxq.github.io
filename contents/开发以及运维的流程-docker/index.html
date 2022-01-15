@@ -124,7 +124,35 @@
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
 </div>
-<div class="details-content toc-content" id=toc-content-static></div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#个人开发以及部署>个人开发以及部署</a></li>
+<li><a href=#从拿到centos服务器开始>从拿到centos服务器开始</a>
+<ul>
+<li><a href=#安装系统所需的repo>安装系统所需的repo</a></li>
+<li><a href=#配置我所需要用到的服务>配置我所需要用到的服务</a></li>
+<li><a href=#安装我所需要的工具>安装我所需要的工具</a></li>
+<li><a href=#可选操作>可选操作</a></li>
+</ul>
+</li>
+<li><a href=#开始部署自己的东西>开始部署自己的东西</a>
+<ul>
+<li><a href=#docker>docker</a></li>
+<li><a href=#mongodb>mongodb</a></li>
+<li><a href=#mysql>mysql</a></li>
+<li><a href=#nginx>nginx</a></li>
+<li><a href=#redis>redis</a></li>
+<li><a href=#个人部署脚本>个人部署脚本</a></li>
+</ul>
+</li>
+<li><a href=#webhook服务>webhook服务</a></li>
+<li><a href=#团队以及企业开发上云k8s>团队以及企业开发(上云k8s)</a>
+<ul>
+<li><a href=#理清楚几个概念>理清楚几个概念</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
 </div><div class=content id=content><blockquote>
 <p>开发以及运维的流程-docker</p>
 </blockquote>
@@ -661,6 +689,9 @@ sudo docker run -p 8080:8080 --rm --name wechat_test  -d <span class=nv>$IMAGE</
 </main><footer class=footer>
 <div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
 <span class=icp>湘ICP备2021002319号-1</span></div>
+<div class=footer-line></div>
+<div class=footer-line>
+</div>
 </div><script>'serviceWorker'in navigator&&(navigator.serviceWorker.register('/sw.min.js',{scope:'/'}).then(function(a){}),navigator.serviceWorker.ready.then(function(a){}))</script></footer></div>
 <div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>

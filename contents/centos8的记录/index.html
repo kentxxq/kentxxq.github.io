@@ -108,7 +108,19 @@
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
 </div>
-<div class="details-content toc-content" id=toc-content-static></div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#心路历程>心路历程</a></li>
+<li><a href=#centos8新特性>centos8新特性</a>
+<ul>
+<li><a href=#包管理yum和dnf>包管理yum和dnf</a></li>
+<li><a href=#内核升级>内核升级</a></li>
+<li><a href=#内置python升级>内置python升级</a></li>
+</ul>
+</li>
+<li><a href=#总结>总结</a></li>
+</ul>
+</nav></div>
 </div><div class=content id=content><blockquote>
 <p>centos7从我刚开始接触linux就开始用。所以在我使用的时候，老是不明白为什么会有人喜欢centos6。centos真是万年才更新一次大版本，导致许多的新特性不能使用。而我经常喜欢追热点。。所以这一次我要用上最新的centos8。</p>
 </blockquote>
@@ -203,6 +215,9 @@ lsmod <span class=p>|</span> grep bbr
 </main><footer class=footer>
 <div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
 <span class=icp>湘ICP备2021002319号-1</span></div>
+<div class=footer-line></div>
+<div class=footer-line>
+</div>
 </div><script>'serviceWorker'in navigator&&(navigator.serviceWorker.register('/sw.min.js',{scope:'/'}).then(function(a){}),navigator.serviceWorker.ready.then(function(a){}))</script></footer></div>
 <div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
