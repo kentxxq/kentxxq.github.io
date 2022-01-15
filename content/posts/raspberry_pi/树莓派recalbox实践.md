@@ -103,6 +103,29 @@ chmod +x x
 ./x
 ```
 
+### 图像显示溢出
+```bash
+# 当前我的版本是recalbox8: 去除黑边不一定有效，但是对图像溢出是有用的。
+# 我在调整了很多次黑边距离，没有效果。虽然黑边不大，不太影响。 
+
+# 重新挂载/boot分区
+mount -o remount,rw /boot
+
+# 编辑配置文件
+su root
+/boot/config.txt
+
+disable_overscan=0
+overscan_left=24
+overscan_right=24
+overscan_top=24
+overscan_bottom=24
+overscan_scale=1
+
+# 重启生效
+reboot
+```
+
 
 
 ## todo
@@ -119,3 +142,5 @@ chmod +x x
 **20210321**: `开篇`
 
 **20210322**: 添加`疑难杂症`
+
+**20220115**: 添加`图像显示溢出`
