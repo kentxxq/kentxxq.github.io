@@ -46,6 +46,19 @@ recalbox是一个游戏模拟器的合集+kodi媒体中心！是的，都集成�
 3. nes是nintendo entertainment system的简写，找到这个模拟器，就可以看到游戏了![recalbox游戏界面1](/images/raspberry_pi/recalbox游戏界面1.jpg)![recalbox游戏界面2](/images/raspberry_pi/recalbox游戏界面2.jpg)
 
 
+### ddns开机自启
+
+暂时使用别人写的[ddns-go](https://github.com/jeessy2/ddns-go)，后面等dotnet支持了armv6，会开始全部自己写。
+
+进入`/etc/init.d`，`vim S99ddns-go`，内容如下(同样也需要先remount，参见[疑难杂症](https://kentxxq.com/contents/%E6%A0%91%E8%8E%93%E6%B4%BErecalbox%E5%AE%9E%E8%B7%B5/#%E6%97%A0%E6%B3%95chmod%E6%89%A7%E8%A1%8C%E6%9D%83%E9%99%90))
+```bash
+#/bin/bash
+/etc/init.d/kentxxq/ddns-go
+```
+
+**然后chmod+x。重启即可生效。**
+
+
 ## kodi配置
 
 `主菜单=>kodi媒体中心`,系统会重启。**kodi和recalbox的键盘映射不一定相同**！
