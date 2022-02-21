@@ -8,7 +8,7 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://kentxxq.com/contents/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="1993-07-06T00:00:00+08:00">
-<meta property="article:modified_time" content="2021-08-23T00:57:19+08:00">
+<meta property="article:modified_time" content="2022-02-21T17:58:33+08:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="mysql启动参数优化">
 <meta name=twitter:description content="mysql启动参数优化">
@@ -19,7 +19,7 @@
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/><link rel=prev href=https://kentxxq.com/contents/mysql%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/><link rel=next href=https://kentxxq.com/contents/mysqladmin/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
 <noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"mysql启动参数优化","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96\/"},"genre":"posts","keywords":"mysql","wordcount":1718,"url":"https:\/\/kentxxq.com\/contents\/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96\/","datePublished":"1993-07-06T00:00:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"mysql启动参数优化"}</script></head>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"mysql启动参数优化","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96\/"},"genre":"posts","keywords":"mysql","wordcount":1718,"url":"https:\/\/kentxxq.com\/contents\/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96\/","datePublished":"1993-07-06T00:00:00+08:00","dateModified":"2022-02-21T17:58:33+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"mysql启动参数优化"}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -94,7 +94,7 @@
 <div class=post-meta-line>
 <span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
 </span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=1993-07-06>1993-07-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1718 字&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=1993-07-06>1993-07-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-02-21>2022-02-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1718 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -227,120 +227,120 @@
 </span><span class=lnt>115
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>[mysqld]
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=o>[</span>mysqld<span class=o>]</span>
 
-### 
-#  基本相关配置
-###
-server-id=1
-pid-file=/var/run/mysqld/mysqld.pid
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
-# 在linux中，文件可以进行ln，类似快捷方式。如果设置为1，则有可能会出现安全问题，默认配置中设置为0，进行关闭
-symbolic-links=0
-# 设置数据库字符集
-character_set_server=utf8mb4
-# 禁止MySQL对外部连接进行DNS解析，使用这一选项可以消除MySQL进行DNS解析的时间。但需要注意，如果开启该选项，则所有远程主机连接授权都要使用IP地址方式，否则MySQL将无法正常处理连接请求
+<span class=c1>### </span>
+<span class=c1>#  基本相关配置</span>
+<span class=c1>###</span>
+server-id<span class=o>=</span><span class=m>1</span>
+pid-file<span class=o>=</span>/var/run/mysqld/mysqld.pid
+<span class=nv>datadir</span><span class=o>=</span>/var/lib/mysql
+<span class=nv>socket</span><span class=o>=</span>/var/lib/mysql/mysql.sock
+<span class=c1># 在linux中，文件可以进行ln，类似快捷方式。如果设置为1，则有可能会出现安全问题，默认配置中设置为0，进行关闭</span>
+symbolic-links<span class=o>=</span><span class=m>0</span>
+<span class=c1># 设置数据库字符集</span>
+<span class=nv>character_set_server</span><span class=o>=</span>utf8mb4
+<span class=c1># 禁止MySQL对外部连接进行DNS解析，使用这一选项可以消除MySQL进行DNS解析的时间。但需要注意，如果开启该选项，则所有远程主机连接授权都要使用IP地址方式，否则MySQL将无法正常处理连接请求</span>
 skip-name-resolve
-character_set_filesystem=utf8mb4
-# 统一使用小写的表名
-lower_case_table_names = 1
+<span class=nv>character_set_filesystem</span><span class=o>=</span>utf8mb4
+<span class=c1># 统一使用小写的表名</span>
+<span class=nv>lower_case_table_names</span> <span class=o>=</span> <span class=m>1</span>
 
 
 
 
-### 
-#  日志配置
-###
-log-error=/var/log/mysqld.log
-# 二进制日志路径
-log-bin=/tmp/logbin
-# 超过30天的binlog删除
-expire_logs_days = 30
-# 慢查询时间 超过1秒则为慢查询
-long_query_time = 1
-slow_query_log_file = /tmp/mysql-slow.log
+<span class=c1>### </span>
+<span class=c1>#  日志配置</span>
+<span class=c1>###</span>
+log-error<span class=o>=</span>/var/log/mysqld.log
+<span class=c1># 二进制日志路径</span>
+log-bin<span class=o>=</span>/tmp/logbin
+<span class=c1># 超过30天的binlog删除</span>
+<span class=nv>expire_logs_days</span> <span class=o>=</span> <span class=m>30</span>
+<span class=c1># 慢查询时间 超过1秒则为慢查询</span>
+<span class=nv>long_query_time</span> <span class=o>=</span> <span class=m>1</span>
+<span class=nv>slow_query_log_file</span> <span class=o>=</span> /tmp/mysql-slow.log
 
 
 
 
-### 
-#  性能提升参数
-###
-# mysql最大连接数 查看max_used_connections，在最大值的70%左右最好
-max_connections = 1000
-# 官方：8 + (max_connections / 100)，上限100. 缓存的线程池不应该过多。
-# 暂时我的业务高峰期，估计是200+的并发一直保持。50个应该足够
-# 一般来说，大于4G的内存，预先缓存50个线程没有问题
-thread_cache_size=10
-# 表缓存分为多个区。5.7开始16为默认值，非常好！
-# table_open_cache_instances=16
-# 查询缓存关闭
-# 听起来很美好的参数而已：如果表有insert、update等操作，表的相关所有cache失效
-# 保存的是一个sql的查询结果集，而不是执行计划之类的
-query_cache_size=0
+<span class=c1>### </span>
+<span class=c1>#  性能提升参数</span>
+<span class=c1>###</span>
+<span class=c1># mysql最大连接数 查看max_used_connections，在最大值的70%左右最好</span>
+<span class=nv>max_connections</span> <span class=o>=</span> <span class=m>1000</span>
+<span class=c1># 官方：8 + (max_connections / 100)，上限100. 缓存的线程池不应该过多。</span>
+<span class=c1># 暂时我的业务高峰期，估计是200+的并发一直保持。50个应该足够</span>
+<span class=c1># 一般来说，大于4G的内存，预先缓存50个线程没有问题</span>
+<span class=nv>thread_cache_size</span><span class=o>=</span><span class=m>10</span>
+<span class=c1># 表缓存分为多个区。5.7开始16为默认值，非常好！</span>
+<span class=c1># table_open_cache_instances=16</span>
+<span class=c1># 查询缓存关闭</span>
+<span class=c1># 听起来很美好的参数而已：如果表有insert、update等操作，表的相关所有cache失效</span>
+<span class=c1># 保存的是一个sql的查询结果集，而不是执行计划之类的</span>
+<span class=nv>query_cache_size</span><span class=o>=</span><span class=m>0</span>
 
-# INNODB
-# innodb非常好！所以默认使用它做存储引擎。 设置为总内存的80%
-innodb_buffer_pool_size=800m
-# 为提高性能，MySQL可以以循环方式将日志文件写到多个文件。推荐设置为3
-innodb_log_files_in_group = 3
-# SHOW GLOBAL STATUS like &#39;%innodb_os_log_written%&#39; 单位：字节
-# 官方推荐innodb_log_files_in_group*innodb_log_file_size * 0.75 &gt; 209MB，可以设置更大一些，但1小时内最好内进行一次刷入磁盘
-innodb_log_file_size=140m
-## 这里我启用的搭配模式，满足性能要求，系统一般情况下不会断电就不会崩溃。
-# 控制数据库的事务日志刷到磁盘上
-# 0:最快，但是进程崩溃就会丢失数据
-# 1:最慢，数据会回滚没有提交的操作，数据保证一致
-# 2:性能不错，除非操作系统不可用，才会丢失数据
-innodb_flush_log_at_trx_commit=2
-# 控制数据库的binlog刷到磁盘上
-# 0:最快 系统决定
-# n:10000&gt;n&gt;1 多少条日志记录后开刷
-# 1:每次提交就开刷
-sync_binlog=0
-# O_DIRECT直接跨过os缓存，直接写入到文件。  直接在raid上操作数据会更快
-# 默认为空：fsync                        直接连接到san存储，会更快
-# O_DSYNC很少使用，没有上两个设置的优点
-innodb_flush_method=O_DIRECT
-# 不限制线程并发的数量，在大型系统中会进行集群，同时会分配好任务，所以不需要调整
-# 如果是单个的数据库，最高并发数量达到了100，那么设置为80，将会很好的满足需求
-innodb_thread_concurrency=0
-# mysql5.7的默认值，会提高速度
-innodb_checksum_algorithm=crc32
-# 不会有很大的提升，但是如果你的磁盘非常快，可以提高到16-32之间
-innodb_read_io_threads=8
-innodb_write_io_threads=8
-# 刷新脏数据时每秒写 IO请求数 默认200即可，除非用sysbench压力测试，tps一段时间内为0，是因为它的问题。而且磁盘速度非常快
-# 数值过大，mysql认为磁盘能力很强，不会着急得把redo log刷到磁盘。而不大或者100这样比较小的值，则会认为磁盘能力一般，提早刷入磁盘
-innodb_io_capacity=200
-# 关闭的时候把缓冲了的数据记录id记录到文件，启动的时候加载进来，这样尽可能的让它在重启的时候，缓冲数据完全一致
-innodb_buffer_pool_load_at_startup=on
-innodb_buffer_pool_dump_at_shutdown=on
-
-
+<span class=c1># INNODB</span>
+<span class=c1># innodb非常好！所以默认使用它做存储引擎。 设置为总内存的80%</span>
+<span class=nv>innodb_buffer_pool_size</span><span class=o>=</span>800m
+<span class=c1># 为提高性能，MySQL可以以循环方式将日志文件写到多个文件。推荐设置为3</span>
+<span class=nv>innodb_log_files_in_group</span> <span class=o>=</span> <span class=m>3</span>
+<span class=c1># SHOW GLOBAL STATUS like &#39;%innodb_os_log_written%&#39; 单位：字节</span>
+<span class=c1># 官方推荐innodb_log_files_in_group*innodb_log_file_size * 0.75 &gt; 209MB，可以设置更大一些，但1小时内最好内进行一次刷入磁盘</span>
+<span class=nv>innodb_log_file_size</span><span class=o>=</span>140m
+<span class=c1>## 这里我启用的搭配模式，满足性能要求，系统一般情况下不会断电就不会崩溃。</span>
+<span class=c1># 控制数据库的事务日志刷到磁盘上</span>
+<span class=c1># 0:最快，但是进程崩溃就会丢失数据</span>
+<span class=c1># 1:最慢，数据会回滚没有提交的操作，数据保证一致</span>
+<span class=c1># 2:性能不错，除非操作系统不可用，才会丢失数据</span>
+<span class=nv>innodb_flush_log_at_trx_commit</span><span class=o>=</span><span class=m>2</span>
+<span class=c1># 控制数据库的binlog刷到磁盘上</span>
+<span class=c1># 0:最快 系统决定</span>
+<span class=c1># n:10000&gt;n&gt;1 多少条日志记录后开刷</span>
+<span class=c1># 1:每次提交就开刷</span>
+<span class=nv>sync_binlog</span><span class=o>=</span><span class=m>0</span>
+<span class=c1># O_DIRECT直接跨过os缓存，直接写入到文件。  直接在raid上操作数据会更快</span>
+<span class=c1># 默认为空：fsync                        直接连接到san存储，会更快</span>
+<span class=c1># O_DSYNC很少使用，没有上两个设置的优点</span>
+<span class=nv>innodb_flush_method</span><span class=o>=</span>O_DIRECT
+<span class=c1># 不限制线程并发的数量，在大型系统中会进行集群，同时会分配好任务，所以不需要调整</span>
+<span class=c1># 如果是单个的数据库，最高并发数量达到了100，那么设置为80，将会很好的满足需求</span>
+<span class=nv>innodb_thread_concurrency</span><span class=o>=</span><span class=m>0</span>
+<span class=c1># mysql5.7的默认值，会提高速度</span>
+<span class=nv>innodb_checksum_algorithm</span><span class=o>=</span>crc32
+<span class=c1># 不会有很大的提升，但是如果你的磁盘非常快，可以提高到16-32之间</span>
+<span class=nv>innodb_read_io_threads</span><span class=o>=</span><span class=m>8</span>
+<span class=nv>innodb_write_io_threads</span><span class=o>=</span><span class=m>8</span>
+<span class=c1># 刷新脏数据时每秒写 IO请求数 默认200即可，除非用sysbench压力测试，tps一段时间内为0，是因为它的问题。而且磁盘速度非常快</span>
+<span class=c1># 数值过大，mysql认为磁盘能力很强，不会着急得把redo log刷到磁盘。而不大或者100这样比较小的值，则会认为磁盘能力一般，提早刷入磁盘</span>
+<span class=nv>innodb_io_capacity</span><span class=o>=</span><span class=m>200</span>
+<span class=c1># 关闭的时候把缓冲了的数据记录id记录到文件，启动的时候加载进来，这样尽可能的让它在重启的时候，缓冲数据完全一致</span>
+<span class=nv>innodb_buffer_pool_load_at_startup</span><span class=o>=</span>on
+<span class=nv>innodb_buffer_pool_dump_at_shutdown</span><span class=o>=</span>on
 
 
-### 
-#  连接相关参数
-###
-# 设置同一主机，最大可连接报错数。设置成100万没有特别大的影响，但是极大减少了flush hosts的次数
-max_connect_errors=1000000
-# 连接到达数量之后，排队的请求格式。超过600就会拒绝
-back_log = 600
-# 会话超过多久自动断开，默认秒，8小时
-wait_timeout = 28800
 
 
-# mysql可以打开的文件数       
-open_files_limit = 65535
+<span class=c1>### </span>
+<span class=c1>#  连接相关参数</span>
+<span class=c1>###</span>
+<span class=c1># 设置同一主机，最大可连接报错数。设置成100万没有特别大的影响，但是极大减少了flush hosts的次数</span>
+<span class=nv>max_connect_errors</span><span class=o>=</span><span class=m>1000000</span>
+<span class=c1># 连接到达数量之后，排队的请求格式。超过600就会拒绝</span>
+<span class=nv>back_log</span> <span class=o>=</span> <span class=m>600</span>
+<span class=c1># 会话超过多久自动断开，默认秒，8小时</span>
+<span class=nv>wait_timeout</span> <span class=o>=</span> <span class=m>28800</span>
 
 
-### 
-# 备份工具innobackupex的备份路径
-###
-[xtrabackup]
-target_dir = /tmp/backups
+<span class=c1># mysql可以打开的文件数       </span>
+<span class=nv>open_files_limit</span> <span class=o>=</span> <span class=m>65535</span>
+
+
+<span class=c1>### </span>
+<span class=c1># 备份工具innobackupex的备份路径</span>
+<span class=c1>###</span>
+<span class=o>[</span>xtrabackup<span class=o>]</span>
+<span class=nv>target_dir</span> <span class=o>=</span> /tmp/backups
 
 </code></pre></td></tr></table>
 </div>
@@ -394,7 +394,7 @@ vi limits.conf
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2021-08-23</span>
+<span>更新于 2022-02-21</span>
 </div>
 <div class=post-info-license></div>
 </div>
