@@ -10,7 +10,7 @@ description: "mysql启动参数优化"
 
 ## 参数文件
 
-```bash
+```bash
 [mysqld]
 
 ### 
