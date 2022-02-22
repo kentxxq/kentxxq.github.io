@@ -146,23 +146,48 @@ ken ws wss://ws.kentxxq.com/ws
 ### tr
 `tr`代表traceroute。是通过dotnet的ping实现。结果发现在linux有问题，所以后续再去拓展吧。
 ```bash
-❯ .\ken.exe tr kentxxq.com
-connect success
-1 172.18.87.1 take 3ms XX-XX-内网IP-内网IP
-2 10.10.18.5 take 2ms 未知的主机
-3 175.6.6.233 take 2ms 中国-湖南-长沙-电信
-4 172.16.250.1 take 30ms 未知的主机
-5 无响应
-6 124.232.148.125 take 2ms 中国-湖南-长沙-电信
-7 61.137.4.129 take 6ms 中国-湖南-长沙-电信
-8 202.97.77.1 take 22ms 中国-广东-广州-电信
-9 无响应
-10 无响应
-11 129.250.66.61 take 122ms 日本-XX-XX-日本电信电话
-12 129.250.3.23 take 87ms 美国-XX-XX-XX
-13 无响应
-14 无响应
-15 185.199.110.153 美国-华盛顿-西雅图-XX
+❯ ken.exe tr kentxxq.com
+try connecting to kentxxq.com ...success
+1 request timeout
+2 118.250.180.1 take 0ms 中国-湖南-长沙-电信
+3 61.187.29.245 take 3ms 中国-湖南-长沙-电信
+4 61.137.3.129 take 0ms 中国-湖南-长沙-电信
+5 request timeout
+6 202.97.94.122 take 19ms 中国-北京-北京-电信
+7 202.97.94.94 take 58ms 中国-北京-北京-电信
+8 202.97.60.214 take 0ms 日本-XX-XX-电信
+9 129.250.3.23 take 79ms 美国-XX-XX-XX
+10 129.250.6.127 take 0ms 美国-XX-XX-XX
+11 61.200.82.50 take 102ms 日本-XX-XX-XX
+12 185.199.110.153 美国-华盛顿-西雅图-XX
+```
+
+### redis
+`redis`因为经常删除特定的key，而`redis-cli`没有没有很好的支持这点，所以就自己写了一个最常用的。。
+```bash
+# 错误命令就会输出usage
+# usage:
+# a*: search all keys start with a in db
+# del a2*: delete all keys start with a2 in db
+# select 1: checkout db 1
+# exit(): just exit
+
+> ken redis bwd.kentxxq.com -p 123456
+connect success,take 27.4024 ms
+db0 keys:2
+>>a
+keys count:1
+>>b
+keys count:1
+>>a*
+keys count:1
+>>del a
+deleted 1 key(s)
+>>select 1
+using db1 keys count:1
+>>c
+keys count:1
+>>exit()
 ```
 
 ## TODO
@@ -179,3 +204,5 @@ connect success
 **20210905**: 使用七牛云免费套餐，加速国内的下载
 
 **20211115**: net6发布了，所以更新了支持的平台。把2个还未完成的功能加入到了todo...反正我一直想有个自己的命令行工具，一定会持续完善的...
+
+**20220222**: 新增了`redis`命令，然后优化了一些内部逻辑
