@@ -16,18 +16,14 @@
 <meta name=apple-mobile-web-app-title content="kentxxq">
 <meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/><link rel=prev href=https://kentxxq.com/contents/gitlab%E6%89%8B%E6%91%B8%E6%89%8B%E6%8E%92%E5%9D%91/><link rel=next href=https://kentxxq.com/contents/%E6%88%91%E5%AF%B9go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%BA%86%E8%A7%A3/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
-<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"入坑Xamarin初探","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2\/"},"genre":"posts","keywords":"csharp, Xamarin","wordcount":1947,"url":"https:\/\/kentxxq.com\/contents\/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2\/","datePublished":"2019-05-10T00:46:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"在之前无意中了解到了linq，被超级方便的语法吸引到了。开始认真了解C#以及微软的现状。github被微软收购以后开放了免费的无限量私人仓库。C#自举且一系列生态代码完全开源。net core跨平台且目标是替代framework系列。浏览器开始使用chrome相同的内核且融合了ie模式，却被谷歌摆了一道。还有云平台，ide等等一系列的动作。这些做法让我对微软的好感度急剧攀升。无意间了解到Xamarin，更是让我不得不想叫一句：微软爸爸。"}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
-<div id=back-to-top></div>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/><link rel=prev href=https://kentxxq.com/contents/gitlab%E6%89%8B%E6%91%B8%E6%89%8B%E6%8E%92%E5%9D%91/><link rel=next href=https://kentxxq.com/contents/%E6%88%91%E5%AF%B9go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%BA%86%E8%A7%A3/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"入坑Xamarin初探","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2\/"},"genre":"posts","keywords":"csharp, Xamarin","wordcount":1947,"url":"https:\/\/kentxxq.com\/contents\/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2\/","datePublished":"2019-05-10T00:46:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"在之前无意中了解到了linq，被超级方便的语法吸引到了。开始认真了解C#以及微软的现状。github被微软收购以后开放了免费的无限量私人仓库。C#自举且一系列生态代码完全开源。net core跨平台且目标是替代framework系列。浏览器开始使用chrome相同的内核且融合了ie模式，却被谷歌摆了一道。还有云平台，ide等等一系列的动作。这些做法让我对微软的好感度急剧攀升。无意间了解到Xamarin，更是让我不得不想叫一句：微软爸爸。"}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e)}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(t){const e=document.getElementsByTagName("meta");for(let n=0;n<e.length;n++)if(e[n].getAttribute("name")===t)return e[n];return''}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light")}else''==="light"||''==="dark"||''==="black"?(setTheme(''),saveTheme('')):(saveTheme("auto"),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")]</script>
+<div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/posts/> Blog </a><a class=menu-item href=/categories/> Categories </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/about/> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -41,20 +37,14 @@
 </span>
 </span><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</a></div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -66,122 +56,51 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
+</div><a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
-<li><a href=#为什么会有这篇文章>为什么会有这篇文章</a></li>
-<li><a href=#xamarin初步了解>Xamarin初步了解</a></li>
-<li><a href=#前期准备工作>前期准备工作</a></li>
-<li><a href=#排坑之旅>排坑之旅</a>
+<li><a href=#为什么会有这篇文章>为什么会有这篇文章</a></li><li><a href=#xamarin初步了解>Xamarin初步了解</a></li><li><a href=#前期准备工作>前期准备工作</a></li><li><a href=#排坑之旅>排坑之旅</a>
 <ul>
-<li><a href=#ios开发>iOS开发</a></li>
-<li><a href=#生成apk>生成apk</a></li>
-</ul>
-</li>
-<li><a href=#笑容逐渐展露>笑容逐渐展露</a></li>
-<li><a href=#总结>总结</a></li>
-</ul>
-</nav></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">入坑Xamarin初探</h1><div class=post-meta>
+<li><a href=#ios开发>iOS开发</a></li><li><a href=#生成apk>生成apk</a></li></ul></li><li><a href=#笑容逐渐展露>笑容逐渐展露</a></li><li><a href=#总结>总结</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">入坑Xamarin初探</h1><div class=post-meta>
 <div class=post-meta-line>
 <span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-05-10>2019-05-10</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1947 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-05-10>2019-05-10</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1947 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#为什么会有这篇文章>为什么会有这篇文章</a></li>
-<li><a href=#xamarin初步了解>Xamarin初步了解</a></li>
-<li><a href=#前期准备工作>前期准备工作</a></li>
-<li><a href=#排坑之旅>排坑之旅</a>
+<li><a href=#为什么会有这篇文章>为什么会有这篇文章</a></li><li><a href=#xamarin初步了解>Xamarin初步了解</a></li><li><a href=#前期准备工作>前期准备工作</a></li><li><a href=#排坑之旅>排坑之旅</a>
 <ul>
-<li><a href=#ios开发>iOS开发</a></li>
-<li><a href=#生成apk>生成apk</a></li>
-</ul>
-</li>
-<li><a href=#笑容逐渐展露>笑容逐渐展露</a></li>
-<li><a href=#总结>总结</a></li>
-</ul>
-</nav></div>
-</div><div class=content id=content><blockquote>
-<p>在之前无意中了解到了linq，被超级方便的语法吸引到了。开始认真了解C#以及微软的现状。</p>
-<p>github被微软收购以后开放了免费的无限量私人仓库。C#自举且一系列生态代码完全开源。net core跨平台且目标是替代framework系列。浏览器开始使用chrome相同的内核且融合了ie模式，却被谷歌摆了一道。还有云平台，ide等等一系列的动作。</p>
-<p>这些做法让我对微软的好感度急剧攀升。无意间了解到Xamarin，更是让我不得不想叫一句：微软爸爸。</p>
-</blockquote>
-<h2 id=为什么会有这篇文章 class=headerLink>
-<a href=#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%bc%9a%e6%9c%89%e8%bf%99%e7%af%87%e6%96%87%e7%ab%a0 class=header-mark></a>为什么会有这篇文章</h2><p>在最近了解了一系列微软的技术发展动态后，一个<strong>不能停止学习</strong>的程序员应该体会到，如果不去了解它(微软的技术栈)，沉溺在公司现有的技术栈，会导致视野越来越小。甚至几年以后，与公司外部世界技术脱轨。</p>
-<p>从技术方面来说，微软有这些值得注意的点:</p>
-<ol>
-<li>c#/c++/xaramin等等技术的全面开源。可以在使用微软技术栈的同时，更好的学习知识(或者排坑)。</li>
-<li>积极拥抱社区，为Chromium内核项目提交代码。发布WSL2支持原生linux内核，秒级启动！同时支持docker技术！</li>
-<li>从net5的blog来看，以后windows会放弃net framework，而使用net core。
-<img class=lazyload data-src=/images/csharp/Xamarin_dotnet5%e8%a7%84%e5%88%92.png data-srcset="/images/csharp/Xamarin_dotnet5%e8%a7%84%e5%88%92.png, /images/csharp/Xamarin_dotnet5%e8%a7%84%e5%88%92.png 1.5x, /images/csharp/Xamarin_dotnet5%e8%a7%84%e5%88%92.png 2x" data-sizes=auto alt=/images/csharp/Xamarin_dotnet5规划.png title=Xamarin_dotnet5规划></li>
-<li>随着vs/vsc和微软服务绑定增多，开发越来越方便。vsc remote等理念非常前沿，甚至可以说是未来的开发模式！</li>
-</ol>
-<p>从上面可以得出，学好了微软技术栈在开发中可以有以下优势:</p>
-<ol>
-<li>类似java，可以跨平台运行。同时在windows上，可以不用安装运行环境！</li>
-<li>对于普通用户来说，跨平台就是一个伪需求。在xp电脑上能双击打开的exe才是王道。</li>
-<li>xaramin可以开发移动端app(iOS/Android)，且拥有庞大的社区。</li>
-<li>对比js写的windows客户端，C#性能不用担心。</li>
-</ol>
-<h2 id=xamarin初步了解 class=headerLink>
-<a href=#xamarin%e5%88%9d%e6%ad%a5%e4%ba%86%e8%a7%a3 class=header-mark></a>Xamarin初步了解</h2><p><strong>一个跨平台UI开发的解决方案</strong>。</p>
-<p>对比原生语言。同时开发iOS，Android应用，且代码的复用率高。</p>
-<p>对比js跨平台。性能有优势。</p>
-<p>对比flutter技术。dart是一个不主流的语言。且如果flutter胎死腹中(指fuchsia无法代替安卓)，那你学了dart语言以后，几乎没有用武之地！因为几乎没有公司用dart来编写除flutter以外的项目。</p>
-<p><img class=lazyload data-src=/images/csharp/Xamarin_%e6%a1%86%e6%9e%b6%e5%af%b9%e6%af%94%e5%9b%be.png data-srcset="/images/csharp/Xamarin_%e6%a1%86%e6%9e%b6%e5%af%b9%e6%af%94%e5%9b%be.png, /images/csharp/Xamarin_%e6%a1%86%e6%9e%b6%e5%af%b9%e6%af%94%e5%9b%be.png 1.5x, /images/csharp/Xamarin_%e6%a1%86%e6%9e%b6%e5%af%b9%e6%af%94%e5%9b%be.png 2x" data-sizes=auto alt=/images/csharp/Xamarin_框架对比图.png title=Xamarin_框架对比图></p>
-<h2 id=前期准备工作 class=headerLink>
-<a href=#%e5%89%8d%e6%9c%9f%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c class=header-mark></a>前期准备工作</h2><p>只需要傻瓜化安装vs，即可完成整个开发环境的搭建。<a href="https://docs.microsoft.com/zh-cn/visualstudio/products/?view=vs-2019" target=_blank rel="noopener noreffer">vs官方文档</a>是最好的教程了。且中文！</p>
-<p>参见<a href="https://docs.microsoft.com/zh-cn/xamarin/get-started/first-app/?pivots=windows" target=_blank rel="noopener noreffer">Xamarin官方文档</a>，数据线连接在安卓手机上开启debug模式。点击即可运行。</p>
-<p>而iOS则属于排坑之旅了。</p>
-<h2 id=排坑之旅 class=headerLink>
+<li><a href=#ios开发>iOS开发</a></li><li><a href=#生成apk>生成apk</a></li></ul></li><li><a href=#笑容逐渐展露>笑容逐渐展露</a></li><li><a href=#总结>总结</a></li></ul></nav></div></div><div class=content id=content><blockquote>
+<p>在之前无意中了解到了linq，被超级方便的语法吸引到了。开始认真了解C#以及微软的现状。</p><p>github被微软收购以后开放了免费的无限量私人仓库。C#自举且一系列生态代码完全开源。net core跨平台且目标是替代framework系列。浏览器开始使用chrome相同的内核且融合了ie模式，却被谷歌摆了一道。还有云平台，ide等等一系列的动作。</p><p>这些做法让我对微软的好感度急剧攀升。无意间了解到Xamarin，更是让我不得不想叫一句：微软爸爸。</p></blockquote><h2 id=为什么会有这篇文章 class=headerLink>
+<a href=#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%bc%9a%e6%9c%89%e8%bf%99%e7%af%87%e6%96%87%e7%ab%a0 class=header-mark></a>为什么会有这篇文章</h2><p>在最近了解了一系列微软的技术发展动态后，一个<strong>不能停止学习</strong>的程序员应该体会到，如果不去了解它(微软的技术栈)，沉溺在公司现有的技术栈，会导致视野越来越小。甚至几年以后，与公司外部世界技术脱轨。</p><p>从技术方面来说，微软有这些值得注意的点:</p><ol>
+<li>c#/c++/xaramin等等技术的全面开源。可以在使用微软技术栈的同时，更好的学习知识(或者排坑)。</li><li>积极拥抱社区，为Chromium内核项目提交代码。发布WSL2支持原生linux内核，秒级启动！同时支持docker技术！</li><li>从net5的blog来看，以后windows会放弃net framework，而使用net core。
+<img class=lazyload data-src=/images/csharp/Xamarin_dotnet5%e8%a7%84%e5%88%92.png data-srcset="/images/csharp/Xamarin_dotnet5%e8%a7%84%e5%88%92.png, /images/csharp/Xamarin_dotnet5%e8%a7%84%e5%88%92.png 1.5x, /images/csharp/Xamarin_dotnet5%e8%a7%84%e5%88%92.png 2x" data-sizes=auto alt=/images/csharp/Xamarin_dotnet5规划.png title=Xamarin_dotnet5规划></li><li>随着vs/vsc和微软服务绑定增多，开发越来越方便。vsc remote等理念非常前沿，甚至可以说是未来的开发模式！</li></ol><p>从上面可以得出，学好了微软技术栈在开发中可以有以下优势:</p><ol>
+<li>类似java，可以跨平台运行。同时在windows上，可以不用安装运行环境！</li><li>对于普通用户来说，跨平台就是一个伪需求。在xp电脑上能双击打开的exe才是王道。</li><li>xaramin可以开发移动端app(iOS/Android)，且拥有庞大的社区。</li><li>对比js写的windows客户端，C#性能不用担心。</li></ol><h2 id=xamarin初步了解 class=headerLink>
+<a href=#xamarin%e5%88%9d%e6%ad%a5%e4%ba%86%e8%a7%a3 class=header-mark></a>Xamarin初步了解</h2><p><strong>一个跨平台UI开发的解决方案</strong>。</p><p>对比原生语言。同时开发iOS，Android应用，且代码的复用率高。</p><p>对比js跨平台。性能有优势。</p><p>对比flutter技术。dart是一个不主流的语言。且如果flutter胎死腹中(指fuchsia无法代替安卓)，那你学了dart语言以后，几乎没有用武之地！因为几乎没有公司用dart来编写除flutter以外的项目。</p><p><img class=lazyload data-src=/images/csharp/Xamarin_%e6%a1%86%e6%9e%b6%e5%af%b9%e6%af%94%e5%9b%be.png data-srcset="/images/csharp/Xamarin_%e6%a1%86%e6%9e%b6%e5%af%b9%e6%af%94%e5%9b%be.png, /images/csharp/Xamarin_%e6%a1%86%e6%9e%b6%e5%af%b9%e6%af%94%e5%9b%be.png 1.5x, /images/csharp/Xamarin_%e6%a1%86%e6%9e%b6%e5%af%b9%e6%af%94%e5%9b%be.png 2x" data-sizes=auto alt=/images/csharp/Xamarin_框架对比图.png title=Xamarin_框架对比图></p><h2 id=前期准备工作 class=headerLink>
+<a href=#%e5%89%8d%e6%9c%9f%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c class=header-mark></a>前期准备工作</h2><p>只需要傻瓜化安装vs，即可完成整个开发环境的搭建。<a href="https://docs.microsoft.com/zh-cn/visualstudio/products/?view=vs-2019" target=_blank rel="noopener noreffer">vs官方文档</a>是最好的教程了。且中文！</p><p>参见<a href="https://docs.microsoft.com/zh-cn/xamarin/get-started/first-app/?pivots=windows" target=_blank rel="noopener noreffer">Xamarin官方文档</a>，数据线连接在安卓手机上开启debug模式。点击即可运行。</p><p>而iOS则属于排坑之旅了。</p><h2 id=排坑之旅 class=headerLink>
 <a href=#%e6%8e%92%e5%9d%91%e4%b9%8b%e6%97%85 class=header-mark></a>排坑之旅</h2><h3 id=ios开发 class=headerLink>
 <a href=#ios%e5%bc%80%e5%8f%91 class=header-mark></a>iOS开发</h3><ol>
-<li>你需要一个mac电脑。或者参考<a href=https://www.macincloud.com/ target=_blank rel="noopener noreffer">云mac</a>，我没用过，也不推荐这样。</li>
-<li>最好有一个iPhone，因为模拟器耗资源，且不方便操作。</li>
-<li>装好xcode</li>
-<li>新建跨平台应用的时候注意你的应用名称和组织标识符
-<img class=lazyload data-src=/images/csharp/Xamarin_%e6%96%b0%e5%bb%ba%e9%a1%b9%e7%9b%ae.png data-srcset="/images/csharp/Xamarin_%e6%96%b0%e5%bb%ba%e9%a1%b9%e7%9b%ae.png, /images/csharp/Xamarin_%e6%96%b0%e5%bb%ba%e9%a1%b9%e7%9b%ae.png 1.5x, /images/csharp/Xamarin_%e6%96%b0%e5%bb%ba%e9%a1%b9%e7%9b%ae.png 2x" data-sizes=auto alt=/images/csharp/Xamarin_新建项目.png title=新建项目></li>
-<li>用Apple ID<a href=https://developer.apple.com/account/ target=_blank rel="noopener noreffer">申请成为开发者</a>。<strong>如果你有付费的开发者账号可以按照Xamarin官网的方法来，否则继续往下看</strong>。</li>
-<li>Xcode随便新建一个项目，关键<code>Bundle Identifier</code>要一致。打开<strong>Xcode=>Preferences=>Accounts</strong>，。然后添加你自己的账号。Manage Certificates。
-<img class=lazyload data-src=/images/csharp/Xamarin_xcode%e7%99%bb%e9%99%86.png data-srcset="/images/csharp/Xamarin_xcode%e7%99%bb%e9%99%86.png, /images/csharp/Xamarin_xcode%e7%99%bb%e9%99%86.png 1.5x, /images/csharp/Xamarin_xcode%e7%99%bb%e9%99%86.png 2x" data-sizes=auto alt=/images/csharp/Xamarin_xcode登陆.png title=xcode登陆></li>
-</ol>
-<hr>
-<p><img class=lazyload data-src=/images/csharp/Xamarin_xcode%e8%af%81%e4%b9%a6.png data-srcset="/images/csharp/Xamarin_xcode%e8%af%81%e4%b9%a6.png, /images/csharp/Xamarin_xcode%e8%af%81%e4%b9%a6.png 1.5x, /images/csharp/Xamarin_xcode%e8%af%81%e4%b9%a6.png 2x" data-sizes=auto alt=/images/csharp/Xamarin_xcode证书.png title=xcode证书></p>
-<hr>
+<li>你需要一个mac电脑。或者参考<a href=https://www.macincloud.com/ target=_blank rel="noopener noreffer">云mac</a>，我没用过，也不推荐这样。</li><li>最好有一个iPhone，因为模拟器耗资源，且不方便操作。</li><li>装好xcode</li><li>新建跨平台应用的时候注意你的应用名称和组织标识符
+<img class=lazyload data-src=/images/csharp/Xamarin_%e6%96%b0%e5%bb%ba%e9%a1%b9%e7%9b%ae.png data-srcset="/images/csharp/Xamarin_%e6%96%b0%e5%bb%ba%e9%a1%b9%e7%9b%ae.png, /images/csharp/Xamarin_%e6%96%b0%e5%bb%ba%e9%a1%b9%e7%9b%ae.png 1.5x, /images/csharp/Xamarin_%e6%96%b0%e5%bb%ba%e9%a1%b9%e7%9b%ae.png 2x" data-sizes=auto alt=/images/csharp/Xamarin_新建项目.png title=新建项目></li><li>用Apple ID<a href=https://developer.apple.com/account/ target=_blank rel="noopener noreffer">申请成为开发者</a>。<strong>如果你有付费的开发者账号可以按照Xamarin官网的方法来，否则继续往下看</strong>。</li><li>Xcode随便新建一个项目，关键<code>Bundle Identifier</code>要一致。打开<strong>Xcode=>Preferences=>Accounts</strong>，。然后添加你自己的账号。Manage Certificates。
+<img class=lazyload data-src=/images/csharp/Xamarin_xcode%e7%99%bb%e9%99%86.png data-srcset="/images/csharp/Xamarin_xcode%e7%99%bb%e9%99%86.png, /images/csharp/Xamarin_xcode%e7%99%bb%e9%99%86.png 1.5x, /images/csharp/Xamarin_xcode%e7%99%bb%e9%99%86.png 2x" data-sizes=auto alt=/images/csharp/Xamarin_xcode登陆.png title=xcode登陆></li></ol><hr>
+<p><img class=lazyload data-src=/images/csharp/Xamarin_xcode%e8%af%81%e4%b9%a6.png data-srcset="/images/csharp/Xamarin_xcode%e8%af%81%e4%b9%a6.png, /images/csharp/Xamarin_xcode%e8%af%81%e4%b9%a6.png 1.5x, /images/csharp/Xamarin_xcode%e8%af%81%e4%b9%a6.png 2x" data-sizes=auto alt=/images/csharp/Xamarin_xcode证书.png title=xcode证书></p><hr>
 <p><img class=lazyload data-src=/images/csharp/Xamarin_xcode%e5%ae%8c%e6%88%90%e7%ad%be%e5%90%8d.png data-srcset="/images/csharp/Xamarin_xcode%e5%ae%8c%e6%88%90%e7%ad%be%e5%90%8d.png, /images/csharp/Xamarin_xcode%e5%ae%8c%e6%88%90%e7%ad%be%e5%90%8d.png 1.5x, /images/csharp/Xamarin_xcode%e5%ae%8c%e6%88%90%e7%ad%be%e5%90%8d.png 2x" data-sizes=auto alt=/images/csharp/Xamarin_xcode完成签名.png title=xcode完成签名>
 7. 回到General，钩上自动signing。team选择自己personal team。等一会就ojbk了！
 <img class=lazyload data-src=/images/csharp/Xamarin_xcode%e7%ad%be%e5%90%8dojbk.png data-srcset="/images/csharp/Xamarin_xcode%e7%ad%be%e5%90%8dojbk.png, /images/csharp/Xamarin_xcode%e7%ad%be%e5%90%8dojbk.png 1.5x, /images/csharp/Xamarin_xcode%e7%ad%be%e5%90%8dojbk.png 2x" data-sizes=auto alt=/images/csharp/Xamarin_xcode签名ojbk.png title=xcode签名ojbk>
-8. 回到<strong>vs=>左上角kentxxq_app.iOS=>Debug=>你的iPhone</strong>,启动项目吧！</p>
-<h3 id=生成apk class=headerLink>
-<a href=#%e7%94%9f%e6%88%90apk class=header-mark></a>生成apk</h3><p>在生成apk文件的时候，记得选择release来生成。否则apk的大小会非常惊人。</p>
-<h2 id=笑容逐渐展露 class=headerLink>
-<a href=#%e7%ac%91%e5%ae%b9%e9%80%90%e6%b8%90%e5%b1%95%e9%9c%b2 class=header-mark></a>笑容逐渐展露</h2><p>开始写代码。参考官方文档，试一下<strong>闪光灯和语音功能</strong>！</p>
-<p>为什么呢？因为我记得好久以前iPhone没有自带手电筒的功能，我是通过app下载的。而且一个调用了硬件，语音功能则调用了软件。</p>
-<div class=highlight><div class=chroma>
+8. 回到<strong>vs=>左上角kentxxq_app.iOS=>Debug=>你的iPhone</strong>,启动项目吧！</p><h3 id=生成apk class=headerLink>
+<a href=#%e7%94%9f%e6%88%90apk class=header-mark></a>生成apk</h3><p>在生成apk文件的时候，记得选择release来生成。否则apk的大小会非常惊人。</p><h2 id=笑容逐渐展露 class=headerLink>
+<a href=#%e7%ac%91%e5%ae%b9%e9%80%90%e6%b8%90%e5%b1%95%e9%9c%b2 class=header-mark></a>笑容逐渐展露</h2><p>开始写代码。参考官方文档，试一下<strong>闪光灯和语音功能</strong>！</p><p>为什么呢？因为我记得好久以前iPhone没有自带手电筒的功能，我是通过app下载的。而且一个调用了硬件，语音功能则调用了软件。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -193,21 +112,18 @@
 </span><span class=lnt> 8
 </span><span class=lnt> 9
 </span><span class=lnt>10
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=cp>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-<span class=nt>&lt;ContentPage</span> <span class=na>xmlns=</span><span class=s>&#34;http://xamarin.com/schemas/2014/forms&#34;</span> <span class=na>xmlns:x=</span><span class=s>&#34;http://schemas.microsoft.com/winfx/2009/xaml&#34;</span> <span class=na>xmlns:local=</span><span class=s>&#34;clr-namespace:kentxxq_app&#34;</span> <span class=na>x:Class=</span><span class=s>&#34;kentxxq_app.MainPage&#34;</span><span class=nt>&gt;</span>
-    <span class=nt>&lt;StackLayout&gt;</span>
-        <span class=c>&lt;!-- Place new controls here --&gt;</span>
-        <span class=nt>&lt;Label</span> <span class=na>Text=</span><span class=s>&#34;Welcome to Xamarin.Forms!&#34;</span> <span class=na>HorizontalOptions=</span><span class=s>&#34;Center&#34;</span> <span class=na>VerticalOptions=</span><span class=s>&#34;CenterAndExpand&#34;</span> <span class=nt>/&gt;</span>
-        <span class=nt>&lt;Button</span> <span class=na>Text=</span><span class=s>&#34;说话&#34;</span> <span class=na>Clicked=</span><span class=s>&#34;Speak_Word&#34;</span><span class=nt>/&gt;</span>
-        <span class=nt>&lt;Button</span> <span class=na>Text=</span><span class=s>&#34;开闪光灯&#34;</span> <span class=na>Clicked=</span><span class=s>&#34;Open_Flashlight&#34;</span><span class=nt>/&gt;</span>
-        <span class=nt>&lt;Button</span> <span class=na>Text=</span><span class=s>&#34;关闪光灯&#34;</span> <span class=na>Clicked=</span><span class=s>&#34;Close_Flashlight&#34;</span><span class=nt>/&gt;</span>
-    <span class=nt>&lt;/StackLayout&gt;</span>
-<span class=nt>&lt;/ContentPage&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=cp>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;ContentPage</span> <span class=na>xmlns=</span><span class=s>&#34;http://xamarin.com/schemas/2014/forms&#34;</span> <span class=na>xmlns:x=</span><span class=s>&#34;http://schemas.microsoft.com/winfx/2009/xaml&#34;</span> <span class=na>xmlns:local=</span><span class=s>&#34;clr-namespace:kentxxq_app&#34;</span> <span class=na>x:Class=</span><span class=s>&#34;kentxxq_app.MainPage&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;StackLayout&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- Place new controls here --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Label</span> <span class=na>Text=</span><span class=s>&#34;Welcome to Xamarin.Forms!&#34;</span> <span class=na>HorizontalOptions=</span><span class=s>&#34;Center&#34;</span> <span class=na>VerticalOptions=</span><span class=s>&#34;CenterAndExpand&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Button</span> <span class=na>Text=</span><span class=s>&#34;说话&#34;</span> <span class=na>Clicked=</span><span class=s>&#34;Speak_Word&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Button</span> <span class=na>Text=</span><span class=s>&#34;开闪光灯&#34;</span> <span class=na>Clicked=</span><span class=s>&#34;Open_Flashlight&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Button</span> <span class=na>Text=</span><span class=s>&#34;关闪光灯&#34;</span> <span class=na>Clicked=</span><span class=s>&#34;Close_Flashlight&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/StackLayout&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/ContentPage&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -264,110 +180,81 @@
 </span><span class=lnt>53
 </span><span class=lnt>54
 </span><span class=lnt>55
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cs data-lang=cs><span class=k>using</span> <span class=nn>System</span><span class=p>;</span>
-<span class=k>using</span> <span class=nn>System.Collections.Generic</span><span class=p>;</span>
-<span class=k>using</span> <span class=nn>System.ComponentModel</span><span class=p>;</span>
-<span class=k>using</span> <span class=nn>System.Linq</span><span class=p>;</span>
-<span class=k>using</span> <span class=nn>System.Text</span><span class=p>;</span>
-<span class=k>using</span> <span class=nn>System.Threading.Tasks</span><span class=p>;</span>
-<span class=k>using</span> <span class=nn>Xamarin.Forms</span><span class=p>;</span>
-<span class=k>using</span> <span class=nn>Xamarin.Essentials</span><span class=p>;</span>
-
-<span class=k>namespace</span> <span class=nn>kentxxq_app</span>
-<span class=p>{</span>
-    <span class=c1>// Learn more about making custom code visible in the Xamarin.Forms previewer
-</span><span class=c1></span>    <span class=c1>// by visiting https://aka.ms/xamarinforms-previewer
-</span><span class=c1></span><span class=na>    [DesignTimeVisible(true)]</span>
-    <span class=k>public</span> <span class=k>partial</span> <span class=k>class</span> <span class=nc>MainPage</span> <span class=p>:</span> <span class=n>ContentPage</span>
-    <span class=p>{</span>
-        <span class=k>public</span> <span class=n>MainPage</span><span class=p>()</span>
-        <span class=p>{</span>
-            <span class=n>InitializeComponent</span><span class=p>();</span>
-        <span class=p>}</span>
-
-        <span class=k>protected</span> <span class=k>async</span> <span class=k>void</span> <span class=n>Open_Flashlight</span><span class=p>(</span><span class=kt>object</span> <span class=n>sender</span><span class=p>,</span><span class=n>EventArgs</span> <span class=n>e</span><span class=p>)</span>
-        <span class=p>{</span>
-            <span class=k>try</span>
-            <span class=p>{</span>
-                <span class=c1>// Turn On
-</span><span class=c1></span>                <span class=k>await</span> <span class=n>Flashlight</span><span class=p>.</span><span class=n>TurnOnAsync</span><span class=p>();</span>
-            <span class=p>}</span>
-            <span class=k>catch</span> <span class=p>(</span><span class=n>Exception</span> <span class=n>ex</span><span class=p>)</span>
-            <span class=p>{</span>
-                
-            <span class=p>}</span>
-        <span class=p>}</span>
-
-        <span class=k>protected</span> <span class=k>async</span> <span class=k>void</span> <span class=n>Close_Flashlight</span><span class=p>(</span><span class=kt>object</span> <span class=n>sender</span><span class=p>,</span> <span class=n>EventArgs</span> <span class=n>e</span><span class=p>)</span>
-        <span class=p>{</span>
-            <span class=k>try</span>
-            <span class=p>{</span>
-                <span class=c1>// Turn On
-</span><span class=c1></span>                <span class=k>await</span> <span class=n>Flashlight</span><span class=p>.</span><span class=n>TurnOffAsync</span><span class=p>();</span>
-            <span class=p>}</span>
-            <span class=k>catch</span> <span class=p>(</span><span class=n>Exception</span> <span class=n>ex</span><span class=p>)</span>
-            <span class=p>{</span>
-
-            <span class=p>}</span>
-        <span class=p>}</span>
-
-
-        <span class=k>protected</span> <span class=k>async</span> <span class=k>void</span> <span class=n>Speak_Word</span><span class=p>(</span><span class=kt>object</span> <span class=n>sender</span><span class=p>,</span> <span class=n>EventArgs</span> <span class=n>e</span><span class=p>)</span>
-        <span class=p>{</span>
-            <span class=k>await</span> <span class=n>TextToSpeech</span><span class=p>.</span><span class=n>SpeakAsync</span><span class=p>(</span><span class=s>&#34;Hello World&#34;</span><span class=p>);</span>
-        <span class=p>}</span>
-
-    <span class=p>}</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>ojbk!!!后面就慢慢自己深入学习吧！</p>
-<h2 id=总结 class=headerLink>
-<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>开发工具安装挺方便的，只是开发环境比较耗硬盘空间。</p>
-<p>Android开发还是很方便的。就是iOS的开发太麻烦了。</p>
-<p>为了开发方便，vs的mac版本右边有一个模拟窗口。cpu占用也不高。windows版本则最好通过xamarin hotload插件来支持热重载。</p>
-<p>最后留一下自己的<a href=https://github.com/a805429509/kentxxq_app target=_blank rel="noopener noreffer">demo地址</a></p>
-</div>
-<div class=post-footer id=post-footer>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-cs data-lang=cs><span class=line><span class=cl><span class=k>using</span> <span class=nn>System</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>System.Collections.Generic</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>System.ComponentModel</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>System.Linq</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>System.Text</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>System.Threading.Tasks</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>Xamarin.Forms</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>Xamarin.Essentials</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>namespace</span> <span class=nn>kentxxq_app</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Learn more about making custom code visible in the Xamarin.Forms previewer</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// by visiting https://aka.ms/xamarinforms-previewer</span>
+</span></span><span class=line><span class=cl><span class=na>    [DesignTimeVisible(true)]</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>partial</span> <span class=k>class</span> <span class=nc>MainPage</span> <span class=p>:</span> <span class=n>ContentPage</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>public</span> <span class=n>MainPage</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>InitializeComponent</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>protected</span> <span class=k>async</span> <span class=k>void</span> <span class=n>Open_Flashlight</span><span class=p>(</span><span class=kt>object</span> <span class=n>sender</span><span class=p>,</span><span class=n>EventArgs</span> <span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>try</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// Turn On</span>
+</span></span><span class=line><span class=cl>                <span class=k>await</span> <span class=n>Flashlight</span><span class=p>.</span><span class=n>TurnOnAsync</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=k>catch</span> <span class=p>(</span><span class=n>Exception</span> <span class=n>ex</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span>
+</span></span><span class=line><span class=cl>                
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>protected</span> <span class=k>async</span> <span class=k>void</span> <span class=n>Close_Flashlight</span><span class=p>(</span><span class=kt>object</span> <span class=n>sender</span><span class=p>,</span> <span class=n>EventArgs</span> <span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>try</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// Turn On</span>
+</span></span><span class=line><span class=cl>                <span class=k>await</span> <span class=n>Flashlight</span><span class=p>.</span><span class=n>TurnOffAsync</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=k>catch</span> <span class=p>(</span><span class=n>Exception</span> <span class=n>ex</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>protected</span> <span class=k>async</span> <span class=k>void</span> <span class=n>Speak_Word</span><span class=p>(</span><span class=kt>object</span> <span class=n>sender</span><span class=p>,</span> <span class=n>EventArgs</span> <span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>await</span> <span class=n>TextToSpeech</span><span class=p>.</span><span class=n>SpeakAsync</span><span class=p>(</span><span class=s>&#34;Hello World&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>ojbk!!!后面就慢慢自己深入学习吧！</p><h2 id=总结 class=headerLink>
+<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>开发工具安装挺方便的，只是开发环境比较耗硬盘空间。</p><p>Android开发还是很方便的。就是iOS的开发太麻烦了。</p><p>为了开发方便，vs的mac版本右边有一个模拟窗口。cpu占用也不高。windows版本则最好通过xamarin hotload插件来支持热重载。</p><p>最后留一下自己的<a href=https://github.com/a805429509/kentxxq_app target=_blank rel="noopener noreffer">demo地址</a></p></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
 <span>更新于 2021-08-23</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span><a href=# onclick=return!1 title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/ data-title=入坑Xamarin初探 data-hashtags=csharp,Xamarin><i class="fab fa-twitter fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/ data-hashtag=csharp><i class="fab fa-facebook-square fa-fw"></i></a><a href=# onclick=return!1 title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/ data-title=入坑Xamarin初探 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/ data-title=入坑Xamarin初探><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# onclick=return!1 title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/ data-title=入坑Xamarin初探><i class="fab fa-weibo fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/ data-title=入坑Xamarin初探 data-description="在之前无意中了解到了linq，被超级方便的语法吸引到了。开始认真了解C#以及微软的现状。github被微软收购以后开放了免费的无限量私人仓库。C#自举且一系列生态代码完全开源。net core跨平台且目标是替代framework系列。浏览器开始使用chrome相同的内核且融合了ie模式，却被谷歌摆了一道。还有云平台，ide等等一系列的动作。这些做法让我对微软的好感度急剧攀升。无意间了解到Xamarin，更是让我不得不想叫一句：微软爸爸。"><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# onclick=return!1 title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/ data-title=入坑Xamarin初探 data-description="在之前无意中了解到了linq，被超级方便的语法吸引到了。开始认真了解C#以及微软的现状。github被微软收购以后开放了免费的无限量私人仓库。C#自举且一系列生态代码完全开源。net core跨平台且目标是替代framework系列。浏览器开始使用chrome相同的内核且融合了ie模式，却被谷歌摆了一道。还有云平台，ide等等一系列的动作。这些做法让我对微软的好感度急剧攀升。无意间了解到Xamarin，更是让我不得不想叫一句：微软爸爸。"><i class="fab fa-blogger fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/contents/%E5%85%A5%E5%9D%91xamarin%E5%88%9D%E6%8E%A2/ data-title=入坑Xamarin初探><i class="fab fa-evernote fa-fw"></i></a></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/csharp/>csharp</a>,&nbsp;<a href=/tags/xamarin/>Xamarin</a></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/csharp/>csharp</a>,&nbsp;<a href=/tags/xamarin/>Xamarin</a></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/contents/gitlab%E6%89%8B%E6%91%B8%E6%89%8B%E6%8E%92%E5%9D%91/ class=prev rel=prev title=gitlab手摸手排坑><i class="fas fa-angle-left fa-fw"></i>gitlab手摸手排坑</a>
-<a href=/contents/%E6%88%91%E5%AF%B9go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%BA%86%E8%A7%A3/ class=next rel=next title=我对go语言的了解>我对go语言的了解<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
+</section></div><div class=post-nav><a href=/contents/gitlab%E6%89%8B%E6%91%B8%E6%89%8B%E6%8E%92%E5%9D%91/ class=prev rel=prev title=gitlab手摸手排坑><i class="fas fa-angle-left fa-fw"></i>gitlab手摸手排坑</a>
+<a href=/contents/%E6%88%91%E5%AF%B9go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%BA%86%E8%A7%A3/ class=next rel=next title=我对go语言的了解>我对go语言的了解<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
 <div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
-<span class=icp>湘ICP备2021002319号-1</span></div>
-<div class=footer-line></div>
-<div class=footer-line>
-</div>
-</div><script>'serviceWorker'in navigator&&(navigator.serviceWorker.register('/sw.min.js',{scope:'/'}).then(function(a){}),navigator.serviceWorker.ready.then(function(a){}))</script></footer></div>
-<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
+<span class=icp>湘ICP备2021002319号-1</span></div><div class=footer-line></div><div class=footer-line>
+</div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
-</body>
-</html>
+</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div><div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div></body></html>

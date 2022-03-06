@@ -16,18 +16,14 @@
 <meta name=apple-mobile-web-app-title content="kentxxq">
 <meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/><link rel=prev href=https://kentxxq.com/contents/%E6%8B%93%E5%B1%95hugo%E7%9A%84markdown_%E6%B5%81%E7%A8%8B%E5%9B%BEmermaid/><link rel=next href=https://kentxxq.com/contents/%E5%9C%A8mac%E4%B8%8Aheic%E8%BD%ACjpg%E6%88%96png/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
-<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"记录一次解决电脑异响的过程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B\/"},"genre":"posts","keywords":"硬件","wordcount":1266,"url":"https:\/\/kentxxq.com\/contents\/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B\/","datePublished":"2019-04-14T13:12:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"现在公司里其实就只有一台开发服务器。运行着win7，运行着svn、oracle12c等等的服务。但是最近公司项目打算重写。从SpringMVC换成SpringBoot,前后端分离，用vue来写。代码服务器准备从svn换成git。而前后端的权限验证，打算用redis来进行保存。而redis在windows上只有3.x的版本，太老了。后期也打算把项目的部署全部流程化，规范化。解决误操作的问题。所以还是打算windows转linux"}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
-<div id=back-to-top></div>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/><link rel=prev href=https://kentxxq.com/contents/%E6%8B%93%E5%B1%95hugo%E7%9A%84markdown_%E6%B5%81%E7%A8%8B%E5%9B%BEmermaid/><link rel=next href=https://kentxxq.com/contents/%E5%9C%A8mac%E4%B8%8Aheic%E8%BD%ACjpg%E6%88%96png/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"记录一次解决电脑异响的过程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B\/"},"genre":"posts","keywords":"硬件","wordcount":1266,"url":"https:\/\/kentxxq.com\/contents\/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B\/","datePublished":"2019-04-14T13:12:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"现在公司里其实就只有一台开发服务器。运行着win7，运行着svn、oracle12c等等的服务。但是最近公司项目打算重写。从SpringMVC换成SpringBoot,前后端分离，用vue来写。代码服务器准备从svn换成git。而前后端的权限验证，打算用redis来进行保存。而redis在windows上只有3.x的版本，太老了。后期也打算把项目的部署全部流程化，规范化。解决误操作的问题。所以还是打算windows转linux"}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e)}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(t){const e=document.getElementsByTagName("meta");for(let n=0;n<e.length;n++)if(e[n].getAttribute("name")===t)return e[n];return''}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light")}else''==="light"||''==="dark"||''==="black"?(setTheme(''),saveTheme('')):(saveTheme("auto"),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")]</script>
+<div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/posts/> Blog </a><a class=menu-item href=/categories/> Categories </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/about/> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -41,20 +37,14 @@
 </span>
 </span><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</a></div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -66,159 +56,63 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
+</div><a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
-<li><a href=#环境说明>环境说明</a></li>
-<li><a href=#开始动手>开始动手</a>
+<li><a href=#环境说明>环境说明</a></li><li><a href=#开始动手>开始动手</a>
 <ul>
-<li><a href=#先看机箱图>先看机箱图</a></li>
-<li><a href=#电源图>电源图</a></li>
-<li><a href=#电源内部图>电源内部图</a></li>
-<li><a href=#风扇图>风扇图</a></li>
-<li><a href=#风扇接口图>风扇接口图</a></li>
-<li><a href=#完工>完工！</a></li>
-</ul>
-</li>
-<li><a href=#总结>总结</a></li>
-</ul>
-</nav></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">记录一次解决电脑异响的过程</h1><div class=post-meta>
+<li><a href=#先看机箱图>先看机箱图</a></li><li><a href=#电源图>电源图</a></li><li><a href=#电源内部图>电源内部图</a></li><li><a href=#风扇图>风扇图</a></li><li><a href=#风扇接口图>风扇接口图</a></li><li><a href=#完工>完工！</a></li></ul></li><li><a href=#总结>总结</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">记录一次解决电脑异响的过程</h1><div class=post-meta>
 <div class=post-meta-line>
 <span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-04-14>2019-04-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1266 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-04-14>2019-04-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1266 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#环境说明>环境说明</a></li>
-<li><a href=#开始动手>开始动手</a>
+<li><a href=#环境说明>环境说明</a></li><li><a href=#开始动手>开始动手</a>
 <ul>
-<li><a href=#先看机箱图>先看机箱图</a></li>
-<li><a href=#电源图>电源图</a></li>
-<li><a href=#电源内部图>电源内部图</a></li>
-<li><a href=#风扇图>风扇图</a></li>
-<li><a href=#风扇接口图>风扇接口图</a></li>
-<li><a href=#完工>完工！</a></li>
-</ul>
-</li>
-<li><a href=#总结>总结</a></li>
-</ul>
-</nav></div>
-</div><div class=content id=content><blockquote>
-<p>现在公司里其实就只有一台开发服务器。运行着win7，运行着svn、oracle12c等等的服务。</p>
-<p>但是最近公司项目打算重写。从SpringMVC换成SpringBoot,前后端分离，用vue来写。代码服务器准备从svn换成git。而前后端的权限验证，打算用redis来进行保存。</p>
-<p>而redis在windows上只有3.x的版本，太老了。后期也打算把项目的部署全部流程化，规范化。解决误操作的问题。所以还是打算windows转linux。</p>
-</blockquote>
-<h2 id=环境说明 class=headerLink>
-<a href=#%e7%8e%af%e5%a2%83%e8%af%b4%e6%98%8e class=header-mark></a>环境说明</h2><p>配置其实很烂:</p>
-<ol>
-<li>cpu:i3-4130</li>
-<li>memory:16gb 1600</li>
-<li>storage:128SSD+500GBHDD</li>
-<li>power:长城HOPELY HP-2800DY</li>
-</ol>
-<p>我在办公的时候，用的是win10。每次开机都会有<strong>非常大的声音</strong>，<strong>机箱震动明显</strong>。</p>
-<p>初步分析应该是在开机的时候会全功率运行风扇。我当时的想法是，之前没有这么大的声音啊。于是开机以后<strong>手动休眠</strong>，机箱没有了反应，然后用鼠标或者键盘唤醒电脑。这时候电脑不会全功率运转，至少风扇不会这样。于是开始办公。</p>
-<p>但是我现在是要用来装linux啊。准备摆放到一个角落，只有一个网线和电源连接。难道我开机以后，也远程进入休眠。然后去唤醒？我没有这么操作过，能不能成功还不知道，在linux下这个办法能不能管用也不知道。于是想着要从根源解决。</p>
-<p>我最早的一部个人电脑是联想的笔记本。用了4年左右，风扇也是出现的相同的情况。之前也有过一次自己拆机清灰的经验。自己给风扇加了一点猪油。。。解决了问题后，感觉性能都上升了2个档次！</p>
-<h2 id=开始动手 class=headerLink>
+<li><a href=#先看机箱图>先看机箱图</a></li><li><a href=#电源图>电源图</a></li><li><a href=#电源内部图>电源内部图</a></li><li><a href=#风扇图>风扇图</a></li><li><a href=#风扇接口图>风扇接口图</a></li><li><a href=#完工>完工！</a></li></ul></li><li><a href=#总结>总结</a></li></ul></nav></div></div><div class=content id=content><blockquote>
+<p>现在公司里其实就只有一台开发服务器。运行着win7，运行着svn、oracle12c等等的服务。</p><p>但是最近公司项目打算重写。从SpringMVC换成SpringBoot,前后端分离，用vue来写。代码服务器准备从svn换成git。而前后端的权限验证，打算用redis来进行保存。</p><p>而redis在windows上只有3.x的版本，太老了。后期也打算把项目的部署全部流程化，规范化。解决误操作的问题。所以还是打算windows转linux。</p></blockquote><h2 id=环境说明 class=headerLink>
+<a href=#%e7%8e%af%e5%a2%83%e8%af%b4%e6%98%8e class=header-mark></a>环境说明</h2><p>配置其实很烂:</p><ol>
+<li>cpu:i3-4130</li><li>memory:16gb 1600</li><li>storage:128SSD+500GBHDD</li><li>power:长城HOPELY HP-2800DY</li></ol><p>我在办公的时候，用的是win10。每次开机都会有<strong>非常大的声音</strong>，<strong>机箱震动明显</strong>。</p><p>初步分析应该是在开机的时候会全功率运行风扇。我当时的想法是，之前没有这么大的声音啊。于是开机以后<strong>手动休眠</strong>，机箱没有了反应，然后用鼠标或者键盘唤醒电脑。这时候电脑不会全功率运转，至少风扇不会这样。于是开始办公。</p><p>但是我现在是要用来装linux啊。准备摆放到一个角落，只有一个网线和电源连接。难道我开机以后，也远程进入休眠。然后去唤醒？我没有这么操作过，能不能成功还不知道，在linux下这个办法能不能管用也不知道。于是想着要从根源解决。</p><p>我最早的一部个人电脑是联想的笔记本。用了4年左右，风扇也是出现的相同的情况。之前也有过一次自己拆机清灰的经验。自己给风扇加了一点猪油。。。解决了问题后，感觉性能都上升了2个档次！</p><h2 id=开始动手 class=headerLink>
 <a href=#%e5%bc%80%e5%a7%8b%e5%8a%a8%e6%89%8b class=header-mark></a>开始动手</h2><h3 id=先看机箱图 class=headerLink>
-<a href=#%e5%85%88%e7%9c%8b%e6%9c%ba%e7%ae%b1%e5%9b%be class=header-mark></a>先看机箱图</h3><p>我把电源弄了出来了。可以看到是小主板。东西不是特别多，但不整洁。对比一些背部走线的机箱，算比较乱的了。</p>
-<p>因为拆开以后，我用手摸着各个可能震动的部位，发现是电源部分，所以把电源拿了出来。</p>
-<p><img class=lazyload data-src=/images/workstation/%e6%9c%ba%e7%ae%b1%e5%9b%be.jpg data-srcset="/images/workstation/%e6%9c%ba%e7%ae%b1%e5%9b%be.jpg, /images/workstation/%e6%9c%ba%e7%ae%b1%e5%9b%be.jpg 1.5x, /images/workstation/%e6%9c%ba%e7%ae%b1%e5%9b%be.jpg 2x" data-sizes=auto alt=/images/workstation/机箱图.jpg title=机箱图></p>
-<h3 id=电源图 class=headerLink>
-<a href=#%e7%94%b5%e6%ba%90%e5%9b%be class=header-mark></a>电源图</h3><p><img class=lazyload data-src=/images/workstation/%e7%94%b5%e6%ba%90%e5%9b%be.jpg data-srcset="/images/workstation/%e7%94%b5%e6%ba%90%e5%9b%be.jpg, /images/workstation/%e7%94%b5%e6%ba%90%e5%9b%be.jpg 1.5x, /images/workstation/%e7%94%b5%e6%ba%90%e5%9b%be.jpg 2x" data-sizes=auto alt=/images/workstation/电源图.jpg title=电源图></p>
-<p>从电源的型号，我成功搜到了对应的淘宝卖家。同时也有了详细的参数信息。</p>
-<p><img class=lazyload data-src=/images/workstation/%e7%94%b5%e6%ba%90%e5%8f%82%e6%95%b0%e5%9b%be.jpg data-srcset="/images/workstation/%e7%94%b5%e6%ba%90%e5%8f%82%e6%95%b0%e5%9b%be.jpg, /images/workstation/%e7%94%b5%e6%ba%90%e5%8f%82%e6%95%b0%e5%9b%be.jpg 1.5x, /images/workstation/%e7%94%b5%e6%ba%90%e5%8f%82%e6%95%b0%e5%9b%be.jpg 2x" data-sizes=auto alt=/images/workstation/电源参数图.jpg title=电源参数图></p>
-<h3 id=电源内部图 class=headerLink>
-<a href=#%e7%94%b5%e6%ba%90%e5%86%85%e9%83%a8%e5%9b%be class=header-mark></a>电源内部图</h3><p>断电，卸掉了顶部的4个螺丝，但是盖子还有线材连接，所以只能这样拍了一张。</p>
-<p>我也没学过什么电路和电板知识，但是我知道肯定是这个风扇最可疑了。</p>
-<p>取下了右下角的风扇接口，重新开机。果然！</p>
-<p>但是电源的风扇还是很有用的，我只能自己换了它。</p>
-<p><img class=lazyload data-src=/images/workstation/%e7%94%b5%e6%ba%90%e5%86%85%e9%83%a8%e5%9b%be.jpg data-srcset="/images/workstation/%e7%94%b5%e6%ba%90%e5%86%85%e9%83%a8%e5%9b%be.jpg, /images/workstation/%e7%94%b5%e6%ba%90%e5%86%85%e9%83%a8%e5%9b%be.jpg 1.5x, /images/workstation/%e7%94%b5%e6%ba%90%e5%86%85%e9%83%a8%e5%9b%be.jpg 2x" data-sizes=auto alt=/images/workstation/电源内部图.jpg title=电源内部图></p>
-<h3 id=风扇图 class=headerLink>
-<a href=#%e9%a3%8e%e6%89%87%e5%9b%be class=header-mark></a>风扇图</h3><p><img class=lazyload data-src=/images/workstation/%e9%a3%8e%e6%89%87.jpg data-srcset="/images/workstation/%e9%a3%8e%e6%89%87.jpg, /images/workstation/%e9%a3%8e%e6%89%87.jpg 1.5x, /images/workstation/%e9%a3%8e%e6%89%87.jpg 2x" data-sizes=auto alt=/images/workstation/风扇.jpg title=风扇></p>
-<p>下面附上一个此类风扇的内部拆解视频。</p>
-<div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden>
+<a href=#%e5%85%88%e7%9c%8b%e6%9c%ba%e7%ae%b1%e5%9b%be class=header-mark></a>先看机箱图</h3><p>我把电源弄了出来了。可以看到是小主板。东西不是特别多，但不整洁。对比一些背部走线的机箱，算比较乱的了。</p><p>因为拆开以后，我用手摸着各个可能震动的部位，发现是电源部分，所以把电源拿了出来。</p><p><img class=lazyload data-src=/images/workstation/%e6%9c%ba%e7%ae%b1%e5%9b%be.jpg data-srcset="/images/workstation/%e6%9c%ba%e7%ae%b1%e5%9b%be.jpg, /images/workstation/%e6%9c%ba%e7%ae%b1%e5%9b%be.jpg 1.5x, /images/workstation/%e6%9c%ba%e7%ae%b1%e5%9b%be.jpg 2x" data-sizes=auto alt=/images/workstation/机箱图.jpg title=机箱图></p><h3 id=电源图 class=headerLink>
+<a href=#%e7%94%b5%e6%ba%90%e5%9b%be class=header-mark></a>电源图</h3><p><img class=lazyload data-src=/images/workstation/%e7%94%b5%e6%ba%90%e5%9b%be.jpg data-srcset="/images/workstation/%e7%94%b5%e6%ba%90%e5%9b%be.jpg, /images/workstation/%e7%94%b5%e6%ba%90%e5%9b%be.jpg 1.5x, /images/workstation/%e7%94%b5%e6%ba%90%e5%9b%be.jpg 2x" data-sizes=auto alt=/images/workstation/电源图.jpg title=电源图></p><p>从电源的型号，我成功搜到了对应的淘宝卖家。同时也有了详细的参数信息。</p><p><img class=lazyload data-src=/images/workstation/%e7%94%b5%e6%ba%90%e5%8f%82%e6%95%b0%e5%9b%be.jpg data-srcset="/images/workstation/%e7%94%b5%e6%ba%90%e5%8f%82%e6%95%b0%e5%9b%be.jpg, /images/workstation/%e7%94%b5%e6%ba%90%e5%8f%82%e6%95%b0%e5%9b%be.jpg 1.5x, /images/workstation/%e7%94%b5%e6%ba%90%e5%8f%82%e6%95%b0%e5%9b%be.jpg 2x" data-sizes=auto alt=/images/workstation/电源参数图.jpg title=电源参数图></p><h3 id=电源内部图 class=headerLink>
+<a href=#%e7%94%b5%e6%ba%90%e5%86%85%e9%83%a8%e5%9b%be class=header-mark></a>电源内部图</h3><p>断电，卸掉了顶部的4个螺丝，但是盖子还有线材连接，所以只能这样拍了一张。</p><p>我也没学过什么电路和电板知识，但是我知道肯定是这个风扇最可疑了。</p><p>取下了右下角的风扇接口，重新开机。果然！</p><p>但是电源的风扇还是很有用的，我只能自己换了它。</p><p><img class=lazyload data-src=/images/workstation/%e7%94%b5%e6%ba%90%e5%86%85%e9%83%a8%e5%9b%be.jpg data-srcset="/images/workstation/%e7%94%b5%e6%ba%90%e5%86%85%e9%83%a8%e5%9b%be.jpg, /images/workstation/%e7%94%b5%e6%ba%90%e5%86%85%e9%83%a8%e5%9b%be.jpg 1.5x, /images/workstation/%e7%94%b5%e6%ba%90%e5%86%85%e9%83%a8%e5%9b%be.jpg 2x" data-sizes=auto alt=/images/workstation/电源内部图.jpg title=电源内部图></p><h3 id=风扇图 class=headerLink>
+<a href=#%e9%a3%8e%e6%89%87%e5%9b%be class=header-mark></a>风扇图</h3><p><img class=lazyload data-src=/images/workstation/%e9%a3%8e%e6%89%87.jpg data-srcset="/images/workstation/%e9%a3%8e%e6%89%87.jpg, /images/workstation/%e9%a3%8e%e6%89%87.jpg 1.5x, /images/workstation/%e9%a3%8e%e6%89%87.jpg 2x" data-sizes=auto alt=/images/workstation/风扇.jpg title=风扇></p><p>下面附上一个此类风扇的内部拆解视频。</p><div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden>
 <iframe src=https://www.youtube.com/embed/51cc0rHFwOc style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 allowfullscreen title="YouTube Video"></iframe>
-</div>
-<p>我在加了一些润滑油以后，还是有很大的响声和震动。我在拆开的时候，很容易就<strong>弄坏了上层的白色胶片</strong>。<br>
-干脆就打算去重新买一个新的风扇好了。</p>
-<h3 id=风扇接口图 class=headerLink>
-<a href=#%e9%a3%8e%e6%89%87%e6%8e%a5%e5%8f%a3%e5%9b%be class=header-mark></a>风扇接口图</h3><p><img class=lazyload data-src=/images/workstation/%e9%a3%8e%e6%89%87%e6%8e%a5%e5%8f%a3%e5%9b%be.jpg data-srcset="/images/workstation/%e9%a3%8e%e6%89%87%e6%8e%a5%e5%8f%a3%e5%9b%be.jpg, /images/workstation/%e9%a3%8e%e6%89%87%e6%8e%a5%e5%8f%a3%e5%9b%be.jpg 1.5x, /images/workstation/%e9%a3%8e%e6%89%87%e6%8e%a5%e5%8f%a3%e5%9b%be.jpg 2x" data-sizes=auto alt=/images/workstation/风扇接口图.jpg title=风扇接口图></p>
-<p>可以看到是2个口的。</p>
-<p>于是在淘宝上找。。淘宝真是个好东西啊！感觉国外的人真的是生活在水深火热中啊～～</p>
-<p>根据8cm和2pin口这个信息，成功买到了适合的风扇。</p>
-<p><img class=lazyload data-src=/images/workstation/%e8%b4%ad%e4%b9%b0%e9%a3%8e%e6%89%87%e8%81%8a%e5%a4%a9%e8%ae%b0%e5%bd%95.png data-srcset="/images/workstation/%e8%b4%ad%e4%b9%b0%e9%a3%8e%e6%89%87%e8%81%8a%e5%a4%a9%e8%ae%b0%e5%bd%95.png, /images/workstation/%e8%b4%ad%e4%b9%b0%e9%a3%8e%e6%89%87%e8%81%8a%e5%a4%a9%e8%ae%b0%e5%bd%95.png 1.5x, /images/workstation/%e8%b4%ad%e4%b9%b0%e9%a3%8e%e6%89%87%e8%81%8a%e5%a4%a9%e8%ae%b0%e5%bd%95.png 2x" data-sizes=auto alt=/images/workstation/购买风扇聊天记录.png title=购买风扇聊天记录></p>
-<h3 id=完工 class=headerLink>
-<a href=#%e5%ae%8c%e5%b7%a5 class=header-mark></a>完工！</h3><p>把风扇装好，测试没问题。收工！</p>
-<h2 id=总结 class=headerLink>
-<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>我自己之前最多也就是加加内存(拔插一下)，加加硬盘(怼上接口，拧好螺丝)。心里比较忐忑。因为拆了硬件以后，一般都是不保修的。</p>
-<p>电源顶部的一个螺丝，是用防伪纸盖住的。要拆开肯定就会被发现。如果厂家看到了，也会拒绝保修。但是我打了一圈的电话，也没能搞定。真的是无语了。虽然价格便宜，但是服务态度真的是一般般。爱踢皮球。</p>
-<p>还好电脑这东西不容易坏。正常使用。一用就是很多年，而且可以升级。不用太担心拆坏。</p>
-<p>你要想想那些电脑城的人，入门门槛极低，手艺层次不齐。细心一点，你能做的比他们更好！</p>
-</div>
-<div class=post-footer id=post-footer>
+</div><p>我在加了一些润滑油以后，还是有很大的响声和震动。我在拆开的时候，很容易就<strong>弄坏了上层的白色胶片</strong>。<br>
+干脆就打算去重新买一个新的风扇好了。</p><h3 id=风扇接口图 class=headerLink>
+<a href=#%e9%a3%8e%e6%89%87%e6%8e%a5%e5%8f%a3%e5%9b%be class=header-mark></a>风扇接口图</h3><p><img class=lazyload data-src=/images/workstation/%e9%a3%8e%e6%89%87%e6%8e%a5%e5%8f%a3%e5%9b%be.jpg data-srcset="/images/workstation/%e9%a3%8e%e6%89%87%e6%8e%a5%e5%8f%a3%e5%9b%be.jpg, /images/workstation/%e9%a3%8e%e6%89%87%e6%8e%a5%e5%8f%a3%e5%9b%be.jpg 1.5x, /images/workstation/%e9%a3%8e%e6%89%87%e6%8e%a5%e5%8f%a3%e5%9b%be.jpg 2x" data-sizes=auto alt=/images/workstation/风扇接口图.jpg title=风扇接口图></p><p>可以看到是2个口的。</p><p>于是在淘宝上找。。淘宝真是个好东西啊！感觉国外的人真的是生活在水深火热中啊～～</p><p>根据8cm和2pin口这个信息，成功买到了适合的风扇。</p><p><img class=lazyload data-src=/images/workstation/%e8%b4%ad%e4%b9%b0%e9%a3%8e%e6%89%87%e8%81%8a%e5%a4%a9%e8%ae%b0%e5%bd%95.png data-srcset="/images/workstation/%e8%b4%ad%e4%b9%b0%e9%a3%8e%e6%89%87%e8%81%8a%e5%a4%a9%e8%ae%b0%e5%bd%95.png, /images/workstation/%e8%b4%ad%e4%b9%b0%e9%a3%8e%e6%89%87%e8%81%8a%e5%a4%a9%e8%ae%b0%e5%bd%95.png 1.5x, /images/workstation/%e8%b4%ad%e4%b9%b0%e9%a3%8e%e6%89%87%e8%81%8a%e5%a4%a9%e8%ae%b0%e5%bd%95.png 2x" data-sizes=auto alt=/images/workstation/购买风扇聊天记录.png title=购买风扇聊天记录></p><h3 id=完工 class=headerLink>
+<a href=#%e5%ae%8c%e5%b7%a5 class=header-mark></a>完工！</h3><p>把风扇装好，测试没问题。收工！</p><h2 id=总结 class=headerLink>
+<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>我自己之前最多也就是加加内存(拔插一下)，加加硬盘(怼上接口，拧好螺丝)。心里比较忐忑。因为拆了硬件以后，一般都是不保修的。</p><p>电源顶部的一个螺丝，是用防伪纸盖住的。要拆开肯定就会被发现。如果厂家看到了，也会拒绝保修。但是我打了一圈的电话，也没能搞定。真的是无语了。虽然价格便宜，但是服务态度真的是一般般。爱踢皮球。</p><p>还好电脑这东西不容易坏。正常使用。一用就是很多年，而且可以升级。不用太担心拆坏。</p><p>你要想想那些电脑城的人，入门门槛极低，手艺层次不齐。细心一点，你能做的比他们更好！</p></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
 <span>更新于 2021-08-23</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span><a href=# onclick=return!1 title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/ data-title=记录一次解决电脑异响的过程 data-hashtags=硬件><i class="fab fa-twitter fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/ data-hashtag=硬件><i class="fab fa-facebook-square fa-fw"></i></a><a href=# onclick=return!1 title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/ data-title=记录一次解决电脑异响的过程 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/ data-title=记录一次解决电脑异响的过程><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# onclick=return!1 title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/ data-title=记录一次解决电脑异响的过程><i class="fab fa-weibo fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/ data-title=记录一次解决电脑异响的过程 data-description=现在公司里其实就只有一台开发服务器。运行着win7，运行着svn、oracle12c等等的服务。但是最近公司项目打算重写。从SpringMVC换成SpringBoot,前后端分离，用vue来写。代码服务器准备从svn换成git。而前后端的权限验证，打算用redis来进行保存。而redis在windows上只有3.x的版本，太老了。后期也打算把项目的部署全部流程化，规范化。解决误操作的问题。所以还是打算windows转linux><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# onclick=return!1 title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/ data-title=记录一次解决电脑异响的过程 data-description=现在公司里其实就只有一台开发服务器。运行着win7，运行着svn、oracle12c等等的服务。但是最近公司项目打算重写。从SpringMVC换成SpringBoot,前后端分离，用vue来写。代码服务器准备从svn换成git。而前后端的权限验证，打算用redis来进行保存。而redis在windows上只有3.x的版本，太老了。后期也打算把项目的部署全部流程化，规范化。解决误操作的问题。所以还是打算windows转linux><i class="fab fa-blogger fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/contents/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%94%B5%E8%84%91%E5%BC%82%E5%93%8D%E7%9A%84%E8%BF%87%E7%A8%8B/ data-title=记录一次解决电脑异响的过程><i class="fab fa-evernote fa-fw"></i></a></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/%E7%A1%AC%E4%BB%B6/>硬件</a></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/%E7%A1%AC%E4%BB%B6/>硬件</a></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/contents/%E6%8B%93%E5%B1%95hugo%E7%9A%84markdown_%E6%B5%81%E7%A8%8B%E5%9B%BEmermaid/ class=prev rel=prev title=拓展hugo的markdown_流程图mermaid><i class="fas fa-angle-left fa-fw"></i>拓展hugo的markdown_流程图mermaid</a>
-<a href=/contents/%E5%9C%A8mac%E4%B8%8Aheic%E8%BD%ACjpg%E6%88%96png/ class=next rel=next title=在mac上HEIC转JPG或PNG>在mac上HEIC转JPG或PNG<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
+</section></div><div class=post-nav><a href=/contents/%E6%8B%93%E5%B1%95hugo%E7%9A%84markdown_%E6%B5%81%E7%A8%8B%E5%9B%BEmermaid/ class=prev rel=prev title=拓展hugo的markdown_流程图mermaid><i class="fas fa-angle-left fa-fw"></i>拓展hugo的markdown_流程图mermaid</a>
+<a href=/contents/%E5%9C%A8mac%E4%B8%8Aheic%E8%BD%ACjpg%E6%88%96png/ class=next rel=next title=在mac上HEIC转JPG或PNG>在mac上HEIC转JPG或PNG<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
 <div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
-<span class=icp>湘ICP备2021002319号-1</span></div>
-<div class=footer-line></div>
-<div class=footer-line>
-</div>
-</div><script>'serviceWorker'in navigator&&(navigator.serviceWorker.register('/sw.min.js',{scope:'/'}).then(function(a){}),navigator.serviceWorker.ready.then(function(a){}))</script></footer></div>
-<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
+<span class=icp>湘ICP备2021002319号-1</span></div><div class=footer-line></div><div class=footer-line>
+</div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
-</body>
-</html>
+</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div><div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div></body></html>

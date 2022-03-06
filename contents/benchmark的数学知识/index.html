@@ -16,18 +16,14 @@
 <meta name=apple-mobile-web-app-title content="kentxxq">
 <meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/><link rel=prev href=https://kentxxq.com/contents/k8s%E7%9A%84%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/><link rel=next href=https://kentxxq.com/contents/2021%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%97%A5%E8%AE%B0/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
-<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"benchmark的数学知识","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86\/"},"genre":"posts","keywords":"csharp, benchmark","wordcount":916,"url":"https:\/\/kentxxq.com\/contents\/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86\/","datePublished":"2021-08-14T20:20:20+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"程序性能总是一个永恒的话题。各个系统、编程语言、算法、io逻辑，总是不停的对比。今天在dotnet闲逛的时候，看到了官方做的一个性能评测库，但是指标我却看不懂。于是就看了一会儿相关知识，准备记录一下"}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
-<div id=back-to-top></div>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/><link rel=prev href=https://kentxxq.com/contents/k8s%E7%9A%84%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/><link rel=next href=https://kentxxq.com/contents/2021%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%97%A5%E8%AE%B0/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"benchmark的数学知识","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86\/"},"genre":"posts","keywords":"csharp, benchmark","wordcount":916,"url":"https:\/\/kentxxq.com\/contents\/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86\/","datePublished":"2021-08-14T20:20:20+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"程序性能总是一个永恒的话题。各个系统、编程语言、算法、io逻辑，总是不停的对比。今天在dotnet闲逛的时候，看到了官方做的一个性能评测库，但是指标我却看不懂。于是就看了一会儿相关知识，准备记录一下"}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e)}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(t){const e=document.getElementsByTagName("meta");for(let n=0;n<e.length;n++)if(e[n].getAttribute("name")===t)return e[n];return''}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light")}else''==="light"||''==="dark"||''==="black"?(setTheme(''),saveTheme('')):(saveTheme("auto"),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")]</script>
+<div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/posts/> Blog </a><a class=menu-item href=/categories/> Categories </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/about/> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -41,20 +37,14 @@
 </span>
 </span><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</a></div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -66,55 +56,30 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
+</div><a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
-<li><a href=#程序说明>程序说明</a></li>
-<li><a href=#输出分析>输出分析</a></li>
-<li><a href=#总结>总结</a></li>
-</ul>
-</nav></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">benchmark的数学知识</h1><div class=post-meta>
+<li><a href=#程序说明>程序说明</a></li><li><a href=#输出分析>输出分析</a></li><li><a href=#总结>总结</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">benchmark的数学知识</h1><div class=post-meta>
 <div class=post-meta-line>
 <span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-08-14>2021-08-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 916 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
-</div><div class=featured-image><img class=lazyload data-src=/featureImage/benchmark%e7%9a%84%e6%95%b0%e5%ad%a6%e7%9f%a5%e8%af%86.webp data-srcset="/featureImage/benchmark%e7%9a%84%e6%95%b0%e5%ad%a6%e7%9f%a5%e8%af%86.webp, /featureImage/benchmark%e7%9a%84%e6%95%b0%e5%ad%a6%e7%9f%a5%e8%af%86.webp 1.5x, /featureImage/benchmark%e7%9a%84%e6%95%b0%e5%ad%a6%e7%9f%a5%e8%af%86.webp 2x" data-sizes=auto alt=/featureImage/benchmark的数学知识.webp title=程序性能总是一个永恒的话题。各个系统、编程语言、算法、io逻辑，总是不停的对比。今天在dotnet闲逛的时候，看到了官方做的一个性能评测库，但是指标我却看不懂。于是就看了一会儿相关知识，准备记录一下 height=auto width=auto></div><div class="details toc" id=toc-static kept>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-08-14>2021-08-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 916 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class=featured-image><img class=lazyload data-src=/featureImage/benchmark%e7%9a%84%e6%95%b0%e5%ad%a6%e7%9f%a5%e8%af%86.webp data-srcset="/featureImage/benchmark%e7%9a%84%e6%95%b0%e5%ad%a6%e7%9f%a5%e8%af%86.webp, /featureImage/benchmark%e7%9a%84%e6%95%b0%e5%ad%a6%e7%9f%a5%e8%af%86.webp 1.5x, /featureImage/benchmark%e7%9a%84%e6%95%b0%e5%ad%a6%e7%9f%a5%e8%af%86.webp 2x" data-sizes=auto alt=/featureImage/benchmark的数学知识.webp title=程序性能总是一个永恒的话题。各个系统、编程语言、算法、io逻辑，总是不停的对比。今天在dotnet闲逛的时候，看到了官方做的一个性能评测库，但是指标我却看不懂。于是就看了一会儿相关知识，准备记录一下 height=auto width=auto></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#程序说明>程序说明</a></li>
-<li><a href=#输出分析>输出分析</a></li>
-<li><a href=#总结>总结</a></li>
-</ul>
-</nav></div>
-</div><div class=content id=content><blockquote>
-<p>程序性能总是一个永恒的话题。各个系统、编程语言、算法、io逻辑，总是不停的对比。今天在dotnet闲逛的时候，看到了官方做的一个性能评测库，但是指标我却看不懂。于是就看了一会儿相关知识，准备记录一下。</p>
-</blockquote>
-<h2 id=程序说明 class=headerLink>
-<a href=#%e7%a8%8b%e5%ba%8f%e8%af%b4%e6%98%8e class=header-mark></a>程序说明</h2><p>抄了一个官方的demo。很简单，就是在对比<code>md5</code>和<code>sha256</code>两者的性能。</p>
-<div class=highlight><div class=chroma>
+<li><a href=#程序说明>程序说明</a></li><li><a href=#输出分析>输出分析</a></li><li><a href=#总结>总结</a></li></ul></nav></div></div><div class=content id=content><blockquote>
+<p>程序性能总是一个永恒的话题。各个系统、编程语言、算法、io逻辑，总是不停的对比。今天在dotnet闲逛的时候，看到了官方做的一个性能评测库，但是指标我却看不懂。于是就看了一会儿相关知识，准备记录一下。</p></blockquote><h2 id=程序说明 class=headerLink>
+<a href=#%e7%a8%8b%e5%ba%8f%e8%af%b4%e6%98%8e class=header-mark></a>程序说明</h2><p>抄了一个官方的demo。很简单，就是在对比<code>md5</code>和<code>sha256</code>两者的性能。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -152,50 +117,45 @@
 </span><span class=lnt>34
 </span><span class=lnt>35
 </span><span class=lnt>36
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cs data-lang=cs><span class=k>using</span> <span class=nn>System</span><span class=p>;</span>
-<span class=k>using</span> <span class=nn>System.Security.Cryptography</span><span class=p>;</span>
-<span class=k>using</span> <span class=nn>BenchmarkDotNet.Attributes</span><span class=p>;</span>
-<span class=k>using</span> <span class=nn>BenchmarkDotNet.Jobs</span><span class=p>;</span>
-<span class=k>using</span> <span class=nn>BenchmarkDotNet.Running</span><span class=p>;</span>
-
-<span class=k>namespace</span> <span class=nn>Cli</span>
-<span class=p>{</span>
-    <span class=k>public</span> <span class=k>class</span> <span class=nc>Md5VsSha256</span>
-    <span class=p>{</span>
-        <span class=k>private</span> <span class=k>const</span> <span class=kt>int</span> <span class=n>N</span> <span class=p>=</span> <span class=m>10000</span><span class=p>;</span>
-        <span class=k>private</span> <span class=k>readonly</span> <span class=kt>byte</span><span class=p>[]</span> <span class=n>data</span><span class=p>;</span>
-
-        <span class=k>private</span> <span class=k>readonly</span> <span class=n>SHA256</span> <span class=n>sha256</span> <span class=p>=</span> <span class=n>SHA256</span><span class=p>.</span><span class=n>Create</span><span class=p>();</span>
-        <span class=k>private</span> <span class=k>readonly</span> <span class=n>MD5</span> <span class=n>md5</span> <span class=p>=</span> <span class=n>MD5</span><span class=p>.</span><span class=n>Create</span><span class=p>();</span>
-
-        <span class=k>public</span> <span class=n>Md5VsSha256</span><span class=p>()</span>
-        <span class=p>{</span>
-            <span class=n>data</span> <span class=p>=</span> <span class=k>new</span> <span class=kt>byte</span><span class=p>[</span><span class=n>N</span><span class=p>];</span>
-            <span class=k>new</span> <span class=n>Random</span><span class=p>(</span><span class=m>42</span><span class=p>).</span><span class=n>NextBytes</span><span class=p>(</span><span class=n>data</span><span class=p>);</span>
-        <span class=p>}</span>
-<span class=na>
-</span><span class=na>        [Benchmark]</span>
-        <span class=k>public</span> <span class=kt>byte</span><span class=p>[]</span> <span class=n>Sha256</span><span class=p>()</span> <span class=p>=&gt;</span> <span class=n>sha256</span><span class=p>.</span><span class=n>ComputeHash</span><span class=p>(</span><span class=n>data</span><span class=p>);</span>
-<span class=na>
-</span><span class=na>        [Benchmark]</span>
-        <span class=k>public</span> <span class=kt>byte</span><span class=p>[]</span> <span class=n>Md5</span><span class=p>()</span> <span class=p>=&gt;</span> <span class=n>md5</span><span class=p>.</span><span class=n>ComputeHash</span><span class=p>(</span><span class=n>data</span><span class=p>);</span>
-    <span class=p>}</span>
-    <span class=k>class</span> <span class=nc>Program</span>
-    <span class=p>{</span>
-        <span class=k>static</span> <span class=k>void</span> <span class=n>Main</span><span class=p>(</span><span class=kt>string</span><span class=p>[]</span> <span class=n>args</span><span class=p>)</span>
-        <span class=p>{</span>
-            <span class=kt>var</span> <span class=n>summary</span> <span class=p>=</span> <span class=n>BenchmarkRunner</span><span class=p>.</span><span class=n>Run</span><span class=p>&lt;</span><span class=n>Md5VsSha256</span><span class=p>&gt;();</span>
-        <span class=p>}</span>
-    <span class=p>}</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=输出分析 class=headerLink>
-<a href=#%e8%be%93%e5%87%ba%e5%88%86%e6%9e%90 class=header-mark></a>输出分析</h2><p>首先需要将代码release。因为这样会对代码进行优化。让我们的性能观测更加准确。</p>
-<p>接下来就是查看我们的输出结果。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-cs data-lang=cs><span class=line><span class=cl><span class=k>using</span> <span class=nn>System</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>System.Security.Cryptography</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>BenchmarkDotNet.Attributes</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>BenchmarkDotNet.Jobs</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>BenchmarkDotNet.Running</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>namespace</span> <span class=nn>Cli</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>class</span> <span class=nc>Md5VsSha256</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>private</span> <span class=k>const</span> <span class=kt>int</span> <span class=n>N</span> <span class=p>=</span> <span class=m>10000</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>private</span> <span class=k>readonly</span> <span class=kt>byte</span><span class=p>[]</span> <span class=n>data</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>private</span> <span class=k>readonly</span> <span class=n>SHA256</span> <span class=n>sha256</span> <span class=p>=</span> <span class=n>SHA256</span><span class=p>.</span><span class=n>Create</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>        <span class=k>private</span> <span class=k>readonly</span> <span class=n>MD5</span> <span class=n>md5</span> <span class=p>=</span> <span class=n>MD5</span><span class=p>.</span><span class=n>Create</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>public</span> <span class=n>Md5VsSha256</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>data</span> <span class=p>=</span> <span class=k>new</span> <span class=kt>byte</span><span class=p>[</span><span class=n>N</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>            <span class=k>new</span> <span class=n>Random</span><span class=p>(</span><span class=m>42</span><span class=p>).</span><span class=n>NextBytes</span><span class=p>(</span><span class=n>data</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=na>
+</span></span></span><span class=line><span class=cl><span class=na>        [Benchmark]</span>
+</span></span><span class=line><span class=cl>        <span class=k>public</span> <span class=kt>byte</span><span class=p>[]</span> <span class=n>Sha256</span><span class=p>()</span> <span class=p>=&gt;</span> <span class=n>sha256</span><span class=p>.</span><span class=n>ComputeHash</span><span class=p>(</span><span class=n>data</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=na>
+</span></span></span><span class=line><span class=cl><span class=na>        [Benchmark]</span>
+</span></span><span class=line><span class=cl>        <span class=k>public</span> <span class=kt>byte</span><span class=p>[]</span> <span class=n>Md5</span><span class=p>()</span> <span class=p>=&gt;</span> <span class=n>md5</span><span class=p>.</span><span class=n>ComputeHash</span><span class=p>(</span><span class=n>data</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Program</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>static</span> <span class=k>void</span> <span class=n>Main</span><span class=p>(</span><span class=kt>string</span><span class=p>[]</span> <span class=n>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=kt>var</span> <span class=n>summary</span> <span class=p>=</span> <span class=n>BenchmarkRunner</span><span class=p>.</span><span class=n>Run</span><span class=p>&lt;</span><span class=n>Md5VsSha256</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=输出分析 class=headerLink>
+<a href=#%e8%be%93%e5%87%ba%e5%88%86%e6%9e%90 class=header-mark></a>输出分析</h2><p>首先需要将代码release。因为这样会对代码进行优化。让我们的性能观测更加准确。</p><p>接下来就是查看我们的输出结果。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -212,74 +172,42 @@
 </span><span class=lnt>13
 </span><span class=lnt>14
 </span><span class=lnt>15
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nv>BenchmarkDotNet</span><span class=o>=</span>v0.13.1, <span class=nv>OS</span><span class=o>=</span>Windows 10.0.22000
-Intel Core i5-10210U CPU 1.60GHz, <span class=m>1</span> CPU, <span class=m>8</span> logical and <span class=m>4</span> physical cores
-.NET <span class=nv>SDK</span><span class=o>=</span>5.0.400
-  <span class=o>[</span>Host<span class=o>]</span>     : .NET 5.0.9 <span class=o>(</span>5.0.921.35908<span class=o>)</span>, X64 RyuJIT
-  DefaultJob : .NET 5.0.9 <span class=o>(</span>5.0.921.35908<span class=o>)</span>, X64 RyuJIT
-
-<span class=p>|</span> Method <span class=p>|</span>     Mean <span class=p>|</span>    Error <span class=p>|</span>   StdDev <span class=p>|</span>
-<span class=p>|</span>------- <span class=p>|</span>---------:<span class=p>|</span>---------:<span class=p>|</span>---------:<span class=p>|</span>
-<span class=p>|</span> Sha256 <span class=p>|</span> 48.94 us <span class=p>|</span> 0.947 us <span class=p>|</span> 1.197 us <span class=p>|</span>
-<span class=p>|</span>    Md5 <span class=p>|</span> 19.58 us <span class=p>|</span> 0.356 us <span class=p>|</span> 0.315 us <span class=p>|</span>
-
-Mean   : Arithmetic mean of all measurements
-Error  : Half of 99.9% confidence interval
-StdDev : Standard deviation of all measurements
-<span class=m>1</span> us   : <span class=m>1</span> Microsecond <span class=o>(</span>0.000001 sec<span class=o>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>Mean</strong>代表平均值。举例我们有100次样本，这时候<code>Mean=所有样本时间/100</code>。也就是说可以看做是平均时间。</p>
-<p><strong>Error</strong>代表标准误差。标准误越小，样本均值和总体均值差距越小，那么样本数据就越能代表总体数据。标准误是多次抽样统计，量化了多组测量值均值的变化程度。因此用于推论统计，越小对Mean的结果推论越准确。</p>
-<p><strong>StdDev</strong>代表标准偏差。标准差越小，样本值之前的差别越小。标准差是一次抽样，量化了一组测量值的变化程度，用于描述统计。而我们的测试中用到了所有的样本(all measurements)，所以这里我们可以知道Mean和实际请求时间相差多少us。</p>
-<h2 id=总结 class=headerLink>
-<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>我们通过结果和概念，可以得到以下信息</p>
-<ol>
-<li><code>Mean</code>是此次性能测试的平均值。得到信息是：md5是比sha256要快的。</li>
-<li><code>Error</code>表明如果我们做更多的测试。sha256所花费的时间，预计是Mean加减0.947us。而md5预计是Mean加减0.356us。得到的信息是：准确性还是不错的。</li>
-<li><code>StdDev</code>表明在此次测试中，sha256偏差是加减1.197us。md5偏差是加减0.315us。得到的信息是：此次测试中每次花费的时间差别不大。</li>
-</ol>
-</div>
-<div class=post-footer id=post-footer>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nv>BenchmarkDotNet</span><span class=o>=</span>v0.13.1, <span class=nv>OS</span><span class=o>=</span>Windows 10.0.22000
+</span></span><span class=line><span class=cl>Intel Core i5-10210U CPU 1.60GHz, <span class=m>1</span> CPU, <span class=m>8</span> logical and <span class=m>4</span> physical cores
+</span></span><span class=line><span class=cl>.NET <span class=nv>SDK</span><span class=o>=</span>5.0.400
+</span></span><span class=line><span class=cl>  <span class=o>[</span>Host<span class=o>]</span>     : .NET 5.0.9 <span class=o>(</span>5.0.921.35908<span class=o>)</span>, X64 RyuJIT
+</span></span><span class=line><span class=cl>  DefaultJob : .NET 5.0.9 <span class=o>(</span>5.0.921.35908<span class=o>)</span>, X64 RyuJIT
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>|</span> Method <span class=p>|</span>     Mean <span class=p>|</span>    Error <span class=p>|</span>   StdDev <span class=p>|</span>
+</span></span><span class=line><span class=cl><span class=p>|</span>------- <span class=p>|</span>---------:<span class=p>|</span>---------:<span class=p>|</span>---------:<span class=p>|</span>
+</span></span><span class=line><span class=cl><span class=p>|</span> Sha256 <span class=p>|</span> 48.94 us <span class=p>|</span> 0.947 us <span class=p>|</span> 1.197 us <span class=p>|</span>
+</span></span><span class=line><span class=cl><span class=p>|</span>    Md5 <span class=p>|</span> 19.58 us <span class=p>|</span> 0.356 us <span class=p>|</span> 0.315 us <span class=p>|</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Mean   : Arithmetic mean of all measurements
+</span></span><span class=line><span class=cl>Error  : Half of 99.9% confidence interval
+</span></span><span class=line><span class=cl>StdDev : Standard deviation of all measurements
+</span></span><span class=line><span class=cl><span class=m>1</span> us   : <span class=m>1</span> Microsecond <span class=o>(</span>0.000001 sec<span class=o>)</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>Mean</strong>代表平均值。举例我们有100次样本，这时候<code>Mean=所有样本时间/100</code>。也就是说可以看做是平均时间。</p><p><strong>Error</strong>代表标准误差。标准误越小，样本均值和总体均值差距越小，那么样本数据就越能代表总体数据。标准误是多次抽样统计，量化了多组测量值均值的变化程度。因此用于推论统计，越小对Mean的结果推论越准确。</p><p><strong>StdDev</strong>代表标准偏差。标准差越小，样本值之前的差别越小。标准差是一次抽样，量化了一组测量值的变化程度，用于描述统计。而我们的测试中用到了所有的样本(all measurements)，所以这里我们可以知道Mean和实际请求时间相差多少us。</p><h2 id=总结 class=headerLink>
+<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>我们通过结果和概念，可以得到以下信息</p><ol>
+<li><code>Mean</code>是此次性能测试的平均值。得到信息是：md5是比sha256要快的。</li><li><code>Error</code>表明如果我们做更多的测试。sha256所花费的时间，预计是Mean加减0.947us。而md5预计是Mean加减0.356us。得到的信息是：准确性还是不错的。</li><li><code>StdDev</code>表明在此次测试中，sha256偏差是加减1.197us。md5偏差是加减0.315us。得到的信息是：此次测试中每次花费的时间差别不大。</li></ol></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
 <span>更新于 2021-08-23</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span><a href=# onclick=return!1 title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/contents/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/ data-title=benchmark的数学知识 data-hashtags=csharp,benchmark><i class="fab fa-twitter fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/contents/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/ data-hashtag=csharp><i class="fab fa-facebook-square fa-fw"></i></a><a href=# onclick=return!1 title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/contents/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/ data-title=benchmark的数学知识 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/contents/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/ data-title=benchmark的数学知识><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# onclick=return!1 title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/contents/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/ data-title=benchmark的数学知识 data-image=/featureImage/benchmark的数学知识.webp><i class="fab fa-weibo fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/contents/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/ data-title=benchmark的数学知识 data-description=程序性能总是一个永恒的话题。各个系统、编程语言、算法、io逻辑，总是不停的对比。今天在dotnet闲逛的时候，看到了官方做的一个性能评测库，但是指标我却看不懂。于是就看了一会儿相关知识，准备记录一下><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# onclick=return!1 title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/contents/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/ data-title=benchmark的数学知识 data-description=程序性能总是一个永恒的话题。各个系统、编程语言、算法、io逻辑，总是不停的对比。今天在dotnet闲逛的时候，看到了官方做的一个性能评测库，但是指标我却看不懂。于是就看了一会儿相关知识，准备记录一下><i class="fab fa-blogger fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/contents/benchmark%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/ data-title=benchmark的数学知识><i class="fab fa-evernote fa-fw"></i></a></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/csharp/>csharp</a>,&nbsp;<a href=/tags/benchmark/>benchmark</a></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/csharp/>csharp</a>,&nbsp;<a href=/tags/benchmark/>benchmark</a></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/contents/k8s%E7%9A%84%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/ class=prev rel=prev title=k8s的疑难杂症><i class="fas fa-angle-left fa-fw"></i>k8s的疑难杂症</a>
-<a href=/contents/2021%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%97%A5%E8%AE%B0/ class=next rel=next title=2021一句话日记>2021一句话日记<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
+</section></div><div class=post-nav><a href=/contents/k8s%E7%9A%84%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/ class=prev rel=prev title=k8s的疑难杂症><i class="fas fa-angle-left fa-fw"></i>k8s的疑难杂症</a>
+<a href=/contents/2021%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%97%A5%E8%AE%B0/ class=next rel=next title=2021一句话日记>2021一句话日记<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
 <div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
-<span class=icp>湘ICP备2021002319号-1</span></div>
-<div class=footer-line></div>
-<div class=footer-line>
-</div>
-</div><script>'serviceWorker'in navigator&&(navigator.serviceWorker.register('/sw.min.js',{scope:'/'}).then(function(a){}),navigator.serviceWorker.ready.then(function(a){}))</script></footer></div>
-<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
+<span class=icp>湘ICP备2021002319号-1</span></div><div class=footer-line></div><div class=footer-line>
+</div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
-</body>
-</html>
+</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div><div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div></body></html>

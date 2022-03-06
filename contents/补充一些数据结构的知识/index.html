@@ -16,18 +16,14 @@
 <meta name=apple-mobile-web-app-title content="kentxxq">
 <meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86/><link rel=prev href=https://kentxxq.com/contents/%E8%B5%B7%E7%A0%81%E8%A6%81%E8%83%BD%E7%9C%8B%E6%87%82c%E7%B3%BB%E5%88%97%E7%9A%84%E4%BB%A3%E7%A0%81/><link rel=next href=https://kentxxq.com/contents/%E5%B8%B8%E7%94%A8%E7%9A%84%E4%BF%A1%E6%81%AF%E6%89%8B%E5%86%8C/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
-<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"补充一些数据结构的知识","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86\/"},"genre":"posts","keywords":"笔记, c","wordcount":2578,"url":"https:\/\/kentxxq.com\/contents\/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86\/","datePublished":"2019-11-04T01:10:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"在之前做爬虫练手的时候，去爬的Porn网站。影片简介其中有一项就是影片时长。而在我后来的一段时间，发现很多影片网站是没有时长信息的。要知道影片的时长信息其实是非常重要的，需要作为一个筛选的条件。于是开始尝试自己来用python编写获取在线视频时长的工具。而后这段时间在看了c和c#相关的知识后，开始有了更为深入的了解。也遇到了一些在python中没有详细了解过的问题"}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
-<div id=back-to-top></div>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86/><link rel=prev href=https://kentxxq.com/contents/%E8%B5%B7%E7%A0%81%E8%A6%81%E8%83%BD%E7%9C%8B%E6%87%82c%E7%B3%BB%E5%88%97%E7%9A%84%E4%BB%A3%E7%A0%81/><link rel=next href=https://kentxxq.com/contents/%E5%B8%B8%E7%94%A8%E7%9A%84%E4%BF%A1%E6%81%AF%E6%89%8B%E5%86%8C/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"补充一些数据结构的知识","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86\/"},"genre":"posts","keywords":"笔记, c","wordcount":2578,"url":"https:\/\/kentxxq.com\/contents\/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86\/","datePublished":"2019-11-04T01:10:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"在之前做爬虫练手的时候，去爬的Porn网站。影片简介其中有一项就是影片时长。而在我后来的一段时间，发现很多影片网站是没有时长信息的。要知道影片的时长信息其实是非常重要的，需要作为一个筛选的条件。于是开始尝试自己来用python编写获取在线视频时长的工具。而后这段时间在看了c和c#相关的知识后，开始有了更为深入的了解。也遇到了一些在python中没有详细了解过的问题"}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e)}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(t){const e=document.getElementsByTagName("meta");for(let n=0;n<e.length;n++)if(e[n].getAttribute("name")===t)return e[n];return''}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light")}else''==="light"||''==="dark"||''==="black"?(setTheme(''),saveTheme('')):(saveTheme("auto"),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")]</script>
+<div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/posts/> Blog </a><a class=menu-item href=/categories/> Categories </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/about/> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -41,20 +37,14 @@
 </span>
 </span><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</a></div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -66,87 +56,38 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
+</div><a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
-<li><a href=#在线视频现状>在线视频现状</a></li>
-<li><a href=#我的解决方案>我的解决方案</a>
+<li><a href=#在线视频现状>在线视频现状</a></li><li><a href=#我的解决方案>我的解决方案</a>
 <ul>
-<li><a href=#python>python</a></li>
-<li><a href=#c>c#</a></li>
-<li><a href=#20191118日补充>20191118日补充</a></li>
-</ul>
-</li>
-<li><a href=#总结>总结</a></li>
-</ul>
-</nav></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">补充一些数据结构的知识</h1><div class=post-meta>
+<li><a href=#python>python</a></li><li><a href=#c>c#</a></li><li><a href=#20191118日补充>20191118日补充</a></li></ul></li><li><a href=#总结>总结</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">补充一些数据结构的知识</h1><div class=post-meta>
 <div class=post-meta-line>
 <span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-11-04>2019-11-04</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2578 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2019-11-04>2019-11-04</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2578 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#在线视频现状>在线视频现状</a></li>
-<li><a href=#我的解决方案>我的解决方案</a>
+<li><a href=#在线视频现状>在线视频现状</a></li><li><a href=#我的解决方案>我的解决方案</a>
 <ul>
-<li><a href=#python>python</a></li>
-<li><a href=#c>c#</a></li>
-<li><a href=#20191118日补充>20191118日补充</a></li>
-</ul>
-</li>
-<li><a href=#总结>总结</a></li>
-</ul>
-</nav></div>
-</div><div class=content id=content><blockquote>
-<p>在之前做爬虫练手的时候，去爬的Porn网站。影片简介其中有一项就是影片时长。而在我后来的一段时间，发现很多影片网站是没有时长信息的。要知道影片的时长信息其实是非常重要的，需要作为一个筛选的条件。</p>
-<p>于是开始尝试自己来用python编写获取在线视频时长的工具。而后这段时间在看了c和c#相关的知识后，开始有了更为深入的了解。也遇到了一些在python中没有详细了解过的问题。</p>
-</blockquote>
-<h2 id=在线视频现状 class=headerLink>
-<a href=#%e5%9c%a8%e7%ba%bf%e8%a7%86%e9%a2%91%e7%8e%b0%e7%8a%b6 class=header-mark></a>在线视频现状</h2><p>现在html5越来越流行，flash则已经确定在2020年后不再更新支持，每次打开chrome都会提醒我这一点。</p>
-<p>而html5钦定的视频文件格式，就是mp4文件。所以从mp4文件来入手是非常好的。</p>
-<p>mp4是一种文件格式。通过规范后的数据结构编排，生成文件。而软件则通过规范来解码文件，进行画面的绘制和输出。几乎所有的文件都是用c/c++的结构体来进行组装的。所以学习c语言对理解文件结构很有帮助。</p>
-<p>可以参考苹果网站的文档<a href=https://developer.apple.com/library/archive/documentation/QuickTime/QTFF/QTFFPreface/qtffPreface.html target=_blank rel="noopener noreffer">查阅规范</a></p>
-<h2 id=我的解决方案 class=headerLink>
+<li><a href=#python>python</a></li><li><a href=#c>c#</a></li><li><a href=#20191118日补充>20191118日补充</a></li></ul></li><li><a href=#总结>总结</a></li></ul></nav></div></div><div class=content id=content><blockquote>
+<p>在之前做爬虫练手的时候，去爬的Porn网站。影片简介其中有一项就是影片时长。而在我后来的一段时间，发现很多影片网站是没有时长信息的。要知道影片的时长信息其实是非常重要的，需要作为一个筛选的条件。</p><p>于是开始尝试自己来用python编写获取在线视频时长的工具。而后这段时间在看了c和c#相关的知识后，开始有了更为深入的了解。也遇到了一些在python中没有详细了解过的问题。</p></blockquote><h2 id=在线视频现状 class=headerLink>
+<a href=#%e5%9c%a8%e7%ba%bf%e8%a7%86%e9%a2%91%e7%8e%b0%e7%8a%b6 class=header-mark></a>在线视频现状</h2><p>现在html5越来越流行，flash则已经确定在2020年后不再更新支持，每次打开chrome都会提醒我这一点。</p><p>而html5钦定的视频文件格式，就是mp4文件。所以从mp4文件来入手是非常好的。</p><p>mp4是一种文件格式。通过规范后的数据结构编排，生成文件。而软件则通过规范来解码文件，进行画面的绘制和输出。几乎所有的文件都是用c/c++的结构体来进行组装的。所以学习c语言对理解文件结构很有帮助。</p><p>可以参考苹果网站的文档<a href=https://developer.apple.com/library/archive/documentation/QuickTime/QTFF/QTFFPreface/qtffPreface.html target=_blank rel="noopener noreffer">查阅规范</a></p><h2 id=我的解决方案 class=headerLink>
 <a href=#%e6%88%91%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88 class=header-mark></a>我的解决方案</h2><h3 id=python class=headerLink>
-<a href=#python class=header-mark></a>python</h3><p>一开始我搜索已有的解决方案。</p>
-<p>ffmpeg是一个很强的工具。跨平台且可以解析各种文件，但是ffmpeg需要单独部署，且不方便代码移植。我在用python通过命令行来调用的时候，发现速度奇慢。2小时才解析了200多条信息，且会无故hang住。对程序来说，也算是一个黑箱操作。无法调试。</p>
-<p><img class=lazyload data-src=/images/c/ffmpeg.jpg data-srcset="/images/c/ffmpeg.jpg, /images/c/ffmpeg.jpg 1.5x, /images/c/ffmpeg.jpg 2x" data-sizes=auto alt=/images/c/ffmpeg.jpg title=使用ffmpeg工具解析></p>
-<p>随后发现<a href=https://github.com/kkroening/ffmpeg-python target=_blank rel="noopener noreffer">ffmpeg-python</a>这个库可以帮我操作，但还是觉得麻烦。我需要了解一套新的api，以及它所对应到的ffmpeg接口。</p>
-<hr>
-<p>当你在在chrome中通过浏览器打开一个mp4文件的时候，会直接播放。且带有时长。</p>
-<p>在之前了解爬虫的过程中，一些难搞的网站，是可以使用selenium来操作的。使用一个真正的浏览器来进行数据采集。于是我进行了尝试。</p>
-<p><img class=lazyload data-src=/images/c/selenium.jpg data-srcset="/images/c/selenium.jpg, /images/c/selenium.jpg 1.5x, /images/c/selenium.jpg 2x" data-sizes=auto alt=/images/c/selenium.jpg title=使用selenium工具解析></p>
-<p>但是这样的效率同样不高。现在的浏览器越来越复杂和庞大。</p>
-<p>那么浏览器是如何获取到时长的呢？肯定是有方法的。我只要了解原理，然后用python写出来即可。</p>
-<hr>
-<p>首先需要了解http(s)请求中一个非常重要的header头，Range。</p>
-<p>状态码为200系列，代表不同的请求成功了。而你带上<code>"Range":"bytes=0-7"</code>请求去请求一个在线的mp4文件，正常情况下(大部分服务端都支持)会拿到206的状态码。代表你请求的数据成功了。你拿到了这个mp4前8个字节的数据。</p>
-<p>于是我们的需求变成了从mp4文件中获取到存储时长信息的那几个字节。对照之前的苹果文档，我便写出了如下的代码。</p>
-<div class=highlight><div class=chroma>
+<a href=#python class=header-mark></a>python</h3><p>一开始我搜索已有的解决方案。</p><p>ffmpeg是一个很强的工具。跨平台且可以解析各种文件，但是ffmpeg需要单独部署，且不方便代码移植。我在用python通过命令行来调用的时候，发现速度奇慢。2小时才解析了200多条信息，且会无故hang住。对程序来说，也算是一个黑箱操作。无法调试。</p><p><img class=lazyload data-src=/images/c/ffmpeg.jpg data-srcset="/images/c/ffmpeg.jpg, /images/c/ffmpeg.jpg 1.5x, /images/c/ffmpeg.jpg 2x" data-sizes=auto alt=/images/c/ffmpeg.jpg title=使用ffmpeg工具解析></p><p>随后发现<a href=https://github.com/kkroening/ffmpeg-python target=_blank rel="noopener noreffer">ffmpeg-python</a>这个库可以帮我操作，但还是觉得麻烦。我需要了解一套新的api，以及它所对应到的ffmpeg接口。</p><hr>
+<p>当你在在chrome中通过浏览器打开一个mp4文件的时候，会直接播放。且带有时长。</p><p>在之前了解爬虫的过程中，一些难搞的网站，是可以使用selenium来操作的。使用一个真正的浏览器来进行数据采集。于是我进行了尝试。</p><p><img class=lazyload data-src=/images/c/selenium.jpg data-srcset="/images/c/selenium.jpg, /images/c/selenium.jpg 1.5x, /images/c/selenium.jpg 2x" data-sizes=auto alt=/images/c/selenium.jpg title=使用selenium工具解析></p><p>但是这样的效率同样不高。现在的浏览器越来越复杂和庞大。</p><p>那么浏览器是如何获取到时长的呢？肯定是有方法的。我只要了解原理，然后用python写出来即可。</p><hr>
+<p>首先需要了解http(s)请求中一个非常重要的header头，Range。</p><p>状态码为200系列，代表不同的请求成功了。而你带上<code>"Range":"bytes=0-7"</code>请求去请求一个在线的mp4文件，正常情况下(大部分服务端都支持)会拿到206的状态码。代表你请求的数据成功了。你拿到了这个mp4前8个字节的数据。</p><p>于是我们的需求变成了从mp4文件中获取到存储时长信息的那几个字节。对照之前的苹果文档，我便写出了如下的代码。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -216,90 +157,78 @@
 </span><span class=lnt>66
 </span><span class=lnt>67
 </span><span class=lnt>68
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=c1># coding:utf-8</span>
-
-
-<span class=kn>import</span> <span class=nn>struct</span>
-<span class=kn>import</span> <span class=nn>requests</span>
-
-
-<span class=k>class</span> <span class=nc>Mp4info</span><span class=p>:</span>
-    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>file</span><span class=p>):</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>file</span> <span class=o>=</span> <span class=n>file</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>seek</span> <span class=o>=</span> <span class=mi>0</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>duration</span> <span class=o>=</span> <span class=mi>0</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>s</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>session</span><span class=p>()</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>timeout</span> <span class=o>=</span> <span class=mi>6</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>s</span><span class=o>.</span><span class=n>headers</span> <span class=o>=</span> <span class=p>{</span>
-            <span class=s1>&#39;Connection&#39;</span><span class=p>:</span> <span class=s1>&#39;keep-alive&#39;</span><span class=p>,</span>
-            <span class=s1>&#39;Accept&#39;</span><span class=p>:</span> <span class=s1>&#39;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8&#39;</span><span class=p>,</span>
-            <span class=s1>&#39;Accept-Encoding&#39;</span><span class=p>:</span> <span class=s1>&#39;gzip, deflate&#39;</span><span class=p>,</span>
-            <span class=s1>&#39;Accept-Language&#39;</span><span class=p>:</span> <span class=s1>&#39;zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7&#39;</span><span class=p>,</span>
-            <span class=s1>&#39;User-Agent&#39;</span><span class=p>:</span> <span class=s1>&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36&#39;</span>
-        <span class=p>}</span>
-
-    <span class=c1># 设置请求头  set request header</span>
-    <span class=c1># 传入的seek表示代表需要跳过的字节数量  use seek to skip initial data</span>
-    <span class=c1># 在这里进行判断是为了后续获取视频的宽高信息预留的  the condition here is for reserving space for getting the media data</span>
-    <span class=k>def</span> <span class=nf>_set_headers</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>seek</span><span class=p>,</span> <span class=nb>type</span><span class=p>):</span>
-        <span class=k>if</span> <span class=nb>type</span> <span class=ow>in</span> <span class=p>[</span><span class=s1>&#39;moov&#39;</span><span class=p>,</span> <span class=s1>&#39;duration&#39;</span><span class=p>]:</span>
-            <span class=bp>self</span><span class=o>.</span><span class=n>s</span><span class=o>.</span><span class=n>headers</span><span class=p>[</span><span class=s1>&#39;Range&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;bytes=</span><span class=si>{}</span><span class=s1>-</span><span class=si>{}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>seek</span><span class=p>,</span> <span class=n>seek</span> <span class=o>+</span> <span class=mi>7</span><span class=p>)</span>
-
-    <span class=k>def</span> <span class=nf>_send_request</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-        <span class=k>try</span><span class=p>:</span>
-            <span class=n>data</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>s</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>url</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>file</span><span class=p>,</span> <span class=n>stream</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>
-                              <span class=n>timeout</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>timeout</span><span class=p>)</span><span class=o>.</span><span class=n>raw</span><span class=o>.</span><span class=n>read</span><span class=p>()</span>
-        <span class=k>except</span> <span class=n>requests</span><span class=o>.</span><span class=n>Timeout</span><span class=p>:</span>
-            <span class=k>raise</span> <span class=s1>&#39;连接超时:超过6秒(默认)服务器没有响应任何数据！&#39;</span>  <span class=c1># timeout 6 seconds, the server fails to respond and assumes there is no data</span>
-        <span class=k>return</span> <span class=n>data</span>
-
-    <span class=k>def</span> <span class=nf>_find_moov_request</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>_set_headers</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>seek</span><span class=p>,</span> <span class=nb>type</span><span class=o>=</span><span class=s1>&#39;moov&#39;</span><span class=p>)</span>
-        <span class=n>data</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_send_request</span><span class=p>()</span>
-        <span class=n>size</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>struct</span><span class=o>.</span><span class=n>unpack</span><span class=p>(</span><span class=s1>&#39;&gt;I&#39;</span><span class=p>,</span> <span class=n>data</span><span class=p>[:</span><span class=mi>4</span><span class=p>])[</span><span class=mi>0</span><span class=p>])</span>
-        <span class=n>flag</span> <span class=o>=</span> <span class=n>data</span><span class=p>[</span><span class=o>-</span><span class=mi>4</span><span class=p>:]</span><span class=o>.</span><span class=n>decode</span><span class=p>(</span><span class=s1>&#39;ascii&#39;</span><span class=p>)</span>
-        <span class=k>return</span> <span class=n>size</span><span class=p>,</span> <span class=n>flag</span>
-
-    <span class=k>def</span> <span class=nf>_find_duration_request</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-        <span class=c1># 4+4是moov的大小和标识,跳过20个字符，直接读到time_scale，duration  # 4+4 is the first 8 characters denoting charset, skip the next 20 to time_scale and duration</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>_set_headers</span><span class=p>(</span><span class=n>seek</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>seek</span><span class=o>+</span><span class=mi>4</span><span class=o>+</span><span class=mi>4</span><span class=o>+</span><span class=mi>20</span><span class=p>,</span> <span class=nb>type</span><span class=o>=</span><span class=s1>&#39;duration&#39;</span><span class=p>)</span>
-        <span class=n>data</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_send_request</span><span class=p>()</span>
-        <span class=n>time_scale</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>struct</span><span class=o>.</span><span class=n>unpack</span><span class=p>(</span><span class=s1>&#39;&gt;I&#39;</span><span class=p>,</span> <span class=n>data</span><span class=p>[:</span><span class=mi>4</span><span class=p>])[</span><span class=mi>0</span><span class=p>])</span>
-        <span class=n>duration</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>struct</span><span class=o>.</span><span class=n>unpack</span><span class=p>(</span><span class=s1>&#39;&gt;I&#39;</span><span class=p>,</span> <span class=n>data</span><span class=p>[</span><span class=o>-</span><span class=mi>4</span><span class=p>:])[</span><span class=mi>0</span><span class=p>])</span>
-        <span class=k>return</span> <span class=n>time_scale</span><span class=p>,</span> <span class=n>duration</span>
-
-    <span class=k>def</span> <span class=nf>get_duration</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-        <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
-            <span class=n>size</span><span class=p>,</span> <span class=n>flag</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_find_moov_request</span><span class=p>()</span>
-            <span class=k>if</span> <span class=n>flag</span> <span class=o>==</span> <span class=s1>&#39;moov&#39;</span><span class=p>:</span>
-                <span class=n>time_scale</span><span class=p>,</span> <span class=n>duration</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_find_duration_request</span><span class=p>()</span>
-                <span class=bp>self</span><span class=o>.</span><span class=n>duration</span> <span class=o>=</span> <span class=n>duration</span><span class=o>/</span><span class=n>time_scale</span>
-                <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>duration</span>
-            <span class=k>else</span><span class=p>:</span>
-                <span class=bp>self</span><span class=o>.</span><span class=n>seek</span> <span class=o>+=</span> <span class=n>size</span>
-
-
-<span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
-    <span class=n>url</span> <span class=o>=</span> <span class=s1>&#39;http://tekeye.uk/html/images/Joren_Falls_Izu_Japan.mp4&#39;</span>
-    <span class=n>file</span> <span class=o>=</span> <span class=n>Mp4info</span><span class=p>(</span><span class=n>url</span><span class=p>)</span>
-    <span class=n>a</span> <span class=o>=</span> <span class=n>file</span><span class=o>.</span><span class=n>get_duration</span><span class=p>()</span>
-    <span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>在代码中有几个关键点:</p>
-<ul>
-<li>requests用来请求数据。加上请求头信息防止服务器认为是无效访问。使用session是因为我们在过程中会有多次请求，介绍tcp连接的次数，加快连接速度。</li>
-<li>struct是python的标准库之一，用来解析c结构类型的数据块。</li>
-<li>可以看到这个类实现的功能非常单一。如果获取更多信息的需求，应该使用<a href=https://github.com/construct/construct target=_blank rel="noopener noreffer">construct</a>来帮助你。</li>
-</ul>
-<p>另外说一句，我写了一个<a href=https://www.github.com/kentxxq/VideoInfo target=_blank rel="noopener noreffer">VideoInfo</a>的库，你可以用pip进行安装使用。用的是construct来解析文件。通过少数几次的请求，来下载整个元数据(因此更注重网络带宽而不是连接速度)。来帮助你在需要获得更多信息的时候来使用。</p>
-<h3 id=c class=headerLink>
-<a href=#c class=header-mark></a>c#</h3><p>在完成了python版本以后，我学了一些c#的知识。</p>
-<p>发现python作为一种高级、动态语言，是用纯c写的，且一直兼容这c-api。于是不但有了高级语言的oop特性，又有了通过c工具来操作数据的便利性。</p>
-<p>而c#算是一个纯面向对象的语言了。很多底层的东西，你是需要完全改变思想来处理问题。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># coding:utf-8</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>struct</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Mp4info</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>file</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>file</span> <span class=o>=</span> <span class=n>file</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>seek</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>duration</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>s</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>session</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>timeout</span> <span class=o>=</span> <span class=mi>6</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>s</span><span class=o>.</span><span class=n>headers</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;Connection&#39;</span><span class=p>:</span> <span class=s1>&#39;keep-alive&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;Accept&#39;</span><span class=p>:</span> <span class=s1>&#39;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;Accept-Encoding&#39;</span><span class=p>:</span> <span class=s1>&#39;gzip, deflate&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;Accept-Language&#39;</span><span class=p>:</span> <span class=s1>&#39;zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;User-Agent&#39;</span><span class=p>:</span> <span class=s1>&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 设置请求头  set request header</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 传入的seek表示代表需要跳过的字节数量  use seek to skip initial data</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 在这里进行判断是为了后续获取视频的宽高信息预留的  the condition here is for reserving space for getting the media data</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_set_headers</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>seek</span><span class=p>,</span> <span class=nb>type</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>type</span> <span class=ow>in</span> <span class=p>[</span><span class=s1>&#39;moov&#39;</span><span class=p>,</span> <span class=s1>&#39;duration&#39;</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>s</span><span class=o>.</span><span class=n>headers</span><span class=p>[</span><span class=s1>&#39;Range&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;bytes=</span><span class=si>{}</span><span class=s1>-</span><span class=si>{}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>seek</span><span class=p>,</span> <span class=n>seek</span> <span class=o>+</span> <span class=mi>7</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_send_request</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>data</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>s</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>url</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>file</span><span class=p>,</span> <span class=n>stream</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                              <span class=n>timeout</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>timeout</span><span class=p>)</span><span class=o>.</span><span class=n>raw</span><span class=o>.</span><span class=n>read</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>except</span> <span class=n>requests</span><span class=o>.</span><span class=n>Timeout</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=s1>&#39;连接超时:超过6秒(默认)服务器没有响应任何数据！&#39;</span>  <span class=c1># timeout 6 seconds, the server fails to respond and assumes there is no data</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>data</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_find_moov_request</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_set_headers</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>seek</span><span class=p>,</span> <span class=nb>type</span><span class=o>=</span><span class=s1>&#39;moov&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>data</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_send_request</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>size</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>struct</span><span class=o>.</span><span class=n>unpack</span><span class=p>(</span><span class=s1>&#39;&gt;I&#39;</span><span class=p>,</span> <span class=n>data</span><span class=p>[:</span><span class=mi>4</span><span class=p>])[</span><span class=mi>0</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        <span class=n>flag</span> <span class=o>=</span> <span class=n>data</span><span class=p>[</span><span class=o>-</span><span class=mi>4</span><span class=p>:]</span><span class=o>.</span><span class=n>decode</span><span class=p>(</span><span class=s1>&#39;ascii&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>size</span><span class=p>,</span> <span class=n>flag</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_find_duration_request</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 4+4是moov的大小和标识,跳过20个字符，直接读到time_scale，duration  # 4+4 is the first 8 characters denoting charset, skip the next 20 to time_scale and duration</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_set_headers</span><span class=p>(</span><span class=n>seek</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>seek</span><span class=o>+</span><span class=mi>4</span><span class=o>+</span><span class=mi>4</span><span class=o>+</span><span class=mi>20</span><span class=p>,</span> <span class=nb>type</span><span class=o>=</span><span class=s1>&#39;duration&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>data</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_send_request</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>time_scale</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>struct</span><span class=o>.</span><span class=n>unpack</span><span class=p>(</span><span class=s1>&#39;&gt;I&#39;</span><span class=p>,</span> <span class=n>data</span><span class=p>[:</span><span class=mi>4</span><span class=p>])[</span><span class=mi>0</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        <span class=n>duration</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>struct</span><span class=o>.</span><span class=n>unpack</span><span class=p>(</span><span class=s1>&#39;&gt;I&#39;</span><span class=p>,</span> <span class=n>data</span><span class=p>[</span><span class=o>-</span><span class=mi>4</span><span class=p>:])[</span><span class=mi>0</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>time_scale</span><span class=p>,</span> <span class=n>duration</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>get_duration</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>size</span><span class=p>,</span> <span class=n>flag</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_find_moov_request</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>flag</span> <span class=o>==</span> <span class=s1>&#39;moov&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>time_scale</span><span class=p>,</span> <span class=n>duration</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_find_duration_request</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>                <span class=bp>self</span><span class=o>.</span><span class=n>duration</span> <span class=o>=</span> <span class=n>duration</span><span class=o>/</span><span class=n>time_scale</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>duration</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=bp>self</span><span class=o>.</span><span class=n>seek</span> <span class=o>+=</span> <span class=n>size</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>url</span> <span class=o>=</span> <span class=s1>&#39;http://tekeye.uk/html/images/Joren_Falls_Izu_Japan.mp4&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>file</span> <span class=o>=</span> <span class=n>Mp4info</span><span class=p>(</span><span class=n>url</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span> <span class=o>=</span> <span class=n>file</span><span class=o>.</span><span class=n>get_duration</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>在代码中有几个关键点:</p><ul>
+<li>requests用来请求数据。加上请求头信息防止服务器认为是无效访问。使用session是因为我们在过程中会有多次请求，介绍tcp连接的次数，加快连接速度。</li><li>struct是python的标准库之一，用来解析c结构类型的数据块。</li><li>可以看到这个类实现的功能非常单一。如果获取更多信息的需求，应该使用<a href=https://github.com/construct/construct target=_blank rel="noopener noreffer">construct</a>来帮助你。</li></ul><p>另外说一句，我写了一个<a href=https://www.github.com/kentxxq/VideoInfo target=_blank rel="noopener noreffer">VideoInfo</a>的库，你可以用pip进行安装使用。用的是construct来解析文件。通过少数几次的请求，来下载整个元数据(因此更注重网络带宽而不是连接速度)。来帮助你在需要获得更多信息的时候来使用。</p><h3 id=c class=headerLink>
+<a href=#c class=header-mark></a>c#</h3><p>在完成了python版本以后，我学了一些c#的知识。</p><p>发现python作为一种高级、动态语言，是用纯c写的，且一直兼容这c-api。于是不但有了高级语言的oop特性，又有了通过c工具来操作数据的便利性。</p><p>而c#算是一个纯面向对象的语言了。很多底层的东西，你是需要完全改变思想来处理问题。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -309,27 +238,18 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span><span class=lnt>8
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=kt>var</span> <span class=n>req</span> <span class=p>=</span> <span class=k>new</span> <span class=n>HttpClient</span><span class=p>();</span>
-<span class=n>req</span><span class=p>.</span><span class=n>DefaultRequestHeaders</span><span class=p>.</span><span class=n>Add</span><span class=p>(</span><span class=s>&#34;Range&#34;</span><span class=p>,</span> <span class=s>&#34;bytes=9737-9740&#34;</span><span class=p>);</span>
-<span class=kt>var</span> <span class=n>bytes</span> <span class=p>=</span> <span class=k>await</span> <span class=n>req</span><span class=p>.</span><span class=n>GetByteArrayAsync</span><span class=p>(</span><span class=s>&#34;http://clips.vorwaerts-gmbh.debig_buck_bunny.mp4&#34;</span><span class=p>);</span>
-<span class=kt>var</span> <span class=n>size</span> <span class=p>=</span> <span class=n>bytes</span><span class=p>.</span><span class=n>Take</span><span class=p>(</span><span class=m>2</span><span class=p>).</span><span class=n>ToArray</span><span class=p>();</span>
-<span class=k>if</span> <span class=p>(</span><span class=n>BitConverter</span><span class=p>.</span><span class=n>IsLittleEndian</span><span class=p>)</span>
-    <span class=n>Array</span><span class=p>.</span><span class=n>Reverse</span><span class=p>(</span><span class=n>size</span><span class=p>);</span>
-<span class=kt>var</span> <span class=n>size2</span> <span class=p>=</span> <span class=n>BitConverter</span><span class=p>.</span><span class=n>ToInt16</span><span class=p>(</span><span class=n>size</span><span class=p>);</span>
-<span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=n>size2</span><span class=p>);</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>上面这段代码中，让我理解了更多的不同之处:</p>
-<ul>
-<li>c#可以很方便的进行异步。且有多种形式。可以通过异步流或者字节等方式，方便的取拿到各种形式的返回值。</li>
-<li>补充了大小端的知识。之前只知道使用大端来转换数据。而不知道其实是按照byte字节来排序的。而不是用二进制的bit。所以在转换的时候直接转换bytes数组，而不是单独的bit。</li>
-<li>如果你需要转换成8位的int，直接拿到byte后进行tostring来转成十进制即可。而int16和int32等格式需要用到BitConverter。</li>
-</ul>
-<h3 id=20191118日补充 class=headerLink>
-<a href=#20191118%e6%97%a5%e8%a1%a5%e5%85%85 class=header-mark></a>20191118日补充</h3><p>之前用c#写的解析部分，相比python而言，麻烦了很多。于是有了新的方法。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=kt>var</span> <span class=n>req</span> <span class=p>=</span> <span class=k>new</span> <span class=n>HttpClient</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=n>req</span><span class=p>.</span><span class=n>DefaultRequestHeaders</span><span class=p>.</span><span class=n>Add</span><span class=p>(</span><span class=s>&#34;Range&#34;</span><span class=p>,</span> <span class=s>&#34;bytes=9737-9740&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>bytes</span> <span class=p>=</span> <span class=k>await</span> <span class=n>req</span><span class=p>.</span><span class=n>GetByteArrayAsync</span><span class=p>(</span><span class=s>&#34;http://clips.vorwaerts-gmbh.debig_buck_bunny.mp4&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>size</span> <span class=p>=</span> <span class=n>bytes</span><span class=p>.</span><span class=n>Take</span><span class=p>(</span><span class=m>2</span><span class=p>).</span><span class=n>ToArray</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=n>BitConverter</span><span class=p>.</span><span class=n>IsLittleEndian</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>Array</span><span class=p>.</span><span class=n>Reverse</span><span class=p>(</span><span class=n>size</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>size2</span> <span class=p>=</span> <span class=n>BitConverter</span><span class=p>.</span><span class=n>ToInt16</span><span class=p>(</span><span class=n>size</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=n>size2</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>上面这段代码中，让我理解了更多的不同之处:</p><ul>
+<li>c#可以很方便的进行异步。且有多种形式。可以通过异步流或者字节等方式，方便的取拿到各种形式的返回值。</li><li>补充了大小端的知识。之前只知道使用大端来转换数据。而不知道其实是按照byte字节来排序的。而不是用二进制的bit。所以在转换的时候直接转换bytes数组，而不是单独的bit。</li><li>如果你需要转换成8位的int，直接拿到byte后进行tostring来转成十进制即可。而int16和int32等格式需要用到BitConverter。</li></ul><h3 id=20191118日补充 class=headerLink>
+<a href=#20191118%e6%97%a5%e8%a1%a5%e5%85%85 class=header-mark></a>20191118日补充</h3><p>之前用c#写的解析部分，相比python而言，麻烦了很多。于是有了新的方法。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -366,88 +286,61 @@
 </span><span class=lnt>33
 </span><span class=lnt>34
 </span><span class=lnt>35
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=c1>// 字节数组转结构体
-</span><span class=c1></span><span class=k>public</span> <span class=k>static</span> <span class=n>T</span> <span class=n>BytesToStuct</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;(</span><span class=kt>byte</span><span class=p>[]</span> <span class=n>bytes</span><span class=p>)</span>
-<span class=p>{</span>
-    <span class=c1>//得到结构体的大小
-</span><span class=c1></span>    <span class=kt>int</span> <span class=n>size</span> <span class=p>=</span> <span class=n>Marshal</span><span class=p>.</span><span class=n>SizeOf</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;();</span>
-    <span class=c1>//byte数组长度小于结构体的大小
-</span><span class=c1></span>    <span class=k>if</span> <span class=p>(</span><span class=n>size</span> <span class=p>&gt;</span> <span class=n>bytes</span><span class=p>.</span><span class=n>Length</span><span class=p>)</span>
-    <span class=p>{</span>
-        <span class=c1>//返回空
-</span><span class=c1></span>        <span class=k>return</span> <span class=k>default</span><span class=p>(</span><span class=n>T</span><span class=p>);</span>
-    <span class=p>}</span>
-    <span class=c1>//分配结构体大小的内存空间
-</span><span class=c1></span>    <span class=n>IntPtr</span> <span class=n>structPtr</span> <span class=p>=</span> <span class=n>Marshal</span><span class=p>.</span><span class=n>AllocHGlobal</span><span class=p>(</span><span class=n>size</span><span class=p>);</span>
-    <span class=c1>//将byte数组拷到分配好的内存空间
-</span><span class=c1></span>    <span class=n>Marshal</span><span class=p>.</span><span class=n>Copy</span><span class=p>(</span><span class=n>bytes</span><span class=p>,</span> <span class=m>0</span><span class=p>,</span> <span class=n>structPtr</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
-    <span class=c1>//将内存空间转换为目标结构体
-</span><span class=c1></span>    <span class=n>T</span> <span class=n>obj</span> <span class=p>=</span> <span class=n>Marshal</span><span class=p>.</span><span class=n>PtrToStructure</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;(</span><span class=n>structPtr</span><span class=p>);</span>
-    <span class=c1>//释放内存空间
-</span><span class=c1></span>    <span class=n>Marshal</span><span class=p>.</span><span class=n>FreeHGlobal</span><span class=p>(</span><span class=n>structPtr</span><span class=p>);</span>
-    <span class=c1>//返回结构体
-</span><span class=c1></span>    <span class=k>return</span> <span class=n>obj</span><span class=p>;</span>
-<span class=p>}</span>
-
-<span class=c1>// 结构体
-</span><span class=c1></span><span class=na>[StructLayoutAttribute(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]</span>
-<span class=k>public</span> <span class=k>struct</span> <span class=nc>DataStruct</span>
-<span class=p>{</span>
-    <span class=k>public</span> <span class=kt>int</span> <span class=n>size</span><span class=p>;</span>
-<span class=na>    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]</span>
-    <span class=k>public</span> <span class=kt>char</span><span class=p>[]</span> <span class=n>flag</span><span class=p>;</span>
-<span class=p>}</span>
-
-<span class=c1>// 由于大小端的问题，你必须先综合我前面的c#部分代码，把size部分先反转顺序
-</span><span class=c1></span><span class=kt>var</span> <span class=n>bytes2</span> <span class=p>=</span> <span class=n>size</span><span class=p>.</span><span class=n>Concat</span><span class=p>(</span><span class=n>flag</span><span class=p>).</span><span class=n>ToArray</span><span class=p>();</span>
-<span class=kt>var</span> <span class=n>dataStruct</span> <span class=p>=</span> <span class=n>BytesToStuct</span><span class=p>&lt;</span><span class=n>DataStruct</span><span class=p>&gt;(</span><span class=n>bytes2</span><span class=p>);</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>关于大小端的问题，在<a href=https://stackoverflow.com/questions/2480116/marshalling-a-big-endian-byte-collection-into-a-struct-in-order-to-pull-out-valu target=_blank rel="noopener noreffer">stackoverflow</a>的这个回答里也有解决方案。</p>
-<h2 id=总结 class=headerLink>
-<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>写日志真的是一个巩固知识，以及加深理解的好方法。哪怕只是半桶水，也会比某些人的那半桶水要好。</p>
-<p>可以看到python的construct非常好用。而c#这样完全自举且面向对象的语言,则麻烦不少。对于不定长的字段以及嵌套的数据结构，更加麻烦。</p>
-</div>
-<div class=post-footer id=post-footer>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=c1>// 字节数组转结构体</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>static</span> <span class=n>T</span> <span class=n>BytesToStuct</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;(</span><span class=kt>byte</span><span class=p>[]</span> <span class=n>bytes</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>//得到结构体的大小</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>size</span> <span class=p>=</span> <span class=n>Marshal</span><span class=p>.</span><span class=n>SizeOf</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl>    <span class=c1>//byte数组长度小于结构体的大小</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>size</span> <span class=p>&gt;</span> <span class=n>bytes</span><span class=p>.</span><span class=n>Length</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>//返回空</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=k>default</span><span class=p>(</span><span class=n>T</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=c1>//分配结构体大小的内存空间</span>
+</span></span><span class=line><span class=cl>    <span class=n>IntPtr</span> <span class=n>structPtr</span> <span class=p>=</span> <span class=n>Marshal</span><span class=p>.</span><span class=n>AllocHGlobal</span><span class=p>(</span><span class=n>size</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>//将byte数组拷到分配好的内存空间</span>
+</span></span><span class=line><span class=cl>    <span class=n>Marshal</span><span class=p>.</span><span class=n>Copy</span><span class=p>(</span><span class=n>bytes</span><span class=p>,</span> <span class=m>0</span><span class=p>,</span> <span class=n>structPtr</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>//将内存空间转换为目标结构体</span>
+</span></span><span class=line><span class=cl>    <span class=n>T</span> <span class=n>obj</span> <span class=p>=</span> <span class=n>Marshal</span><span class=p>.</span><span class=n>PtrToStructure</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;(</span><span class=n>structPtr</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>//释放内存空间</span>
+</span></span><span class=line><span class=cl>    <span class=n>Marshal</span><span class=p>.</span><span class=n>FreeHGlobal</span><span class=p>(</span><span class=n>structPtr</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>//返回结构体</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>obj</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 结构体</span>
+</span></span><span class=line><span class=cl><span class=na>[StructLayoutAttribute(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>struct</span> <span class=nc>DataStruct</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>int</span> <span class=n>size</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=na>    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>char</span><span class=p>[]</span> <span class=n>flag</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 由于大小端的问题，你必须先综合我前面的c#部分代码，把size部分先反转顺序</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>bytes2</span> <span class=p>=</span> <span class=n>size</span><span class=p>.</span><span class=n>Concat</span><span class=p>(</span><span class=n>flag</span><span class=p>).</span><span class=n>ToArray</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>dataStruct</span> <span class=p>=</span> <span class=n>BytesToStuct</span><span class=p>&lt;</span><span class=n>DataStruct</span><span class=p>&gt;(</span><span class=n>bytes2</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>关于大小端的问题，在<a href=https://stackoverflow.com/questions/2480116/marshalling-a-big-endian-byte-collection-into-a-struct-in-order-to-pull-out-valu target=_blank rel="noopener noreffer">stackoverflow</a>的这个回答里也有解决方案。</p><h2 id=总结 class=headerLink>
+<a href=#%e6%80%bb%e7%bb%93 class=header-mark></a>总结</h2><p>写日志真的是一个巩固知识，以及加深理解的好方法。哪怕只是半桶水，也会比某些人的那半桶水要好。</p><p>可以看到python的construct非常好用。而c#这样完全自举且面向对象的语言,则麻烦不少。对于不定长的字段以及嵌套的数据结构，更加麻烦。</p></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
 <span>更新于 2021-08-23</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span><a href=# onclick=return!1 title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/contents/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86/ data-title=补充一些数据结构的知识 data-hashtags=笔记,c><i class="fab fa-twitter fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/contents/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86/ data-hashtag=笔记><i class="fab fa-facebook-square fa-fw"></i></a><a href=# onclick=return!1 title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/contents/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86/ data-title=补充一些数据结构的知识 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/contents/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86/ data-title=补充一些数据结构的知识><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# onclick=return!1 title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/contents/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86/ data-title=补充一些数据结构的知识><i class="fab fa-weibo fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/contents/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86/ data-title=补充一些数据结构的知识 data-description=在之前做爬虫练手的时候，去爬的Porn网站。影片简介其中有一项就是影片时长。而在我后来的一段时间，发现很多影片网站是没有时长信息的。要知道影片的时长信息其实是非常重要的，需要作为一个筛选的条件。于是开始尝试自己来用python编写获取在线视频时长的工具。而后这段时间在看了c和c#相关的知识后，开始有了更为深入的了解。也遇到了一些在python中没有详细了解过的问题><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# onclick=return!1 title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/contents/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86/ data-title=补充一些数据结构的知识 data-description=在之前做爬虫练手的时候，去爬的Porn网站。影片简介其中有一项就是影片时长。而在我后来的一段时间，发现很多影片网站是没有时长信息的。要知道影片的时长信息其实是非常重要的，需要作为一个筛选的条件。于是开始尝试自己来用python编写获取在线视频时长的工具。而后这段时间在看了c和c#相关的知识后，开始有了更为深入的了解。也遇到了一些在python中没有详细了解过的问题><i class="fab fa-blogger fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/contents/%E8%A1%A5%E5%85%85%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%9F%A5%E8%AF%86/ data-title=补充一些数据结构的知识><i class="fab fa-evernote fa-fw"></i></a></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/%E7%AC%94%E8%AE%B0/>笔记</a>,&nbsp;<a href=/tags/c/>c</a></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/%E7%AC%94%E8%AE%B0/>笔记</a>,&nbsp;<a href=/tags/c/>c</a></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/contents/%E8%B5%B7%E7%A0%81%E8%A6%81%E8%83%BD%E7%9C%8B%E6%87%82c%E7%B3%BB%E5%88%97%E7%9A%84%E4%BB%A3%E7%A0%81/ class=prev rel=prev title=起码要能看懂c系列的代码><i class="fas fa-angle-left fa-fw"></i>起码要能看懂c系列的代码</a>
-<a href=/contents/%E5%B8%B8%E7%94%A8%E7%9A%84%E4%BF%A1%E6%81%AF%E6%89%8B%E5%86%8C/ class=next rel=next title=常用的信息手册>常用的信息手册<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
+</section></div><div class=post-nav><a href=/contents/%E8%B5%B7%E7%A0%81%E8%A6%81%E8%83%BD%E7%9C%8B%E6%87%82c%E7%B3%BB%E5%88%97%E7%9A%84%E4%BB%A3%E7%A0%81/ class=prev rel=prev title=起码要能看懂c系列的代码><i class="fas fa-angle-left fa-fw"></i>起码要能看懂c系列的代码</a>
+<a href=/contents/%E5%B8%B8%E7%94%A8%E7%9A%84%E4%BF%A1%E6%81%AF%E6%89%8B%E5%86%8C/ class=next rel=next title=常用的信息手册>常用的信息手册<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
 <div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
-<span class=icp>湘ICP备2021002319号-1</span></div>
-<div class=footer-line></div>
-<div class=footer-line>
-</div>
-</div><script>'serviceWorker'in navigator&&(navigator.serviceWorker.register('/sw.min.js',{scope:'/'}).then(function(a){}),navigator.serviceWorker.ready.then(function(a){}))</script></footer></div>
-<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
+<span class=icp>湘ICP备2021002319号-1</span></div><div class=footer-line></div><div class=footer-line>
+</div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
-</body>
-</html>
+</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div><div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div></body></html>

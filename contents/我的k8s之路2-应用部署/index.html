@@ -16,18 +16,14 @@
 <meta name=apple-mobile-web-app-title content="kentxxq">
 <meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2/><link rel=prev href=https://kentxxq.com/contents/linux%E4%B9%8Blimit%E9%99%90%E5%88%B6/><link rel=next href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
-<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"我的k8s之路2-应用部署","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2\/"},"genre":"posts","keywords":"k8s","wordcount":2747,"url":"https:\/\/kentxxq.com\/contents\/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2\/","datePublished":"2020-08-01T11:08:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"这是k8s的第二篇，但是已经时隔一年了。也不知道是k8s变化了，还是我之前的理解不够正确。不过我看了一眼，觉得上一篇写的一些内容，还是比较浅显易懂的，作为入门速览还不错。不过从这一篇开始，要好好抠细节了"}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
-<div id=back-to-top></div>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2/><link rel=prev href=https://kentxxq.com/contents/linux%E4%B9%8Blimit%E9%99%90%E5%88%B6/><link rel=next href=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"我的k8s之路2-应用部署","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2\/"},"genre":"posts","keywords":"k8s","wordcount":2747,"url":"https:\/\/kentxxq.com\/contents\/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2\/","datePublished":"2020-08-01T11:08:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"这是k8s的第二篇，但是已经时隔一年了。也不知道是k8s变化了，还是我之前的理解不够正确。不过我看了一眼，觉得上一篇写的一些内容，还是比较浅显易懂的，作为入门速览还不错。不过从这一篇开始，要好好抠细节了"}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e)}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(t){const e=document.getElementsByTagName("meta");for(let n=0;n<e.length;n++)if(e[n].getAttribute("name")===t)return e[n];return''}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light")}else''==="light"||''==="dark"||''==="black"?(setTheme(''),saveTheme('')):(saveTheme("auto"),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")]</script>
+<div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/posts/> Blog </a><a class=menu-item href=/categories/> Categories </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/about/> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -41,20 +37,14 @@
 </span>
 </span><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</a></div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -66,90 +56,37 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
+</div><a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
-<li><a href=#pod细节>pod细节</a></li>
-<li><a href=#replicaset和deployments>ReplicaSet和Deployments</a></li>
-<li><a href=#实例操作>实例操作</a>
+<li><a href=#pod细节>pod细节</a></li><li><a href=#replicaset和deployments>ReplicaSet和Deployments</a></li><li><a href=#实例操作>实例操作</a>
 <ul>
-<li><a href=#简单示例>简单示例</a></li>
-<li><a href=#模板示例>模板示例</a></li>
-</ul>
-</li>
-<li><a href=#job>Job</a></li>
-<li><a href=#cronjob>Cronjob</a></li>
-<li><a href=#daemonset>DaemonSet</a></li>
-<li><a href=#拓展知识>拓展知识</a></li>
-<li><a href=#更新>更新</a></li>
-</ul>
-</nav></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">我的k8s之路2-应用部署</h1><div class=post-meta>
+<li><a href=#简单示例>简单示例</a></li><li><a href=#模板示例>模板示例</a></li></ul></li><li><a href=#job>Job</a></li><li><a href=#cronjob>Cronjob</a></li><li><a href=#daemonset>DaemonSet</a></li><li><a href=#拓展知识>拓展知识</a></li><li><a href=#更新>更新</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">我的k8s之路2-应用部署</h1><div class=post-meta>
 <div class=post-meta-line>
 <span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-08-01>2020-08-01</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2747 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-08-01>2020-08-01</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2747 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#pod细节>pod细节</a></li>
-<li><a href=#replicaset和deployments>ReplicaSet和Deployments</a></li>
-<li><a href=#实例操作>实例操作</a>
+<li><a href=#pod细节>pod细节</a></li><li><a href=#replicaset和deployments>ReplicaSet和Deployments</a></li><li><a href=#实例操作>实例操作</a>
 <ul>
-<li><a href=#简单示例>简单示例</a></li>
-<li><a href=#模板示例>模板示例</a></li>
-</ul>
-</li>
-<li><a href=#job>Job</a></li>
-<li><a href=#cronjob>Cronjob</a></li>
-<li><a href=#daemonset>DaemonSet</a></li>
-<li><a href=#拓展知识>拓展知识</a></li>
-<li><a href=#更新>更新</a></li>
-</ul>
-</nav></div>
-</div><div class=content id=content><blockquote>
+<li><a href=#简单示例>简单示例</a></li><li><a href=#模板示例>模板示例</a></li></ul></li><li><a href=#job>Job</a></li><li><a href=#cronjob>Cronjob</a></li><li><a href=#daemonset>DaemonSet</a></li><li><a href=#拓展知识>拓展知识</a></li><li><a href=#更新>更新</a></li></ul></nav></div></div><div class=content id=content><blockquote>
 <p>这是k8s的第二篇，但是已经时隔一年了。也不知道是k8s变化了，还是我之前的理解不够正确。
-不过我看了一眼，觉得上一篇写的一些内容，还是比较浅显易懂的，作为入门速览还不错。不过从这一篇开始，要好好抠细节了。</p>
-</blockquote>
-<h2 id=pod细节 class=headerLink>
-<a href=#pod%e7%bb%86%e8%8a%82 class=header-mark></a>pod细节</h2><p>修正上一篇文章说的pod推荐内部只包含单个docker用法。因为一个pod内部拥有多个docker，在很多场景下是非常不错的解决方案。</p>
-<p>首先要说明一件事情，既然pod允许内部包含多个docker，而pod内的资源是可以互访的。没有手动挂在共享内容，是如何实现的呢？</p>
-<p>pod内部就是一个小集群。通过infra-container来进行连接，也称之为sidecar设计模式。这样设计有一些有点。</p>
-<p><img class=lazyload data-src=/images/server/sidecar.png data-srcset="/images/server/sidecar.png, /images/server/sidecar.png 1.5x, /images/server/sidecar.png 2x" data-sizes=auto alt=/images/server/sidecar.png title=sidecar></p>
-<ol>
-<li>单个image的更新，不会让整个pod重启。从而减少了开销。</li>
-<li>解决了pod内容器共享资源的问题。pod内的容器读取到的ip，mac地址等网络相关信息，其实都是infra-container的。</li>
-<li>方便拓展功能。例如我要加入一个nginx的转发。拿到一个/a的请求，可以在pod内新增一个用来代理的容器。把请求转发到应用容器的/b上。</li>
-</ol>
-<h2 id=replicaset和deployments class=headerLink>
-<a href=#replicaset%e5%92%8cdeployments class=header-mark></a>ReplicaSet和Deployments</h2><p>这里一次讲2种kind:<code>ReplicaSet</code>,<code>Deployments</code>。</p>
-<p>ReplicaSet是用来创建pod的，控制pod的数量、使用的pod版本。</p>
-<p>Deployments是一个无状态的应用。他是用来控制各个版本的ReplicaSet。</p>
-<p>通过上面来匹配呢？label。</p>
-<p><img class=lazyload data-src=/images/server/deployment.png data-srcset="/images/server/deployment.png, /images/server/deployment.png 1.5x, /images/server/deployment.png 2x" data-sizes=auto alt=/images/server/deployment.png title=deployment></p>
-<div class=highlight><div class=chroma>
+不过我看了一眼，觉得上一篇写的一些内容，还是比较浅显易懂的，作为入门速览还不错。不过从这一篇开始，要好好抠细节了。</p></blockquote><h2 id=pod细节 class=headerLink>
+<a href=#pod%e7%bb%86%e8%8a%82 class=header-mark></a>pod细节</h2><p>修正上一篇文章说的pod推荐内部只包含单个docker用法。因为一个pod内部拥有多个docker，在很多场景下是非常不错的解决方案。</p><p>首先要说明一件事情，既然pod允许内部包含多个docker，而pod内的资源是可以互访的。没有手动挂在共享内容，是如何实现的呢？</p><p>pod内部就是一个小集群。通过infra-container来进行连接，也称之为sidecar设计模式。这样设计有一些有点。</p><p><img class=lazyload data-src=/images/server/sidecar.png data-srcset="/images/server/sidecar.png, /images/server/sidecar.png 1.5x, /images/server/sidecar.png 2x" data-sizes=auto alt=/images/server/sidecar.png title=sidecar></p><ol>
+<li>单个image的更新，不会让整个pod重启。从而减少了开销。</li><li>解决了pod内容器共享资源的问题。pod内的容器读取到的ip，mac地址等网络相关信息，其实都是infra-container的。</li><li>方便拓展功能。例如我要加入一个nginx的转发。拿到一个/a的请求，可以在pod内新增一个用来代理的容器。把请求转发到应用容器的/b上。</li></ol><h2 id=replicaset和deployments class=headerLink>
+<a href=#replicaset%e5%92%8cdeployments class=header-mark></a>ReplicaSet和Deployments</h2><p>这里一次讲2种kind:<code>ReplicaSet</code>,<code>Deployments</code>。</p><p>ReplicaSet是用来创建pod的，控制pod的数量、使用的pod版本。</p><p>Deployments是一个无状态的应用。他是用来控制各个版本的ReplicaSet。</p><p>通过上面来匹配呢？label。</p><p><img class=lazyload data-src=/images/server/deployment.png data-srcset="/images/server/deployment.png, /images/server/deployment.png 1.5x, /images/server/deployment.png 2x" data-sizes=auto alt=/images/server/deployment.png title=deployment></p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -157,17 +94,14 @@
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># 查看运行的pods</span>
-kubectl get pods
-<span class=c1># 查看运行的replicasets</span>
-kubectl get replicasets
-<span class=c1># 查看运行的deployments</span>
-kubectl get deployments
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=实例操作 class=headerLink>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看运行的pods</span>
+</span></span><span class=line><span class=cl>kubectl get pods
+</span></span><span class=line><span class=cl><span class=c1># 查看运行的replicasets</span>
+</span></span><span class=line><span class=cl>kubectl get replicasets
+</span></span><span class=line><span class=cl><span class=c1># 查看运行的deployments</span>
+</span></span><span class=line><span class=cl>kubectl get deployments
+</span></span></code></pre></td></tr></table></div></div><h2 id=实例操作 class=headerLink>
 <a href=#%e5%ae%9e%e4%be%8b%e6%93%8d%e4%bd%9c class=header-mark></a>实例操作</h2><h3 id=简单示例 class=headerLink>
 <a href=#%e7%ae%80%e5%8d%95%e7%a4%ba%e4%be%8b class=header-mark></a>简单示例</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -187,36 +121,26 @@ kubectl get deployments
 </span><span class=lnt>14
 </span><span class=lnt>15
 </span><span class=lnt>16
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Pod</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myapp</span><span class=w>
-</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myapp</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>containers</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myapp</span><span class=w>
-</span><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nginx:1.11.1</span><span class=w>
-</span><span class=w>    </span><span class=nt>resources</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>limits</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;128Mi&#34;</span><span class=w>
-</span><span class=w>        </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;500m&#34;</span><span class=w>
-</span><span class=w>    </span><span class=nt>ports</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>containerPort</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><p>在上面我们写了一个最简单的pod模板：</p>
-<ol>
-<li>一个名为myapp的无状态应用，同时通过label:myapp来匹配内容</li>
-<li>指定要用nginx:1.11.1镜像</li>
-<li>限制了使用的资源</li>
-<li>制定了要对集群暴露的端口</li>
-</ol>
-<h3 id=模板示例 class=headerLink>
-<a href=#%e6%a8%a1%e6%9d%bf%e7%a4%ba%e4%be%8b class=header-mark></a>模板示例</h3><p>模板示例不会把所有的参数都列出来。只是会把日常会用到的写出来。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Pod</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myapp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myapp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myapp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nginx:1.11.1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>limits</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;128Mi&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;500m&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>ports</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>containerPort</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>在上面我们写了一个最简单的pod模板：</p><ol>
+<li>一个名为myapp的无状态应用，同时通过label:myapp来匹配内容</li><li>指定要用nginx:1.11.1镜像</li><li>限制了使用的资源</li><li>制定了要对集群暴露的端口</li></ol><h3 id=模板示例 class=headerLink>
+<a href=#%e6%a8%a1%e6%9d%bf%e7%a4%ba%e4%be%8b class=header-mark></a>模板示例</h3><p>模板示例不会把所有的参数都列出来。只是会把日常会用到的写出来。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -290,89 +214,81 @@ kubectl get deployments
 </span><span class=lnt>70
 </span><span class=lnt>71
 </span><span class=lnt>72
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>apps/v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Deployment</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nginx-deployment</span><span class=w>
-</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
-</span><span class=w>    </span><span class=nt>env</span><span class=p>:</span><span class=w> </span><span class=l>test</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>selector</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>matchLabels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
-</span><span class=w>  </span><span class=nt>replicas</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
-</span><span class=w>  </span><span class=c># 进入ready状态20秒后，才判断容器为available</span><span class=w>
-</span><span class=w>  </span><span class=nt>minReadySeconds</span><span class=p>:</span><span class=w> </span><span class=m>20</span><span class=w>
-</span><span class=w>  </span><span class=c># 超过这个时间deployment还没有完全部署成功，就会失败！默认600</span><span class=w>
-</span><span class=w>  </span><span class=c># 必须必上面的值大。同时卡住后需要使用kubectl rollout undo回滚</span><span class=w>
-</span><span class=w>  </span><span class=nt>progressDeadlineSeconds</span><span class=p>:</span><span class=w> </span><span class=m>100</span><span class=w>
-</span><span class=w>  </span><span class=c># 暂停部署deployment，这样可以通过set命令修改模板参数</span><span class=w>
-</span><span class=w>  </span><span class=c># paused: true</span><span class=w>
-</span><span class=w>  </span><span class=nt>strategy</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>rollingUpdate</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=c># 默认25%的最大增长，100个pods，则升级时最多不能有125个</span><span class=w>
-</span><span class=w>      </span><span class=c># 我这里改成一次最多起5个pod</span><span class=w>
-</span><span class=w>      </span><span class=nt>maxSurge</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
-</span><span class=w>      </span><span class=c># 最大不可用，100个pods，则最少要有75个随时能提供服务</span><span class=w>
-</span><span class=w>      </span><span class=nt>maxUnavailable</span><span class=p>:</span><span class=w> </span><span class=m>25</span><span class=l>%</span><span class=w>
-</span><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>RollingUpdate</span><span class=w>
-</span><span class=w>  </span><span class=c># 默认是10，保留的10个副本</span><span class=w>
-</span><span class=w>  </span><span class=nt>revisionHistoryLimit</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>
-</span><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
-</span><span class=w>        </span><span class=nt>env</span><span class=p>:</span><span class=w> </span><span class=l>test</span><span class=w>
-</span><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
-</span><span class=w>          </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nginx:1.18</span><span class=w>
-</span><span class=w>          </span><span class=nt>resources</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>requests</span><span class=p>:</span><span class=w>
-</span><span class=w>              </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=l>100m</span><span class=w>
-</span><span class=w>              </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=l>100Mi</span><span class=w>
-</span><span class=w>            </span><span class=nt>limits</span><span class=p>:</span><span class=w>
-</span><span class=w>              </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=l>100m</span><span class=w>
-</span><span class=w>              </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=l>100Mi</span><span class=w>
-</span><span class=w>          </span><span class=nt>ports</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span>- <span class=nt>containerPort</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
-</span><span class=w>          </span><span class=c># 存活检测</span><span class=w>
-</span><span class=w>          </span><span class=nt>livenessProbe</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>tcpSocket</span><span class=p>:</span><span class=w>
-</span><span class=w>              </span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
-</span><span class=w>            </span><span class=c># 初始化等待，例如jvm启动需要一定可预见的时间</span><span class=w>
-</span><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
-</span><span class=w>            </span><span class=c># 超时时间</span><span class=w>
-</span><span class=w>            </span><span class=nt>timeoutSeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
-</span><span class=w>            </span><span class=c># 失败以后，需要成功几次才能判定真的成功了</span><span class=w>
-</span><span class=w>            </span><span class=nt>successThreshold</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
-</span><span class=w>            </span><span class=c># 失败的重试次数</span><span class=w>
-</span><span class=w>            </span><span class=nt>failureThreshold</span><span class=p>:</span><span class=w> </span><span class=m>3</span><span class=w>
-</span><span class=w>            </span><span class=c># 检测间隔时间</span><span class=w>
-</span><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
-</span><span class=w>          </span><span class=nt>readinessProbe</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>httpGet</span><span class=p>:</span><span class=w>
-</span><span class=w>              </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/</span><span class=w>
-</span><span class=w>              </span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
-</span><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
-</span><span class=w>            </span><span class=nt>timeoutSeconds</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
-</span><span class=w>            </span><span class=nt>successThreshold</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
-</span><span class=w>            </span><span class=nt>failureThreshold</span><span class=p>:</span><span class=w> </span><span class=m>3</span><span class=w>
-</span><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
-</span><span class=w>          </span><span class=c># 总是从服务器拉取image，会检验digest。所以其实也很快</span><span class=w>
-</span><span class=w>          </span><span class=nt>imagePullPolicy</span><span class=p>:</span><span class=w> </span><span class=l>Always</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><p>其实也没什么复杂的，也只有一点点细节设计：</p>
-<ol>
-<li>我们使用2个pod来提供服务。</li>
-<li>加上了一些常用参数，具体说明都在注释里。</li>
-</ol>
-<p><strong>操作效果</strong></p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>apps/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Deployment</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nginx-deployment</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>env</span><span class=p>:</span><span class=w> </span><span class=l>test</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>selector</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>matchLabels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>replicas</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 进入ready状态20秒后，才判断容器为available</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>minReadySeconds</span><span class=p>:</span><span class=w> </span><span class=m>20</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 超过这个时间deployment还没有完全部署成功，就会失败！默认600</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 必须必上面的值大。同时卡住后需要使用kubectl rollout undo回滚</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>progressDeadlineSeconds</span><span class=p>:</span><span class=w> </span><span class=m>100</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 暂停部署deployment，这样可以通过set命令修改模板参数</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># paused: true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>strategy</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>rollingUpdate</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=c># 默认25%的最大增长，100个pods，则升级时最多不能有125个</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=c># 我这里改成一次最多起5个pod</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>maxSurge</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=c># 最大不可用，100个pods，则最少要有75个随时能提供服务</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>maxUnavailable</span><span class=p>:</span><span class=w> </span><span class=m>25</span><span class=l>%</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>RollingUpdate</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 默认是10，保留的10个副本</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>revisionHistoryLimit</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>env</span><span class=p>:</span><span class=w> </span><span class=l>test</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nginx:1.18</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>requests</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=l>100m</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=l>100Mi</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>limits</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=l>100m</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=l>100Mi</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>ports</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span>- <span class=nt>containerPort</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=c># 存活检测</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>livenessProbe</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>tcpSocket</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=c># 初始化等待，例如jvm启动需要一定可预见的时间</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=c># 超时时间</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>timeoutSeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=c># 失败以后，需要成功几次才能判定真的成功了</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>successThreshold</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=c># 失败的重试次数</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>failureThreshold</span><span class=p>:</span><span class=w> </span><span class=m>3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=c># 检测间隔时间</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>readinessProbe</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>httpGet</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>initialDelaySeconds</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>timeoutSeconds</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>successThreshold</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>failureThreshold</span><span class=p>:</span><span class=w> </span><span class=m>3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>periodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=c># 总是从服务器拉取image，会检验digest。所以其实也很快</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>imagePullPolicy</span><span class=p>:</span><span class=w> </span><span class=l>Always</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>其实也没什么复杂的，也只有一点点细节设计：</p><ol>
+<li>我们使用2个pod来提供服务。</li><li>加上了一些常用参数，具体说明都在注释里。</li></ol><p><strong>操作效果</strong></p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -391,30 +307,26 @@ kubectl get deployments
 </span><span class=lnt>15
 </span><span class=lnt>16
 </span><span class=lnt>17
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># 先观察pods情况</span>
-kubectl get pods --watch
-<span class=c1># 通过tt.yml文件创建或者更新集群</span>
-kubectl apply -f tt.yml
-<span class=c1># 查看deployments</span>
-kubectl get deployments
-<span class=c1># 通过label过滤查询</span>
-kubectl.exe get deployments -l <span class=nv>env</span><span class=o>=</span><span class=nb>test</span>
-
-
-
-<span class=c1># 改动一次replicas的数量，查看rs状态</span>
-kubectl get rs
-<span class=c1># 发现有多个replicas版本，默认是10个，说明默认自带回退10个版本的功能</span>
-<span class=c1># 默认回退上一个版本，指定参数可回退到指定版本，但是不推荐使用！！！！</span>
-<span class=c1># 应该用apply应用声明的方式来进行，因为命令式存在重复操作的可能性。而声明式是修改最终状态！！！！</span>
-kubectl rollout undo deployment/nginx-deployment --to-revision<span class=o>=</span><span class=m>2</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=job class=headerLink>
-<a href=#job class=header-mark></a>Job</h2><p>一次性任务就是job。应用场景：突然有很多的任务堆积，临时加服务消费掉任务。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 先观察pods情况</span>
+</span></span><span class=line><span class=cl>kubectl get pods --watch
+</span></span><span class=line><span class=cl><span class=c1># 通过tt.yml文件创建或者更新集群</span>
+</span></span><span class=line><span class=cl>kubectl apply -f tt.yml
+</span></span><span class=line><span class=cl><span class=c1># 查看deployments</span>
+</span></span><span class=line><span class=cl>kubectl get deployments
+</span></span><span class=line><span class=cl><span class=c1># 通过label过滤查询</span>
+</span></span><span class=line><span class=cl>kubectl.exe get deployments -l <span class=nv>env</span><span class=o>=</span><span class=nb>test</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 改动一次replicas的数量，查看rs状态</span>
+</span></span><span class=line><span class=cl>kubectl get rs
+</span></span><span class=line><span class=cl><span class=c1># 发现有多个replicas版本，默认是10个，说明默认自带回退10个版本的功能</span>
+</span></span><span class=line><span class=cl><span class=c1># 默认回退上一个版本，指定参数可回退到指定版本，但是不推荐使用！！！！</span>
+</span></span><span class=line><span class=cl><span class=c1># 应该用apply应用声明的方式来进行，因为命令式存在重复操作的可能性。而声明式是修改最终状态！！！！</span>
+</span></span><span class=line><span class=cl>kubectl rollout undo deployment/nginx-deployment --to-revision<span class=o>=</span><span class=m>2</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=job class=headerLink>
+<a href=#job class=header-mark></a>Job</h2><p>一次性任务就是job。应用场景：突然有很多的任务堆积，临时加服务消费掉任务。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -442,39 +354,35 @@ kubectl rollout undo deployment/nginx-deployment --to-revision<span class=o>=</s
 </span><span class=lnt>24
 </span><span class=lnt>25
 </span><span class=lnt>26
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>batch/v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Job</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myjob</span><span class=w>
-</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>default</span><span class=w>
-</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>myjob</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=c># 执行8次这个镜像</span><span class=w>
-</span><span class=w>  </span><span class=nt>completions</span><span class=p>:</span><span class=w> </span><span class=m>8</span><span class=w>
-</span><span class=w>  </span><span class=c># 每次可以2个并发</span><span class=w>
-</span><span class=w>  </span><span class=nt>parallelism</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
-</span><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myjob</span><span class=w>
-</span><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>myjob</span><span class=w>
-</span><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myjob</span><span class=w>
-</span><span class=w>        </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu</span><span class=w>
-</span><span class=w>        </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s1>&#39;/bin/sh&#39;</span><span class=p>]</span><span class=w>
-</span><span class=w>        </span><span class=nt>args</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span>- -<span class=l>c</span><span class=w>
-</span><span class=w>          </span>- <span class=l>echo hello from myjob</span><span class=w>
-</span><span class=w>      </span><span class=nt>restartPolicy</span><span class=p>:</span><span class=w> </span><span class=l>OnFailure</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><h2 id=cronjob class=headerLink>
-<a href=#cronjob class=header-mark></a>Cronjob</h2><p>定时任务就是cronjob。应用场景：日志清理，日常跑批。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>batch/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Job</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myjob</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>default</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>myjob</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 执行8次这个镜像</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>completions</span><span class=p>:</span><span class=w> </span><span class=m>8</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 每次可以2个并发</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>parallelism</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myjob</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>myjob</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myjob</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s1>&#39;/bin/sh&#39;</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>args</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- -<span class=l>c</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=l>echo hello from myjob</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>restartPolicy</span><span class=p>:</span><span class=w> </span><span class=l>OnFailure</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=cronjob class=headerLink>
+<a href=#cronjob class=header-mark></a>Cronjob</h2><p>定时任务就是cronjob。应用场景：日志清理，日常跑批。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -499,36 +407,32 @@ kubectl rollout undo deployment/nginx-deployment --to-revision<span class=o>=</s
 </span><span class=lnt>21
 </span><span class=lnt>22
 </span><span class=lnt>23
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>batch/v1beta1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>CronJob</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>hello</span><span class=w>
-</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>default</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=c># 和linux的crontab一致</span><span class=w>
-</span><span class=w>  </span><span class=nt>schedule</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;*/1 * * * *&#34;</span><span class=w>
-</span><span class=w>  </span><span class=c># Pod最长启动或者运行时间</span><span class=w>
-</span><span class=w>  </span><span class=nt>startingDeadlineSeconds</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
-</span><span class=w>  </span><span class=c># 是否允许并行</span><span class=w>
-</span><span class=w>  </span><span class=nt>concurrencyPolicy</span><span class=p>:</span><span class=w> </span><span class=l>Allow</span><span class=w>
-</span><span class=w>  </span><span class=c># 允许保留job的历史个数</span><span class=w>
-</span><span class=w>  </span><span class=nt>successfulJobHistoryLimit</span><span class=p>:</span><span class=w> </span><span class=m>4</span><span class=w>
-</span><span class=w>  </span><span class=nt>jobTemplate</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>template</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span><span class=nt>containers</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>hello</span><span class=w>
-</span><span class=w>            </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>busybox</span><span class=w>
-</span><span class=w>            </span><span class=nt>args</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s1>&#39;/bin/sh&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;-c&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;date; echo Hello from the Kubernetes cluster&#39;</span><span class=p>]</span><span class=w>
-</span><span class=w>          </span><span class=nt>restartPolicy</span><span class=p>:</span><span class=w> </span><span class=l>OnFailure</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><h2 id=daemonset class=headerLink>
-<a href=#daemonset class=header-mark></a>DaemonSet</h2><p>在每一个节点或指定节点上运行一个pod服务。应用场景：加入一个新机器需要执行一个骚操作。例如加入rds的白名单。或者node节点自动伸缩，每次拓展的时候推送通知。还有node节点日志收集等内容</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>batch/v1beta1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>CronJob</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>hello</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>default</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 和linux的crontab一致</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>schedule</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;*/1 * * * *&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># Pod最长启动或者运行时间</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>startingDeadlineSeconds</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 是否允许并行</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>concurrencyPolicy</span><span class=p>:</span><span class=w> </span><span class=l>Allow</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 允许保留job的历史个数</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>successfulJobHistoryLimit</span><span class=p>:</span><span class=w> </span><span class=m>4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>jobTemplate</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>hello</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>busybox</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>args</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s1>&#39;/bin/sh&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;-c&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;date; echo Hello from the Kubernetes cluster&#39;</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>restartPolicy</span><span class=p>:</span><span class=w> </span><span class=l>OnFailure</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=daemonset class=headerLink>
+<a href=#daemonset class=header-mark></a>DaemonSet</h2><p>在每一个节点或指定节点上运行一个pod服务。应用场景：加入一个新机器需要执行一个骚操作。例如加入rds的白名单。或者node节点自动伸缩，每次拓展的时候推送通知。还有node节点日志收集等内容</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -560,97 +464,68 @@ kubectl rollout undo deployment/nginx-deployment --to-revision<span class=o>=</s
 </span><span class=lnt>28
 </span><span class=lnt>29
 </span><span class=lnt>30
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>apps/v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>DaemonSet</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>MYAPP</span><span class=w>
-</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>default</span><span class=w>
-</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>MYAPP</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>selector</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>matchLabels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>MYAPP</span><span class=w>
-</span><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>MYAPP</span><span class=w>
-</span><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>tolerations</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=c># 这里的tolerations是在master节点上也要指定。不要的话就删掉它</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=l>node-role.kubernetes.io/master</span><span class=w>
-</span><span class=w>        </span><span class=nt>effect</span><span class=p>:</span><span class=w> </span><span class=l>NoSchedule</span><span class=w>
-</span><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>MYAPP</span><span class=w>
-</span><span class=w>        </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>debian</span><span class=w>
-</span><span class=w>        </span><span class=nt>resources</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span><span class=nt>limits</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=l>200Mi</span><span class=w>
-</span><span class=w>          </span><span class=nt>requests</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=l>100m</span><span class=w>
-</span><span class=w>            </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=l>200Mi</span><span class=w>
-</span><span class=w>      </span><span class=nt>terminationGracePeriodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>30</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><h2 id=拓展知识 class=headerLink>
-<a href=#%e6%8b%93%e5%b1%95%e7%9f%a5%e8%af%86 class=header-mark></a>拓展知识</h2><p><a href=https://github.com/mziyabo/PSKubectlCompletion target=_blank rel="noopener noreffer">PSKubectlCompletion</a>：提供powershell的自动补全</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>apps/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>DaemonSet</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>MYAPP</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>default</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>MYAPP</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>selector</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>matchLabels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>MYAPP</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>MYAPP</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>tolerations</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=c># 这里的tolerations是在master节点上也要指定。不要的话就删掉它</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=l>node-role.kubernetes.io/master</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>effect</span><span class=p>:</span><span class=w> </span><span class=l>NoSchedule</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>MYAPP</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>debian</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>limits</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=l>200Mi</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>requests</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>cpu</span><span class=p>:</span><span class=w> </span><span class=l>100m</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>memory</span><span class=p>:</span><span class=w> </span><span class=l>200Mi</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>terminationGracePeriodSeconds</span><span class=p>:</span><span class=w> </span><span class=m>30</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=拓展知识 class=headerLink>
+<a href=#%e6%8b%93%e5%b1%95%e7%9f%a5%e8%af%86 class=header-mark></a>拓展知识</h2><p><a href=https://github.com/mziyabo/PSKubectlCompletion target=_blank rel="noopener noreffer">PSKubectlCompletion</a>：提供powershell的自动补全</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># 声明式，推荐使用</span>
-kubectl apply -f test.yml
-<span class=c1># 命令式则更适用于job。create是立即干掉pod后执行job</span>
-kubectl create -f test.yml
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=更新 class=headerLink>
-<a href=#%e6%9b%b4%e6%96%b0 class=header-mark></a>更新</h2><p><strong>20200805</strong>：在deployment新加参数<code>imagePullPolicy</code>,修改参数示例，修改http存活请求地址</p>
-</div>
-<div class=post-footer id=post-footer>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 声明式，推荐使用</span>
+</span></span><span class=line><span class=cl>kubectl apply -f test.yml
+</span></span><span class=line><span class=cl><span class=c1># 命令式则更适用于job。create是立即干掉pod后执行job</span>
+</span></span><span class=line><span class=cl>kubectl create -f test.yml
+</span></span></code></pre></td></tr></table></div></div><h2 id=更新 class=headerLink>
+<a href=#%e6%9b%b4%e6%96%b0 class=header-mark></a>更新</h2><p><strong>20200805</strong>：在deployment新加参数<code>imagePullPolicy</code>,修改参数示例，修改http存活请求地址</p></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
 <span>更新于 2021-08-23</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span><a href=# onclick=return!1 title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2/ data-title=我的k8s之路2-应用部署 data-hashtags=k8s><i class="fab fa-twitter fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2/ data-hashtag=k8s><i class="fab fa-facebook-square fa-fw"></i></a><a href=# onclick=return!1 title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2/ data-title=我的k8s之路2-应用部署 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2/ data-title=我的k8s之路2-应用部署><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# onclick=return!1 title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2/ data-title=我的k8s之路2-应用部署><i class="fab fa-weibo fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2/ data-title=我的k8s之路2-应用部署 data-description=这是k8s的第二篇，但是已经时隔一年了。也不知道是k8s变化了，还是我之前的理解不够正确。不过我看了一眼，觉得上一篇写的一些内容，还是比较浅显易懂的，作为入门速览还不错。不过从这一篇开始，要好好抠细节了><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# onclick=return!1 title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2/ data-title=我的k8s之路2-应用部署 data-description=这是k8s的第二篇，但是已经时隔一年了。也不知道是k8s变化了，还是我之前的理解不够正确。不过我看了一眼，觉得上一篇写的一些内容，还是比较浅显易懂的，作为入门速览还不错。不过从这一篇开始，要好好抠细节了><i class="fab fa-blogger fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF2-%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2/ data-title=我的k8s之路2-应用部署><i class="fab fa-evernote fa-fw"></i></a></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/k8s/>k8s</a></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/k8s/>k8s</a></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/contents/linux%E4%B9%8Blimit%E9%99%90%E5%88%B6/ class=prev rel=prev title=linux之limit限制><i class="fas fa-angle-left fa-fw"></i>linux之limit限制</a>
-<a href=/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/ class=next rel=next title=我的k8s之路0-集群部署>我的k8s之路0-集群部署<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
+</section></div><div class=post-nav><a href=/contents/linux%E4%B9%8Blimit%E9%99%90%E5%88%B6/ class=prev rel=prev title=linux之limit限制><i class="fas fa-angle-left fa-fw"></i>linux之limit限制</a>
+<a href=/contents/%E6%88%91%E7%9A%84k8s%E4%B9%8B%E8%B7%AF0-%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/ class=next rel=next title=我的k8s之路0-集群部署>我的k8s之路0-集群部署<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
 <div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
-<span class=icp>湘ICP备2021002319号-1</span></div>
-<div class=footer-line></div>
-<div class=footer-line>
-</div>
-</div><script>'serviceWorker'in navigator&&(navigator.serviceWorker.register('/sw.min.js',{scope:'/'}).then(function(a){}),navigator.serviceWorker.ready.then(function(a){}))</script></footer></div>
-<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
+<span class=icp>湘ICP备2021002319号-1</span></div><div class=footer-line></div><div class=footer-line>
+</div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
-</body>
-</html>
+</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div><div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div></body></html>

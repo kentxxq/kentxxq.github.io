@@ -16,18 +16,14 @@
 <meta name=apple-mobile-web-app-title content="kentxxq">
 <meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/><link rel=prev href=https://kentxxq.com/contents/2021%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%97%A5%E8%AE%B0/><link rel=next href=https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
-<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript>
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"网络命令行工具-ken","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken\/"},"genre":"posts","keywords":"csharp, tools","wordcount":1474,"url":"https:\/\/kentxxq.com\/contents\/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken\/","datePublished":"2021-08-30T17:42:00+08:00","dateModified":"2022-02-22T16:02:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个"}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
-<div id=back-to-top></div>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/><link rel=prev href=https://kentxxq.com/contents/2021%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%97%A5%E8%AE%B0/><link rel=next href=https://kentxxq.com/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"网络命令行工具-ken","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken\/"},"genre":"posts","keywords":"csharp, tools","wordcount":1474,"url":"https:\/\/kentxxq.com\/contents\/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken\/","datePublished":"2021-08-30T17:42:00+08:00","dateModified":"2022-02-22T16:02:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个"}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e)}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(t){const e=document.getElementsByTagName("meta");for(let n=0;n<e.length;n++)if(e[n].getAttribute("name")===t)return e[n];return''}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light")}else''==="light"||''==="dark"||''==="black"?(setTheme(''),saveTheme('')):(saveTheme("auto"),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")]</script>
+<div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/posts/> Blog </a><a class=menu-item href=/categories/> Categories </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/about/> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -41,20 +37,14 @@
 </span>
 </span><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</a></div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -66,89 +56,36 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
+</div><a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto><nav id=TableOfContents>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents>
 <ul>
-<li><a href=#简介>简介</a></li>
-<li><a href=#如何使用>如何使用</a>
+<li><a href=#简介>简介</a></li><li><a href=#如何使用>如何使用</a>
 <ul>
-<li><a href=#sp>sp</a></li>
-<li><a href=#ws>ws</a></li>
-<li><a href=#ss>ss</a></li>
-<li><a href=#tr>tr</a></li>
-<li><a href=#redis>redis</a></li>
-</ul>
-</li>
-<li><a href=#todo>TODO</a></li>
-<li><a href=#更新日志>更新日志</a></li>
-</ul>
-</nav></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">网络命令行工具-ken</h1><div class=post-meta>
+<li><a href=#sp>sp</a></li><li><a href=#ws>ws</a></li><li><a href=#ss>ss</a></li><li><a href=#tr>tr</a></li><li><a href=#redis>redis</a></li></ul></li><li><a href=#todo>TODO</a></li><li><a href=#更新日志>更新日志</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">网络命令行工具-ken</h1><div class=post-meta>
 <div class=post-meta-line>
 <span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-08-30>2021-08-30</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-02-22>2022-02-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1474 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-08-30>2021-08-30</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-02-22>2022-02-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1474 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#简介>简介</a></li>
-<li><a href=#如何使用>如何使用</a>
+<li><a href=#简介>简介</a></li><li><a href=#如何使用>如何使用</a>
 <ul>
-<li><a href=#sp>sp</a></li>
-<li><a href=#ws>ws</a></li>
-<li><a href=#ss>ss</a></li>
-<li><a href=#tr>tr</a></li>
-<li><a href=#redis>redis</a></li>
-</ul>
-</li>
-<li><a href=#todo>TODO</a></li>
-<li><a href=#更新日志>更新日志</a></li>
-</ul>
-</nav></div>
-</div><div class=content id=content><blockquote>
-<p>在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个。</p>
-</blockquote>
-<h2 id=简介 class=headerLink>
+<li><a href=#sp>sp</a></li><li><a href=#ws>ws</a></li><li><a href=#ss>ss</a></li><li><a href=#tr>tr</a></li><li><a href=#redis>redis</a></li></ul></li><li><a href=#todo>TODO</a></li><li><a href=#更新日志>更新日志</a></li></ul></nav></div></div><div class=content id=content><blockquote>
+<p>在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个。</p></blockquote><h2 id=简介 class=headerLink>
 <a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p><code>ken</code>的由来: 我一直以来用的都是名字kentxxq。而在日常生活中需要一个简短好用的名字，于是就用了ken。同时也因为命令行需要足够简短，所以也就用了这个名字。<br>
-<a href=https://github.com/kentxxq/kentxxq.Cli target=_blank rel="noopener noreffer">代码都是开源</a>的，采用c#编写。使用了微软自己的<code>System.Commandline</code>。</p>
-<p>现支持的所有系统版本</p>
-<ul>
-<li>ken-linux-arm</li>
-<li>ken-linux-arm64</li>
-<li>ken-linux-arm</li>
-<li>ken-linux-arm64</li>
-<li>ken-linux-musl-x64</li>
-<li>ken-linux-x64</li>
-<li>ken-osx-arm64</li>
-<li>ken-osx-x64</li>
-<li>ken-win-arm.exe</li>
-<li>ken-win-arm64.exe</li>
-<li>ken-win-x64.exe</li>
-<li>ken-win-x86.exe</li>
-</ul>
-<div class=highlight><div class=chroma>
+<a href=https://github.com/kentxxq/kentxxq.Cli target=_blank rel="noopener noreffer">代码都是开源</a>的，采用c#编写。使用了微软自己的<code>System.Commandline</code>。</p><p>现支持的所有系统版本</p><ul>
+<li>ken-linux-arm</li><li>ken-linux-arm64</li><li>ken-linux-arm</li><li>ken-linux-arm64</li><li>ken-linux-musl-x64</li><li>ken-linux-x64</li><li>ken-osx-arm64</li><li>ken-osx-x64</li><li>ken-win-arm.exe</li><li>ken-win-arm64.exe</li><li>ken-win-x64.exe</li><li>ken-win-x86.exe</li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -156,21 +93,16 @@
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># 下载举例：linux-x64 下载到程序路径</span>
-curl -L -o /usr/local/bin/ken https://github.com/kentxxq/kentxxq.Cli/releases/latest/download/ken-linux-x64
-<span class=c1># 如果是国内网络不行的话，可以使用七牛云cdn下载</span>
-curl -L -o /usr/local/bin/ken http://tools.kentxxq.com/ken-linux-x64
-<span class=c1># 赋权</span>
-chmod +x /usr/local/bin/ken
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=如何使用 class=headerLink>
-<a href=#%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8 class=header-mark></a>如何使用</h2><p>说明: 如果命令返回状态非0，则代表异常退出</p>
-<h3 id=sp class=headerLink>
-<a href=#sp class=header-mark></a>sp</h3><p><code>sp</code>代表socketping，之前一直都是用的<code>telnet</code>。但是只能一次性请求，而sp可以设置<strong>连接超时时间、重试次数、连接成功后退出</strong>。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 下载举例：linux-x64 下载到程序路径</span>
+</span></span><span class=line><span class=cl>curl -L -o /usr/local/bin/ken https://github.com/kentxxq/kentxxq.Cli/releases/latest/download/ken-linux-x64
+</span></span><span class=line><span class=cl><span class=c1># 如果是国内网络不行的话，可以使用七牛云cdn下载</span>
+</span></span><span class=line><span class=cl>curl -L -o /usr/local/bin/ken http://tools.kentxxq.com/ken-linux-x64
+</span></span><span class=line><span class=cl><span class=c1># 赋权</span>
+</span></span><span class=line><span class=cl>chmod +x /usr/local/bin/ken
+</span></span></code></pre></td></tr></table></div></div><h2 id=如何使用 class=headerLink>
+<a href=#%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8 class=header-mark></a>如何使用</h2><p>说明: 如果命令返回状态非0，则代表异常退出</p><h3 id=sp class=headerLink>
+<a href=#sp class=header-mark></a>sp</h3><p><code>sp</code>代表socketping，之前一直都是用的<code>telnet</code>。但是只能一次性请求，而sp可以设置<strong>连接超时时间、重试次数、连接成功后退出</strong>。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -198,39 +130,35 @@ chmod +x /usr/local/bin/ken
 </span><span class=lnt>24
 </span><span class=lnt>25
 </span><span class=lnt>26
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>Usage:
-  ken <span class=o>[</span>options<span class=o>]</span> sp &lt;url&gt;
-
-Arguments:
-  &lt;url&gt;  url: kentxxq.com:443
-
-Options:
-  -n, --retryTimes &lt;retryTimes&gt;  default:0,retry forever <span class=o>[</span>default: 0<span class=o>]</span>
-  -t, --timeout &lt;timeout&gt;        default:2 seconds <span class=o>[</span>default: 2<span class=o>]</span>
-  -q, --quit                     Quit after connection succeeded <span class=o>[</span>default: False<span class=o>]</span>
-  -?, -h, --help                 Show <span class=nb>help</span> and usage information
-
-<span class=c1># 请求2次</span>
-ken sp kentxxq.com:443 -n <span class=m>2</span>
-request successed. waited <span class=m>137</span> ms
-request successed. waited <span class=m>1117</span> ms
-<span class=c1># 请求2次，一旦成功就退出</span>
-ken sp kentxxq.com:443 -n <span class=m>2</span> -q
-request successed. waited <span class=m>96</span> ms
-<span class=c1># 请求失败的情况，同时设置超时时间</span>
-ken sp kentxxq.com:444 -t <span class=m>3</span> -n <span class=m>2</span> -q
-request failed. waited <span class=m>3016</span> ms
-request failed. waited <span class=m>3013</span> ms
-<span class=c1># 解析失败的情况</span>
-ken sp kentxxq:443 -t <span class=m>3</span> -n <span class=m>2</span> -q
-parse error:不知道这样的主机。
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=ws class=headerLink>
-<a href=#ws class=header-mark></a>ws</h3><p><code>ws</code>代表连接websocket。之前一直用wscat，但是<strong>wscat依赖nodejs</strong>。每次使用的时候都觉得有点大材小用了。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Usage:
+</span></span><span class=line><span class=cl>  ken <span class=o>[</span>options<span class=o>]</span> sp &lt;url&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Arguments:
+</span></span><span class=line><span class=cl>  &lt;url&gt;  url: kentxxq.com:443
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Options:
+</span></span><span class=line><span class=cl>  -n, --retryTimes &lt;retryTimes&gt;  default:0,retry forever <span class=o>[</span>default: 0<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -t, --timeout &lt;timeout&gt;        default:2 seconds <span class=o>[</span>default: 2<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -q, --quit                     Quit after connection succeeded <span class=o>[</span>default: False<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -?, -h, --help                 Show <span class=nb>help</span> and usage information
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 请求2次</span>
+</span></span><span class=line><span class=cl>ken sp kentxxq.com:443 -n <span class=m>2</span>
+</span></span><span class=line><span class=cl>request successed. waited <span class=m>137</span> ms
+</span></span><span class=line><span class=cl>request successed. waited <span class=m>1117</span> ms
+</span></span><span class=line><span class=cl><span class=c1># 请求2次，一旦成功就退出</span>
+</span></span><span class=line><span class=cl>ken sp kentxxq.com:443 -n <span class=m>2</span> -q
+</span></span><span class=line><span class=cl>request successed. waited <span class=m>96</span> ms
+</span></span><span class=line><span class=cl><span class=c1># 请求失败的情况，同时设置超时时间</span>
+</span></span><span class=line><span class=cl>ken sp kentxxq.com:444 -t <span class=m>3</span> -n <span class=m>2</span> -q
+</span></span><span class=line><span class=cl>request failed. waited <span class=m>3016</span> ms
+</span></span><span class=line><span class=cl>request failed. waited <span class=m>3013</span> ms
+</span></span><span class=line><span class=cl><span class=c1># 解析失败的情况</span>
+</span></span><span class=line><span class=cl>ken sp kentxxq:443 -t <span class=m>3</span> -n <span class=m>2</span> -q
+</span></span><span class=line><span class=cl>parse error:不知道这样的主机。
+</span></span></code></pre></td></tr></table></div></div><h3 id=ws class=headerLink>
+<a href=#ws class=header-mark></a>ws</h3><p><code>ws</code>代表连接websocket。之前一直用wscat，但是<strong>wscat依赖nodejs</strong>。每次使用的时候都觉得有点大材小用了。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -246,27 +174,23 @@ parse error:不知道这样的主机。
 </span><span class=lnt>12
 </span><span class=lnt>13
 </span><span class=lnt>14
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>Usage:
-  ken <span class=o>[</span>options<span class=o>]</span> ws &lt;wsUrl&gt;
-
-Arguments:
-  &lt;wsUrl&gt;  wsUrl: wss://ws.kentxxq.com/ws
-
-<span class=c1># 连接websocket</span>
-ken ws wss://ws.kentxxq.com/ws
-&gt;&gt; ls
-&lt;&lt; ls
-&gt;&gt; <span class=nb>pwd</span>
-&lt;&lt; <span class=nb>pwd</span>
-&gt;&gt; 你好
-&lt;&lt; 你好
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=ss class=headerLink>
-<a href=#ss class=header-mark></a>ss</h3><p><code>ss</code>代表socket status。主要原因是每次在windows上都容易忘记命令。后面会找时间去拓展成有用的功能。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Usage:
+</span></span><span class=line><span class=cl>  ken <span class=o>[</span>options<span class=o>]</span> ws &lt;wsUrl&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Arguments:
+</span></span><span class=line><span class=cl>  &lt;wsUrl&gt;  wsUrl: wss://ws.kentxxq.com/ws
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 连接websocket</span>
+</span></span><span class=line><span class=cl>ken ws wss://ws.kentxxq.com/ws
+</span></span><span class=line><span class=cl>&gt;&gt; ls
+</span></span><span class=line><span class=cl>&lt;&lt; ls
+</span></span><span class=line><span class=cl>&gt;&gt; <span class=nb>pwd</span>
+</span></span><span class=line><span class=cl>&lt;&lt; <span class=nb>pwd</span>
+</span></span><span class=line><span class=cl>&gt;&gt; 你好
+</span></span><span class=line><span class=cl>&lt;&lt; 你好
+</span></span></code></pre></td></tr></table></div></div><h3 id=ss class=headerLink>
+<a href=#ss class=header-mark></a>ss</h3><p><code>ss</code>代表socket status。主要原因是每次在windows上都容易忘记命令。后面会找时间去拓展成有用的功能。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -313,58 +237,54 @@ ken ws wss://ws.kentxxq.com/ws
 </span><span class=lnt>43
 </span><span class=lnt>44
 </span><span class=lnt>45
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>❯ .<span class=se>\k</span>en.exe ss
-0.0.0.0:135
-0.0.0.0:445
-0.0.0.0:2179
-0.0.0.0:5040
-0.0.0.0:7680
-0.0.0.0:7890
-0.0.0.0:28653
-0.0.0.0:49664
-0.0.0.0:49665
-0.0.0.0:49666
-0.0.0.0:49667
-0.0.0.0:49668
-0.0.0.0:49669
-0.0.0.0:49678
-127.0.0.1:4012
-127.0.0.1:4013
-127.0.0.1:9100
-127.0.0.1:9180
-127.0.0.1:53087
-127.0.0.1:53088
-127.0.0.1:53117
-127.0.0.1:53121
-127.0.0.1:53430
-127.0.0.1:57956
-127.0.0.1:57961
-127.0.0.1:61078
-127.0.0.1:62078
-169.254.171.114:139
-172.18.87.230:139
-172.18.87.230:5822
-172.19.144.1:139
-:::135
-:::445
-:::2179
-:::7680
-:::7890
-:::49664
-:::49665
-:::49666
-:::49667
-:::49668
-:::49669
-:::49678
-::1:49672
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=tr class=headerLink>
-<a href=#tr class=header-mark></a>tr</h3><p><code>tr</code>代表traceroute。是通过dotnet的ping实现。结果发现在linux有问题，所以后续再去拓展吧。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>❯ .<span class=se>\k</span>en.exe ss
+</span></span><span class=line><span class=cl>0.0.0.0:135
+</span></span><span class=line><span class=cl>0.0.0.0:445
+</span></span><span class=line><span class=cl>0.0.0.0:2179
+</span></span><span class=line><span class=cl>0.0.0.0:5040
+</span></span><span class=line><span class=cl>0.0.0.0:7680
+</span></span><span class=line><span class=cl>0.0.0.0:7890
+</span></span><span class=line><span class=cl>0.0.0.0:28653
+</span></span><span class=line><span class=cl>0.0.0.0:49664
+</span></span><span class=line><span class=cl>0.0.0.0:49665
+</span></span><span class=line><span class=cl>0.0.0.0:49666
+</span></span><span class=line><span class=cl>0.0.0.0:49667
+</span></span><span class=line><span class=cl>0.0.0.0:49668
+</span></span><span class=line><span class=cl>0.0.0.0:49669
+</span></span><span class=line><span class=cl>0.0.0.0:49678
+</span></span><span class=line><span class=cl>127.0.0.1:4012
+</span></span><span class=line><span class=cl>127.0.0.1:4013
+</span></span><span class=line><span class=cl>127.0.0.1:9100
+</span></span><span class=line><span class=cl>127.0.0.1:9180
+</span></span><span class=line><span class=cl>127.0.0.1:53087
+</span></span><span class=line><span class=cl>127.0.0.1:53088
+</span></span><span class=line><span class=cl>127.0.0.1:53117
+</span></span><span class=line><span class=cl>127.0.0.1:53121
+</span></span><span class=line><span class=cl>127.0.0.1:53430
+</span></span><span class=line><span class=cl>127.0.0.1:57956
+</span></span><span class=line><span class=cl>127.0.0.1:57961
+</span></span><span class=line><span class=cl>127.0.0.1:61078
+</span></span><span class=line><span class=cl>127.0.0.1:62078
+</span></span><span class=line><span class=cl>169.254.171.114:139
+</span></span><span class=line><span class=cl>172.18.87.230:139
+</span></span><span class=line><span class=cl>172.18.87.230:5822
+</span></span><span class=line><span class=cl>172.19.144.1:139
+</span></span><span class=line><span class=cl>:::135
+</span></span><span class=line><span class=cl>:::445
+</span></span><span class=line><span class=cl>:::2179
+</span></span><span class=line><span class=cl>:::7680
+</span></span><span class=line><span class=cl>:::7890
+</span></span><span class=line><span class=cl>:::49664
+</span></span><span class=line><span class=cl>:::49665
+</span></span><span class=line><span class=cl>:::49666
+</span></span><span class=line><span class=cl>:::49667
+</span></span><span class=line><span class=cl>:::49668
+</span></span><span class=line><span class=cl>:::49669
+</span></span><span class=line><span class=cl>:::49678
+</span></span><span class=line><span class=cl>::1:49672
+</span></span></code></pre></td></tr></table></div></div><h3 id=tr class=headerLink>
+<a href=#tr class=header-mark></a>tr</h3><p><code>tr</code>代表traceroute。是通过dotnet的ping实现。结果发现在linux有问题，所以后续再去拓展吧。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -380,27 +300,23 @@ ken ws wss://ws.kentxxq.com/ws
 </span><span class=lnt>12
 </span><span class=lnt>13
 </span><span class=lnt>14
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>❯ ken.exe tr kentxxq.com
-try connecting to kentxxq.com ...success
-<span class=m>1</span> request timeout
-<span class=m>2</span> 118.250.180.1 take 0ms 中国-湖南-长沙-电信
-<span class=m>3</span> 61.187.29.245 take 3ms 中国-湖南-长沙-电信
-<span class=m>4</span> 61.137.3.129 take 0ms 中国-湖南-长沙-电信
-<span class=m>5</span> request timeout
-<span class=m>6</span> 202.97.94.122 take 19ms 中国-北京-北京-电信
-<span class=m>7</span> 202.97.94.94 take 58ms 中国-北京-北京-电信
-<span class=m>8</span> 202.97.60.214 take 0ms 日本-XX-XX-电信
-<span class=m>9</span> 129.250.3.23 take 79ms 美国-XX-XX-XX
-<span class=m>10</span> 129.250.6.127 take 0ms 美国-XX-XX-XX
-<span class=m>11</span> 61.200.82.50 take 102ms 日本-XX-XX-XX
-<span class=m>12</span> 185.199.110.153 美国-华盛顿-西雅图-XX
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=redis class=headerLink>
-<a href=#redis class=header-mark></a>redis</h3><p><code>redis</code>因为经常删除特定的key，而<code>redis-cli</code>没有没有很好的支持这点，所以就自己写了一个最常用的。。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>❯ ken.exe tr kentxxq.com
+</span></span><span class=line><span class=cl>try connecting to kentxxq.com ...success
+</span></span><span class=line><span class=cl><span class=m>1</span> request timeout
+</span></span><span class=line><span class=cl><span class=m>2</span> 118.250.180.1 take 0ms 中国-湖南-长沙-电信
+</span></span><span class=line><span class=cl><span class=m>3</span> 61.187.29.245 take 3ms 中国-湖南-长沙-电信
+</span></span><span class=line><span class=cl><span class=m>4</span> 61.137.3.129 take 0ms 中国-湖南-长沙-电信
+</span></span><span class=line><span class=cl><span class=m>5</span> request timeout
+</span></span><span class=line><span class=cl><span class=m>6</span> 202.97.94.122 take 19ms 中国-北京-北京-电信
+</span></span><span class=line><span class=cl><span class=m>7</span> 202.97.94.94 take 58ms 中国-北京-北京-电信
+</span></span><span class=line><span class=cl><span class=m>8</span> 202.97.60.214 take 0ms 日本-XX-XX-电信
+</span></span><span class=line><span class=cl><span class=m>9</span> 129.250.3.23 take 79ms 美国-XX-XX-XX
+</span></span><span class=line><span class=cl><span class=m>10</span> 129.250.6.127 take 0ms 美国-XX-XX-XX
+</span></span><span class=line><span class=cl><span class=m>11</span> 61.200.82.50 take 102ms 日本-XX-XX-XX
+</span></span><span class=line><span class=cl><span class=m>12</span> 185.199.110.153 美国-华盛顿-西雅图-XX
+</span></span></code></pre></td></tr></table></div></div><h3 id=redis class=headerLink>
+<a href=#redis class=header-mark></a>redis</h3><p><code>redis</code>因为经常删除特定的key，而<code>redis-cli</code>没有没有很好的支持这点，所以就自己写了一个最常用的。。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -425,83 +341,51 @@ try connecting to kentxxq.com ...success
 </span><span class=lnt>21
 </span><span class=lnt>22
 </span><span class=lnt>23
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># 错误命令就会输出usage</span>
-<span class=c1># usage:</span>
-<span class=c1># a*: search all keys start with a in db</span>
-<span class=c1># del a2*: delete all keys start with a2 in db</span>
-<span class=c1># select 1: checkout db 1</span>
-<span class=c1># exit(): just exit</span>
-
-&gt; ken redis bwd.kentxxq.com -p <span class=m>123456</span>
-connect success,take 27.4024 ms
-db0 keys:2
-&gt;&gt;a
-keys count:1
-&gt;&gt;b
-keys count:1
-&gt;&gt;a*
-keys count:1
-&gt;&gt;del a
-deleted <span class=m>1</span> key<span class=o>(</span>s<span class=o>)</span>
-&gt;&gt;select <span class=m>1</span>
-using db1 keys count:1
-&gt;&gt;c
-keys count:1
-&gt;&gt;exit<span class=o>()</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=todo class=headerLink>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 错误命令就会输出usage</span>
+</span></span><span class=line><span class=cl><span class=c1># usage:</span>
+</span></span><span class=line><span class=cl><span class=c1># a*: search all keys start with a in db</span>
+</span></span><span class=line><span class=cl><span class=c1># del a2*: delete all keys start with a2 in db</span>
+</span></span><span class=line><span class=cl><span class=c1># select 1: checkout db 1</span>
+</span></span><span class=line><span class=cl><span class=c1># exit(): just exit</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&gt; ken redis bwd.kentxxq.com -p <span class=m>123456</span>
+</span></span><span class=line><span class=cl>connect success,take 27.4024 ms
+</span></span><span class=line><span class=cl>db0 keys:2
+</span></span><span class=line><span class=cl>&gt;&gt;a
+</span></span><span class=line><span class=cl>keys count:1
+</span></span><span class=line><span class=cl>&gt;&gt;b
+</span></span><span class=line><span class=cl>keys count:1
+</span></span><span class=line><span class=cl>&gt;&gt;a*
+</span></span><span class=line><span class=cl>keys count:1
+</span></span><span class=line><span class=cl>&gt;&gt;del a
+</span></span><span class=line><span class=cl>deleted <span class=m>1</span> key<span class=o>(</span>s<span class=o>)</span>
+</span></span><span class=line><span class=cl>&gt;&gt;select <span class=m>1</span>
+</span></span><span class=line><span class=cl>using db1 keys count:1
+</span></span><span class=line><span class=cl>&gt;&gt;c
+</span></span><span class=line><span class=cl>keys count:1
+</span></span><span class=line><span class=cl>&gt;&gt;exit<span class=o>()</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=todo class=headerLink>
 <a href=#todo class=header-mark></a>TODO</h2><ol>
-<li>ss命令增加更多的功能</li>
-<li>tr命令等待ping库的完善，或者后续直接调用系统api来完成</li>
-</ol>
-<h2 id=更新日志 class=headerLink>
-<a href=#%e6%9b%b4%e6%96%b0%e6%97%a5%e5%bf%97 class=header-mark></a>更新日志</h2><p><strong>20210830</strong>: 开篇</p>
-<p><strong>20210901</strong>: 补全所有可以支持的linux版本</p>
-<p><strong>20210905</strong>: 使用七牛云免费套餐，加速国内的下载</p>
-<p><strong>20211115</strong>: net6发布了，所以更新了支持的平台。把2个还未完成的功能加入到了todo&mldr;反正我一直想有个自己的命令行工具，一定会持续完善的&mldr;</p>
-<p><strong>20220222</strong>: 新增了<code>redis</code>命令，然后优化了一些内部逻辑</p>
-</div>
-<div class=post-footer id=post-footer>
+<li>ss命令增加更多的功能</li><li>tr命令等待ping库的完善，或者后续直接调用系统api来完成</li></ol><h2 id=更新日志 class=headerLink>
+<a href=#%e6%9b%b4%e6%96%b0%e6%97%a5%e5%bf%97 class=header-mark></a>更新日志</h2><p><strong>20210830</strong>: 开篇</p><p><strong>20210901</strong>: 补全所有可以支持的linux版本</p><p><strong>20210905</strong>: 使用七牛云免费套餐，加速国内的下载</p><p><strong>20211115</strong>: net6发布了，所以更新了支持的平台。把2个还未完成的功能加入到了todo&mldr;反正我一直想有个自己的命令行工具，一定会持续完善的&mldr;</p><p><strong>20220222</strong>: 新增了<code>redis</code>命令，然后优化了一些内部逻辑</p></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
 <span>更新于 2022-02-22</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span><a href=# onclick=return!1 title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken data-hashtags=csharp,tools><i class="fab fa-twitter fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-hashtag=csharp><i class="fab fa-facebook-square fa-fw"></i></a><a href=# onclick=return!1 title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# onclick=return!1 title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken><i class="fab fa-weibo fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken data-description=在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# onclick=return!1 title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken data-description=在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个><i class="fab fa-blogger fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/contents/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7ken/ data-title=网络命令行工具-ken><i class="fab fa-evernote fa-fw"></i></a></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/csharp/>csharp</a>,&nbsp;<a href=/tags/tools/>tools</a></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/csharp/>csharp</a>,&nbsp;<a href=/tags/tools/>tools</a></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/contents/2021%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%97%A5%E8%AE%B0/ class=prev rel=prev title=2021一句话日记><i class="fas fa-angle-left fa-fw"></i>2021一句话日记</a>
-<a href=/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/ class=next rel=next title=gitlab-迁移-升级-代理>gitlab-迁移-升级-代理<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
+</section></div><div class=post-nav><a href=/contents/2021%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%97%A5%E8%AE%B0/ class=prev rel=prev title=2021一句话日记><i class="fas fa-angle-left fa-fw"></i>2021一句话日记</a>
+<a href=/contents/gitlab%E8%BF%81%E7%A7%BB%E5%8D%87%E7%BA%A7/ class=next rel=next title=gitlab-迁移-升级-代理>gitlab-迁移-升级-代理<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
 <div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
-<span class=icp>湘ICP备2021002319号-1</span></div>
-<div class=footer-line></div>
-<div class=footer-line>
-</div>
-</div><script>'serviceWorker'in navigator&&(navigator.serviceWorker.register('/sw.min.js',{scope:'/'}).then(function(a){}),navigator.serviceWorker.ready.then(function(a){}))</script></footer></div>
-<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
+<span class=icp>湘ICP备2021002319号-1</span></div><div class=footer-line></div><div class=footer-line>
+</div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-131319987-1',{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div>
-<div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div>
-</body>
-</html>
+</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div><div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div></body></html>
