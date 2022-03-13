@@ -1,96 +1,16 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="noodp">
-<title class=pjax-title>linux常用命令 - kentxxq Blog</title><meta name=Description content="记录一下常用的linux常用命令"><meta property="og:title" content="linux常用命令">
-<meta property="og:description" content="记录一下常用的linux常用命令">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2020-06-09T23:47:00+08:00">
-<meta property="article:modified_time" content="2021-08-23T00:57:19+08:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="linux常用命令">
-<meta name=twitter:description content="记录一下常用的linux常用命令">
-<meta name=application-name content="kentxxq">
-<meta name=apple-mobile-web-app-title content="kentxxq">
-<meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/><link rel=prev href=https://kentxxq.com/contents/%E4%B8%80%E4%B8%AA%E6%88%91%E9%9C%80%E8%A6%81%E7%9A%84win10/><link rel=next href=https://kentxxq.com/contents/linux%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css>
-<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"linux常用命令","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4\/"},"genre":"posts","keywords":"linux","wordcount":560,"url":"https:\/\/kentxxq.com\/contents\/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4\/","datePublished":"2020-06-09T23:47:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"记录一下常用的linux常用命令"}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e)}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(t){const e=document.getElementsByTagName("meta");for(let n=0;n<e.length;n++)if(e[n].getAttribute("name")===t)return e[n];return''}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light")}else''==="light"||''==="dark"||''==="black"?(setTheme(''),saveTheme('')):(saveTheme("auto"),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")]</script>
-<div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div><div class=menu>
-<div class=menu-inner><a class=menu-item href=/posts/> Blog </a><a class=menu-item href=/categories/> Categories </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/about/> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title class=pjax-title>linux常用命令 - kentxxq Blog</title><meta name=Description content="记录一下常用的linux常用命令"><meta property="og:title" content="linux常用命令"><meta property="og:description" content="记录一下常用的linux常用命令"><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-06-09T23:47:00+08:00"><meta property="article:modified_time" content="2021-08-23T00:57:19+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="linux常用命令"><meta name=twitter:description content="记录一下常用的linux常用命令"><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/><link rel=prev href=https://kentxxq.com/contents/%E4%B8%80%E4%B8%AA%E6%88%91%E9%9C%80%E8%A6%81%E7%9A%84win10/><link rel=next href=https://kentxxq.com/contents/linux%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"linux常用命令","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/contents\/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4\/"},"genre":"posts","keywords":"linux","wordcount":560,"url":"https:\/\/kentxxq.com\/contents\/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4\/","datePublished":"2020-06-09T23:47:00+08:00","dateModified":"2021-08-23T00:57:19+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"记录一下常用的linux常用命令"}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e)}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(t){const e=document.getElementsByTagName("meta");for(let n=0;n<e.length;n++)if(e[n].getAttribute("name")===t)return e[n];return''}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light")}else''==="light"||''==="dark"||''==="black"?(setTheme(''),saveTheme('')):(saveTheme("auto"),window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?setTheme("dark"):setTheme("light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")]</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="kentxxq Blog">kentxxq Blog</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-desktop title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=# onclick=return!1 class="search-button search-clear" id=search-clear-desktop title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-desktop>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</span><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a></div></div></div></header><header class=mobile id=header-mobile>
-<div class=header-container>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/ title="kentxxq Blog">kentxxq Blog</a>
-</div><div class=menu-toggle id=menu-toggle-mobile>
-<span></span><span></span><span></span>
-</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
-<div class="search mobile" id=search-mobile>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-mobile title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=# onclick=return!1 class="search-button search-clear" id=search-clear-mobile title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-mobile>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</div><a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>
-取消
-</a>
-</div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a></div></div></header><div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div></div><main class=main>
-<div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents>
-<ul>
-<li><a href=#常用命令>常用命令</a>
-<ul>
-<li><a href=#tar压缩解压>tar压缩、解压</a></li><li><a href=#时间同步>时间同步</a></li><li><a href=#清空文件>清空文件</a></li><li><a href=#开启bbr>开启bbr</a></li><li><a href=#使用yum镜像源>使用yum镜像源</a></li><li><a href=#终端中文显示>终端中文显示</a>
-<ul>
-<li><a href=#查看已有的字符编码集>查看已有的字符编码集</a></li><li><a href=#如果没有zh_cnutf-8>如果没有zh_CN.UTF-8</a></li><li><a href=#使用中文>使用中文</a></li></ul></li><li><a href=#删除7天前的文件>删除7天前的文件</a></li><li><a href=#查看进程的启动时间>查看进程的启动时间</a></li><li><a href=#端口连接情况>端口连接情况</a></li></ul></li><li><a href=#更新>更新</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">linux常用命令</h1><div class=post-meta>
-<div class=post-meta-line>
-<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
+<a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# onclick=return!1 class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="kentxxq Blog">kentxxq Blog</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# onclick=return!1 class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# onclick=return!1 class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# onclick=return!1 class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=# onclick=return!1 class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#常用命令>常用命令</a><ul><li><a href=#tar压缩解压>tar压缩、解压</a></li><li><a href=#时间同步>时间同步</a></li><li><a href=#清空文件>清空文件</a></li><li><a href=#开启bbr>开启bbr</a></li><li><a href=#使用yum镜像源>使用yum镜像源</a></li><li><a href=#终端中文显示>终端中文显示</a><ul><li><a href=#查看已有的字符编码集>查看已有的字符编码集</a></li><li><a href=#如果没有zh_cnutf-8>如果没有zh_CN.UTF-8</a></li><li><a href=#使用中文>使用中文</a></li></ul></li><li><a href=#删除7天前的文件>删除7天前的文件</a></li><li><a href=#查看进程的启动时间>查看进程的启动时间</a></li><li><a href=#端口连接情况>端口连接情况</a></li></ul></li><li><a href=#更新>更新</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","wide")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">linux常用命令</h1><div class=post-meta><div class=post-meta-line><span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreffer author" class=author>kentxxq</a>
 </span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2020-06-09>2020-06-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-08-23>2021-08-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 560 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
-<ul>
-<li><a href=#常用命令>常用命令</a>
-<ul>
-<li><a href=#tar压缩解压>tar压缩、解压</a></li><li><a href=#时间同步>时间同步</a></li><li><a href=#清空文件>清空文件</a></li><li><a href=#开启bbr>开启bbr</a></li><li><a href=#使用yum镜像源>使用yum镜像源</a></li><li><a href=#终端中文显示>终端中文显示</a>
-<ul>
-<li><a href=#查看已有的字符编码集>查看已有的字符编码集</a></li><li><a href=#如果没有zh_cnutf-8>如果没有zh_CN.UTF-8</a></li><li><a href=#使用中文>使用中文</a></li></ul></li><li><a href=#删除7天前的文件>删除7天前的文件</a></li><li><a href=#查看进程的启动时间>查看进程的启动时间</a></li><li><a href=#端口连接情况>端口连接情况</a></li></ul></li><li><a href=#更新>更新</a></li></ul></nav></div></div><div class=content id=content><blockquote>
-<p>记录一下常用的linux常用命令。</p></blockquote><h2 id=常用命令 class=headerLink>
-<a href=#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4 class=header-mark></a>常用命令</h2><h3 id=tar压缩解压 class=headerLink>
-<a href=#tar%e5%8e%8b%e7%bc%a9%e8%a7%a3%e5%8e%8b class=header-mark></a>tar压缩、解压</h3><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#常用命令>常用命令</a><ul><li><a href=#tar压缩解压>tar压缩、解压</a></li><li><a href=#时间同步>时间同步</a></li><li><a href=#清空文件>清空文件</a></li><li><a href=#开启bbr>开启bbr</a></li><li><a href=#使用yum镜像源>使用yum镜像源</a></li><li><a href=#终端中文显示>终端中文显示</a><ul><li><a href=#查看已有的字符编码集>查看已有的字符编码集</a></li><li><a href=#如果没有zh_cnutf-8>如果没有zh_CN.UTF-8</a></li><li><a href=#使用中文>使用中文</a></li></ul></li><li><a href=#删除7天前的文件>删除7天前的文件</a></li><li><a href=#查看进程的启动时间>查看进程的启动时间</a></li><li><a href=#端口连接情况>端口连接情况</a></li></ul></li><li><a href=#更新>更新</a></li></ul></nav></div></div><div class=content id=content><blockquote><p>记录一下常用的linux常用命令。</p></blockquote><h2 id=常用命令 class=headerLink><a href=#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4 class=header-mark></a>常用命令</h2><h3 id=tar压缩解压 class=headerLink><a href=#tar%e5%8e%8b%e7%bc%a9%e8%a7%a3%e5%8e%8b class=header-mark></a>tar压缩、解压</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -108,8 +28,7 @@
 </span><span class=lnt>16
 </span><span class=lnt>17
 </span><span class=lnt>18
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># z是使用gzip </span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># z是使用gzip </span>
 </span></span><span class=line><span class=cl><span class=c1># v是查看细节</span>
 </span></span><span class=line><span class=cl><span class=c1># f是指定文件</span>
 </span></span><span class=line><span class=cl><span class=c1># --strip-components=1 去掉一层解压目录</span>
@@ -127,125 +46,65 @@
 </span></span><span class=line><span class=cl>tar -czvf dist.tgz /data/path
 </span></span><span class=line><span class=cl><span class=c1># 如果是在当前目录，可以手动指定</span>
 </span></span><span class=line><span class=cl>tar -czvf dist.tgz tar -zcvf dist.tgz .<span class=o>[</span>!.<span class=o>]</span>* * 
-</span></span></code></pre></td></tr></table></div></div><h3 id=时间同步 class=headerLink>
-<a href=#%e6%97%b6%e9%97%b4%e5%90%8c%e6%ad%a5 class=header-mark></a>时间同步</h3><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=时间同步 class=headerLink><a href=#%e6%97%b6%e9%97%b4%e5%90%8c%e6%ad%a5 class=header-mark></a>时间同步</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo yum install ntp -y
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo yum install ntp -y
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>ntpdate pool.ntp.org
-</span></span></code></pre></td></tr></table></div></div><h3 id=清空文件 class=headerLink>
-<a href=#%e6%b8%85%e7%a9%ba%e6%96%87%e4%bb%b6 class=header-mark></a>清空文件</h3><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=清空文件 class=headerLink><a href=#%e6%b8%85%e7%a9%ba%e6%96%87%e4%bb%b6 class=header-mark></a>清空文件</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 本来可以如此简单 </span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 本来可以如此简单 </span>
 </span></span><span class=line><span class=cl>&gt;file.txt
 </span></span><span class=line><span class=cl><span class=c1># 但是不属于你的文件呢？</span>
 </span></span><span class=line><span class=cl>sudo bash -c <span class=s2>&#34;&gt;file.txt&#34;</span>
 </span></span><span class=line><span class=cl><span class=c1># 于是就用新的命令,加sudo也很方便</span>
 </span></span><span class=line><span class=cl><span class=c1># 这里的s是大小的意思</span>
 </span></span><span class=line><span class=cl>truncate -s <span class=m>0</span> file.txt
-</span></span></code></pre></td></tr></table></div></div><h3 id=开启bbr class=headerLink>
-<a href=#%e5%bc%80%e5%90%afbbr class=header-mark></a>开启bbr</h3><p>bbr是一种浪费网络资源，提升网络速度和稳定性的通讯手段。</p><p>centos8默认内核4.18，不用升级内核，即可启动。否则需要用升级内核。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=开启bbr class=headerLink><a href=#%e5%bc%80%e5%90%afbbr class=header-mark></a>开启bbr</h3><p>bbr是一种浪费网络资源，提升网络速度和稳定性的通讯手段。</p><p>centos8默认内核4.18，不用升级内核，即可启动。否则需要用升级内核。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;net.core.default_qdisc=fq&#34;</span> &gt;&gt; /etc/sysctl.conf
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;net.core.default_qdisc=fq&#34;</span> &gt;&gt; /etc/sysctl.conf
 </span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;net.ipv4.tcp_congestion_control=bbr&#34;</span> &gt;&gt; /etc/sysctl.conf
 </span></span><span class=line><span class=cl><span class=c1># 生效</span>
 </span></span><span class=line><span class=cl>sysctl -p
 </span></span><span class=line><span class=cl><span class=c1># 验证</span>
 </span></span><span class=line><span class=cl>lsmod <span class=p>|</span> grep bbr
-</span></span></code></pre></td></tr></table></div></div><h3 id=使用yum镜像源 class=headerLink>
-<a href=#%e4%bd%bf%e7%94%a8yum%e9%95%9c%e5%83%8f%e6%ba%90 class=header-mark></a>使用yum镜像源</h3><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-</span></span></code></pre></td></tr></table></div></div><h3 id=终端中文显示 class=headerLink>
-<a href=#%e7%bb%88%e7%ab%af%e4%b8%ad%e6%96%87%e6%98%be%e7%a4%ba class=header-mark></a>终端中文显示</h3><h4 id=查看已有的字符编码集 class=headerLink>
-<a href=#%e6%9f%a5%e7%9c%8b%e5%b7%b2%e6%9c%89%e7%9a%84%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%e9%9b%86 class=header-mark></a>查看已有的字符编码集</h4><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>locale -a
-</span></span></code></pre></td></tr></table></div></div><h4 id=如果没有zh_cnutf-8 class=headerLink>
-<a href=#%e5%a6%82%e6%9e%9c%e6%b2%a1%e6%9c%89zh_cnutf-8 class=header-mark></a>如果没有zh_CN.UTF-8</h4><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo yum install -y langpacks-zh_CN
-</span></span></code></pre></td></tr></table></div></div><h4 id=使用中文 class=headerLink>
-<a href=#%e4%bd%bf%e7%94%a8%e4%b8%ad%e6%96%87 class=header-mark></a>使用中文</h4><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=使用yum镜像源 class=headerLink><a href=#%e4%bd%bf%e7%94%a8yum%e9%95%9c%e5%83%8f%e6%ba%90 class=header-mark></a>使用yum镜像源</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+</span></span></code></pre></td></tr></table></div></div><h3 id=终端中文显示 class=headerLink><a href=#%e7%bb%88%e7%ab%af%e4%b8%ad%e6%96%87%e6%98%be%e7%a4%ba class=header-mark></a>终端中文显示</h3><h4 id=查看已有的字符编码集 class=headerLink><a href=#%e6%9f%a5%e7%9c%8b%e5%b7%b2%e6%9c%89%e7%9a%84%e5%ad%97%e7%ac%a6%e7%bc%96%e7%a0%81%e9%9b%86 class=header-mark></a>查看已有的字符编码集</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>locale -a
+</span></span></code></pre></td></tr></table></div></div><h4 id=如果没有zh_cnutf-8 class=headerLink><a href=#%e5%a6%82%e6%9e%9c%e6%b2%a1%e6%9c%89zh_cnutf-8 class=header-mark></a>如果没有zh_CN.UTF-8</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo yum install -y langpacks-zh_CN
+</span></span></code></pre></td></tr></table></div></div><h4 id=使用中文 class=headerLink><a href=#%e4%bd%bf%e7%94%a8%e4%b8%ad%e6%96%87 class=header-mark></a>使用中文</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>vim /etc/locale.conf
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>vim /etc/locale.conf
 </span></span><span class=line><span class=cl><span class=nv>LANG</span><span class=o>=</span>zh_CN.UTF-8
-</span></span></code></pre></td></tr></table></div></div><p>或<code>localectl set-locale LANG=zh_CN.UTF8</code></p><h3 id=删除7天前的文件 class=headerLink>
-<a href=#%e5%88%a0%e9%99%a47%e5%a4%a9%e5%89%8d%e7%9a%84%e6%96%87%e4%bb%b6 class=header-mark></a>删除7天前的文件</h3><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>find /data/weblog/ -name <span class=s1>&#39;*.log.*&#39;</span> -type f -mtime +7 -exec rm -f <span class=o>{}</span> <span class=se>\;</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=查看进程的启动时间 class=headerLink>
-<a href=#%e6%9f%a5%e7%9c%8b%e8%bf%9b%e7%a8%8b%e7%9a%84%e5%90%af%e5%8a%a8%e6%97%b6%e9%97%b4 class=header-mark></a>查看进程的启动时间</h3><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>或<code>localectl set-locale LANG=zh_CN.UTF8</code></p><h3 id=删除7天前的文件 class=headerLink><a href=#%e5%88%a0%e9%99%a47%e5%a4%a9%e5%89%8d%e7%9a%84%e6%96%87%e4%bb%b6 class=header-mark></a>删除7天前的文件</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>find /data/weblog/ -name <span class=s1>&#39;*.log.*&#39;</span> -type f -mtime +7 -exec rm -f <span class=o>{}</span> <span class=se>\;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=查看进程的启动时间 class=headerLink><a href=#%e6%9f%a5%e7%9c%8b%e8%bf%9b%e7%a8%8b%e7%9a%84%e5%90%af%e5%8a%a8%e6%97%b6%e9%97%b4 class=header-mark></a>查看进程的启动时间</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ps -eo pid,lstart,etime <span class=p>|</span> grep <span class=m>1310</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ps -eo pid,lstart,etime <span class=p>|</span> grep <span class=m>1310</span>
 </span></span><span class=line><span class=cl><span class=m>1310</span> Sat Aug <span class=m>10</span> 10:21:25 <span class=m>2019</span> 242-07:26:58
 </span></span><span class=line><span class=cl><span class=c1># 前面是启动时间，后面是启动了242天</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=端口连接情况 class=headerLink>
-<a href=#%e7%ab%af%e5%8f%a3%e8%bf%9e%e6%8e%a5%e6%83%85%e5%86%b5 class=header-mark></a>端口连接情况</h3><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=端口连接情况 class=headerLink><a href=#%e7%ab%af%e5%8f%a3%e8%bf%9e%e6%8e%a5%e6%83%85%e5%86%b5 class=header-mark></a>端口连接情况</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看监听的端口</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看监听的端口</span>
 </span></span><span class=line><span class=cl>netstat -ltnp
 </span></span><span class=line><span class=cl><span class=c1># 统计外部ip，端口连接数量</span>
 </span></span><span class=line><span class=cl>netstat -ant <span class=p>|</span>awk <span class=s1>&#39;{print $5}&#39;</span> <span class=p>|</span> awk -F <span class=s1>&#39;:&#39;</span> <span class=s1>&#39;{count[$1]++;} END {for(i in count) {print i &#34;\t&#34; count[i]}}&#39;</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=更新 class=headerLink>
-<a href=#%e6%9b%b4%e6%96%b0 class=header-mark></a>更新</h2><p><strong>20200609</strong>: 初版
-<strong>20200717</strong>：新增<code>端口连接情况</code></p></div><div class=post-footer id=post-footer>
-<div class=post-info>
-<div class=post-info-line>
-<div class=post-info-mod>
-<span>更新于 2021-08-23</span>
-</div><div class=post-info-license></div></div><div class=post-info-line>
-<div class=post-info-md></div><div class=post-info-share>
-<span><a href=# onclick=return!1 title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令 data-hashtags=linux><i class="fab fa-twitter fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-hashtag=linux><i class="fab fa-facebook-square fa-fw"></i></a><a href=# onclick=return!1 title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# onclick=return!1 title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令><i class="fab fa-weibo fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令 data-description=记录一下常用的linux常用命令><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# onclick=return!1 title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令 data-description=记录一下常用的linux常用命令><i class="fab fa-blogger fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令><i class="fab fa-evernote fa-fw"></i></a></span>
-</div></div></div><div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/linux/>linux</a></section><section>
-<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
-</section></div><div class=post-nav><a href=/contents/%E4%B8%80%E4%B8%AA%E6%88%91%E9%9C%80%E8%A6%81%E7%9A%84win10/ class=prev rel=prev title=一个我需要的win10><i class="fas fa-angle-left fa-fw"></i>一个我需要的win10</a>
-<a href=/contents/linux%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/ class=next rel=next title=linux问题记录>linux问题记录<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
-<div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br>
-<span class=icp>湘ICP备2021002319号-1</span></div><div class=footer-line></div><div class=footer-line>
-</div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部>
-<i class="fas fa-arrow-up fa-fw"></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论>
-<i class="fas fa-comment fa-fw"></i>
-</a>
-</div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div><div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div></body></html>
+</span></span></code></pre></td></tr></table></div></div><h2 id=更新 class=headerLink><a href=#%e6%9b%b4%e6%96%b0 class=header-mark></a>更新</h2><p><strong>20200609</strong>: 初版
+<strong>20200717</strong>：新增<code>端口连接情况</code></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2021-08-23</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=# onclick=return!1 title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令 data-hashtags=linux><i class="fab fa-twitter fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-hashtag=linux><i class="fab fa-facebook-square fa-fw"></i></a><a href=# onclick=return!1 title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# onclick=return!1 title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令><i class="fab fa-weibo fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令 data-description=记录一下常用的linux常用命令><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# onclick=return!1 title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令 data-description=记录一下常用的linux常用命令><i class="fab fa-blogger fa-fw"></i></a><a href=# onclick=return!1 title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/contents/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/ data-title=linux常用命令><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/linux/>linux</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/contents/%E4%B8%80%E4%B8%AA%E6%88%91%E9%9C%80%E8%A6%81%E7%9A%84win10/ class=prev rel=prev title=一个我需要的win10><i class="fas fa-angle-left fa-fw"></i>一个我需要的win10</a>
+<a href=/contents/linux%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/ class=next rel=next title=linux问题记录>linux问题记录<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp>湘ICP备2021002319号-1</span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/fuse/fuse.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div><div class=pjax-assets><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css></div></body></html>
