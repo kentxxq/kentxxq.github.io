@@ -28,3 +28,6 @@ var kafkaConfig = new ProducerConfig
 
 1. 我们先找到kafka的docker名称
 2. 于是我们在系统的hosts文件里写上`127.0.0.1 docker名称`
+
+## 参考资料
+[官方使用docker-kafka](https://developer.confluent.io/get-started/dotnet/#kafka-setup)
