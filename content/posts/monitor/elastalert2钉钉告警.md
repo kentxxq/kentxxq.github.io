@@ -3,7 +3,7 @@ title:  elastalert2钉钉告警
 date:   2022-05-24 21:13:00+08:00
 categories: ["笔记"]
 tags: ["监控"]
-keywords: ["elastalert2","es","elastic","告警","日志"]
+keywords: ["elastalert2","es","elastic","告警","日志","钉钉"]
 description: "elastalert2是一个日志告警服务，原理其实很简单，就是查询es数据，并触发告警信息。刚好最近在自建k8s和efk相关的内容，顺便更新到博客吧"
 ---
 
