@@ -75,7 +75,7 @@ parse error:不知道这样的主机。
 ```
 
 ### ws
-`ws`代表连接websocket。之前一直用wscat，但是**wscat依赖nodejs**。每次使用的时候都觉得有点大材小用了。
+`ws`代表连接websocket。之前一直用wscat，但是**wscat依赖nodejs**。每次使用的时候都觉得有点小题大做了。
 ```bash
 Usage:
   ken [options] ws <wsUrl>
