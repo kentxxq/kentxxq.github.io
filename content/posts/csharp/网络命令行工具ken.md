@@ -32,9 +32,9 @@ description: "在日常的使用场景中，总是不得不接触各种各样的
 
 ```bash
 # 下载举例：linux-x64 下载到程序路径
-curl -L -o /usr/local/bin/ken https://github.com/kentxxq/kentxxq.Cli/releases/latest/download/ken-linux-x64
-# 如果是国内网络不行的话，可以使用七牛云cdn下载
-curl -L -o /usr/local/bin/ken http://tools.kentxxq.com/ken-linux-x64
+curl -L -o /usr/local/bin/ken https://github.com/kentxxq/kentxxq.Cli/releases/download/1.2.7/ken-linux-x64
+# 如果是国内网络不行的话，可以使用代理下载
+curl -L -o /usr/local/bin/ken https://github.abskoop.workers.dev/https://github.com/kentxxq/kentxxq.Cli/releases/download/1.2.7/ken-linux-x64
 # 赋权
 chmod +x /usr/local/bin/ken
 ```
