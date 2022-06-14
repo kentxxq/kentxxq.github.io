@@ -260,9 +260,17 @@ Options:
   -w, --webroot <webroot>  file path [default: .]
   -p, --port <port>        http port [default: 5000]
   -?, -h, --help           Show help and usage information
+
+# 使用示例
+ken web
+listening http://0.0.0.0:5000
+HTTP/1.1 GET / 200 text/html; charset=utf-8 5367
+HTTP/1.1 GET /favicon.ico 404
 ```
 1. 默认当前目录，也可以只用`-w`指定目录
 2. 默认使用5000端口，也可以使用`-p`指定端口
+
+![ken-web](/images/csharp/ken-web.jpg)
 
 
 ## TODO
