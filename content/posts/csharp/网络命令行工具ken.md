@@ -270,8 +270,6 @@ HTTP/1.1 GET /favicon.ico 404
 1. 默认当前目录，也可以只用`-w`指定目录
 2. 默认使用5000端口，也可以使用`-p`指定端口
 
-![ken-web](/images/csharp/ken-web.jpg)
-
 
 ## TODO
 1. ss命令增加更多的功能
