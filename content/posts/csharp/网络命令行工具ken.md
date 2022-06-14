@@ -19,8 +19,6 @@ description: "在日常的使用场景中，总是不得不接触各种各样的
 现支持的所有系统版本
 - ken-linux-arm
 - ken-linux-arm64
-- ken-linux-arm
-- ken-linux-arm64
 - ken-linux-musl-x64
 - ken-linux-x64
 - ken-osx-arm64
@@ -190,6 +188,83 @@ keys count:1
 >>exit()
 ```
 
+### k8s
+`k8s`命令的存在，主要是因为我日常需要查看k8s集群的信息，所以做到了命令里。
+```bash
+Description:
+  get k8s resource info
+
+Usage:
+  ken k8s [command] [options]
+
+Options:
+  -c, --kubeconfig <kubeconfig>  kubeconfig file path
+  -n, --namespace <namespace>    specified namespace
+  -?, -h, --help                 Show help and usage information
+
+Commands:
+  1  list restarted pod
+  2  list deployment resource usage
+```
+
+#### 查看k8s内重启过的容器
+```bash
+ken k8s 1
+┌───────────┬──────────────────┬───────────────┐
+│ Namespace │ Pod Name         │ Restart Times │
+├───────────┼──────────────────┼───────────────┤
+│ default   │ A-service        │ 187           │
+│ default   │ B-service        │ 1             │
+│ default   │ C-service        │ 3             │
+└───────────┴──────────────────┴───────────────┘
+```
+
+#### 查看deployment的资源使用情况
+`ken k8s 2`大致输出如下
+| Namespace | Deployment         | Memory Usage | Cpu Usage | Request Memory | Limit Memory | Request Cpu | Limit Cpu |
+|-----------|--------------------|--------------|-----------|----------------|--------------|-------------|-----------|
+| default   | kube-state-metrics | 3.57%        | 0.25%     | 32Mi           | 1Gi          | 10m         | 200m      |
+
+### update
+这个命令主要是为了更新ken程序自己。避免冗长的bash命令。
+```bash
+ken update -h
+Description:
+  update ken command
+
+Usage:
+  ken update [options]
+
+Options:
+  -f, --force                       force update current version [default: False]
+  -kv, --ken-version <ken-version>  force upgrade to specific current version
+  -p, --proxy                       use proxy url
+  -t, --token <token>               github token for query github-api []
+  -?, -h, --help                    Show help and usage information
+```
+1. `-p`使用`https://github.abskoop.workers.dev`代理下载，方便国内用户
+2. `-t`是因为github的api存在次数限制。带上token可以大幅提升api的请求次数
+3. `-kv`可以指定特定的版本，例如`-kv 1.3.2`则更新到1.3.2版本。因为我不想留着一些无用的版本号，所以1.3.1可能不见了。。。建议不使用此命令，直接update到最新版本
+
+
+### web
+`web`直接将当前目录暴露成http，并提供访问。方便调试、静态文件下载等等需求
+```bash
+Description:
+  static file http server
+
+Usage:
+  ken web [options]
+
+Options:
+  -w, --webroot <webroot>  file path [default: .]
+  -p, --port <port>        http port [default: 5000]
+  -?, -h, --help           Show help and usage information
+```
+1. 默认当前目录，也可以只用`-w`指定目录
+2. 默认使用5000端口，也可以使用`-p`指定端口
+
+
 ## TODO
 1. ss命令增加更多的功能
 2. tr命令等待ping库的完善，或者后续直接调用系统api来完成
@@ -206,3 +281,5 @@ keys count:1
 **20211115**: net6发布了，所以更新了支持的平台。把2个还未完成的功能加入到了todo...反正我一直想有个自己的命令行工具，一定会持续完善的...
 
 **20220222**: 新增了`redis`命令，然后优化了一些内部逻辑
+
+**20220614**: 新增了`k8s`、`update`、`web`命令和示例
