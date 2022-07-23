@@ -33,6 +33,7 @@ description: "在日常的使用场景中，总是不得不接触各种各样的
 curl -L -o /usr/local/bin/ken https://github.com/kentxxq/kentxxq.Cli/releases/download/1.2.7/ken-linux-x64
 # 如果是国内网络不行的话，可以使用代理下载
 curl -L -o /usr/local/bin/ken https://github.abskoop.workers.dev/https://github.com/kentxxq/kentxxq.Cli/releases/download/1.2.7/ken-linux-x64
+# 或 curl -L -o /usr/local/bin/ken https://ghproxy.com/https://github.com/kentxxq/kentxxq.Cli/releases/download/1.2.7/ken-linux-x64
 # 赋权
 chmod +x /usr/local/bin/ken
 ```
@@ -289,3 +290,5 @@ HTTP/1.1 GET /favicon.ico 404
 **20220222**: 新增了`redis`命令，然后优化了一些内部逻辑
 
 **20220614**: 新增了`k8s`、`update`、`web`命令和示例
+
+**20220723**: 新增了国内代理
