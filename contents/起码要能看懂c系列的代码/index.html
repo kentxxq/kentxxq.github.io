@@ -66,7 +66,7 @@
 </span></span><span class=line><span class=cl><span class=c1>// 把a的地址给p
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>p</span><span class=o>=&amp;</span><span class=n>a</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=c1>// 现在用*p即可取到a的值
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>printf</span><span class=p>(</span><span class=err>&#39;</span><span class=o>%</span><span class=n>d</span><span class=err>&#39;</span><span class=p>,</span><span class=o>*</span><span class=n>p</span><span class=p>);</span>
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nf>printf</span><span class=p>(</span><span class=err>&#39;</span><span class=o>%</span><span class=n>d</span><span class=err>&#39;</span><span class=p>,</span><span class=o>*</span><span class=n>p</span><span class=p>);</span>
 </span></span></code></pre></td></tr></table></div></div><ol><li>指针如果指向数组，则默认指向数组的第一个元素。可以通过<code>*(p+1)</code>取到第二个元素的值。字符串同理。</li><li>函数也是占用连续的内存段。则<code>int (*pf)();</code>代表指向一个返回值是int的函数。当指针赋值后，通过<code>(*pmax)(a)</code>调用。</li><li><code>int *ap(int x,int y)</code>代表返回指针。</li></ol><table><thead><tr><th>语法</th><th>说明</th></tr></thead><tbody><tr><td>int i;</td><td>定义整型变量 i</td></tr><tr><td>int *p;</td><td>p 为指向整型数据的指针变量</td></tr><tr><td>int a[n];</td><td>定义整型数组 a，它有 n 个元素</td></tr><tr><td>int *p[n];</td><td>定义指针数组 p，它由 n 个指向整型数据的指针元素组成</td></tr><tr><td>int (*p)[n];</td><td>p 为指向含 n 个元素的一维数组的指针变量</td></tr><tr><td>int f();</td><td>f 为带回整型函数值的函数</td></tr><tr><td>int *p();</td><td>p 为带回一个指针的函数，该指针指向整型数据</td></tr><tr><td>int (*p)();</td><td>p 为指向函数的指针，该函数返回一个整型值</td></tr><tr><td>int **p;</td><td>P 是一个指针变量，它指向一个指向整型数据的指针变量</td></tr></tbody></table><p>优先级为：()>[]>*。然后从左往右看。</p><h3 id=结构体 class=headerLink><a href=#%e7%bb%93%e6%9e%84%e4%bd%93 class=header-mark></a>结构体</h3><p>如果你理解了前面所说的指针，那么指针就会很好理解。其实就是一系列的基本类型放在一个连续的内存段中。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
@@ -140,12 +140,12 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=c1>// 分配一个100字节长度字符数组，pc为指向这个字符数组
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>pc</span><span class=o>=</span><span class=p>(</span><span class=kt>char</span> <span class=o>*</span><span class=p>)</span><span class=n>malloc</span><span class=p>(</span><span class=mi>100</span><span class=p>);</span>
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>pc</span><span class=o>=</span><span class=p>(</span><span class=kt>char</span> <span class=o>*</span><span class=p>)</span><span class=nf>malloc</span><span class=p>(</span><span class=mi>100</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=c1>// 分配2个struct human结构体的长度。ps为指针且指向这个数组
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>ps</span><span class=o>=</span><span class=p>(</span><span class=n>struet</span> <span class=n>human</span><span class=o>*</span><span class=p>)</span><span class=n>calloc</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span><span class=k>sizeof</span><span class=p>(</span><span class=k>struct</span> <span class=n>human</span><span class=p>));</span>
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>ps</span><span class=o>=</span><span class=p>(</span><span class=n>struet</span> <span class=n>human</span><span class=o>*</span><span class=p>)</span><span class=nf>calloc</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span><span class=k>sizeof</span><span class=p>(</span><span class=k>struct</span> <span class=n>human</span><span class=p>));</span>
 </span></span><span class=line><span class=cl><span class=c1>// 接收指针变量，释放它
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>free</span><span class=p>(</span><span class=n>pc</span><span class=p>);</span>
-</span></span><span class=line><span class=cl><span class=n>free</span><span class=p>(</span><span class=n>ps</span><span class=p>);</span>
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nf>free</span><span class=p>(</span><span class=n>pc</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=nf>free</span><span class=p>(</span><span class=n>ps</span><span class=p>);</span>
 </span></span></code></pre></td></tr></table></div></div><h3 id=typedef class=headerLink><a href=#typedef class=header-mark></a>typedef</h3><p>用typedef加在struct前面，变量名写HUMAN，就可以用HUMAN h1,h2来声明变量了！简洁明了。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
@@ -205,7 +205,7 @@
 </span></span><span class=line><span class=cl>	<span class=kt>void</span>	<span class=o>*</span><span class=n>_cookie</span><span class=p>;</span>	<span class=cm>/* cookie passed to io functions */</span>
 </span></span><span class=line><span class=cl>	<span class=kt>int</span>	<span class=p>(</span><span class=o>*</span> <span class=n>_Nullable</span> <span class=n>_close</span><span class=p>)(</span><span class=kt>void</span> <span class=o>*</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>	<span class=kt>int</span>	<span class=p>(</span><span class=o>*</span> <span class=n>_Nullable</span> <span class=n>_read</span><span class=p>)</span> <span class=p>(</span><span class=kt>void</span> <span class=o>*</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=p>,</span> <span class=kt>int</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>	<span class=n>fpos_t</span>	<span class=p>(</span><span class=o>*</span> <span class=n>_Nullable</span> <span class=n>_seek</span><span class=p>)</span> <span class=p>(</span><span class=kt>void</span> <span class=o>*</span><span class=p>,</span> <span class=n>fpos_t</span><span class=p>,</span> <span class=kt>int</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=kt>fpos_t</span>	<span class=p>(</span><span class=o>*</span> <span class=n>_Nullable</span> <span class=n>_seek</span><span class=p>)</span> <span class=p>(</span><span class=kt>void</span> <span class=o>*</span><span class=p>,</span> <span class=kt>fpos_t</span><span class=p>,</span> <span class=kt>int</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>	<span class=kt>int</span>	<span class=p>(</span><span class=o>*</span> <span class=n>_Nullable</span> <span class=n>_write</span><span class=p>)(</span><span class=kt>void</span> <span class=o>*</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=p>,</span> <span class=kt>int</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>	<span class=cm>/* separate buffer for long sequences of ungetc() */</span>
@@ -222,7 +222,7 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>	<span class=cm>/* Unix stdio files get aligned to block boundaries on fseek() */</span>
 </span></span><span class=line><span class=cl>	<span class=kt>int</span>	<span class=n>_blksize</span><span class=p>;</span>	<span class=cm>/* stat.st_blksize (may be != _bf._size) */</span>
-</span></span><span class=line><span class=cl>	<span class=n>fpos_t</span>	<span class=n>_offset</span><span class=p>;</span>	<span class=cm>/* current lseek offset (see WARNING) */</span>
+</span></span><span class=line><span class=cl>	<span class=kt>fpos_t</span>	<span class=n>_offset</span><span class=p>;</span>	<span class=cm>/* current lseek offset (see WARNING) */</span>
 </span></span><span class=line><span class=cl><span class=p>}</span> <span class=n>FILE</span><span class=p>;</span>
 </span></span></code></pre></td></tr></table></div></div><ul><li><p><code>fp=("/home/a.txt","r");</code>只读方式打开制定文件，后面的参数类似python。</p></li><li><p><code>ch=fgetc(fp);</code>取第一个字符赋值给ch。</p></li><li><p><code>fputc('a',fp);</code>弄一个字符串到到指针位置。</p></li><li><p><code>fgets(str,n,fp);</code>从fp中取n-1个字符(即字符串)到str这个char数组中。为什么是n-1(一般也是str长度-1)，因为字符串后面要有一个&rsquo;\0&rsquo;啊！ 它读取到换行符或者文件结尾会停止。
 str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，小于它可能会影响性能。而我看到python默认使用的是系统buffer大小8192(8k即2个block)。现在的文件系统多数都是4k为一个block，而io一般最少存取一个block。那么设置成2个block，也有助于更快的对下一个block数据块进行操作，而更大的话就没有太大意义了，可能会浪费磁盘io导致占用过多的资源。</p></li><li><p><code>fputs(“abcd“,fp);</code>把字符串放到指针位置。这里传递的是字符串，其实传递的就是字符数组首地址。所以如果是char *b=&ldquo;abcd"要进行传递，直接传递fputs(b,fp)即可！</p></li><li><p><code>fread(qq,sizeof(struct stu),2,fp);</code>qq是一个指针，表示数据的首地址(在这里指向一个stu结构体)，qq+1会移动到第二个stu结构体。第二个是数据块的大小,第三个是读取几个数据块，fp是文件指针。</p></li><li><p><code>fwrite(qq,sizeof(struct stu),2,fp);</code>参数同上，只不过是写数据。</p></li><li><p><code>fscanf(fp,"%d %s",&i,s);</code>和<code>fprintf(fp,"%d %c",j,ch);</code>用来通过第二个参数指定的方式，存放或者打印数据。主义第二个参数中的空格也是会生效的！</p></li><li><p><code>rewind</code>函数把文件指针重新指向头部。</p></li><li><p><code>fseek(fp,100L,0);</code>类似python的指针偏移。0文件首地址，1当前位置，2文件末尾。常量表示偏移量必须带上&rsquo;L&rsquo;。移动到离文件首100字节距离的位置。也可以直接填写数字。负号前移，正号后移。</p></li></ul><p><strong>最后说明</strong>EOF是一个隐藏字符。在读取完了数据以后，才会遇到EOF。</p><p>而feof()是通过返回错误来判断是否结束。所以需要先取值，后判断。遇到了EOF(即-1)就会出错。停止下一个循环。</p><p>0是false，非0位true。</p><h2 id=编译 class=headerLink><a href=#%e7%bc%96%e8%af%91 class=header-mark></a>编译</h2><p>简单来说，编译就是使用<code>gcc</code>,<code>make</code>,<code>cmake</code>等工具来进行的。</p><p>如果使用vs或者clion这样的工具，需要了解的是工具的使用方法。而下面我要简单说明的是手工编译。</p><ol><li>在项目目录下新建build文件夹。</li><li>进入build文件夹使用<code>cmake ..</code>生成Makefile</li><li>运行make命令编译成功，找到输出文件即可。</li></ol><h3 id=linux class=headerLink><a href=#linux class=header-mark></a>linux</h3><p>我在centos7上运行<code>gcc</code>,<code>make</code>,<code>cmake</code>都可以正常使用。</p><h3 id=mac class=headerLink><a href=#mac class=header-mark></a>mac</h3><p>用brew安装cmake后，也可以跑通。</p><h3 id=windows class=headerLink><a href=#windows class=header-mark></a>windows</h3><p>我是用的<a href=https://scoop.sh/ target=_blank rel="noopener noreffer">scoop</a>安装cmake。</p><p>然后安装最新的vs。下载<code>mingw-get</code>，然后安装<code>mingw32-make</code>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -275,33 +275,33 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 </span><span class=lnt>38
 </span><span class=lnt>39
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=nf>test3</span><span class=p>(</span><span class=kt>int</span> <span class=n>ac</span><span class=p>,</span><span class=kt>char</span> <span class=n>av</span><span class=p>[]){</span>
-</span></span><span class=line><span class=cl>    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span><span class=n>av</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span><span class=n>av</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>ac</span><span class=p>;</span> <span class=o>++</span><span class=n>i</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%c&#34;</span><span class=p>,</span><span class=n>av</span><span class=p>[</span><span class=n>i</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%c&#34;</span><span class=p>,</span><span class=n>av</span><span class=p>[</span><span class=n>i</span><span class=p>]);</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>test4</span><span class=p>(</span><span class=kt>char</span> <span class=n>a</span><span class=p>){</span>
-</span></span><span class=line><span class=cl>    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span><span class=o>&amp;</span><span class=n>a</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span><span class=o>&amp;</span><span class=n>a</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>test5</span><span class=p>(</span><span class=kt>char</span> <span class=o>*</span><span class=n>qt</span><span class=p>[]){</span>
-</span></span><span class=line><span class=cl>    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>qt</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>qt</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>argv</span><span class=p>[])</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>p</span><span class=o>=</span><span class=sc>&#39;p&#39;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span><span class=o>&amp;</span><span class=n>p</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>    <span class=n>test4</span><span class=p>(</span><span class=n>p</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span><span class=o>&amp;</span><span class=n>p</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>test4</span><span class=p>(</span><span class=n>p</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>pch</span><span class=p>[]</span> <span class=o>=</span> <span class=s>&#34;pch&#34;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>pch</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>    <span class=n>test3</span><span class=p>(</span><span class=n>strlen</span><span class=p>(</span><span class=n>pch</span><span class=p>),</span> <span class=n>pch</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>pch</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>test3</span><span class=p>(</span><span class=nf>strlen</span><span class=p>(</span><span class=n>pch</span><span class=p>),</span> <span class=n>pch</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=o>*</span><span class=n>qq</span><span class=p>[]</span><span class=o>=</span><span class=p>{</span><span class=s>&#34;q&#34;</span><span class=p>,</span><span class=s>&#34;w&#34;</span><span class=p>};</span>
 </span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=o>**</span><span class=n>qq2</span><span class=o>=</span><span class=n>qq</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>qq</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>    <span class=n>test5</span><span class=p>(</span><span class=n>qq</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>qq</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>test5</span><span class=p>(</span><span class=n>qq</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
@@ -325,7 +325,7 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 </span></span><span class=line><span class=cl><span class=kt>char</span> <span class=o>*</span><span class=n>rr</span><span class=o>=&amp;</span><span class=n>r</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=kt>char</span> <span class=o>**</span><span class=n>rrr</span><span class=o>=&amp;</span><span class=n>rr</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=c1>// 下面报错
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>printf</span><span class=p>(</span><span class=s>&#34;%d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span><span class=n>rrr</span><span class=p>[</span><span class=mi>0</span><span class=p>]);</span>
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span><span class=n>rrr</span><span class=p>[</span><span class=mi>0</span><span class=p>]);</span>
 </span></span><span class=line><span class=cl><span class=c1>// 说明要分情况的，char **qt不等同于char *qt[]
 </span></span></span></code></pre></td></tr></table></div></div><h3 id=第三点再来说一下我自己理解错误 class=headerLink><a href=#%e7%ac%ac%e4%b8%89%e7%82%b9%e5%86%8d%e6%9d%a5%e8%af%b4%e4%b8%80%e4%b8%8b%e6%88%91%e8%87%aa%e5%b7%b1%e7%90%86%e8%a7%a3%e9%94%99%e8%af%af class=header-mark></a>第三点，再来说一下我自己理解错误。</h3><p>由于之前所接触到的语言，基本的逻辑都是面向对象且没有指针。都是值传递，而不是地址传递。</p><p>写过一篇go语言的文章，可我没有深入了解过它的指针。经过翻查，发现go在数组传递的时候也是值传递。在go中，指针是为了减少性能开销存在的。而很少见到有人做指针运算。</p><p>而c的指针贯穿了整个语言。在进行值传递的时候，形参可以拿到所有信息，因为要进行赋值操作。值传递会让变量名直接取到值。</p><p>而地址传递只有一个地址和类型，需要用到取值符*。且在一个指针指向数组的时候*p和p[0]等价。</p><p>只有搞清楚传递的过程中是值还是地址，才能正确的分析问题。</p><h3 id=文件读取 class=headerLink><a href=#%e6%96%87%e4%bb%b6%e8%af%bb%e5%8f%96 class=header-mark></a>文件读取</h3><h3 id=代码示例 class=headerLink><a href=#%e4%bb%a3%e7%a0%81%e7%a4%ba%e4%be%8b class=header-mark></a>代码示例</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -358,22 +358,22 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=cm>/* 下面这段代码会正确打印文本内容直到结束 */</span>
 </span></span><span class=line><span class=cl><span class=kt>int</span> <span class=n>str3</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=k>while</span> <span class=p>((</span><span class=n>str3</span> <span class=o>=</span> <span class=n>fgetc</span><span class=p>(</span><span class=n>f1</span><span class=p>))</span> <span class=o>!=</span> <span class=n>EOF</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%c&#34;</span><span class=p>,</span> <span class=n>str3</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>while</span> <span class=p>((</span><span class=n>str3</span> <span class=o>=</span> <span class=nf>fgetc</span><span class=p>(</span><span class=n>f1</span><span class=p>))</span> <span class=o>!=</span> <span class=n>EOF</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%c&#34;</span><span class=p>,</span> <span class=n>str3</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=cm>/* 下面这段代码会多打印一个奇怪的问号符 */</span>
 </span></span><span class=line><span class=cl><span class=kt>int</span> <span class=n>str2</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=k>while</span> <span class=p>(</span><span class=n>str2</span> <span class=o>!=</span> <span class=n>EOF</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=n>str2</span> <span class=o>=</span> <span class=n>fgetc</span><span class=p>(</span><span class=n>f1</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%c&#34;</span><span class=p>,</span> <span class=n>str2</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>str2</span> <span class=o>=</span> <span class=nf>fgetc</span><span class=p>(</span><span class=n>f1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%c&#34;</span><span class=p>,</span> <span class=n>str2</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=cm>/* 下面这段代码会把最后的哈哈打印两次 */</span>
 </span></span><span class=line><span class=cl><span class=kt>char</span> <span class=n>str</span><span class=p>[</span><span class=mi>4096</span><span class=p>];</span>
-</span></span><span class=line><span class=cl><span class=k>while</span> <span class=p>(</span><span class=o>!</span><span class=n>feof</span><span class=p>(</span><span class=n>f1</span><span class=p>))</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=n>fgets</span><span class=p>(</span><span class=n>str</span><span class=p>,</span> <span class=mi>4096</span><span class=p>,</span> <span class=n>f1</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=n>str</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>while</span> <span class=p>(</span><span class=o>!</span><span class=nf>feof</span><span class=p>(</span><span class=n>f1</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>fgets</span><span class=p>(</span><span class=n>str</span><span class=p>,</span> <span class=mi>4096</span><span class=p>,</span> <span class=n>f1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=n>str</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>下面来说说为什么。</p><ol><li>先看第一个。首先把数据用fgetc取出，然后判断是否为EOF，选择是否打印。没毛病。</li><li>第二个则是先判断是否为EOF，当我们读取到&rsquo;哈&rsquo;的时候，先打印出来。然后再判断依旧!=EOF，就会导致把EOF读取出来后进行了打印。</li><li>feof是通过返回错误<code>-1</code>来停止循环的。所以在使用的时候先进行读取。在循环了2次以后，feof仍然没有收到错误信息。第三次循环的时候fgets其实没有读取到数据。但是下面的语句还是得要执行。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -390,13 +390,13 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cm>/* 改成这样，最后一次读取到了错误，但是下面没有代码了，什么都没发生。循环条件进行判断后跳出循环。 */</span>
 </span></span><span class=line><span class=cl><span class=kt>char</span> <span class=n>str</span><span class=p>[</span><span class=mi>4096</span><span class=p>];</span>
 </span></span><span class=line><span class=cl><span class=kt>int</span> <span class=n>c</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=n>fgets</span><span class=p>(</span><span class=n>str</span><span class=p>,</span> <span class=mi>4096</span><span class=p>,</span> <span class=n>f1</span><span class=p>);</span>
-</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=n>feof</span><span class=p>(</span><span class=n>f1</span><span class=p>))</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;空文件</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=nf>fgets</span><span class=p>(</span><span class=n>str</span><span class=p>,</span> <span class=mi>4096</span><span class=p>,</span> <span class=n>f1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=nf>feof</span><span class=p>(</span><span class=n>f1</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;空文件</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=p>(</span><span class=o>!</span><span class=n>feof</span><span class=p>(</span><span class=n>f1</span><span class=p>))</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=n>str</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>        <span class=n>fgets</span><span class=p>(</span><span class=n>str</span><span class=p>,</span> <span class=mi>4096</span><span class=p>,</span> <span class=n>f1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=p>(</span><span class=o>!</span><span class=nf>feof</span><span class=p>(</span><span class=n>f1</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=n>str</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>fgets</span><span class=p>(</span><span class=n>str</span><span class=p>,</span> <span class=mi>4096</span><span class=p>,</span> <span class=n>f1</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><h3 id=eof和feof class=headerLink><a href=#eof%e5%92%8cfeof class=header-mark></a>EOF和feof</h3><p>EOF和foef什么时候用呢？</p><p>EOF主要用于文本文件进行判断结尾。不适合或者说不适用于读取二进制文件。</p><p>foef则都可以使用。</p><p><strong>那么我到底应该怎么读取文件呢？</strong></p><p>下面这个应该是通用版本。无论是二进制还是文本。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -423,22 +423,22 @@ str这个数组我试过几个不同的大小。发现4096(4k)是一个门槛，
 </span><span class=lnt>22
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>FILE</span> <span class=o>*</span><span class=n>fp</span><span class=p>,</span><span class=o>*</span><span class=n>xx</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=kt>int</span> <span class=n>c</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=n>fp</span><span class=o>=</span><span class=n>fopen</span><span class=p>(</span><span class=s>&#34;/Users/kentxxq/test.txt&#34;</span><span class=p>,</span><span class=s>&#34;rb&#34;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl><span class=n>xx</span><span class=o>=</span><span class=n>fopen</span><span class=p>(</span><span class=s>&#34;/Users/kentxxq/xx.txt&#34;</span><span class=p>,</span><span class=s>&#34;wb&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>fp</span><span class=o>=</span><span class=nf>fopen</span><span class=p>(</span><span class=s>&#34;/Users/kentxxq/test.txt&#34;</span><span class=p>,</span><span class=s>&#34;rb&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>xx</span><span class=o>=</span><span class=nf>fopen</span><span class=p>(</span><span class=s>&#34;/Users/kentxxq/xx.txt&#34;</span><span class=p>,</span><span class=s>&#34;wb&#34;</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=k>if</span><span class=p>(</span><span class=n>fp</span><span class=o>==</span><span class=nb>NULL</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;文件打开错误&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;文件打开错误&#34;</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span><span class=k>else</span><span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=n>c</span> <span class=o>=</span> <span class=n>fgetc</span><span class=p>(</span><span class=n>fp</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>    <span class=k>if</span><span class=p>(</span><span class=n>ferror</span><span class=p>(</span><span class=n>fp</span><span class=p>)){</span>
-</span></span><span class=line><span class=cl>        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;文件读取失败！&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>c</span> <span class=o>=</span> <span class=nf>fgetc</span><span class=p>(</span><span class=n>fp</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span><span class=p>(</span><span class=nf>ferror</span><span class=p>(</span><span class=n>fp</span><span class=p>)){</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;文件读取失败！&#34;</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span><span class=k>else</span><span class=p>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>if</span><span class=p>(</span><span class=n>feof</span><span class=p>(</span><span class=n>fp</span><span class=p>)){</span>
-</span></span><span class=line><span class=cl>            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;这是一个空文件&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span><span class=p>(</span><span class=nf>feof</span><span class=p>(</span><span class=n>fp</span><span class=p>)){</span>
+</span></span><span class=line><span class=cl>            <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;这是一个空文件&#34;</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>        <span class=p>}</span> <span class=k>else</span><span class=p>{</span>
-</span></span><span class=line><span class=cl>            <span class=k>while</span> <span class=p>(</span><span class=o>!</span><span class=n>feof</span><span class=p>(</span><span class=n>fp</span><span class=p>)){</span>
-</span></span><span class=line><span class=cl>                <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%c&#34;</span><span class=p>,</span><span class=n>c</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>                <span class=n>fputc</span><span class=p>(</span><span class=n>c</span><span class=p>,</span> <span class=n>xx</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>                <span class=n>c</span> <span class=o>=</span> <span class=n>fgetc</span><span class=p>(</span><span class=n>fp</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>while</span> <span class=p>(</span><span class=o>!</span><span class=nf>feof</span><span class=p>(</span><span class=n>fp</span><span class=p>)){</span>
+</span></span><span class=line><span class=cl>                <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%c&#34;</span><span class=p>,</span><span class=n>c</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=nf>fputc</span><span class=p>(</span><span class=n>c</span><span class=p>,</span> <span class=n>xx</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=n>c</span> <span class=o>=</span> <span class=nf>fgetc</span><span class=p>(</span><span class=n>fp</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>            <span class=p>}</span>
 </span></span><span class=line><span class=cl>        <span class=p>}</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
