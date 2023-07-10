@@ -21,9 +21,12 @@ jobs:
 
       - name: Setup Hugo
         run: |
-          wget https://github.com/kentxxq/hugo/releases/download/latest/hugo-linux-amd64 -o hugo
+          wget https://github.com/kentxxq/hugo/releases/download/latest/hugo-linux-amd64 -O hugo
           chmod +x hugo
           cp hugo /usr/local/bin/hugo
+          ls -al hugo 
+          ./hugo version
+          hugo version
           pwd
 
       - name: Build Static File
