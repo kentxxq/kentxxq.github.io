@@ -1,0 +1,458 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>网络命令行工具-ken - 运维个人技术栈</title><meta name=Description content="在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个"><meta property="og:title" content="网络命令行工具-ken"><meta property="og:description" content="在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个"><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7-ken/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-07-08T00:00:00+00:00"><meta property="article:modified_time" content="2023-07-10T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="网络命令行工具-ken"><meta name=twitter:description content="在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个"><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7-ken/><link rel=prev href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E6%88%91%E7%9A%84%E5%BD%B1%E7%89%87%E8%AE%B0%E5%BD%95/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"网络命令行工具-ken","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7-ken\/"},"genre":"posts","keywords":"csharp, tools","wordcount":2229,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7-ken\/","datePublished":"2023-07-08T00:00:00+00:00","dateModified":"2023-07-10T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个"}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#如何使用>如何使用</a><ul><li><a href=#端口检测-sp>端口检测 sp</a></li><li><a href=#长连接-ws>长连接 ws</a></li><li><a href=#查看端口监听-ss>查看端口监听 ss</a></li><li><a href=#路由追踪-tr>路由追踪 tr</a></li><li><a href=#操作-redis>操作 redis</a></li><li><a href=#k8s-状态查询>k8s 状态查询</a><ul><li><a href=#查看-k8s-内重启过的容器>查看 k8s 内重启过的容器</a></li><li><a href=#查看-deployment-的资源使用情况>查看 deployment 的资源使用情况</a></li></ul></li><li><a href=#更新-update>更新 update</a></li><li><a href=#静态文件代理-web>静态文件代理 web</a></li><li><a href=#网站连通性测试-wp>网站连通性测试 wp</a></li><li><a href=#压测-bm>压测 bm</a></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">网络命令行工具-ken</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/blog/><i class="far fa-folder fa-fw"></i>blog</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-07-08>2023-07-08</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-07-10>2023-07-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2229 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#如何使用>如何使用</a><ul><li><a href=#端口检测-sp>端口检测 sp</a></li><li><a href=#长连接-ws>长连接 ws</a></li><li><a href=#查看端口监听-ss>查看端口监听 ss</a></li><li><a href=#路由追踪-tr>路由追踪 tr</a></li><li><a href=#操作-redis>操作 redis</a></li><li><a href=#k8s-状态查询>k8s 状态查询</a><ul><li><a href=#查看-k8s-内重启过的容器>查看 k8s 内重启过的容器</a></li><li><a href=#查看-deployment-的资源使用情况>查看 deployment 的资源使用情况</a></li></ul></li><li><a href=#更新-update>更新 update</a></li><li><a href=#静态文件代理-web>静态文件代理 web</a></li><li><a href=#网站连通性测试-wp>网站连通性测试 wp</a></li><li><a href=#压测-bm>压测 bm</a></li></ul></li></ul></nav></div></div><div class=content id=content><blockquote><p>在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到 NET6，终于做到了在 mac 和 windows 系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个。</p></blockquote><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p><code>ken</code> 的由来: 我一直以来用的都是名字 kentxxq。而在日常生活中需要一个简短好用的名字，于是就用了 ken。同时也因为命令行需要足够简短，所以也就用了这个名字。<br><a href=https://github.com/kentxxq/kentxxq.Cli target=_blank rel="noopener noreferrer">代码都是开源</a> 的，采用 c#编写。使用了微软自己的 <code>System.Commandline</code>。</p><p>现支持的所有系统版本</p><ul><li>ken-linux-arm</li><li>ken-linux-arm64</li><li>ken-linux-musl-x64</li><li>ken-linux-x64</li><li>ken-osx-arm64</li><li>ken-osx-x64</li><li>ken-win-arm.exe</li><li>ken-win-arm64.exe</li><li>ken-win-x64.exe</li><li>ken-win-x86.exe</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 下载举例：linux-x64 下载到程序路径</span>
+</span></span><span class=line><span class=cl>curl -L -o /usr/local/bin/ken https://github.com/kentxxq/kentxxq.Cli/releases/download/1.2.7/ken-linux-x64
+</span></span><span class=line><span class=cl><span class=c1># 如果是国内网络不行的话，可以使用代理下载</span>
+</span></span><span class=line><span class=cl>curl -L -o /usr/local/bin/ken https://github.abskoop.workers.dev/https://github.com/kentxxq/kentxxq.Cli/releases/download/1.2.7/ken-linux-x64
+</span></span><span class=line><span class=cl><span class=c1># 或 curl -L -o /usr/local/bin/ken https://ghproxy.com/https://github.com/kentxxq/kentxxq.Cli/releases/download/1.2.7/ken-linux-x64</span>
+</span></span><span class=line><span class=cl><span class=c1># 赋权</span>
+</span></span><span class=line><span class=cl>chmod +x /usr/local/bin/ken
+</span></span></code></pre></td></tr></table></div></div><h2 id=如何使用 class=headerLink><a href=#%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8 class=header-mark></a>如何使用</h2><p>说明: 如果命令返回状态非 0，则代表异常退出</p><h3 id=端口检测-sp class=headerLink><a href=#%e7%ab%af%e5%8f%a3%e6%a3%80%e6%b5%8b-sp class=header-mark></a>端口检测 sp</h3><p><code>sp</code> 代表 socketping，之前一直都是用的 <code>telnet</code>。但是只能一次性请求，而 sp 可以设置<strong>连接超时时间、重试次数、连接成功后退出</strong>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Usage:
+</span></span><span class=line><span class=cl>  ken <span class=o>[</span>options<span class=o>]</span> sp &lt;url&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Arguments:
+</span></span><span class=line><span class=cl>  &lt;url&gt;  url: kentxxq.com:443
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Options:
+</span></span><span class=line><span class=cl>  -n, --retryTimes &lt;retryTimes&gt;  default:0,retry forever <span class=o>[</span>default: 0<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -t, --timeout &lt;timeout&gt;        default:2 seconds <span class=o>[</span>default: 2<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -q, --quit                     Quit after connection succeeded <span class=o>[</span>default: False<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -?, -h, --help                 Show <span class=nb>help</span> and usage information
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 请求2次</span>
+</span></span><span class=line><span class=cl>ken sp kentxxq.com:443 -n <span class=m>2</span>
+</span></span><span class=line><span class=cl>request successed. waited <span class=m>137</span> ms
+</span></span><span class=line><span class=cl>request successed. waited <span class=m>1117</span> ms
+</span></span><span class=line><span class=cl><span class=c1># 请求2次，一旦成功就退出</span>
+</span></span><span class=line><span class=cl>ken sp kentxxq.com:443 -n <span class=m>2</span> -q
+</span></span><span class=line><span class=cl>request successed. waited <span class=m>96</span> ms
+</span></span><span class=line><span class=cl><span class=c1># 请求失败的情况，同时设置超时时间</span>
+</span></span><span class=line><span class=cl>ken sp kentxxq.com:444 -t <span class=m>3</span> -n <span class=m>2</span> -q
+</span></span><span class=line><span class=cl>request failed. waited <span class=m>3016</span> ms
+</span></span><span class=line><span class=cl>request failed. waited <span class=m>3013</span> ms
+</span></span><span class=line><span class=cl><span class=c1># 解析失败的情况</span>
+</span></span><span class=line><span class=cl>ken sp kentxxq:443 -t <span class=m>3</span> -n <span class=m>2</span> -q
+</span></span><span class=line><span class=cl>parse error:不知道这样的主机。
+</span></span></code></pre></td></tr></table></div></div><h3 id=长连接-ws class=headerLink><a href=#%e9%95%bf%e8%bf%9e%e6%8e%a5-ws class=header-mark></a>长连接 ws</h3><p><code>ws</code> 代表连接 websocket。之前一直用 wscat，但是<strong>wscat 依赖 nodejs</strong>。每次使用的时候都觉得有点小题大做了。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Usage:
+</span></span><span class=line><span class=cl>  ken <span class=o>[</span>options<span class=o>]</span> ws &lt;wsUrl&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Arguments:
+</span></span><span class=line><span class=cl>  &lt;wsUrl&gt;  wsUrl: wss://ws.kentxxq.com/ws
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 连接websocket</span>
+</span></span><span class=line><span class=cl>ken ws wss://ws.kentxxq.com/ws
+</span></span><span class=line><span class=cl>&gt;&gt; ls
+</span></span><span class=line><span class=cl>&lt;&lt; ls
+</span></span><span class=line><span class=cl>&gt;&gt; <span class=nb>pwd</span>
+</span></span><span class=line><span class=cl>&lt;&lt; <span class=nb>pwd</span>
+</span></span><span class=line><span class=cl>&gt;&gt; 你好
+</span></span><span class=line><span class=cl>&lt;&lt; 你好
+</span></span></code></pre></td></tr></table></div></div><h3 id=查看端口监听-ss class=headerLink><a href=#%e6%9f%a5%e7%9c%8b%e7%ab%af%e5%8f%a3%e7%9b%91%e5%90%ac-ss class=header-mark></a>查看端口监听 ss</h3><p><code>ss</code> 代表 socket status。主要原因是每次在 windows 上都容易忘记命令。后面会找时间去拓展成有用的功能。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>❯ .<span class=se>\k</span>en.exe ss
+</span></span><span class=line><span class=cl>0.0.0.0:135
+</span></span><span class=line><span class=cl>0.0.0.0:445
+</span></span><span class=line><span class=cl>0.0.0.0:2179
+</span></span><span class=line><span class=cl>0.0.0.0:5040
+</span></span><span class=line><span class=cl>0.0.0.0:7680
+</span></span><span class=line><span class=cl>0.0.0.0:7890
+</span></span><span class=line><span class=cl>0.0.0.0:28653
+</span></span><span class=line><span class=cl>0.0.0.0:49664
+</span></span><span class=line><span class=cl>0.0.0.0:49665
+</span></span><span class=line><span class=cl>0.0.0.0:49666
+</span></span><span class=line><span class=cl>0.0.0.0:49667
+</span></span><span class=line><span class=cl>0.0.0.0:49668
+</span></span><span class=line><span class=cl>0.0.0.0:49669
+</span></span><span class=line><span class=cl>0.0.0.0:49678
+</span></span><span class=line><span class=cl>127.0.0.1:4012
+</span></span><span class=line><span class=cl>127.0.0.1:4013
+</span></span><span class=line><span class=cl>127.0.0.1:9100
+</span></span><span class=line><span class=cl>127.0.0.1:9180
+</span></span><span class=line><span class=cl>127.0.0.1:53087
+</span></span><span class=line><span class=cl>127.0.0.1:53088
+</span></span><span class=line><span class=cl>127.0.0.1:53117
+</span></span><span class=line><span class=cl>127.0.0.1:53121
+</span></span><span class=line><span class=cl>127.0.0.1:53430
+</span></span><span class=line><span class=cl>127.0.0.1:57956
+</span></span><span class=line><span class=cl>127.0.0.1:57961
+</span></span><span class=line><span class=cl>127.0.0.1:61078
+</span></span><span class=line><span class=cl>127.0.0.1:62078
+</span></span><span class=line><span class=cl>169.254.171.114:139
+</span></span><span class=line><span class=cl>172.18.87.230:139
+</span></span><span class=line><span class=cl>172.18.87.230:5822
+</span></span><span class=line><span class=cl>172.19.144.1:139
+</span></span><span class=line><span class=cl>:::135
+</span></span><span class=line><span class=cl>:::445
+</span></span><span class=line><span class=cl>:::2179
+</span></span><span class=line><span class=cl>:::7680
+</span></span><span class=line><span class=cl>:::7890
+</span></span><span class=line><span class=cl>:::49664
+</span></span><span class=line><span class=cl>:::49665
+</span></span><span class=line><span class=cl>:::49666
+</span></span><span class=line><span class=cl>:::49667
+</span></span><span class=line><span class=cl>:::49668
+</span></span><span class=line><span class=cl>:::49669
+</span></span><span class=line><span class=cl>:::49678
+</span></span><span class=line><span class=cl>::1:49672
+</span></span></code></pre></td></tr></table></div></div><h3 id=路由追踪-tr class=headerLink><a href=#%e8%b7%af%e7%94%b1%e8%bf%bd%e8%b8%aa-tr class=header-mark></a>路由追踪 tr</h3><p><code>tr</code> 代表 traceroute。是通过 dotnet 的 ping 实现。结果发现在 linux 有问题，所以后续再去拓展吧。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>❯ ken.exe tr kentxxq.com
+</span></span><span class=line><span class=cl>try connecting to kentxxq.com ...success
+</span></span><span class=line><span class=cl><span class=m>1</span> request timeout
+</span></span><span class=line><span class=cl><span class=m>2</span> 118.250.180.1 take 0ms 中国-湖南-长沙-电信
+</span></span><span class=line><span class=cl><span class=m>3</span> 61.187.29.245 take 3ms 中国-湖南-长沙-电信
+</span></span><span class=line><span class=cl><span class=m>4</span> 61.137.3.129 take 0ms 中国-湖南-长沙-电信
+</span></span><span class=line><span class=cl><span class=m>5</span> request timeout
+</span></span><span class=line><span class=cl><span class=m>6</span> 202.97.94.122 take 19ms 中国-北京-北京-电信
+</span></span><span class=line><span class=cl><span class=m>7</span> 202.97.94.94 take 58ms 中国-北京-北京-电信
+</span></span><span class=line><span class=cl><span class=m>8</span> 202.97.60.214 take 0ms 日本-XX-XX-电信
+</span></span><span class=line><span class=cl><span class=m>9</span> 129.250.3.23 take 79ms 美国-XX-XX-XX
+</span></span><span class=line><span class=cl><span class=m>10</span> 129.250.6.127 take 0ms 美国-XX-XX-XX
+</span></span><span class=line><span class=cl><span class=m>11</span> 61.200.82.50 take 102ms 日本-XX-XX-XX
+</span></span><span class=line><span class=cl><span class=m>12</span> 185.199.110.153 美国-华盛顿-西雅图-XX
+</span></span></code></pre></td></tr></table></div></div><h3 id=操作-redis class=headerLink><a href=#%e6%93%8d%e4%bd%9c-redis class=header-mark></a>操作 redis</h3><p><code>redis</code> 因为经常删除特定的 key，而 <code>redis-cli</code> 没有没有很好的支持这点，所以就自己写了一个最常用的。。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 错误命令就会输出usage</span>
+</span></span><span class=line><span class=cl><span class=c1># usage:</span>
+</span></span><span class=line><span class=cl><span class=c1># a*: search all keys start with a in db</span>
+</span></span><span class=line><span class=cl><span class=c1># del a2*: delete all keys start with a2 in db</span>
+</span></span><span class=line><span class=cl><span class=c1># select 1: checkout db 1</span>
+</span></span><span class=line><span class=cl><span class=c1># exit(): just exit</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&gt; ken redis bwd.kentxxq.com -p <span class=m>123456</span>
+</span></span><span class=line><span class=cl>connect success,take 27.4024 ms
+</span></span><span class=line><span class=cl>db0 keys:2
+</span></span><span class=line><span class=cl>&gt;&gt;a
+</span></span><span class=line><span class=cl>keys count:1
+</span></span><span class=line><span class=cl>&gt;&gt;b
+</span></span><span class=line><span class=cl>keys count:1
+</span></span><span class=line><span class=cl>&gt;&gt;a*
+</span></span><span class=line><span class=cl>keys count:1
+</span></span><span class=line><span class=cl>&gt;&gt;del a
+</span></span><span class=line><span class=cl>deleted <span class=m>1</span> key<span class=o>(</span>s<span class=o>)</span>
+</span></span><span class=line><span class=cl>&gt;&gt;select <span class=m>1</span>
+</span></span><span class=line><span class=cl>using db1 keys count:1
+</span></span><span class=line><span class=cl>&gt;&gt;c
+</span></span><span class=line><span class=cl>keys count:1
+</span></span><span class=line><span class=cl>&gt;&gt;exit<span class=o>()</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=k8s-状态查询 class=headerLink><a href=#k8s-%e7%8a%b6%e6%80%81%e6%9f%a5%e8%af%a2 class=header-mark></a>k8s 状态查询</h3><p><code>k8s</code> 命令的存在，主要是因为我日常需要查看 k8s 集群的信息，所以做到了命令里。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Description:
+</span></span><span class=line><span class=cl>  get k8s resource info
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Usage:
+</span></span><span class=line><span class=cl>  ken k8s <span class=o>[</span>command<span class=o>]</span> <span class=o>[</span>options<span class=o>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Options:
+</span></span><span class=line><span class=cl>  -c, --kubeconfig &lt;kubeconfig&gt;  kubeconfig file path
+</span></span><span class=line><span class=cl>  -n, --namespace &lt;namespace&gt;    specified namespace
+</span></span><span class=line><span class=cl>  -?, -h, --help                 Show <span class=nb>help</span> and usage information
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Commands:
+</span></span><span class=line><span class=cl>  <span class=m>1</span>  list restarted pod
+</span></span><span class=line><span class=cl>  <span class=m>2</span>  list deployment resource usage
+</span></span></code></pre></td></tr></table></div></div><h4 id=查看-k8s-内重启过的容器 class=headerLink><a href=#%e6%9f%a5%e7%9c%8b-k8s-%e5%86%85%e9%87%8d%e5%90%af%e8%bf%87%e7%9a%84%e5%ae%b9%e5%99%a8 class=header-mark></a>查看 k8s 内重启过的容器</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ken k8s <span class=m>1</span>
+</span></span><span class=line><span class=cl>┌───────────┬──────────────────┬───────────────┐
+</span></span><span class=line><span class=cl>│ Namespace │ Pod Name         │ Restart Times │
+</span></span><span class=line><span class=cl>├───────────┼──────────────────┼───────────────┤
+</span></span><span class=line><span class=cl>│ default   │ A-service        │ <span class=m>187</span>           │
+</span></span><span class=line><span class=cl>│ default   │ B-service        │ <span class=m>1</span>             │
+</span></span><span class=line><span class=cl>│ default   │ C-service        │ <span class=m>3</span>             │
+</span></span><span class=line><span class=cl>└───────────┴──────────────────┴───────────────┘
+</span></span></code></pre></td></tr></table></div></div><h4 id=查看-deployment-的资源使用情况 class=headerLink><a href=#%e6%9f%a5%e7%9c%8b-deployment-%e7%9a%84%e8%b5%84%e6%ba%90%e4%bd%bf%e7%94%a8%e6%83%85%e5%86%b5 class=header-mark></a>查看 deployment 的资源使用情况</h4><p><code>ken k8s 2</code> 大致输出如下</p><table><thead><tr><th>Namespace</th><th>Deployment</th><th>Memory Usage</th><th>Cpu Usage</th><th>Request Memory</th><th>Limit Memory</th><th>Request Cpu</th><th>Limit Cpu</th></tr></thead><tbody><tr><td>default</td><td>kube-state-metrics</td><td>3.57%</td><td>0.25%</td><td>32Mi</td><td>1Gi</td><td>10m</td><td>200m</td></tr></tbody></table><h3 id=更新-update class=headerLink><a href=#%e6%9b%b4%e6%96%b0-update class=header-mark></a>更新 update</h3><p>这个命令主要是为了更新 ken 程序自己。避免冗长的 bash 命令。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ken update -h
+</span></span><span class=line><span class=cl>Description:
+</span></span><span class=line><span class=cl>  update ken <span class=nb>command</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Usage:
+</span></span><span class=line><span class=cl>  ken update <span class=o>[</span>options<span class=o>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Options:
+</span></span><span class=line><span class=cl>  -f, --force                       force update current version <span class=o>[</span>default: False<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -kv, --ken-version &lt;ken-version&gt;  force upgrade to specific current version
+</span></span><span class=line><span class=cl>  -p, --proxy                       use proxy url
+</span></span><span class=line><span class=cl>  -t, --token &lt;token&gt;               github token <span class=k>for</span> query github-api <span class=o>[]</span>
+</span></span><span class=line><span class=cl>  -?, -h, --help                    Show <span class=nb>help</span> and usage information
+</span></span></code></pre></td></tr></table></div></div><ol><li><code>-p</code> 使用 <code>https://github.abskoop.workers.dev</code> 代理下载，方便国内用户</li><li><code>-t</code> 是因为 github 的 api 存在次数限制。带上 token 可以大幅提升 api 的请求次数</li><li><code>-kv</code> 可以指定特定的版本，例如 <code>-kv 1.3.2</code> 则更新到 1.3.2 版本。因为我不想留着一些无用的版本号，所以 1.3.1 可能不见了。。。建议不使用此命令，直接 update 到最新版本</li></ol><h3 id=静态文件代理-web class=headerLink><a href=#%e9%9d%99%e6%80%81%e6%96%87%e4%bb%b6%e4%bb%a3%e7%90%86-web class=header-mark></a>静态文件代理 web</h3><p><code>web</code> 直接将当前目录暴露成 http，并提供访问。方便调试、静态文件下载等等需求</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Description:
+</span></span><span class=line><span class=cl>  static file http server
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Usage:
+</span></span><span class=line><span class=cl>  ken web <span class=o>[</span>options<span class=o>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Options:
+</span></span><span class=line><span class=cl>  -w, --webroot &lt;webroot&gt;  file path <span class=o>[</span>default: .<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -p, --port &lt;port&gt;        http port <span class=o>[</span>default: 5000<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -?, -h, --help           Show <span class=nb>help</span> and usage information
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 使用示例</span>
+</span></span><span class=line><span class=cl>ken web
+</span></span><span class=line><span class=cl>listening http://0.0.0.0:5000
+</span></span><span class=line><span class=cl>HTTP/1.1 GET / <span class=m>200</span> text/html<span class=p>;</span> <span class=nv>charset</span><span class=o>=</span>utf-8 <span class=m>5367</span>
+</span></span><span class=line><span class=cl>HTTP/1.1 GET /favicon.ico <span class=m>404</span>
+</span></span></code></pre></td></tr></table></div></div><ol><li>默认当前目录，也可以只用 <code>-w</code> 指定目录</li><li>默认使用 5000 端口，也可以使用 <code>-p</code> 指定端口</li></ol><h3 id=网站连通性测试-wp class=headerLink><a href=#%e7%bd%91%e7%ab%99%e8%bf%9e%e9%80%9a%e6%80%a7%e6%b5%8b%e8%af%95-wp class=header-mark></a>网站连通性测试 wp</h3><p><code>wp</code> 是 <code>web ping</code> 的缩写. 顾名思义类似 <code>sp</code> 命令不断发送 http 请求, 帮助判断是否存活.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>Description:
+</span></span><span class=line><span class=cl>  web ping
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>Usage:
+</span></span><span class=line><span class=cl>  ken wp &lt;url&gt; <span class=o>[</span>options<span class=o>]</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>Arguments:
+</span></span><span class=line><span class=cl>  &lt;url&gt;  url: https://www.kentxxq.com
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>Options:
+</span></span><span class=line><span class=cl>  -i, --interval &lt;interval&gt;  web ping interval seconds <span class=o>[</span>default: 1<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -t, --timeout &lt;timeout&gt;    default:2 seconds <span class=o>[</span>default: 2<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -d, --disableKeepAlive     default: <span class=nb>true</span> <span class=o>[</span>default: False<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -f, --curlFile &lt;curlFile&gt;  <span class=k>if</span> curlFile is not null ,Argument url will be ignore. default: <span class=s1>&#39;&#39;</span> <span class=o>[]</span>
+</span></span><span class=line><span class=cl>  --debug                    <span class=nb>enable</span> verbose output <span class=o>[</span>default: False<span class=o>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 每秒一次请求</span>
+</span></span><span class=line><span class=cl>ken wp https://baidu.com
+</span></span><span class=line><span class=cl>09:51:24,https://baidu.com/: Redirect 245ms
+</span></span><span class=line><span class=cl>09:51:25,https://baidu.com/: Redirect 37ms
+</span></span><span class=line><span class=cl>09:51:26,https://baidu.com/: Redirect 40ms
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 支持导入curl.如果导入了curl文件,https://a.com 将不会生效</span>
+</span></span><span class=line><span class=cl>ken wp https://a.com -f D:<span class=se>\t</span>mp<span class=se>\c</span>url.txt
+</span></span></code></pre></td></tr></table></div></div><h3 id=压测-bm class=headerLink><a href=#%e5%8e%8b%e6%b5%8b-bm class=header-mark></a>压测 bm</h3><p><code>bm</code> 是 <code>benchmark</code> 的缩写. 用来进行压测 http 压测的.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>Description:
+</span></span><span class=line><span class=cl>  http benchmark
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Usage:
+</span></span><span class=line><span class=cl>  ken bm &lt;url&gt; <span class=o>[</span>options<span class=o>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Arguments:
+</span></span><span class=line><span class=cl>  &lt;url&gt;  url: https://test.kentxxq.com/Counter/Count
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Options:
+</span></span><span class=line><span class=cl>  -d, --duration &lt;duration&gt;      duration: benchmark duration <span class=o>[</span>default: 10<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -c, --concurrent &lt;concurrent&gt;  concurrent: concurrent request <span class=o>[</span>default: 50<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -f, --curlFile &lt;curlFile&gt;      <span class=k>if</span> curlFile is not null ,Argument url will be ignore. default: <span class=s1>&#39;&#39;</span> <span class=o>[]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 默认50并发,10秒钟.请求了3328次</span>
+</span></span><span class=line><span class=cl>ken bm https://test.kentxxq.com/counter/count
+</span></span><span class=line><span class=cl>完成次数3328
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-07-10</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7-ken/ data-title=网络命令行工具-ken data-hashtags=csharp,tools><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7-ken/ data-hashtag=csharp><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7-ken/ data-title=网络命令行工具-ken data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7-ken/ data-title=网络命令行工具-ken><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7-ken/ data-title=网络命令行工具-ken><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7-ken/ data-title=网络命令行工具-ken data-description=在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7-ken/ data-title=网络命令行工具-ken data-description=在日常的使用场景中，总是不得不接触各种各样的命令行工具。而在使用的过程中，多多少少有一些不好用的地方。马上就要发布到NET6，终于做到了在mac和windows系统上进行单个文件的发布。同时单个文件的大小又几乎缩小了一倍。所以就有了想法自己写一个><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7-ken/ data-title=网络命令行工具-ken><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/csharp/>csharp</a>,&nbsp;<a href=/tags/tools/>tools</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/%E6%88%91%E7%9A%84%E5%BD%B1%E7%89%87%E8%AE%B0%E5%BD%95/ class=prev rel=prev title=我的影片记录><i class="fas fa-angle-left fa-fw"></i>我的影片记录</a>
+<a href=/posts/%E7%AC%94%E8%AE%B0/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%88%9D%E5%A7%8B%E5%8C%96/ class=next rel=next title=树莓派初始化>树莓派初始化<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a target=_blank href=https://beian.miit.gov.cn>湘ICP备2021002319号-1</a></span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div></body></html>
