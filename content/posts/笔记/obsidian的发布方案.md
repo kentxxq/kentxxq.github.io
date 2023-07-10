@@ -5,7 +5,7 @@ tags:
   - hugo
   - blog
 date: 2023-06-21
-lastmod: 2023-06-30
+lastmod: 2023-07-10
 categories:
   - blog
 description: "这里是我在确定使用 [[笔记/point/obsidian|obsidian]] 记录笔记以后. 对比选择我的博客发布方案.之前我的博客和笔记内容是割裂的. 一直使用 vscode 编写博客, 然后 [[笔记/point/hugo|hugo]] 发布. 而现在我想重新组合我的工作流."
@@ -50,3 +50,36 @@ description: "这里是我在确定使用 [[笔记/point/obsidian|obsidian]] 记
 3 比较麻烦, 同时如果
 
 #todo/笔记
+
+### 发布脚本
+
+```powershell
+# 设置源文件夹和目标文件夹的路径
+$sourceRootFolder = "obsidian文档路径"
+$targetRootFolder = "博客路径"
+
+# 切换到目标文件夹
+Set-Location -Path $targetRootFolder
+git pull
+Write-Host "github拉取完成"
+
+Get-ChildItem -Path $targetRootFolder | Remove-Item -Force -Recurse
+Write-Host "已删除存在的内容"
+
+# 需要拷贝的文件夹
+$folders = @("笔记", "附件", "日记")
+
+foreach ($folder in $folders) {
+    Copy-Item -Path "$sourceRootFolder\$folder" -Destination "$targetRootFolder\$folder" -Recurse -Force
+}
+
+Write-Host "文件拷贝完成"
+
+Write-Host "查看效果"
+Get-ChildItem -Path $targetRootFolder
+
+git add -A
+git commit -am "文章更新"
+git push
+Write-Host "推送完成"
+```
