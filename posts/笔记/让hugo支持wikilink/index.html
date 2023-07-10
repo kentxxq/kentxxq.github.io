@@ -1,0 +1,354 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>让hugo支持wikilink - 运维个人技术栈</title><meta name=Description content="在我决定使用 [[笔记/point/obsidian|obsidian]] 来记录笔记后, 就发现有 `wikilink` 这个东西, 它不是 [CommonMark](https://commonmark.org/) 的一部分, 所以会导致很多的工具链的不兼容. 例如 [[笔记/point/vscode|vscode]] 默认无法读取.而我选择用 [hugo](point/hugo.md) 进行站点的构建发布. 所以这篇博客就如题目所说的, 我要打通 [[笔记/point/hugo|hugo]] 和 [[笔记/point/obsidian|obsidian]] ,所以就有了这一篇文章.我搭建了一个 demo 站点, 你可以看看 [效果](https://doit-demo.kentxxq.com/)."><meta property="og:title" content="让hugo支持wikilink"><meta property="og:description" content="在我决定使用 [[笔记/point/obsidian|obsidian]] 来记录笔记后, 就发现有 `wikilink` 这个东西, 它不是 [CommonMark](https://commonmark.org/) 的一部分, 所以会导致很多的工具链的不兼容. 例如 [[笔记/point/vscode|vscode]] 默认无法读取.而我选择用 [hugo](point/hugo.md) 进行站点的构建发布. 所以这篇博客就如题目所说的, 我要打通 [[笔记/point/hugo|hugo]] 和 [[笔记/point/obsidian|obsidian]] ,所以就有了这一篇文章.我搭建了一个 demo 站点, 你可以看看 [效果](https://doit-demo.kentxxq.com/)."><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%AE%A9hugo%E6%94%AF%E6%8C%81wikilink/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-06-26T00:00:00+00:00"><meta property="article:modified_time" content="2023-07-10T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="让hugo支持wikilink"><meta name=twitter:description content="在我决定使用 [[笔记/point/obsidian|obsidian]] 来记录笔记后, 就发现有 `wikilink` 这个东西, 它不是 [CommonMark](https://commonmark.org/) 的一部分, 所以会导致很多的工具链的不兼容. 例如 [[笔记/point/vscode|vscode]] 默认无法读取.而我选择用 [hugo](point/hugo.md) 进行站点的构建发布. 所以这篇博客就如题目所说的, 我要打通 [[笔记/point/hugo|hugo]] 和 [[笔记/point/obsidian|obsidian]] ,所以就有了这一篇文章.我搭建了一个 demo 站点, 你可以看看 [效果](https://doit-demo.kentxxq.com/)."><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%AE%A9hugo%E6%94%AF%E6%8C%81wikilink/><link rel=prev href=https://kentxxq.com/posts/%E6%97%A5%E8%AE%B0/2023-06-25/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%AE%89%E8%A3%85mingw-w64/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"让hugo支持wikilink","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/%E8%AE%A9hugo%E6%94%AF%E6%8C%81wikilink\/"},"genre":"posts","keywords":"blog, hugo, wikilink","wordcount":1611,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/%E8%AE%A9hugo%E6%94%AF%E6%8C%81wikilink\/","datePublished":"2023-06-26T00:00:00+00:00","dateModified":"2023-07-10T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"在我决定使用 [[笔记/point/obsidian|obsidian]] 来记录笔记后, 就发现有 `wikilink` 这个东西, 它不是 [CommonMark](https://commonmark.org/) 的一部分, 所以会导致很多的工具链的不兼容. 例如 [[笔记/point/vscode|vscode]] 默认无法读取.而我选择用 [hugo](point/hugo.md) 进行站点的构建发布. 所以这篇博客就如题目所说的, 我要打通 [[笔记/point/hugo|hugo]] 和 [[笔记/point/obsidian|obsidian]] ,所以就有了这一篇文章.我搭建了一个 demo 站点, 你可以看看 [效果](https://doit-demo.kentxxq.com/)."}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#前情提要>前情提要</a></li><li><a href=#我做了什么>我做了什么</a><ul><li><a href=#原理>原理</a></li><li><a href=#准备-goldmark-wikilink>准备 goldmark-wikilink</a></li><li><a href=#改动-hugo>改动 hugo</a></li><li><a href=#配置-dart-sass>配置 dart-sass</a></li><li><a href=#开始构建代码>开始构建代码</a></li><li><a href=#hugo-预览>hugo 预览</a></li></ul></li><li><a href=#相关资料>相关资料</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">让hugo支持wikilink</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/blog/><i class="far fa-folder fa-fw"></i>blog</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-06-26>2023-06-26</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-07-10>2023-07-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1611 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#前情提要>前情提要</a></li><li><a href=#我做了什么>我做了什么</a><ul><li><a href=#原理>原理</a></li><li><a href=#准备-goldmark-wikilink>准备 goldmark-wikilink</a></li><li><a href=#改动-hugo>改动 hugo</a></li><li><a href=#配置-dart-sass>配置 dart-sass</a></li><li><a href=#开始构建代码>开始构建代码</a></li><li><a href=#hugo-预览>hugo 预览</a></li></ul></li><li><a href=#相关资料>相关资料</a></li></ul></nav></div></div><div class=content id=content><h2 id=前情提要 class=headerLink><a href=#%e5%89%8d%e6%83%85%e6%8f%90%e8%a6%81 class=header-mark></a>前情提要</h2><p>在我决定使用 <a href=/posts/%E7%AC%94%E8%AE%B0/point/obsidian/>obsidian</a> 来记录笔记后, 就发现有 <code>wikilink</code> 这个东西, 它不是 <a href=/posts/%E7%AC%94%E8%AE%B0/point/CommonMark/>CommonMark</a> 的一部分, 所以会导致很多的工具链的不兼容. 例如 <a href=/posts/%E7%AC%94%E8%AE%B0/point/vscode/>vscode</a> 默认无法读取.</p><p>而我选择用 <a href=point/hugo.md rel>hugo</a> 进行站点的构建发布. 所以这篇博客就如题目所说的, 我要打通 <a href=/posts/%E7%AC%94%E8%AE%B0/point/hugo/>hugo</a> 和 <a href=/posts/%E7%AC%94%E8%AE%B0/point/obsidian/>obsidian</a> ,所以就有了这一篇文章.我搭建了一个 demo 站点, 你可以看看 <a href=https://doit-demo.kentxxq.com/ target=_blank rel="noopener noreferrer">效果</a>.</p><h2 id=我做了什么 class=headerLink><a href=#%e6%88%91%e5%81%9a%e4%ba%86%e4%bb%80%e4%b9%88 class=header-mark></a>我做了什么</h2><h3 id=原理 class=headerLink><a href=#%e5%8e%9f%e7%90%86 class=header-mark></a>原理</h3><ol><li><a href=/posts/%E7%AC%94%E8%AE%B0/point/hugo/>hugo</a> 默认使用 <a href=https://github.com/yuin/goldmark/ target=_blank rel="noopener noreferrer">goldmark</a> 进行 markdown 的渲染.</li><li><a href=https://github.com/yuin/goldmark/ target=_blank rel="noopener noreferrer">goldmark</a> 可以通过插件支持 wikilink.</li><li><a href=https://github.com/abhinav/goldmark-wikilink target=_blank rel="noopener noreferrer">abhinav 的 goldmark-wikilink</a> 这个插件与我的主题, 笔记路径, url 配置<strong>不兼容, 需要进行调整</strong>.</li><li>改 <a href=/posts/%E7%AC%94%E8%AE%B0/point/hugo/>hugo</a> 代码, 加入配置, 编译构建.</li><li>编写 github actions 发布工具.</li></ol><h3 id=准备-goldmark-wikilink class=headerLink><a href=#%e5%87%86%e5%a4%87-goldmark-wikilink class=header-mark></a>准备 goldmark-wikilink</h3><p>首先 fork 一份 <a href=https://github.com/abhinav/goldmark-wikilink target=_blank rel="noopener noreferrer">goldmark-wikilink</a> 代码到 <a href=https://github.com/kentxxq/goldmark-wikilink target=_blank rel="noopener noreferrer">我的仓库</a>.</p><p>改动 <a href=https://github.com/kentxxq/goldmark-wikilink/blob/main/go.mod target=_blank rel="noopener noreferrer">go.mod</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>module</span> <span class=nx>github</span><span class=p>.</span><span class=nx>com</span><span class=o>/</span><span class=nx>kentxxq</span><span class=o>/</span><span class=nx>goldmark</span><span class=o>-</span><span class=nx>wikilink</span>
+</span></span></code></pre></td></tr></table></div></div><p>改动 <a href=https://github.com/kentxxq/goldmark-wikilink/blob/main/resolver.go target=_blank rel="noopener noreferrer">resolver.go</a>, 添加解析代码. 下面是伪代码, 讲一下我做了什么:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 默认解析,看起来不错
+</span></span></span><span class=line><span class=cl><span class=c1>//	[[Foo]]      // =&gt; &#34;Foo.html&#34;
+</span></span></span><span class=line><span class=cl><span class=c1>//	[[Foo bar]]  // =&gt; &#34;Foo bar.html&#34;
+</span></span></span><span class=line><span class=cl><span class=c1>//	[[foo/Bar]]  // =&gt; &#34;foo/Bar.html&#34;
+</span></span></span><span class=line><span class=cl><span class=c1>//	[[foo.pdf]]  // =&gt; &#34;foo.pdf&#34;
+</span></span></span><span class=line><span class=cl><span class=c1>//	[[foo.png]]  // =&gt; &#34;foo.png&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>DefaultResolver</span> <span class=nx>Resolver</span> <span class=p>=</span> <span class=nx>defaultResolver</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// hugo默认路径是/Foo/,所以我加了一个PrettyResolver解决这个问题
+</span></span></span><span class=line><span class=cl><span class=c1>// 关于url的路径切换可以参考文档 https://gohugo.io/content-management/urls/#appearance
+</span></span></span><span class=line><span class=cl><span class=c1>//  [[Foo]]      // =&gt; &#34;Foo/&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>PrettyResolver</span> <span class=nx>Resolver</span> <span class=p>=</span> <span class=nx>prettyResolver</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 当我的obsidian笔记wikilink使用`相对于当前文件的路径`时
+</span></span></span><span class=line><span class=cl><span class=c1>//  /root/Foo.md                 url: /root/Foo/
+</span></span></span><span class=line><span class=cl><span class=c1>//  /root/a.md include [[Foo]] . url: /root/a/    wikilink: /root/a/Foo/ not found!
+</span></span></span><span class=line><span class=cl><span class=c1>//  所以我加上了RelResolver
+</span></span></span><span class=line><span class=cl><span class=c1>//  [[Foo]]      // =&gt; &#34;../Foo/&#34;    worked!
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>RelResolver</span> <span class=nx>Resolver</span> <span class=p>=</span> <span class=nx>relResolver</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 但其实obsidian中使用这样的格式并不好看.我改成了`相对于项目根路径`后
+</span></span></span><span class=line><span class=cl><span class=c1>// when i use pretty url with [[absolute path]]
+</span></span></span><span class=line><span class=cl><span class=c1>//  /Foo.md                      url: /posts/Foo/
+</span></span></span><span class=line><span class=cl><span class=c1>//  /a.md include [[root/Foo]] . url: /posts/a/    wikilink: /posts/a/posts/Foo/ not found!
+</span></span></span><span class=line><span class=cl><span class=c1>//  so...
+</span></span></span><span class=line><span class=cl><span class=c1>//  [[Foo]]      // =&gt; &#34;/root/Foo/&#34; worked!
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>RootResolver</span> <span class=p>=</span> <span class=kd>func</span><span class=p>(</span><span class=nx>b</span> <span class=kt>string</span><span class=p>)</span> <span class=nx>Resolver</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=o>&amp;</span><span class=nx>rootResolver</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>base</span><span class=p>:</span> <span class=nx>b</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>pretty_html</span> <span class=p>=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=s>&#34;/&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 相对路径就是在最前面加上../,变成请求上一级目录
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>rel_head</span> <span class=p>=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=s>&#34;../&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>relResolver</span> <span class=kd>struct</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>relResolver</span><span class=p>)</span> <span class=nf>ResolveWikilink</span><span class=p>(</span><span class=nx>n</span> <span class=o>*</span><span class=nx>Node</span><span class=p>)</span> <span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>dest</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>rel_head</span><span class=p>)</span><span class=o>+</span><span class=nb>len</span><span class=p>(</span><span class=nx>n</span><span class=p>.</span><span class=nx>Target</span><span class=p>)</span><span class=o>+</span><span class=nb>len</span><span class=p>(</span><span class=nx>pretty_html</span><span class=p>)</span><span class=o>+</span><span class=nb>len</span><span class=p>(</span><span class=nx>_hash</span><span class=p>)</span><span class=o>+</span><span class=nb>len</span><span class=p>(</span><span class=nx>n</span><span class=p>.</span><span class=nx>Fragment</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>i</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>n</span><span class=p>.</span><span class=nx>Target</span><span class=p>)</span> <span class=p>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>i</span> <span class=o>+=</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>dest</span><span class=p>,</span> <span class=nx>rel_head</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>i</span> <span class=o>+=</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>dest</span><span class=p>[</span><span class=nx>i</span><span class=p>:],</span> <span class=nx>n</span><span class=p>.</span><span class=nx>Target</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>filepath</span><span class=p>.</span><span class=nf>Ext</span><span class=p>(</span><span class=nb>string</span><span class=p>(</span><span class=nx>n</span><span class=p>.</span><span class=nx>Target</span><span class=p>))</span> <span class=o>==</span> <span class=s>&#34;&#34;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>i</span> <span class=o>+=</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>dest</span><span class=p>[</span><span class=nx>i</span><span class=p>:],</span> <span class=nx>pretty_html</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>n</span><span class=p>.</span><span class=nx>Fragment</span><span class=p>)</span> <span class=p>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>i</span> <span class=o>+=</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>dest</span><span class=p>[</span><span class=nx>i</span><span class=p>:],</span> <span class=nx>_hash</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>i</span> <span class=o>+=</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>dest</span><span class=p>[</span><span class=nx>i</span><span class=p>:],</span> <span class=nx>n</span><span class=p>.</span><span class=nx>Fragment</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>dest</span><span class=p>[:</span><span class=nx>i</span><span class=p>],</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 绝对路径就是传入前缀,然后直接加上wikilink的内容即可
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>rootResolver</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>base</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>r</span> <span class=nx>rootResolver</span><span class=p>)</span> <span class=nf>ResolveWikilink</span><span class=p>(</span><span class=nx>n</span> <span class=o>*</span><span class=nx>Node</span><span class=p>)</span> <span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>dest</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>r</span><span class=p>.</span><span class=nx>base</span><span class=p>)</span><span class=o>+</span><span class=nb>len</span><span class=p>(</span><span class=nx>n</span><span class=p>.</span><span class=nx>Target</span><span class=p>)</span><span class=o>+</span><span class=nb>len</span><span class=p>(</span><span class=nx>pretty_html</span><span class=p>)</span><span class=o>+</span><span class=nb>len</span><span class=p>(</span><span class=nx>_hash</span><span class=p>)</span><span class=o>+</span><span class=nb>len</span><span class=p>(</span><span class=nx>n</span><span class=p>.</span><span class=nx>Fragment</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>i</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>n</span><span class=p>.</span><span class=nx>Target</span><span class=p>)</span> <span class=p>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>i</span> <span class=o>+=</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>dest</span><span class=p>,</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>r</span><span class=p>.</span><span class=nx>base</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>		<span class=nx>i</span> <span class=o>+=</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>dest</span><span class=p>[</span><span class=nx>i</span><span class=p>:],</span> <span class=nx>n</span><span class=p>.</span><span class=nx>Target</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>filepath</span><span class=p>.</span><span class=nf>Ext</span><span class=p>(</span><span class=nb>string</span><span class=p>(</span><span class=nx>n</span><span class=p>.</span><span class=nx>Target</span><span class=p>))</span> <span class=o>==</span> <span class=s>&#34;&#34;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>i</span> <span class=o>+=</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>dest</span><span class=p>[</span><span class=nx>i</span><span class=p>:],</span> <span class=nx>pretty_html</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>n</span><span class=p>.</span><span class=nx>Fragment</span><span class=p>)</span> <span class=p>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>i</span> <span class=o>+=</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>dest</span><span class=p>[</span><span class=nx>i</span><span class=p>:],</span> <span class=nx>_hash</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>i</span> <span class=o>+=</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>dest</span><span class=p>[</span><span class=nx>i</span><span class=p>:],</span> <span class=nx>n</span><span class=p>.</span><span class=nx>Fragment</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>dest</span><span class=p>[:</span><span class=nx>i</span><span class=p>],</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=改动-hugo class=headerLink><a href=#%e6%94%b9%e5%8a%a8-hugo class=header-mark></a>改动 hugo</h3><p>同样 fork 一份 <a href=/posts/%E7%AC%94%E8%AE%B0/point/hugo/>hugo</a> 代码到 <a href=https://github.com/kentxxq/hugo target=_blank rel="noopener noreferrer">我的仓库</a>.</p><p>安装依赖 <code>go get github.com/kentxxq/goldmark-wikilink</code>.</p><p>改动 <a href=https://github.com/kentxxq/hugo/blob/master/markup/goldmark/goldmark_config/config.go target=_blank rel="noopener noreferrer">markup/goldmark/goldmark_config/config.go</a>,加入配置参数</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Extensions</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Typographer</span>    <span class=nx>Typographer</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Footnote</span>       <span class=kt>bool</span>
+</span></span><span class=line><span class=cl>	<span class=nx>DefinitionList</span> <span class=kt>bool</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// GitHub flavored markdown
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>Table</span>            <span class=kt>bool</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Strikethrough</span>    <span class=kt>bool</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Linkify</span>          <span class=kt>bool</span>
+</span></span><span class=line><span class=cl>	<span class=nx>LinkifyProtocol</span>  <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=nx>TaskList</span>         <span class=kt>bool</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 下面是我们新加的参数
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// 采用那种方法解析链接?
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>WikilinkReslover</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// ROOT模式下,传入路径前缀
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=err> </span> <span class=err> </span> <span class=nx>WikilinkRootPath</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 是否启用wikilink
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>EnableWikilink</span>   <span class=kt>bool</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>改动 <a href=https://github.com/kentxxq/hugo/blob/master/markup/goldmark/convert.go target=_blank rel="noopener noreferrer">markup/goldmark/convert.go</a>,让我们的配置和 wikilink 解析器生效.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;bytes&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/gohugoio/hugo/identity&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/gohugoio/hugo/markup/goldmark/codeblocks&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/gohugoio/hugo/markup/goldmark/goldmark_config&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/gohugoio/hugo/markup/goldmark/images&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/gohugoio/hugo/markup/goldmark/internal/extensions/attributes&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/gohugoio/hugo/markup/goldmark/internal/render&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/gohugoio/hugo/markup/converter&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/gohugoio/hugo/markup/tableofcontents&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=nx>wikilink</span> <span class=s>&#34;github.com/kentxxq/goldmark-wikilink&#34;</span> <span class=c1>//引入解析
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=s>&#34;github.com/yuin/goldmark&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/yuin/goldmark/ast&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/yuin/goldmark/extension&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/yuin/goldmark/parser&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/yuin/goldmark/renderer&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/yuin/goldmark/renderer/html&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/yuin/goldmark/text&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>extensions</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>extensions</span><span class=p>,</span> <span class=nx>images</span><span class=p>.</span><span class=nf>New</span><span class=p>(</span><span class=nx>cfg</span><span class=p>.</span><span class=nx>Parser</span><span class=p>.</span><span class=nx>WrapStandAloneImageWithinParagraph</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 加入
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>if</span> <span class=nx>mcfg</span><span class=p>.</span><span class=nx>Goldmark</span><span class=p>.</span><span class=nx>Extensions</span><span class=p>.</span><span class=nx>EnableWikilink</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>switch</span> <span class=nx>mcfg</span><span class=p>.</span><span class=nx>Goldmark</span><span class=p>.</span><span class=nx>Extensions</span><span class=p>.</span><span class=nx>WikilinkReslover</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=s>&#34;DefaultResolver&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>			<span class=nx>extensions</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>extensions</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>wikilink</span><span class=p>.</span><span class=nx>Extender</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>Resolver</span><span class=p>:</span> <span class=nx>wikilink</span><span class=p>.</span><span class=nx>DefaultResolver</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=p>})</span>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=s>&#34;PrettyResolver&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>			<span class=nx>extensions</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>extensions</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>wikilink</span><span class=p>.</span><span class=nx>Extender</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>Resolver</span><span class=p>:</span> <span class=nx>wikilink</span><span class=p>.</span><span class=nx>PrettyResolver</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=p>})</span>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=s>&#34;RelResolver&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>			<span class=nx>extensions</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>extensions</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>wikilink</span><span class=p>.</span><span class=nx>Extender</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>Resolver</span><span class=p>:</span> <span class=nx>wikilink</span><span class=p>.</span><span class=nx>RelResolver</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=p>})</span>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=s>&#34;RootResolver&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>			<span class=nx>extensions</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>extensions</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>wikilink</span><span class=p>.</span><span class=nx>Extender</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>Resolver</span><span class=p>:</span> <span class=nx>wikilink</span><span class=p>.</span><span class=nf>RootResolver</span><span class=p>(</span><span class=nx>mcfg</span><span class=p>.</span><span class=nx>Goldmark</span><span class=p>.</span><span class=nx>Extensions</span><span class=p>.</span><span class=nx>WikilinkRootPath</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>			<span class=p>})</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=配置-dart-sass class=headerLink><a href=#%e9%85%8d%e7%bd%ae-dart-sass class=header-mark></a>配置 dart-sass</h3><p>下载 <a href=https://github.com/sass/dart-sass/releases target=_blank rel="noopener noreferrer">Releases · sass/dart-sass</a> 的对应系统版本, 我用的 <code>dart-sass-1.63.6-windows-x64.zip</code>.解压后配置到环境变量里. <img src=/posts/%E9%99%84%E4%BB%B6/dart-sass%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png></p><p>打开终端验证效果</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=n>sass</span> <span class=p>-</span><span class=n>-version</span>
+</span></span><span class=line><span class=cl><span class=mf>1.63</span><span class=p>.</span><span class=py>6</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=开始构建代码 class=headerLink><a href=#%e5%bc%80%e5%a7%8b%e6%9e%84%e5%bb%ba%e4%bb%a3%e7%a0%81 class=header-mark></a>开始构建代码</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=nv>$GOOS</span><span class=p>=</span><span class=n>windows</span>
+</span></span><span class=line><span class=cl><span class=nv>$GOARCH</span><span class=p>=</span><span class=n>amd64</span>
+</span></span><span class=line><span class=cl><span class=nv>$CGO_ENABLED</span><span class=p>=</span><span class=mf>1</span>
+</span></span><span class=line><span class=cl><span class=nv>$CC</span><span class=p>=</span><span class=s2>&#34;gcc&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>$CXX</span><span class=p>=</span><span class=s2>&#34;g++&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 构建命令</span>
+</span></span><span class=line><span class=cl><span class=c># -v 详细信息</span>
+</span></span><span class=line><span class=cl><span class=c># -x 打印出执行的命令，以及相关的详细信息</span>
+</span></span><span class=line><span class=cl><span class=c># extended是加入sass,release则是hugo自定义</span>
+</span></span><span class=line><span class=cl><span class=c># `-s` 表示禁用符号表，`-w` 表示禁用 DWARF 调试信息，`-extldflags &#39;-static&#39;` 表示使用静态链接方式进行链接。</span>
+</span></span><span class=line><span class=cl><span class=n>go</span> <span class=n>build</span>  <span class=n>-v</span> <span class=n>-x</span> <span class=n>-tags</span> <span class=n>extended</span><span class=p>,</span><span class=n>release</span> <span class=n>-ldflags</span> <span class=s2>&#34;-s -w -extldflags &#39;-static&#39;&#34;</span>
+</span></span><span class=line><span class=cl><span class=c># 文件夹多出一个hugo.exe</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=hugo-预览 class=headerLink><a href=#hugo-%e9%a2%84%e8%a7%88 class=header-mark></a>hugo 预览</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 克隆我的示例代码</span>
+</span></span><span class=line><span class=cl><span class=n>git</span> <span class=n>clone</span> <span class=n>https</span><span class=err>:</span><span class=p>//</span><span class=n>github</span><span class=p>.</span><span class=n>com</span><span class=p>/</span><span class=n>kentxxq</span><span class=p>/</span><span class=nb>doit-demo</span><span class=p>.</span><span class=py>git</span>
+</span></span><span class=line><span class=cl><span class=c># 注意hugo.toml文件加入了如下配置</span>
+</span></span><span class=line><span class=cl><span class=n>EnableWikilink</span> <span class=p>=</span> <span class=n>true</span>
+</span></span><span class=line><span class=cl><span class=n>WikilinkRootPath</span> <span class=p>=</span> <span class=s2>&#34;/posts/&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>WikilinkReslover</span> <span class=p>=</span> <span class=s2>&#34;RootResolver&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 启动3333端口</span>
+</span></span><span class=line><span class=cl><span class=nb>cd doit-demo</span>
+</span></span><span class=line><span class=cl><span class=n>hugo</span> <span class=n>server</span> <span class=p>-</span><span class=n>-disableFastRender</span> <span class=n>-p</span> <span class=mf>3333</span>
+</span></span></code></pre></td></tr></table></div></div><p>访问 <a href=http://localhost:3333 target=_blank rel="noopener noreferrer">http://localhost:3333</a> 看看效果吧.</p><h2 id=相关资料 class=headerLink><a href=#%e7%9b%b8%e5%85%b3%e8%b5%84%e6%96%99 class=header-mark></a>相关资料</h2><ul><li>除非 <a href=/posts/%E7%AC%94%E8%AE%B0/point/CommonMark/>CommonMark</a> 添加对 wikilink 的支持, <a href=/posts/%E7%AC%94%E8%AE%B0/point/hugo/>hugo</a> 可能永远都不会有 wikilink 了. <a href=https://github.com/gohugoio/hugo/issues/3606#issuecomment-1555955974 target=_blank rel="noopener noreferrer">Support wiki-style internal page links · Issue #3606 · gohugoio/hugo · GitHub</a></li><li>除了让 <a href=/posts/%E7%AC%94%E8%AE%B0/point/hugo/>hugo</a> 在渲染阶段支持 wikilink, 还可以再主题内进行 url 的处理,例如 <a href=/posts/%E7%AC%94%E8%AE%B0/obsidian%E5%8F%91%E5%B8%83hugo-quartz/>obsidian发布hugo-quartz</a>.但是这样的主题很少&mldr;</li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-07-10</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%AE%A9hugo%E6%94%AF%E6%8C%81wikilink/ data-title=让hugo支持wikilink data-hashtags=blog,hugo,wikilink><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%AE%A9hugo%E6%94%AF%E6%8C%81wikilink/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%AE%A9hugo%E6%94%AF%E6%8C%81wikilink/ data-title=让hugo支持wikilink data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%AE%A9hugo%E6%94%AF%E6%8C%81wikilink/ data-title=让hugo支持wikilink><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%AE%A9hugo%E6%94%AF%E6%8C%81wikilink/ data-title=让hugo支持wikilink><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%AE%A9hugo%E6%94%AF%E6%8C%81wikilink/ data-title=让hugo支持wikilink data-description="在我决定使用 [[笔记/point/obsidian|obsidian]] 来记录笔记后, 就发现有 `wikilink` 这个东西, 它不是 [CommonMark](https://commonmark.org/) 的一部分, 所以会导致很多的工具链的不兼容. 例如 [[笔记/point/vscode|vscode]] 默认无法读取.而我选择用 [hugo](point/hugo.md) 进行站点的构建发布. 所以这篇博客就如题目所说的, 我要打通 [[笔记/point/hugo|hugo]] 和 [[笔记/point/obsidian|obsidian]] ,所以就有了这一篇文章.我搭建了一个 demo 站点, 你可以看看 [效果](https://doit-demo.kentxxq.com/)."><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%AE%A9hugo%E6%94%AF%E6%8C%81wikilink/ data-title=让hugo支持wikilink data-description="在我决定使用 [[笔记/point/obsidian|obsidian]] 来记录笔记后, 就发现有 `wikilink` 这个东西, 它不是 [CommonMark](https://commonmark.org/) 的一部分, 所以会导致很多的工具链的不兼容. 例如 [[笔记/point/vscode|vscode]] 默认无法读取.而我选择用 [hugo](point/hugo.md) 进行站点的构建发布. 所以这篇博客就如题目所说的, 我要打通 [[笔记/point/hugo|hugo]] 和 [[笔记/point/obsidian|obsidian]] ,所以就有了这一篇文章.我搭建了一个 demo 站点, 你可以看看 [效果](https://doit-demo.kentxxq.com/)."><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%AE%A9hugo%E6%94%AF%E6%8C%81wikilink/ data-title=让hugo支持wikilink><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a>,&nbsp;<a href=/tags/hugo/>hugo</a>,&nbsp;<a href=/tags/wikilink/>wikilink</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E6%97%A5%E8%AE%B0/2023-06-25/ class=prev rel=prev title=2023-06-25><i class="fas fa-angle-left fa-fw"></i>2023-06-25</a>
+<a href=/posts/%E7%AC%94%E8%AE%B0/%E5%AE%89%E8%A3%85mingw-w64/ class=next rel=next title=安装MinGW-w64>安装MinGW-w64<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a target=_blank href=https://beian.miit.gov.cn>湘ICP备2021002319号-1</a></span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div></body></html>

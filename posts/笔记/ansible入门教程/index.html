@@ -1,0 +1,716 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>ansible入门教程 - 运维个人技术栈</title><meta name=Description content="[[笔记/point/ansible|ansible]] 的使用记录, 用到的时候能快速重新捡起来.."><meta property="og:title" content="ansible入门教程"><meta property="og:description" content="[[笔记/point/ansible|ansible]] 的使用记录, 用到的时候能快速重新捡起来.."><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ansible%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-07-01T00:00:00+00:00"><meta property="article:modified_time" content="2023-07-02T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="ansible入门教程"><meta name=twitter:description content="[[笔记/point/ansible|ansible]] 的使用记录, 用到的时候能快速重新捡起来.."><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ansible%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/><link rel=prev href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/dns%E5%88%97%E8%A1%A8/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/ansible/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"ansible入门教程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/ansible%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B\/"},"genre":"posts","keywords":"blog","wordcount":2334,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/ansible%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B\/","datePublished":"2023-07-01T00:00:00+00:00","dateModified":"2023-07-02T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"[[笔记/point/ansible|ansible]] 的使用记录, 用到的时候能快速重新捡起来.."}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#安装配置>安装配置</a></li><li><a href=#日常操作>日常操作</a></li><li><a href=#role-方案>Role 方案</a><ul><li><a href=#目录结构>目录结构</a></li><li><a href=#调用方法>调用方法</a></li><li><a href=#文件内容>文件内容</a></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ansible入门教程</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/blog/><i class="far fa-folder fa-fw"></i>blog</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-07-01>2023-07-01</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-07-02>2023-07-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2334 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#安装配置>安装配置</a></li><li><a href=#日常操作>日常操作</a></li><li><a href=#role-方案>Role 方案</a><ul><li><a href=#目录结构>目录结构</a></li><li><a href=#调用方法>调用方法</a></li><li><a href=#文件内容>文件内容</a></li></ul></li></ul></nav></div></div><div class=content id=content><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p><a href=/posts/%E7%AC%94%E8%AE%B0/point/ansible/>ansible</a> 的使用记录, 用到的时候能快速重新捡起来..</p><h2 id=安装配置 class=headerLink><a href=#%e5%ae%89%e8%a3%85%e9%85%8d%e7%bd%ae class=header-mark></a>安装配置</h2><ol><li><p>安装 <code>apt install ansible sshpass -y</code></p></li><li><p>配置主机</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>vim /etc/ansible/hosts
+</span></span><span class=line><span class=cl><span class=c1># test组有一台机器,并配置了ssh连接信息</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>test<span class=o>]</span>
+</span></span><span class=line><span class=cl>sh-ecs01 <span class=nv>ansible_ssh_host</span><span class=o>=</span>test.kentxxq.com <span class=nv>ansible_ssh_user</span><span class=o>=</span><span class=s2>&#34;root&#34;</span> <span class=nv>ansible_ssh_pass</span><span class=o>=</span><span class=s2>&#34;123456&#34;</span> <span class=nv>ansible_ssh_port</span><span class=o>=</span><span class=m>22</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>vim /etc/ansible/ansible.cfg
+</span></span><span class=line><span class=cl><span class=o>[</span>defaults<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>host_key_checking</span> <span class=o>=</span> False    <span class=c1>#不检测host key</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><h2 id=日常操作 class=headerLink><a href=#%e6%97%a5%e5%b8%b8%e6%93%8d%e4%bd%9c class=header-mark></a>日常操作</h2><p>简单执行命令</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>ansible <span class=nb>test</span> -m shell -a <span class=s2>&#34;ls&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>使用 <code>ansible-playbook playbook.yml</code> 执行脚本, 下面是脚本文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Install remote facts</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>hosts</span><span class=p>:</span><span class=w> </span><span class=l>test</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>vars</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>test_dir</span><span class=p>:</span><span class=w> </span><span class=l>/tmp/test_dir</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>test_file</span><span class=p>:</span><span class=w> </span><span class=l>/tmp/test.txt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 禁用收集信息，可以加快脚本执行</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># gather_facts: false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>tasks</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>先ping一下</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>ping</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>echo输出</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=l>echo 1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>准备工作-创建测试目录 &#34;{{ test_dir }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>file</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ test_dir }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>state</span><span class=p>:</span><span class=w> </span><span class=l>directory</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>owner</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;root&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>group</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;root&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>mode</span><span class=p>:</span><span class=w> </span><span class=m>0755</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c># 输出ansible默认采集到的信息</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c>#- name: debug输出ansible默认收集的变量</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c>#  debug:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c>#    var: ansible_facts</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>计算剩余内存百分比</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>debug</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>msg</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ ansible_facts.memory_mb.nocache.free / ansible_facts.memtotal_mb * 100 }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>register</span><span class=p>:</span><span class=w> </span><span class=l>memory_usage_percent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>拿到register变量</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>debug</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>msg</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ memory_usage_percent.msg }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>再register一个远程输出</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>shell</span><span class=p>:</span><span class=w> </span><span class=l>hostname</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>register</span><span class=p>:</span><span class=w> </span><span class=l>hostname_info</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>拿到hostname_info变量</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>debug</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>msg</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ hostname_info.stdout }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>创建本地文件</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>copy</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>content</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;123&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>dest</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ test_file }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>delegate_to</span><span class=p>:</span><span class=w> </span><span class=l>localhost</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>传送文件</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>copy</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>src</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ test_file }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>dest</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ test_file }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>本地执行命令</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>local_action</span><span class=p>:</span><span class=w> </span><span class=l>command tar -zcvf /tmp/tmp.tgz /tmp/test.txt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c># 压缩和解压</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;拷贝代码去到对应目录&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>unarchive</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>src</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;/tmp/tmp.tgz&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>dest</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ test_dir }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>owner</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;root&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>group</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;root&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>extra_opts</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- --<span class=l>strip-components= 1</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=role-方案 class=headerLink><a href=#role-%e6%96%b9%e6%a1%88 class=header-mark></a>Role 方案</h2><h3 id=目录结构 class=headerLink><a href=#%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84 class=header-mark></a>目录结构</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>root@poc:~/ansible-role# tree
+</span></span><span class=line><span class=cl>.
+</span></span><span class=line><span class=cl>├── <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>├── deploy_java_role.yml <span class=c1># 入口文件</span>
+</span></span><span class=line><span class=cl>├── inventory
+</span></span><span class=line><span class=cl>│   └── test-hosts <span class=c1># 主机文件</span>
+</span></span><span class=line><span class=cl>└── roles
+</span></span><span class=line><span class=cl>    └── deploy_java_role
+</span></span><span class=line><span class=cl>        ├── tasks
+</span></span><span class=line><span class=cl>        │   ├── depoly-task.yml <span class=c1># 部署任务</span>
+</span></span><span class=line><span class=cl>        │   ├── init-app-task.yml <span class=c1># 初始化app环境</span>
+</span></span><span class=line><span class=cl>        │   ├── init-system-task.yml <span class=c1># 初始化系统环境</span>
+</span></span><span class=line><span class=cl>        │   ├── main.yml <span class=c1># 主入口</span>
+</span></span><span class=line><span class=cl>        │   └── vars-task.yml <span class=c1># 获取环境变量</span>
+</span></span><span class=line><span class=cl>        ├── templates
+</span></span><span class=line><span class=cl>        │   └── supervisor_conf_template.j2 <span class=c1># 模板文件</span>
+</span></span><span class=line><span class=cl>        └── vars
+</span></span><span class=line><span class=cl>            └── main.yml <span class=c1># 静态环境变量</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=调用方法 class=headerLink><a href=#%e8%b0%83%e7%94%a8%e6%96%b9%e6%b3%95 class=header-mark></a>调用方法</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 部署到了 deploy-task 阶段会报错,因为并没有 java 包,也没有 jenkins. 但是思路是一致的. 从本地 copy 构建物到目标机器.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 指定role文件,-i指定hosts文件,然后外部传入参数</span>
+</span></span><span class=line><span class=cl>ansible-playbook deploy_java_role.yml <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>-i inventory/test-hosts <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--extra-vars <span class=s2>&#34;ip_list=demo_test1&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--extra-vars <span class=s2>&#34;java_params=&#39;-Xms256m -Xmx256m&#39;&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--extra-vars <span class=s2>&#34;module_name=name&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--extra-vars <span class=s2>&#34;init=1&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=文件内容 class=headerLink><a href=#%e6%96%87%e4%bb%b6%e5%86%85%e5%ae%b9 class=header-mark></a>文件内容</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=c># role入口文件</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># deploy_java_role.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>hosts</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ ip_list }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>remote_user</span><span class=p>:</span><span class=w> </span><span class=l>root</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>roles</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>role</span><span class=p>:</span><span class=w> </span><span class=l>deploy_java_role</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>serial</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>max_fail_percentage</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 主机文件</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># inventory/test-hosts</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>[</span><span class=l>demo_test1]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>sh-ecs01 ansible_ssh_host=1.1.1.1 ansible_ssh_user=&#34;root&#34; ansible_ssh_pass=&#34;123456&#34; ansible_ssh_port=22</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 主入口</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># roles/deploy_java_role/tasks/main.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>构建环境变量</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>import_tasks</span><span class=p>:</span><span class=w> </span><span class=l>vars-task.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>初始化环境</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>import_tasks</span><span class=p>:</span><span class=w> </span><span class=l>init-system-task.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>when</span><span class=p>:</span><span class=w> </span><span class=l>init == &#34;1&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>应用所需环境</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>import_tasks</span><span class=p>:</span><span class=w> </span><span class=l>init-app-task.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>when</span><span class=p>:</span><span class=w> </span><span class=l>init == &#34;1&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>部署脚本</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>import_tasks</span><span class=p>:</span><span class=w> </span><span class=l>depoly-task.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 获取环境变量</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># roles/deploy_java_role/tasks/vars-task.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>获取workspace变量</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>debug</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>msg</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ lookup(&#39;env&#39;, &#39;WORKSPACE&#39;)}}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>register</span><span class=p>:</span><span class=w> </span><span class=l>JenkinsWorkspace</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c>#failed_when: JenkinsWorkspace.msg == &#39;&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 初始化系统环境</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># roles/deploy_java_role/tasks/init-system-task.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>安装Supervisor启动管理程序</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>package</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>supervisor</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>state</span><span class=p>:</span><span class=w> </span><span class=l>present</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>开机自启supervisor</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>service</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>supervisor</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>yes</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>创建程序运行目录 &#34;{{ program_dir }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>file</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{program_dir}}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>state</span><span class=p>:</span><span class=w> </span><span class=l>directory</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>owner</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ appuser }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>group</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ appuser }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>mode</span><span class=p>:</span><span class=w> </span><span class=m>0755</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>创建程序备份目录 &#34;{{ program_dir_backup }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>file</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ program_dir_backup }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>state</span><span class=p>:</span><span class=w> </span><span class=l>directory</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>owner</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ appuser }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>group</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ appuser }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>mode</span><span class=p>:</span><span class=w> </span><span class=m>0755</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>创建程序运行日志目录 &#34;{{ program_dir_logs }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>file</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ program_dir_logs }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>state</span><span class=p>:</span><span class=w> </span><span class=l>directory</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>owner</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ appuser }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>group</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ appuser }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>mode</span><span class=p>:</span><span class=w> </span><span class=m>0755</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>创建程序运行临时目录 &#34;{{ program_dir_tmp }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>file</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ program_dir_tmp }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>state</span><span class=p>:</span><span class=w> </span><span class=l>directory</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>owner</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ appuser }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>group</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ appuser }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>mode</span><span class=p>:</span><span class=w> </span><span class=m>0755</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>启动supervisor</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>service</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>supervisor</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>state</span><span class=p>:</span><span class=w> </span><span class=l>started</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 初始化app环境</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># roles/deploy_java_role/tasks/init-app-task.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>判断启动文件 &#34;{{ module_name }}&#34;.ini是否存在</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>stat</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>/etc/supervisor/conf.d/{{ module_name }}.conf</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>register</span><span class=p>:</span><span class=w> </span><span class=l>init_file</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>如果启动文件不存在就拷贝一份启动模板文件 &#34;{{ module_name }}&#34;.ini 到目标主机</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>src</span><span class=p>:</span><span class=w> </span><span class=l>supervisor_conf_template.j2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>dest</span><span class=p>:</span><span class=w> </span><span class=l>/etc/supervisor/conf.d/{{ module_name }}.conf</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>when</span><span class=p>:</span><span class=w> </span><span class=l>init_file.stat.exists == false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>更新supervisor</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>shell</span><span class=p>:</span><span class=w> </span><span class=l>supervisorctl update</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>when</span><span class=p>:</span><span class=w> </span><span class=l>init_file.stat.exists == false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 部署任务</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># roles/deploy_java_role/tasks/depoly-task.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;获取当前时间&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>shell</span><span class=p>:</span><span class=w> </span><span class=l>date +%F_%H%M%S</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>register</span><span class=p>:</span><span class=w> </span><span class=l>date_result</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;获取{{ module_name }}构建物的名称&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>find</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>paths</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=s2>&#34;{{ JenkinsWorkspace.msg }}/deploy/target&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>file_type</span><span class=p>:</span><span class=w> </span><span class=l>file</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>use_regex</span><span class=p>:</span><span class=w> </span><span class=kc>yes</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>patterns</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;.*{{ module_name }}((?!sources).)*.jar$&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>recurse</span><span class=p>:</span><span class=w> </span><span class=kc>no</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>register</span><span class=p>:</span><span class=w> </span><span class=l>artcraft</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>delegate_to</span><span class=p>:</span><span class=w> </span><span class=l>localhost</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;判断构建物是否存在，不存在则退出&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>fail</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>msg</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ module_name }}.jar is not find&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>when</span><span class=p>:</span><span class=w> </span><span class=l>artcraft.matched == 0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;复制Jenkins构建物{{ module_name }}到对应服务器的指定目录&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>copy</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>src</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ item.path }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>dest</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ program_dir_tmp }}/{{ module_name }}.jar&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>owner</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ appuser }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>group</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ appuser }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>mode</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;0644&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>force</span><span class=p>:</span><span class=w> </span><span class=kc>yes</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c>#backup: yes</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>with_items</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ artcraft.files }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>注册.部署前.程序运行状况并注册状态</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>shell</span><span class=p>:</span><span class=w> </span><span class=l>ps -ef | grep {{ module_name }} | grep {{ appuser }} | awk &#39;{print $2}&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>ignore_errors</span><span class=p>:</span><span class=w> </span><span class=kc>True</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>register</span><span class=p>:</span><span class=w> </span><span class=l>artcraft_status</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>回显并注册当前进程PID信息</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>debug</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>var</span><span class=p>:</span><span class=w> </span><span class=l>artcraft_status.stdout_lines[0]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>verbosity</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>when</span><span class=p>:</span><span class=w> </span><span class=l>artcraft_status.stdout_lines[1]  is defined</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>提示当前进程没有运行</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>debug</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>msg</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;当前用户服务进程没有运行...部署继续...&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>when</span><span class=p>:</span><span class=w> </span><span class=l>artcraft_status.stdout_lines[1] is undefined</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>停止{{ module_name }}对应的服务</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=l>supervisorctl stop {{ module_name }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>when</span><span class=p>:</span><span class=w> </span><span class=l>artcraft_status.stdout_lines[1]  is defined</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>register</span><span class=p>:</span><span class=w> </span><span class=l>artcraft_stop_status</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>回显当前程序状态是否停止成功</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>debug</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>var</span><span class=p>:</span><span class=w> </span><span class=l>artcraft_stop_status</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>verbosity</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>when</span><span class=p>:</span><span class=w> </span><span class=l>artcraft_status.stdout_lines[1]  is defined</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>注册.部署前.最新软件包的地址</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>shell</span><span class=p>:</span><span class=w> </span><span class=l>ls -lt {{ program_dir_tmp }} | grep {{ module_name }} | head -n 1 |awk &#39;{print $9}&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>ignore_errors</span><span class=p>:</span><span class=w> </span><span class=kc>True</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>register</span><span class=p>:</span><span class=w> </span><span class=l>artcraft_file</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>回显当前程序artcraft_file信息</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>debug</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>var</span><span class=p>:</span><span class=w> </span><span class=l>artcraft_file</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>verbosity</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>备份并复制{{ module_name }}的构建物到指定目录</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>copy</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>src</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ program_dir_tmp }}/{{ artcraft_file.stdout }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>dest</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ program_dir }}/{{ appuser }}/{{ module_name }}.jar&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>owner</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ appuser }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>group</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ appuser }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>mode</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;0644&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>backup</span><span class=p>:</span><span class=w> </span><span class=kc>yes</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>remote_src</span><span class=p>:</span><span class=w> </span><span class=kc>yes</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>启动{{ module_name }}服务</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=l>supervisorctl start {{ module_name }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>register</span><span class=p>:</span><span class=w> </span><span class=l>artcraft_start_status</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>等待{{ module_name }}服务正常收敛...</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>wait_for</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ port }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>delay</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>timeout</span><span class=p>:</span><span class=w> </span><span class=m>60</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>when</span><span class=p>:</span><span class=w> </span><span class=l>port != &#34;0&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>回显当前服务{{ module_name }}状态信息</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>debug</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>var</span><span class=p>:</span><span class=w> </span><span class=l>artcraft_start_status</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>verbosity</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#- name: 更新服务的IP信息</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#  uri:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#    url: &#34;{{ register_url }}/appinfo/v2/add&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#    method: POST</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#    body_format: json</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#    body: { &#34;name&#34;:&#34;{{ module_name }}&#34;,&#34;updatetime&#34;:&#34;{{ date_result.stdout_lines[0] }}&#34;,&#34;ip&#34;:&#34;{{  play_hosts | join(&#39;,&#39;) }}&#34;,&#34;env&#34;:&#34;{{ deploy_env }}&#34;,&#34;project&#34;:&#34;{{ module_name }}&#34;,&#34;note&#34;:&#34;&#34; }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#  register: _register_service</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#- name: 返回结果成功</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#  debug: &#34;msg={{ _register_service }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 静态环境变量</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># roles/deploy_java_role/vars/main.yml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>company</span><span class=p>:</span><span class=w> </span><span class=l>kentxxq</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>appuser</span><span class=p>:</span><span class=w> </span><span class=l>root</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>program_dir</span><span class=p>:</span><span class=w> </span><span class=l>/usr/local/program</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>program_dir_tmp</span><span class=p>:</span><span class=w> </span><span class=l>/usr/local/program/tmp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>program_dir_backup</span><span class=p>:</span><span class=w> </span><span class=l>/usr/local/program/backup</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>program_dir_logs</span><span class=p>:</span><span class=w> </span><span class=l>/usr/local/program/logs</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 模板文件</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># roles/deploy_java_role/templates/supervisor_conf_template.j2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>[</span><span class=l>program:{{ module_name }}]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 运行程序 相对PATemplateTH 可以使用参数</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>command = java -Dfile.encoding=UTF-8 {{ java_params }} -jar {{ program_dir }}/{{ module_name }}.jar</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 启动进程数目默认为1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>numprocs = 1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 如果supervisord是root启动的 设置此用户可以管理该program</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>user = root</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 程序运行的优先级 默认999</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>priority = 997</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 随着supervisord 自启动</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>autostart = true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 子进程挂掉后w无条件自动重启</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>autorestart = true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 子进程启动多少秒之后 状态为running 表示运行成功</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>startsecs = 20</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 进程启动失败 最大尝试次数 超过将把状态置为FAIL</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>startretries = 3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 标准输出的文件路径</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>stdout_logfile =  {{ program_dir_logs }}/{{ module_name }}-supervisor.log</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 日志文件最大大小</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>stdout_logfile_maxbytes=20MB</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># 日志文件保持数量 默认为10 设置为0 表示不限制</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>stdout_logfile_backups = 30</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-07-02</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ansible%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ data-title=ansible入门教程 data-hashtags=blog><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ansible%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ansible%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ data-title=ansible入门教程 data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ansible%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ data-title=ansible入门教程><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ansible%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ data-title=ansible入门教程><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ansible%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ data-title=ansible入门教程 data-description="[[笔记/point/ansible|ansible]] 的使用记录, 用到的时候能快速重新捡起来.."><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ansible%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ data-title=ansible入门教程 data-description="[[笔记/point/ansible|ansible]] 的使用记录, 用到的时候能快速重新捡起来.."><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ansible%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ data-title=ansible入门教程><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/dns%E5%88%97%E8%A1%A8/ class=prev rel=prev title=dns列表><i class="fas fa-angle-left fa-fw"></i>dns列表</a>
+<a href=/posts/%E7%AC%94%E8%AE%B0/point/ansible/ class=next rel=next title=ansible>ansible<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a target=_blank href=https://beian.miit.gov.cn>湘ICP备2021002319号-1</a></span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div></body></html>
