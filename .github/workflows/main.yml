@@ -24,9 +24,14 @@ jobs:
           wget https://github.com/kentxxq/hugo/releases/download/latest/hugo-linux-amd64 -o hugo
           chmod +x hugo
           cp hugo /usr/local/bin/hugo
+          pwd
 
       - name: Build Static File
-        run: hugo --minify
+        run: |
+          pwd
+          ls
+          hugo version
+          hugo --minify
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
