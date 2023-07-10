@@ -4,7 +4,7 @@ languageCode = "zh-CN"
 hasCJKLanguage = true
 title = "运维个人技术栈"
 theme = "DoIt"
-enableGitInfo = true
+# enableGitInfo = true
 
 [menu]
   [[menu.main]]
@@ -505,8 +505,8 @@ enableGitInfo = true
   series = "series"
 
 # 地址导航配置
-[permalinks]
-  posts = "/contents/:filename/" 
+# [permalinks]
+#   posts = "/contents/:filename/" 
 
 # Hugo 解析文档的配置
 [markup]
@@ -529,6 +529,9 @@ enableGitInfo = true
       table = true
       taskList = true
       typographer = true
+      EnableWikilink = true
+      WikilinkReslover = "RootResolver"
+      WikilinkRootPath = "/posts/"
     [markup.goldmark.renderer]
       # 是否在文档中直接使用 HTML 标签
       unsafe = true

@@ -1,0 +1,525 @@
+---
+title: linux命令与配置
+tags:
+  - blog
+  - linux
+date: 2023-06-29
+lastmod: 2023-07-08
+categories:
+  - blog
+description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
+---
+
+## 简介
+
+这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法.
+
+## 常用配置
+
+### 免密 sudo
+
+```shell
+vim /etc/sudoers
+# 找到下面这部分内容
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
+kentxxq ALL=(ALL)    NOPASSWD: ALL  # 加入此行
+```
+
+### alias
+
+```shell
+alias vpn='export http_proxy=http://1.1.1.1:7890; export https_proxy=http://1.1.1.1:7890;'
+alias novpn='unset http_proxy; unset https_proxy;'
+```
+
+### 免密 ssh
+
+```shell
+# 生成公钥和秘钥
+ssh-keygen -t rsa
+# 拷贝公钥到远程机器,需要输入密码
+ssh-copy-id root@1.1.1.1
+# 测试效果
+ssh root@1.1.1.1
+
+# 如果目标ip重装过,需要清理本地的拷贝记录
+ssh-keygen -R 1.1.1.1
+```
+
+### 允许 root 远程登录
+
+```shell
+vim /etc/ssh/sshd_config
+# 把参数值改成yes
+PermitRootLogin yes
+
+# 设置密码
+passwd root
+# 重启ssh服务
+systemctl restart ssh
+```
+
+### 安装字体
+
+一般来说合同都要使用宋体, [[附件/simsun.ttc|simsun]]
+
+```shell
+# 创建字体文件夹，放入字体文件
+mkdir -p /usr/share/fonts/simsun
+cd /usr/share/fonts/simsun
+rz sumsun.ttc
+
+# 安装字体工具
+apt install xfonts-utils fontconfig -y
+# 字体操作
+mkfontscale
+mkfontdir
+# 刷新缓存
+fc-cache –fv
+# 字体查询
+fc-list :lang=zh
+```
+
+### 配置 limit
+
+```shell
+vim /etc/security/limits.conf
+# hard硬限制 不会超过
+# soft软限制 告警
+
+# nofile 每个进程可以打开的文件数
+root soft nofile 65535
+root hard nofile 65535
+* soft nofile 65535
+* hard nofile 65535
+
+# nproc 操作系统级别对每个用户创建的进程数
+root soft nofile 65535
+root hard nofile 65535
+* soft nofile 65535
+* hard nofile 65535
+```
+
+### 温度传感器
+
+```shell
+apt install lm-sensors
+# 观察模式
+watch sensors
+
+# 如果不是ubuntu系统
+cat /sys/class/thermal/thermal_zone0/temp
+# 摄氏度
+echo $[$(cat /sys/class/thermal/thermal_zone0/temp)/1000]°
+```
+
+### 安装 snap-store
+
+```shell
+sudo snap install snap-store
+```
+
+### wifi 工具
+
+```shell
+sudo apt install wireless-tools
+# 查看wifi设备信息
+iwconfig
+```
+
+### 关闭防火墙
+
+```shell
+ufw disable
+```
+
+### 安装桌面
+
+```shell
+# 安装一个小工具
+sudo apt install tasksel
+# 看可以装哪些版本
+tasksel --list-tasks
+# 安装桌面套件
+sudo tasksel install ubuntu-desktop
+# 重启生效
+reboot
+```
+
+### 关闭 selinux
+
+```shell
+# 当前生效
+setenforce 0
+
+# 永久生效
+vim /etc/selinux/config  
+SELINUX=disabled
+```
+
+### 定时任务 crontab
+
+```shell
+vim /etc/cron.d/myjob
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name command to be executed
+
+# 凌晨5点和6点清理docker镜像
+0 5,6 * * * root /usr/bin/docker rmi $(docker images -q) -f
+# 每10分钟执行
+*/10 * * * * * /bin/bash /root/backup.sh
+```
+
+### 时间同步
+
+```shell
+apt install ntp ntpdate -y
+# 同步时间
+ntpdate ntp.aliyun.com
+0 * * * * /usr/sbin/ntpdate ntp.aliyun.com
+# 写入系统
+hwclock -w
+
+# 查看当前时间和配置
+timedatectl
+# 查询可用的时区
+timedatectl list-timezones | grep -i shang
+# 设置时区
+timedatectl set-timezone Asia/Shanghai
+```
+
+### 配置 locale 中文
+
+```shell
+# 查看当前shell环境locale
+locale
+
+# 查看系统locale
+localectl
+# 查看系统有的字符集
+localectl list-locales
+# 如果有中文字体
+localectl set-locale LANG=zh_CN.UTF-8
+# 默认英文
+localectl set-locale LANG=en_US.UTF-8
+# 没有效果?
+vim /etc/locale.conf
+LANG=zh_CN.UTF-8
+
+# 搜索所有语言包
+apt search language-pack*
+# 搜索中文包
+apt search language-pack-zh*
+# 建议选用
+apt install language-pack-zh-hans -y
+```
+
+### 开启 bbr
+
+bbr 是一种浪费网络资源，提升网络速度和稳定性的通讯手段。
+
+```shell
+echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+# 生效
+sysctl -p
+# 验证
+lsmod | grep bbr
+```
+
+### 登录后的提示信息
+
+```shell
+vim /etc/motd
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+```
+
+## 常见操作
+
+### curl
+
+```shell
+# -X 指定请求方式 大写
+# -H 设置请求头，可以多个-H
+# -d 指定payload的数据
+curl -X POST -H "Accept: application/json" -H "Content-type: application/json" -d '{"post_data":"i_love_immvp.com"}' localhost:8096/api/answer/checkAnswer
+
+# 模拟跨域
+curl -vvv 'https://kentxxq.com/Count' -H 'Origin: http://localhost:3000'
+
+# 请求es
+curl -H "Content-Type: application/json"  -XPUT --user elastic:password   es-cn-oew1whnk60023e4s9.elasticsearch.aliyuncs.com:9200/flow_user_index/_settings -d '{"index.mapping.total_fields.limit":0}'
+结果 {"acknowledged":true}
+```
+
+### 清除历史记录
+
+```shell
+# 清除指定id
+history -d 123
+# 清除所有历史记录
+history -c
+```
+
+### 压缩/解压 tar
+
+```shell
+# z是使用gzip 
+# v是查看细节
+# f是指定文件
+# --strip-components=1 去掉一层解压目录
+
+# 打包
+tar -czvf dist.tgz dist/
+
+# 解压
+tar -xzvf dist.tgz
+# 解压到指定文件夹
+tar Cxzvf /dist dist.tgz
+
+# 打包隐藏文件
+# 通过 . 可以打包到隐藏文件 
+tar -czvf dist.tgz /dad/path/.
+# 通过上级目录来打包
+tar -czvf dist.tgz /data/path
+# 如果是在当前目录，可以手动指定
+tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* * 
+```
+
+### 配置主机名
+
+```shell
+hostnamectl set-hostname master1
+```
+
+### shell 退出码
+
+```shell
+# 正常退出
+ls
+EXCODE=$?
+echo $EXCODE # 0
+# 异常错误
+ls ---
+EXCODE=$?
+echo $EXCODE # 2
+
+# shell脚本
+EXCODE=$?
+if [ "$EXCODE" != "0" ]; then
+    echo "有问题！"
+    exit 1;
+fi
+```
+
+### 用户, 组, 加入组, 权限
+
+```shell
+# 创建组dba,组号6001
+groupadd -g 6001 dba
+
+# 创建用户sam,同时指定主目录
+useradd –d /home/sam -m sam
+# 设置密码
+passwd sam
+
+#把sam加入dba组
+usermod -a -G dba sam
+
+# 修改目录拥有者:组
+chown -R sam:dba file/folder
+# 放开权限给所有用户
+chmod 777 file/folder
+```
+
+### 卸载软件包
+
+```shell
+# 查看已安装的包
+dpkg --list
+
+# 查看正则匹配的包
+# 查看以dotnet-开头的包
+dpkg --list 'dotnet-*'
+
+# 卸载匹配的包
+sudo apt-get --purge remove <programname>
+
+# 按照正则卸载匹配的包
+# 卸载以dotnet-开头的包
+sudo apt-get --purge remove 'dotnet-*'
+
+# 如果不想自己手动输入Y确认的话则使用
+echo "Y" |sudo apt-get --purge remove 'dotnet-*'
+```
+
+### 查看文件
+
+```shell
+# less 只读超大文件
+# 输入F可以滚动输出,刷新当前屏幕,不刷屏.也可以手动输入G,移到底部
+# q输出 /搜索
+less file.txt
+
+# head 文件尾部
+head -n 10 file.txt
+
+# tail 文件尾部
+# tail -f 滚动输出
+# 配合 |grep 过滤
+tail -f file.txt
+# 末尾10行
+tail -n 10 file.txt
+```
+
+### 删除 x 天前的文件
+
+```shell
+find /data/weblog/ -name '*.log.*' -type f -mtime +7 -exec rm -f {} \;
+```
+
+### 查看进程启动时间
+
+```shell
+ps -eo pid,lstart,etime | grep 1310
+1310 Sat Aug 10 10:21:25 2019 242-07:26:58
+# 前面是启动时间，后面是启动了242天又7小时
+```
+
+### 拷贝文件
+
+#### scp
+
+简单高效, 日常使用.
+
+```shell
+# 本地到远程
+scp /path/thing root@10.10.10.10:/path/thing
+# 远程到本地 
+# -r遍历
+# -C压缩
+sshpass -p 密码 -o StrictHostKeyChecking=no scp -Cr root@10.10.10.10:/path/folder /path/folder
+
+# 使用sshpass免密一条命令
+# scp支持所有ssh的参数
+# StrictHostKeyChecking 第一次连接会需要输入yes,禁用掉它.
+# UserKnownHostsFile 这次的配置丢弃掉,表示临时使用.避免安全问题.
+/usr/bin/sshpass -p 密码 /usr/bin/scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@1.1.1.1:/tmp/t1/1 /tmp/t1/1
+```
+
+#### rsync
+
+通常用于**增量传输**.
+
+```shell
+# 把1这个文件/文件夹 拷贝到远程的/tmp/t1/下面
+# at保持文件信息不变
+# VP先是进度
+# -z 可以开启压缩
+rsync -atvP /tmp/t1/1 root@1.1.1.1:/tmp/t1/
+
+# 也支持sshpass
+/usr/bin/sshpass -p 密码 rsync -atvP -e "ssh -o StrictHostKeyChecking=no" /tmp/t1/1 root@1.1.1.1:/tmp/t1/
+```
+
+### 清空文件
+
+```shell
+# 快速清空
+>file.txt
+# 截断任意文件
+truncate -s 0 file.txt
+```
+
+### 筛选替换
+
+```shell
+# -r遍历 当前目录,筛选所有带有kentxxq的文件
+# 替换old-a成new-b
+sed -i 's/old-a/new-b/g' `grep kentxxq -rl ./`
+```
+
+## 系统监控
+
+### 信息查询
+
+```shell
+# 系统信息
+lsb_release -a
+LSB Version: :core-4.1-amd64:core-4.1-noarch
+Distributor ID: CentOS
+Description: CentOS Linux release 8.0.1905 (Core) 
+Release: 8.0.1905
+Codename: Core
+# cpu信息
+cat /proc/cpuinfo
+# 内存信息,2个16g代表32gb内存,双通道
+# 或 cat /proc/meminfo
+# 或 dmidecode -t memory
+dmidecode | grep -A16 "Memory Device" | grep "Size" |sed 's/^[ \t]*//'
+# 磁盘信息
+fdisk -l
+
+
+# 系统os错误代码查询
+perror 24
+OS error code 24: Too many open files
+# 服务器型号
+dmidecode | grep 'Product Name'
+# 主板序列号
+dmidecode | grep 'Serial Number'
+# 系统序列号
+dmidecode -s system-serial-number
+# oem信息
+dmidecode -t 11
+```
+
+### 状态监控
+
+#### 整体概况
+
+```shell
+top
+htop
+```
+
+#### 内存
+
+```shell
+# 查看内存使用状态
+free -m
+# 查看内存变化 vmstat 间隔 监控次数
+vmstat 2 2
+```
+
+#### 硬盘
+
+```shell
+# 磁盘分区等情况
+fdisk -l
+# 硬盘监控
+iotop
+```
+
+#### 网络
+
+```shell
+# 用来进行查看各个网卡的总流量
+nload
+# 用来监控各个进程的流量使用情况
+nethogs
+# 图形化的工具，可以查看具体的端口情况
+iptraf-ng
+
+
+# 外部ip连接最多的20条记录
+netstat -ant | awk '/^tcp/ {split($5, a, ":"); count[a[1]]++} END {for (ip in count) print ip "\t" count[ip]}' | sort -nrk2 | head -n 20
+```
