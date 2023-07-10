@@ -32,7 +32,7 @@ theme = "DoIt"
 [params]
   since = 1993
   author = "kentxxq"                          
-  avatar = "/images/me/avatar.jpg"           
+  avatar = "/avatar.jpg"           
   subtitle = "Less is more"         
   description = "kentxxq个人站点" 
   keywords = ["编码","生活","电影","音乐","过去","现在","将来"]
@@ -47,13 +47,15 @@ theme = "DoIt"
     # 是否隐藏网站图标资源链接
     noFavicon = false
     # 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件
-    # svgFavicon = ""
+    # svgFavicon = "/avatar.svg"
     # Safari 图标颜色
     iconColor = "#5bbad5"
     # Windows v8-10磁贴颜色
     tileColor = "#da532c"
 
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 
   [params.search]
     enable = true
