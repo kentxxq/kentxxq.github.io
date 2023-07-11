@@ -6,7 +6,7 @@ tags:
 date: 2017-07-19
 lastmod: 2023-07-11
 categories:
-  - 笔记
+  - blog
 keywords:
   - oracle
   - "DML_Error_Logging"

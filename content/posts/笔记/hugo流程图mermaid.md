@@ -7,7 +7,7 @@ date: 2019-03-30
 lastmod: 2023-07-11
 hiddenFromHomePage: false
 categories:
-  - "笔记"
+  - blog
 keywords:
   - "hugo"
   - "markdown"

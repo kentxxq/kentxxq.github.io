@@ -6,7 +6,7 @@ tags:
 date: 2017-10-19
 lastmod: 2023-07-11
 categories:
-  - 笔记
+  - blog
 keywords:
   - "python"
   - "项目打包"

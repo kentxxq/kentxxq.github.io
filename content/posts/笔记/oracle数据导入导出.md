@@ -6,7 +6,7 @@ tags:
 date: 2020-01-05
 lastmod: 2023-07-11
 categories:
-  - 笔记
+  - blog
 keywords:
   - "oracle"
   - "expdp"

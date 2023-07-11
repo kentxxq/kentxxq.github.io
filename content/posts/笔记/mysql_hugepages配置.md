@@ -6,7 +6,7 @@ tags:
 date: 1993-07-06
 lastmod: 2023-07-11
 categories:
-  - 笔记
+  - blog
 keywords:
   - mysql
   - hugepages

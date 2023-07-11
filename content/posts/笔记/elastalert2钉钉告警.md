@@ -6,7 +6,7 @@ tags:
 date: 2022-05-24
 lastmod: 2023-07-11
 categories:
-  - 笔记
+  - blog
 keywords:
   - "elastalert2"
   - "es"

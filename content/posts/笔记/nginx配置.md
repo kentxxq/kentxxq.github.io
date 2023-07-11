@@ -363,8 +363,7 @@ http {
     geo $whitelist {
         default 0;
         10.0.0.0/8 1;
-        8.142.70.33 1;
-        8.142.138.158 1;
+        8.133.183.80 1;
     }
     # 白名单映射到空字符串,生成限速列表
     map $whitelist $limit {
@@ -372,6 +371,7 @@ http {
         1 "";
     }
     # 应用限速列表,分配50m内存,每秒10次
+    # 10r/m分钟 10r/h小时 10r/d天 10r/w周 10r/y年
     limit_req_zone $limit zone=iplimit:50m rate=10r/s;
 }
 

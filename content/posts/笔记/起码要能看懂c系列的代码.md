@@ -6,7 +6,7 @@ tags:
 date: 2019-08-29
 lastmod: 2023-07-11
 categories:
-  - "笔记"
+  - blog
 keywords:
   - "c"
   - "c++"

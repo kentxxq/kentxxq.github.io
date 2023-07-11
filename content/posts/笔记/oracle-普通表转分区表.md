@@ -6,7 +6,7 @@ tags:
 date: 2018-12-20
 lastmod: 2023-07-11
 categories:
-  - 笔记
+  - blog
 keywords:
   - "oracle"
   - "普通表"
