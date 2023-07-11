@@ -1,0 +1,150 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>python的文件项目打包 - 运维个人技术栈</title><meta name=Description content="在自己的机器还有服务器上面，都应该搭建好pyenv。网络上的教程太多了，但是说的又很乱。所以自己稍微整理一下。这次的目的是写一个及其简单的过程，所以如果有具体问题，请看官方文档"><meta property="og:title" content="python的文件项目打包"><meta property="og:description" content="在自己的机器还有服务器上面，都应该搭建好pyenv。网络上的教程太多了，但是说的又很乱。所以自己稍微整理一下。这次的目的是写一个及其简单的过程，所以如果有具体问题，请看官方文档"><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/python%E7%9A%84%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2017-10-19T00:00:00+00:00"><meta property="article:modified_time" content="2023-07-11T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="python的文件项目打包"><meta name=twitter:description content="在自己的机器还有服务器上面，都应该搭建好pyenv。网络上的教程太多了，但是说的又很乱。所以自己稍微整理一下。这次的目的是写一个及其简单的过程，所以如果有具体问题，请看官方文档"><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/python%E7%9A%84%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/><link rel=prev href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/oracle-dml_error_logging%E7%89%B9%E6%80%A7/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%92%8C%E4%BD%8D%E8%BF%90%E7%AE%97/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"python的文件项目打包","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/python%E7%9A%84%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85\/"},"genre":"posts","keywords":"blog, python","wordcount":542,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/python%E7%9A%84%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85\/","datePublished":"2017-10-19T00:00:00+00:00","dateModified":"2023-07-11T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"在自己的机器还有服务器上面，都应该搭建好pyenv。网络上的教程太多了，但是说的又很乱。所以自己稍微整理一下。这次的目的是写一个及其简单的过程，所以如果有具体问题，请看官方文档"}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a><ul><li><a href=#先看目录结构>先看目录结构</a></li><li><a href=#运行打包>运行打包</a></li><li><a href=#开始安装>开始安装</a></li><li><a href=#安装完成后查看安装结果>安装完成后，查看安装结果</a></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">python的文件项目打包</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2017-10-19>2017-10-19</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-07-11>2023-07-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 542 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a><ul><li><a href=#先看目录结构>先看目录结构</a></li><li><a href=#运行打包>运行打包</a></li><li><a href=#开始安装>开始安装</a></li><li><a href=#安装完成后查看安装结果>安装完成后，查看安装结果</a></li></ul></li></ul></nav></div></div><div class=content id=content><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p>打算自己做一个 <a href=/posts/%E7%AC%94%E8%AE%B0/point/python/>python</a> 项目, 然后推到 pypi 上去.</p><p>这次的目的记录<strong>写一个及其简单的过程</strong>，所以如果有具体问题，请看官方文档。</p><h3 id=先看目录结构 class=headerLink><a href=#%e5%85%88%e7%9c%8b%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84 class=header-mark></a>先看目录结构</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=err>$</span> <span class=n>tree</span>
+</span></span><span class=line><span class=cl><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=err>├──</span> <span class=n>MANIFEST</span><span class=o>.</span><span class=ow>in</span>
+</span></span><span class=line><span class=cl><span class=err>├──</span> <span class=n>README</span><span class=o>.</span><span class=n>md</span>
+</span></span><span class=line><span class=cl><span class=err>├──</span> <span class=n>myapp</span>
+</span></span><span class=line><span class=cl><span class=err>│  </span> <span class=err>├──</span> <span class=mf>1.</span><span class=n>txt</span>
+</span></span><span class=line><span class=cl><span class=err>│  </span> <span class=err>├──</span> <span class=fm>__init__</span><span class=o>.</span><span class=n>py</span>
+</span></span><span class=line><span class=cl><span class=err>│  </span> <span class=err>├──</span> <span class=n>__pycache__</span>
+</span></span><span class=line><span class=cl><span class=err>│  </span> <span class=err>│  </span> <span class=err>├──</span> <span class=fm>__init__</span><span class=o>.</span><span class=n>cpython</span><span class=o>-</span><span class=mf>36.</span><span class=n>pyc</span>
+</span></span><span class=line><span class=cl><span class=err>│  </span> <span class=err>│  </span> <span class=err>└──</span> <span class=n>test</span><span class=o>.</span><span class=n>cpython</span><span class=o>-</span><span class=mf>36.</span><span class=n>pyc</span>
+</span></span><span class=line><span class=cl><span class=err>│  </span> <span class=err>├──</span> <span class=n>test</span><span class=o>.</span><span class=n>py</span>
+</span></span><span class=line><span class=cl><span class=err>│  </span> <span class=err>└──</span> <span class=n>txt</span>
+</span></span><span class=line><span class=cl><span class=err>│  </span>     <span class=err>└──</span> <span class=mf>1.</span><span class=n>txt</span>
+</span></span><span class=line><span class=cl><span class=err>├──</span> <span class=n>myapp2</span>
+</span></span><span class=line><span class=cl><span class=err>│  </span> <span class=err>└──</span> <span class=n>test222</span><span class=o>.</span><span class=n>py</span>
+</span></span><span class=line><span class=cl><span class=err>└──</span> <span class=n>setup</span><span class=o>.</span><span class=n>py</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=mi>4</span> <span class=n>directories</span><span class=p>,</span> <span class=mi>10</span> <span class=n>files</span>
+</span></span></code></pre></td></tr></table></div></div><ol><li><code>MANIFEST.in</code> 用来记录除了 py 文件外，需要打包的文件</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 包含文件</span>
+</span></span><span class=line><span class=cl>include README.md
+</span></span><span class=line><span class=cl><span class=c1># 递归-包含</span>
+</span></span><span class=line><span class=cl>recursive-include myapp/txt *
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li><p><code>README.md</code> 一个用来简单介绍的文档</p></li><li><p><code>myapp</code> 和 <code>myapp2</code> 都是存放代码</p></li><li><p><code>setup.py</code> 是用来安装和打包的主要文件</p></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># -*- coding: utf-8 -*-</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>setuptools</span> <span class=kn>import</span> <span class=n>setup</span><span class=p>,</span> <span class=n>find_packages</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>setup</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=o>=</span><span class=s1>&#39;kentxxq&#39;</span><span class=p>,</span>               <span class=c1># 项目名</span>
+</span></span><span class=line><span class=cl>    <span class=n>version</span><span class=o>=</span><span class=s1>&#39;1.0.2&#39;</span><span class=p>,</span>              <span class=c1># 版本号</span>
+</span></span><span class=line><span class=cl>    <span class=n>zip_safe</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>               <span class=c1># 因为部分工具不支持zip，推荐禁用</span>
+</span></span><span class=line><span class=cl>    <span class=n>packages</span><span class=o>=</span><span class=n>find_packages</span><span class=p>(),</span>     <span class=c1># 当前目录下所有的包</span>
+</span></span><span class=line><span class=cl>    <span class=n>include_package_data</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>    <span class=c1># 启用清单文件MANIFEST.in</span>
+</span></span><span class=line><span class=cl>    <span class=n>install_requires</span><span class=o>=</span><span class=p>[</span>    <span class=c1># 依赖列表</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;Scrapy&gt;=1.4.0&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 上传到PyPI所需要的信息</span>
+</span></span><span class=line><span class=cl>    <span class=n>author</span><span class=o>=</span><span class=s2>&#34;kentxxq&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>author_email</span><span class=o>=</span><span class=s2>&#34;805429509@qq.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>description</span><span class=o>=</span><span class=s2>&#34;This is an Example Package&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>license</span><span class=o>=</span><span class=s2>&#34;PSF&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>keywords</span><span class=o>=</span><span class=s2>&#34;hello world example examples&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>url</span><span class=o>=</span><span class=s2>&#34;https://a805429509.github.io/&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=运行打包 class=headerLink><a href=#%e8%bf%90%e8%a1%8c%e6%89%93%e5%8c%85 class=header-mark></a>运行打包</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python setup.py sdist
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 构建物在这里</span>
+</span></span><span class=line><span class=cl>dist/kentxxq-1.0.2.tar.gz
+</span></span></code></pre></td></tr></table></div></div><h3 id=开始安装 class=headerLink><a href=#%e5%bc%80%e5%a7%8b%e5%ae%89%e8%a3%85 class=header-mark></a>开始安装</h3><p>直接拷贝 <code>dist/kentxxq-1.0.2.tar.gz</code> 到目标机器，进行解压。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python setup.py install
+</span></span></code></pre></td></tr></table></div></div><h3 id=安装完成后查看安装结果 class=headerLink><a href=#%e5%ae%89%e8%a3%85%e5%ae%8c%e6%88%90%e5%90%8e%e6%9f%a5%e7%9c%8b%e5%ae%89%e8%a3%85%e7%bb%93%e6%9e%9c class=header-mark></a>安装完成后，查看安装结果</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ tree kentxxq-1.0.2-py3.6.egg
+</span></span><span class=line><span class=cl>kentxxq-1.0.2-py3.6.egg
+</span></span><span class=line><span class=cl>├── EGG-INFO
+</span></span><span class=line><span class=cl>│   ├── dependency_links.txt
+</span></span><span class=line><span class=cl>│   ├── not-zip-safe
+</span></span><span class=line><span class=cl>│   ├── PKG-INFO
+</span></span><span class=line><span class=cl>│   ├── requires.txt
+</span></span><span class=line><span class=cl>│   ├── SOURCES.txt
+</span></span><span class=line><span class=cl>│   └── top_level.txt
+</span></span><span class=line><span class=cl>└── myapp
+</span></span><span class=line><span class=cl>    ├── __init__.py
+</span></span><span class=line><span class=cl>    ├── __pycache__
+</span></span><span class=line><span class=cl>    │   ├── __init__.cpython-36.pyc
+</span></span><span class=line><span class=cl>    │   └── test.cpython-36.pyc
+</span></span><span class=line><span class=cl>    ├── test.py
+</span></span><span class=line><span class=cl>    └── txt
+</span></span><span class=line><span class=cl>        └── 1.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=m>4</span> directories, <span class=m>11</span> files
+</span></span></code></pre></td></tr></table></div></div><ol><li>没有 <code>__init__.py</code> 的 myapp2 是没有打包的。</li><li>myapp 中 1.txt 没有进入包内，而 MANIFEST.in 中的记录的 <code>recursive-include myapp/txt *</code> 在包内。</li></ol></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-07-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/python%E7%9A%84%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/ data-title=python的文件项目打包 data-hashtags=blog,python><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/python%E7%9A%84%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/python%E7%9A%84%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/ data-title=python的文件项目打包 data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/python%E7%9A%84%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/ data-title=python的文件项目打包><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/python%E7%9A%84%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/ data-title=python的文件项目打包><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/python%E7%9A%84%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/ data-title=python的文件项目打包 data-description=在自己的机器还有服务器上面，都应该搭建好pyenv。网络上的教程太多了，但是说的又很乱。所以自己稍微整理一下。这次的目的是写一个及其简单的过程，所以如果有具体问题，请看官方文档><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/python%E7%9A%84%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/ data-title=python的文件项目打包 data-description=在自己的机器还有服务器上面，都应该搭建好pyenv。网络上的教程太多了，但是说的又很乱。所以自己稍微整理一下。这次的目的是写一个及其简单的过程，所以如果有具体问题，请看官方文档><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/python%E7%9A%84%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/ data-title=python的文件项目打包><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a>,&nbsp;<a href=/tags/python/>python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/oracle-dml_error_logging%E7%89%B9%E6%80%A7/ class=prev rel=prev title=oracle-DML_Error_Logging特性><i class="fas fa-angle-left fa-fw"></i>oracle-DML_Error_Logging特性</a>
+<a href=/posts/%E7%AC%94%E8%AE%B0/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%92%8C%E4%BD%8D%E8%BF%90%E7%AE%97/ class=next rel=next title=二进制和位运算>二进制和位运算<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a target=_blank href=https://beian.miit.gov.cn>湘ICP备2021002319号-1</a></span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div></body></html>

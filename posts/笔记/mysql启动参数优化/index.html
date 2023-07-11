@@ -1,0 +1,271 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>mysql启动参数优化 - 运维个人技术栈</title><meta name=Description content="mysql启动参数优化"><meta property="og:title" content="mysql启动参数优化"><meta property="og:description" content="mysql启动参数优化"><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/"><meta property="article:section" content="posts"><meta property="article:published_time" content="1993-07-06T00:00:00+00:00"><meta property="article:modified_time" content="2023-07-11T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="mysql启动参数优化"><meta name=twitter:description content="mysql启动参数优化"><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BC%98%E5%8C%96/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"mysql启动参数优化","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96\/"},"genre":"posts","keywords":"blog, mysql","wordcount":1731,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96\/","datePublished":"1993-07-06T00:00:00+00:00","dateModified":"2023-07-11T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"mysql启动参数优化"}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#参数文件>参数文件</a></li><li><a href=#随记>随记</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">mysql启动参数优化</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=1993-07-06>1993-07-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-07-11>2023-07-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1731 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#参数文件>参数文件</a></li><li><a href=#随记>随记</a></li></ul></nav></div></div><div class=content id=content><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p>这里是我总结的 <a href=/posts/%E7%AC%94%E8%AE%B0/point/mysql/>mysql</a> 配置文件配置项.</p><h2 id=参数文件 class=headerLink><a href=#%e5%8f%82%e6%95%b0%e6%96%87%e4%bb%b6 class=header-mark></a>参数文件</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=o>[</span>mysqld<span class=o>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>### </span>
+</span></span><span class=line><span class=cl><span class=c1>#  基本相关配置</span>
+</span></span><span class=line><span class=cl><span class=c1>###</span>
+</span></span><span class=line><span class=cl>server-id<span class=o>=</span><span class=m>1</span>
+</span></span><span class=line><span class=cl>pid-file<span class=o>=</span>/var/run/mysqld/mysqld.pid
+</span></span><span class=line><span class=cl><span class=nv>datadir</span><span class=o>=</span>/var/lib/mysql
+</span></span><span class=line><span class=cl><span class=nv>socket</span><span class=o>=</span>/var/lib/mysql/mysql.sock
+</span></span><span class=line><span class=cl><span class=c1># 在linux中，文件可以进行ln，类似快捷方式。如果设置为1，则有可能会出现安全问题，默认配置中设置为0，进行关闭</span>
+</span></span><span class=line><span class=cl>symbolic-links<span class=o>=</span><span class=m>0</span>
+</span></span><span class=line><span class=cl><span class=c1># 设置数据库字符集</span>
+</span></span><span class=line><span class=cl><span class=nv>character_set_server</span><span class=o>=</span>utf8mb4
+</span></span><span class=line><span class=cl><span class=c1># 禁止MySQL对外部连接进行DNS解析，使用这一选项可以消除MySQL进行DNS解析的时间。但需要注意，如果开启该选项，则所有远程主机连接授权都要使用IP地址方式，否则MySQL将无法正常处理连接请求</span>
+</span></span><span class=line><span class=cl>skip-name-resolve
+</span></span><span class=line><span class=cl><span class=nv>character_set_filesystem</span><span class=o>=</span>utf8mb4
+</span></span><span class=line><span class=cl><span class=c1># 统一使用小写的表名</span>
+</span></span><span class=line><span class=cl><span class=nv>lower_case_table_names</span> <span class=o>=</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>### </span>
+</span></span><span class=line><span class=cl><span class=c1>#  日志配置</span>
+</span></span><span class=line><span class=cl><span class=c1>###</span>
+</span></span><span class=line><span class=cl>log-error<span class=o>=</span>/var/log/mysqld.log
+</span></span><span class=line><span class=cl><span class=c1># 二进制日志路径</span>
+</span></span><span class=line><span class=cl>log-bin<span class=o>=</span>/tmp/logbin
+</span></span><span class=line><span class=cl><span class=c1># 超过30天的binlog删除</span>
+</span></span><span class=line><span class=cl><span class=nv>expire_logs_days</span> <span class=o>=</span> <span class=m>30</span>
+</span></span><span class=line><span class=cl><span class=c1># 慢查询时间 超过1秒则为慢查询</span>
+</span></span><span class=line><span class=cl><span class=nv>long_query_time</span> <span class=o>=</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=nv>slow_query_log_file</span> <span class=o>=</span> /tmp/mysql-slow.log
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>### </span>
+</span></span><span class=line><span class=cl><span class=c1>#  性能提升参数</span>
+</span></span><span class=line><span class=cl><span class=c1>###</span>
+</span></span><span class=line><span class=cl><span class=c1># mysql最大连接数 查看max_used_connections，在最大值的70%左右最好</span>
+</span></span><span class=line><span class=cl><span class=nv>max_connections</span> <span class=o>=</span> <span class=m>1000</span>
+</span></span><span class=line><span class=cl><span class=c1># 官方：8 + (max_connections / 100)，上限100. 缓存的线程池不应该过多。</span>
+</span></span><span class=line><span class=cl><span class=c1># 暂时我的业务高峰期，估计是200+的并发一直保持。50个应该足够</span>
+</span></span><span class=line><span class=cl><span class=c1># 一般来说，大于4G的内存，预先缓存50个线程没有问题</span>
+</span></span><span class=line><span class=cl><span class=nv>thread_cache_size</span><span class=o>=</span><span class=m>10</span>
+</span></span><span class=line><span class=cl><span class=c1># 表缓存分为多个区。5.7开始16为默认值，非常好！</span>
+</span></span><span class=line><span class=cl><span class=c1># table_open_cache_instances=16</span>
+</span></span><span class=line><span class=cl><span class=c1># 查询缓存关闭</span>
+</span></span><span class=line><span class=cl><span class=c1># 听起来很美好的参数而已：如果表有insert、update等操作，表的相关所有cache失效</span>
+</span></span><span class=line><span class=cl><span class=c1># 保存的是一个sql的查询结果集，而不是执行计划之类的</span>
+</span></span><span class=line><span class=cl><span class=nv>query_cache_size</span><span class=o>=</span><span class=m>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># INNODB</span>
+</span></span><span class=line><span class=cl><span class=c1># innodb非常好！所以默认使用它做存储引擎。 设置为总内存的80%</span>
+</span></span><span class=line><span class=cl><span class=nv>innodb_buffer_pool_size</span><span class=o>=</span>800m
+</span></span><span class=line><span class=cl><span class=c1># 为提高性能，MySQL可以以循环方式将日志文件写到多个文件。推荐设置为3</span>
+</span></span><span class=line><span class=cl><span class=nv>innodb_log_files_in_group</span> <span class=o>=</span> <span class=m>3</span>
+</span></span><span class=line><span class=cl><span class=c1># SHOW GLOBAL STATUS like &#39;%innodb_os_log_written%&#39; 单位：字节</span>
+</span></span><span class=line><span class=cl><span class=c1># 官方推荐innodb_log_files_in_group*innodb_log_file_size * 0.75 &gt; 209MB，可以设置更大一些，但1小时内最好内进行一次刷入磁盘</span>
+</span></span><span class=line><span class=cl><span class=nv>innodb_log_file_size</span><span class=o>=</span>140m
+</span></span><span class=line><span class=cl><span class=c1>## 这里我启用的搭配模式，满足性能要求，系统一般情况下不会断电就不会崩溃。</span>
+</span></span><span class=line><span class=cl><span class=c1># 控制数据库的事务日志刷到磁盘上</span>
+</span></span><span class=line><span class=cl><span class=c1># 0:最快，但是进程崩溃就会丢失数据</span>
+</span></span><span class=line><span class=cl><span class=c1># 1:最慢，数据会回滚没有提交的操作，数据保证一致</span>
+</span></span><span class=line><span class=cl><span class=c1># 2:性能不错，除非操作系统不可用，才会丢失数据</span>
+</span></span><span class=line><span class=cl><span class=nv>innodb_flush_log_at_trx_commit</span><span class=o>=</span><span class=m>2</span>
+</span></span><span class=line><span class=cl><span class=c1># 控制数据库的binlog刷到磁盘上</span>
+</span></span><span class=line><span class=cl><span class=c1># 0:最快 系统决定</span>
+</span></span><span class=line><span class=cl><span class=c1># n:10000&gt;n&gt;1 多少条日志记录后开刷</span>
+</span></span><span class=line><span class=cl><span class=c1># 1:每次提交就开刷</span>
+</span></span><span class=line><span class=cl><span class=nv>sync_binlog</span><span class=o>=</span><span class=m>0</span>
+</span></span><span class=line><span class=cl><span class=c1># O_DIRECT直接跨过os缓存，直接写入到文件。  直接在raid上操作数据会更快</span>
+</span></span><span class=line><span class=cl><span class=c1># 默认为空：fsync                        直接连接到san存储，会更快</span>
+</span></span><span class=line><span class=cl><span class=c1># O_DSYNC很少使用，没有上两个设置的优点</span>
+</span></span><span class=line><span class=cl><span class=nv>innodb_flush_method</span><span class=o>=</span>O_DIRECT
+</span></span><span class=line><span class=cl><span class=c1># 不限制线程并发的数量，在大型系统中会进行集群，同时会分配好任务，所以不需要调整</span>
+</span></span><span class=line><span class=cl><span class=c1># 如果是单个的数据库，最高并发数量达到了100，那么设置为80，将会很好的满足需求</span>
+</span></span><span class=line><span class=cl><span class=nv>innodb_thread_concurrency</span><span class=o>=</span><span class=m>0</span>
+</span></span><span class=line><span class=cl><span class=c1># mysql5.7的默认值，会提高速度</span>
+</span></span><span class=line><span class=cl><span class=nv>innodb_checksum_algorithm</span><span class=o>=</span>crc32
+</span></span><span class=line><span class=cl><span class=c1># 不会有很大的提升，但是如果你的磁盘非常快，可以提高到16-32之间</span>
+</span></span><span class=line><span class=cl><span class=nv>innodb_read_io_threads</span><span class=o>=</span><span class=m>8</span>
+</span></span><span class=line><span class=cl><span class=nv>innodb_write_io_threads</span><span class=o>=</span><span class=m>8</span>
+</span></span><span class=line><span class=cl><span class=c1># 刷新脏数据时每秒写 IO请求数 默认200即可，除非用sysbench压力测试，tps一段时间内为0，是因为它的问题。而且磁盘速度非常快</span>
+</span></span><span class=line><span class=cl><span class=c1># 数值过大，mysql认为磁盘能力很强，不会着急得把redo log刷到磁盘。而不大或者100这样比较小的值，则会认为磁盘能力一般，提早刷入磁盘</span>
+</span></span><span class=line><span class=cl><span class=nv>innodb_io_capacity</span><span class=o>=</span><span class=m>200</span>
+</span></span><span class=line><span class=cl><span class=c1># 关闭的时候把缓冲了的数据记录id记录到文件，启动的时候加载进来，这样尽可能的让它在重启的时候，缓冲数据完全一致</span>
+</span></span><span class=line><span class=cl><span class=nv>innodb_buffer_pool_load_at_startup</span><span class=o>=</span>on
+</span></span><span class=line><span class=cl><span class=nv>innodb_buffer_pool_dump_at_shutdown</span><span class=o>=</span>on
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>### </span>
+</span></span><span class=line><span class=cl><span class=c1>#  连接相关参数</span>
+</span></span><span class=line><span class=cl><span class=c1>###</span>
+</span></span><span class=line><span class=cl><span class=c1># 设置同一主机，最大可连接报错数。设置成100万没有特别大的影响，但是极大减少了flush hosts的次数</span>
+</span></span><span class=line><span class=cl><span class=nv>max_connect_errors</span><span class=o>=</span><span class=m>1000000</span>
+</span></span><span class=line><span class=cl><span class=c1># 连接到达数量之后，排队的请求格式。超过600就会拒绝</span>
+</span></span><span class=line><span class=cl><span class=nv>back_log</span> <span class=o>=</span> <span class=m>600</span>
+</span></span><span class=line><span class=cl><span class=c1># 会话超过多久自动断开，默认秒，8小时</span>
+</span></span><span class=line><span class=cl><span class=nv>wait_timeout</span> <span class=o>=</span> <span class=m>28800</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># mysql可以打开的文件数       </span>
+</span></span><span class=line><span class=cl><span class=nv>open_files_limit</span> <span class=o>=</span> <span class=m>65535</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>### </span>
+</span></span><span class=line><span class=cl><span class=c1># 备份工具innobackupex的备份路径</span>
+</span></span><span class=line><span class=cl><span class=c1>###</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>xtrabackup<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>target_dir</span> <span class=o>=</span> /tmp/backups
+</span></span></code></pre></td></tr></table></div></div><h2 id=随记 class=headerLink><a href=#%e9%9a%8f%e8%ae%b0 class=header-mark></a>随记</h2><p>为了搞定这一系列的参数，真是花了好大力气，也加深了对 <code>mysql</code> 的了解</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>2015-06-17 17:28:53 26720 [Warning] Buffered warning: Changed limits: max_connections: 5000 (requested 65535)
+</span></span><span class=line><span class=cl>2015-06-17 17:28:53 26720 [Warning] Buffered warning: Changed limits: table_open_cache: 1995 (requested 2000)
+</span></span></code></pre></td></tr></table></div></div><p>这个问题的 <a href=https://dev.mysql.com/doc/refman/5.7/en/using-systemd.html target=_blank rel="noopener noreferrer">解决办法</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 修改系统的参数</span>
+</span></span><span class=line><span class=cl>vi /etc/security/limits.conf
+</span></span><span class=line><span class=cl><span class=c1># 加入这两行，或者把*指定为mysql用户</span>
+</span></span><span class=line><span class=cl>*                soft    nofile          <span class=m>65535</span>
+</span></span><span class=line><span class=cl>*                hard    nofile          <span class=m>65535</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 这个是mysql服务的参数，也要加上</span>
+</span></span><span class=line><span class=cl>mkdir /etc/systemd/system/mysqld.service.d  //if not exists
+</span></span><span class=line><span class=cl>vi limits.conf
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>root@centos1 system<span class=o>]</span><span class=c1># cat /etc/systemd/system/mysql.service.d/override.conf</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>Service<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>LimitNOFILE</span><span class=o>=</span><span class=m>65535</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-07-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/ data-title=mysql启动参数优化 data-hashtags=blog,mysql><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/ data-title=mysql启动参数优化 data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/ data-title=mysql启动参数优化><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/ data-title=mysql启动参数优化><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/ data-title=mysql启动参数优化 data-description=mysql启动参数优化><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/ data-title=mysql启动参数优化 data-description=mysql启动参数优化><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/ data-title=mysql启动参数优化><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a>,&nbsp;<a href=/tags/mysql/>mysql</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/mysql%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BC%98%E5%8C%96/ class=next rel=next title=mysql配置和优化>mysql配置和优化<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a target=_blank href=https://beian.miit.gov.cn>湘ICP备2021002319号-1</a></span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div></body></html>
