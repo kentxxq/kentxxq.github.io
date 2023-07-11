@@ -2,8 +2,9 @@
 title: ansible入门教程
 tags:
   - blog
+  - ansible
 date: 2023-07-01
-lastmod: 2023-07-02
+lastmod: 2023-07-11
 categories:
   - blog
 description: "[[笔记/point/ansible|ansible]] 的使用记录, 用到的时候能快速重新捡起来.."

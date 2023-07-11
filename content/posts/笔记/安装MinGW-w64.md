@@ -2,8 +2,9 @@
 title: 安装MinGW-w64
 tags:
   - blog
+  - MinGW-w64
 date: 2023-06-26
-lastmod: 2023-07-01
+lastmod: 2023-07-11
 categories:
   - blog
 description: "快速安装 [[笔记/point/MinGW-w64|MinGW-w64]] 的方法."

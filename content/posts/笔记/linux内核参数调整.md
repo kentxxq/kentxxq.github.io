@@ -2,8 +2,9 @@
 title: linux内核参数调整
 tags:
   - blog
+  - linux
 date: 2023-07-01
-lastmod: 2023-07-01
+lastmod: 2023-07-11
 categories:
   - blog
 description: "这里记录我调整过的 [[linux]] 内核参数."

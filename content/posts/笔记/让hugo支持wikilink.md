@@ -5,7 +5,13 @@ tags:
   - hugo
   - wikilink
 date: 2023-06-26
-lastmod: 2023-07-10
+lastmod: 2023-07-11
+keywords:
+  - hugo
+  - wikilink
+  - hugo
+  - dart-sass
+  - goldmark-wikilink
 categories:
   - blog
 description: "在我决定使用 [[笔记/point/obsidian|obsidian]] 来记录笔记后, 就发现有 `wikilink` 这个东西, 它不是 [CommonMark](https://commonmark.org/) 的一部分, 所以会导致很多的工具链的不兼容. 例如 [[笔记/point/vscode|vscode]] 默认无法读取.而我选择用 [hugo](point/hugo.md) 进行站点的构建发布. 所以这篇博客就如题目所说的, 我要打通 [[笔记/point/hugo|hugo]] 和 [[笔记/point/obsidian|obsidian]] ,所以就有了这一篇文章.我搭建了一个 demo 站点, 你可以看看 [效果](https://doit-demo.kentxxq.com/)."

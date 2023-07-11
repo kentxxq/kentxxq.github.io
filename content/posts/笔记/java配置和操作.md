@@ -2,7 +2,7 @@
 title: java配置和操作
 tags:
   - blog
-  - JVM
+  - java
 date: 2023-07-04
 lastmod: 2023-07-05
 categories:

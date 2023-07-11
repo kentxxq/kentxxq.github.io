@@ -2,6 +2,7 @@
 title: linux的初始化配置
 tags:
   - blog
+  - linux
 date: 2023-07-08
 lastmod: 2023-07-08
 categories:

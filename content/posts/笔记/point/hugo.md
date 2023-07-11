@@ -4,7 +4,7 @@ tags:
   - point
   - hugo
 date: 2023-06-26
-lastmod: 2023-06-28
+lastmod: 2023-07-10
 categories:
   - point
 ---
@@ -12,6 +12,12 @@ categories:
 `hugo` 是一个静态网站生成工具, 使用 [[笔记/point/golang|golang]] 编写.
 
 [GitHub - gohugoio/hugo: The world’s fastest framework for building websites.](https://github.com/gohugoio/hugo)
+
+运行启动
+
+```shell
+hugo serve --disableFastRender
+```
 
 要点:
 

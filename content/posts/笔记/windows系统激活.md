@@ -4,9 +4,13 @@ tags:
   - blog
   - windows
 date: 2023-07-01
-lastmod: 2023-07-06
+lastmod: 2023-07-11
 categories:
   - blog
+keywords:
+  - windows
+  - 激活
+  - kms
 description: "推荐使用正版, 但用来学技术也是不错的."
 ---
 

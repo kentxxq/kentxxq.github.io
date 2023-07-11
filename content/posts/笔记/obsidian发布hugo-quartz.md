@@ -4,9 +4,8 @@ tags:
   - blog
   - hugo
   - obsidian
-  - githubPages
 date: 2023-06-20
-lastmod: 2023-07-01
+lastmod: 2023-07-11
 categories:
   - blog
 description: "这里是用 [[笔记/point/obsidian|obsidian]] 发布到 [[point/hugo|hugo]] 的 quartz 主题详细操作步骤."

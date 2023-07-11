@@ -3,7 +3,7 @@ title: benchmark的数学知识
 tags:
   - blog
   - csharp
-date: 2023-07-08
+date: 2021-08-14
 lastmod: 2023-07-08
 categories:
   - blog
