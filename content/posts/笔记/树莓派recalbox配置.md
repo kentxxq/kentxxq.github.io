@@ -3,17 +3,16 @@ title: 树莓派recalbox配置
 tags:
   - blog
   - 树莓派
-  - recalbox
 date: 2021-03-21
-lastmod: 2023-07-08
+lastmod: 2023-07-11
 categories:
   - blog
-description: 
+description: "recalbox 是一个游戏模拟器的合集 +kodi 媒体中心！是的，都集成到了一起是我选用它的主要原因。下面的内容都是在 [[笔记/point/树莓派|树莓派]] 上操作的."
 ---
 
 ## 简介
 
-recalbox 是一个游戏模拟器的合集 +kodi 媒体中心！是的，都集成到了一起是我选用它的主要原因。
+recalbox 是一个游戏模拟器的合集 +kodi 媒体中心！是的，都集成到了一起是我选用它的主要原因。下面的内容都是在 [[笔记/point/树莓派|树莓派]] 上操作的.
 
 ## 配置内容
 

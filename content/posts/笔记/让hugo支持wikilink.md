@@ -3,7 +3,6 @@ title: 让hugo支持wikilink
 tags:
   - blog
   - hugo
-  - wikilink
 date: 2023-06-26
 lastmod: 2023-07-11
 keywords:

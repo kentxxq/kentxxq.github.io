@@ -1,12 +1,12 @@
 ---
-title: JavaScript
+title: js
 aliases:
-  - js
+  - JavaScript
 tags:
   - point
-  - JavaScript
+  - js
 date: 2023-07-06
-lastmod: 2023-07-06
+lastmod: 2023-07-11
 categories:
   - point
 ---

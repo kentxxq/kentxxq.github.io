@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-07-08
+lastmod: 2023-07-11
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -184,7 +184,7 @@ ssl_certificate_key /usr/local/nginx/conf/ssl/kentxxq.key;
 `/usr/local/nginx/conf/options/map.conf`
 
 ```nginx
-# 域名匹配,就把
+# $http_origin如果正则匹配了,$allow_origin会变成后面的值
 map $http_origin $allow_origin {  
     default "";  
     "~http://www.kentxxq.com" http://www.kentxxq.com;
@@ -354,6 +354,35 @@ server {
 ```
 
 ## 功能配置
+
+### IP 限速
+
+```nginx
+http {
+    # 白名单
+    geo $whitelist {
+        default 0;
+        10.0.0.0/8 1;
+        8.142.70.33 1;
+        8.142.138.158 1;
+    }
+    # 白名单映射到空字符串,生成限速列表
+    map $whitelist $limit {
+        0 $binary_remote_addr;
+        1 "";
+    }
+    # 应用限速列表,分配50m内存,每秒10次
+    limit_req_zone $limit zone=iplimit:50m rate=10r/s;
+}
+
+# 域名限速
+# burst代表最多蓄力100,即第一秒最多100+10次请求.
+# 默认110次请求排队发送,nodelay则会不排队,直接把110次请求一次性发送
+server {
+    limit_req zone=iplimit burst=100 nodelay;
+}
+
+```
 
 ### 用户名密码
 

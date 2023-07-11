@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2021-08-14
-lastmod: 2023-07-08
+lastmod: 2023-07-11
 categories:
   - blog
 description: 
@@ -13,7 +13,7 @@ featuredImage: /featureImage/benchmark的数学知识.webp
 
 ## 简介
 
-程序性能总是一个永恒的话题。各个系统、编程语言、算法、io 逻辑，总是不停的对比。今天在 dotnet 闲逛的时候，看到了官方做的一个性能评测库，但是指标我却看不懂。于是就看了一会儿相关知识，准备记录一下。
+程序性能总是一个永恒的话题。各个系统、编程语言、算法、io 逻辑，总是不停的对比。今天在 [[笔记/point/csharp|csharp]] 闲逛的时候，看到了官方做的一个性能评测库，但是指标我却看不懂。于是就看了一会儿相关知识，准备记录一下。
 
 ## 程序说明
 

@@ -14,7 +14,7 @@ categories:
 要点:
 
 - 免费
-- 和 [[笔记/point/JavaScript|js]] 匹配度高
+- 和 [[笔记/point/js|js]] 匹配度高
 
 ### 导入导出
 
