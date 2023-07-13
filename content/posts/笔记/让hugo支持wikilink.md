@@ -152,7 +152,7 @@ type Extensions struct {
 	// 采用那种方法解析链接?
 	WikilinkReslover string
 	// ROOT模式下,传入路径前缀
-    WikilinkRootPath string
+    WikilinkRootPath string
 	// 是否启用wikilink
 	EnableWikilink   bool
 }
@@ -233,7 +233,7 @@ $CXX="g++"
 # -v 详细信息
 # -x 打印出执行的命令，以及相关的详细信息
 # extended是加入sass,release则是hugo自定义
-# `-s` 表示禁用符号表，`-w` 表示禁用 DWARF 调试信息，`-extldflags '-static'` 表示使用静态链接方式进行链接。
+# `-s` 表示禁用符号表，`-w` 表示禁用 DWARF 调试信息，`-extldflags '-static'` 表示使用静态链接方式进行链接。
 go build  -v -x -tags extended,release -ldflags "-s -w -extldflags '-static'"
 # 文件夹多出一个hugo.exe
 ```

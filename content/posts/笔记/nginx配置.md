@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-07-11
+lastmod: 2023-07-13
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -30,22 +30,22 @@ worker_rlimit_nofile 65535;
 
 events {
     use     epoll;
-    worker_connections  65535;   
+    worker_connections  65535;
 }
 
-## tcp代理参考  
-stream {  
-    upstream service-a {  
-        hash   $remote_addr consistent;  
-        server 1.1.1.1:222;  
-    }  
-  
-    server {  
-        listen  10022;  
-        proxy_connect_timeout   30s;  
-        proxy_timeout   300s;  
-        proxy_pass  service-a;  
-    }  
+## tcp代理参考
+stream {
+    upstream service-a {
+        hash   $remote_addr consistent;
+        server 1.1.1.1:222;
+    }
+
+    server {
+        listen  10022;
+        proxy_connect_timeout   30s;
+        proxy_timeout 300s;
+        proxy_pass  service-a;
+    }
 }
 
 http {
@@ -59,26 +59,27 @@ http {
                      '$upstream_response_length $upstream_response_time $upstream_status';
 
     # json日志格式
-    log_format k-json escape=json '{ "@timestamp":"$time_iso8601", '  
-                         '"@fields":{ '  
-                         '"request_uri":"$request_uri", '  
-                         '"url":"$uri", '  
-                         '"upstream_addr":"$upstream_addr", '  
-                         '"remote_addr":"$remote_addr", '  
-                         '"remote_user":"$remote_user", '  
-                         '"body_bytes_sent":"$body_bytes_sent", '  
-                         '"host":"$host", '  
-                         '"server_addr":"$server_addr", '  
-                         '"request_time":"$request_time", '  
-                         '"status":"$status", '  
-                         '"request":"$request", '  
-                         '"request_method":"$request_method", '  
-                         '"upstream_response_time":"$upstream_response_time", '  
-                         '"http_referrer":"$http_referer", '  
-                         '"http_x_forwarded_for":"$http_x_forwarded_for", '  
-                         '"http_user_agent":"$http_user_agent" } }';
+    log_format k-json escape=json '{ "@timestamp":"$time_iso8601", '
+                         '"@fields":{ '
+                         '"request_uri":"$request_uri", '
+                         '"url":"$uri", '
+                         '"upstream_addr":"$upstream_addr", '
+                         '"remote_addr":"$remote_addr", '
+                         '"remote_user":"$remote_user", '
+                         '"body_bytes_sent":"$body_bytes_sent", '
+                         '"host":"$host", '
+                         '"server_addr":"$server_addr", '
+                         '"request_time":"$request_time", '
+                         '"status":"$status", '
+                         '"request":"$request", '
+                         '"request_method":"$request_method", '
+                         '"upstream_response_time":"$upstream_response_time", '
+                         '"http_referrer":"$http_referer", '
+                         '"http_x_forwarded_for":"$http_x_forwarded_for", '
+                         '"http_user_agent":"$http_user_agent" } }';
 
-
+    # 配置字符集
+    charset utf-8;
     # 访问日志
     access_log  /data/logs/nginx-access.log  main;
     # 默认http 1.0, 改成1.1
@@ -89,7 +90,7 @@ http {
     tcp_nopush     on;
     # 尽快发送数据,禁用Nagle算法(等凑满一个MSS-Maximum Segment Size最大报文长度或收到确认再发送)
     tcp_nodelay         on;
-    # 可以看到 TCP_NOPUSH 是要等数据包累积到一定大小才发送, TCP_NODELAY 是要尽快发送, 二者相互矛盾. 实际上, 它们确实可以一起用, 最终的效果是先填满包, 再尽快发送. 在传输过程中, 应用程序发送的数据会被 TCP 协议分割成多个段(segment), 每个段都会被封装为一个网络层的包(packet)进行传输.
+    # 可以看到 TCP_NOPUSH 是要等数据包累积到一定大小才发送, TCP_NODELAY 是要尽快发送, 二者相互矛盾. 实际上, 它们确实可以一起用, 最终的效果是先填满包, 再尽快发送. 在传输过程中, 应用程序发送的数据会被 TCP 协议分割成多个段(segment), 每个段都会被封装为一个网络层的包(packet)进行传输.
 
     keepalive_timeout   360;
     types_hash_max_size 2048;
@@ -114,16 +115,16 @@ http {
 
     # 打开gzip,10k内不压缩
     gzip on;
-    gzip_min_length 10k;    
-    gzip_http_version 1.1;  
-    gzip_comp_level 7;        
+    gzip_min_length 10k;
+    gzip_http_version 1.1;
+    gzip_comp_level 7;
     # 压缩类型，下面的配置压缩了接口。可配置项参考nginx目录下的mime.types
-    gzip_types text/css text/xml application/javascript application/json; 
+    gzip_types text/css text/xml application/javascript application/json;
     gzip_vary on;
-    
+
     gzip_disable "msie6";
     # 等价 gzip_disable "MSIE[1-6]\." 但性能更好,匹配更合适;
-    
+
 
     # 包含目录
     include /usr/local/nginx/conf/hosts/*.conf;
@@ -137,7 +138,7 @@ http {
             root   html;
             index  index.html index.htm;
         }
-        
+
         error_page   500 502 503 504  /50x.html;
         location = /50x.html {
             root   html;
@@ -151,6 +152,9 @@ http {
 `/usr/local/nginx/conf/options/normal.conf`
 
 ```nginx
+# 关闭代表不修改upstream返回的Location,Refresh
+# 后端发送301,location地址可能会有问题,这时候需要开启
+# proxy_redirect http:// https://; 把http改成https
 proxy_redirect off;
 proxy_set_header Host $host;
 proxy_set_header X-Forwarded-Proto $scheme;
@@ -164,10 +168,10 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 `/usr/local/nginx/conf/options/### upgrade_to_websocket.conf`
 
 ```nginx
-proxy_http_version 1.1;  
-proxy_set_header Host $host;  
-proxy_set_header Upgrade $http_upgrade;  
-proxy_set_header Connection "upgrade";
+proxy_http_version 1.1;
+proxy_set_header Host $host;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection "upgrade";
 ```
 
 ### 证书配置
@@ -185,10 +189,10 @@ ssl_certificate_key /usr/local/nginx/conf/ssl/kentxxq.key;
 
 ```nginx
 # $http_origin如果正则匹配了,$allow_origin会变成后面的值
-map $http_origin $allow_origin {  
-    default "";  
-    "~http://www.kentxxq.com" http://www.kentxxq.com;
-    "~https://www.kentxxq.com" https://www.kentxxq.com;
+map $http_origin $allow_origin {
+    default "";
+    "~http://www.kentxxq.com" http://www.kentxxq.com;
+    "~https://www.kentxxq.com" https://www.kentxxq.com;
 }
 ```
 
@@ -199,13 +203,13 @@ map $http_origin $allow_origin {
 `/usr/local/nginx/conf/options/allow_all_cross_origin.conf`
 
 ```nginx
-# add_header 'Access-Control-Allow-Origin' * always;  
-add_header 'Access-Control-Allow-Origin' $http_origin always;  
-add_header 'Access-Control-Allow-Credentials' 'true';  
-add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, HEAD, PUT, DELETE, TRACE, CONNECT';  
-# add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type';  
-add_header 'Access-Control-Allow-Headers' *;  
-add_header 'Access-Control-Max-Age' 86400;
+# add_header 'Access-Control-Allow-Origin' * always;
+add_header 'Access-Control-Allow-Origin' $http_origin always;
+add_header 'Access-Control-Allow-Credentials' 'true';
+add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, HEAD, PUT, DELETE, TRACE, CONNECT';
+# add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type';
+add_header 'Access-Control-Allow-Headers' *;
+add_header 'Access-Control-Max-Age' 86400;
 ```
 
 #### 全部 options 跨域
@@ -213,16 +217,16 @@ add_header 'Access-Control-Max-Age' 86400;
 `/usr/local/nginx/conf/options/allow_all_cross_origin.conf`
 
 ```nginx
-if ($request_method = 'OPTIONS') {  
-    # 前两条的配置为固定格式！兼容性最强。原因是客户端发送ajax请求，包含withCredentials的时候，origin不能为*，且Credentials必须为true。  
-    # 参考链接 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials  
-    add_header 'Access-Control-Allow-Origin' $http_origin always;  
-    add_header 'Access-Control-Allow-Credentials' 'true';  
-    add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS,HEAD,PUT,DELETE, TRACE, CONNECT';  
-    add_header 'Access-Control-Allow-Headers' *;  
-    add_header 'Access-Control-Max-Age' 86400;  
-    add_header 'Content-Length' 0;  
-    return 204;  
+if ($request_method = 'OPTIONS') {
+    # 前两条的配置为固定格式！兼容性最强。原因是客户端发送ajax请求，包含withCredentials的时候，origin不能为*，且Credentials必须为true。
+    # 参考链接 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials
+    add_header 'Access-Control-Allow-Origin' $http_origin always;
+    add_header 'Access-Control-Allow-Credentials' 'true';
+    add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS,HEAD,PUT,DELETE, TRACE, CONNECT';
+    add_header 'Access-Control-Allow-Headers' *;
+    add_header 'Access-Control-Max-Age' 86400;
+    add_header 'Content-Length' 0;
+    return 204;
 }
 ```
 
@@ -231,14 +235,14 @@ if ($request_method = 'OPTIONS') {
 `/usr/local/nginx/conf/options/allow_kentxxq_cross_origin.conf`
 
 ```nginx
-if ($request_method = 'OPTIONS') {  
-    add_header 'Access-Control-Allow-Origin' $allow_origin always;  
-    add_header 'Access-Control-Allow-Credentials' 'true';  
-    add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, HEAD, PUT, DELETE, TRACE, CONNECT';  
-    add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,X-Requested-With,token,terminalType';  
-    add_header 'Access-Control-Max-Age' 86400;  
-    add_header 'Content-Length' 0;  
-    return 204;  
+if ($request_method = 'OPTIONS') {
+    add_header 'Access-Control-Allow-Origin' $allow_origin always;
+    add_header 'Access-Control-Allow-Credentials' 'true';
+    add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, HEAD, PUT, DELETE, TRACE, CONNECT';
+    add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,X-Requested-With,token,terminalType';
+    add_header 'Access-Control-Max-Age' 86400;
+    add_header 'Content-Length' 0;
+    return 204;
 }
 ```
 
@@ -247,30 +251,30 @@ if ($request_method = 'OPTIONS') {
 `/usr/local/nginx/conf/hosts/www.kentxxq.com.conf`
 
 ```nginx
-server {  
-    listen 80;  
-    server_name www.kentxxq.com;  
-    return 301 https://$server_name$request_uri;  
-    access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log k-json; 
-}  
-  
-server {  
-    listen 443 ssl http2;  
-    server_name www.kentxxq.com;    
-    access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log k-json; 
+server {
+    listen 80;
+    server_name www.kentxxq.com;
+    return 301 https://$server_name$request_uri;
+    access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log k-json;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name www.kentxxq.com;
+    access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log k-json;
 
     # 普通header头,ip之类的
-    include /usr/local/nginx/conf/options/normal.conf;  
-    # 跨域
-    include /usr/local/nginx/conf/options/allow_all_cross_origin.conf;
-    # 证书相关
-    include /usr/local/nginx/conf/options/ssl_kentxxq.conf;  
+    include /usr/local/nginx/conf/options/normal.conf;
+    # 跨域
+    include /usr/local/nginx/conf/options/allow_all_cross_origin.conf;
+    # 证书相关
+    include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
 
-    location / {  
-        # 跨域
-        include /usr/local/nginx/conf/options/allow_all_options_cross_origin.conf;
-        proxy_pass http://1.1.1.1:80;  
-    }  
+    location / {
+        # 跨域
+        include /usr/local/nginx/conf/options/allow_all_options_cross_origin.conf;
+        proxy_pass http://1.1.1.1:80;
+    }
 }
 ```
 
@@ -289,67 +293,67 @@ location / {
 #### 完整版本
 
 ```nginx
-server {  
-    listen 80;  
-    server_name www.kentxxq.com;  
-    return 301 https://$server_name$request_uri;  
-    access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log; 
-}  
-  
-server {  
-    listen 443 ssl http2;  
-    server_name www.kentxxq.com;    
-    access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log; 
+server {
+    listen 80;
+    server_name www.kentxxq.com;
+    return 301 https://$server_name$request_uri;
+    access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log;
+}
 
-    include /usr/local/nginx/conf/options/normal.conf;
-    include /usr/local/nginx/conf/options/ssl_kentxxq.conf;  
+server {
+    listen 443 ssl http2;
+    server_name www.kentxxq.com;
+    access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log;
 
-    location / {  
-        if ($request_filename ~* .*\.(?:htm|html)$)  
-        {  
-           add_header Cache-Control "no-store";  
-        }  
-        root /usr/share/nginx/html;  
-        try_files $uri @index ;  
-    }  
-  
-    location @index {  
-        add_header Cache-Control "no-store" ;  
-        root /usr/share/nginx/html;  
-        index index.html index.htm;  
-        try_files $uri/index.html /index.html;  
-    }  
-          
-    error_page 405 =200 $uri;   
+    include /usr/local/nginx/conf/options/normal.conf;
+    include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
+
+    location / {
+        if ($request_filename ~* .*\.(?:htm|html)$)
+        {
+           add_header Cache-Control "no-store";
+        }
+        root /usr/share/nginx/html;
+        try_files $uri @index ;
+    }
+
+    location @index {
+        add_header Cache-Control "no-store" ;
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        try_files $uri/index.html /index.html;
+    }
+
+    error_page 405 =200 $uri;
 }
 ```
 
 #### 容器版本
 
 ```nginx
-server {  
-    listen 80;  
-    listen [::]:80;  
-    server_name localhost default_server;  
-    client_max_body_size 200m;  
-  
-    location / {  
-        if ($request_filename ~* .*\.(?:htm|html)$)  
-        {  
-           add_header Cache-Control "no-store";  
-        }  
-        root /usr/share/nginx/html;  
-        try_files $uri @index ;  
-    }  
-  
-    location @index {  
-        add_header Cache-Control "no-store" ;  
-        root /usr/share/nginx/html;  
-        index index.html index.htm;  
-        try_files $uri/index.html /index.html;  
-    }  
-          
-    error_page 405 =200 $uri;  
+server {
+    listen 80;
+    listen [::]:80;
+    server_name localhost default_server;
+    client_max_body_size 200m;
+
+    location / {
+        if ($request_filename ~* .*\.(?:htm|html)$)
+        {
+           add_header Cache-Control "no-store";
+        }
+        root /usr/share/nginx/html;
+        try_files $uri @index ;
+    }
+
+    location @index {
+        add_header Cache-Control "no-store" ;
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        try_files $uri/index.html /index.html;
+    }
+
+    error_page 405 =200 $uri;
 }
 ```
 
@@ -384,6 +388,32 @@ server {
 
 ```
 
+### 代理 openai
+
+```nginx
+server {
+    listen 8888;
+    server_name ip;
+    access_log /tmp/openai.com.log;
+
+    location / {
+        # 使用特定ca来验证证书,默认不验证
+        # proxy_ssl_verify on;
+        # proxy_ssl_trusted_certificate /etc/nginx/conf.d/cacert.pem;
+        # 默认不带SNI,会返回错误的证书,因此需要开启
+        proxy_ssl_server_name on;
+        # 可以改变SNI的名称,但是没必要
+        # proxy_ssl_name www.baidu.com;
+        proxy_set_header Host api.openai.com;
+        proxy_pass https://api.openai.com;
+    }
+}
+```
+
+相关资料:
+
+- [Nginx 反向代理，当后端为 Https 时的一些细节和原理 - XniLe - Ops 2.0](https://blog.dianduidian.com/post/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%BD%93%E5%90%8E%E7%AB%AF%E4%B8%BAhttps%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82%E5%92%8C%E5%8E%9F%E7%90%86/)
+
 ### 用户名密码
 
 ```nginx
@@ -391,10 +421,10 @@ server {
 apt install apache2-utils -y
 # 密码在 /usr/local/nginx/conf/passwd.db ,让你输入密码
 htpasswd -c /usr/local/nginx/conf/passwd.db user1
-  
-# 配置使用用户名密码  
+
+# 配置使用用户名密码
 location / {
-    auth_basic "需要输入用户名: 密码:"; 
+    auth_basic "需要输入用户名: 密码:";
     auth_basic_user_file /usr/local/nginx/conf/passwd.db;
     proxy_pass http://1.1.1.1:80;
 }
@@ -434,7 +464,7 @@ location /string {
     default_type text/html;
     return 200 "维护中";
 }
-            
+
 location /json {
     default_type application/json;
     return 200 '{"status":"success","result":"nginx json"}';
@@ -444,8 +474,8 @@ location /json {
 ### 405 错误 -post 请求静态文件
 
 ```nginx
-# 这一行加在server的第一层，不能加在location位置  
-error_page 405 =200 $uri;
+# 这一行加在server的第一层，不能加在location位置
+error_page 405 =200 $uri;
 ```
 
 ### 防止嵌入 iframe
@@ -459,6 +489,46 @@ error_page 405 =200 $uri;
 add_header Content-Security-Policy "frame-ancestors 'self' a.com b.com *.a.com *.b.com; frame-src 'self' a.com b.com *.a.com *.b.com";
 ```
 
+## 守护进程
+
+[[笔记/point/supervisor|supervisor]] 守护起来
+
+- 开机自启
+- 异常自动重启
+
+```toml
+[program:nginx]
+command = /usr/local/nginx/sbin/nginx -g 'daemon off;'
+
+# 启动进程数目默认为1
+numprocs = 1
+# 如果supervisord是root启动的 设置此用户可以管理该program
+user = root
+# 程序运行的优先级 默认999
+priority = 996
+
+# 随着supervisord 自启动
+autostart = true
+# 子进程挂掉后无条件自动重启
+autorestart = true
+# 子进程启动多少秒之后 状态为running 表示运行成功
+startsecs = 20
+# 进程启动失败 最大尝试次数 超过将把状态置为FAIL
+startretries = 3
+# 标准输出的文件路径
+stdout_logfile = /tmp/nginx-supervisor.log
+# 日志文件最大大小
+stdout_logfile_maxbytes=20MB
+# 日志文件保持数量 默认为10 设置为0 表示不限制
+stdout_logfile_backups = 3
+# 错误输出的文件路径
+stderr_logfile = /tmp/nginx-supervisor.log
+# 日志文件最大大小
+stderr_logfile_maxbytes=20MB
+# 日志文件保持数量 默认为10 设置为0 表示不限制
+stderr_logfile_backups = 3
+```
+
 ## Ingress-nginx 配置
 
 ```nginx
@@ -466,52 +536,52 @@ add_header Content-Security-Policy "frame-ancestors 'self' a.com b.com *.a.com *
 use-forwarded-headers: 'true'
 
 # yml配置
-kind: Ingress  
-apiVersion: networking.k8s.io/v1  
-metadata:  
-  name: gateway.gateway.com  
-  namespace: default
-  annotations:  
-    kubectl.kubernetes.io/last-applied-configuration: >  
-      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"kubernetes.io/ingress.class":"nginx","nginx.ingress.kubernetes.io/cors-allow-headers":"uid,download,repeat,DNT,X-CustomHeader,X-LANG,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,X-Api-Key,X-Device-Id,Access-Control-Allow-Origin,authorization","nginx.ingress.kubernetes.io/cors-allow-methods":"PUT,  
-      GET, POST, OPTIONS,  
-      DELETE","nginx.ingress.kubernetes.io/cors-allow-origin":"*","nginx.ingress.kubernetes.io/enable-cors":"true"},"name":"gateway.kentxxq.com","namespace":"default"},"spec":{"ingressClassName":"nginx","rules":[{"host":"gateway.kentxxq.com","http":{"paths":[{"backend":{"service":{"name":"gateway","port":{"number":8090}}},"path":"/","pathType":"Prefix"}]}}],"tls":[{"hosts":["gateway.kentxxq.com"],"secretName":"a.kentxxq.com-secret"}]}}  
-    kubernetes.io/ingress.class: nginx  
-    nginx.ingress.kubernetes.io/cors-allow-headers: >-  
-      uid,download,repeat,DNT,X-CustomHeader,X-LANG,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,X-Api-Key,X-Device-Id,Access-Control-Allow-Origin,authorization  
-    nginx.ingress.kubernetes.io/cors-allow-methods: 'PUT, GET, POST, OPTIONS, DELETE'  
-    nginx.ingress.kubernetes.io/cors-allow-origin: '*'  
-    nginx.ingress.kubernetes.io/enable-cors: 'true'  
-    # 下面是手动添加内容，用于压测或自定义  
-    nginx.ingress.kubernetes.io/server-snippet: |  
-      location /200_ingress_nginx {  
-        default_type text/html;  
-        return 200 "200_ingress_nginx";  
-      }  
-spec:  
-  ingressClassName: nginx  
-  tls:  
-    - hosts:  
-        - gateway.kentxxq.com  
-      secretName: a.kentxxq.com-secret  
-  rules:  
-    - host: gateway.kentxxq.com  
-      http:  
-        paths:  
-          - path: /  
-            pathType: Prefix  
-            backend:  
-              service:  
-                name: gateway  
-                port:  
-                  number: 8090  
-          - path: /200_ingress_to_nginx  
-            pathType: Prefix  
-            backend:  
-              service:  
-                name: test-nginx  
-                port:  
-                  number: 80
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: gateway.gateway.com
+  namespace: default
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"kubernetes.io/ingress.class":"nginx","nginx.ingress.kubernetes.io/cors-allow-headers":"uid,download,repeat,DNT,X-CustomHeader,X-LANG,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,X-Api-Key,X-Device-Id,Access-Control-Allow-Origin,authorization","nginx.ingress.kubernetes.io/cors-allow-methods":"PUT,
+      GET, POST, OPTIONS,
+      DELETE","nginx.ingress.kubernetes.io/cors-allow-origin":"*","nginx.ingress.kubernetes.io/enable-cors":"true"},"name":"gateway.kentxxq.com","namespace":"default"},"spec":{"ingressClassName":"nginx","rules":[{"host":"gateway.kentxxq.com","http":{"paths":[{"backend":{"service":{"name":"gateway","port":{"number":8090}}},"path":"/","pathType":"Prefix"}]}}],"tls":[{"hosts":["gateway.kentxxq.com"],"secretName":"a.kentxxq.com-secret"}]}}
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/cors-allow-headers: >-
+      uid,download,repeat,DNT,X-CustomHeader,X-LANG,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,X-Api-Key,X-Device-Id,Access-Control-Allow-Origin,authorization
+    nginx.ingress.kubernetes.io/cors-allow-methods: 'PUT, GET, POST, OPTIONS, DELETE'
+    nginx.ingress.kubernetes.io/cors-allow-origin: '*'
+    nginx.ingress.kubernetes.io/enable-cors: 'true'
+    # 下面是手动添加内容，用于压测或自定义
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location /200_ingress_nginx {
+        default_type text/html;
+        return 200 "200_ingress_nginx";
+      }
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - gateway.kentxxq.com
+      secretName: a.kentxxq.com-secret
+  rules:
+    - host: gateway.kentxxq.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port:
+                  number: 8090
+          - path: /200_ingress_to_nginx
+            pathType: Prefix
+            backend:
+              service:
+                name: test-nginx
+                port:
+                  number: 80
 
 ```
 

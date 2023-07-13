@@ -3,6 +3,7 @@ title: elastalert2钉钉告警
 tags:
   - blog
   - devops
+  - 告警
 date: 2022-05-24
 lastmod: 2023-07-11
 categories:

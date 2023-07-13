@@ -12,7 +12,7 @@ description: "这里记录一下 supervisor 在 [[笔记/point/linux|linux]] 下
 
 ## 简介
 
-这里记录一下 supervisor 在 [[笔记/point/linux|linux]] 下的常用配置, 方便复用.
+这里记录一下 [[笔记/point/supervisor|supervisor]] 的常用配置, 方便复用.
 
 ## 操作手册
 
@@ -36,7 +36,6 @@ systemctl start supervisor
 
 ```toml
 [program:demo]
-
 environment=VAR1="value1",VAR2="value2"
 directory = /root/app_dir
 command = /xxx/java -jar app.jar

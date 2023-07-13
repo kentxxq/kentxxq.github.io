@@ -27,16 +27,16 @@ $ tree
 ├── MANIFEST.in
 ├── README.md
 ├── myapp
-│   ├── 1.txt
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-36.pyc
-│   │   └── test.cpython-36.pyc
-│   ├── test.py
-│   └── txt
-│       └── 1.txt
+│   ├── 1.txt
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-36.pyc
+│   │   └── test.cpython-36.pyc
+│   ├── test.py
+│   └── txt
+│       └── 1.txt
 ├── myapp2
-│   └── test222.py
+│   └── test222.py
 └── setup.py
 
 4 directories, 10 files
@@ -55,7 +55,7 @@ recursive-include myapp/txt *
 
 3. `myapp` 和 `myapp2` 都是存放代码
 
-4. `setup.py` 是用来安装和打包的主要文件  
+4. `setup.py` 是用来安装和打包的主要文件
 
 ```python
 # -*- coding: utf-8 -*-
@@ -105,17 +105,17 @@ python setup.py install
 $ tree kentxxq-1.0.2-py3.6.egg
 kentxxq-1.0.2-py3.6.egg
 ├── EGG-INFO
-│   ├── dependency_links.txt
-│   ├── not-zip-safe
-│   ├── PKG-INFO
-│   ├── requires.txt
-│   ├── SOURCES.txt
-│   └── top_level.txt
+│   ├── dependency_links.txt
+│   ├── not-zip-safe
+│   ├── PKG-INFO
+│   ├── requires.txt
+│   ├── SOURCES.txt
+│   └── top_level.txt
 └── myapp
     ├── __init__.py
     ├── __pycache__
-    │   ├── __init__.cpython-36.pyc
-    │   └── test.cpython-36.pyc
+    │   ├── __init__.cpython-36.pyc
+    │   └── test.cpython-36.pyc
     ├── test.py
     └── txt
         └── 1.txt

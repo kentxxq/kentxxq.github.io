@@ -25,10 +25,10 @@ CREATE USER 'ttt'@'%' IDENTIFIED BY '123456';
 grant all privileges on  *.* to 'ttt'@'%';
 
 # 授权
-GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX,TRIGGER,CREATE VIEW,SHOW VIEW ON `db`.`table` TO 'ttt'@'%';
+GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX,TRIGGER,CREATE VIEW,SHOW VIEW ON `db`.`table` TO 'ttt'@'%';
 
 # 改密码
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';  
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
 FLUSH PRIVILEGES;
 
 ```

@@ -40,10 +40,10 @@ description: "这里是用 [[笔记/point/obsidian|obsidian]] 发布到 [[point/
   description: "kentxxq's digital garden"
   page_title: "🪴 kentxxq's digital garden"
   links:
-    - link_name: Blog
-      link: https://www.kentxxq.com
-    - link_name: GitHub
-      link: https://github.com/kentxxq
+    - link_name: Blog
+      link: https://www.kentxxq.com
+    - link_name: GitHub
+      link: https://github.com/kentxxq
   ```
 
 - 编辑 `config.toml`
@@ -51,9 +51,9 @@ description: "这里是用 [[笔记/point/obsidian|obsidian]] 发布到 [[point/
   ```toml
   baseURL = "https://blog.kentxxq.com/"
   ignoreFiles = [
-      "/content/templates/*",
-      "/content/private/*",
-      "/content/附件/*.md",
+      "/content/templates/*",
+      "/content/private/*",
+      "/content/附件/*.md",
   ]
   ```
 
@@ -67,8 +67,8 @@ description: "这里是用 [[笔记/point/obsidian|obsidian]] 发布到 [[point/
 - 修改 `layouts/partials/date-fmt.html` 里的日志格式
 
   ```html
-  {{if .Date}} {{.Date.Format "2006-01-02"}} {{else if .Lastmod}} {{.Lastmod.Format "2006-01-02"}}
-  {{else}} Unknown {{end}}
+  {{if .Date}} {{.Date.Format "2006-01-02"}} {{else if .Lastmod}}
+  {{.Lastmod.Format "2006-01-02"}} {{else}} Unknown {{end}}
   ```
 
 - 修改 `.github/workflows/deploy.yaml` 文件
@@ -76,44 +76,44 @@ description: "这里是用 [[笔记/point/obsidian|obsidian]] 发布到 [[point/
   ```yml
   name: Deploy to GitHub Pages
   on:
-    push:
-      branches:
-        - hugo
+    push:
+      branches:
+        - hugo
   jobs:
-    deploy:
-      runs-on: ubuntu-20.04
-      steps:
-        - uses: actions/checkout@v2
-          with:
-            fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
-        - name: Build Link Index
-          uses: jackyzha0/hugo-obsidian@v2.20
-          with:
-            index: true
-            input: content
-            output: assets/indices
-            root: .
-        - name: Setup Hugo
-          uses: peaceiris/actions-hugo@v2
-          with:
-            hugo-version: "0.96.0"
-            extended: true
-        - name: Build
-          run: hugo --minify
-        - name: Deploy
-          uses: peaceiris/actions-gh-pages@v3
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./public
-            publish_branch: master # deploying branch
-            cname: blog.kentxxq.com # 先用blog来做测试
+    deploy:
+      runs-on: ubuntu-20.04
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+        - name: Build Link Index
+          uses: jackyzha0/hugo-obsidian@v2.20
+          with:
+            index: true
+            input: content
+            output: assets/indices
+            root: .
+        - name: Setup Hugo
+          uses: peaceiris/actions-hugo@v2
+          with:
+            hugo-version: "0.96.0"
+            extended: true
+        - name: Build
+          run: hugo --minify
+        - name: Deploy
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./public
+            publish_branch: master # deploying branch
+            cname: blog.kentxxq.com # 先用blog来做测试
   ```
 
 ### 配置 githubPage
 
 > 到你的 quartz 仓库调整配置
 >
-> 进入 `Settings > Action > General > Workflow Permissions`  并选中  `Read and Write Permissions` ![[附件/配置secrets.GITHUB_TOKEN的权限.png]]
+> 进入 `Settings > Action > General > Workflow Permissions` 并选中 `Read and Write Permissions` ![[附件/配置secrets.GITHUB_TOKEN的权限.png]]
 
 ### 使用说明
 

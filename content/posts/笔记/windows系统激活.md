@@ -49,9 +49,9 @@ slmgr /ato
 docker run -d -p 1688:1688 --name kms --restart=always teddysun/kms
 
 # 验证
-# 查看服务的版本信息  
+# 查看服务的版本信息
 vlmcs.exe -v kms.luody.info
-# 查看支持的服务类型  
+# 查看支持的服务类型
 vlmcs.exe -x kms.luody.info
 ```
 
@@ -61,8 +61,8 @@ vlmcs.exe -x kms.luody.info
 
 ## 可能遇到的问题
 
-### 弹出内部版本 xx 过期  
+### 弹出内部版本 xx 过期
 
-我用的是 win10 预览版，一直没有激活。激活了以后，一直弹出内部版本过期。  
+我用的是 win10 预览版，一直没有激活。激活了以后，一直弹出内部版本过期。
 
 进入系统更新，升级到最新的版本，之后重启解决

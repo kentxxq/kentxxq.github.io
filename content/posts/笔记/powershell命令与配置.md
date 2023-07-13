@@ -34,7 +34,7 @@ echo $env:CGO_ENABLED
 ```powershell
 # 查询所有命令
 Get-Command
-# 查询名字包含Process的命令 
+# 查询名字包含Process的命令
 Get-Command -Name *Process
 
 # 查看alias
@@ -70,11 +70,11 @@ oh-my-posh init pwsh --config "D:\OneDrive\kentxxq\config\oh-my-posh\theme.json"
 
 # vpn命令
 function vpn {
-    $Env:http_proxy = "http://127.0.0.1:7890"; $Env:https_proxy = "http://127.0.0.1:7890";
+    $Env:http_proxy = "http://127.0.0.1:7890"; $Env:https_proxy = "http://127.0.0.1:7890";
 }
 
 function novpn {
-    $Env:http_proxy = ""; $Env:https_proxy = "";
+    $Env:http_proxy = ""; $Env:https_proxy = "";
 }
 
 # 配合ssh-agent使用

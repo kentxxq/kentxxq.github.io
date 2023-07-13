@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-07-08
+lastmod: 2023-07-13
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -29,7 +29,12 @@ kentxxq ALL=(ALL)    NOPASSWD: ALL  # 加入此行
 ### alias
 
 ```shell
-alias vpn='export http_proxy=http://1.1.1.1:7890; export https_proxy=http://1.1.1.1:7890;'
+# 当前会话代理
+alias vpn='export http_proxy=http://1.1.1.1:7890; export https_proxy=http://1.1.1.1:7890;'
+# 带密码代理
+alias vpn='export http_proxy=http://user1:pass1@1.1.1.1:7890; export https_proxy=http://user1:pass1@1.1.1.1:7890;'
+
+# 清空
 alias novpn='unset http_proxy; unset https_proxy;'
 ```
 
@@ -131,7 +136,7 @@ iwconfig
 ### 关闭防火墙
 
 ```shell
-ufw disable
+ufw disable
 ```
 
 ### 安装桌面
@@ -154,7 +159,7 @@ reboot
 setenforce 0
 
 # 永久生效
-vim /etc/selinux/config  
+vim /etc/selinux/config
 SELINUX=disabled
 ```
 
@@ -272,7 +277,7 @@ history -c
 ### 压缩/解压 tar
 
 ```shell
-# z是使用gzip 
+# z是使用gzip
 # v是查看细节
 # f是指定文件
 # --strip-components=1 去掉一层解压目录
@@ -286,12 +291,20 @@ tar -xzvf dist.tgz
 tar Cxzvf /dist dist.tgz
 
 # 打包隐藏文件
-# 通过 . 可以打包到隐藏文件 
+# 通过 . 可以打包到隐藏文件
 tar -czvf dist.tgz /dad/path/.
 # 通过上级目录来打包
 tar -czvf dist.tgz /data/path
 # 如果是在当前目录，可以手动指定
-tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* * 
+tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* *
+```
+
+### 软链接 ln
+
+```shell
+# ln -s 现有文件 链接名称
+# 创建/usr/local/nginx/sbin/nginx的快捷方式到/usr/local/bin/nginx
+ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/nginx
 ```
 
 ### 配置主机名
@@ -403,7 +416,7 @@ ps -eo pid,lstart,etime | grep 1310
 ```shell
 # 本地到远程
 scp /path/thing root@10.10.10.10:/path/thing
-# 远程到本地 
+# 远程到本地
 # -r遍历
 # -C压缩
 sshpass -p 密码 -o StrictHostKeyChecking=no scp -Cr root@10.10.10.10:/path/folder /path/folder
@@ -456,7 +469,7 @@ sed -i 's/old-a/new-b/g' `grep kentxxq -rl ./`
 lsb_release -a
 LSB Version: :core-4.1-amd64:core-4.1-noarch
 Distributor ID: CentOS
-Description: CentOS Linux release 8.0.1905 (Core) 
+Description: CentOS Linux release 8.0.1905 (Core)
 Release: 8.0.1905
 Codename: Core
 # cpu信息
