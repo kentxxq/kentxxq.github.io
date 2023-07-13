@@ -45,7 +45,7 @@
 </span><span class=lnt>18
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 查询所有命令</span>
 </span></span><span class=line><span class=cl><span class=nb>Get-Command</span>
-</span></span><span class=line><span class=cl><span class=c># 查询名字包含Process的命令 </span>
+</span></span><span class=line><span class=cl><span class=c># 查询名字包含Process的命令</span>
 </span></span><span class=line><span class=cl><span class=nb>Get-Command</span> <span class=n>-Name</span> <span class=p>*</span><span class=k>Process</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c># 查看alias</span>
@@ -96,11 +96,11 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c># vpn命令</span>
 </span></span><span class=line><span class=cl><span class=kd>function</span><span class=w> </span><span class=nb>vpn</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl><span class=err> </span> <span class=err> </span> <span class=nv>$Env:http_proxy</span> <span class=p>=</span> <span class=s2>&#34;http://127.0.0.1:7890&#34;</span><span class=p>;</span> <span class=nv>$Env:https_proxy</span> <span class=p>=</span> <span class=s2>&#34;http://127.0.0.1:7890&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=nv>$Env:http_proxy</span> <span class=p>=</span> <span class=s2>&#34;http://127.0.0.1:7890&#34;</span><span class=p>;</span> <span class=nv>$Env:https_proxy</span> <span class=p>=</span> <span class=s2>&#34;http://127.0.0.1:7890&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>function</span><span class=w> </span><span class=nb>novpn</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl><span class=err> </span> <span class=err> </span> <span class=nv>$Env:http_proxy</span> <span class=p>=</span> <span class=s2>&#34;&#34;</span><span class=p>;</span> <span class=nv>$Env:https_proxy</span> <span class=p>=</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=nv>$Env:http_proxy</span> <span class=p>=</span> <span class=s2>&#34;&#34;</span><span class=p>;</span> <span class=nv>$Env:https_proxy</span> <span class=p>=</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c># 配合ssh-agent使用</span>

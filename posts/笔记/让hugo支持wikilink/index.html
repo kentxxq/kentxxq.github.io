@@ -205,7 +205,7 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// 采用那种方法解析链接?
 </span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>WikilinkReslover</span> <span class=kt>string</span>
 </span></span><span class=line><span class=cl>	<span class=c1>// ROOT模式下,传入路径前缀
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=err> </span> <span class=err> </span> <span class=nx>WikilinkRootPath</span> <span class=kt>string</span>
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>WikilinkRootPath</span> <span class=kt>string</span>
 </span></span><span class=line><span class=cl>	<span class=c1>// 是否启用wikilink
 </span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>EnableWikilink</span>   <span class=kt>bool</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
@@ -326,7 +326,7 @@
 </span></span><span class=line><span class=cl><span class=c># -v 详细信息</span>
 </span></span><span class=line><span class=cl><span class=c># -x 打印出执行的命令，以及相关的详细信息</span>
 </span></span><span class=line><span class=cl><span class=c># extended是加入sass,release则是hugo自定义</span>
-</span></span><span class=line><span class=cl><span class=c># `-s` 表示禁用符号表，`-w` 表示禁用 DWARF 调试信息，`-extldflags &#39;-static&#39;` 表示使用静态链接方式进行链接。</span>
+</span></span><span class=line><span class=cl><span class=c># `-s` 表示禁用符号表，`-w` 表示禁用 DWARF 调试信息，`-extldflags &#39;-static&#39;` 表示使用静态链接方式进行链接。</span>
 </span></span><span class=line><span class=cl><span class=n>go</span> <span class=n>build</span>  <span class=n>-v</span> <span class=n>-x</span> <span class=n>-tags</span> <span class=n>extended</span><span class=p>,</span><span class=n>release</span> <span class=n>-ldflags</span> <span class=s2>&#34;-s -w -extldflags &#39;-static&#39;&#34;</span>
 </span></span><span class=line><span class=cl><span class=c># 文件夹多出一个hugo.exe</span>
 </span></span></code></pre></td></tr></table></div></div><h3 id=hugo-预览 class=headerLink><a href=#hugo-%e9%a2%84%e8%a7%88 class=header-mark></a>hugo 预览</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1

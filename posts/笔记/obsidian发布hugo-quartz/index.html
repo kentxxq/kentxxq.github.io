@@ -25,10 +25,10 @@
 </span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>description</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;kentxxq&#39;s digital garden&#34;</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>page_title</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;🪴 kentxxq&#39;s digital garden&#34;</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>links</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>  - link_name</span><span class=p>:</span><span class=w> </span><span class=l>Blog</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>    link</span><span class=p>:</span><span class=w> </span><span class=l>https://www.kentxxq.com</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>  - link_name</span><span class=p>:</span><span class=w> </span><span class=l>GitHub</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>    link</span><span class=p>:</span><span class=w> </span><span class=l>https://github.com/kentxxq</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>link_name</span><span class=p>:</span><span class=w> </span><span class=l>Blog</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>link</span><span class=p>:</span><span class=w> </span><span class=l>https://www.kentxxq.com</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>link_name</span><span class=p>:</span><span class=w> </span><span class=l>GitHub</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>link</span><span class=p>:</span><span class=w> </span><span class=l>https://github.com/kentxxq</span><span class=w>
 </span></span></span></code></pre></td></tr></table></div></div></li><li><p>编辑 <code>config.toml</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
@@ -37,16 +37,16 @@
 </span><span class=lnt>6
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=line><span class=cl><span class=nx>baseURL</span> <span class=p>=</span> <span class=s2>&#34;https://blog.kentxxq.com/&#34;</span>
 </span></span><span class=line><span class=cl><span class=nx>ignoreFiles</span> <span class=p>=</span> <span class=p>[</span>
-</span></span><span class=line><span class=cl><span class=err> </span> <span class=err> </span> <span class=s2>&#34;/content/templates/*&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl><span class=err> </span> <span class=err> </span> <span class=s2>&#34;/content/private/*&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl><span class=err> </span> <span class=err> </span> <span class=s2>&#34;/content/附件/*.md&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;/content/templates/*&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;/content/private/*&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;/content/附件/*.md&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl><span class=p>]</span>
 </span></span></code></pre></td></tr></table></div></div></li><li><p>注释掉 <code>.github/workflows/docker-publish.yaml</code> 文件</p></li><li><p><code>.gitignore</code> 过滤 private 文件夹</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>content/private
 </span></span></code></pre></td></tr></table></div></div></li><li><p>修改 <code>layouts/partials/date-fmt.html</code> 里的日志格式</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl>{{if .Date}} {{.Date.Format &#34;2006-01-02&#34;}} {{else if .Lastmod}} {{.Lastmod.Format &#34;2006-01-02&#34;}}
-</span></span><span class=line><span class=cl>{{else}} Unknown {{end}}
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl>{{if .Date}} {{.Date.Format &#34;2006-01-02&#34;}} {{else if .Lastmod}}
+</span></span><span class=line><span class=cl>{{.Lastmod.Format &#34;2006-01-02&#34;}} {{else}} Unknown {{end}}
 </span></span></code></pre></td></tr></table></div></div></li><li><p>修改 <code>.github/workflows/deploy.yaml</code> 文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
@@ -82,38 +82,38 @@
 </span><span class=lnt>33
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy to GitHub Pages</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>  push</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>    branches</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>      - hugo</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>hugo</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>  deploy</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>    runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-20.04</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>    steps</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>      - uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>        with</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>          fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w> </span><span class=c># Fetch all history for .GitInfo and .Lastmod</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>      - name</span><span class=p>:</span><span class=w> </span><span class=l>Build Link Index</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>        uses</span><span class=p>:</span><span class=w> </span><span class=l>jackyzha0/hugo-obsidian@v2.20</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>        with</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>          index</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>          input</span><span class=p>:</span><span class=w> </span><span class=l>content</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>          output</span><span class=p>:</span><span class=w> </span><span class=l>assets/indices</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>          root</span><span class=p>:</span><span class=w> </span><span class=l>.</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>      - name</span><span class=p>:</span><span class=w> </span><span class=l>Setup Hugo</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>        uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>        with</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>          hugo-version</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;0.96.0&#34;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>          extended</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>      - name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>        run</span><span class=p>:</span><span class=w> </span><span class=l>hugo --minify</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>      - name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>        uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v3</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>        with</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>          github_token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITHUB_TOKEN }}</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>          publish_dir</span><span class=p>:</span><span class=w> </span><span class=l>./public</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>          publish_branch</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w> </span><span class=c># deploying branch</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>          cname</span><span class=p>:</span><span class=w> </span><span class=l>blog.kentxxq.com</span><span class=w> </span><span class=c># 先用blog来做测试</span><span class=w>
-</span></span></span></code></pre></td></tr></table></div></div></li></ul><h3 id=配置-githubpage class=headerLink><a href=#%e9%85%8d%e7%bd%ae-githubpage class=header-mark></a>配置 githubPage</h3><blockquote><p>到你的 quartz 仓库调整配置</p><p>进入 <code>Settings > Action > General > Workflow Permissions</code>  并选中  <code>Read and Write Permissions</code> <img src=/posts/%E9%99%84%E4%BB%B6/%E9%85%8D%E7%BD%AEsecrets.GITHUB_TOKEN%E7%9A%84%E6%9D%83%E9%99%90.png></p></blockquote><h3 id=使用说明 class=headerLink><a href=#%e4%bd%bf%e7%94%a8%e8%af%b4%e6%98%8e class=header-mark></a>使用说明</h3><ul><li><p><code>vault</code> 应该创建在 content 下面</p></li><li><p><code>_index.md</code> 是 quartz 的首页</p></li><li><p>设置 - 编辑器 - 显示 - 显示 frontmatter, 方便我们迅速查看调整 tag, 标题之类的内容</p></li><li><p>做一个模板,方便你以后用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>deploy</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-20.04</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w> </span><span class=c># Fetch all history for .GitInfo and .Lastmod</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build Link Index</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>jackyzha0/hugo-obsidian@v2.20</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>index</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>input</span><span class=p>:</span><span class=w> </span><span class=l>content</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>output</span><span class=p>:</span><span class=w> </span><span class=l>assets/indices</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>root</span><span class=p>:</span><span class=w> </span><span class=l>.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup Hugo</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;0.96.0&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>extended</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>hugo --minify</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>github_token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITHUB_TOKEN }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>publish_dir</span><span class=p>:</span><span class=w> </span><span class=l>./public</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>publish_branch</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w> </span><span class=c># deploying branch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>cname</span><span class=p>:</span><span class=w> </span><span class=l>blog.kentxxq.com</span><span class=w> </span><span class=c># 先用blog来做测试</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div></li></ul><h3 id=配置-githubpage class=headerLink><a href=#%e9%85%8d%e7%bd%ae-githubpage class=header-mark></a>配置 githubPage</h3><blockquote><p>到你的 quartz 仓库调整配置</p><p>进入 <code>Settings > Action > General > Workflow Permissions</code> 并选中 <code>Read and Write Permissions</code> <img src=/posts/%E9%99%84%E4%BB%B6/%E9%85%8D%E7%BD%AEsecrets.GITHUB_TOKEN%E7%9A%84%E6%9D%83%E9%99%90.png></p></blockquote><h3 id=使用说明 class=headerLink><a href=#%e4%bd%bf%e7%94%a8%e8%af%b4%e6%98%8e class=header-mark></a>使用说明</h3><ul><li><p><code>vault</code> 应该创建在 content 下面</p></li><li><p><code>_index.md</code> 是 quartz 的首页</p></li><li><p>设置 - 编辑器 - 显示 - 显示 frontmatter, 方便我们迅速查看调整 tag, 标题之类的内容</p></li><li><p>做一个模板,方便你以后用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
