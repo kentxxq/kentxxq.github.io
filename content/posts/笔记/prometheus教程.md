@@ -3,8 +3,10 @@ title: prometheus教程
 tags:
   - blog
   - prometheus
+  - devops
+  - 监控
 date: 2023-07-11
-lastmod: 2023-07-11
+lastmod: 2023-07-14
 categories:
   - blog
 description: 
@@ -57,3 +59,29 @@ description:
     ```
 
 3. 验证 `curl 127.0.0.1:9090`
+
+### 常用配置
+
+官网完整配置查看 [Configuration | Prometheus](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)
+
+```yml
+global:
+  scrape_interval: 15s # 每15s采集一次
+  evaluation_interval: 15s # 每15s进行一次规则计算,数据汇总
+  # scrape_timeout: 10s # 默认10s超时
+
+scrape_configs:
+  # 极简
+  - job_name: "demo_node"
+    static_configs:
+      - targets: ["localhost:9100"]
+      
+  # 常用配置
+  - job_name: "demo_app"
+    tls_config:
+      insecure_skip_verify: true # 忽略证书
+    scheme: https            # 默认http
+    metrics_path: "/metrics" # 默认
+    static_configs:
+      - targets: ["192.168.31.100:5001"]
+```

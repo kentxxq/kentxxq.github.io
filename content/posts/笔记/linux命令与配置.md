@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-07-13
+lastmod: 2023-07-18
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -29,11 +29,18 @@ kentxxq ALL=(ALL)    NOPASSWD: ALL  # 加入此行
 ### alias
 
 ```shell
+# 查看出口ip
+alias myip = 'curl -L test.kentxxq.com/ip'
+
+# 全部代理配置
+alias vpn='export all_proxy=http://1.1.1.1:7890;'
+# 清空
+alias novpn='unset all_proxy;'
+
 # 当前会话代理
 alias vpn='export http_proxy=http://1.1.1.1:7890; export https_proxy=http://1.1.1.1:7890;'
 # 带密码代理
 alias vpn='export http_proxy=http://user1:pass1@1.1.1.1:7890; export https_proxy=http://user1:pass1@1.1.1.1:7890;'
-
 # 清空
 alias novpn='unset http_proxy; unset https_proxy;'
 ```
@@ -257,12 +264,27 @@ Welcome to Alibaba Cloud Elastic Compute Service !
 # -d 指定payload的数据
 curl -X POST -H "Accept: application/json" -H "Content-type: application/json" -d '{"post_data":"i_love_immvp.com"}' localhost:8096/api/answer/checkAnswer
 
+# 忽略证书
+curl -k https://127.0.0.1:5001/
+
 # 模拟跨域
 curl -vvv 'https://kentxxq.com/Count' -H 'Origin: http://localhost:3000'
 
 # 请求es
 curl -H "Content-Type: application/json"  -XPUT --user elastic:password   es-cn-oew1whnk60023e4s9.elasticsearch.aliyuncs.com:9200/flow_user_index/_settings -d '{"index.mapping.total_fields.limit":0}'
 结果 {"acknowledged":true}
+```
+
+### 代理 apt
+
+```shell
+# 临时
+-o Acquire::http::proxy="https://user1:pass1@a.kentxxq.com:17890" -o Acquire::https::proxy="https://user1:pass1@a.kentxxq.com:17890"
+
+# 永久,文件不存在就创建
+vim /etc/apt/apt.conf.d/95proxy.conf
+Acquire::http::proxy "https://user1:pass1@a.kentxxq.com:17890";
+Acquire::https::proxy "https://user1:pass1@a.kentxxq.com:17890";
 ```
 
 ### 清除历史记录
@@ -302,8 +324,9 @@ tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* *
 ### 软链接 ln
 
 ```shell
-# ln -s 现有文件 链接名称
+# ln -s 现有文件/目标文件 链接文件
 # 创建/usr/local/nginx/sbin/nginx的快捷方式到/usr/local/bin/nginx
+# 软连接的目标文件可以被替换,替换后会链接到新文件
 ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/nginx
 ```
 

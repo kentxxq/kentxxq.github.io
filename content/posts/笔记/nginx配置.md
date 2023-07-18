@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-07-13
+lastmod: 2023-07-18
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -12,13 +12,11 @@ description: "[[笔记/point/nginx|nginx]] 的配置示例."
 
 ## 简介
 
-[[笔记/point/nginx|nginx]] 的配置示例, 目录结构可以符合 [[笔记/nginx编译和升级|nginx编译和升级]] 后的目录.
+[[笔记/point/nginx|nginx]] 的配置示例, 文档中的配置文件, 目录结构最好结合 [[笔记/nginx编译和升级|nginx编译和升级]] 使用.
 
 ## 基础配置
 
 ### nginx.conf 主配置
-
-#todo/笔记 理解 tcp 参数在每层产生的实际效果
 
 ```nginx
 #user  nobody;
@@ -90,7 +88,9 @@ http {
     tcp_nopush     on;
     # 尽快发送数据,禁用Nagle算法(等凑满一个MSS-Maximum Segment Size最大报文长度或收到确认再发送)
     tcp_nodelay         on;
-    # 可以看到 TCP_NOPUSH 是要等数据包累积到一定大小才发送, TCP_NODELAY 是要尽快发送, 二者相互矛盾. 实际上, 它们确实可以一起用, 最终的效果是先填满包, 再尽快发送. 在传输过程中, 应用程序发送的数据会被 TCP 协议分割成多个段(segment), 每个段都会被封装为一个网络层的包(packet)进行传输.
+    
+    # 可以看到 TCP_NOPUSH 是要等数据包累积到一定大小才发送, TCP_NODELAY 是要尽快发送, 二者相互矛盾. 
+    # 实际上, 它们确实可以一起用.在传输文件的时候, 先填满包, 再尽快发送. 而其他的情况,都迅速发包,减少延迟.
 
     keepalive_timeout   360;
     types_hash_max_size 2048;
@@ -147,7 +147,7 @@ http {
 }
 ```
 
-### 通用代理配置
+### 通用 Header 配置
 
 `/usr/local/nginx/conf/options/normal.conf`
 
@@ -183,6 +183,40 @@ ssl_certificate     /usr/local/nginx/conf/ssl/kentxxq.cer;
 ssl_certificate_key /usr/local/nginx/conf/ssl/kentxxq.key;
 ```
 
+### 时间转换
+
+在 `server` 内使用 `/usr/local/nginx/conf/options/time.conf`
+
+```nginx
+# nginx 内置变量，解析为定义格式，仅支持到秒 （实现支持到毫秒）
+#
+# $time_iso8601  日期格式示例： 2022-09-08T18:16:01+08:00
+# $time_local    日期格式示例： 02/Aug/2022:11:11:32 +0800
+# $msec          日期格式示例： 1663839717.105 当前的Unix时间戳,单位为秒，小数为毫秒
+
+# 格式化日期
+if ($time_iso8601 ~ "^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\+\d{2})") {
+  set $year   $1;
+  set $month  $2;
+  set $day    $3;
+  set $hour   $4;
+  set $minute $5;
+  set $second $6;
+  # 时区，只到小时
+  set $time_zone $7;
+  # 自定义 yyyy-MM-dd hh:mi:ss 格式
+  set $time_zh "$1-$2-$3 $4:$5:$6";
+}
+# 时间戳，单位毫秒  使用 $msec 去除中间的小数点实现
+if ($msec ~ "^(\d+)\.(\d+)") {
+  set $timestamp $1$2;
+  # 自定义 yyyy-MM-dd hh:mi:ss,SSS 带毫秒格式
+  set $time_zh_ms $time_zh,$2;
+  # 自定义 yyyy-MM-dd hh:mi:ss.SSS 带毫秒格式
+  set $time_zh_ms2 $time_zh.$2;
+}
+```
+
 ### map 配置
 
 `/usr/local/nginx/conf/options/map.conf`
@@ -194,6 +228,31 @@ map $http_origin $allow_origin {
     "~http://www.kentxxq.com" http://www.kentxxq.com;
     "~https://www.kentxxq.com" https://www.kentxxq.com;
 }
+
+# 添加map会影响性能,如果不是全局使用,建议采用include局部转换时间
+# # 自定义 yyyy-MM-dd hh:mi:ss 格式
+# map $time_iso8601 $time_zh {
+#   default $time_iso8601;
+#   "~(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})(\+\d{2})" "$1 $2";
+# }
+# 
+# # 时间戳，单位毫秒  使用 $msec 去除中间的小数点实现
+# map $msec $timestamp {
+#   default $msec;
+#   ~(\d+)\.(\d+) $1$2;
+# }
+# 
+# # 自定义 yyyy-MM-dd hh:mi:ss,SSS 带毫秒格式
+# map "$time_iso8601 # $msec" $time_zh_ms {
+#   default $time_zh,000;
+#   "~(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})(\+\d{2}:\d{2}) # (\d+)\.(\d+)$" "$1 $2,$5";
+# }
+# 
+# # 自定义 yyyy-MM-dd hh:mi:ss.SSS 带毫秒格式
+# map "$time_iso8601 # $msec" $time_zh_ms2 {
+#   default $time_zh.000;
+#   "~(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})(\+\d{2}:\d{2}) # (\d+)\.(\d+)$" "$1 $2.$5";
+# }
 ```
 
 ### 跨域配置文件
@@ -247,6 +306,55 @@ if ($request_method = 'OPTIONS') {
 ```
 
 ### 域名转发
+
+#### Debug 配置
+
+`/usr/local/nginx/conf/hosts/debug.conf`
+
+```nginx
+server {
+    listen 8000;
+    server_name _;
+    include /usr/local/nginx/conf/time.conf;
+
+    location /status_string {
+        stub_status;
+    }
+
+    location /status_metrics {
+        default_type text/plain;
+        return 200 '# TYPE connections_active counter 
+# HELP The current number of active client connections including Waiting connections. 
+connections_active $connections_active $timestamp 
+
+# TYPE connections_reading counter 
+# HELP The current number of connections where nginx is reading the request header. 
+connections_reading $connections_reading $timestamp 
+
+# TYPE connections_writing counter 
+# HELP The current number of connections where nginx is writing the response back to the client. 
+connections_writing $connections_writing $timestamp
+
+# TYPE connections_waiting counter 
+# HELP The current number of idle client connections waiting for a request. 
+connections_waiting $connections_waiting $timestamp';
+}
+
+    location /time {
+        default_type text/plain;
+        return 200 'time';
+        add_header time_zh $time_zh;
+        add_header timestamp $timestamp;
+        add_header time_msec $msec;
+        add_header time_zh_ms $time_zh_ms;
+        add_header time_zh_ms2 $time_zh_ms2;
+        add_header time_local $time_local;
+        add_header time_iso8601 $time_iso8601;
+    }
+}
+```
+
+#### 用户配置
 
 `/usr/local/nginx/conf/hosts/www.kentxxq.com.conf`
 
@@ -468,6 +576,11 @@ location /string {
 location /json {
     default_type application/json;
     return 200 '{"status":"success","result":"nginx json"}';
+}
+
+location /metrics {
+    default_type text/plain;
+    return 200 'metrics';
 }
 ```
 

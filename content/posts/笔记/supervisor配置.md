@@ -2,9 +2,11 @@
 title: supervisor配置
 tags:
   - blog
+  - supervisor
+  - 监控
   - devops
 date: 2023-07-03
-lastmod: 2023-07-11
+lastmod: 2023-07-14
 categories:
   - blog
 description: "这里记录一下 supervisor 在 [[笔记/point/linux|linux]] 下的常用配置, 方便复用."

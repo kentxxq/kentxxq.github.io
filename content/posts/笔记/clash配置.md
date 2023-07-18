@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-07-13
+lastmod: 2023-07-14
 keywords:
   - clash
   - 配置文件
@@ -198,7 +198,7 @@ proxy-providers:
     type: http
     path: ./ProxySet/HongKong.yaml
     url: "你的订阅地址"
-    interval: 1800
+    interval: 3600
     filter: "香港"
     health-check:
       enable: true
@@ -208,7 +208,7 @@ proxy-providers:
     type: http
     path: ./ProxySet/US.yaml
     url: "你的订阅地址"
-    interval: 1800
+    interval: 3600
     filter: "美国"
     health-check:
       enable: true
@@ -218,7 +218,7 @@ proxy-providers:
     type: http
     path: ./ProxySet/Taiwan.yaml
     url: "你的订阅地址"
-    interval: 1800
+    interval: 3600
     filter: "台湾"
     health-check:
       enable: true
@@ -228,7 +228,7 @@ proxy-providers:
     type: http
     path: ./ProxySet/Japan.yaml
     url: "你的订阅地址"
-    interval: 1800
+    interval: 3600
     filter: "日本"
     health-check:
       enable: true
@@ -238,7 +238,7 @@ proxy-providers:
     type: http
     path: ./ProxySet/Singapore.yaml
     url: "你的订阅地址"
-    interval: 1800
+    interval: 3600
     filter: "新加坡"
     health-check:
       enable: true
@@ -258,21 +258,21 @@ proxy-groups:
   - name: 香港-auto
     type: url-test
     url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 100 # 宽容,
+    interval: 600
+    tolerance: 100 # 宽容,新节点速度快老节点少于100ms,就不改.
     use:
       - AMY-HongKong
   - name: 美国-auto
     type: url-test
     url: http://www.gstatic.com/generate_204
-    interval: 300
+    interval: 600
     tolerance: 150
     use:
       - AMY-US
   - name: 所有-auto
     type: url-test
     url: http://www.gstatic.com/generate_204
-    interval: 300
+    interval: 600
     use:
       - AMY-HongKong
       - AMY-US
@@ -302,6 +302,7 @@ rules:
   - DOMAIN-SUFFIX,at.alicdn.com,香港-auto
   - DOMAIN-SUFFIX,bet365.com,香港-auto
   - DOMAIN-SUFFIX,ip-api.com,美国-auto
+  - DOMAIN-SUFFIX,devblogs.microsoft.com,香港-auto
   - RULE-SET,OpenAI,美国-auto
   - RULE-SET,ChinaMax,DIRECT
   - GEOIP,CN,DIRECT
@@ -398,8 +399,7 @@ stream {
 使用方法
 
 ```shell
-export http_proxy=https://user1:pass1@proxy.kentxxq.com:17890; 
-export https_proxy=https://user1:pass1@a.kentxxq.com:17890;
+export all_proxy=https://user1:pass1@a.kentxxq.com:17890; 
 ```
 
 ## 参考地址
