@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>nginx配置 - 运维个人技术栈</title><meta name=Description content="[[笔记/point/nginx|nginx]] 的配置示例."><meta property="og:title" content="nginx配置"><meta property="og:description" content="[[笔记/point/nginx|nginx]] 的配置示例."><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-07-06T00:00:00+00:00"><meta property="article:modified_time" content="2023-07-13T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="nginx配置"><meta name=twitter:description content="[[笔记/point/nginx|nginx]] 的配置示例."><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/><link rel=prev href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/oracle/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E7%BC%96%E8%AF%91%E5%92%8C%E5%8D%87%E7%BA%A7/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"nginx配置","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/nginx%E9%85%8D%E7%BD%AE\/"},"genre":"posts","keywords":"blog, nginx","wordcount":3644,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/nginx%E9%85%8D%E7%BD%AE\/","datePublished":"2023-07-06T00:00:00+00:00","dateModified":"2023-07-13T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"[[笔记/point/nginx|nginx]] 的配置示例."}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>nginx配置 - 运维个人技术栈</title><meta name=Description content="[[笔记/point/nginx|nginx]] 的配置示例."><meta property="og:title" content="nginx配置"><meta property="og:description" content="[[笔记/point/nginx|nginx]] 的配置示例."><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-07-06T00:00:00+00:00"><meta property="article:modified_time" content="2023-07-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="nginx配置"><meta name=twitter:description content="[[笔记/point/nginx|nginx]] 的配置示例."><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/><link rel=prev href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/oracle/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E7%BC%96%E8%AF%91%E5%92%8C%E5%8D%87%E7%BA%A7/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"nginx配置","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/nginx%E9%85%8D%E7%BD%AE\/"},"genre":"posts","keywords":"blog, nginx","wordcount":4236,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/nginx%E9%85%8D%E7%BD%AE\/","datePublished":"2023-07-06T00:00:00+00:00","dateModified":"2023-07-18T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"[[笔记/point/nginx|nginx]] 的配置示例."}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
@@ -7,9 +7,9 @@
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
 <span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#基础配置>基础配置</a><ul><li><a href=#nginxconf-主配置>nginx.conf 主配置</a></li><li><a href=#通用代理配置>通用代理配置</a></li><li><a href=#长连接-websocket-配置>长连接 websocket 配置</a></li><li><a href=#证书配置>证书配置</a></li><li><a href=#map-配置>map 配置</a></li><li><a href=#跨域配置文件>跨域配置文件</a><ul><li><a href=#全部跨域>全部跨域</a></li><li><a href=#全部-options-跨域>全部 options 跨域</a></li><li><a href=#特定匹配-options-跨域>特定匹配 options 跨域</a></li></ul></li><li><a href=#域名转发>域名转发</a></li><li><a href=#静态页代理>静态页代理</a><ul><li><a href=#简单版>简单版</a></li><li><a href=#完整版本>完整版本</a></li><li><a href=#容器版本>容器版本</a></li></ul></li></ul></li><li><a href=#功能配置>功能配置</a><ul><li><a href=#ip-限速>IP 限速</a></li><li><a href=#代理-openai>代理 openai</a></li><li><a href=#用户名密码>用户名密码</a></li><li><a href=#移动端检测>移动端检测</a></li><li><a href=#返回-200>返回 200</a></li><li><a href=#405-错误--post-请求静态文件>405 错误 -post 请求静态文件</a></li><li><a href=#防止嵌入-iframe>防止嵌入 iframe</a></li></ul></li><li><a href=#守护进程>守护进程</a></li><li><a href=#ingress-nginx-配置>Ingress-nginx 配置</a></li><li><a href=#openrestry-转发给-kafka>Openrestry 转发给 kafka</a><ul><li><a href=#依赖配置>依赖配置</a></li><li><a href=#转发配置>转发配置</a></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">nginx配置</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/blog/><i class="far fa-folder fa-fw"></i>blog</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-07-06>2023-07-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-07-13>2023-07-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3644 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#基础配置>基础配置</a><ul><li><a href=#nginxconf-主配置>nginx.conf 主配置</a></li><li><a href=#通用代理配置>通用代理配置</a></li><li><a href=#长连接-websocket-配置>长连接 websocket 配置</a></li><li><a href=#证书配置>证书配置</a></li><li><a href=#map-配置>map 配置</a></li><li><a href=#跨域配置文件>跨域配置文件</a><ul><li><a href=#全部跨域>全部跨域</a></li><li><a href=#全部-options-跨域>全部 options 跨域</a></li><li><a href=#特定匹配-options-跨域>特定匹配 options 跨域</a></li></ul></li><li><a href=#域名转发>域名转发</a></li><li><a href=#静态页代理>静态页代理</a><ul><li><a href=#简单版>简单版</a></li><li><a href=#完整版本>完整版本</a></li><li><a href=#容器版本>容器版本</a></li></ul></li></ul></li><li><a href=#功能配置>功能配置</a><ul><li><a href=#ip-限速>IP 限速</a></li><li><a href=#代理-openai>代理 openai</a></li><li><a href=#用户名密码>用户名密码</a></li><li><a href=#移动端检测>移动端检测</a></li><li><a href=#返回-200>返回 200</a></li><li><a href=#405-错误--post-请求静态文件>405 错误 -post 请求静态文件</a></li><li><a href=#防止嵌入-iframe>防止嵌入 iframe</a></li></ul></li><li><a href=#守护进程>守护进程</a></li><li><a href=#ingress-nginx-配置>Ingress-nginx 配置</a></li><li><a href=#openrestry-转发给-kafka>Openrestry 转发给 kafka</a><ul><li><a href=#依赖配置>依赖配置</a></li><li><a href=#转发配置>转发配置</a></li></ul></li></ul></nav></div></div><div class=content id=content><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p><a href=/posts/%E7%AC%94%E8%AE%B0/point/nginx/>nginx</a> 的配置示例, 目录结构可以符合 <a href=/posts/%E7%AC%94%E8%AE%B0/nginx%E7%BC%96%E8%AF%91%E5%92%8C%E5%8D%87%E7%BA%A7/>nginx编译和升级</a> 后的目录.</p><h2 id=基础配置 class=headerLink><a href=#%e5%9f%ba%e7%a1%80%e9%85%8d%e7%bd%ae class=header-mark></a>基础配置</h2><h3 id=nginxconf-主配置 class=headerLink><a href=#nginxconf-%e4%b8%bb%e9%85%8d%e7%bd%ae class=header-mark></a>nginx.conf 主配置</h3><p>#todo/笔记 理解 tcp 参数在每层产生的实际效果</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#基础配置>基础配置</a><ul><li><a href=#nginxconf-主配置>nginx.conf 主配置</a></li><li><a href=#通用-header-配置>通用 Header 配置</a></li><li><a href=#长连接-websocket-配置>长连接 websocket 配置</a></li><li><a href=#证书配置>证书配置</a></li><li><a href=#时间转换>时间转换</a></li><li><a href=#map-配置>map 配置</a></li><li><a href=#跨域配置文件>跨域配置文件</a><ul><li><a href=#全部跨域>全部跨域</a></li><li><a href=#全部-options-跨域>全部 options 跨域</a></li><li><a href=#特定匹配-options-跨域>特定匹配 options 跨域</a></li></ul></li><li><a href=#域名转发>域名转发</a><ul><li><a href=#debug-配置>Debug 配置</a></li><li><a href=#用户配置>用户配置</a></li></ul></li><li><a href=#静态页代理>静态页代理</a><ul><li><a href=#简单版>简单版</a></li><li><a href=#完整版本>完整版本</a></li><li><a href=#容器版本>容器版本</a></li></ul></li></ul></li><li><a href=#功能配置>功能配置</a><ul><li><a href=#ip-限速>IP 限速</a></li><li><a href=#代理-openai>代理 openai</a></li><li><a href=#用户名密码>用户名密码</a></li><li><a href=#移动端检测>移动端检测</a></li><li><a href=#返回-200>返回 200</a></li><li><a href=#405-错误--post-请求静态文件>405 错误 -post 请求静态文件</a></li><li><a href=#防止嵌入-iframe>防止嵌入 iframe</a></li></ul></li><li><a href=#守护进程>守护进程</a></li><li><a href=#ingress-nginx-配置>Ingress-nginx 配置</a></li><li><a href=#openrestry-转发给-kafka>Openrestry 转发给 kafka</a><ul><li><a href=#依赖配置>依赖配置</a></li><li><a href=#转发配置>转发配置</a></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">nginx配置</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/blog/><i class="far fa-folder fa-fw"></i>blog</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-07-06>2023-07-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-07-18>2023-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4236 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#基础配置>基础配置</a><ul><li><a href=#nginxconf-主配置>nginx.conf 主配置</a></li><li><a href=#通用-header-配置>通用 Header 配置</a></li><li><a href=#长连接-websocket-配置>长连接 websocket 配置</a></li><li><a href=#证书配置>证书配置</a></li><li><a href=#时间转换>时间转换</a></li><li><a href=#map-配置>map 配置</a></li><li><a href=#跨域配置文件>跨域配置文件</a><ul><li><a href=#全部跨域>全部跨域</a></li><li><a href=#全部-options-跨域>全部 options 跨域</a></li><li><a href=#特定匹配-options-跨域>特定匹配 options 跨域</a></li></ul></li><li><a href=#域名转发>域名转发</a><ul><li><a href=#debug-配置>Debug 配置</a></li><li><a href=#用户配置>用户配置</a></li></ul></li><li><a href=#静态页代理>静态页代理</a><ul><li><a href=#简单版>简单版</a></li><li><a href=#完整版本>完整版本</a></li><li><a href=#容器版本>容器版本</a></li></ul></li></ul></li><li><a href=#功能配置>功能配置</a><ul><li><a href=#ip-限速>IP 限速</a></li><li><a href=#代理-openai>代理 openai</a></li><li><a href=#用户名密码>用户名密码</a></li><li><a href=#移动端检测>移动端检测</a></li><li><a href=#返回-200>返回 200</a></li><li><a href=#405-错误--post-请求静态文件>405 错误 -post 请求静态文件</a></li><li><a href=#防止嵌入-iframe>防止嵌入 iframe</a></li></ul></li><li><a href=#守护进程>守护进程</a></li><li><a href=#ingress-nginx-配置>Ingress-nginx 配置</a></li><li><a href=#openrestry-转发给-kafka>Openrestry 转发给 kafka</a><ul><li><a href=#依赖配置>依赖配置</a></li><li><a href=#转发配置>转发配置</a></li></ul></li></ul></nav></div></div><div class=content id=content><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p><a href=/posts/%E7%AC%94%E8%AE%B0/point/nginx/>nginx</a> 的配置示例, 文档中的配置文件, 目录结构最好结合 <a href=/posts/%E7%AC%94%E8%AE%B0/nginx%E7%BC%96%E8%AF%91%E5%92%8C%E5%8D%87%E7%BA%A7/>nginx编译和升级</a> 使用.</p><h2 id=基础配置 class=headerLink><a href=#%e5%9f%ba%e7%a1%80%e9%85%8d%e7%bd%ae class=header-mark></a>基础配置</h2><h3 id=nginxconf-主配置 class=headerLink><a href=#nginxconf-%e4%b8%bb%e9%85%8d%e7%bd%ae class=header-mark></a>nginx.conf 主配置</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
 </span><span class=lnt>  2
 </span><span class=lnt>  3
 </span><span class=lnt>  4
@@ -133,6 +133,8 @@
 </span><span class=lnt>122
 </span><span class=lnt>123
 </span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=line><span class=cl><span class=c1>#user  nobody;
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>worker_processes</span>  <span class=s>auto</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=k>worker_cpu_affinity</span> <span class=s>auto</span><span class=p>;</span>
@@ -202,7 +204,9 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kn>tcp_nopush</span>     <span class=no>on</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=c1># 尽快发送数据,禁用Nagle算法(等凑满一个MSS-Maximum Segment Size最大报文长度或收到确认再发送)
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kn>tcp_nodelay</span>         <span class=no>on</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>    <span class=c1># 可以看到 TCP_NOPUSH 是要等数据包累积到一定大小才发送, TCP_NODELAY 是要尽快发送, 二者相互矛盾. 实际上, 它们确实可以一起用, 最终的效果是先填满包, 再尽快发送. 在传输过程中, 应用程序发送的数据会被 TCP 协议分割成多个段(segment), 每个段都会被封装为一个网络层的包(packet)进行传输.
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># 可以看到 TCP_NOPUSH 是要等数据包累积到一定大小才发送, TCP_NODELAY 是要尽快发送, 二者相互矛盾. 
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1># 实际上, 它们确实可以一起用.在传输文件的时候, 先填满包, 再尽快发送. 而其他的情况,都迅速发包,减少延迟.
 </span></span></span><span class=line><span class=cl><span class=c1></span>
 </span></span><span class=line><span class=cl>    <span class=kn>keepalive_timeout</span>   <span class=mi>360</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=kn>types_hash_max_size</span> <span class=mi>2048</span><span class=p>;</span>
@@ -257,7 +261,7 @@
 </span></span><span class=line><span class=cl>        <span class=p>}</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=通用代理配置 class=headerLink><a href=#%e9%80%9a%e7%94%a8%e4%bb%a3%e7%90%86%e9%85%8d%e7%bd%ae class=header-mark></a>通用代理配置</h3><p><code>/usr/local/nginx/conf/options/normal.conf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=通用-header-配置 class=headerLink><a href=#%e9%80%9a%e7%94%a8-header-%e9%85%8d%e7%bd%ae class=header-mark></a>通用 Header 配置</h3><p><code>/usr/local/nginx/conf/options/normal.conf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -287,19 +291,123 @@
 </span><span class=lnt>2
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=line><span class=cl><span class=k>ssl_certificate</span>     <span class=s>/usr/local/nginx/conf/ssl/kentxxq.cer</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=k>ssl_certificate_key</span> <span class=s>/usr/local/nginx/conf/ssl/kentxxq.key</span><span class=p>;</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=map-配置 class=headerLink><a href=#map-%e9%85%8d%e7%bd%ae class=header-mark></a>map 配置</h3><p><code>/usr/local/nginx/conf/options/map.conf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
+</span></span></code></pre></td></tr></table></div></div><h3 id=时间转换 class=headerLink><a href=#%e6%97%b6%e9%97%b4%e8%bd%ac%e6%8d%a2 class=header-mark></a>时间转换</h3><p>在 <code>server</code> 内使用 <code>/usr/local/nginx/conf/options/time.conf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=line><span class=cl><span class=c1># nginx 内置变量，解析为定义格式，仅支持到秒 （实现支持到毫秒）
+</span></span></span><span class=line><span class=cl><span class=c1>#
+</span></span></span><span class=line><span class=cl><span class=c1># $time_iso8601  日期格式示例： 2022-09-08T18:16:01+08:00
+</span></span></span><span class=line><span class=cl><span class=c1># $time_local    日期格式示例： 02/Aug/2022:11:11:32 +0800
+</span></span></span><span class=line><span class=cl><span class=c1># $msec          日期格式示例： 1663839717.105 当前的Unix时间戳,单位为秒，小数为毫秒
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=c1># 格式化日期
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>if</span> <span class=s>(</span><span class=nv>$time_iso8601</span> <span class=p>~</span> <span class=sr>&#34;^(\d</span><span class=p>{</span><span class=kn>4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\+\d{2})&#34;)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kn>set</span> <span class=nv>$year</span>   <span class=nv>$1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kn>set</span> <span class=nv>$month</span>  <span class=nv>$2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kn>set</span> <span class=nv>$day</span>    <span class=nv>$3</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kn>set</span> <span class=nv>$hour</span>   <span class=nv>$4</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kn>set</span> <span class=nv>$minute</span> <span class=nv>$5</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kn>set</span> <span class=nv>$second</span> <span class=nv>$6</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=c1># 时区，只到小时
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kn>set</span> <span class=nv>$time_zone</span> <span class=nv>$7</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=c1># 自定义 yyyy-MM-dd hh:mi:ss 格式
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kn>set</span> <span class=nv>$time_zh</span> <span class=s>&#34;</span><span class=nv>$1-$2-$3</span> <span class=nv>$4:$5:$6&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1># 时间戳，单位毫秒  使用 $msec 去除中间的小数点实现
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>if</span> <span class=s>(</span><span class=nv>$msec</span> <span class=p>~</span> <span class=sr>&#34;^(\d+)\.(\d+)&#34;)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kn>set</span> <span class=nv>$timestamp</span> <span class=nv>$1$2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=c1># 自定义 yyyy-MM-dd hh:mi:ss,SSS 带毫秒格式
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kn>set</span> <span class=nv>$time_zh_ms</span> <span class=nv>$time_zh,$2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=c1># 自定义 yyyy-MM-dd hh:mi:ss.SSS 带毫秒格式
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kn>set</span> <span class=nv>$time_zh_ms2</span> <span class=nv>$time_zh.$2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=map-配置 class=headerLink><a href=#map-%e9%85%8d%e7%bd%ae class=header-mark></a>map 配置</h3><p><code>/usr/local/nginx/conf/options/map.conf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=line><span class=cl><span class=c1># $http_origin如果正则匹配了,$allow_origin会变成后面的值
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>map</span> <span class=nv>$http_origin</span> <span class=nv>$allow_origin</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kn>default</span> <span class=s>&#34;&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=kn>&#34;~http://www.kentxxq.com&#34;</span> <span class=s>http://www.kentxxq.com</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=kn>&#34;~https://www.kentxxq.com&#34;</span> <span class=s>https://www.kentxxq.com</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=跨域配置文件 class=headerLink><a href=#%e8%b7%a8%e5%9f%9f%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6 class=header-mark></a>跨域配置文件</h3><h4 id=全部跨域 class=headerLink><a href=#%e5%85%a8%e9%83%a8%e8%b7%a8%e5%9f%9f class=header-mark></a>全部跨域</h4><p><code>/usr/local/nginx/conf/options/allow_all_cross_origin.conf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 添加map会影响性能,如果不是全局使用,建议采用include局部转换时间
+</span></span></span><span class=line><span class=cl><span class=c1># # 自定义 yyyy-MM-dd hh:mi:ss 格式
+</span></span></span><span class=line><span class=cl><span class=c1># map $time_iso8601 $time_zh {
+</span></span></span><span class=line><span class=cl><span class=c1>#   default $time_iso8601;
+</span></span></span><span class=line><span class=cl><span class=c1>#   &#34;~(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})(\+\d{2})&#34; &#34;$1 $2&#34;;
+</span></span></span><span class=line><span class=cl><span class=c1># }
+</span></span></span><span class=line><span class=cl><span class=c1># 
+</span></span></span><span class=line><span class=cl><span class=c1># # 时间戳，单位毫秒  使用 $msec 去除中间的小数点实现
+</span></span></span><span class=line><span class=cl><span class=c1># map $msec $timestamp {
+</span></span></span><span class=line><span class=cl><span class=c1>#   default $msec;
+</span></span></span><span class=line><span class=cl><span class=c1>#   ~(\d+)\.(\d+) $1$2;
+</span></span></span><span class=line><span class=cl><span class=c1># }
+</span></span></span><span class=line><span class=cl><span class=c1># 
+</span></span></span><span class=line><span class=cl><span class=c1># # 自定义 yyyy-MM-dd hh:mi:ss,SSS 带毫秒格式
+</span></span></span><span class=line><span class=cl><span class=c1># map &#34;$time_iso8601 # $msec&#34; $time_zh_ms {
+</span></span></span><span class=line><span class=cl><span class=c1>#   default $time_zh,000;
+</span></span></span><span class=line><span class=cl><span class=c1>#   &#34;~(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})(\+\d{2}:\d{2}) # (\d+)\.(\d+)$&#34; &#34;$1 $2,$5&#34;;
+</span></span></span><span class=line><span class=cl><span class=c1># }
+</span></span></span><span class=line><span class=cl><span class=c1># 
+</span></span></span><span class=line><span class=cl><span class=c1># # 自定义 yyyy-MM-dd hh:mi:ss.SSS 带毫秒格式
+</span></span></span><span class=line><span class=cl><span class=c1># map &#34;$time_iso8601 # $msec&#34; $time_zh_ms2 {
+</span></span></span><span class=line><span class=cl><span class=c1>#   default $time_zh.000;
+</span></span></span><span class=line><span class=cl><span class=c1>#   &#34;~(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})(\+\d{2}:\d{2}) # (\d+)\.(\d+)$&#34; &#34;$1 $2.$5&#34;;
+</span></span></span><span class=line><span class=cl><span class=c1># }
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=跨域配置文件 class=headerLink><a href=#%e8%b7%a8%e5%9f%9f%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6 class=header-mark></a>跨域配置文件</h3><h4 id=全部跨域 class=headerLink><a href=#%e5%85%a8%e9%83%a8%e8%b7%a8%e5%9f%9f class=header-mark></a>全部跨域</h4><p><code>/usr/local/nginx/conf/options/allow_all_cross_origin.conf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -353,7 +461,87 @@
 </span></span><span class=line><span class=cl>    <span class=kn>add_header</span> <span class=s>&#39;Content-Length&#39;</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=kn>return</span> <span class=mi>204</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=域名转发 class=headerLink><a href=#%e5%9f%9f%e5%90%8d%e8%bd%ac%e5%8f%91 class=header-mark></a>域名转发</h3><p><code>/usr/local/nginx/conf/hosts/www.kentxxq.com.conf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=域名转发 class=headerLink><a href=#%e5%9f%9f%e5%90%8d%e8%bd%ac%e5%8f%91 class=header-mark></a>域名转发</h3><h4 id=debug-配置 class=headerLink><a href=#debug-%e9%85%8d%e7%bd%ae class=header-mark></a>Debug 配置</h4><p><code>/usr/local/nginx/conf/hosts/debug.conf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=line><span class=cl><span class=k>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kn>listen</span> <span class=mi>8000</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>server_name</span> <span class=s>_</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>include</span> <span class=s>/usr/local/nginx/conf/time.conf</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kn>location</span> <span class=s>/status_string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kn>stub_status</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kn>location</span> <span class=s>/status_metrics</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kn>default_type</span> <span class=s>text/plain</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>return</span> <span class=mi>200</span> <span class=s>&#39;</span><span class=c1># TYPE connections_active counter 
+</span></span></span><span class=line><span class=cl><span class=c1># HELP The current number of active client connections including Waiting connections. 
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s>connections_active</span> <span class=nv>$connections_active</span> <span class=nv>$timestamp</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># TYPE connections_reading counter 
+</span></span></span><span class=line><span class=cl><span class=c1># HELP The current number of connections where nginx is reading the request header. 
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s>connections_reading</span> <span class=nv>$connections_reading</span> <span class=nv>$timestamp</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># TYPE connections_writing counter 
+</span></span></span><span class=line><span class=cl><span class=c1># HELP The current number of connections where nginx is writing the response back to the client. 
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s>connections_writing</span> <span class=nv>$connections_writing</span> <span class=nv>$timestamp</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># TYPE connections_waiting counter 
+</span></span></span><span class=line><span class=cl><span class=c1># HELP The current number of idle client connections waiting for a request. 
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s>connections_waiting</span> <span class=nv>$connections_waiting</span> <span class=nv>$timestamp&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kn>location</span> <span class=s>/time</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kn>default_type</span> <span class=s>text/plain</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>return</span> <span class=mi>200</span> <span class=s>&#39;time&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>add_header</span> <span class=s>time_zh</span> <span class=nv>$time_zh</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>add_header</span> <span class=s>timestamp</span> <span class=nv>$timestamp</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>add_header</span> <span class=s>time_msec</span> <span class=nv>$msec</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>add_header</span> <span class=s>time_zh_ms</span> <span class=nv>$time_zh_ms</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>add_header</span> <span class=s>time_zh_ms2</span> <span class=nv>$time_zh_ms2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>add_header</span> <span class=s>time_local</span> <span class=nv>$time_local</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>add_header</span> <span class=s>time_iso8601</span> <span class=nv>$time_iso8601</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=用户配置 class=headerLink><a href=#%e7%94%a8%e6%88%b7%e9%85%8d%e7%bd%ae class=header-mark></a>用户配置</h4><p><code>/usr/local/nginx/conf/hosts/www.kentxxq.com.conf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -669,15 +857,20 @@
 </span></span><span class=line><span class=cl>        <span class=kn>proxy_pass</span> <span class=s>http://1.1.1.1:80</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=返回-200 class=headerLink><a href=#%e8%bf%94%e5%9b%9e-200 class=header-mark></a>返回 200</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+</span></span></code></pre></td></tr></table></div></div><h3 id=返回-200 class=headerLink><a href=#%e8%bf%94%e5%9b%9e-200 class=header-mark></a>返回 200</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=line><span class=cl><span class=k>location</span> <span class=s>/string</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kn>default_type</span> <span class=s>text/html</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=kn>return</span> <span class=mi>200</span> <span class=s>&#34;维护中&#34;</span><span class=p>;</span>
@@ -686,6 +879,11 @@
 </span></span><span class=line><span class=cl><span class=k>location</span> <span class=s>/json</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kn>default_type</span> <span class=s>application/json</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=kn>return</span> <span class=mi>200</span> <span class=s>&#39;</span><span class=p>{</span><span class=kn>&#34;status&#34;:&#34;success&#34;,&#34;result&#34;:&#34;nginx</span> <span class=s>json&#34;</span><span class=err>}</span><span class=s>&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>location</span> <span class=s>/metrics</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kn>default_type</span> <span class=s>text/plain</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>return</span> <span class=mi>200</span> <span class=s>&#39;metrics&#39;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><h3 id=405-错误--post-请求静态文件 class=headerLink><a href=#405-%e9%94%99%e8%af%af--post-%e8%af%b7%e6%b1%82%e9%9d%99%e6%80%81%e6%96%87%e4%bb%b6 class=header-mark></a>405 错误 -post 请求静态文件</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -1023,6 +1221,6 @@
 </span></span><span class=line><span class=cl>        <span class=kn>server_name</span>  <span class=s>a.kentxxq.com</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>        <span class=kn>return</span> <span class=mi>301</span> <span class=s>https://</span><span class=nv>$server_name$request_uri</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-07-13</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置 data-hashtags=blog,nginx><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置 data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置 data-description="[[笔记/point/nginx|nginx]] 的配置示例."><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置 data-description="[[笔记/point/nginx|nginx]] 的配置示例."><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a>,&nbsp;<a href=/tags/nginx/>nginx</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/point/oracle/ class=prev rel=prev title=oracle><i class="fas fa-angle-left fa-fw"></i>oracle</a>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-07-18</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置 data-hashtags=blog,nginx><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置 data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置 data-description="[[笔记/point/nginx|nginx]] 的配置示例."><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置 data-description="[[笔记/point/nginx|nginx]] 的配置示例."><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/ data-title=nginx配置><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a>,&nbsp;<a href=/tags/nginx/>nginx</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/point/oracle/ class=prev rel=prev title=oracle><i class="fas fa-angle-left fa-fw"></i>oracle</a>
 <a href=/posts/%E7%AC%94%E8%AE%B0/nginx%E7%BC%96%E8%AF%91%E5%92%8C%E5%8D%87%E7%BA%A7/ class=next rel=next title=nginx编译和升级>nginx编译和升级<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a target=_blank href=https://beian.miit.gov.cn>湘ICP备2021002319号-1</a></span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div></body></html>
