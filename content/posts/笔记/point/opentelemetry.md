@@ -1,17 +1,18 @@
 ---
-title: opentelemetry
+title: OpenTelemetry
 aliases:
   - OTLP
+  - opentelemetry
 tags:
   - point
-  - opentelemetry
+  - OpenTelemetry
 date: 2023-07-14
-lastmod: 2023-07-14
+lastmod: 2023-07-20
 categories:
   - point
 ---
 
-`opentelemetry` 是新一代的监控工具.
+`OpenTelemetry` 是新一代的监控工具.
 
 要点:
 

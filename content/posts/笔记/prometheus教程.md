@@ -6,10 +6,10 @@ tags:
   - devops
   - 监控
 date: 2023-07-11
-lastmod: 2023-07-14
+lastmod: 2023-07-19
 categories:
   - blog
-description: 
+description: "记录 [[笔记/point/prometheus|prometheus]] 的相关使用."
 ---
 
 ## 简介
@@ -62,6 +62,23 @@ description:
 
 ### 常用配置
 
+#### 启动配置
+
+存储配置文档 [Storage | Prometheus](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects)
+
+```shell
+# 指定配置文件
+--config.file /etc/prometheus/prometheus.yml
+# 默认存放路径
+--storage.tsdb.path data/
+# 保存多大默认是0 可以是512MB,2GB,1TB等等
+--storage.tsdb.retention.size
+# 默认15天
+--storage.tsdb.retention.time 15d
+```
+
+#### 主配置文件
+
 官网完整配置查看 [Configuration | Prometheus](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)
 
 ```yml
@@ -85,3 +102,10 @@ scrape_configs:
     static_configs:
       - targets: ["192.168.31.100:5001"]
 ```
+
+### 高可用采集
+
+- 存储: [[笔记/point/prometheus|prometheus]] 的后端存储使用 mimir, 实际存放在 [[笔记/point/minio|minio]] 里. 通过集群的方式保证两者高可用.
+- [[笔记/point/k8s|k8s]] 采集: 使用 [shards-and-replicas.md](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/shards-and-replicas.md) 多实例分片拓展.
+- 动态服务发现: 使用现有方案过滤, 例如 [consul_sd_config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#consul_sd_config), 通过 label 进行花费, 使多个节点均匀分配指标采集. 也可以使用 [file_sd_config](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#file_sd_config) 自己编写一个动态服务发现
+- 手动管理: 通常来说 [[笔记/point/prometheus|prometheus]] 的性能不弱, 部署一个起码能服务 1000 个以上的微服务, 即使手动部署, 也不会是一件太困难的事情.

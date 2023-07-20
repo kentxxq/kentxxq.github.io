@@ -2,11 +2,13 @@
 title: grafana-agent教程
 tags:
   - blog
+  - grafana
+  - agent
 date: 2023-07-14
-lastmod: 2023-07-17
+lastmod: 2023-07-19
 categories:
   - blog
-description: 
+description: "grafana-agent 是 [[笔记/point/grafana|grafana]] 公司的产品之一, 用于接收 OTLP 数据."
 ---
 
 ## 简介

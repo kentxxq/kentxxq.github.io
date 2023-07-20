@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-07-18
+lastmod: 2023-07-20
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -26,9 +26,51 @@ vim /etc/sudoers
 kentxxq ALL=(ALL)    NOPASSWD: ALL  # 加入此行
 ```
 
-### alias
+### 安装 chrome
 
 ```shell
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+apt install ./google-chrome-stable_current_amd64.deb
+
+google-chrome -v
+```
+
+### alias
+
+#### 补全
+
+```shell
+# 通常已经安装了
+# apt install bash-completion -y
+# 下载文件
+curl https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias -o ~/.complete_alias
+# 编辑配置文件
+vim /root/.bash_completion
+. /root/.complete_alias
+
+# 设置alias
+vim ~/.bashrc
+alias sc='systemctl'
+# 尾部添加
+vim /root/.complete_alias 
+complete -F _complete_alias sc
+
+# 如果.bashrc文件没有启用.必须退出,重新登录后生效!
+# 默认是注释的
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+#    . /etc/bash_completion
+#fi
+```
+
+#### 常用配置
+
+```shell
+# 查看日志
+alias tailf='tail -f'
+
 # 查看出口ip
 alias myip = 'curl -L test.kentxxq.com/ip'
 
@@ -96,6 +138,7 @@ fc-list :lang=zh
 ### 配置 limit
 
 ```shell
+# 先确保/etc/security/limits.d没有覆盖的配置
 vim /etc/security/limits.conf
 # hard硬限制 不会超过
 # soft软限制 告警
@@ -107,10 +150,10 @@ root hard nofile 65535
 * hard nofile 65535
 
 # nproc 操作系统级别对每个用户创建的进程数
-root soft nofile 65535
-root hard nofile 65535
-* soft nofile 65535
-* hard nofile 65535
+root soft nproc 65535
+root hard nproc 65535
+* soft nproc 65535
+* hard nproc 65535
 ```
 
 ### 温度传感器
@@ -267,6 +310,9 @@ curl -X POST -H "Accept: application/json" -H "Content-type: application/json" -
 # 忽略证书
 curl -k https://127.0.0.1:5001/
 
+# 下载 -C 断点续传 -O 指定名称
+curl -C - https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20230711212934.0.0_amd64.deb -O minio.deb
+
 # 模拟跨域
 curl -vvv 'https://kentxxq.com/Count' -H 'Origin: http://localhost:3000'
 
@@ -319,6 +365,27 @@ tar -czvf dist.tgz /dad/path/.
 tar -czvf dist.tgz /data/path
 # 如果是在当前目录，可以手动指定
 tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* *
+```
+
+### 大版本升级
+
+```shell
+apt install update-manager-core -y
+do-release-upgrade -d
+```
+
+### 跑分
+
+```shell
+wget http://soft.vpser.net/test/unixbench/unixbench-5.1.2.tar.gz
+tar zxvf unixbench-5.1.2.tar.gz
+cd unixbench-5.1.2/
+
+vim Makefile
+# GRAPHIC_TESTS = defined
+
+make
+./Run
 ```
 
 ### 软链接 ln
@@ -376,9 +443,12 @@ chown -R sam:dba file/folder
 chmod 777 file/folder
 ```
 
-### 卸载软件包
+### 安装/卸载软件
 
 ```shell
+# 安装deb包
+dpkg -i minio.deb
+
 # 查看已安装的包
 dpkg --list
 
@@ -473,6 +543,20 @@ rsync -atvP /tmp/t1/1 root@1.1.1.1:/tmp/t1/
 >file.txt
 # 截断任意文件
 truncate -s 0 file.txt
+
+# 寻找log文件并清空
+vim /opt/truncate-log.sh
+#!/bin/bash
+files=`find / -name *.log`
+for file in `ls $files`
+do
+  truncate -s 0 $file
+done
+
+# 凌晨3点定时执行
+chmod +x /opt/truncate-log.sh
+vim /etc/crontab
+0 3 * * * root /opt/truncate-log.sh
 ```
 
 ### 筛选替换

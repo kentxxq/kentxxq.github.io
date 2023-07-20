@@ -4,11 +4,12 @@ tags:
   - blog
   - promtail
   - loki
+  - grafana
 date: 2023-07-17
-lastmod: 2023-07-18
+lastmod: 2023-07-19
 categories:
   - blog
-description: 
+description: "grafana-loki 是 [[笔记/point/grafana|grafana]] 公司的日志采集组件"
 ---
 
 ## 简介

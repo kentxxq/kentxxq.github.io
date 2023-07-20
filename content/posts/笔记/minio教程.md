@@ -1,0 +1,102 @@
+---
+title: minio教程
+tags:
+  - blog
+date: 2023-07-19
+lastmod: 2023-07-19
+categories:
+  - blog
+description: "[[笔记/point/minio|minio]] 的搭建和使用."
+---
+
+## 简介
+
+[[笔记/point/minio|minio]] 的搭建和使用.
+
+## 内容
+
+### 安装
+
+#### 单点单驱动
+
+```shell
+wget https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20230711212934.0.0_amd64.deb -O minio.deb
+dpkg -i minio.deb
+```
+
+启动配置文件 `/etc/default/minio`
+
+```shell
+MINIO_ROOT_USER=myminioadmin
+MINIO_ROOT_PASSWORD=minio-secret-key-change-me
+
+MINIO_VOLUMES="/data/minio-data"
+#MINIO_SERVER_URL="http://minio.example.net:9000"
+```
+
+守护 systemd, `/etc/systemd/system/minio.service`
+
+```toml
+[Unit]
+Description=MinIO
+Documentation=https://min.io/docs/minio/linux/index.html
+Wants=network-online.target
+After=network-online.target
+AssertFileIsExecutable=/usr/local/bin/minio
+
+[Service]
+WorkingDirectory=/usr/local
+
+User=minio-user
+Group=minio-user
+ProtectProc=invisible
+
+EnvironmentFile=-/etc/default/minio
+ExecStartPre=/bin/bash -c "if [ -z \"${MINIO_VOLUMES}\" ]; then echo \"Variable MINIO_VOLUMES not set in /etc/default/minio\"; exit 1; fi"
+ExecStart=/usr/local/bin/minio server $MINIO_OPTS $MINIO_VOLUMES
+
+# MinIO RELEASE.2023-05-04T21-44-30Z adds support for Type=notify (https://www.freedesktop.org/software/systemd/man/systemd.service.html#Type=)
+# This may improve systemctl setups where other services use `After=minio.server`
+# Uncomment the line to enable the functionality
+# Type=notify
+
+# Let systemd restart this service always
+Restart=always
+
+# Specifies the maximum file descriptor number that can be opened by this process
+LimitNOFILE=65536
+
+# Specifies the maximum number of threads this process can create
+TasksMax=infinity
+
+# Disable timeout logic and wait until process is stopped
+TimeoutStopSec=infinity
+SendSIGKILL=no
+
+[Install]
+WantedBy=multi-user.target
+
+# Built for ${project.name}-${project.version} (${project.name})
+```
+
+数据目录准备
+
+```shell
+mkdir -p /data/minio-data
+groupadd -r minio-user
+useradd -M -r -g minio-user minio-user
+chown minio-user:minio-user /data/minio-data
+```
+
+启动, 配置文件中默认 9000 端口
+
+```shell
+systemctl enable minio.service
+systemctl start minio.service
+```
+
+### 基础使用
+
+1. 登录 9000 端口, 输入用户名和密码
+2. 创建 `demo1` bucket
+3. 创建 `ak`
