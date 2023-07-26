@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-07-18
+lastmod: 2023-07-22
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -106,9 +106,9 @@ http {
 
     # 大Header会导致502,解决
     client_header_buffer_size  64k;
-    proxy_buffer_size          256k;
-    proxy_buffers              4 256k;
-    proxy_busy_buffers_size    512k;
+    proxy_buffer_size          1024k;
+    proxy_buffers              16 1024k;
+    proxy_busy_buffers_size    2048k;
 
     # header允许下划线
     underscores_in_headers on;
@@ -119,7 +119,9 @@ http {
     gzip_http_version 1.1;
     gzip_comp_level 7;
     # 压缩类型，下面的配置压缩了接口。可配置项参考nginx目录下的mime.types
-    gzip_types text/css text/xml application/javascript application/json;
+    # 参考google压缩了html,css,js,json. text/html 总是会压缩,加上去返回而报错.
+    # 图片属于压缩过了的格式, 应该由专门的服务或CDN转换图片格式
+    gzip_types text/plain text/xml text/css application/javascript application/json;
     gzip_vary on;
 
     gzip_disable "msie6";

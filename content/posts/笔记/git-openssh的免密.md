@@ -46,4 +46,4 @@ openssh 为了保证安全. 提供了私钥和公钥. 其中私钥可以密码�
    ```
 
 4. 终端有效果, 但 `vscode` 等等软件没有生效? 按照这个老哥的做法, 改全局变量吧 [Git: Support git with private key password · Issue #13680 · microsoft/vscode · GitHub](https://github.com/microsoft/vscode/issues/13680#issuecomment-1202087713) ![[附件/GIT_SSH全局变量.png]]
-5. **重新打开终端**, 这里有一些 [[笔记/git常用命令|git常用命令]] 可以给你测试验证
+5. **重新打开终端**, 这里有一些 [[笔记/git教程|git教程]] 可以给你测试验证

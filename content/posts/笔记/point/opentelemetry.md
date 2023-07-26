@@ -1,13 +1,13 @@
 ---
 title: OpenTelemetry
 aliases:
-  - OTLP
+  - OTEL
   - opentelemetry
 tags:
   - point
   - OpenTelemetry
 date: 2023-07-14
-lastmod: 2023-07-20
+lastmod: 2023-07-22
 categories:
   - point
 ---

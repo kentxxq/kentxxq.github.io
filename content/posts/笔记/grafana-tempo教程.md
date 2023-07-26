@@ -5,7 +5,7 @@ tags:
   - tempo
   - grafana
 date: 2023-07-19
-lastmod: 2023-07-20
+lastmod: 2023-07-21
 categories:
   - blog
 description: "grafana-tempo 是 [[笔记/point/grafana|grafana]] 公司的链路追踪组件"

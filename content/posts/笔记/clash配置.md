@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-07-14
+lastmod: 2023-07-26
 keywords:
   - clash
   - 配置文件
@@ -63,15 +63,12 @@ bypass:
 ### 配置文件讲解
 
 ```yml
-# http代理端口
-# http代理的用户名密码
-# authentication:
-#   - "user1:pass1"
 port: 7890
 socks-port: 7891
 redir-port: 7892
 mixed-port: 7893
-# 允许局域网访问
+# authentication:
+#   - "usr1:pass1"
 allow-lan: true
 mode: Rule
 log-level: info
@@ -82,7 +79,6 @@ clash-for-android:
   append-system-dns: false
 profile:
   tracing: true
-# dns配置,避免被dns污染
 dns:
   enable: true
   listen: 127.0.0.1:8853
@@ -90,10 +86,7 @@ dns:
     - 223.5.5.5
     - 1.0.0.1
   ipv6: false
-  # 使用伪造ip
   enhanced-mode: fake-ip
-  # 时间服务器如果使用伪造ip,可能导致时区错误?
-  # 音乐服务器如果使用伪造ip,可能版权问题?
   fake-ip-filter:
     - "*.lan"
     - stun.*.*.*
@@ -259,7 +252,7 @@ proxy-groups:
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 600
-    tolerance: 100 # 宽容,新节点速度快老节点少于100ms,就不改.
+    tolerance: 100
     use:
       - AMY-HongKong
   - name: 美国-auto
@@ -270,7 +263,7 @@ proxy-groups:
     use:
       - AMY-US
   - name: 所有-auto
-    type: url-test
+    type: select
     url: http://www.gstatic.com/generate_204
     interval: 600
     use:
@@ -286,14 +279,38 @@ rule-providers:
   ChinaMax:
     type: http
     behavior: classical
-    url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/ChinaMax/ChinaMax.yaml"
+    url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml"
     path: ./RuleSet/ChinaMax.yaml
     interval: 86400
   OpenAI:
     type: http
-    behavior: domain
+    behavior: classical
     url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/OpenAI/OpenAI.yaml"
     path: ./RuleSet/OpenAI.yaml
+    interval: 86400
+  Microsoft:
+    type: http
+    behavior: classical
+    url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Microsoft/Microsoft.yaml"
+    path: ./RuleSet/Microsoft.yaml
+    interval: 86400
+  GitLab:
+    type: http
+    behavior: classical
+    url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitLab/GitLab.yaml"
+    path: ./RuleSet/GitLab.yaml
+    interval: 86400
+  GitHub:
+    type: http
+    behavior: classical
+    url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitHub/GitHub.yaml"
+    path: ./RuleSet/GitHub.yaml
+    interval: 86400
+  Google:
+    type: http
+    behavior: classical
+    url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitHub/GitHub.yaml"
+    path: ./RuleSet/Google.yaml
     interval: 86400
 
 # 自定义规则
@@ -302,7 +319,13 @@ rules:
   - DOMAIN-SUFFIX,at.alicdn.com,香港-auto
   - DOMAIN-SUFFIX,bet365.com,香港-auto
   - DOMAIN-SUFFIX,ip-api.com,美国-auto
-  - DOMAIN-SUFFIX,devblogs.microsoft.com,香港-auto
+  - IP-CIDR,10.0.0.0/8,DIRECT
+  - IP-CIDR,172.16.0.0/12,DIRECT
+  - IP-CIDR,192.168.0.0/16,DIRECT
+  - RULE-SET,Google,香港-auto
+  - RULE-SET,GitHub,香港-auto
+  - RULE-SET,GitLab,香港-auto
+  - RULE-SET,Microsoft,香港-auto
   - RULE-SET,OpenAI,美国-auto
   - RULE-SET,ChinaMax,DIRECT
   - GEOIP,CN,DIRECT
@@ -327,7 +350,7 @@ mv clash-linux-amd64-2023.06.30 clash
 chmod +x clash
 
 # 下载geo数据库
-https://github.com/Loyalsoldier/geoip/releases/download/202307060123/Country.mmdb
+wget https://github.com/Loyalsoldier/geoip/releases/download/202307060123/Country.mmdb
 
 # 贴入配置,建议加上用户名密码
 vim config.yaml
@@ -335,7 +358,7 @@ vim config.yaml
 
 ### 守护进程
 
-[[笔记/point/supervisor|supervisor]] 配置
+[[笔记/point/supervisor|supervisor]] 配置文件 `/etc/supervisor/conf.d/clash.conf`
 
 ```toml
 [program:clash]

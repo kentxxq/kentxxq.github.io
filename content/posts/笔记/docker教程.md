@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-07-20
+lastmod: 2023-07-26
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有操作"
@@ -13,6 +13,23 @@ description: "这里记录 [[笔记/point/docker|docker]] 的所有操作"
 ## 简介
 
 这里记录 [[笔记/point/docker|docker]] 的所有操作
+
+## 配置参数
+
+ `/etc/docker/daemon.json`
+
+```json
+{
+  "registry-mirrors": ["https://bwx6yb0u.mirror.aliyuncs.com"],
+  "proxies": {
+    "default": {
+      "httpProxy": "http://proxy.example.com:3128",
+      "httpsProxy": "https://proxy.example.com:3129",
+      "noProxy": "NO_PROXY: localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.test.example.com"
+    }
+  }
+}
+```
 
 ## 上传 docker 镜像
 
@@ -47,11 +64,29 @@ description: "这里记录 [[笔记/point/docker|docker]] 的所有操作"
    docker push msb-images-registry-vpc.cn-zhangjiakou.cr.aliyuncs.com/public/maven:3.6.1-jdk-8
    ```
 
+## 文件拷贝
+
+### 从镜像拷贝文件到本地
+
+```shell
+id = $(docker create 镜像名)
+docker cp $id:path - > 本地文件名
+docker rm -v $id
+```
+
+[[笔记/point/powershell|powershell]] 版本:
+
+```shell
+$id = docker create 镜像名
+docker cp "${id}:镜像内源文件路径" - | Set-Content 目标文件名
+docker rm -v $id
+```
+
 ## 操作 docker-compose
 
-虽然在生产环境 `docker-compose` 很少用到, 但是在开发, 测试, [[笔记/point/poc|poc]] 的时候经常会用到.
+虽然在生产环境 [[笔记/point/docker-compose|docker-compose]] 很少用到, 但是在开发, 测试, [[笔记/point/poc|poc]] 的时候经常会用到.
 
-> `docker-compose` 现在集成到了 [[笔记/point/docker|docker]] 里, 所以 `docker-compose` 和 `docker compose` 等效
+> [[笔记/point/docker-compose|docker-compose]] 现在集成到了 [[笔记/point/docker|docker]] 里, 所以 `docker-compose` 和 `docker compose` 等效
 
 ```shell
 # 只拉取镜像
