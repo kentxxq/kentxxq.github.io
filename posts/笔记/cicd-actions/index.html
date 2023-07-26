@@ -1,0 +1,366 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>CICD-Actions - 运维个人技术栈</title><meta name=Description content="kentxxq个人站点"><meta property="og:title" content="CICD-Actions"><meta property="og:description" content="简介github 的 CICD 工具名字叫 action,而 gitea 采用了兼容的方式. 因为 github 肯定会经常用到, 而以后私人也可以使用 gitea, 所以记录一下使用方法. 内容 触发"><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cicd-actions/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-07-26T00:00:00+00:00"><meta property="article:modified_time" content="2023-07-26T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="CICD-Actions"><meta name=twitter:description content="简介github 的 CICD 工具名字叫 action,而 gitea 采用了兼容的方式. 因为 github 肯定会经常用到, 而以后私人也可以使用 gitea, 所以记录一下使用方法. 内容 触发"><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cicd-actions/><link rel=prev href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/><link rel=next href=https://kentxxq.com/posts/%E6%97%A5%E8%AE%B0/2023-07-26/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"CICD-Actions","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/cicd-actions\/"},"genre":"posts","keywords":"blog, CICD","wordcount":939,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/cicd-actions\/","datePublished":"2023-07-26T00:00:00+00:00","dateModified":"2023-07-26T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":""}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#内容>内容</a></li><li><a href=#触发事件>触发事件</a><ul><li><a href=#缓存>缓存</a></li><li><a href=#上传下载>上传下载</a></li><li><a href=#csharp-构建示例>Csharp 构建示例</a></li><li><a href=#docker-构建>Docker 构建</a><ul><li><a href=#gitea-版本>Gitea 版本</a></li><li><a href=#github-版本>Github 版本</a></li></ul></li><li><a href=#内置变量>内置变量</a></li><li><a href=#release-发布>Release 发布</a></li></ul></li><li><a href=#遗留问题>遗留问题</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CICD-Actions</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/blog/><i class="far fa-folder fa-fw"></i>blog</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-07-26>2023-07-26</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-07-26>2023-07-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 939 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#内容>内容</a></li><li><a href=#触发事件>触发事件</a><ul><li><a href=#缓存>缓存</a></li><li><a href=#上传下载>上传下载</a></li><li><a href=#csharp-构建示例>Csharp 构建示例</a></li><li><a href=#docker-构建>Docker 构建</a><ul><li><a href=#gitea-版本>Gitea 版本</a></li><li><a href=#github-版本>Github 版本</a></li></ul></li><li><a href=#内置变量>内置变量</a></li><li><a href=#release-发布>Release 发布</a></li></ul></li><li><a href=#遗留问题>遗留问题</a></li></ul></nav></div></div><div class=content id=content><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p><a href=/posts/%E7%AC%94%E8%AE%B0/point/github/>github</a> 的 <a href=/posts/%E7%AC%94%E8%AE%B0/point/CICD/>CICD</a> 工具名字叫 <code>action</code>,而 <a href=/posts/%E7%AC%94%E8%AE%B0/point/gitea/>gitea</a> 采用了兼容的方式. 因为 github 肯定会经常用到, 而以后私人也可以使用 gitea, 所以记录一下使用方法.</p><h2 id=内容 class=headerLink><a href=#%e5%86%85%e5%ae%b9 class=header-mark></a>内容</h2><h2 id=触发事件 class=headerLink><a href=#%e8%a7%a6%e5%8f%91%e4%ba%8b%e4%bb%b6 class=header-mark></a>触发事件</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Actions Demo</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>run-name</span><span class=p>:</span><span class=w> </span><span class=l>ken is testing out Actions 🚀</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># gitea无法手动触发</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># workflow_dispatch:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 可以为空</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 这样也可以</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>tags</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=s1>&#39;**&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>paths</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=s1>&#39;**.js&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=s1>&#39;!xxx/***&#39;</span><span class=w> </span><span class=c># 忽略路径</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>main</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=s1>&#39;releases/**&#39;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=缓存 class=headerLink><a href=#%e7%bc%93%e5%ad%98 class=header-mark></a>缓存</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 测试缓存,缓存后build操作不再执行</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>test-cache-all</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>cache 1.txt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>cache1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/cache@v3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=m>1.</span><span class=l>txt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=m>1.</span><span class=l>txt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>build 1.txt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=c># 条件判断cache1是id</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>if</span><span class=p>:</span><span class=w> </span><span class=l>steps.cache1.outputs.cache-hit != &#39;true&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>          touch 1.txt
+</span></span></span><span class=line><span class=cl><span class=sd>          echo 1 &gt; 1.txt
+</span></span></span><span class=line><span class=cl><span class=sd>          echo 1.txt创建完成</span><span class=w>          
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=上传下载 class=headerLink><a href=#%e4%b8%8a%e4%bc%a0%e4%b8%8b%e8%bd%bd class=header-mark></a>上传下载</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 上传</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>test-upload-all</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>upload txt1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/upload-artifact@v3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>artifact-txt1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=m>1.</span><span class=l>txt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>upload txt2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/upload-artifact@v3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>artifact-txt2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=m>2.</span><span class=l>txt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 下载</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>download</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>needs</span><span class=p>:</span><span class=w> </span><span class=l>test-upload-all</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>download txt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/download-artifact@v3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>artifact-txt1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>echo</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>          pwd
+</span></span></span><span class=line><span class=cl><span class=sd>          ls
+</span></span></span><span class=line><span class=cl><span class=sd>          cd artifact-txt1
+</span></span></span><span class=line><span class=cl><span class=sd>          pwd
+</span></span></span><span class=line><span class=cl><span class=sd>          ls
+</span></span></span><span class=line><span class=cl><span class=sd>          cat 1.txt</span><span class=w>          
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=csharp-构建示例 class=headerLink><a href=#csharp-%e6%9e%84%e5%bb%ba%e7%a4%ba%e4%be%8b class=header-mark></a>Csharp 构建示例</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>build</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c># 这里和runner的标签匹配,可以多个[a,b]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>strategy</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>matrix</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>dotnet-version</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;6&#34;</span><span class=p>,</span><span class=w> </span><span class=s2>&#34;7&#34;</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>拉取代码 https://github.com/actions/checkout</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>配置dotnet-sdk  https://github.com/actions/setup-dotnet</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/setup-dotnet@v3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>dotnet-version</span><span class=p>:</span><span class=w> </span><span class=l>${{ matrix.dotnet-version }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>cache</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>cache-dependency-path</span><span class=p>:</span><span class=w> </span><span class=l>subdir/packages.lock.json</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>          dotnet --version
+</span></span></span><span class=line><span class=cl><span class=sd>          dotnet --help</span><span class=w>          
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=docker-构建 class=headerLink><a href=#docker-%e6%9e%84%e5%bb%ba class=header-mark></a>Docker 构建</h3><h4 id=gitea-版本 class=headerLink><a href=#gitea-%e7%89%88%e6%9c%ac class=header-mark></a>Gitea 版本</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>test-docker</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>container</span><span class=p>:</span><span class=w> </span><span class=l>catthehacker/ubuntu:act-latest</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>check docker version</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>          docker version</span><span class=w>          
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=github-版本 class=headerLink><a href=#github-%e7%89%88%e6%9c%ac class=header-mark></a>Github 版本</h4><p><a href=https://github.com/marketplace/actions/build-and-push-docker-images target=_blank rel="noopener noreferrer">Build and push Docker images · Actions · GitHub Marketplace · GitHub</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>docker</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Set up Docker Buildx</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>docker/setup-buildx-action@v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>check docker version</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>          docker version</span><span class=w>          
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Login to Docker Hub</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>docker/login-action@v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>username</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.DOCKERHUB_USERNAME }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.DOCKERHUB_TOKEN }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build and push</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>docker/build-push-action@v4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>file</span><span class=p>:</span><span class=w> </span><span class=l>./Dockerfile</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>push</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>tags</span><span class=p>:</span><span class=w> </span><span class=l>user/app:latest</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=内置变量 class=headerLink><a href=#%e5%86%85%e7%bd%ae%e5%8f%98%e9%87%8f class=header-mark></a>内置变量</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>build-in-env</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=c># 所有的内置对象示例 https://docs.github.com/en/actions/learn-github-actions/contexts#example-contents-of-the-github-context</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>echo ${{ gitea.event_name }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>echo ${{ runner.os }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>echo ${{ gitea.ref }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>echo ${{ gitea.repository }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>echo ${{ gitea.workspace }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>List files in the repository</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>          ls ${{ gitea.workspace }}</span><span class=w>          
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>echo ${{ job.status }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>echo ${{ github.api_url }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>echo ${{ github.server_url }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>echo ${{ github.base_ref	 }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>sleep 2</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=release-发布 class=headerLink><a href=#release-%e5%8f%91%e5%b8%83 class=header-mark></a>Release 发布</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 测试release</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>test-release-gitea</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c># gitea 必须要tag,否则无法工作,同时避免在github上运行</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c># if: ${{ startsWith(gitea.ref, &#39;refs/tags/&#39;) &amp;&amp; contains(gitea.server_url, &#39;你的服务器地址,例如github.com&#39;) }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>if</span><span class=p>:</span><span class=w> </span><span class=l>${{ startsWith(gitea.ref, &#39;refs/tags/&#39;) &amp;&amp; contains(gitea.server_url, &#39;ken&#39;) }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>download txt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/download-artifact@v3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>artifact-txt1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>setup go</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/setup-go@v4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>go-version</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&gt;=1.20.1&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>release</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>release1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>https://gitea.com/actions/release-action@main</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>files</span><span class=p>:</span><span class=w> </span><span class=p>|-</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>            artifact-txt1/*.txt</span><span class=w>            
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>api_key</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;${{secrets.RELEASE_TOKEN}}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>test-release-github</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c># 打tag才运行,且避免在gitea上运行</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>if</span><span class=p>:</span><span class=w> </span><span class=l>${{ startsWith(github.ref, &#39;refs/tags/&#39;) &amp;&amp; contains(github.server_url, &#39;github&#39;) }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>download txt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/download-artifact@v3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>artifact-txt2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>release</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>release</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;marvinpinto/action-automatic-releases@latest&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>repo_token</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;${{ secrets.GITHUB_TOKEN }}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>automatic_release_tag</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;latest&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>prerelease</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;${{ github.ref_name }}&#34;</span><span class=w> </span><span class=c># kentxxq.Cli是tag构建,所以输出的是tag名称</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>files</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>            artifact-txt2/2.txt</span><span class=w>            
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=遗留问题 class=headerLink><a href=#%e9%81%97%e7%95%99%e9%97%ae%e9%a2%98 class=header-mark></a>遗留问题</h2><ul><li>Gitea 不支持并发 <a href=https://docs.gitea.com/zh-cn/next/usage/actions/comparison#concurrency target=_blank rel="noopener noreferrer">Fetching Title#4efs</a></li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-07-26</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cicd-actions/ data-title=CICD-Actions data-hashtags=blog,CICD><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cicd-actions/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cicd-actions/ data-title=CICD-Actions data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cicd-actions/ data-title=CICD-Actions><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cicd-actions/ data-title=CICD-Actions><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cicd-actions/ data-title=CICD-Actions data-description><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cicd-actions/ data-title=CICD-Actions data-description><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cicd-actions/ data-title=CICD-Actions><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a>,&nbsp;<a href=/tags/cicd/>CICD</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/ class=prev rel=prev title=csharp项目配置><i class="fas fa-angle-left fa-fw"></i>csharp项目配置</a>
+<a href=/posts/%E6%97%A5%E8%AE%B0/2023-07-26/ class=next rel=next title=2023-07-26>2023-07-26<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a target=_blank href=https://beian.miit.gov.cn>湘ICP备2021002319号-1</a></span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div></body></html>
