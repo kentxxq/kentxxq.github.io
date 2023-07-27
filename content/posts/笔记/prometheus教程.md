@@ -6,7 +6,7 @@ tags:
   - devops
   - 监控
 date: 2023-07-11
-lastmod: 2023-07-26
+lastmod: 2023-07-27
 categories:
   - blog
 description: "记录 [[笔记/point/prometheus|prometheus]] 的相关使用."
@@ -146,3 +146,13 @@ scrape_configs:
 - `absent(qweoj)===1` 表示指标 qweoj 不存在
 - `histogram_quantile(0.99,sum (rate(prometheus_http_requests_total[1m])))` 分位置
 - `rate(node_cpu_seconds_total{mode="idle"}[10m])*100` cpu 空闲率
+
+### 查询示例
+
+#### Pod 内存使用率
+
+`取每个容器的最大内存值` / `requests 内存` * 100
+
+```shell
+(max(container_memory_working_set_bytes{namespace="default"}) by (pod) / sum(kube_pod_container_resource_requests_memory_bytes{namespace="default"}) by (pod)) * 100
+```

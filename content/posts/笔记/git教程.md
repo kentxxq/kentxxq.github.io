@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2023-07-26
+lastmod: 2023-07-27
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."
@@ -40,8 +40,18 @@ git clone --depth 1 xxx.git
 git clone https://ghproxy.com/https://github.com/kentxxq/hugo.git
 # 私有仓库配合token使用.
 git clone https://user:your_token@ghproxy.com/https://ghproxy.com/https://github.com/kentxxq/hugo.git
+```
+
+### 仓库 remote
+
+```shell
+# 添加remote
+git remote add gitea https://ken.mashibing.cn/admin1/learn-actions.git
 # 修改origin地址
 git remote set-url origin https://github.com/kentxxq/hugo.git
+# 删除
+git remote remove origin2
+
 # 验证效果
 git remote -v
 ```

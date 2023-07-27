@@ -9,7 +9,7 @@ categories:
   - point
 ---
 
-`github` 是微软收购的公司, 做开源平台的.
+`github` 是微软收购的公司, 做开源平台的. 为大家提供 [[笔记/point/git|git]] 服务.
 
 要点:
 

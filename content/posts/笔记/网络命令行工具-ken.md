@@ -252,29 +252,6 @@ ken k8s 1
 |-----------|--------------------|--------------|-----------|----------------|--------------|-------------|-----------|
 | default   | kube-state-metrics | 3.57%        | 0.25%     | 32Mi           | 1Gi          | 10m         | 200m      |
 
-### 更新 update
-
-这个命令主要是为了更新 ken 程序自己。避免冗长的 bash 命令。
-
-```bash
-ken update -h
-Description:
-  update ken command
-
-Usage:
-  ken update [options]
-
-Options:
-  -f, --force                       force update current version [default: False]
-  -kv, --ken-version <ken-version>  force upgrade to specific current version
-  -p, --proxy                       use proxy url
-  -t, --token <token>               github token for query github-api []
-  -?, -h, --help                    Show help and usage information
-```
-
-1. `-p` 使用 `https://github.abskoop.workers.dev` 代理下载，方便国内用户
-2. `-t` 是因为 github 的 api 存在次数限制。带上 token 可以大幅提升 api 的请求次数
-3. `-kv` 可以指定特定的版本，例如 `-kv 1.3.2` 则更新到 1.3.2 版本。因为我不想留着一些无用的版本号，所以 1.3.1 可能不见了。。。建议不使用此命令，直接 update 到最新版本
 
 ### 静态文件代理 web
 
@@ -301,6 +278,31 @@ HTTP/1.1 GET /favicon.ico 404
 
 1. 默认当前目录，也可以只用 `-w` 指定目录
 2. 默认使用 5000 端口，也可以使用 `-p` 指定端口
+### 更新 update
+
+这个命令主要是为了更新 ken 程序自己。避免冗长的 bash 命令。
+
+```bash
+ken update -h
+Description:
+  update ken command
+
+Usage:
+  ken update [options]
+
+Options:
+  -f, --force                       force update current version [default: False]
+  -kv, --ken-version <ken-version>  force upgrade to specific current version
+  -p, --proxy                       use proxy url
+  -t, --token <token>               github token for query github-api []
+  -?, -h, --help                    Show help and usage information
+```
+
+1. `-p` 使用 `https://github.abskoop.workers.dev` 代理下载，方便国内用户
+2. `-t` 是因为 github 的 api 存在次数限制。带上 token 可以大幅提升 api 的请求次数
+3. `-kv` 可以指定特定的版本，例如 `-kv 1.3.2` 则更新到 1.3.2 版本。因为我不想留着一些无用的版本号，所以 1.3.1 可能不见了。。。建议不使用此命令，直接 update 到最新版本
+
+
 
 ### 网站连通性测试 wp
 
