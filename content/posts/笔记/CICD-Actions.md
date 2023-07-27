@@ -180,6 +180,7 @@ jobs:
           path: 2.txt
 
   test-release-gitea:
+    needs: [build-1, build-2]
     runs-on: ubuntu-latest
     # gitea 必须要tag,否则无法工作,同时避免在github上运行
     # if: ${{ startsWith(github.ref, 'refs/tags/') && contains(github.server_url, '你的服务器地址,例如github.com') }}
@@ -203,6 +204,7 @@ jobs:
 
   test-release-github:
     runs-on: ubuntu-latest
+    needs: [build-1, build-2]
     # 打tag才运行,且避免在gitea上运行
     if: ${{ startsWith(github.ref, 'refs/tags/') && contains(github.server_url, 'github') }}
     steps:
@@ -215,8 +217,8 @@ jobs:
         uses: actions/download-artifact@v3
       - run: |
           ls
-          cat 1.txt
-          cat 2.txt
+          cat txt1/1.txt
+          cat txt2/2.txt
       - name: release
         id: release
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -226,7 +228,8 @@ jobs:
           prerelease: false
           title: "${{ github.ref_name }}" # kentxxq.Cli是tag构建,所以输出的是tag名称
           files: |
-            2.txt
+            txt2/2.txt
+
 ```
 
 ## Csharp 构建示例
