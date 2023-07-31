@@ -4,7 +4,7 @@ tags:
   - point
   - ansible
 date: 2023-07-01
-lastmod: 2023-07-01
+lastmod: 2023-07-31
 categories:
   - point
 ---

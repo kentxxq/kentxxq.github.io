@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-07-20
+lastmod: 2023-07-31
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -342,31 +342,6 @@ history -d 123
 history -c
 ```
 
-### 压缩/解压 tar
-
-```shell
-# z是使用gzip
-# v是查看细节
-# f是指定文件
-# --strip-components=1 去掉一层解压目录
-
-# 打包
-tar -czvf dist.tgz dist/
-
-# 解压
-tar -xzvf dist.tgz
-# 解压到指定文件夹
-tar Cxzvf /dist dist.tgz
-
-# 打包隐藏文件
-# 通过 . 可以打包到隐藏文件
-tar -czvf dist.tgz /dad/path/.
-# 通过上级目录来打包
-tar -czvf dist.tgz /data/path
-# 如果是在当前目录，可以手动指定
-tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* *
-```
-
 ### 大版本升级
 
 ```shell
@@ -395,6 +370,10 @@ make
 # 创建/usr/local/nginx/sbin/nginx的快捷方式到/usr/local/bin/nginx
 # 软连接的目标文件可以被替换,替换后会链接到新文件
 ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/nginx
+
+# 查看软链接的实际路径
+readlink -f /lib/systemd/system/nginx.service
+/usr/lib/systemd/system/nginx.service
 ```
 
 ### 配置主机名
@@ -449,7 +428,7 @@ chmod 777 file/folder
 # 安装deb包
 dpkg -i minio.deb
 
-# 查看已安装的包
+# 搜索查看已安装的包
 dpkg --list
 
 # 查看正则匹配的包
@@ -498,6 +477,31 @@ find /data/weblog/ -name '*.log.*' -type f -mtime +7 -exec rm -f {} \;
 ps -eo pid,lstart,etime | grep 1310
 1310 Sat Aug 10 10:21:25 2019 242-07:26:58
 # 前面是启动时间，后面是启动了242天又7小时
+```
+
+### 压缩/解压 tar
+
+```shell
+# z是使用gzip
+# v是查看细节
+# f是指定文件
+# --strip-components=1 去掉一层解压目录
+
+# 打包
+tar -czvf dist.tgz dist/
+
+# 解压
+tar -xzvf dist.tgz
+# 解压到指定文件夹
+tar Cxzvf /dist dist.tgz
+
+# 打包隐藏文件
+# 通过 . 可以打包到隐藏文件
+tar -czvf dist.tgz /dad/path/.
+# 通过上级目录来打包
+tar -czvf dist.tgz /data/path
+# 如果是在当前目录，可以手动指定
+tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* *
 ```
 
 ### 拷贝文件

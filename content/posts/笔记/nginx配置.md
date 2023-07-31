@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-07-22
+lastmod: 2023-07-31
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -307,7 +307,54 @@ if ($request_method = 'OPTIONS') {
 }
 ```
 
+### Upstream 配置
+
+```nginx
+upstream backend {
+    # 默认轮训,有weight就是加权轮训
+    # ip_hash; 适合session等固定机器场景
+    # least_conn; 最少连接数
+    server backend1.example.com max_fails=1 weight=10;
+    server backend2.example.com max_fails=1 weight=5;
+    server backend4.example.com;
+    # 最大空闲连接数
+    keepalive 10;
+}
+```
+
 ### 域名转发
+
+#### 转发配置
+
+`/usr/local/nginx/conf/hosts/www.kentxxq.com.conf`
+
+```nginx
+server {
+    listen 80;
+    server_name www.kentxxq.com;
+    return 301 https://$server_name$request_uri;
+    access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log k-json;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name www.kentxxq.com;
+    access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log k-json;
+
+    # 普通header头,ip之类的
+    include /usr/local/nginx/conf/options/normal.conf;
+    # 跨域
+    include /usr/local/nginx/conf/options/allow_all_cross_origin.conf;
+    # 证书相关
+    include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
+
+    location / {
+        # 跨域
+        include /usr/local/nginx/conf/options/allow_all_options_cross_origin.conf;
+        proxy_pass http://1.1.1.1:80;
+    }
+}
+```
 
 #### Debug 配置
 
@@ -352,38 +399,6 @@ connections_waiting $connections_waiting $timestamp';
         add_header time_zh_ms2 $time_zh_ms2;
         add_header time_local $time_local;
         add_header time_iso8601 $time_iso8601;
-    }
-}
-```
-
-#### 用户配置
-
-`/usr/local/nginx/conf/hosts/www.kentxxq.com.conf`
-
-```nginx
-server {
-    listen 80;
-    server_name www.kentxxq.com;
-    return 301 https://$server_name$request_uri;
-    access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log k-json;
-}
-
-server {
-    listen 443 ssl http2;
-    server_name www.kentxxq.com;
-    access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log k-json;
-
-    # 普通header头,ip之类的
-    include /usr/local/nginx/conf/options/normal.conf;
-    # 跨域
-    include /usr/local/nginx/conf/options/allow_all_cross_origin.conf;
-    # 证书相关
-    include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
-
-    location / {
-        # 跨域
-        include /usr/local/nginx/conf/options/allow_all_options_cross_origin.conf;
-        proxy_pass http://1.1.1.1:80;
     }
 }
 ```
@@ -524,6 +539,53 @@ server {
 
 - [Nginx 反向代理，当后端为 Https 时的一些细节和原理 - XniLe - Ops 2.0](https://blog.dianduidian.com/post/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%BD%93%E5%90%8E%E7%AB%AF%E4%B8%BAhttps%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82%E5%92%8C%E5%8E%9F%E7%90%86/)
 
+### grpc 配置
+
+```nginx
+http {
+    access_log  /usr/local/var/log/nginx/access.log;
+
+    upstream auth_services {
+        server 0.0.0.0:50051;
+        server 0.0.0.0:50052;
+    }
+
+    upstream laptop_services {
+        server 0.0.0.0:50051;
+        server 0.0.0.0:50052;
+    }
+
+    server {
+        listen       8080 ssl http2;
+
+        # Mutual TLS between gRPC client and nginx
+        ssl_certificate cert/server-cert.pem;
+        ssl_certificate_key cert/server-key.pem;
+
+        ssl_client_certificate cert/ca-cert.pem;
+        ssl_verify_client on;
+
+        location /techschool.pcbook.AuthService {
+            grpc_pass grpcs://auth_services;
+
+            # Mutual TLS between nginx and gRPC server
+            grpc_ssl_certificate cert/server-cert.pem;
+            grpc_ssl_certificate_key cert/server-key.pem;
+        }
+
+        location /techschool.pcbook.LaptopService {
+            grpc_pass grpcs://laptop_services;
+
+            # Mutual TLS between nginx and gRPC server
+            grpc_ssl_certificate cert/server-cert.pem;
+            grpc_ssl_certificate_key cert/server-key.pem;
+        }
+    }
+}
+```
+
+- [Module ngx\_http\_grpc\_module](http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_pass)
+
 ### 用户名密码
 
 ```nginx
@@ -649,6 +711,10 @@ stderr_logfile_backups = 3
 ```nginx
 # 双层nginx,第二层的ingress-nginx需要配置这个
 use-forwarded-headers: 'true'
+
+# 负载均衡,默认round_robin. 还有ip_hash,least_conn
+# https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#load-balance
+nginx.ingress.kubernetes.io/upstream-hash-by: 'ip_hash'
 
 # yml配置
 kind: Ingress

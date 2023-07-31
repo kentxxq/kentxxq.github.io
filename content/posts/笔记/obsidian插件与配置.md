@@ -4,7 +4,7 @@ tags:
   - blog
   - obsidian
 date: 2023-06-19
-lastmod: 2023-06-30
+lastmod: 2023-07-31
 categories:
   - blog
 description: "这篇文章主要记录我使用 [[笔记/point/obsidian|obsidian]] 的配置和插件.方便自己记录, 也可以让你了解我做了什么让 [[笔记/point/obsidian|obsidian]] 变得更好用."
@@ -55,6 +55,7 @@ description: "这篇文章主要记录我使用 [[笔记/point/obsidian|obsidian
 
 ### 可能尝试的插件
 
-| 插件名称      | 插件作用 | 总结说明                               |
-| ------------- | -------- | -------------------------------------- |
-| sliding panes | 横向卷动 | 打开多个标签页，然后配合触摸板横向浏览 |
+| 插件名称        | 插件作用     | 总结说明                               |
+| --------------- | ------------ | -------------------------------------- |
+| sliding panes   | 横向卷动     | 打开多个标签页，然后配合触摸板横向浏览 |
+| obisidian links | 链接类型转换 | wikilink, markdown-link, 删除 link 等等                                       |

@@ -1,24 +1,47 @@
 ---
-title: csharp项目配置
+title: csharp项目配置与运行配置
 tags:
   - blog
   - csharp
 date: 2023-07-26
-lastmod: 2023-07-27
+lastmod: 2023-07-30
 categories:
   - blog
-description: 
+description: "[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."
 ---
 
 ## 简介
 
-[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目.
+[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数.
 
 ## 项目配置
 
 [.NET 项目 SDK 概述 | Microsoft Learn](https://learn.microsoft.com/zh-cn/dotnet/core/project-sdk/overview)
 
 ### 配置项参考
+
+#todo/笔记  `dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\win-x64.pubxml`
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+    <PropertyGroup>
+        <Configuration>Release</Configuration>
+        <Platform>Any CPU</Platform>
+        <PublishDir>bin\Release\net7.0\win-x64\publish\win-x64\</PublishDir>
+        <PublishProtocol>FileSystem</PublishProtocol>
+        <_TargetId>Folder</_TargetId>
+        <TargetFramework>net7.0</TargetFramework>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <SelfContained>true</SelfContained>
+        <PublishSingleFile>false</PublishSingleFile>
+        <PublishReadyToRun>false</PublishReadyToRun>
+    </PropertyGroup>
+</Project>
+```
 
 > 已知 aot 的时候 IncludeNativeLibrariesInSingleFile 会失败
 > 如果没有生效, 可以 -p 手动传参.
@@ -164,3 +187,10 @@ description:
 ### single file
 
 - 设计文档 [design.md](https://github.com/dotnet/designs/blob/main/accepted/2020/single-file/design.md#optional-settings)
+
+## 运行配置
+
+```docker
+# 多gc节省 0-9之间 https://learn.microsoft.com/zh-cn/dotnet/core/runtime-config/garbage-collector#conserve-memory
+ENV DOTNET_GCConserveMemory=9
+```
