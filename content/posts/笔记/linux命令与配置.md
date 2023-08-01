@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-07-31
+lastmod: 2023-08-01
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -250,9 +250,12 @@ timedatectl list-timezones | grep -i shang
 timedatectl set-timezone Asia/Shanghai
 ```
 
-### 配置 locale 中文
+### 配置中文
 
 ```shell
+export LANG=zh_CN.UTF-8
+
+
 # 查看当前shell环境locale
 locale
 
@@ -264,9 +267,15 @@ localectl list-locales
 localectl set-locale LANG=zh_CN.UTF-8
 # 默认英文
 localectl set-locale LANG=en_US.UTF-8
-# 没有效果?
+
+# 没有效果? 重启生效
 vim /etc/locale.conf
 LANG=zh_CN.UTF-8
+LC_ALL="zh_CN.UTF-8"
+# 或者
+vim .bashrc
+export LANG=zh_CN.UTF-8
+export LC_ALL="zh_CN.UTF-8"
 
 # 搜索所有语言包
 apt search language-pack*

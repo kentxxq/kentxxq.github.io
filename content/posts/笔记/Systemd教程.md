@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-29
-lastmod: 2023-07-31
+lastmod: 2023-08-01
 categories:
   - blog
 description: "[[笔记/point/Systemd|systemd]] 的相关概念, 使用, 操作示例."
@@ -74,6 +74,10 @@ RestartSec=30s
 Restart=always
 # 相关资源都发送term后,后发送kill
 KillMode=mixed
+# 最大文件打开数不限制
+LimitNOFILE=infinity
+# 子线程数量不限制
+TasksMax=infinity
 
 
 [Install]
@@ -106,11 +110,14 @@ Before=a.service
 After=a.service
 # a-Unit不能与我同时运行
 Conflicts=a.service
+
 # Condition开头 必须满足所有条件我才会运行
 # 下面是路径存在就运行
 ConditionPathExists=/usr/bin/myprogram
 # Assert开头 必须满足所有条件,否则会报错启动失败
 AssertPathExists=/usr/bin/myprogram
+# 这个文件有运行权限
+AssertFileIsExecutable=/xxxx
 
 # 启动时间区间,单位秒.
 StartLimitIntervalSec=30
@@ -128,6 +135,10 @@ Type=simple
 Type=forking
 # 代替rc.local,执行开机启动. 搭配RemainAfterExit=yes,让systemd显示状态active,让你知道已经执行过了.
 Type=oneshot
+
+# 运行用户和组,默认root用户/root组
+User=kentxxq
+Group=kentxxq
 
 # 运行目录
 WorkingDirectory=/path
@@ -159,6 +170,9 @@ Restart=always
 # 默认control-group
 # control-group向控制组先term后发送kill, mixed一起发送term后发送kill, process向主进程发送term后发送kill
 KillMode=mixed
+# 确认只处理term信号,不需要发送kill命令,可以不发送.
+# 配合TimeoutStopSec=infinity 使用,一直等待term信号处理完成
+SendSIGKILL=no
 
 # 环境变量 $MY_ENV1 $MY_ENV2
 Environment=MY_ENV1=value1
@@ -173,6 +187,14 @@ StandardOutput=append:/tmp/my-service.log
 StandardError=append:/tmp/my-service.log
 # 定义一个名字
 SyslogIdentifier=my-service
+
+# 其他
+# 保护/proc文件系统,其他进程无法修改,保证安全性. minio有用到
+ProtectProc=invisible
+# 可以打开的文件数/文件描述符=无限 默认是system.conf:#DefaultLimitNOFILE=1024:524288
+LimitNOFILE=infinity
+# 最大线程数=无限,默认4915. 比LimitNPROC好,参考回答https://unix.stackexchange.com/questions/452284/managing-nproc-in-systemd
+TasksMax=infinity
 ```
 
 #### Install
@@ -291,6 +313,7 @@ journalctl --disk-usage
 
 ## 参考文档
 
+- [systemd.unit](https://www.freedesktop.org/software/systemd/man/systemd.unit.html)
 - [Systemd 入门教程：命令篇 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html)
 - [Systemd 入门教程：实战篇 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html)
 - [systemd详解 | learn-systemd](https://yifengyou.github.io/learn-systemd/)

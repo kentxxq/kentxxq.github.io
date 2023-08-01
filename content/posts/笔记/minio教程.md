@@ -3,7 +3,7 @@ title: minio教程
 tags:
   - blog
 date: 2023-07-19
-lastmod: 2023-07-19
+lastmod: 2023-08-01
 categories:
   - blog
 description: "[[笔记/point/minio|minio]] 的搭建和使用."
@@ -19,19 +19,36 @@ description: "[[笔记/point/minio|minio]] 的搭建和使用."
 
 #### 单点单驱动
 
+安装 `minio`
+
 ```shell
 wget https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20230711212934.0.0_amd64.deb -O minio.deb
 dpkg -i minio.deb
 ```
 
-启动配置文件 `/etc/default/minio`
+数据目录准备
 
 ```shell
+# 数据目录
+mkdir -p /data/minio-data
+# 添加组和用户
+groupadd -r minio-user
+useradd -M -r -g minio-user minio-user
+# 配置权限
+chown minio-user:minio-user /data/minio-data
+```
+
+编辑配置文件 `/etc/default/minio`
+
+```shell
+# 用户名和密码
 MINIO_ROOT_USER=myminioadmin
 MINIO_ROOT_PASSWORD=minio-secret-key-change-me
 
+# 数据存放位置
 MINIO_VOLUMES="/data/minio-data"
-#MINIO_SERVER_URL="http://minio.example.net:9000"
+# 如果通过nginx反向代理https,或者集群的时候,可以配置MINIO_SERVER_URL
+# MINIO_SERVER_URL="http://minio.example.net:9000"
 ```
 
 守护 systemd, `/etc/systemd/system/minio.service`
@@ -79,15 +96,6 @@ WantedBy=multi-user.target
 # Built for ${project.name}-${project.version} (${project.name})
 ```
 
-数据目录准备
-
-```shell
-mkdir -p /data/minio-data
-groupadd -r minio-user
-useradd -M -r -g minio-user minio-user
-chown minio-user:minio-user /data/minio-data
-```
-
 启动, 配置文件中默认 9000 端口
 
 ```shell
@@ -97,6 +105,6 @@ systemctl start minio.service
 
 ### 基础使用
 
-1. 登录 9000 端口, 输入用户名和密码
+1. 浏览器打开登录 `ip:9000` 端口, 输入用户名和密码
 2. 创建 `demo1` bucket
 3. 创建 `ak`
