@@ -4,7 +4,7 @@ tags:
   - point
   - elastic
 date: 2023-07-19
-lastmod: 2023-07-31
+lastmod: 2023-08-02
 categories:
   - point
 ---
@@ -38,7 +38,6 @@ vm.max_map_count = 262144
 sysctl -p
 
 # 启动并验证
-systemctl start elasticsearch
-systemctl enable elasticsearch
+systemctl enable elasticsearch --now
 curl -X GET "localhost:9200/_cat/health?v"
 ```

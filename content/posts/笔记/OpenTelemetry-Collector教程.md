@@ -4,7 +4,7 @@ tags:
   - blog
   - OpenTelemetry
 date: 2023-07-21
-lastmod: 2023-07-22
+lastmod: 2023-08-02
 categories:
   - blog
 description: "`OpenTelemetry-collector` 是 [[笔记/point/OpenTelemetry|OpenTelemetry]] 官方的数据采集软件. 它和 [[笔记/grafana-agent教程|grafana-agent]] 的功能有些类似."
@@ -44,6 +44,8 @@ description: "`OpenTelemetry-collector` 是 [[笔记/point/OpenTelemetry|OpenTel
 
 ### 单点 agent 采集
 
+#### 安装
+
 [Getting Started | OpenTelemetry](https://opentelemetry.io/docs/collector/getting-started/) 有很多的安装方法, 我用 deb 安装包方便使用.
 
 ```shell
@@ -51,8 +53,10 @@ wget https://github.com/open-telemetry/opentelemetry-collector-releases/releases
 dpkg -i otelcol_0.81.0_linux_amd64.deb
 
 # 启用
-systemctl enable otelcol; systemctl status otelcol;
+systemctl enable otelcol --now
 ```
+
+#### 配置文件
 
 配置文件 `/etc/otelcol/config.yaml`,完整配置参考官网 [Configuration | OpenTelemetry](https://opentelemetry.io/docs/collector/configuration/)
 

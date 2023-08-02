@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-29
-lastmod: 2023-08-01
+lastmod: 2023-08-02
 categories:
   - blog
 description: "[[笔记/point/Systemd|systemd]] 的相关概念, 使用, 操作示例."
@@ -28,7 +28,7 @@ description: "[[笔记/point/Systemd|systemd]] 的相关概念, 使用, 操作�
 
 ```shell
 # 启用supervisor
-systemctl enable supervisor
+systemctl enable supervisor --now
 Created symlink /etc/systemd/system/multi-user.target.wants/supervisor.service → /lib/systemd/system/supervisor.service
 
 # 我们看一下这个目录下的内容, 都是类似的符号链接
@@ -135,6 +135,8 @@ Type=simple
 Type=forking
 # 代替rc.local,执行开机启动. 搭配RemainAfterExit=yes,让systemd显示状态active,让你知道已经执行过了.
 Type=oneshot
+# 服务启动以后,通过sd_notify(3)发送通知给systemd,才算启动成功.containerd有用到
+Type=notify
 
 # 运行用户和组,默认root用户/root组
 User=kentxxq
@@ -143,6 +145,8 @@ Group=kentxxq
 # 运行目录
 WorkingDirectory=/path
 # 启动前执行,失败不会执行ExecStart
+# 启动前加载overlay内核模块, -减号 代表失败了也不影响ExecStart
+# ExecStartPre=-/sbin/modprobe overlay
 ExecStartPre=ls
 # 启动命令.可以存在多个,然后会顺序执行.可能是为了调试方便?
 ExecStart=
@@ -168,11 +172,16 @@ Restart=always
 
 # 杀死模式
 # 默认control-group
-# control-group向控制组先term后发送kill, mixed一起发送term后发送kill, process向主进程发送term后发送kill
+# control-group执行ExecStop后,向cgroup中所有进程先term后发送kill
+# mixed会在cgroup的子进程全部先term,再kill后,才开始term,再kill主进程
+# process仅主进程发送term后发送kill(containerd只杀主进程)
+# none只是执行ExecStop命令
 KillMode=mixed
 # 确认只处理term信号,不需要发送kill命令,可以不发送.
 # 配合TimeoutStopSec=infinity 使用,一直等待term信号处理完成
 SendSIGKILL=no
+# 修改杀死信号,默认是SIGTERM
+RestartKillSignal=SIGHUP
 
 # 环境变量 $MY_ENV1 $MY_ENV2
 Environment=MY_ENV1=value1
@@ -193,8 +202,16 @@ SyslogIdentifier=my-service
 ProtectProc=invisible
 # 可以打开的文件数/文件描述符=无限 默认是system.conf:#DefaultLimitNOFILE=1024:524288
 LimitNOFILE=infinity
-# 最大线程数=无限,默认4915. 比LimitNPROC好,参考回答https://unix.stackexchange.com/questions/452284/managing-nproc-in-systemd
+# 允许核心转储文件无限大,containerd有用到
+LimitCORE=infinity
+# 最大进程数无限
+LimitNPROC=infinity
+# 最大线程数=无限,默认4915. TasksMax比LimitNPROC更常用,参考回答https://unix.stackexchange.com/questions/452284/managing-nproc-in-systemd
 TasksMax=infinity
+# 开启后将其cgroup下资源控制交给进程自己管理,containerd有用到.
+Delegate=yes
+# -1000到1000,-999代表优先级很高.发生oom的时候,内核尽量先杀其他进程,保留这个. containerd有用到
+OOMScoreAdjust=-999
 ```
 
 #### Install

@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-08-01
+lastmod: 2023-08-02
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -205,9 +205,10 @@ reboot
 ### 关闭 selinux
 
 ```shell
+apt install selinux-utils policycoreutils -y
+
 # 当前生效
 setenforce 0
-
 # 永久生效
 vim /etc/selinux/config
 SELINUX=disabled
@@ -495,6 +496,9 @@ ps -eo pid,lstart,etime | grep 1310
 # v是查看细节
 # f是指定文件
 # --strip-components=1 去掉一层解压目录
+
+# 查看文件内容
+tar -tf xxx.tar.gz
 
 # 打包
 tar -czvf dist.tgz dist/

@@ -4,15 +4,29 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-07-31
+lastmod: 2023-08-02
 categories:
   - blog
-description: "这里记录 [[笔记/point/docker|docker]] 的所有操作"
+description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
 ---
 
 ## 简介
 
-这里记录 [[笔记/point/docker|docker]] 的所有操作
+这里记录 [[笔记/point/docker|docker]] 的所有配置和操作.
+
+## 安装/卸载 docker
+
+```shell
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+chmod a+r /etc/apt/keyrings/docker.gpg
+apt update -y
+apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+vim /etc/docker/daemon.json
+systemctl daemon-reload
+systemctl enable docker --now
+
+apt remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+```
 
 ## 配置参数
 

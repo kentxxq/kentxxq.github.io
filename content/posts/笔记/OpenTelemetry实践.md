@@ -7,7 +7,7 @@ tags:
   - prometheus
   - csharp
 date: 2023-07-20
-lastmod: 2023-07-24
+lastmod: 2023-08-02
 keywords:
   - OpenTelemetry
   - grafana

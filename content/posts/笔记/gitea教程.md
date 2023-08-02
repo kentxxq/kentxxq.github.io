@@ -4,7 +4,7 @@ tags:
   - blog
   - gitea
 date: 2023-07-24
-lastmod: 2023-07-26
+lastmod: 2023-08-02
 categories:
   - blog
 description: "[[笔记/point/gitea|gitea]] 支持了 [[笔记/point/CICD|CICD]],且兼容 github 的 actions, 这样就可以复用很多的脚本了.这里记录一下相关的搭建, 配置, 使用."
@@ -18,7 +18,7 @@ description: "[[笔记/point/gitea|gitea]] 支持了 [[笔记/point/CICD|CICD]],
 
 ## 内容
 
-### 安装
+### 基础安装
 
 ```shell
 mkdir -p gitea/{data,config}
@@ -61,9 +61,9 @@ SSH_PORT = 2222
 ROOT_URL = https://git.kentxxq.com/
 ```
 
-## CICD
+### CICD
 
-### 配置
+#### 配置
 
 [[笔记/point/gitea|gitea]] `config/app.ini` 配置
 
@@ -117,7 +117,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
 
-### 测试
+#### 测试
 
 `代码块根目录/.gitea/workflows/demo.yaml`
 
@@ -147,7 +147,7 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
 ```
 
-### 重建 runner
+#### 重建 runner
 
 1. 管理后台删除 runner
 2. `docker compose down`, `docker compose up -d`

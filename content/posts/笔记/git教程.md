@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2023-07-27
+lastmod: 2023-08-02
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."

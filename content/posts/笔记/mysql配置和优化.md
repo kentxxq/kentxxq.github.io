@@ -5,7 +5,7 @@ tags:
   - mysql
   - docker
 date: 1993-07-06
-lastmod: 2023-07-27
+lastmod: 2023-08-02
 categories:
   - blog
 description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置. 所以记录一下配置和操作."
@@ -42,8 +42,7 @@ apt install libtinfo5 libmecab2 -y
 # 安装
 dpkg -i mysql*.deb
 # 配置
-systemctl enable mysql
-systemctl start mysql
+systemctl enable mysql --now
 mysql -uroot -p
 password
 ```

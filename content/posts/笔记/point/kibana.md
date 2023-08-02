@@ -4,7 +4,7 @@ tags:
   - point
   - kibana
 date: 2023-07-26
-lastmod: 2023-07-26
+lastmod: 2023-08-02
 categories:
   - point
 ---
@@ -26,9 +26,7 @@ server.host: "0.0.0.0"
 elasticsearch.hosts: ["http://EFK:9200"]
 i18n.locale: "zh-CN"          #这是显示中文
 
-systemctl start kibana.service
-systemctl enable kibana.service
-systemctl status kibana.service
+systemctl enable kibana --now
 ```
 
 - [docker安装](https://www.elastic.co/guide/en/kibana/8.9/docker.html)

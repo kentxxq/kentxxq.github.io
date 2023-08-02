@@ -3,7 +3,7 @@ title: minio教程
 tags:
   - blog
 date: 2023-07-19
-lastmod: 2023-08-01
+lastmod: 2023-08-02
 categories:
   - blog
 description: "[[笔记/point/minio|minio]] 的搭建和使用."
@@ -99,8 +99,7 @@ WantedBy=multi-user.target
 启动, 配置文件中默认 9000 端口
 
 ```shell
-systemctl enable minio.service
-systemctl start minio.service
+systemctl enable minio --now
 ```
 
 ### 基础使用

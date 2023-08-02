@@ -6,7 +6,7 @@ tags:
   - devops
   - 监控
 date: 2023-07-11
-lastmod: 2023-07-27
+lastmod: 2023-08-02
 categories:
   - blog
 description: "记录 [[笔记/point/prometheus|prometheus]] 的相关使用."

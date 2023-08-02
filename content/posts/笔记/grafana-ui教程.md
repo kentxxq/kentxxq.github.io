@@ -6,7 +6,7 @@ tags:
   - 监控
   - devops
 date: 2023-07-11
-lastmod: 2023-07-21
+lastmod: 2023-08-02
 categories:
   - blog
 description: "[[笔记/point/grafana|grafana]] 的使用教程"
@@ -30,7 +30,7 @@ echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com st
 apt update -y; apt install grafana -y
 
 # 启动
-systemctl enable grafana-server.service; systemctl start grafana-server.service
+systemctl enable grafana-server --now
 # 默认密码 admin/admin
 curl 127.0.0.1:3000
 ```

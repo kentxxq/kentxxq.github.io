@@ -6,7 +6,7 @@ tags:
   - 监控
   - devops
 date: 2023-07-03
-lastmod: 2023-07-14
+lastmod: 2023-08-02
 categories:
   - blog
 description: "这里记录一下 supervisor 在 [[笔记/point/linux|linux]] 下的常用配置, 方便复用."
@@ -30,8 +30,7 @@ vim /etc/supervisor/conf.d/supervisord.conf
 minfds=81920
 minprocs=81920
 
-systemctl enable supervisor
-systemctl start supervisor
+systemctl enable supervisor --now
 ```
 
 编辑配置文件 `vim /etc/supervisor/conf.d/demo.conf`

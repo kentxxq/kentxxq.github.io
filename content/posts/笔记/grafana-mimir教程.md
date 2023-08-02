@@ -2,8 +2,10 @@
 title: grafana-mimir教程
 tags:
   - blog
+  - mimir
+  - grafana
 date: 2023-07-22
-lastmod: 2023-07-22
+lastmod: 2023-08-02
 categories:
   - blog
 description: 

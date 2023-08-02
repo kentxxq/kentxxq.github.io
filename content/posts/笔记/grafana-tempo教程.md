@@ -5,7 +5,7 @@ tags:
   - tempo
   - grafana
 date: 2023-07-19
-lastmod: 2023-07-21
+lastmod: 2023-08-02
 categories:
   - blog
 description: "grafana-tempo 是 [[笔记/point/grafana|grafana]] 公司的链路追踪组件"
@@ -87,5 +87,5 @@ overrides:
 启动:
 
 ```shell
-systemctl enable tempo; systemctl start tempo; systemctl status tempo
+systemctl enable tempo --now
 ```
