@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-08-02
+lastmod: 2023-08-03
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -12,7 +12,7 @@ description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操�
 
 ## 简介
 
-这里记录 [[笔记/point/docker|docker]] 的所有配置和操作.
+这里记录 [[笔记/point/docker|docker]] 的所有配置和操作. 相关的概念可以通过 [[笔记/k8s组件#容器|容器]] 来了解.
 
 ## 安装/卸载 docker
 
@@ -34,7 +34,7 @@ apt remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-com
 
 ```json
 {
-  "registry-mirrors": ["https://bwx6yb0u.mirror.aliyuncs.com"],
+  "registry-mirrors": ["https://1ocw3lst.mirror.aliyuncs.com"],
   "proxies": {
     "default": {
       "httpProxy": "http://proxy.example.com:3128",

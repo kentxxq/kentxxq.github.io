@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-01
-lastmod: 2023-08-02
+lastmod: 2023-08-03
 categories:
   - blog
 description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
@@ -12,11 +12,24 @@ description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
 
 ## 简介
 
-[[笔记/point/k8s|k8s]] 的组件学习记录.
+[[笔记/point/k8s|k8s]] 的组件学习记录
+
+主要组件如下:
+
+- [[笔记/k8s组件#容器|容器技术]]
+- Api-server: 提供 api 接口作为主要入口
+- Etcd: 存储配置和状态信息
+- Controller Manager: 控制器, 管理 Replication,Deployment 等等
+- Scheduler: 调度分发应用程序
+- kubelet: 管理容器的启动和停止, 健康状态
+- kube-proxy: 每个节点上的代理,转发的实现
+- CoreDNS: 内部的 dns 解析
+- [[笔记/k8s组件#网络组件|网络组件]]: 联通节点, 容器网络
+- Ingress Controller: 提供对外的入口. 承接 Http, https 流量
 
 ## 内容
 
-### 容器相关
+### 容器
 
 - [[笔记/point/k8s|k8s]] 通过 [[笔记/point/CRI|CRI]] 规范来进行实际的编排操作.
 - [[笔记/point/docker|docker]] 操作 [[笔记/point/Containerd|Containerd]]

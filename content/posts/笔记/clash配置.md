@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-07-26
+lastmod: 2023-08-03
 keywords:
   - clash
   - 配置文件
@@ -333,6 +333,8 @@ rules:
 ```
 
 ## 安装
+
+#todo/笔记 来个示意图, 同时把守护进程换了
 
 ### 服务搭建
 
