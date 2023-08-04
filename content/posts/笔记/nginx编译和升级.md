@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-07-18
+lastmod: 2023-08-04
 categories:
   - blog
 description: "这里记录 [[笔记/point/nginx|nginx]] 的模块编译和升级操作."
@@ -21,9 +21,18 @@ description: "这里记录 [[笔记/point/nginx|nginx]] 的模块编译和升级
 #### 正常编译
 
 ```shell
+# 准备目录
+mkdir nginx ; cd nginx
+
+# 下载tengine https://tengine.taobao.org/download_cn.html
+curl https://tengine.taobao.org/download/tengine-3.0.0.tar.gz -o 
+tengine-3.0.0.tar.gz
+tar xf tengine-3.0.0.tar.gz
+
 # 下载,解压 https://nginx.org/en/download.html
-curl http://nginx.org/download/nginx-1.20.2.tar.gz -o nginx-1.20.2.tar.gz
-tar -zxvf nginx-1.20.2.tar.gz
+curl http://nginx.org/download/nginx-1.24.0.tar.gz -o nginx-1.24.0.tar.gz
+tar -xf nginx-1.24.0.tar.gz
+cd nginx-1.24.0
 # 安装编译需要用的依赖
 apt install libpcre3 libpcre3-dev openssl libssl-dev -y
 
@@ -32,7 +41,7 @@ apt install libpcre3 libpcre3-dev openssl libssl-dev -y
 # tcp代理和tcp代理证书 --with-stream --with-stream_ssl_module
 # tcp代理的时候，把客户端ip传到PROXY协议的header头部 --with-stream_realip_module,虽然我一直用header传输
 # 启用http2  --with-http_v2_module
-./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --with-http_ssl_module --with-stream --with-stream_ssl_module --with-stream_realip_module --with-http_v2_module --with-http_stub_status_module
+./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --with-http_ssl_module --with-stream --with-stream_ssl_module --with-stream_realip_module --with-http_v2_module --with-http_stub_status_module --add-module=/root/nginx/tengine-3.0.0/modules/ngx_debug_pool
 make && make install
 
 # 软连接
@@ -63,15 +72,15 @@ patch -p1 < ngx_http_proxy_connect_module/patch/proxy_connect_rewrite_102101.pat
 
 ```shell
 # 下载,解压
-curl http://nginx.org/download/nginx-1.22.1.tar.gz -o ~/nginx-1.22.1.tar.gz
-tar xf ~/nginx-1.22.1.tar.gz
+curl http://nginx.org/download/nginx-1.24.0.tar.gz -o ~/nginx-1.24.0.tar.gz
+tar xf ~/nginx-1.24.0.tar.gz
 
 # nginx -V查看现有配置，然后到新版本nginx目录下执行同样配置
 # nginx version: nginx/1.24.0
 # built by gcc 11.3.0 (Ubuntu 11.3.0-1ubuntu1~22.04.1) 
 # built with OpenSSL 3.0.2 15 Mar 2022
 # TLS SNI support enabled
-# configure arguments: --user=nginx --group=nginx --prefix=/usr/local/nginx --with-http_ssl_module --with-stream --with-stream_realip_module --with-http_v2_module --with-stream_ssl_module
+# configure arguments: --user=nginx --group=nginx --prefix=/usr/local/nginx --with-http_ssl_module --with-stream --with-stream_realip_module --with-http_v2_module --with-stream_ssl_module --add-module=/root/nginx/tengine-3.0.0/modules/ngx_debug_pool
 ./configure 上面的参数
 
 # 编译  

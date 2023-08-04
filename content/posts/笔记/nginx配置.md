@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-07-31
+lastmod: 2023-08-04
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -364,8 +364,10 @@ server {
 server {
     listen 8000;
     server_name _;
-    include /usr/local/nginx/conf/time.conf;
+    include /usr/local/nginx/conf/options/time.conf;
 
+    # 显示处理过,处理中的请求
+    # https://nginx.org/en/docs/http/ngx_http_stub_status_module.html
     location /status_string {
         stub_status;
     }
@@ -389,6 +391,7 @@ connections_writing $connections_writing $timestamp
 connections_waiting $connections_waiting $timestamp';
 }
 
+    # 在header中展示各个时间
     location /time {
         default_type text/plain;
         return 200 'time';
@@ -399,6 +402,12 @@ connections_waiting $connections_waiting $timestamp';
         add_header time_zh_ms2 $time_zh_ms2;
         add_header time_local $time_local;
         add_header time_iso8601 $time_iso8601;
+    }
+
+    # tengine的debug模块
+    # https://tengine.taobao.org/document_cn/ngx_debug_pool_cn.html
+    location = /debug_pool {
+        debug_pool;
     }
 }
 ```
@@ -492,6 +501,8 @@ http {
     geo $whitelist {
         default 0;
         10.0.0.0/8 1;
+        172.16.0.0/12 1;
+        192.168.0.0/16 1;
         8.133.183.80 1;
     }
     # 白名单映射到空字符串,生成限速列表
