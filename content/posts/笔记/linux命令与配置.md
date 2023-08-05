@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-07-13
+lastmod: 2023-08-02
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -26,14 +26,63 @@ vim /etc/sudoers
 kentxxq ALL=(ALL)    NOPASSWD: ALL  # 加入此行
 ```
 
-### alias
+### 安装 chrome
 
 ```shell
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+apt install ./google-chrome-stable_current_amd64.deb
+
+google-chrome -v
+```
+
+### alias
+
+#### 补全
+
+```shell
+# 通常已经安装了
+# apt install bash-completion -y
+# 下载文件
+curl https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias -o ~/.complete_alias
+# 编辑配置文件
+vim /root/.bash_completion
+. /root/.complete_alias
+
+# 设置alias
+vim ~/.bashrc
+alias sc='systemctl'
+# 尾部添加
+vim /root/.complete_alias 
+complete -F _complete_alias sc
+
+# 如果.bashrc文件没有启用.必须退出,重新登录后生效!
+# 默认是注释的
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+#    . /etc/bash_completion
+#fi
+```
+
+#### 常用配置
+
+```shell
+# 查看日志
+alias tailf='tail -f'
+
+# 查看出口ip
+alias myip = 'curl -L test.kentxxq.com/ip'
+
+# 全部代理配置
+alias vpn='export all_proxy=http://1.1.1.1:7890;'
+# 清空
+alias novpn='unset all_proxy;'
+
 # 当前会话代理
 alias vpn='export http_proxy=http://1.1.1.1:7890; export https_proxy=http://1.1.1.1:7890;'
 # 带密码代理
 alias vpn='export http_proxy=http://user1:pass1@1.1.1.1:7890; export https_proxy=http://user1:pass1@1.1.1.1:7890;'
-
 # 清空
 alias novpn='unset http_proxy; unset https_proxy;'
 ```
@@ -89,6 +138,7 @@ fc-list :lang=zh
 ### 配置 limit
 
 ```shell
+# 先确保/etc/security/limits.d没有覆盖的配置
 vim /etc/security/limits.conf
 # hard硬限制 不会超过
 # soft软限制 告警
@@ -100,10 +150,10 @@ root hard nofile 65535
 * hard nofile 65535
 
 # nproc 操作系统级别对每个用户创建的进程数
-root soft nofile 65535
-root hard nofile 65535
-* soft nofile 65535
-* hard nofile 65535
+root soft nproc 65535
+root hard nproc 65535
+* soft nproc 65535
+* hard nproc 65535
 ```
 
 ### 温度传感器
@@ -155,9 +205,10 @@ reboot
 ### 关闭 selinux
 
 ```shell
+apt install selinux-utils policycoreutils -y
+
 # 当前生效
 setenforce 0
-
 # 永久生效
 vim /etc/selinux/config
 SELINUX=disabled
@@ -200,9 +251,12 @@ timedatectl list-timezones | grep -i shang
 timedatectl set-timezone Asia/Shanghai
 ```
 
-### 配置 locale 中文
+### 配置中文
 
 ```shell
+export LANG=zh_CN.UTF-8
+
+
 # 查看当前shell环境locale
 locale
 
@@ -214,9 +268,15 @@ localectl list-locales
 localectl set-locale LANG=zh_CN.UTF-8
 # 默认英文
 localectl set-locale LANG=en_US.UTF-8
-# 没有效果?
+
+# 没有效果? 重启生效
 vim /etc/locale.conf
 LANG=zh_CN.UTF-8
+LC_ALL="zh_CN.UTF-8"
+# 或者
+vim .bashrc
+export LANG=zh_CN.UTF-8
+export LC_ALL="zh_CN.UTF-8"
 
 # 搜索所有语言包
 apt search language-pack*
@@ -257,12 +317,30 @@ Welcome to Alibaba Cloud Elastic Compute Service !
 # -d 指定payload的数据
 curl -X POST -H "Accept: application/json" -H "Content-type: application/json" -d '{"post_data":"i_love_immvp.com"}' localhost:8096/api/answer/checkAnswer
 
+# 忽略证书
+curl -k https://127.0.0.1:5001/
+
+# 下载 -C 断点续传 -O 指定名称
+curl -C - https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20230711212934.0.0_amd64.deb -O minio.deb
+
 # 模拟跨域
 curl -vvv 'https://kentxxq.com/Count' -H 'Origin: http://localhost:3000'
 
 # 请求es
 curl -H "Content-Type: application/json"  -XPUT --user elastic:password   es-cn-oew1whnk60023e4s9.elasticsearch.aliyuncs.com:9200/flow_user_index/_settings -d '{"index.mapping.total_fields.limit":0}'
 结果 {"acknowledged":true}
+```
+
+### 代理 apt
+
+```shell
+# 临时
+-o Acquire::http::proxy="https://user1:pass1@a.kentxxq.com:17890" -o Acquire::https::proxy="https://user1:pass1@a.kentxxq.com:17890"
+
+# 永久,文件不存在就创建
+vim /etc/apt/apt.conf.d/95proxy.conf
+Acquire::http::proxy "https://user1:pass1@a.kentxxq.com:17890";
+Acquire::https::proxy "https://user1:pass1@a.kentxxq.com:17890";
 ```
 
 ### 清除历史记录
@@ -274,37 +352,38 @@ history -d 123
 history -c
 ```
 
-### 压缩/解压 tar
+### 大版本升级
 
 ```shell
-# z是使用gzip
-# v是查看细节
-# f是指定文件
-# --strip-components=1 去掉一层解压目录
+apt install update-manager-core -y
+do-release-upgrade -d
+```
 
-# 打包
-tar -czvf dist.tgz dist/
+### 跑分
 
-# 解压
-tar -xzvf dist.tgz
-# 解压到指定文件夹
-tar Cxzvf /dist dist.tgz
+```shell
+wget http://soft.vpser.net/test/unixbench/unixbench-5.1.2.tar.gz
+tar zxvf unixbench-5.1.2.tar.gz
+cd unixbench-5.1.2/
 
-# 打包隐藏文件
-# 通过 . 可以打包到隐藏文件
-tar -czvf dist.tgz /dad/path/.
-# 通过上级目录来打包
-tar -czvf dist.tgz /data/path
-# 如果是在当前目录，可以手动指定
-tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* *
+vim Makefile
+# GRAPHIC_TESTS = defined
+
+make
+./Run
 ```
 
 ### 软链接 ln
 
 ```shell
-# ln -s 现有文件 链接名称
+# ln -s 现有文件/目标文件 链接文件
 # 创建/usr/local/nginx/sbin/nginx的快捷方式到/usr/local/bin/nginx
+# 软连接的目标文件可以被替换,替换后会链接到新文件
 ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/nginx
+
+# 查看软链接的实际路径
+readlink -f /lib/systemd/system/nginx.service
+/usr/lib/systemd/system/nginx.service
 ```
 
 ### 配置主机名
@@ -353,10 +432,13 @@ chown -R sam:dba file/folder
 chmod 777 file/folder
 ```
 
-### 卸载软件包
+### 安装/卸载软件
 
 ```shell
-# 查看已安装的包
+# 安装deb包
+dpkg -i minio.deb
+
+# 搜索查看已安装的包
 dpkg --list
 
 # 查看正则匹配的包
@@ -407,6 +489,34 @@ ps -eo pid,lstart,etime | grep 1310
 # 前面是启动时间，后面是启动了242天又7小时
 ```
 
+### 压缩/解压 tar
+
+```shell
+# z是使用gzip
+# v是查看细节
+# f是指定文件
+# --strip-components=1 去掉一层解压目录
+
+# 查看文件内容
+tar -tf xxx.tar.gz
+
+# 打包
+tar -czvf dist.tgz dist/
+
+# 解压
+tar -xzvf dist.tgz
+# 解压到指定文件夹
+tar Cxzvf /dist dist.tgz
+
+# 打包隐藏文件
+# 通过 . 可以打包到隐藏文件
+tar -czvf dist.tgz /dad/path/.
+# 通过上级目录来打包
+tar -czvf dist.tgz /data/path
+# 如果是在当前目录，可以手动指定
+tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* *
+```
+
 ### 拷贝文件
 
 #### scp
@@ -450,6 +560,20 @@ rsync -atvP /tmp/t1/1 root@1.1.1.1:/tmp/t1/
 >file.txt
 # 截断任意文件
 truncate -s 0 file.txt
+
+# 寻找log文件并清空
+vim /opt/truncate-log.sh
+#!/bin/bash
+files=`find / -name *.log`
+for file in `ls $files`
+do
+  truncate -s 0 $file
+done
+
+# 凌晨3点定时执行
+chmod +x /opt/truncate-log.sh
+vim /etc/crontab
+0 3 * * * root /opt/truncate-log.sh
 ```
 
 ### 筛选替换

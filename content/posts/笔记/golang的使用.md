@@ -20,11 +20,11 @@ description: "[[笔记/point/golang|golang]] 用的很少, 记录一下相关的
 
 ```shell
 # 去这里下载最新的jar包
-# [All releases - The Go Programming Language](https://go.dev/dl/)
-# 拿 go1.20.5.linux-amd64.tar.gz 举例
+# https://go.dev/dl/
+# 拿 go1.20.6.linux-amd64.tar.gz 举例
 
 # 解压到/usr/local/
-tar -C /usr/local/ -xzf go1.20.5.linux-amd64.tar.gz
+tar -C /usr/local/ -xzf go1.20.6.linux-amd64.tar.gz
 
 # 文件内容
 root@poc:/usr/local/go# ls -l /usr/local/go
@@ -46,13 +46,13 @@ drwxr-xr-x 26 root root 12288 Jun  2 01:02 test
 -rw-r--r--  1 root root     8 Jun  2 01:01 VERSION
 
 # 加入 ~/.bashrc,每次生效
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/local/go/bin:/root/go/bin/
 # 此次终端生效
 source ~/.bashrc
 
 # 验证效果
 go version
-go version go1.20.5 windows/amd64
+go version go1.20.6 windows/amd64
 ```
 
 ### 配置环境变量

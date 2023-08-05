@@ -4,7 +4,7 @@ tags:
   - point
   - obsidian
 date: 2023-06-24
-lastmod: 2023-06-26
+lastmod: 2023-07-24
 categories:
   - point
 ---
@@ -18,3 +18,5 @@ categories:
 - 性能良好
 - 插件丰富
 - 社区活跃
+
+使用 [Prism](https://prismjs.com/#supported-languages) 进行代码块渲染

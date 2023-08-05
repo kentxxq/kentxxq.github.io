@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-07-13
+lastmod: 2023-08-05
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -12,13 +12,11 @@ description: "[[笔记/point/nginx|nginx]] 的配置示例."
 
 ## 简介
 
-[[笔记/point/nginx|nginx]] 的配置示例, 目录结构可以符合 [[笔记/nginx编译和升级|nginx编译和升级]] 后的目录.
+[[笔记/point/nginx|nginx]] 的配置示例, 文档中的配置文件, 目录结构最好结合 [[笔记/nginx编译和升级|nginx编译和升级]] 使用.
 
 ## 基础配置
 
 ### nginx.conf 主配置
-
-#todo/笔记 理解 tcp 参数在每层产生的实际效果
 
 ```nginx
 #user  nobody;
@@ -27,6 +25,9 @@ worker_cpu_affinity auto;
 error_log /data/logs/nginx-error.log;
 #pid        logs/nginx.pid;
 worker_rlimit_nofile 65535;
+# 解决nginx-worker一直不退出的情况, worker process is shutting down
+# 需要重启nginx生效
+worker_shutdown_timeout 5s;
 
 events {
     use     epoll;
@@ -90,7 +91,9 @@ http {
     tcp_nopush     on;
     # 尽快发送数据,禁用Nagle算法(等凑满一个MSS-Maximum Segment Size最大报文长度或收到确认再发送)
     tcp_nodelay         on;
-    # 可以看到 TCP_NOPUSH 是要等数据包累积到一定大小才发送, TCP_NODELAY 是要尽快发送, 二者相互矛盾. 实际上, 它们确实可以一起用, 最终的效果是先填满包, 再尽快发送. 在传输过程中, 应用程序发送的数据会被 TCP 协议分割成多个段(segment), 每个段都会被封装为一个网络层的包(packet)进行传输.
+    
+    # 可以看到 TCP_NOPUSH 是要等数据包累积到一定大小才发送, TCP_NODELAY 是要尽快发送, 二者相互矛盾. 
+    # 实际上, 它们确实可以一起用.在传输文件的时候, 先填满包, 再尽快发送. 而其他的情况,都迅速发包,减少延迟.
 
     keepalive_timeout   360;
     types_hash_max_size 2048;
@@ -106,9 +109,9 @@ http {
 
     # 大Header会导致502,解决
     client_header_buffer_size  64k;
-    proxy_buffer_size          256k;
-    proxy_buffers              4 256k;
-    proxy_busy_buffers_size    512k;
+    proxy_buffer_size          1024k;
+    proxy_buffers              16 1024k;
+    proxy_busy_buffers_size    2048k;
 
     # header允许下划线
     underscores_in_headers on;
@@ -119,7 +122,9 @@ http {
     gzip_http_version 1.1;
     gzip_comp_level 7;
     # 压缩类型，下面的配置压缩了接口。可配置项参考nginx目录下的mime.types
-    gzip_types text/css text/xml application/javascript application/json;
+    # 参考google压缩了html,css,js,json. text/html 总是会压缩,加上去返回而报错.
+    # 图片属于压缩过了的格式, 应该由专门的服务或CDN转换图片格式
+    gzip_types text/plain text/xml text/css application/javascript application/json;
     gzip_vary on;
 
     gzip_disable "msie6";
@@ -147,7 +152,7 @@ http {
 }
 ```
 
-### 通用代理配置
+### 通用 Header 配置
 
 `/usr/local/nginx/conf/options/normal.conf`
 
@@ -183,6 +188,40 @@ ssl_certificate     /usr/local/nginx/conf/ssl/kentxxq.cer;
 ssl_certificate_key /usr/local/nginx/conf/ssl/kentxxq.key;
 ```
 
+### 时间转换
+
+在 `server` 内使用 `/usr/local/nginx/conf/options/time.conf`
+
+```nginx
+# nginx 内置变量，解析为定义格式，仅支持到秒 （实现支持到毫秒）
+#
+# $time_iso8601  日期格式示例： 2022-09-08T18:16:01+08:00
+# $time_local    日期格式示例： 02/Aug/2022:11:11:32 +0800
+# $msec          日期格式示例： 1663839717.105 当前的Unix时间戳,单位为秒，小数为毫秒
+
+# 格式化日期
+if ($time_iso8601 ~ "^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\+\d{2})") {
+  set $year   $1;
+  set $month  $2;
+  set $day    $3;
+  set $hour   $4;
+  set $minute $5;
+  set $second $6;
+  # 时区，只到小时
+  set $time_zone $7;
+  # 自定义 yyyy-MM-dd hh:mi:ss 格式
+  set $time_zh "$1-$2-$3 $4:$5:$6";
+}
+# 时间戳，单位毫秒  使用 $msec 去除中间的小数点实现
+if ($msec ~ "^(\d+)\.(\d+)") {
+  set $timestamp $1$2;
+  # 自定义 yyyy-MM-dd hh:mi:ss,SSS 带毫秒格式
+  set $time_zh_ms $time_zh,$2;
+  # 自定义 yyyy-MM-dd hh:mi:ss.SSS 带毫秒格式
+  set $time_zh_ms2 $time_zh.$2;
+}
+```
+
 ### map 配置
 
 `/usr/local/nginx/conf/options/map.conf`
@@ -194,6 +233,31 @@ map $http_origin $allow_origin {
     "~http://www.kentxxq.com" http://www.kentxxq.com;
     "~https://www.kentxxq.com" https://www.kentxxq.com;
 }
+
+# 添加map会影响性能,如果不是全局使用,建议采用include局部转换时间
+# # 自定义 yyyy-MM-dd hh:mi:ss 格式
+# map $time_iso8601 $time_zh {
+#   default $time_iso8601;
+#   "~(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})(\+\d{2})" "$1 $2";
+# }
+# 
+# # 时间戳，单位毫秒  使用 $msec 去除中间的小数点实现
+# map $msec $timestamp {
+#   default $msec;
+#   ~(\d+)\.(\d+) $1$2;
+# }
+# 
+# # 自定义 yyyy-MM-dd hh:mi:ss,SSS 带毫秒格式
+# map "$time_iso8601 # $msec" $time_zh_ms {
+#   default $time_zh,000;
+#   "~(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})(\+\d{2}:\d{2}) # (\d+)\.(\d+)$" "$1 $2,$5";
+# }
+# 
+# # 自定义 yyyy-MM-dd hh:mi:ss.SSS 带毫秒格式
+# map "$time_iso8601 # $msec" $time_zh_ms2 {
+#   default $time_zh.000;
+#   "~(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})(\+\d{2}:\d{2}) # (\d+)\.(\d+)$" "$1 $2.$5";
+# }
 ```
 
 ### 跨域配置文件
@@ -246,7 +310,24 @@ if ($request_method = 'OPTIONS') {
 }
 ```
 
+### Upstream 配置
+
+```nginx
+upstream backend {
+    # 默认轮训,有weight就是加权轮训
+    # ip_hash; 适合session等固定机器场景
+    # least_conn; 最少连接数
+    server backend1.example.com max_fails=1 weight=10;
+    server backend2.example.com max_fails=1 weight=5;
+    server backend4.example.com;
+    # 最大空闲连接数
+    keepalive 10;
+}
+```
+
 ### 域名转发
+
+#### 转发配置
 
 `/usr/local/nginx/conf/hosts/www.kentxxq.com.conf`
 
@@ -274,6 +355,62 @@ server {
         # 跨域
         include /usr/local/nginx/conf/options/allow_all_options_cross_origin.conf;
         proxy_pass http://1.1.1.1:80;
+    }
+}
+```
+
+#### Debug 配置
+
+`/usr/local/nginx/conf/hosts/debug.conf`
+
+```nginx
+server {
+    listen 8000;
+    server_name _;
+    include /usr/local/nginx/conf/options/time.conf;
+
+    # 显示处理过,处理中的请求
+    # https://nginx.org/en/docs/http/ngx_http_stub_status_module.html
+    location /status_string {
+        stub_status;
+    }
+
+    location /status_metrics {
+        default_type text/plain;
+        return 200 '# TYPE connections_active counter 
+# HELP The current number of active client connections including Waiting connections. 
+connections_active $connections_active $timestamp 
+
+# TYPE connections_reading counter 
+# HELP The current number of connections where nginx is reading the request header. 
+connections_reading $connections_reading $timestamp 
+
+# TYPE connections_writing counter 
+# HELP The current number of connections where nginx is writing the response back to the client. 
+connections_writing $connections_writing $timestamp
+
+# TYPE connections_waiting counter 
+# HELP The current number of idle client connections waiting for a request. 
+connections_waiting $connections_waiting $timestamp';
+}
+
+    # 在header中展示各个时间
+    location /time {
+        default_type text/plain;
+        return 200 'time';
+        add_header time_zh $time_zh;
+        add_header timestamp $timestamp;
+        add_header time_msec $msec;
+        add_header time_zh_ms $time_zh_ms;
+        add_header time_zh_ms2 $time_zh_ms2;
+        add_header time_local $time_local;
+        add_header time_iso8601 $time_iso8601;
+    }
+
+    # tengine的debug模块
+    # https://tengine.taobao.org/document_cn/ngx_debug_pool_cn.html
+    location = /debug_pool {
+        debug_pool;
     }
 }
 ```
@@ -367,6 +504,8 @@ http {
     geo $whitelist {
         default 0;
         10.0.0.0/8 1;
+        172.16.0.0/12 1;
+        192.168.0.0/16 1;
         8.133.183.80 1;
     }
     # 白名单映射到空字符串,生成限速列表
@@ -413,6 +552,53 @@ server {
 相关资料:
 
 - [Nginx 反向代理，当后端为 Https 时的一些细节和原理 - XniLe - Ops 2.0](https://blog.dianduidian.com/post/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%BD%93%E5%90%8E%E7%AB%AF%E4%B8%BAhttps%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82%E5%92%8C%E5%8E%9F%E7%90%86/)
+
+### grpc 配置
+
+```nginx
+http {
+    access_log  /usr/local/var/log/nginx/access.log;
+
+    upstream auth_services {
+        server 0.0.0.0:50051;
+        server 0.0.0.0:50052;
+    }
+
+    upstream laptop_services {
+        server 0.0.0.0:50051;
+        server 0.0.0.0:50052;
+    }
+
+    server {
+        listen       8080 ssl http2;
+
+        # Mutual TLS between gRPC client and nginx
+        ssl_certificate cert/server-cert.pem;
+        ssl_certificate_key cert/server-key.pem;
+
+        ssl_client_certificate cert/ca-cert.pem;
+        ssl_verify_client on;
+
+        location /techschool.pcbook.AuthService {
+            grpc_pass grpcs://auth_services;
+
+            # Mutual TLS between nginx and gRPC server
+            grpc_ssl_certificate cert/server-cert.pem;
+            grpc_ssl_certificate_key cert/server-key.pem;
+        }
+
+        location /techschool.pcbook.LaptopService {
+            grpc_pass grpcs://laptop_services;
+
+            # Mutual TLS between nginx and gRPC server
+            grpc_ssl_certificate cert/server-cert.pem;
+            grpc_ssl_certificate_key cert/server-key.pem;
+        }
+    }
+}
+```
+
+- [Module ngx\_http\_grpc\_module](http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_pass)
 
 ### 用户名密码
 
@@ -468,6 +654,11 @@ location /string {
 location /json {
     default_type application/json;
     return 200 '{"status":"success","result":"nginx json"}';
+}
+
+location /metrics {
+    default_type text/plain;
+    return 200 'metrics';
 }
 ```
 
@@ -534,6 +725,10 @@ stderr_logfile_backups = 3
 ```nginx
 # 双层nginx,第二层的ingress-nginx需要配置这个
 use-forwarded-headers: 'true'
+
+# 负载均衡,默认round_robin. 还有ip_hash,least_conn
+# https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#load-balance
+nginx.ingress.kubernetes.io/upstream-hash-by: 'ip_hash'
 
 # yml配置
 kind: Ingress

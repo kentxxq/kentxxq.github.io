@@ -1,10 +1,12 @@
 ---
 title: golang
+aliases:
+  - go
 tags:
   - point
   - golang
 date: 2023-06-26
-lastmod: 2023-06-26
+lastmod: 2023-07-24
 categories:
   - point
 ---
