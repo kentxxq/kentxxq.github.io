@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-08-03
+lastmod: 2023-08-06
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -30,19 +30,27 @@ apt remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-com
 
 ## 配置参数
 
- `/etc/docker/daemon.json`
+ `/etc/docker/daemon.json`,参考 [镜像源](https://docs.docker.com/registry/recipes/mirror/#configure-the-docker-daemon) 和 [http代理](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
 
 ```json
 {
   "registry-mirrors": ["https://1ocw3lst.mirror.aliyuncs.com"],
   "proxies": {
-    "default": {
-      "httpProxy": "http://proxy.example.com:3128",
-      "httpsProxy": "https://proxy.example.com:3129",
-      "noProxy": "NO_PROXY: localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.test.example.com"
+      "http-proxy": "http://proxy.example.com:3128",
+      "https-proxy": "https://proxy.example.com:3129",
+      "no-proxy": " localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.test.example.com"
     }
   }
 }
+```
+
+[[笔记/point/Systemd|Systemd]] 配置 http/https 代理
+
+```ini
+[Service]
+Environment="HTTP_PROXY=http://proxy.example.com:3128"
+Environment="HTTPS_PROXY=https://proxy.example.com:3129"
+Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
 ```
 
 ## 格式解析

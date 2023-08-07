@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-08-05
+lastmod: 2023-08-07
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -95,7 +95,8 @@ http {
     # 可以看到 TCP_NOPUSH 是要等数据包累积到一定大小才发送, TCP_NODELAY 是要尽快发送, 二者相互矛盾. 
     # 实际上, 它们确实可以一起用.在传输文件的时候, 先填满包, 再尽快发送. 而其他的情况,都迅速发包,减少延迟.
 
-    keepalive_timeout   360;
+    # 会话保持120秒
+    keepalive_timeout   120;
     types_hash_max_size 2048;
     server_tokens off;
 
@@ -109,9 +110,24 @@ http {
 
     # 大Header会导致502,解决
     client_header_buffer_size  64k;
-    proxy_buffer_size          1024k;
-    proxy_buffers              16 1024k;
-    proxy_busy_buffers_size    2048k;
+    # http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffer_size
+    # 特殊的区域,一般存放的是header信息 
+    proxy_buffer_size          256k;
+    # 默认开启 proxy_buffering on; 只影响下面2个,不影响上面
+    # 缓冲区的个数和大小,ERR_INCOMPLETE_CHUNKED_ENCODING 加大这里
+    proxy_buffers              8 256k;
+    # 在缓冲没有完全塞满的时候,需要划分一部分地方发送数据到客户端,这样可以加快响应.
+    proxy_busy_buffers_size    512k;
+    
+    # 阿里云ingress
+    # proxy_buffers: 4 256k
+    # proxy-buffer-size: 256k
+    # proxy-busy-buffers-size: 512k
+
+    # 不把buffer外的内容写入到硬盘临时文件,但是会消耗比较多的内存
+    # 解决ERR_HTTP2_PROTOCOL_ERROR
+    # proxy_max_temp_file_size 0;
+
 
     # header允许下划线
     underscores_in_headers on;
@@ -176,7 +192,9 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 proxy_http_version 1.1;
 proxy_set_header Host $host;
 proxy_set_header Upgrade $http_upgrade;
-proxy_set_header Connection "upgrade";
+# proxy_set_header Connection "upgrade";
+# 配合map $http_upgrade $connection_upgrade使用
+proxy_set_header Connection $connection_upgrade;
 ```
 
 ### 证书配置
@@ -227,6 +245,11 @@ if ($msec ~ "^(\d+)\.(\d+)") {
 `/usr/local/nginx/conf/options/map.conf`
 
 ```nginx
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    '' close;
+}
+
 # $http_origin如果正则匹配了,$allow_origin会变成后面的值
 map $http_origin $allow_origin {
     default "";
