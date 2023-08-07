@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-08-03
+lastmod: 2023-08-07
 keywords:
   - clash
   - 配置文件
@@ -59,6 +59,14 @@ bypass:
   - 192.168.*
   - <local>
 ```
+
+### 绕过 windows 应用
+
+类似于 [[笔记/point/windows|windows]] 的应用商店, 邮箱等应用开启代理后会无法访问.
+
+可以通过 `UWP Loopback` 跳过.
+
+![[附件/clash的UWP操作图.png]]
 
 ### 配置文件讲解
 
