@@ -30,6 +30,12 @@ categories:
 - 备份
 - 清理无用
 
+### 互通访问
+
+本机=>`wsl`: `localhost` 访问 #todo/笔记 ,多个机器呢?
+
+`wsl` =>本机: `cat /etc/resolv.conf中的nameserver`,可以加入到 [[笔记/linux命令与配置#登录后的提示信息|登录后的提示信息]] #todo/笔记
+
 ### 启用 systemd
 
 默认不是 [[笔记/point/Systemd|Systemd]] 守护进程. 改动如下
@@ -47,6 +53,7 @@ categories:
 
 ### 禁用 windows 下的 PATH
 
+- WSL-Manager =>某实例=>设置=>WSL 设置=>互操作性=>开启再关闭 `AppendWindowsPath`
 - 配置文件
 
     ```shell

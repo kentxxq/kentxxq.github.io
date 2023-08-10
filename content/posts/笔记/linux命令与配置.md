@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-08-02
+lastmod: 2023-08-08
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -216,8 +216,16 @@ SELINUX=disabled
 
 ### 定时任务 crontab
 
+1. **推荐使用**系统配置文件 `/etc/crontab`
+2. 文档**不建议使用** `/etc/cron.d` 系统配置目录, 这个目录留给应用程序放自己的配置. 例如安装 [[笔记/point/mysql|mysql]] 后, 程序自带一个定时备份.
+3. `crontab -e` 等命令都是操作 `/var/spool/cron/crontabs/用户名`
+
+> 重要!!!
+> 1 和 2 属于系统级别配置文件, 允许指定用户名字段
+> 3 属于用户级别配置文件, **用户名字段会是命令的一部分, 导致报错!!!**
+
 ```shell
-vim /etc/cron.d/myjob
+vim /etc/crontab
 # Example of job definition:
 # .---------------- minute (0 - 59)
 # |  .------------- hour (0 - 23)
@@ -230,7 +238,7 @@ vim /etc/cron.d/myjob
 # 凌晨5点和6点清理docker镜像
 0 5,6 * * * root /usr/bin/docker rmi $(docker images -q) -f
 # 每10分钟执行
-*/10 * * * * * /bin/bash /root/backup.sh
+*/10 * * * * root /bin/bash /root/backup.sh
 ```
 
 ### 时间同步
@@ -386,6 +394,17 @@ readlink -f /lib/systemd/system/nginx.service
 /usr/lib/systemd/system/nginx.service
 ```
 
+### 命令手册 man
+
+```shell
+# 查看手册有哪些章节
+man -k crontab
+# 查看手册,默认是章节1
+man crontab
+# 查看特定章节.文档中cron(8)/crontab(5),代表对应的文档(章节)
+man 5 crontab
+```
+
 ### 配置主机名
 
 ```shell
@@ -481,6 +500,29 @@ tail -n 10 file.txt
 find /data/weblog/ -name '*.log.*' -type f -mtime +7 -exec rm -f {} \;
 ```
 
+### 清空文件
+
+```shell
+# 快速清空
+>file.txt
+# 截断任意文件
+truncate -s 0 file.txt
+
+# 寻找log文件并清空
+vim /opt/truncate-log.sh
+#!/bin/bash
+files=`find / -name '*.log'`
+for file in $files
+do
+  truncate -s 0 $file
+done
+
+# 凌晨3点定时执行
+chmod +x /opt/truncate-log.sh
+vim /etc/crontab
+0 3 * * * root /opt/truncate-log.sh
+```
+
 ### 查看进程启动时间
 
 ```shell
@@ -551,29 +593,6 @@ rsync -atvP /tmp/t1/1 root@1.1.1.1:/tmp/t1/
 
 # 也支持sshpass
 /usr/bin/sshpass -p 密码 rsync -atvP -e "ssh -o StrictHostKeyChecking=no" /tmp/t1/1 root@1.1.1.1:/tmp/t1/
-```
-
-### 清空文件
-
-```shell
-# 快速清空
->file.txt
-# 截断任意文件
-truncate -s 0 file.txt
-
-# 寻找log文件并清空
-vim /opt/truncate-log.sh
-#!/bin/bash
-files=`find / -name *.log`
-for file in `ls $files`
-do
-  truncate -s 0 $file
-done
-
-# 凌晨3点定时执行
-chmod +x /opt/truncate-log.sh
-vim /etc/crontab
-0 3 * * * root /opt/truncate-log.sh
 ```
 
 ### 筛选替换

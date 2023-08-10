@@ -1,10 +1,10 @@
 ---
-title: oracle配置和命令
+title: oracle-sql使用技巧
 tags:
   - blog
   - oracle
 date: 2023-07-06
-lastmod: 2023-07-06
+lastmod: 2023-08-08
 categories:
   - blog
 description: "因为以前的公司是用 [[笔记/point/oracle|oracle]],所以也记录了不少的命令. 记录一下后续使用."
@@ -12,9 +12,31 @@ description: "因为以前的公司是用 [[笔记/point/oracle|oracle]],所以�
 
 ## 简介
 
-因为以前的公司是用 [[笔记/point/oracle|oracle]],所以也记录了不少的命令. 记录一下后续使用.
+因为以前的公司是用 [[笔记/point/oracle|oracle]],所以也记录了不少的技巧. 记录一下后续使用.
 
-## 命令
+## 使用技巧
+
+### 字段操作
+
+```sql
+# 字符串截取
+substr(t.family_no,0,6)='433127'
+# 日期转换
+to_date('20170101','yyyymmdd')
+to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+# 值判断
+CASE WHEN A.STR7 IS NULL THEN '0' ELSE '0001' END  AS haha,
+# 类似case when,v1就取r1,v2就取r2
+DECODE(column_name, 'value1', 'result1', 'value2', 'result2', 'default_result')
+# 长度判断
+where length(a.id_card)>=14
+# 在列表中
+where D.IDENTITY IN('0001','17','20','19')
+# 值为null就默认0
+NVL(A.CIVIL_MONEY,0)
+# 转数字
+to_number(NVL(A.STR5,0)
+```
 
 ### 索引
 
@@ -51,8 +73,6 @@ when matched then
 update set t1.account_money=tt.account_money,
 t1.balance=tt.balance,
 t1.remaining_money=tt.remaining_money
-
-
 ```
 
 ### sql 优化

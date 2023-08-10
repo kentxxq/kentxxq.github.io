@@ -4,7 +4,7 @@ tags:
   - point
   - tmux
 date: 2023-08-06
-lastmod: 2023-08-07
+lastmod: 2023-08-09
 categories:
   - point
 ---
@@ -16,12 +16,17 @@ categories:
 - 免费
 - 分屏
 
+#todo/笔记 配合 trzsz 使用
+
 ## 配置
 
 ```shell
 vim /etc/tmux.conf
+
 # 鼠标右键可分屏,拖动窗口大小
 set -g mouse on
+# 默认关闭窗口需要按y确认,这一行去掉确认
+bind-key & kill-window
 ```
 
 ## 使用

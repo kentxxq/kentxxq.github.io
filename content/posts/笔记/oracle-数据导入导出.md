@@ -1,10 +1,10 @@
 ---
-title: oracle数据导入导出
+title: oracle-数据导入导出
 tags:
   - blog
   - oracle
 date: 2020-01-05
-lastmod: 2023-07-11
+lastmod: 2023-08-08
 categories:
   - blog
 keywords:

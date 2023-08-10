@@ -4,7 +4,7 @@ tags:
   - point
   - keepalived
 date: 2023-08-03
-lastmod: 2023-08-04
+lastmod: 2023-08-08
 categories:
   - point
 ---
@@ -27,12 +27,21 @@ apt install keepalived -y
 # 配置文件
 vim /etc/keepalived/keepalived.conf
 global_defs {
-   router_id node1 # 唯一
+   router_id ha1 # ha集群内唯一
+   enable_script_security # 允许执行脚本
+   script_user root # 指定执行脚本的用户
 }
+
+vrrp_script check_health {
+    script "/usr/bin/systemctl is-active nginx" # 检测nginx状态
+    interval 2 # 间隔时间
+    weight -100 # 失败后降低权重,成功的话会恢复
+}
+
 vrrp_instance VI_1 {
     state MASTER   # 主节点
     interface enp0s3 #你的网卡名字
-    virtual_router_id 51 # 必须一致
+    virtual_router_id 51 # ha集群内必须一致
     priority 100   # 权重,可以为90
     advert_int 1   # 主备通讯时间间隔
     authentication {
@@ -42,6 +51,10 @@ vrrp_instance VI_1 {
     virtual_ipaddress {
         # 没被使用的ip dev 网卡名字 标签 标签名字
         192.168.31.244 dev enp0s3 label enp0s3:1
+    }
+
+    track_script {
+        check_health
     }
 }
 
@@ -54,12 +67,21 @@ systemctl enable keepalived --now
 ```shell
 vim /etc/keepalived/keepalived.conf
 global_defs {
-   router_id node2 # 唯一
+   router_id ha2 # ha集群内唯一
+   enable_script_security # 允许执行脚本
+   script_user root # 指定执行脚本的用户
 }
+
+vrrp_script check_health {
+    script "/usr/bin/systemctl is-active nginx" # 检测nginx状态
+    interval 2 # 间隔时间
+    weight -100 # 失败后降低权重,成功的话会恢复
+}
+
 vrrp_instance VI_1 {
     state BACKUP   # 当前节点为高可用从角色,BACKUP为从节点
     interface enp0s3 #你的网卡名字
-    virtual_router_id 51 # 必须一致
+    virtual_router_id 51 # ha集群内必须一致
     priority 90   # 权重,可以为90
     advert_int 1   # 主备通讯时间间隔
     authentication {
@@ -69,6 +91,10 @@ vrrp_instance VI_1 {
     virtual_ipaddress {
         # 没被使用的ip dev 网卡名字 标签 标签名字
         192.168.31.244 dev enp0s3 label enp0s3:1
+    }
+    
+    track_script {
+        check_health
     }
 }
 ```
@@ -117,8 +143,17 @@ vip    192.168.31.244        08-00-27-4d-3b-7e     动态
 
 ```shell
 global_defs {
-   router_id node1 # 唯一
+   router_id node1 # ha集群内唯一
+   enable_script_security # 允许执行脚本
+   script_user root # 指定执行脚本的用户
 }
+
+vrrp_script check_health {
+    script "/usr/bin/systemctl is-active nginx" # 检测nginx状态
+    interval 2 # 间隔时间
+    weight -100 # 失败后降低权重,成功的话会恢复
+}
+
 vrrp_instance VI_1 {
     state MASTER   # 主节点
     interface eth0 # 你的网卡名字
@@ -140,6 +175,9 @@ vrrp_instance VI_1 {
     }
     track_interface {
         eth0  # 设置ECS实例网卡名
+    }
+    track_script {
+        check_health
     }
 }
 ```

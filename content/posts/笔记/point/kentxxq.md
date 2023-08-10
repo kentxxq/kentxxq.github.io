@@ -1,14 +1,14 @@
 ---
 title: kentxxq
+aliases:
+  - ken
 tags:
   - point
   - kentxxq
 date: 2023-06-21
-lastmod: 2023-06-29
+lastmod: 2023-08-08
 categories:
   - point
-aliases:
-  - ken
 ---
 
 - `kentxxq` 这是我的个人网名.
@@ -20,3 +20,7 @@ aliases:
 >我名字的缩写是 `xq`,于是就 "kentXxq"="kentxxq".
 
 联系方式我:<admin@kentxxq.com>
+
+配上自拍帅照一张
+
+![[附件/自拍头像.jpg]]

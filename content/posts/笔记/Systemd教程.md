@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-29
-lastmod: 2023-08-02
+lastmod: 2023-08-09
 categories:
   - blog
 description: "[[笔记/point/Systemd|systemd]] 的相关概念, 使用, 操作示例."
@@ -45,7 +45,7 @@ lrwxrwxrwx  1 root root   38 Jul 29 22:10 supervisor.service -> /lib/systemd/sys
 
 ### 配置示例 - 复制使用
 
-主要有 3 部分.
+配置文件主要有 3 部分.
 
 - `Unit`: 启动顺序与依赖关系
 - `Service`: 启动行为
@@ -114,6 +114,8 @@ Conflicts=a.service
 # Condition开头 必须满足所有条件我才会运行
 # 下面是路径存在就运行
 ConditionPathExists=/usr/bin/myprogram
+# 文件不是空的才运行
+ConditionFileNotEmpty=/etc/keepalived/keepalived.conf
 # Assert开头 必须满足所有条件,否则会报错启动失败
 AssertPathExists=/usr/bin/myprogram
 # 这个文件有运行权限
@@ -133,8 +135,10 @@ StartLimitBurst=3
 Type=simple
 # 主进程创建子进程,父进程立即退出
 Type=forking
-# 代替rc.local,执行开机启动. 搭配RemainAfterExit=yes,让systemd显示状态active,让你知道已经执行过了.
+# 代替rc.local,执行开机启动. 搭配RemainAfterExit=yes,让systemd显示状态active,让你知道已经执行过了.必须成功退出
 Type=oneshot
+# 和上面的区别是只要执行了就行,不一定要成功
+Type=exec
 # 服务启动以后,通过sd_notify(3)发送通知给systemd,才算启动成功.containerd有用到
 Type=notify
 
@@ -212,13 +216,15 @@ TasksMax=infinity
 Delegate=yes
 # -1000到1000,-999代表优先级很高.发生oom的时候,内核尽量先杀其他进程,保留这个. containerd有用到
 OOMScoreAdjust=-999
+# 私有的临时文件目录.systemd自动清理,通过隔离保证安全性.nginx有用到
+PrivateTmp=true
 ```
 
 #### Install
 
 - 守护进程 `systemd` 完全不会处理这部分. 这部分是让 `systemctl enable` 用的.
 - `systemctl get-default` 得到启动时默认的 `target`.
-    - 服务器先启动到 `multi-user`,然后 `graphical.target`. 而通常服务器没有 UI.
+    - 服务器先启动到 `multi-user`,然后再 `graphical.target`. 而通常服务器没有 UI.
     - 常用**多用户命令行** `multi-user`.
     - **图形** `graphical.target`,图形用于开机启动 qq, 钉钉.
 - `systemctl set-default multi-user.target` 可以调整默认 `target`.
@@ -335,3 +341,4 @@ journalctl --disk-usage
 - [Systemd 入门教程：实战篇 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html)
 - [systemd详解 | learn-systemd](https://yifengyou.github.io/learn-systemd/)
 - [System and Service Manager](https://systemd.io/)
+- [runlevel](https://www.freedesktop.org/software/systemd/man/runlevel.html)

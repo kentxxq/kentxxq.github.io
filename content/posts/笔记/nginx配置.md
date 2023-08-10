@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-08-07
+lastmod: 2023-08-09
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -23,7 +23,7 @@ description: "[[笔记/point/nginx|nginx]] 的配置示例."
 worker_processes  auto;
 worker_cpu_affinity auto;
 error_log /data/logs/nginx-error.log;
-#pid        logs/nginx.pid;
+pid        /run/nginx.pid;
 worker_rlimit_nofile 65535;
 # 解决nginx-worker一直不退出的情况, worker process is shutting down
 # 需要重启nginx生效
@@ -382,13 +382,14 @@ server {
 }
 ```
 
-#### Debug 配置
+#### debug 配置
 
 `/usr/local/nginx/conf/hosts/debug.conf`
 
 ```nginx
 server {
     listen 8000;
+    access_log off;
     server_name _;
     include /usr/local/nginx/conf/options/time.conf;
 
@@ -705,42 +706,39 @@ add_header Content-Security-Policy "frame-ancestors 'self' a.com b.com *.a.com *
 
 ## 守护进程
 
-[[笔记/point/supervisor|supervisor]] 守护起来
+[[笔记/point/Systemd|Systemd]] 守护配置 `/etc/systemd/system/nginx.service`
 
-- 开机自启
-- 异常自动重启
+```ini
+[Unit]
+Description=The NGINX HTTP and reverse proxy server
+After=syslog.target network-online.target remote-fs.target nss-lookup.target
+Wants=network-online.target
+# 启动区间30s内,尝试启动3次
+StartLimitIntervalSec=30
+StartLimitBurst=3
 
-```toml
-[program:nginx]
-command = /usr/local/nginx/sbin/nginx -g 'daemon off;'
+[Service]
+Type=forking
+PIDFile=/run/nginx.pid
+ExecStartPre=/usr/local/nginx/sbin/nginx -t
+ExecStart=/usr/local/nginx/sbin/nginx
+ExecReload=/usr/local/nginx/sbin/nginx -s reload
+ExecStop=/bin/kill -s QUIT $MAINPID
+# 会导致无法导出prof文件
+# PrivateTmp=true
 
-# 启动进程数目默认为1
-numprocs = 1
-# 如果supervisord是root启动的 设置此用户可以管理该program
-user = root
-# 程序运行的优先级 默认999
-priority = 996
+# 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
+RestartSec=30s 
+Restart=always
+# 相关资源都发送term后,后发送kill
+KillMode=mixed
+# 最大文件打开数不限制
+LimitNOFILE=infinity
+# 子线程数量不限制
+TasksMax=infinity
 
-# 随着supervisord 自启动
-autostart = true
-# 子进程挂掉后无条件自动重启
-autorestart = true
-# 子进程启动多少秒之后 状态为running 表示运行成功
-startsecs = 20
-# 进程启动失败 最大尝试次数 超过将把状态置为FAIL
-startretries = 3
-# 标准输出的文件路径
-stdout_logfile = /tmp/nginx-supervisor.log
-# 日志文件最大大小
-stdout_logfile_maxbytes=20MB
-# 日志文件保持数量 默认为10 设置为0 表示不限制
-stdout_logfile_backups = 3
-# 错误输出的文件路径
-stderr_logfile = /tmp/nginx-supervisor.log
-# 日志文件最大大小
-stderr_logfile_maxbytes=20MB
-# 日志文件保持数量 默认为10 设置为0 表示不限制
-stderr_logfile_backups = 3
+[Install]
+WantedBy=multi-user.target
 ```
 
 ## Ingress-nginx 配置

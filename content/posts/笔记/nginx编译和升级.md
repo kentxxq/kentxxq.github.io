@@ -34,7 +34,7 @@ curl http://nginx.org/download/nginx-1.24.0.tar.gz -o nginx-1.24.0.tar.gz
 tar -xf nginx-1.24.0.tar.gz
 cd nginx-1.24.0
 # 安装编译需要用的依赖
-apt install libpcre3 libpcre3-dev openssl libssl-dev -y
+apt install libpcre3 libpcre3-dev openssl libssl-dev build-essential -y
 
 # 监控信息 --with-http_stub_status_module 
 # ssl证书 --with-http_ssl_module
