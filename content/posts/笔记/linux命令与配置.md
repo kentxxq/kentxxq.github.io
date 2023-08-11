@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-08-08
+lastmod: 2023-08-11
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -240,6 +240,12 @@ vim /etc/crontab
 # 每10分钟执行
 */10 * * * * root /bin/bash /root/backup.sh
 ```
+
+- 特定值：使用具体的数值表示，如 `5` 表示第 5 分钟、`10` 表示 10 点。
+- 通配符（`*`）：表示匹配任意值，如 `*` 表示每分钟、每小时、每天等。
+- 范围值：使用 `-` 表示范围，如 `2-5` 表示 2 到 5 之间的值。
+- 枚举值：使用逗号 `,` 表示枚举多个值，如 `1,3,5` 表示 1、3 和 5。
+- 步长值：使用 `*/n` 表示步长，如 `*/15` 表示每隔 15 个单位执行一次。
 
 ### 时间同步
 
@@ -507,20 +513,6 @@ find /data/weblog/ -name '*.log.*' -type f -mtime +7 -exec rm -f {} \;
 >file.txt
 # 截断任意文件
 truncate -s 0 file.txt
-
-# 寻找log文件并清空
-vim /opt/truncate-log.sh
-#!/bin/bash
-files=`find / -name '*.log'`
-for file in $files
-do
-  truncate -s 0 $file
-done
-
-# 凌晨3点定时执行
-chmod +x /opt/truncate-log.sh
-vim /etc/crontab
-0 3 * * * root /opt/truncate-log.sh
 ```
 
 ### 查看进程启动时间
