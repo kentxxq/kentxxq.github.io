@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-08-11
+lastmod: 2023-08-14
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -26,7 +26,7 @@ vim /etc/sudoers
 kentxxq ALL=(ALL)    NOPASSWD: ALL  # 加入此行
 ```
 
-### 安装 chrome
+### 安装 deb/chrome
 
 ```shell
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -247,6 +247,25 @@ vim /etc/crontab
 - 枚举值：使用逗号 `,` 表示枚举多个值，如 `1,3,5` 表示 1、3 和 5。
 - 步长值：使用 `*/n` 表示步长，如 `*/15` 表示每隔 15 个单位执行一次。
 
+### openssl 验证问题
+
+在部署服务的时候, 发现无法发送邮件. 因为 ssl 验证不通过, 可以尝试配置.
+
+```
+openssl_conf = openssl_init
+
+[openssl_init]
+ssl_conf = ssl_config
+
+[ssl_config]
+system_default = tls_defaults
+
+[tls_defaults]
+CipherString = @SECLEVEL=2:kEECDH:kRSA:kEDH:kPSK:kDHEPSK:kECDHEPSK:-aDSS:-3DES:!DES:!RC4:!RC2:!IDEA:-SEED:!eNULL:!aNULL:!MD5:-SHA384:-CAMELLIA:-ARIA:-AESCCM8
+Ciphersuites = TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:TLS_AES_128_CCM_SHA256
+MinProtocol = TLSv1.2
+```
+
 ### 时间同步
 
 ```shell
@@ -355,6 +374,22 @@ curl -H "Content-Type: application/json"  -XPUT --user elastic:password   es-cn-
 vim /etc/apt/apt.conf.d/95proxy.conf
 Acquire::http::proxy "https://user1:pass1@a.kentxxq.com:17890";
 Acquire::https::proxy "https://user1:pass1@a.kentxxq.com:17890";
+```
+
+### tcpdump
+
+```shell
+# -nn 不解析域名-加速
+# -w 175.6.6.238.pcap 指定文件名
+# 指定网络接口
+# host 175.6.6.238 捕获ip地址为 xxx , 可以src host或者dst host
+# port 8088 捕获端口为 8088,可以 src port或者dst host
+tcpdump -i eth0 src host 175.6.6.238 and dst port 80 -nn
+
+# 协议
+tcpdump icmp
+tcpdump tcp
+tcpdump 'ip && tcp'
 ```
 
 ### 清除历史记录

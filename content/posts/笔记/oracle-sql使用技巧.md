@@ -4,7 +4,7 @@ tags:
   - blog
   - oracle
 date: 2023-07-06
-lastmod: 2023-08-08
+lastmod: 2023-08-14
 categories:
   - blog
 description: "因为以前的公司是用 [[笔记/point/oracle|oracle]],所以也记录了不少的命令. 记录一下后续使用."
@@ -22,6 +22,8 @@ description: "因为以前的公司是用 [[笔记/point/oracle|oracle]],所以�
 # 字符串截取
 substr(t.family_no,0,6)='433127'
 # 日期转换
+systimestamp 时间戳
+sysdate 日期
 to_date('20170101','yyyymmdd')
 to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
 # 值判断

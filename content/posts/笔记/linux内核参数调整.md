@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-01
-lastmod: 2023-07-19
+lastmod: 2023-08-14
 categories:
   - blog
 description: "这里记录我调整过的 [[linux]] 内核参数."
@@ -59,12 +59,17 @@ net.ipv4.tcp_synack_retries = 2
 # TCP空闲一段时间后,会较小窗口发送数据,然后再放大窗口. 0代表立即最大窗口发送数据
 net.ipv4.tcp_slow_start_after_idle = 0
 
-# 复用TIME-WAIT状态的TCP连接
+# 避免频繁连接造成大量TIME-WAIT,复用TIME-WAIT状态的TCP连接,
 net.ipv4.tcp_tw_reuse = 1
 # 关闭连接以后,内核60秒后释放相关资源
 net.ipv4.tcp_fin_timeout = 60
-# nat环境下多个机器同一个出口ip,可能会导致tcp连接被丢弃.这里表示响应所有的tcp请求.
+# nat环境下多个机器同一个出口ip,可能会导致tcp连接被丢弃.这里关闭时间验证,响应所有的tcp请求.
 net.ipv4.tcp_timestamps = 0
 # 3次握手时,会将信息保存到服务器队列里.每个端口的队列有60000个位置
 net.core.somaxconn=60000
+
+# 4.12内核版本开始移除了tcp_tw_recycle配置
+# 不适用于NAT！！！！！！
+# 快速回收tcp，减少TIME-WAIT。
+# net.ipv4.tcp_tw_recycle = 1
 ```

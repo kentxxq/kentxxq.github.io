@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-08-09
+lastmod: 2023-08-14
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -640,6 +640,46 @@ location / {
 }
 ```
 
+### 正则匹配
+
+匹配字符:
+
+- `^` : 匹配输入字符串的起始位置
+- `$` : 匹配输入字符串的结束位置
+- `.` : 匹配除 `\n` 之外的任何单个字符，若要匹配包括“\n”在内的任意字符，请使用诸如 `[.\n]` 之类的模式
+- `\s`: 匹配任意的空格符
+
+匹配长度:
+
+- `*`: 任意个数
+- `+`: 1 次以上
+- `?`: 0 或 1 次
+
+匹配范围
+
+- `[c]`: 匹配单个字符 `c`
+- `[a-zA-Z0-9]`: 1 个字符
+- `()`: 表达式的内容. 例如 `(jpg|gif|swf)`
+
+匹配优先级
+
+1. `=`
+2. `location 完整路径`,进行路径匹配, 但**只是记住**这个最长的路径.
+3. `location ^~ 否定正则`.上面的路径如果包含 `^~` ,那么使用并停止匹配.
+4. `location ~* 正则` 和 `location ~ 区分大小写正则` 顺序匹配. 匹配到了就选用.
+5. `location 部分起始路径`. 没有正则匹配到, 那么开始选用第二步的匹配
+6. `/` 还是没有匹配, 则用 `/` 路径
+
+示例:
+
+```nginx
+    # api-docs结尾的全部拦截
+    location ~ /api-docs$ {
+        default_type application/json;
+        return 200 '{"status":"success","result":"nginx json"}';
+    }
+```
+
 ### 移动端检测
 
 [Detect Mobile Browsers - Open source mobile phone detection](http://detectmobilebrowsers.com/)
@@ -686,7 +726,7 @@ location /metrics {
 }
 ```
 
-### 405 错误 -post 请求静态文件
+### 405 错误 - post 请求静态文件
 
 ```nginx
 # 这一行加在server的第一层，不能加在location位置

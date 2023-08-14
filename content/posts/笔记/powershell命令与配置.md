@@ -4,7 +4,7 @@ tags:
   - blog
   - powershell
 date: 2023-06-26
-lastmod: 2023-07-13
+lastmod: 2023-08-14
 categories:
   - blog
 description: "这里记录 [[笔记/point/powershell|powershell]] 的常用命令."
@@ -58,29 +58,34 @@ Alias           mv -> Move-Item
 
 #### $profile 配置
 
+1. 安装 `oh-my-post`: `winget install JanDeDobbeleer.OhMyPosh -s winget`
+2. 编辑配置文件 `notepad $profile` 或者 `code $profile`
+3. 贴入配置文件
+
 ```powershell
-# 查看配置文件
-code $profile # vscode打开
-notepad $profile # 记事本打开
-
-# 配置文件的内容
-## 安装oh-my-posh
-winget install JanDeDobbeleer.OhMyPosh -s winget
-
 # 主题配置,主题列表 https://ohmyposh.dev/docs/themes
 oh-my-posh init pwsh --config "D:\OneDrive\kentxxq\config\oh-my-posh\theme.json" | Invoke-Expression
 
 # vpn命令
 function vpn {
-    $Env:http_proxy = "http://127.0.0.1:7890"; $Env:https_proxy = "http://127.0.0.1:7890";
+    $Env:all_proxy = "http://127.0.0.1:7890";
 }
+# function vpn {
+#     $Env:http_proxy = "http://127.0.0.1:7890"; $Env:https_proxy = "http://127.0.0.1:7890";
+# }
 
 function novpn {
-    $Env:http_proxy = ""; $Env:https_proxy = "";
+    $Env:all_proxy = "";
 }
+# function novpn {
+#     $Env:http_proxy = ""; $Env:https_proxy = "";
+# }
+
+# 默认启用vpn
+vpn
 
 # 配合ssh-agent使用
-$env:GIT_SSH="C:\Windows\System32\OpenSSH\ssh.exe"
+$env:GIT_SSH = "C:\Windows\System32\OpenSSH\ssh.exe"
 ```
 
 #### 主题文件
