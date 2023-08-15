@@ -4,7 +4,7 @@ tags:
   - blog
   - shell
 date: 2023-08-10
-lastmod: 2023-08-11
+lastmod: 2023-08-15
 categories:
   - blog
 description: "虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔记/point/shell|shell]] 是高效的."
@@ -293,9 +293,12 @@ if (( -e $a ))
 if (( -s $a ))
 ```
 
-### 报错退出 set
+### 调试/报错
 
 ```shell
+# 开启调试.可以看到变量值和执行命令情况
+set -x
+# 出错就停止返回非0
 set -e
 ```
 

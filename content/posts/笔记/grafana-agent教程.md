@@ -3,7 +3,7 @@ title: grafana-agent教程
 tags:
   - blog
   - grafana
-  - agent
+  - grafana-agent
 date: 2023-07-14
 lastmod: 2023-08-02
 categories:

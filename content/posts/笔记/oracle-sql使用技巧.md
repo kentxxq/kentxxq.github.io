@@ -4,7 +4,7 @@ tags:
   - blog
   - oracle
 date: 2023-07-06
-lastmod: 2023-08-14
+lastmod: 2023-08-15
 categories:
   - blog
 description: "因为以前的公司是用 [[笔记/point/oracle|oracle]],所以也记录了不少的命令. 记录一下后续使用."
@@ -56,17 +56,17 @@ insert /*+append*/ into x (a,b,c) as select a,b,c from xxx;
 
 # 批量删除.根据时间排序,1000条commmit一次
 declare
-     cursor [del_cursor] is select a.*, a.rowid row_id from [table_name] a order by a.rowid;
+    cursor [del_cursor] is select a.*, a.rowid row_id from [table_name] a order by a.rowid;
 begin
-     for v_cusor in [del_cursor] loop
-          if v_cusor.[time_stamp] < to_date('2014-01-01','yyyy-mm-dd') then
-               delete from [table_name] where rowid = v_cusor.row_id;
-          end if;
-          if mod([del_cursor]%rowcount,1000)=0 then
-               commit;
-          end if;
-     end loop;
-     commit;
+    for v_cusor in [del_cursor] loop
+        if v_cusor.[time_stamp] < to_date('2014-01-01','yyyy-mm-dd') then
+            delete from [table_name] where rowid = v_cusor.row_id;
+        end if;
+        if mod([del_cursor]%rowcount,1000)=0 then
+            commit;
+        end if;
+    end loop;
+    commit;
 end;
 
 # 两表数据同步
@@ -79,9 +79,25 @@ t1.remaining_money=tt.remaining_money
 
 ### sql 优化
 
+#### 查看执行计划
+
 ```sql
-# 查看执行计划
-select /*+ gather_plan_statistics */* 
-       from 
+select /*+ gather_plan_statistics */
+        * 
+        from 
 table(dbms_xplan.display_cursor(NVL('ajkqn4733r2qx',NULL),NULL,'ALL ALLSTATS LAST PEEKED_BINDS cost partition -projection -outline'));
+```
+
+#### 查看 session 执行的 sql
+
+```sql
+SELECT 
+    c.spid,
+    b.sql_text, 
+    a.sid, 
+    a.serial#, 
+    osuser, 
+    machine  
+FROM v$session a, v$sqlarea b ,v$process c
+WHERE a.sql_address = b.address and a.paddr=c.addr and spid=&pid; 
 ```

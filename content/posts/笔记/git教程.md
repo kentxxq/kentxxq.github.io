@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2023-08-02
+lastmod: 2023-08-15
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."
@@ -40,6 +40,11 @@ git clone --depth 1 xxx.git
 git clone https://ghproxy.com/https://github.com/kentxxq/hugo.git
 # 私有仓库配合token使用.
 git clone https://user:your_token@ghproxy.com/https://ghproxy.com/https://github.com/kentxxq/hugo.git
+
+# 克隆大文件失败
+git config --global core.compression 0
+git config --global http.postBuffer 500M
+git config --global http.maxRequestBuffer 100M
 ```
 
 ### 仓库 remote

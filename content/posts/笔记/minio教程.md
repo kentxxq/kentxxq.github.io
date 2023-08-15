@@ -3,7 +3,7 @@ title: minio教程
 tags:
   - blog
 date: 2023-07-19
-lastmod: 2023-08-02
+lastmod: 2023-08-15
 categories:
   - blog
 description: "[[笔记/point/minio|minio]] 的搭建和使用."
@@ -51,7 +51,7 @@ MINIO_VOLUMES="/data/minio-data"
 # MINIO_SERVER_URL="http://minio.example.net:9000"
 ```
 
-守护 systemd, `/etc/systemd/system/minio.service`
+[[笔记/point/Systemd|Systemd]] 守护配置 `/etc/systemd/system/minio.service`
 
 ```toml
 [Unit]

@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-07-28
-lastmod: 2023-07-30
+lastmod: 2023-08-15
 categories:
   - blog
 description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
@@ -36,11 +36,7 @@ ExecStart=/usr/local/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $
 
 ### 清理残存的容器
 
-强制删除 pod, 其他资源同参数也可以删除.
-
-```shell
-kubectl delete pod pod名称 -n 命名空间 --force --grace-period=0
-```
+![[笔记/k8s常用命令#清理残存容器]]
 
 ### 证书
 
@@ -64,7 +60,7 @@ kubeadm certs check-expiration
 
 `network: Multus` ... `KillPodSandbox`... `Unauthorized`... `networkPlugin cni failed`
 
-而我们在安装网络插件的时候, 只不过是通过 `kubectl create/edit` 操作了一些资源, 所以我们重启等操作不会造成其他的影响. 在官方也有不少这样的骚操作, 比如 [这个](https://github.com/projectcalico/calico/issues/5712) 直接尝试重启....
+而我们在安装网络插件的时候, 只不过是通过 `kubectl create/edit` 操作了一些资源, 所以我们重启等操作不会造成其他的影响. 在官方也有不少这样的骚操作, 比如 [这个帖子的答案推荐直接尝试重启](https://github.com/projectcalico/calico/issues/5712) ....
 
 操作流程
 

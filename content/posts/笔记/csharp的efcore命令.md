@@ -15,18 +15,6 @@ description:
 
 ## 内容
 
-### 生成 Models
-
-```shell
-# Sqlite
-Dotnet ef dbcontext  scaffold "Data Source=test. Db" -o Models Microsoft. EntityFrameworkCore. Sqlite -c "TestDbContext" -f
-# Mysql
-Dotnet ef dbcontext scaffold "server=localhost; port=3306; user=root; password=mypass; database=sakila" MySql. Data. EntityFrameworkCore -o sakila -f
-# 或者
-Scaffold-DbContext "server=localhost; port=3306; user=root; password=mypass; database=sakila" MySql. Data. EntityFrameworkCore -OutputDir sakila -f
-# Oracle 
-Scaffold-DbContext "Data Source=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST = 192.168.0.220)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orcl))); User ID=kentxxq; Password=mypass;" Oracle. EntityFrameworkCore -OutputDir Models
-```
 
 ### 数据库连接池
 

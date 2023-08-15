@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-08-06
+lastmod: 2023-08-15
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -111,6 +111,32 @@ services:
 
 ## 操作命令
 
+### 镜像清理
+
+```shell
+# vim /etc/crontab
+0 2 * * * root /usr/bin/docker rmi $(docker images -q) -f
+```
+
+### IO 问题 - 定位容器
+
+```shell
+# 查看活动中的进程io
+iotop -oP
+
+# 排查
+docker inspect -f "{{.Id}} {{.State.Pid}} {{.Name}} " $(docker ps -q) | grep pid
+```
+
+### 清空 docker 日志
+
+```shell
+# 找到路径
+docker inspect --format='{{.LogPath}}' 7ce2a0df954b
+
+truncate -s 0 /var/lib/docker/containers/完整id/完整id-json.log
+```
+
 ### 上传 docker 镜像
 
 起因是国内经常因为网络问题, 无法正常拉取镜像. 需要手动把常用的镜像备份过来 (即使配置了代理源, 因为会请求 dockerhub 的接口, 这里也会导致失败).
@@ -176,4 +202,24 @@ docker-compose up -d --build
 
 # 停止
 docker-compose down --remove-orphans
+```
+
+### docker 内安装 chrome
+
+```Dockerfile
+FROM python:latest
+
+# install google chrome
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+RUN apt-get -y update
+RUN apt-get install -y google-chrome-stable
+
+# install chromedriver
+RUN apt-get install -yqq unzip
+RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
+RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
+
+# set display port to avoid crash
+ENV DISPLAY=:99
 ```

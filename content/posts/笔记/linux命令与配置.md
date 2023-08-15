@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-08-14
+lastmod: 2023-08-15
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -133,6 +133,12 @@ mkfontdir
 fc-cache –fv
 # 字体查询
 fc-list :lang=zh
+```
+
+### 挂载 windows 共享盘
+
+```shell
+mount -t cifs -o username=Administrator,password=密码 //共享机器的ip地址/data /mnt/pythondata
 ```
 
 ### 配置 limit
@@ -674,6 +680,26 @@ top
 htop
 ```
 
+#### 文件与进程 lsof
+
+```shell
+# 查看指定用户
+lsof -u root | less
+# 查看除指定用户外
+lsof -u ^root 
+# 查看指定目录
+lsof +D /usr/local/
+# 查看某进程
+lsof -p 3738
+# 查看所有网络
+lsof -i
+# 查看所有tcp
+lsof -i tcp
+
+# 排序句柄  数量-pid
+lsof -n |awk '{print $2}'|sort|uniq -c |sort -nr|less
+```
+
 #### 内存
 
 ```shell
@@ -689,7 +715,9 @@ vmstat 2 2
 # 磁盘分区等情况
 fdisk -l
 # 硬盘监控
-iotop
+# -o 只显示活动中的
+# -P 显示进程相关,而不是线程
+iotop -oP
 ```
 
 #### 网络
@@ -703,6 +731,8 @@ nethogs
 iptraf-ng
 
 
+# 各状态tcp连接统计
+netstat -n | awk '/^tcp/ {++state[$NF]} END {for(key in state) print key,"\t",state[key]}'
 # 外部ip连接最多的20条记录
 netstat -ant | awk '/^tcp/ {split($5, a, ":"); count[a[1]]++} END {for (ip in count) print ip "\t" count[ip]}' | sort -nrk2 | head -n 20
 ```
