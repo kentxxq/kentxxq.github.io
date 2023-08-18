@@ -1,0 +1,406 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>安装k8s - 运维个人技术栈</title><meta name=Description content="安装 [[笔记/point/k8s|k8s]] 的记录."><meta property="og:title" content="安装k8s"><meta property="og:description" content="安装 [[笔记/point/k8s|k8s]] 的记录."><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%AE%89%E8%A3%85k8s/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-08-16T00:00:00+00:00"><meta property="article:modified_time" content="2023-08-16T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="安装k8s"><meta name=twitter:description content="安装 [[笔记/point/k8s|k8s]] 的记录."><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%AE%89%E8%A3%85k8s/><link rel=prev href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%B0%8F%E7%B1%B3%E6%89%8B%E6%9C%BA%E9%85%8D%E7%BD%AE/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vps%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"安装k8s","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/%E5%AE%89%E8%A3%85k8s\/"},"genre":"posts","keywords":"blog, k8s","wordcount":1055,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/%E5%AE%89%E8%A3%85k8s\/","datePublished":"2023-08-16T00:00:00+00:00","dateModified":"2023-08-16T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"安装 [[笔记/point/k8s|k8s]] 的记录."}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#安装>安装</a><ul><li><a href=#基础环境>基础环境</a></li><li><a href=#容器相关>容器相关</a></li><li><a href=#安装-kubeadm>安装 kubeadm</a></li><li><a href=#网络组件>网络组件</a></li></ul></li><li><a href=#参考链接>参考链接</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">安装k8s</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/blog/><i class="far fa-folder fa-fw"></i>blog</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-08-16>2023-08-16</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-08-16>2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1055 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#安装>安装</a><ul><li><a href=#基础环境>基础环境</a></li><li><a href=#容器相关>容器相关</a></li><li><a href=#安装-kubeadm>安装 kubeadm</a></li><li><a href=#网络组件>网络组件</a></li></ul></li><li><a href=#参考链接>参考链接</a></li></ul></nav></div></div><div class=content id=content><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p>安装 <a href=/posts/%E7%AC%94%E8%AE%B0/point/k8s/>k8s</a> 的记录 -20230606.</p><h2 id=安装 class=headerLink><a href=#%e5%ae%89%e8%a3%85 class=header-mark></a>安装</h2><h3 id=基础环境 class=headerLink><a href=#%e5%9f%ba%e7%a1%80%e7%8e%af%e5%a2%83 class=header-mark></a>基础环境</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 主机名和固定ip</span>
+</span></span><span class=line><span class=cl>hostnamectl set-hostname master1
+</span></span><span class=line><span class=cl>reboot
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 防火墙</span>
+</span></span><span class=line><span class=cl>ufw disable
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># selinux</span>
+</span></span><span class=line><span class=cl>vim /etc/selinux/config
+</span></span><span class=line><span class=cl><span class=nv>SELINUX</span><span class=o>=</span>disabled
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 时间同步</span>
+</span></span><span class=line><span class=cl>crontab -e
+</span></span><span class=line><span class=cl><span class=m>0</span> */1 * * * /usr/sbin/ntpdate time1.aliyun.com
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 内核</span>
+</span></span><span class=line><span class=cl>vim /etc/sysctl.d/k8s.conf
+</span></span><span class=line><span class=cl>net.bridge.bridge-nf-call-ip6tables <span class=o>=</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl>net.bridge.bridge-nf-call-iptables <span class=o>=</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl>net.ipv4.ip_forward <span class=o>=</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl>vm.swappiness <span class=o>=</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 模块加载</span>
+</span></span><span class=line><span class=cl>cat <span class=s>&lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf
+</span></span></span><span class=line><span class=cl><span class=s>overlay
+</span></span></span><span class=line><span class=cl><span class=s>br_netfilter
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl><span class=c1># 查看是否加载。出现了就是加载了</span>
+</span></span><span class=line><span class=cl>lsmod <span class=p>|</span> grep br_netfilter
+</span></span><span class=line><span class=cl>br_netfilter           <span class=m>22256</span>  <span class=m>0</span>
+</span></span><span class=line><span class=cl>bridge                <span class=m>151336</span>  <span class=m>1</span> br_netfilter
+</span></span><span class=line><span class=cl>lsmod <span class=p>|</span> grep overlay
+</span></span><span class=line><span class=cl>overlay               <span class=m>151552</span>  <span class=m>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 确认为1</span>
+</span></span><span class=line><span class=cl>sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ipvs相关</span>
+</span></span><span class=line><span class=cl>apt install ipset ipvsadm -y
+</span></span><span class=line><span class=cl>/etc/modules-load.d/k8s.conf 加入
+</span></span><span class=line><span class=cl>overlay
+</span></span><span class=line><span class=cl>br_netfilter
+</span></span><span class=line><span class=cl>ip_vs
+</span></span><span class=line><span class=cl>ip_vs_rr
+</span></span><span class=line><span class=cl>ip_vs_wrr
+</span></span><span class=line><span class=cl>ip_vs_sh
+</span></span><span class=line><span class=cl>nf_conntrack
+</span></span></code></pre></td></tr></table></div></div><h3 id=容器相关 class=headerLink><a href=#%e5%ae%b9%e5%99%a8%e7%9b%b8%e5%85%b3 class=header-mark></a>容器相关</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 下载cri-containerd-cni？  https://github.com/containerd/containerd/releases</span>
+</span></span><span class=line><span class=cl>tar Cxzvf /usr/local containerd-1.6.2-linux-amd64.tar.gz
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 试试systemctl daemon-reload</span>
+</span></span><span class=line><span class=cl><span class=c1># 如果不行就找到它。放到/etc/systemd/system/下面重新daemon-reload</span>
+</span></span><span class=line><span class=cl>find / -name containerd.service
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>Unit<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>Description</span><span class=o>=</span>containerd container runtime
+</span></span><span class=line><span class=cl><span class=nv>Documentation</span><span class=o>=</span>https://containerd.io
+</span></span><span class=line><span class=cl><span class=nv>After</span><span class=o>=</span>network.target local-fs.target
+</span></span><span class=line><span class=cl><span class=o>[</span>Service<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=c1>#uncomment to enable the experimental sbservice (sandboxed) version of containerd/cri integration</span>
+</span></span><span class=line><span class=cl><span class=c1>#Environment=&#34;ENABLE_CRI_SANDBOXES=sandboxed&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>ExecStartPre</span><span class=o>=</span>-/sbin/modprobe overlay
+</span></span><span class=line><span class=cl><span class=nv>ExecStart</span><span class=o>=</span>/usr/local/bin/containerd
+</span></span><span class=line><span class=cl><span class=nv>Type</span><span class=o>=</span>notify
+</span></span><span class=line><span class=cl><span class=nv>Delegate</span><span class=o>=</span>yes
+</span></span><span class=line><span class=cl><span class=nv>KillMode</span><span class=o>=</span>process
+</span></span><span class=line><span class=cl><span class=nv>Restart</span><span class=o>=</span>always
+</span></span><span class=line><span class=cl><span class=nv>RestartSec</span><span class=o>=</span><span class=m>5</span>
+</span></span><span class=line><span class=cl><span class=c1># Having non-zero Limit*s causes performance problems due to accounting overhead</span>
+</span></span><span class=line><span class=cl><span class=c1># in the kernel. We recommend using cgroups to do container-local accounting.</span>
+</span></span><span class=line><span class=cl><span class=nv>LimitNPROC</span><span class=o>=</span>infinity
+</span></span><span class=line><span class=cl><span class=nv>LimitCORE</span><span class=o>=</span>infinity
+</span></span><span class=line><span class=cl><span class=nv>LimitNOFILE</span><span class=o>=</span>infinity
+</span></span><span class=line><span class=cl><span class=c1># Comment TasksMax if your systemd version does not supports it.</span>
+</span></span><span class=line><span class=cl><span class=c1># Only systemd 226 and above support this version.</span>
+</span></span><span class=line><span class=cl><span class=nv>TasksMax</span><span class=o>=</span>infinity
+</span></span><span class=line><span class=cl><span class=nv>OOMScoreAdjust</span><span class=o>=</span>-999
+</span></span><span class=line><span class=cl><span class=o>[</span>Install<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>WantedBy</span><span class=o>=</span>multi-user.target
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>mkdir -p /etc/containerd
+</span></span><span class=line><span class=cl>containerd config default &gt; /etc/containerd/config.toml
+</span></span><span class=line><span class=cl>vim /etc/containerd/config.toml
+</span></span><span class=line><span class=cl><span class=c1># https://github.com/containerd/containerd/issues/4203#issuecomment-651532765</span>
+</span></span><span class=line><span class=cl><span class=nv>systemdGroup</span> <span class=o>=</span> <span class=nb>true</span>
+</span></span><span class=line><span class=cl><span class=nv>sandbox_image</span> <span class=o>=</span> <span class=s2>&#34;registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.9&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>systemctl <span class=nb>enable</span> containerd
+</span></span><span class=line><span class=cl>systemctl start containerd
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 开始安装runc</span>
+</span></span><span class=line><span class=cl><span class=c1># 安装c编译器和gperf</span>
+</span></span><span class=line><span class=cl>apt install build-essential gperf -y
+</span></span><span class=line><span class=cl><span class=c1># 下载https://github.com/opencontainers/runc/releases libseccomp-2.5.4.tar.gz和runc.amd64</span>
+</span></span><span class=line><span class=cl>tar xf libseccomp-2.5.4.tar.gz
+</span></span><span class=line><span class=cl><span class=nb>cd</span> libseccomp-2.5.4/
+</span></span><span class=line><span class=cl>./configure
+</span></span><span class=line><span class=cl>make <span class=o>&amp;&amp;</span> make install
+</span></span><span class=line><span class=cl><span class=c1># 验证</span>
+</span></span><span class=line><span class=cl>find / -name <span class=s2>&#34;libseccomp.so&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>chmod +x runc.amd64
+</span></span><span class=line><span class=cl>把这个runc替换掉containerd的sbin里的runc
+</span></span><span class=line><span class=cl>install -m <span class=m>755</span> runc.amd64 /usr/local/sbin/runc
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 下载https://github.com/containernetworking/plugins/releases</span>
+</span></span><span class=line><span class=cl>mkdir -p /opt/cni/bin
+</span></span><span class=line><span class=cl>tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.3.0.tgz
+</span></span></code></pre></td></tr></table></div></div><h3 id=安装-kubeadm class=headerLink><a href=#%e5%ae%89%e8%a3%85-kubeadm class=header-mark></a>安装 kubeadm</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#  阿里源</span>
+</span></span><span class=line><span class=cl>curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg <span class=p>|</span> apt-key add -
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>cat <span class=s>&lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list
+</span></span></span><span class=line><span class=cl><span class=s>deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>apt update -y
+</span></span><span class=line><span class=cl>apt install -y kubelet kubeadm kubectl -y
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>systemctl <span class=nb>enable</span> kubelet
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 初始化</span>
+</span></span><span class=line><span class=cl>kubeadm init --image-repository<span class=o>=</span><span class=s1>&#39;registry.cn-hangzhou.aliyuncs.com/google_containers&#39;</span> --kubernetes-version<span class=o>=</span>v1.27.2 --pod-network-cidr<span class=o>=</span>10.244.0.0/16 --apiserver-advertise-address<span class=o>=</span>192.168.31.221 --cri-socket unix:///var/run/containerd/containerd.sock
+</span></span></code></pre></td></tr></table></div></div><p><strong>可以跳过</strong>, 或使用文件初始化</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>kubeadm.k8s.io/v1beta3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>bootstrapTokens</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=nt>groups</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=l>system:bootstrappers:kubeadm:default-node-token</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>token</span><span class=p>:</span><span class=w> </span><span class=l>abcdef.0123456789abcdef</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>ttl</span><span class=p>:</span><span class=w> </span><span class=l>24h0m0s</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>usages</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=l>signing</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=l>authentication</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>InitConfiguration</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>localAPIEndpoint</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>advertiseAddress</span><span class=p>:</span><span class=w> </span><span class=m>192.168.31.221</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>bindPort</span><span class=p>:</span><span class=w> </span><span class=m>6443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>nodeRegistration</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>criSocket</span><span class=p>:</span><span class=w> </span><span class=l>unix:///var/run/containerd/containerd.sock</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>imagePullPolicy</span><span class=p>:</span><span class=w> </span><span class=l>IfNotPresent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>master1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>taints</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiServer</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>timeoutForControlPlane</span><span class=p>:</span><span class=w> </span><span class=l>4m0s</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>kubeadm.k8s.io/v1beta3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>certificatesDir</span><span class=p>:</span><span class=w> </span><span class=l>/etc/kubernetes/pki</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>clusterName</span><span class=p>:</span><span class=w> </span><span class=l>kubernetes</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>controllerManager</span><span class=p>:</span><span class=w> </span>{}<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>dns</span><span class=p>:</span><span class=w> </span>{}<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>etcd</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>local</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>dataDir</span><span class=p>:</span><span class=w> </span><span class=l>/var/lib/etcd</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>imageRepository</span><span class=p>:</span><span class=w> </span><span class=l>registry.cn-hangzhou.aliyuncs.com/google_containers</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ClusterConfiguration</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kubernetesVersion</span><span class=p>:</span><span class=w> </span><span class=m>1.27.0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>networking</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>dnsDomain</span><span class=p>:</span><span class=w> </span><span class=l>cluster.local</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>podSubnet</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;10.244.0.0/16&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>scheduler</span><span class=p>:</span><span class=w> </span>{}<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>kubeproxy.config.k8s.io/v1alpha1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>KubeProxyConfiguration</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>mode</span><span class=p>:</span><span class=w> </span><span class=l>ipvs</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=网络组件 class=headerLink><a href=#%e7%bd%91%e7%bb%9c%e7%bb%84%e4%bb%b6 class=header-mark></a>网络组件</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># calico网络插件</span>
+</span></span><span class=line><span class=cl>10.244.0.0/16
+</span></span><span class=line><span class=cl><span class=c1># https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart</span>
+</span></span><span class=line><span class=cl>kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
+</span></span></code></pre></td></tr></table></div></div><p>kubectl 下面这个 yml</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># This section includes base Calico installation configuration.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># For more information, see: https://projectcalico.docs.tigera.io/master/reference/installation/api#operator.tigera.io/v1.Installation</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>operator.tigera.io/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Installation</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>default</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># Configures Calico networking.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>calicoNetwork</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c># Note: The ipPools section cannot be modified post-install.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>ipPools</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>blockSize</span><span class=p>:</span><span class=w> </span><span class=m>26</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>cidr</span><span class=p>:</span><span class=w> </span><span class=m>10.244.0.0</span><span class=l>/16</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>encapsulation</span><span class=p>:</span><span class=w> </span><span class=l>VXLANCrossSubnet</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>natOutgoing</span><span class=p>:</span><span class=w> </span><span class=l>Enabled</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>nodeSelector</span><span class=p>:</span><span class=w> </span><span class=l>all()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># This section configures the Calico API server.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># For more information, see: https://projectcalico.docs.tigera.io/master/reference/installation/api#operator.tigera.io/v1.APIServer</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>operator.tigera.io/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>APIServer</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>default</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w> </span>{}<span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>启用 ipvs:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl edit configmap kube-proxy -n kube-system
+</span></span><span class=line><span class=cl>mode: ipvs
+</span></span><span class=line><span class=cl>kubectl delete po -n kube-system kube-proxy-xxx
+</span></span><span class=line><span class=cl>kubectl logs kube-proxy-xxx -n kube-system <span class=p>|</span> grep <span class=s2>&#34;Using ipvs Proxier&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=参考链接 class=headerLink><a href=#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5 class=header-mark></a>参考链接</h2><ul><li><a href="https://www.youtube.com/watch?v=7k9Rdlx30OY&amp;t=808s" target=_blank rel="noopener noreferrer">How to Install Kubernetes 1.26 on Ubuntu 22.04 LTS - YouTube</a></li><li><a href=https://www.itsgeekhead.com/tuts/kubernetes-126-ubuntu-2204.txt target=_blank rel="noopener noreferrer">视频中的文档地址</a></li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-08-16</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%AE%89%E8%A3%85k8s/ data-title=安装k8s data-hashtags=blog,k8s><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%AE%89%E8%A3%85k8s/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%AE%89%E8%A3%85k8s/ data-title=安装k8s data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%AE%89%E8%A3%85k8s/ data-title=安装k8s><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%AE%89%E8%A3%85k8s/ data-title=安装k8s><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%AE%89%E8%A3%85k8s/ data-title=安装k8s data-description="安装 [[笔记/point/k8s|k8s]] 的记录."><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%AE%89%E8%A3%85k8s/ data-title=安装k8s data-description="安装 [[笔记/point/k8s|k8s]] 的记录."><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%AE%89%E8%A3%85k8s/ data-title=安装k8s><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a>,&nbsp;<a href=/tags/k8s/>k8s</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/%E5%B0%8F%E7%B1%B3%E6%89%8B%E6%9C%BA%E9%85%8D%E7%BD%AE/ class=prev rel=prev title=小米手机配置><i class="fas fa-angle-left fa-fw"></i>小米手机配置</a>
+<a href=/posts/%E7%AC%94%E8%AE%B0/vps%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/ class=next rel=next title=vps部署记录>vps部署记录<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a target=_blank href=https://beian.miit.gov.cn>湘ICP备2021002319号-1</a></span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-131319987-1",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=UA-131319987-1" async></script></div></body></html>
