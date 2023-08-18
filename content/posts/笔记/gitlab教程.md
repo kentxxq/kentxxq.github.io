@@ -2,8 +2,9 @@
 title: gitlab教程
 tags:
   - blog
+  - gitlab
 date: 2023-08-15
-lastmod: 2023-08-15
+lastmod: 2023-08-16
 categories:
   - blog
 description: 
@@ -62,6 +63,13 @@ docker restart gitlab
 
 ### 配置修改
 
+#### 配置生效
+
+```shell
+gitlab-ctl reconfigure
+gitlab-ctl restart
+```
+
 #### 全局变量数
 
 [[笔记/point/gitlab|gitlab]] 的全局变量数有上限.
@@ -77,10 +85,19 @@ Plan.default.actual_limits.update!(ci_instance_level_variables: 100)
 配置文件路径 `/etc/gitlab/gitlab.rb`
 
 ```rb
-gitlab_rails['gitlab_shell_ssh_port'] = 10022
-nginx['listen_port'] = 80
-nginx['listen_https'] = false
+# 配置域名地址
 external_url 'https://git.kentxxq.com'
+# ssh地址
+gitlab_rails['gitlab_ssh_host'] = 'xxx.kentxxq.com'
+# ssh端口
+gitlab_rails['gitlab_shell_ssh_port'] = 10022
+# nginx的地址,允许它代理gitlab
+gitlab_rails['trusted_proxies'] = ['nginx的ip地址']
+# 禁用自带的 nginx
+nginx['enable'] = false
+# 服务监听方式
+gitlab_workhorse['listen_network'] = "tcp"
+gitlab_workhorse['listen_addr'] = "0.0.0.0:80"
 ```
 
 如果不生效, 可以使用环境变量

@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-07-28
-lastmod: 2023-08-15
+lastmod: 2023-08-17
 categories:
   - blog
 description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
@@ -15,6 +15,14 @@ description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
 这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题.
 
 ## 内容
+
+### `error: Metrics API not available`
+
+需要安装 `Metrics-server`, [参考链接](https://github.com/kubernetes-sigs/metrics-server#installation)
+
+```shell
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
 
 ### too many pods 容器启动失败
 

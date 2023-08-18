@@ -4,7 +4,7 @@ tags:
   - point
   - redis
 date: 2023-07-06
-lastmod: 2023-07-06
+lastmod: 2023-08-16
 categories:
   - point
 ---
@@ -16,6 +16,12 @@ categories:
 - 免费
 - 性能高
 - 缓存常用
+
+### 运行
+
+```shell
+docker run --name ken-redis -d -p6379:6379 --restart=always -v /data/redis-data:/data redis --requirepass "didi"
+```
 
 ### 操作手册
 

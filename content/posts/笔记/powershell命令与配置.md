@@ -4,7 +4,7 @@ tags:
   - blog
   - powershell
 date: 2023-06-26
-lastmod: 2023-08-14
+lastmod: 2023-08-16
 categories:
   - blog
 description: "这里记录 [[笔记/point/powershell|powershell]] 的常用命令."
@@ -17,6 +17,12 @@ description: "这里记录 [[笔记/point/powershell|powershell]] 的常用命�
 ## 操作手册
 
 ### 日常操作
+
+#### 重载配置文件
+
+```powershell
+. $profile
+```
 
 #### 操作变量
 
@@ -80,6 +86,12 @@ function novpn {
 # function novpn {
 #     $Env:http_proxy = ""; $Env:https_proxy = "";
 # }
+
+# 重新加载环境变量
+
+function reload {
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+}
 
 # 默认启用vpn
 vpn

@@ -1,11 +1,11 @@
 ---
-title: mysql配置和优化
+title: mysql教程
 tags:
   - blog
   - mysql
   - docker
 date: 1993-07-06
-lastmod: 2023-08-02
+lastmod: 2023-08-16
 categories:
   - blog
 description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置. 所以记录一下配置和操作."
@@ -23,7 +23,9 @@ description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置
 # 名称ken-mysql
 # 数据在本地/data/mysql-data
 # 密码123
-docker run --name ken-mysql -v /data/mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123 -p3306:3306 -d mysql:latest
+# 配置了字符集
+# 优化资源占用 --table-open-cache=400 --table-definition-cache=400 --performance-schema=OFF
+docker run --name ken-mysql -v /data/mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123 -p3306:3306 -d mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ```
 
 ### deb 安装

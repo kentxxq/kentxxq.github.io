@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-08-14
+lastmod: 2023-08-16
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -152,8 +152,8 @@ http {
 
     # 默认配置,保留是为了不加自定义配置也能起nginx
     server {
-        listen       80;
-        server_name  localhost;
+        listen       80 default_server;
+        server_name  _;
 
         location / {
             root   html;

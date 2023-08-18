@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-08-15
+lastmod: 2023-08-17
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -16,9 +16,16 @@ description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操�
 
 ## 安装/卸载 docker
 
+[官方文档Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+
 ```shell
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 chmod a+r /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 apt update -y
 apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 vim /etc/docker/daemon.json
@@ -39,7 +46,6 @@ apt remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-com
       "http-proxy": "http://proxy.example.com:3128",
       "https-proxy": "https://proxy.example.com:3129",
       "no-proxy": " localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.test.example.com"
-    }
   }
 }
 ```

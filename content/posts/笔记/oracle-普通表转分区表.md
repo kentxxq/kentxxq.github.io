@@ -4,7 +4,7 @@ tags:
   - blog
   - oracle
 date: 2018-12-20
-lastmod: 2023-07-11
+lastmod: 2023-08-16
 categories:
   - blog
 keywords:
@@ -25,13 +25,15 @@ description: "oracle普通表转分区表"
 4. 应用应该知道自己的操作是在干嘛，而不是考虑不周，让写在数据库里的 `潜规则` 告诉你必须如何
 5. 方便 `读写分离`，更好的解决了数据库写方面的压力，而读数据的锁几乎没有压力
 
-## 操作前提
+## 转换
+
+### 操作前提
 
 1. 主键
 2. 拥有自己的逻辑 id，而不是业务 id 主键。否则不方便以后的水平拓展
 3. 使用 oracle 提供的包来检测是否可行
 
-## 12cR1 和 11g
+### 12cR1 和 11g
 
 ```sql
 --检查可用性
@@ -63,7 +65,7 @@ dbms_redefinition.finish_redef_table(
   );
 ```
 
-## 12cR2
+### 12cR2
 
 ```sql
 ALTER TABLE table_name MODIFY table_partitioning_clauses
@@ -84,7 +86,9 @@ alter table emp modify
       (idx_emp_no local);
 ```
 
-## 其他
+## 导入
+
+### 创建分区表
 
 > 中小型的系统或者 olap 类型适合分区表，后期超大存储，建议用分布式
 
@@ -112,4 +116,16 @@ alter table emp modify
            values ('433101')
     );
 
+```
+
+### 减少 log 并插入数据
+
+```shell
+# 关闭log
+alter table xxx NOLOGGING;
+# 加速插入数据
+INSERT /*+append*/ into 用户.表名(字段,字段)
+select ... from xxx
+# 恢复log
+ALTER TABLE tt_nh_canhe_members LOGGING;
 ```

@@ -3,7 +3,7 @@ title: csharp代码配置与命令
 tags:
   - blog
 date: 2023-08-15
-lastmod: 2023-08-15
+lastmod: 2023-08-16
 categories:
   - blog
 description: "记录 [[笔记/point/csharp|csharp]] 的代码配置."
@@ -14,7 +14,6 @@ description: "记录 [[笔记/point/csharp|csharp]] 的代码配置."
 记录 [[笔记/point/csharp|csharp]] 的代码配置.
 
 ## 配置
-
 
 ### 数据库连接字符串
 
@@ -47,6 +46,34 @@ options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")); }
 ```
 
 ## 命令
+
+### dotnet-publish 命令
+
+```shell
+dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\win-x64.pubxml
+```
+
+### nuget 推包
+
+```shell
+# 先打包成nupkg
+dotnet nuget push kentxxq.Extensions.1.1.0.nupkg --api-key key
+```
+
+### dotnet-new 模板
+
+```shell
+# 查看所有的包
+dotnet new --list
+# 卸载包
+dotnet new --uninstall
+# 搜包
+dotnet new search kentxxq.Templates
+# 安装
+dotnet new install kentxxq.Templates
+# 使用
+dotnet new k-webapi --name certmanager 
+```
 
 ### 生成 user-jwts
 

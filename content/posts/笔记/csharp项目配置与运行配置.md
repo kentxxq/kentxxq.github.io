@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-07-26
-lastmod: 2023-07-30
+lastmod: 2023-08-16
 categories:
   - blog
 description: "[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."
@@ -20,7 +20,7 @@ description: "[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织
 
 ### 配置项参考
 
-#todo/笔记  `dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\win-x64.pubxml`
+发布文件配置 `win-x64.pubxml`
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -46,6 +46,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 > 已知 aot 的时候 IncludeNativeLibrariesInSingleFile 会失败
 > 如果没有生效, 可以 -p 手动传参.
 > dotnet publish -c Release -r linux-x 64 -p:IncludeNativeLibrariesInSingleFile=true
+
+项目文件配置 `xxx.csproj`
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">

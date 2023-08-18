@@ -1,10 +1,10 @@
 ---
-title: mysql启动参数优化
+title: mysql配置解读
 tags:
   - blog
   - mysql
 date: 1993-07-06
-lastmod: 2023-07-11
+lastmod: 2023-08-16
 categories:
   - blog
 keywords:

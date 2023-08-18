@@ -4,7 +4,7 @@ tags:
   - blog
   - windows
 date: 2023-06-29
-lastmod: 2023-08-15
+lastmod: 2023-08-16
 categories:
   - blog
 description: "[[笔记/point/windows|windows]] 现在是我主要使用的桌面平台. 因为我挑选并使用了大量的软件工具, 而且经常会跨多设备工作. 所以这里我记录下来, 也给大家做一个参考."
@@ -57,10 +57,29 @@ description: "[[笔记/point/windows|windows]] 现在是我主要使用的桌面
 - 截图工具, 配合配置文件 [Snipaste](https://www.snipaste.com/)
 - [Listen 1 音乐播放器](https://listen1.github.io/listen1/?gclid=CjwKCAjwxOymBhAFEiwAnodBLAdmIaAAK6kr4MTMA8lYBt2q40_lBfJyAW1AQYoL_TXqBHvkv8ay1hoCtLMQAvD_BwE)
 - 文件夹锁 [GitHub - Albert-W/Folder-locker: It a tiny tool to lock your folder without compression.](https://github.com/Albert-W/Folder-locker)
+- 压缩/解压 [GitHub - M2Team/NanaZip: The 7-Zip derivative intended for the modern Windows experience](https://github.com/M2Team/NanaZip)
 
 ### 特殊软件
 
-#todo/笔记 utools
+#### Utools
+
+[uTools官网 - 新一代效率工具平台](https://www.u.tools/) 的内置插件
+
+- 谷歌翻译, 配置全局关键字 `ctrl+q`
+- OCR 文字识别
+- Hosts 切换
+- Ctools
+- 随机密码
+- 文件、文件夹定位
+- Linux 命令文档
+- Json 编辑器
+- Sql 格式化
+- 本地搜索
+配置:
+- 中键去掉无用内容, 保留 - 置顶窗口
+- Listen 1 快速启动
+- Wsl 2 distronmananger 快速启动
+-
 
 ## 相关内容
 
