@@ -6,9 +6,7 @@ description: "About Me"
 title: "Offline"
 ---
 
-
-
-[kentxxq,放着我的所有](https://kentxxq.com)
+联系方式:
 
 1. wechat:`kentxxq`
 2. github:[kentxxq](https://github.com/kentxxq)
