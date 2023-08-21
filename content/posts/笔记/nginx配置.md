@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-08-16
+lastmod: 2023-08-19
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -94,6 +94,11 @@ http {
     
     # 可以看到 TCP_NOPUSH 是要等数据包累积到一定大小才发送, TCP_NODELAY 是要尽快发送, 二者相互矛盾. 
     # 实际上, 它们确实可以一起用.在传输文件的时候, 先填满包, 再尽快发送. 而其他的情况,都迅速发包,减少延迟.
+
+    # 优先使用服务器支持的加密套件
+    ssl_prefer_server_ciphers on;
+    # 加速性能
+    ssl_session_cache shared:SSL:10m;
 
     # 会话保持120秒
     keepalive_timeout   120;

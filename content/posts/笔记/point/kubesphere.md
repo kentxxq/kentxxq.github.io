@@ -2,7 +2,7 @@
 title: kubesphere
 tags:
   - point
-  - 未命名
+  - kubesphere
 date: 2023-07-28
 lastmod: 2023-07-28
 categories:

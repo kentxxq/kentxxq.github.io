@@ -4,7 +4,7 @@ tags:
   - blog
   - containerd
 date: 2023-08-02
-lastmod: 2023-08-03
+lastmod: 2023-08-21
 categories:
   - blog
 description: "[[笔记/point/Containerd|Containerd]] 的操作配置."
@@ -122,8 +122,8 @@ Environment="NO_PROXY=localhost, 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.test.
     mkdir -p /etc/containerd/certs.d/_default
     
     vim /etc/containerd/certs.d/_default/hosts.toml
-    server = "https://1ocw3lst.mirror.aliyuncs.com"
-    [host."https://1ocw3lst.mirror.aliyuncs.com"]
+    server = "https://hub-mirror.c.163.com"
+    [host."https://hub-mirror.c.163.com"]
     capabilities = ["pull", "resolve"]
 
     # 官方源
@@ -131,7 +131,7 @@ Environment="NO_PROXY=localhost, 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.test.
     
     vim /etc/containerd/certs.d/docker.io/hosts.toml
     server = "https://docker.io"]
-    [host."https://1ocw3lst.mirror.aliyuncs.com"]
+    [host."https://hub-mirror.c.163.com"]
     capabilities = ["pull", "resolve"]
 
     # gcr
@@ -161,8 +161,7 @@ Environment="NO_PROXY=localhost, 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.test.
 
 上面的配置不生效, 需要追踪 [这个issue](https://github.com/containerd/containerd/issues/6438)......, 记录一下现在生效的配置 #todo/笔记  `k8s.gcr.io` 重定向到了 `registry.k8s.io`,是不是也需要代理, 记录一下
 
-- 注释掉 `config_path`, 会开始读取 `mirrors` 配置
-- `k8s.gcr.io` 还是会失败. 不知道怎么解决...
+> 注释掉 `config_path`, 会开始读取 `mirrors` 配置
 
 ```toml
     [plugins."io.containerd.grpc.v1.cri".registry]
@@ -173,7 +172,8 @@ Environment="NO_PROXY=localhost, 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.test.
           endpoint = ["https://1ocw3lst.mirror.aliyuncs.com
         [plugins."io.containerd.grpc.v1.cri".registry.mirrors."k8s.gcr.io"]
           # http.StatusNotFound
-          endpoint = ["https://registry.cn-hangzhou.aliyuncs.com/google_containers"]
+          # endpoint = ["https://registry.cn-hangzhou.aliyuncs.com/google_containers"]
+          endpoint = ["k8s.dockerproxy.com"]
 ```
 
 ### ctr 操作

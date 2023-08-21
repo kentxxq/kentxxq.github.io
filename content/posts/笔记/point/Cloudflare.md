@@ -4,7 +4,7 @@ aliases:
   - cloudflare
 tags:
   - point
-  - 未命名
+  - cloudflare
 date: 2023-08-01
 lastmod: 2023-08-01
 categories:

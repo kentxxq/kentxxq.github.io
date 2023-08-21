@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-08-07
+lastmod: 2023-08-19
 keywords:
   - clash
   - 配置文件
@@ -68,7 +68,28 @@ bypass:
 
 ![[附件/clash的UWP操作图.png]]
 
-### 配置文件讲解
+### 配置文件使用
+
+1. 修改配置示例
+
+```yml
+proxy-providers:
+  AMY-HongKong:
+    type: http
+    path: ./ProxySet/HongKong.yaml
+    url: "你的订阅地址"
+    interval: 3600
+    # 你的香港节点包含"香港"两个字,就填香港.包含"HK",就填"HK"
+    filter: "香港"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+```
+
+2. 保存成 yml 文件, 然后 `Clash=>Profiles=>Import` 导入
+
+### 配置示例细节
 
 ```yml
 port: 7890
@@ -434,6 +455,10 @@ stream {
 ```shell
 export all_proxy=https://user1:pass1@a.kentxxq.com:17890; 
 ```
+
+## 测试
+
+#todo/笔记 快速验证代理走的什么网络!
 
 ## 参考地址
 

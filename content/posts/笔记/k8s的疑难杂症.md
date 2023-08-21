@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-07-28
-lastmod: 2023-08-17
+lastmod: 2023-08-21
 categories:
   - blog
 description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
@@ -16,13 +16,49 @@ description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
 
 ## 内容
 
-### `error: Metrics API not available`
+### `error: Metrics API not available` 和 `kubectl top pod`
 
 需要安装 `Metrics-server`, [参考链接](https://github.com/kubernetes-sigs/metrics-server#installation)
 
-```shell
-kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-```
+1. 下载下来
+
+    ```shell
+    curl https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml -o metrics-server.yaml
+    ```
+
+2. 因为多数都是自签名证书, 所以添加启动参数 `--kubelet-insecure-tls`
+
+    ```yml
+    ...
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        k8s-app: metrics-server
+      name: metrics-server
+      namespace: kube-system
+    spec:
+      selector:
+        matchLabels:
+          k8s-app: metrics-server
+      strategy:
+        rollingUpdate:
+          maxUnavailable: 0
+      template:
+        metadata:
+          labels:
+            k8s-app: metrics-server
+        spec:
+          containers:
+          - args:
+            - --cert-dir=/tmp
+            - --secure-port=4443
+            - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+            - --kubelet-use-node-status-port
+            - --metric-resolution=15s
+            - --kubelet-insecure-tls # 添加此行
+    ...
+    ```
 
 ### too many pods 容器启动失败
 

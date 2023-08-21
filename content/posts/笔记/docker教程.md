@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-08-17
+lastmod: 2023-08-20
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -37,11 +37,14 @@ apt remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-com
 
 ## 配置参数
 
- `/etc/docker/daemon.json`,参考 [镜像源](https://docs.docker.com/registry/recipes/mirror/#configure-the-docker-daemon) 和 [http代理](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
+ - `/etc/docker/daemon.json` 的 `registry-mirrors` 是拉取镜像的地址, 代替 `docker.io`.
+ - 而 `proxies` 是设置容器网络代理, 这样容器里的 curl 就能使用到代理了.
+
+ 参考 [镜像源](https://docs.docker.com/registry/recipes/mirror/#configure-the-docker-daemon) 和 [http代理](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
 
 ```json
 {
-  "registry-mirrors": ["https://1ocw3lst.mirror.aliyuncs.com"],
+  "registry-mirrors": ["https://hub-mirror.c.163.com"],
   "proxies": {
       "http-proxy": "http://proxy.example.com:3128",
       "https-proxy": "https://proxy.example.com:3129",
@@ -50,7 +53,7 @@ apt remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-com
 }
 ```
 
-[[笔记/point/Systemd|Systemd]] 配置 http/https 代理
+[[笔记/point/Systemd|Systemd]] 配置 http/https 代理, 这样 dockerd 就能使用代理了
 
 ```ini
 [Service]
@@ -202,12 +205,14 @@ docker rm -v $id
 
 ```shell
 # 只拉取镜像
-docker-compose -f xxxx.yml pull
+docker compose -f xxxx.yml pull
 # -d表示后台启动 --build表示构建镜像
-docker-compose up -d --build
-
+docker compose up -d --build
 # 停止
-docker-compose down --remove-orphans
+docker compose down --remove-orphans
+
+# 重建容器
+docker compose up -d --force-recreate
 ```
 
 ### docker 内安装 chrome

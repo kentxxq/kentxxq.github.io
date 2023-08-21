@@ -2,7 +2,7 @@
 title: OCI
 tags:
   - point
-  - 未命名
+  - OCI
 date: 2023-08-02
 lastmod: 2023-08-02
 categories:

@@ -50,7 +50,7 @@ minikube addons enable ingress
 # 内存大小 --memory 4096
 # root启动需要使用--force
 # --docker-env 使用代理
-minikube start --cpus='max' --nodes 3 --memory 4096 --force --docker-env HTTP_PROXY=${http_proxy} --docker-env HTTPS_PROXY=${https_proxy} --docker-env NO_PROXY=localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.test.example.com
+minikube start --cpus='max' --nodes 3 --memory 4096 --force --extra-config=kubelet.housekeeping-interval=10s --docker-env HTTP_PROXY=${http_proxy} --docker-env HTTPS_PROXY=${https_proxy} --docker-env NO_PROXY=localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.test.example.com
 ```
 
 #### 使用中

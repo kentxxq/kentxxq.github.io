@@ -4,7 +4,7 @@ aliases:
   - POC
 tags:
   - point
-  - 未命名
+  - poc
 date: 2023-07-20
 lastmod: 2023-07-20
 categories:

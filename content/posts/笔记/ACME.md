@@ -5,7 +5,7 @@ tags:
   - devops
   - ACME
 date: 2023-08-16
-lastmod: 2023-08-16
+lastmod: 2023-08-19
 keywords:
   - acme
   - acme.sh
@@ -41,10 +41,10 @@ cd ./acme.sh
 ./acme.sh --install -m 805429509@qq.com
 
 # 生成证书
-acme --issue --dns dns_ali -d "*.kentxxq.com" -d "kentxxq.com"
+acme.sh --issue --dns dns_ali -d "*.kentxxq.com" -d "kentxxq.com" --ecc
 
 # 安装证书
-acme --installcert -d "*.kentxxq.com" -d "kentxxq.com" \
+acme.sh --installcert -d "*.kentxxq.com" -d "kentxxq.com" \
 --key-file /usr/local/nginx/conf/ssl/kentxxq.key \
 --fullchain-file /usr/local/nginx/conf/ssl/kentxxq.cer \
 --reloadcmd "/usr/local/nginx/sbin/nginx -s reload"
@@ -54,6 +54,12 @@ acme --installcert -d "*.kentxxq.com" -d "kentxxq.com" \
 
 ```shell
 acme.sh --renew -d "*.kentxxq.com" -d "kentxxq.com" --force --server letsencrypt
+```
+
+### 删除证书
+
+```shell
+acme.sh --remove -d "*.kentxxq.com" -d "kentxxq.com" --force
 ```
 
 ### 修改 CA 服务商

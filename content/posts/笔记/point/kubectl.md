@@ -2,7 +2,7 @@
 title: kubectl
 tags:
   - point
-  - 未命名
+  - kubectl
 date: 2023-08-17
 lastmod: 2023-08-17
 categories:

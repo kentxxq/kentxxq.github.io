@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-08-15
+lastmod: 2023-08-19
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -634,6 +634,9 @@ rsync -atvP /tmp/t1/1 root@1.1.1.1:/tmp/t1/
 # -r遍历 当前目录,筛选所有带有kentxxq的文件
 # 替换old-a成new-b
 sed -i 's/old-a/new-b/g' `grep kentxxq -rl ./`
+
+# 文件替换
+sed -i 's#/etc/nginx/ssl/kentxxq.key#/usr/local/nginx/conf/ssl/kentxxq.key#g' *
 ```
 
 ## 系统监控
