@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-08-22
+lastmod: 2023-08-23
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -122,6 +122,26 @@ services:
 ```
 
 ## 操作命令
+
+### 导入导出
+
+#### 镜像
+
+```shell
+# 保存1个或多个镜像到tar文件
+docker save busybox nginx > 2img.tar
+# 导入
+docker load -i dockerdemo.tar
+```
+
+#### 容器
+
+```shell
+# 导出容器
+docker export 容器id xxx.tar
+# 导入成镜像
+docker import xxx.tar 镜像:tag
+```
 
 ### 镜像清理
 
