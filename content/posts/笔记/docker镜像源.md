@@ -55,7 +55,7 @@ registry-demo:
 | ----------- | ------------------------------------------ |
 | 网易云      | `https://hub-mirror.c.163.com`             |
 | dockerproxy | `https://dockerproxy.com`                  |
-| 百度云      | `https://mirror.baidubce.com	`             |
+| 百度云      | `https://mirror.baidubce.com`             |
 | 上海交大    | `https://docker.mirrors.sjtug.sjtu.edu.cn` |
 | 南京大学    | `https://docker.nju.edu.cn`                |
 

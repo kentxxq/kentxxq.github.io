@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-16
-lastmod: 2023-08-16
+lastmod: 2023-08-23
 categories:
   - blog
 description: "安装 [[笔记/point/k8s|k8s]] 的记录."
@@ -247,7 +247,14 @@ kubectl delete po -n kube-system kube-proxy-xxx
 kubectl logs kube-proxy-xxx -n kube-system | grep "Using ipvs Proxier"
 ```
 
+### Ingress
+
+```shell
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.1/deploy/static/provider/cloud/deploy.yaml
+```
+
 ## 参考链接
 
-- [How to Install Kubernetes 1.26 on Ubuntu 22.04 LTS - YouTube](https://www.youtube.com/watch?v=7k9Rdlx30OY&t=808s)
+- [YouTube安装k8s视频](https://www.youtube.com/watch?v=7k9Rdlx30OY&t=808s)
 - [视频中的文档地址](https://www.itsgeekhead.com/tuts/kubernetes-126-ubuntu-2204.txt)
+- [ingress官方文档地址](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)

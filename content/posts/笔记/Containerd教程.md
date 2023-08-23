@@ -12,7 +12,7 @@ description: "[[笔记/point/Containerd|Containerd]] 的操作配置."
 
 ## 简介
 
-这里记录 [[笔记/point/Containerd|Containerd]] 的操作配置, 相关的概念可以通过 [[笔记/k8s组件#容器|容器]] 来了解.
+这里记录 [[笔记/point/Containerd|Containerd]] 的操作配置, 相关的概念可以通过 [[笔记/k8s组件剖析#容器|容器]] 来了解.
 
 ## 内容
 

@@ -80,7 +80,7 @@ ExecStart=/usr/local/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $
 
 ### 清理残存的容器
 
-![[笔记/k8s常用命令#清理残存容器]]
+![[笔记/k8s常用命令和配置#清理残存容器]]
 
 ### 证书
 
