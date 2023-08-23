@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-07-28
-lastmod: 2023-08-21
+lastmod: 2023-08-23
 categories:
   - blog
 description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
@@ -100,11 +100,13 @@ kubeadm certs check-expiration
 
 ### 网络插件错误
 
+#### Multus
+
 网络插件的报错, 会出现如下的关键字:
 
 `network: Multus` ... `KillPodSandbox`... `Unauthorized`... `networkPlugin cni failed`
 
-而我们在安装网络插件的时候, 只不过是通过 `kubectl create/edit` 操作了一些资源, 所以我们重启等操作不会造成其他的影响. 在官方也有不少这样的骚操作, 比如 [这个帖子的答案推荐直接尝试重启](https://github.com/projectcalico/calico/issues/5712) ....
+我们在安装网络插件的时候, 只不过是通过 `kubectl create/edit` 操作了一些资源, 所以我们重启等操作不会造成其他的影响. 在官方也有不少这样的骚操作, 比如 [这个帖子的答案推荐直接尝试重启](https://github.com/projectcalico/calico/issues/5712) ....
 
 操作流程
 
@@ -116,3 +118,35 @@ kubectl get all -A |grep cali
 kubectl delete pod/calico-node-xxx -n 命名空间
 kubectl delete pod/kube-multus-ds-xxx -n 命名空间
 ```
+
+#### BGP
+
+网络插件的报错类似于
+
+```shell
+calico/node is not ready:
+BIRD is not ready:BGP not established with 192.168.200.129,192.168.200.130
+Number of node(s)with BGP peering established =0
+```
+
+`calico` 通常会根据第一个网卡来配置信息. 而出现上面的报错, 就说明我们**没有找到正确的网卡, 没有配置正确的 ip 信息**.
+
+解决:
+
+1. `ip a` 查看我们需要用到的网卡名称. 例如 `eth0`, `ens33` 等等
+2. 修改 `vim calico.yaml`
+
+    ```yml
+    # 增加内容
+    - name: IP_AUTODETECTION_METHOD
+      value: "interface=en*" # 也可以写死 "interface=eth0"
+    # 下面是原文件内容
+    - name: CLUSTER_TYPE
+      value: "k8s,bgp"
+    - name: IP
+      value: "autodetect"
+    - name: CALICO_IPV4POOL_IPIP
+      value: "Always"
+    ```
+
+3. 重新部署 `kubectl apply -f calico.yaml`
