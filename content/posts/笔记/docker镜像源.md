@@ -68,7 +68,7 @@ registry-demo:
 1. Docker 发送 `image名称:tag` 到 registry 请求 `manifest.list` 数据, registry 返回一个不同架构的列表
     ![[附件/镜像下载流程1-请求manifest.list.png]]
 2. 拿到 `linux+amd64` 的 `image-digest`, 请求服务器 `manifest` 数据
-    ![[附件/Pasted image 20230824170832.png]]
+    ![[附件/镜像下载流程2-请求manifest.png]]
 3. `config.digest` 就是你本地 `docker images` 中的 `docker id`. 如果本地存在就不会再拉取镜像
 4. 镜像不存在则继续查看是否有 layers 已经存在, 存在的就不会去下载
 5. 通过带上 `layersDigest` 请求 registry, 下载不存在的 layers
