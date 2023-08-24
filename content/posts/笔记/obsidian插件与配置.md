@@ -4,7 +4,7 @@ tags:
   - blog
   - obsidian
 date: 2023-06-19
-lastmod: 2023-07-31
+lastmod: 2023-08-24
 categories:
   - blog
 description: "这篇文章主要记录我使用 [[笔记/point/obsidian|obsidian]] 的配置和插件.方便自己记录, 也可以让你了解我做了什么让 [[笔记/point/obsidian|obsidian]] 变得更好用."
