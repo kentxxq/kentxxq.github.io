@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-07-28
-lastmod: 2023-08-23
+lastmod: 2023-08-24
 categories:
   - blog
 description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
@@ -16,9 +16,21 @@ description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
 
 ## 内容
 
-### `error: Metrics API not available` 和 `kubectl top pod`
+### metrics-server
 
-需要安装 `Metrics-server`, [参考链接](https://github.com/kubernetes-sigs/metrics-server#installation)
+#### doesn't contain any IP SANs
+
+在 metrics-server 启动的 yml 文件中, 添加启动参数
+
+```yml
+command:  
+- /metrics-server  
+- --kubelet-insecure-tls
+```
+
+#### kubectl top pod 报错 error: Metrics API not available
+
+当你使用 `kubectl top pod` 来查看信息的时候, 需要安装 `Metrics-server`, [参考链接](https://github.com/kubernetes-sigs/metrics-server#installation)
 
 1. 下载下来
 

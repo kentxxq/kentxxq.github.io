@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-08-19
+lastmod: 2023-08-23
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -788,15 +788,21 @@ WantedBy=multi-user.target
 
 ## Ingress-nginx 配置
 
-```nginx
-# 双层nginx,第二层的ingress-nginx需要配置这个
+双层 nginx,第二层的 ingress-nginx 需要配置这个
+
+```yml
 use-forwarded-headers: 'true'
+```
 
-# 负载均衡,默认round_robin. 还有ip_hash,least_conn
-# https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#load-balance
+负载均衡,默认 round_robin. 还有 ip_hash,least_conn. 可以参考 [ConfigMap - Ingress-Nginx Controller](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#load-balance)
+
+```yml
 nginx.ingress.kubernetes.io/upstream-hash-by: 'ip_hash'
+```
 
-# yml配置
+Ingress 的 yml 文件配置示例:
+
+```nginx
 kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:

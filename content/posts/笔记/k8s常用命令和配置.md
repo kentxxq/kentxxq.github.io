@@ -36,7 +36,7 @@ kubectl delete pod pod名称 -n 命名空间 --force --grace-period=0
 
 ## 配置
 
-### Ingress 示例请求
+### 应用示例
 
 ```yml
 apiVersion: apps/v1
