@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-08-19
+lastmod: 2023-08-24
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -369,6 +369,18 @@ curl -vvv 'https://kentxxq.com/Count' -H 'Origin: http://localhost:3000'
 curl -H "Content-Type: application/json"  -XPUT --user elastic:password   es-cn-oew1whnk60023e4s9.elasticsearch.aliyuncs.com:9200/flow_user_index/_settings -d '{"index.mapping.total_fields.limit":0}'
 结果 {"acknowledged":true}
 ```
+
+报错
+
+- `curl: (35) error:0A000172:SSL routines::wrong signature type`
+
+    ```shell
+    # 修改文件
+    vim /etc/ssl/openssl.cnf
+    
+    [system_default_sect]
+    CipherString = DEFAULT:@SECLEVEL=0
+    ```
 
 ### 代理 apt
 
