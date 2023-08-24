@@ -10,4 +10,4 @@ title: "Offline"
 
 1. wechat:`kentxxq`
 2. github:[kentxxq](https://github.com/kentxxq)
-3. email:[admin@kentxxq.com](mailto:admin@kentxxq.com)
+3. email:[admin@kentxxq.com](mailto:805429509@qq.com)
