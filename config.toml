@@ -480,7 +480,7 @@ theme = "DoIt"
     enable = true
     # Google Analytics
     [params.analytics.google]
-      id = "UA-131319987-1"
+      id = "G-NLLDC353PJ"
       # 是否匿名化用户 IP
       anonymizeIP = true
     # Fathom Analytics
