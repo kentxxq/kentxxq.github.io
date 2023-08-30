@@ -4,7 +4,7 @@ tags:
   - blog
   - obsidian
 date: 2023-06-19
-lastmod: 2023-08-24
+lastmod: 2023-08-27
 categories:
   - blog
 description: "这篇文章主要记录我使用 [[笔记/point/obsidian|obsidian]] 的配置和插件.方便自己记录, 也可以让你了解我做了什么让 [[笔记/point/obsidian|obsidian]] 变得更好用."
@@ -59,3 +59,7 @@ description: "这篇文章主要记录我使用 [[笔记/point/obsidian|obsidian
 | --------------- | ------------ | --------------------------------------- |
 | sliding panes   | 横向卷动     | 打开多个标签页，然后配合触摸板横向浏览  |
 | obisidian links | 链接类型转换 | wikilink, markdown-link, 删除 link 等等 |
+
+- [[obsidian同步方案对比]] #todo/笔记
+- Remote save 设置手动同步? 或者 obsidian 文件夹自己同步?!
+- [GitHub - acheong08/rev-obsidian-sync-plugin](https://github.com/acheong08/rev-obsidian-sync-plugin)

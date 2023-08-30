@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-07-26
-lastmod: 2023-08-16
+lastmod: 2023-08-29
 categories:
   - blog
 description: "[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."
@@ -182,9 +182,54 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 
 ### 执行 msbuild 任务
 
-官方链接 [MSBuild Task Reference - MSBuild | Microsoft Learn](https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-task-reference?view=vs-2022)
+#### 官方文档
 
-- [Copy Task - MSBuild | Microsoft Learn](https://learn.microsoft.com/en-us/visualstudio/msbuild/copy-task?view=vs-2022) 构建的时候, 拷贝 xx 文件到 xx 目录下面
+[MSBuild Task Reference - MSBuild | Microsoft Learn](https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-task-reference?view=vs-2022)
+
+#### 拷贝文件 Copy
+
+构建的时候, 拷贝 xx 文件到 xx 目录下面
+
+```xml
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+<PropertyGroup>  
+    <ip2regionDB>https://ghproxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>  
+</PropertyGroup>  
+  
+<Target Name="DownloadContentFiles" BeforeTargets="Build" Condition="!Exists('$(OutputPath)/ip2region.xdb')">  
+    <DownloadFile 
+        SourceUrl="$(ip2regionDB)"  
+        DestinationFolder="$(OutputPath)">  
+        <Output TaskParameter="DownloadedFile" ItemName="Content" />  
+    </DownloadFile>
+</Target>
+
+</Project>
+```
+
+#### 下载任务 DownloadFile
+
+在构建之前, 下载文件到本地. `ip2region` 就用到了.
+
+- `MSBuildProjectDirectory`: 是 csproj 所在的目录
+- `OutputPath`: 是构建物输出的目录
+
+```xml
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ip2regionDB>https://ghproxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>
+    </PropertyGroup>
+
+    <Target Name="DownloadContentFiles" BeforeTargets="Build">
+        <DownloadFile
+                SourceUrl="$(ip2regionDB)"
+                DestinationFolder="$(OutputPath)">
+            <Output TaskParameter="DownloadedFile" ItemName="Content" />
+        </DownloadFile>
+    </Target>
+</Project>
+```
 
 ### single file
 

@@ -2,6 +2,7 @@
 title: minio教程
 tags:
   - blog
+  - minio
 date: 2023-07-19
 lastmod: 2023-08-15
 categories:

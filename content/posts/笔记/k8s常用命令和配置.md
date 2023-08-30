@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-15
-lastmod: 2023-08-23
+lastmod: 2023-08-30
 categories:
   - blog
 description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
@@ -87,4 +87,220 @@ spec:
                 name: nginx-service
                 port:
                   number: 80
+```
+
+### 自定义开发者权限
+
+```yml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: 'msb_developer'
+rules:
+  - apiGroups:
+      - ''
+    resources:
+      - pods
+      - pods/portforward
+      - pods/proxy
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - delete
+  - apiGroups:
+      - ''
+    resources:
+      - pods/attach
+      - pods/exec
+    verbs:
+      - create
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - ''
+    resources:
+      - configmaps
+      - endpoints
+      - persistentvolumeclaims
+      - replicationcontrollers
+      - replicationcontrollers/scale
+      - secrets
+      - serviceaccounts
+      - services
+      - services/proxy
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - ''
+    resources:
+      - events
+      - namespaces/status
+      - replicationcontrollers/status
+      - pods/log
+      - pods/status
+      - componentstatuses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - ''
+    resources:
+      - namespaces
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - apps
+    resources:
+      - daemonsets
+      - deployments
+      - deployments/rollback
+      - deployments/scale
+      - replicasets
+      - replicasets/scale
+      - statefulsets
+    verbs:
+      - get
+      - list
+      - watch
+      - patch
+  - apiGroups:
+    - autoscaling
+    resources:
+      - horizontalpodautoscalers
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - batch
+    resources:
+      - cronjobs
+      - jobs
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - extensions
+    resources:
+      - daemonsets
+      - deployments
+      - deployments/rollback
+      - deployments/scale
+      - ingresses
+      - replicasets
+      - replicasets/scale
+      - replicationcontrollers/scale
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - networking.k8s.io
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - servicecatalog.k8s.io
+    resources:
+      - clusterserviceclasses
+      - clusterserviceplans
+      - clusterservicebrokers
+      - serviceinstances
+      - servicebindings
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - alicloud.com
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - policy
+    resources:
+      - poddisruptionbudgets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - networking.istio.io
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - config.istio.io
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - rbac.istio.io
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - istio.alibabacloud.com
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - authentication.istio.io
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - log.alibabacloud.com
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - monitoring.kiali.io
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+    - eventing.knative.dev
+    resources:
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
 ```

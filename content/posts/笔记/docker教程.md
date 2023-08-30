@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-08-23
+lastmod: 2023-08-30
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -38,7 +38,7 @@ systemctl enable docker --now
 apt remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 ```
 
-## 配置参数
+## dockerd 配置参数
 
  - `/etc/docker/daemon.json` 的 `registry-mirrors` 是拉取镜像的地址, 代替 `docker.io`.
  - 而 `proxies` 是设置容器网络代理, 这样容器里的 curl 就能使用到代理了.
@@ -65,9 +65,14 @@ Environment="HTTPS_PROXY=https://proxy.example.com:3129"
 Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
 ```
 
-## 格式解析
+## Dockerfile
 
-### docker
+### add 和 copy 命令的区别
+
+- `add` 可以解压文件
+- `copy` 在 multistage 时，拷贝之前的文件
+
+## 配置解析
 
 ```shell
 # -d 后台运行,--restart=always 总是重启,
@@ -84,41 +89,6 @@ kentxqq/testserver:1.2 \
 
 # -t指定名字myapp .代表Dockerfile在当前目录
 docker build -t myapp .
-```
-
-### docker compose
-
-```yml
-version: "3"
-
-services:
-  container_name: web
-  # 构建相关
-  build:
-    context: web-directory
-    dockerfile: web-directory/Dockerfile
-  # 依赖与db服务
-  depends_on:
-    - db
-  web:
-    image: kentxxq/web:1
-    restart: always
-    env_file:
-      # 文件内容类似 CORECLR_ENABLE_PROFILING="1"
-      - xxx.env
-    environment:
-      A: a
-    volumes:
-      # 盘挂载
-      - ./data:/var/lib/gitea
-      # 只读挂载
-      - /etc/localtime:/etc/localtime:ro
-    ports:
-      # web端口
-      - "3000:3000"
-  db:
-    image: ...
-    ...
 ```
 
 ## 操作命令
@@ -218,24 +188,6 @@ docker rm -v $id
 $id = docker create 镜像名
 docker cp "${id}:镜像内源文件路径" - | Set-Content 目标文件名
 docker rm -v $id
-```
-
-### 操作 docker-compose
-
-虽然在生产环境 [[笔记/point/docker-compose|docker-compose]] 很少用到, 但是在开发, 测试, [[笔记/point/poc|poc]] 的时候经常会用到.
-
-> [[笔记/point/docker-compose|docker-compose]] 现在集成到了 [[笔记/point/docker|docker]] 里, 所以 `docker-compose` 和 `docker compose` 等效
-
-```shell
-# 只拉取镜像
-docker compose -f xxxx.yml pull
-# -d表示后台启动 --build表示构建镜像
-docker compose up -d --build
-# 停止
-docker compose down --remove-orphans
-
-# 重建容器
-docker compose up -d --force-recreate
 ```
 
 ### docker 内安装 chrome

@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-29
-lastmod: 2023-08-09
+lastmod: 2023-08-29
 categories:
   - blog
 description: "[[笔记/point/Systemd|systemd]] 的相关概念, 使用, 操作示例."
@@ -67,8 +67,8 @@ StartLimitBurst=3
 # 环境变量文件,文件内容"MY_ENV3=value3" $MY_ENV3
 # EnvironmentFile=/path/to/environment/file1
 
-WorkingDirectory=/root/myApp/TestServer/out/
-ExecStart=/root/myApp/TestServer/out/TestServer
+WorkingDirectory=/root/myApp/TestServer
+ExecStart=/root/myApp/TestServer/TestServer
 # 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
 RestartSec=30s 
 Restart=always

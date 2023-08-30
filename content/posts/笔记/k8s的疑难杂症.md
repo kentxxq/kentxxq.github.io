@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-07-28
-lastmod: 2023-08-24
+lastmod: 2023-08-30
 categories:
   - blog
 description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
@@ -14,7 +14,11 @@ description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
 
 这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题.
 
-## 内容
+## 排错路线
+
+![[附件/k8s排错路线.jpg]]
+
+## 错误合集
 
 ### metrics-server
 

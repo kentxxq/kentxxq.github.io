@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-08-19
+lastmod: 2023-08-30
 keywords:
   - clash
   - 配置文件
@@ -361,6 +361,20 @@ rules:
   - MATCH,所有-auto
 ```
 
+### 自定义规则
+
+- `DOMAIN-SUFFIX`：域名后缀匹配
+- `DOMAIN`：域名匹配
+- `DOMAIN-KEYWORD`：域名关键字匹配
+- `IP-CIDR`：IP 段匹配
+- `SRC-IP-CIDR`：源 IP 段匹配
+- `GEOIP`：GEOIP 数据库（国家代码）匹配
+- `DST-PORT`：目标端口匹配
+- `SRC-PORT`：源端口匹配
+- `PROCESS-NAME`：源进程名匹配
+- `RULE-SET`：Rule Provider 规则匹配
+- `MATCH`：全匹配
+
 ## 安装
 
 #todo/笔记 来个示意图, 同时把守护进程换了
@@ -454,6 +468,61 @@ stream {
 
 ```shell
 export all_proxy=https://user1:pass1@a.kentxxq.com:17890; 
+```
+
+## Clash-windows 追加配置
+
+[配置文件预处理](https://docs.cfw.lbyczf.com/contents/parser.html#%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95-yaml) 适用于**不想修改配置文件, 特定于当前机器的特殊配置**
+
+|键|值类型|操作|
+|---|---|---|
+|append-rules|数组|数组合并至原配置 `rules` 数组**后**|
+|prepend-rules|数组|数组合并至原配置 `rules` 数组**前**|
+|append-proxies|数组|数组合并至原配置 `proxies` 数组**后**|
+|prepend-proxies|数组|数组合并至原配置 `proxies` 数组**前**|
+|append-proxy-groups|数组|数组合并至原配置 `proxy-groups` 数组**后**|
+|prepend-proxy-groups|数组|数组合并至原配置 `proxy-groups` 数组**前**|
+|mix-proxy-providers|对象|对象合并至原配置 `proxy-providers` 中|
+|mix-rule-providers|对象|对象合并至原配置 `rule-providers` 中|
+|mix-object|对象|对象合并至原配置最外层中|
+|commands|数组|在上面操作完成后执行简单命令操作配置文件|
+
+`Settings=>Profiles=>Parsers=>edit` 进入
+
+```yml
+parsers:
+  - url: https://example.com/profile.yaml
+    yaml:
+      prepend-rules:
+        - DOMAIN,test.com,DIRECT # rules最前面增加一个规则
+      append-proxies:
+        - name: test # proxies最后面增加一个服务
+          type: http
+          server: 123.123.123.123
+          port: 456
+```
+
+## API
+
+### 调整配置
+
+[参考网址](https://clash.gitbook.io/doc/restful-api/config)
+
+```shell
+# 查看当前配置
+curl -X GET http://127.0.0.1:9090/configs
+
+# 切换成全局
+curl -X PATCH http://127.0.0.1:9090/configs -d '{"mode":"GLOBAL"}'
+
+# 查看可用，一般有一个global
+curl -X GET http://127.0.0.1:9090/proxies
+
+# 查看global的配置，一般它的type是selector。而api只支持切换selector
+curl -X GET http://127.0.0.1:9090/proxies/GLOBAL
+
+# 切换到global里面的美国a节点
+curl -v -X PUT 'http://127.0.0.1:9090/proxies/GLOBAL'  -H "Content-Type: application/json" --data-raw '{"name": "美国 A"}'
 ```
 
 ## 测试

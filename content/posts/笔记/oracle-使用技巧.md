@@ -4,7 +4,7 @@ tags:
   - blog
   - oracle
 date: 2023-07-06
-lastmod: 2023-08-16
+lastmod: 2023-08-30
 categories:
   - blog
 description: "因为以前的公司是用 [[笔记/point/oracle|oracle]],所以也记录了不少的命令. 记录一下后续使用."
@@ -14,7 +14,7 @@ description: "因为以前的公司是用 [[笔记/point/oracle|oracle]],所以�
 
 因为以前的公司是用 [[笔记/point/oracle|oracle]],所以也记录了不少的技巧. 记录一下后续使用.
 
-## 使用技巧
+## SQL 操作
 
 ### 字段操作
 
@@ -40,68 +40,16 @@ NVL(A.CIVIL_MONEY,0)
 to_number(NVL(A.STR5,0)
 ```
 
-### 收集统计信息
+### 加速插入
 
 ```sql
-execute dbms_stats.gather_table_stats(ownname => 'owner',tabname => 'table_name' ,estimate_percent => null ,method_opt => 'for all indexed columns' ,cascade => true)
-```
-
-### 触发器
-
-```sql
-alter trigger xx_trigger disable;
-alter trigger xx_trigger enable;
-```
-
-### 索引
-
-```sql
-# 快速创建索引
-create index idx_table_a on table_a(字段a,字段b) nologging parallel  4;
-```
-
-### 重建所有索引
-
-```sql
-declare
-  STR VARCHAR2(400);
-begin
-  -- 重建Oracle索引
-  FOR TMP_IDX IN (SELECT TABLESPACE_NAME, OWNER, TABLE_NAME, INDEX_NAME
-                    FROM ALL_INDEXES
-                   WHERE OWNER = 'HNACMS'
-                     AND temporary = 'N'     
-                     --AND TABLE_NAME = 'K_TASK'              
-                     --AND TABLESPACE_NAME <> 'HNACMS_INDX'
-                   ORDER BY TABLESPACE_NAME, TABLE_NAME) LOOP
-    STR := 'ALTER INDEX ' || TMP_IDX.OWNER || '.' || TMP_IDX.INDEX_NAME ||
-           ' Rebuild Tablespace HNACMS_INDX';
-    EXECUTE IMMEDIATE STR;
-  END LOOP;
-end;
-
-```
-
-### 日志切换时间
-
-```sql
-select  b.SEQUENCE#, 
-    b.FIRST_TIME,a.SEQUENCE#,
-    a.FIRST_TIME,round(((a.FIRST_TIME-b.FIRST_TIME)*24)*60,2) 
-from v$log_history a, 
-     v$log_history b 
-where a.SEQUENCE#=b.SEQUENCE#+1 
-    and b.THREAD#=1 
-order by a.SEQUENCE# desc;
-```
-
-### 删除操作
-
-```sql
-# 加速插入
 alter table x nologging;
 insert /*+append*/ into x (a,b,c) as select a,b,c from xxx;
+```
 
+### 批量删除
+
+```sql
 # 批量删除.根据时间排序,1000条commmit一次
 declare
     cursor [del_cursor] is select a.*, a.rowid row_id from [table_name] a order by a.rowid;
@@ -116,8 +64,11 @@ begin
     end loop;
     commit;
 end;
+```
 
-# 两表数据同步
+### 两表数据同步
+
+```sql
 MERGE INTO t_canhe_family t1 USING(select a1.family_id,a1.account_money,a1.balance,a1.remaining_money from t_canhe_family_bak20161121 a1) tt ON (tt.family_id=t1.family_id)
 when matched then
 update set t1.account_money=tt.account_money,
@@ -194,7 +145,179 @@ select dbms_sqltune.report_tuning_task('tuning_sql_test') from dual;
 delete from dba_advisor_tasks where task_name ='tuning_sql_test'
 ```
 
-## 生成 AWR
+## 维护操作
+
+### 新建表空间, 用户, 授权等
+
+```sql
+# 新建表空间
+create tablespace xo datafile 'f:/xo.dbf' size 50m autoextend on;
+# 新建临时表空间
+create temporary tablespace tempfile 'f:/xo.dbf' size 50m autoextend on;
+# 表空间添加文件
+alter tablespace sales add datafile '/home/app/oracle/oradata/oracle8i/sales02.dbf' size 800M autoextend on next 50M maxsize 1000M; 
+# 数据库文件大小重置
+alter database datafile ‘dir’ resize 1000m;
+
+# 新建用户
+create user test identified by test default tablespace xo temporary tablespace test_temp;
+# 修改用户密码
+alter user test identified by 123456;
+# 删除用户
+drop user test cascade;
+
+# 授权角色
+grant dba,connect,resource to test;
+# 授权表操作
+grant select on v$session to test;
+```
+
+### 收集统计信息
+
+```sql
+execute dbms_stats.gather_table_stats(ownname => 'owner',tabname => 'table_name' ,estimate_percent => null ,method_opt => 'for all indexed columns' ,cascade => true)
+```
+
+### 客户端字符集
+
+```sql
+NLS_LANG="AMERICAN_AMERICA.ZHS16GBK"
+```
+
+### 用户表大小排名
+
+```sql
+select OWNER, 
+t.segment_name, t.segment_type, sum(t.bytes / 1024 / 1024) mmm
+from dba_segments t
+where t.owner = 'XIANGXI' 
+and t.segment_type='TABLE'
+group by OWNER, t.segment_name, t.segment_type
+order by mmm desc;
+```
+
+### 触发器 trigger
+
+```sql
+alter trigger xx_trigger disable;
+alter trigger xx_trigger enable;
+```
+
+### 索引 index
+
+```sql
+# 快速创建索引
+create index idx_table_a on table_a(字段a,字段b) nologging parallel  4;
+```
+
+### 重建所有索引
+
+```sql
+declare
+  STR VARCHAR2(400);
+begin
+  -- 重建Oracle索引
+  FOR TMP_IDX IN (SELECT TABLESPACE_NAME, OWNER, TABLE_NAME, INDEX_NAME
+                    FROM ALL_INDEXES
+                   WHERE OWNER = 'HNACMS'
+                     AND temporary = 'N'     
+                     --AND TABLE_NAME = 'K_TASK'              
+                     --AND TABLESPACE_NAME <> 'HNACMS_INDX'
+                   ORDER BY TABLESPACE_NAME, TABLE_NAME) LOOP
+    STR := 'ALTER INDEX ' || TMP_IDX.OWNER || '.' || TMP_IDX.INDEX_NAME ||
+           ' Rebuild Tablespace HNACMS_INDX';
+    EXECUTE IMMEDIATE STR;
+  END LOOP;
+end;
+
+```
+
+### 闪回 flashback
+```shell
+# 启用闪回
+startup mount;
+alter database archivelog;
+alter database flashback on;
+alter database open;
+
+# 开启行移动后,才能执行闪回
+alter table xx enable movement;
+# 闪回表到5分钟前
+flashback table xx as of timestamp sysdate-5/1440;
+flashback table t_canhe_family to timestamp (systimestamp-interval '5' minute);
+
+# 查询5分钟前
+select * from table as of timestamp sysdate-5/1440;
+
+# 还原表
+flashback table xx to before drop；
+```
+
+### 缩小表 shrink
+
+```sql
+alter table my_objects enable row movement;
+alter table my_objects shrink space;
+```
+
+### 日志切换时间
+
+```sql
+select  b.SEQUENCE#, 
+    b.FIRST_TIME,a.SEQUENCE#,
+    a.FIRST_TIME,round(((a.FIRST_TIME-b.FIRST_TIME)*24)*60,2) 
+from v$log_history a, 
+     v$log_history b 
+where a.SEQUENCE#=b.SEQUENCE#+1 
+    and b.THREAD#=1 
+order by a.SEQUENCE# desc;
+```
+
+## 排错
+
+### 活动的 session
+
+```sql
+select s.SID,  
+       s.SERIAL#,  
+       'kill -9 ' || p.SPID,  
+       s.MACHINE,  
+       s.OSUSER,  
+       s.PROGRAM,  
+       s.USERNAME,  
+       s.last_call_et,  
+       a.SQL_ID,  
+       s.LOGON_TIME,  
+       a.SQL_TEXT,  
+       a.SQL_FULLTEXT,  
+       w.EVENT,  
+       a.DISK_READS,  
+       a.BUFFER_GETS  
+  from v$process p, v$session s, v$sqlarea a, v$session_wait w  
+ where p.ADDR = s.PADDR  
+   and s.SQL_ID = a.sql_id  
+   and s.sid = w.SID  
+   and s.STATUS = 'ACTIVE'  
+ order by s.last_call_et desc;  
+```
+
+### 锁表查询
+
+```sql
+ SELECT l.session_id sid, s.serial#, l.locked_mode,l.oracle_username,
+
+　　l.os_user_name,s.machine, s.terminal, o.object_name, s.logon_time
+
+　　FROM v$locked_object l, all_objects o, v$session s
+
+　　WHERE l.object_id = o.object_id
+
+　　AND l.session_id = s.sid
+
+　　ORDER BY sid, s.serial# ;
+```
+
+### 生成 AWR
 
 SQL 路径在 `oracle_home/rdbms/admin/awrrpt.sql`,可以参考 [手工生成AWR报告方法记录\_ITPUB博客](http://blog.itpub.net/17203031/viewspace-700471/)
 

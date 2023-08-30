@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-16
-lastmod: 2023-08-23
+lastmod: 2023-08-30
 categories:
   - blog
 description: "安装 [[笔记/point/k8s|k8s]] 的记录."
@@ -14,7 +14,7 @@ description: "安装 [[笔记/point/k8s|k8s]] 的记录."
 
 安装 [[笔记/point/k8s|k8s]] 的记录 -20230606.
 
-## 安装
+## kubeadm 安装
 
 ### 基础环境
 
@@ -253,8 +253,124 @@ kubectl logs kube-proxy-xxx -n kube-system | grep "Using ipvs Proxier"
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.1/deploy/static/provider/cloud/deploy.yaml
 ```
 
+## kubekey 安装
+
+### 基础准备
+
+```bash
+# 关闭防火墙
+systemctl disable firewalld
+
+# 关闭swap
+swapon --show
+# 在 /etc/sysctl.conf 中添加 vm.swappiness=0
+echo "vm.swappiness=0" >> /etc/sysctl.conf
+# 如果有内容，那么去 /etc/fstab 注释掉下面的东西
+#/swap.img	none	swap	sw	0	0
+# 重启电脑验证
+swapon --show
+
+# 关闭selinux
+apt install selinux-utils
+# 查看输出
+getenforce
+
+# 安装依赖
+apt install socat conntrack ebtables ipset -y
+```
+
+### 安装
+
+```shell
+# 安装kubekey工具  
+export KKZONE=cn  
+curl -sfL https://get-kk.kubesphere.io | VERSION=v1.2.1 sh -  
+chmod +x kk  
+  
+# 创建配置  
+./kk create config  
+# 编辑配置文件  
+vim config-sample.yaml  
+  
+# 开始安装  
+./kk create cluster -f config-sample.yaml --with-kubesphere  
+# 确定没问题就yes 
+  
+# 如果上面没有--with-kubesphere，手动安装的话  
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/kubesphere-installer.yaml  
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.2.1/cluster-configuration.yaml  
+# 检查安装日志  
+kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='{.items[0].metadata.name}') -f  
+# 验证所有pod都起来了  
+kubectl get pod --all-namespaces  
+# 检查控制台端口，默认30880  
+kubectl get svc/ks-console -n kubesphere-system  
+# 访问nodeport   
+ip:30880 admin/P@88w0rd
+```
+
+### 集群管理
+
+```shell
+# 从集群创建配置文件
+./kk create config --from-cluster
+# 或
+./kk create config -f kubeconfig配置文件
+
+# 添加节点
+# 编辑配置
+./kk add nodes -f sample.yaml
+
+# 删除节点
+# 界面停止调度
+# 编辑配置
+./kk delete node <nodeName> -f config-sample.yaml
+```
+
+### 配置文件 demo
+
+```yml
+apiVersion: kubekey.kubesphere.io/v1alpha1
+kind: Cluster
+metadata:
+  name: sample
+spec:
+  hosts:
+  - {name: master, address: 192.168.10.71, internalAddress: 192.168.10.71, user: root, password: 密码}
+  - {name: node1, address: 192.168.10.72, internalAddress: 192.168.10.72, user: root, password: 密码}
+  - {name: node2, address: 192.168.10.73, internalAddress: 192.168.10.73, user: root, password: 密码}
+  roleGroups:
+    etcd:
+    - master
+    master:
+    - master
+    worker:
+    - node1
+    - node2
+  controlPlaneEndpoint:
+    ##Internal loadbalancer for apiservers
+    #internalLoadbalancer: haproxy
+
+    domain: lb.kubesphere.local
+    address: ""
+    port: 6443
+  kubernetes:
+    version: v1.21.5
+    clusterName: cluster.local
+  network:
+    plugin: calico
+    kubePodsCIDR: 10.233.64.0/18
+    kubeServiceCIDR: 10.233.0.0/18
+  registry:
+    registryMirrors: ["https://u7hlore1.mirror.aliyuncs.com"]
+    insecureRegistries: []
+    privateRegistry: ""
+  addons: []
+```
+
 ## 参考链接
 
-- [YouTube安装k8s视频](https://www.youtube.com/watch?v=7k9Rdlx30OY&t=808s)
-- [视频中的文档地址](https://www.itsgeekhead.com/tuts/kubernetes-126-ubuntu-2204.txt)
+- [kubeadm-YouTube安装k8s视频](https://www.youtube.com/watch?v=7k9Rdlx30OY&t=808s)
+- [kubeadm-视频中的文档地址](https://www.itsgeekhead.com/tuts/kubernetes-126-ubuntu-2204.txt)
+- [kubekey-多节点安装 (kubesphere.io)](https://www.kubesphere.io/zh/docs/v3.3/installing-on-linux/introduction/multioverview/)
 - [ingress官方文档地址](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)
