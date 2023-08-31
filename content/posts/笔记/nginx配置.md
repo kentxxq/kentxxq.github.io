@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-08-23
+lastmod: 2023-08-31
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -19,7 +19,9 @@ description: "[[笔记/point/nginx|nginx]] 的配置示例."
 ### nginx.conf 主配置
 
 ```nginx
-#user  nobody;
+# user nobody;
+# 默认进入守护进程 daemon on; 这样就可以forking模式启动.
+# 默认打开 master_process on; 这样会创建worker进程. 这是一个开发人员选项,如果off将只存在master进程处理
 worker_processes  auto;
 worker_cpu_affinity auto;
 error_log /data/logs/nginx-error.log;

@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-14
-lastmod: 2023-08-21
+lastmod: 2023-08-31
 categories:
   - blog
 description: "CKA 是 [[笔记/point/k8s|k8s]] 的一个管理员认证, 我也弄了一个证书 [[附件/CKA证书.pdf|CKA证书]]"
@@ -14,11 +14,9 @@ description: "CKA 是 [[笔记/point/k8s|k8s]] 的一个管理员认证, 我也�
 
 CKA 是 [[笔记/point/k8s|k8s]] 的一个管理员认证, 我也弄了一个证书 [[附件/CKA证书.pdf|CKA证书]].
 
-## 内容
+## 考试题
 
-### 考试题
-
-#### 扩容
+### 扩容
 
 将名为 my-nginx 的 deployment 的数量，扩展至 10 个 pods.
 
@@ -34,7 +32,7 @@ kubectl create deployment my-nginx --image=nginx
 kubectl scale deployment my-nginx --replicas=10
 ```
 
-#### 多容器
+### 多容器
 
 创建一个多容器的 Pod 对象
 
@@ -65,7 +63,92 @@ spec:
           value: "mima"
 ```
 
-#### 操作 PVC
+### 添加容器端口, 通过 service 暴露服务
+
+```yml
+# images下加上ports相关内容
+containers:
+ - image: nginx
+   imagePullPolicy: Always
+   name: nginx
+   ports:
+   - name: http
+     protocol: TCP
+     containerPort: 80
+```
+
+暴露端口 80
+
+```shell
+kubectl expose deployment front-end --name=front-end-svc --port=80 --target-port=80 --type=NodePort 
+```
+
+### pod 添加 sidecar
+
+题目:
+
+1. sidecar 使用 busybox，添加到 pod `legacy-app` 中
+2. 新 sidecar 运行 `/bin/sh -c tail -n+1 -f /var/log/legacy-app.log`
+3. 使用安装在/var/log 的卷，使日志 legacy-app.log 可用于 sidecar 的容器
+
+答题:
+
+1. 将 pod 导出成 yml 保存到文件中 `kubectl get pod legacy-app -o yaml > 1.yml`
+2. 编辑文件 `vim 1.yml`  
+
+	```yml
+	apiVersion: v1
+	kind: Pod
+	metadata:
+	  name: legacy-app
+	spec:
+	  containers:
+	  - name: count
+	    image: busybox
+	    args:
+	    - /bin/sh
+	    - -c
+	    - >
+	      i=0;
+	      while true;
+	      do
+	      echo "$i: $(date)" >> /var/log/legacy-app.log;
+	      sleep 1;
+	      done
+	    volumeMounts:
+	    - name: varlog
+	      mountPath: /var/log
+	  - name: sidecar
+	    image: busybox
+	    args: [/bin/sh, -c, 'tail -n+1 -f /var/log/legacy-app.log']
+	    volumeMounts:
+	    - name: varlog
+	      mountPath: /var/log
+	  volumes: # volumes 块在导出的 yaml 下面已经有了，在已有的添加下面两行即可
+	    - name: varlog
+	      emptyDir: {}
+	```
+
+3. `kubectl apply -f 1.yml` 应用改动. 如果失败则先 `kubectl delete pod legacy-app` 删除.
+
+### 创建 PV
+
+创建名为 app-data 的 pv，容量 2 Gi。ReadwriteOnce,hostPath，位于/srv/app-data
+
+```yml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: app-data
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath: "/srv/app-data"
+```
+
+### 操作 PVC
 
 创建一个名为 app-pvc 的 PVC 资源对象
 
@@ -126,7 +209,51 @@ spec:
 
 参考文档:[配置 Pod 以使用 PersistentVolume 作为存储 | Kubernetes](https://kubernetes.io/zh/docs/tasks/configure-pod-container/configure-persistent-volume-storage/)
 
-#### Ingress 转发
+### 授权 rbac
+
+创一个 clusterrole 将 deployment-clusterrole，允许创建 deployment、statefulset、daemonset。绑定到 app-team1 中 cicd-token 的 serviceaccount
+
+```shell
+# 创建一个clusterrole
+kubectl create clusterrole "default-clusterrole" --verb=create --resource=deployment,statefulset,daemonset
+# 创建命名空间
+kubectl create namespace app-team1
+# 创建serviceaccount 且指定命名空间
+kubectl create serviceaccount cicd-token -n app-team1
+# 权限绑定到一起就授权了
+kubectl create clusterrolebinding rb --clusterrole=default-clusterrole --serviceaccount=app-team1:cicd-token -n app-team1
+```
+
+### 网络 networkpolicy
+
+创建 allow-port-from-namespace 的策略，允许 my-app 连接 big-corp 的 8080
+
+1. 不允许访问没有监听 8080 端口的服务
+2. 仅允许 my-app 中的 pod 访问
+
+```yml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-port-from-namespace
+  namespace: big-corp
+spec:
+  podSelector:
+    matchLabels:
+      namespace: db
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              project: my-app
+      ports:
+        - protocol: TCP
+          port: 8080
+```
+
+### Ingress 转发
 
 创建一个名为 my-ingress 的 ingress:
 
@@ -181,9 +308,9 @@ spec:
               number: 8000
 ```
 
-#### ETCD
+### ETCD
 
-##### 题目
+#### 题目
 
 将当前 kubernetes 集群的 etcd 数据进行备份
 
@@ -191,7 +318,7 @@ spec:
 - 保存到 `/data/backup/` 目录下，文件名为 `snapshot-etcd.db`。
 - 将之前存储的 `/data/backup/snapshot-etcd-previous.db` 数据进行还原
 
-##### 文件目录
+#### 文件目录
 
 切换到题目对应的 `context`, 然后 `ssh` 连接到 `master` 节点. 考虑 `sudo -i` 切换到 root 用户.
 
@@ -217,7 +344,7 @@ command:
 ...
 ```
 
-##### 数据备份
+#### 数据备份
 
 答题:
 
@@ -229,7 +356,7 @@ etcdctl snapshot save /data/backup/etcd-snapshot.db
 --key=/xxx/etcd-client.key
 ```
 
-##### 数据恢复
+#### 数据恢复
 
 `etcd` 以服务的方式运行 (独立于 `k8s` ):
 
@@ -275,6 +402,80 @@ mv /var/lib/etcd /var/lib/etcd-bak
 ETCDCTL_API=3 etcdctl snapshot restore /data/backup/snapshot-etcd-previous.db --data-dir=/var/lib/etcd ...endpoint...ca...cert...key...
 # 恢复容器
 mv /etc/kubernetes/manifests-bak /etc/kubernetes/manifests
+```
+
+### 调整 nodeSelector
+
+```shell
+kubectl edit pod nginx-kusc00401
+```
+
+添加/修改 `nodeSelector` 字段
+
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: nginx-kusc00401
+spec:
+ containers:
+ - name: nginx
+   image: nginx
+ nodeSelector:
+   disk: ssd
+```
+
+### 获取 pod 错误日志
+
+找到 pod bar 的 file-not-found 日志，然后记录到文件
+
+```shell
+kubectl logs pod bar |grep "file-not-found" > 1.txt
+```
+
+### 节点设置为不可调度
+
+```shell
+kubectl drain node1 --ignore-daemonsets
+# 可强制 --delete-local-data --force
+
+# 恢复
+kubectl uncordon node1
+```
+
+### 升级 k8s 集群（1.20.0=>1.20.1）
+
+```bash
+# 排空节点
+kubectl drain node1 --ignore-daemonsets
+
+# 安装指定的kubeadm
+sudo -i
+apt install kubeadm=1.20.1-00 –y
+
+kubeadm upgrade plan
+kubeadm upgrade apply v1.20.1 --etcd-upgrade=false
+
+# 升级kubelet和kubectl
+apt install kubelet=1.20.1-00 kubectl=1.20.1-00 -y
+# 重启kubelet
+systemctl restart kubelet
+# 恢复节点
+kubectl uncordon node1
+# 验证升级情况
+kubectl get nodes
+```
+
+### 统计 cpu 最高的 pod
+
+```shell
+kubectl top pod -l name=cpu-utilizer --sort-by="cpu" –A
+```
+
+### 查看所有 worker 节点，排除不能调度的节点
+
+```bash
+kubectl get nodes |grep worker|grep Ready|wc -l
 ```
 
 ## 相关链接
