@@ -74,7 +74,7 @@ setup(
 
     # 上传到PyPI所需要的信息
     author="kentxxq",
-    author_email="805429509@qq.com",
+    author_email="我的邮箱@qq.com",
     description="This is an Example Package",
     license="PSF",
     keywords="hello world example examples",

@@ -7,6 +7,6 @@ description: "About Me"
 
 联系方式:
 
-1. wechat:`kentxxq`
-2. github:[kentxxq](https://github.com/kentxxq)
-3. email:[805429509@qq.com](mailto:805429509@qq.com)
+- Wechat: `kentxxq`
+- Github: [kentxxq](https://github.com/kentxxq)
+- Email: base64 decode `ODA1NDI5NTA5QHFxLmNvbQ==`

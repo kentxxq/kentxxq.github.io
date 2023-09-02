@@ -38,7 +38,7 @@ export Ali_Secret="sk"
 # 安装
 git clone https://github.com/acmesh-official/acme.sh.git
 cd ./acme.sh
-./acme.sh --install -m 805429509@qq.com
+./acme.sh --install -m 我的邮箱@qq.com
 
 # 生成证书
 acme.sh --issue --dns dns_ali -d "*.kentxxq.com" -d "kentxxq.com" --ecc
@@ -64,7 +64,7 @@ acme.sh --remove -d "*.kentxxq.com" -d "kentxxq.com" --force
 
 ### 修改 CA 服务商
 
-- [支持的CA服务商列表](https://github.com/acmesh-official/acme.sh/wiki/Server)
+- [支持的 CA 服务商列表](https://github.com/acmesh-official/acme.sh/wiki/Server)
 - [各个服务商的区别](https://github.com/acmesh-official/acme.sh/wiki/CA)
 
 ```shell
@@ -86,23 +86,23 @@ acme.sh --install-cronjob
 
 ```json
 {
-    "newNonce": "https://acme.zerossl.com/v2/DV90/newNonce",
-    "newAccount": "https://acme.zerossl.com/v2/DV90/newAccount",
-    "newOrder": "https://acme.zerossl.com/v2/DV90/newOrder",
-    "revokeCert": "https://acme.zerossl.com/v2/DV90/revokeCert",
-    "keyChange": "https://acme.zerossl.com/v2/DV90/keyChange",
-    "meta": {
-        "termsOfService": "https://secure.trust-provider.com/repository/docs/Legacy/20221001_Certificate_Subscriber_Agreement_v_2_5_click.pdf",
-        "website": "https://zerossl.com",
-        "caaIdentities": [
-            "sectigo.com",
-            "trust-provider.com",
-            "usertrust.com",
-            "comodoca.com",
-            "comodo.com"
-        ],
-        "externalAccountRequired": true
-    }
+  "newNonce": "https://acme.zerossl.com/v2/DV90/newNonce",
+  "newAccount": "https://acme.zerossl.com/v2/DV90/newAccount",
+  "newOrder": "https://acme.zerossl.com/v2/DV90/newOrder",
+  "revokeCert": "https://acme.zerossl.com/v2/DV90/revokeCert",
+  "keyChange": "https://acme.zerossl.com/v2/DV90/keyChange",
+  "meta": {
+    "termsOfService": "https://secure.trust-provider.com/repository/docs/Legacy/20221001_Certificate_Subscriber_Agreement_v_2_5_click.pdf",
+    "website": "https://zerossl.com",
+    "caaIdentities": [
+      "sectigo.com",
+      "trust-provider.com",
+      "usertrust.com",
+      "comodoca.com",
+      "comodo.com"
+    ],
+    "externalAccountRequired": true
+  }
 }
 ```
 
