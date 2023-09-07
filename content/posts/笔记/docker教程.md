@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-08-30
+lastmod: 2023-09-04
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -65,13 +65,6 @@ Environment="HTTPS_PROXY=https://proxy.example.com:3129"
 Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
 ```
 
-## Dockerfile
-
-### add 和 copy 命令的区别
-
-- `add` 可以解压文件
-- `copy` 在 multistage 时，拷贝之前的文件
-
 ## 配置解析
 
 ```shell
@@ -113,7 +106,7 @@ docker export 容器id xxx.tar
 docker import xxx.tar 镜像:tag
 ```
 
-### 镜像清理
+### 定时镜像清理
 
 ```shell
 # vim /etc/crontab

@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-08-31
+lastmod: 2023-09-01
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -438,11 +438,11 @@ connections_waiting $connections_waiting $timestamp';
         add_header time_iso8601 $time_iso8601;
     }
 
-    # tengine的debug模块
+    # tengine的debug模块,需要编译加入模块
     # https://tengine.taobao.org/document_cn/ngx_debug_pool_cn.html
-    location = /debug_pool {
-        debug_pool;
-    }
+    # location = /debug_pool {
+    #    debug_pool;
+    # }
 }
 ```
 

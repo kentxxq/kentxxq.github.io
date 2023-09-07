@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2023-08-15
+lastmod: 2023-09-02
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."
@@ -83,11 +83,11 @@ git checkout --orphan  new_branch
 # 添加到暂存区
 git add -A
 # 提交
-git commit -am "文章更新"
-# 删除原有的master
-git branch -D master
+git commit -am "init"
+# 删除原有的main
+git branch -D main
 # 重命名分支
-git branch -m master
+git branch -m main
 # 强制推送
-git push -f origin master
+git push -f origin main
 ```

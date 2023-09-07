@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-08-24
+lastmod: 2023-09-06
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -241,10 +241,8 @@ vim /etc/crontab
 # |  |  |  |  |
 # *  *  *  *  * user-name command to be executed
 
-# 凌晨5点和6点清理docker镜像
-0 5,6 * * * root /usr/bin/docker rmi $(docker images -q) -f
-# 每10分钟执行
-*/10 * * * * root /bin/bash /root/backup.sh
+# 凌晨5点和6点的时候,每10分钟执行
+*/10 5,6 * * * root /bin/bash /root/backup.sh
 ```
 
 - 特定值：使用具体的数值表示，如 `5` 表示第 5 分钟、`10` 表示 10 点。
@@ -359,7 +357,7 @@ curl -X POST -H "Accept: application/json" -H "Content-type: application/json" -
 # 忽略证书
 curl -k https://127.0.0.1:5001/
 
-# 下载 -C 断点续传 -O 指定名称
+# 下载 -C - 断点续传,记得多一个中杠 -O 指定名称
 curl -C - https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20230711212934.0.0_amd64.deb -O minio.deb
 
 # 模拟跨域
@@ -417,6 +415,14 @@ tcpdump 'ip && tcp'
 history -d 123
 # 清除所有历史记录
 history -c
+
+# 清理系统记录
+echo > /var/log/lastlog ;
+echo >   /var/log/utmp ;
+cat /dev/null >  /var/log/secure ;
+cat /dev/null >  /var/log/message ;
+echo > /var/log/btmp ;
+echo > /var/log/wtmp ;
 ```
 
 ### 大版本升级

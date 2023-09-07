@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-01
-lastmod: 2023-08-30
+lastmod: 2023-09-02
 categories:
   - blog
 description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
@@ -38,11 +38,11 @@ description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
 > 题外话
 > [[笔记/point/docker|docker]] 其实从 1.12 版本开始, 已经可以通过 [组件方式](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker) 支持 [[笔记/point/CRI|CRI]] 标准. 但是 [[笔记/point/Containerd|Containerd]] 直接集成 [[笔记/point/CRI|CRI]] 到了自己内部, 这样就少了 [[笔记/point/docker|docker]] 和 [[笔记/point/CRI|CRI]] 组件两个环节. 同时 [[笔记/point/Containerd|Containerd]] 不像 [[笔记/point/docker|docker]] 属于公司, 所以 [[笔记/point/k8s|k8s]] 从 1.24 版本开始切换到了 [[笔记/point/Containerd|Containerd]].
 
-## Master 节点
+## master 节点
 
-- api-server：处理 api 操作，所有组件都通过 api-server
+- [[笔记/k8s组件剖析#api-server 传递流程|api-server]]：处理 api 操作，所有组件都通过 api-server
 - controller：对集群状态处理。自动容器修复，水平扩展
-- scheduler：完成调度操作。根据用户提交的的数据，调度到指定节点
+- [[笔记/k8s组件剖析#scheduler 调度|scheduler]]：完成调度操作。根据用户提交的的数据，调度到指定节点
 - etcd：分布式存储。所有元信息存储
 
 ## node 节点
@@ -51,7 +51,7 @@ description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
 - storage-plugin 和 network-plugin 完成对应操作
 - [[笔记/k8s组件剖析#kube-proxy|kube-proxy]] 服务于 service。通过 iptables 实现功能
 
-## API-server 传递流程
+## api-server 传递流程
 
 1. user 提交到 api-server
 2. api-server 写入到 etcd
@@ -89,7 +89,37 @@ client 访问 service 的时候有 2 种方式。
 
 **服务拓扑**就需要监听 node 信息，实现一个服务可以指定流量是被优先路由到一个和客户端在同一个 Node 或者在同一可用区域的端点。
 
-## PV 和 PVC
+## scheduler 调度
+
+### 调度过程
+
+1. 提交到 api-server
+2. controller 验证以后，api-server 中变成 pending、同时 nodeName 为空
+3. scheduler 发现这个空 nodeName 的 pod 后，开始调度算法、打分。写入 nodeName
+4. kubelet 在 watch 到以后，开始制定调度细节
+5. 最后状态为 running
+
+### QoS 调度打分
+
+#### 默认优先级
+
+- Guaranteed- 高保障：cpu 和 memory 的 request=limit，其他资源可不等
+- Burstable- 中，弹性：cpu 和 memory 的 request!=limit
+- BestEffort- 低，尽力而为：所有资源必须都不填
+
+调度表现:
+
+1. 一定先满足 request 请求
+2. 如果 --cpu-manager-policy=static，且高保障 Guaranteed。会绑核, 避免 cpu 一会儿给 a 服务使用, 一会儿切换到 b 服务.
+3. memory 会根据 QoS 级别进行打分，低优先级 BestEffort 被调走
+
+#### 影响调度
+
+- `ResourceQuota` 限制命名空间的 cpu, 内存, pods 总数
+- `pod亲和,pod与node亲和,pod容忍污点` 会影响调度
+- `PriorityClass` 可以配置在 pod 上, 默认没有启用
+
+## pv 和 pvc
 
 1. 提交创建 pvc 对象
 2. csi-provisioner 给 watch 到，根据 pvc 中的 storage-class 和其他信息，调用 csi-plugin1。于是在云存储中创建真正的存储，于是有了 pv 对象

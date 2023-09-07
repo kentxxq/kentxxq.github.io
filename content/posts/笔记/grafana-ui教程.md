@@ -6,7 +6,7 @@ tags:
   - 监控
   - devops
 date: 2023-07-11
-lastmod: 2023-08-02
+lastmod: 2023-09-07
 categories:
   - blog
 description: "[[笔记/point/grafana|grafana]] 的使用教程"
@@ -26,7 +26,7 @@ apt install -y apt-transport-https software-properties-common wget
 wget -q -O /usr/share/keyrings/grafana.key https://apt.grafana.com/gpg.key
 # 添加repo
 echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
-# 安装
+# 安装, grafana-enterprise是企业版
 apt update -y; apt install grafana -y
 
 # 启动

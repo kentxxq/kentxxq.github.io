@@ -4,7 +4,7 @@ tags:
   - blog
   - windows
 date: 2023-06-29
-lastmod: 2023-08-16
+lastmod: 2023-09-02
 categories:
   - blog
 description: "[[笔记/point/windows|windows]] 现在是我主要使用的桌面平台. 因为我挑选并使用了大量的软件工具, 而且经常会跨多设备工作. 所以这里我记录下来, 也给大家做一个参考."
@@ -58,6 +58,7 @@ description: "[[笔记/point/windows|windows]] 现在是我主要使用的桌面
 - [Listen 1 音乐播放器](https://listen1.github.io/listen1/?gclid=CjwKCAjwxOymBhAFEiwAnodBLAdmIaAAK6kr4MTMA8lYBt2q40_lBfJyAW1AQYoL_TXqBHvkv8ay1hoCtLMQAvD_BwE)
 - 文件夹锁 [GitHub - Albert-W/Folder-locker: It a tiny tool to lock your folder without compression.](https://github.com/Albert-W/Folder-locker)
 - 压缩/解压 [GitHub - M2Team/NanaZip: The 7-Zip derivative intended for the modern Windows experience](https://github.com/M2Team/NanaZip)
+- 滴答清单
 
 ### 特殊软件
 
