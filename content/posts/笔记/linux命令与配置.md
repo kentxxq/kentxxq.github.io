@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-09-06
+lastmod: 2023-09-08
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -423,6 +423,19 @@ cat /dev/null >  /var/log/secure ;
 cat /dev/null >  /var/log/message ;
 echo > /var/log/btmp ;
 echo > /var/log/wtmp ;
+```
+
+### 用户会话处理
+
+```shell
+# 查看会话
+w
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+root     pts/0    175.9.140.51     Thu14    1.00s  0.08s  0.00s w
+root     pts/1    tmux(368975).%7  09Aug23 29days  0.10s  0.10s -bash
+
+# 杀死指定会话
+pkill -KILL -t pts/1
 ```
 
 ### 大版本升级
