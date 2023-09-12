@@ -240,7 +240,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      namespace: db
+      namespace: big-corp
   policyTypes:
     - Ingress
   ingress:
