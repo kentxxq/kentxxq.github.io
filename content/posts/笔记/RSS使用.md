@@ -32,7 +32,9 @@ b 站配置在浏览器打开. 列表点击=>打开网页=>app 内打开
 金山词霸ok
 ```
 
-feeder 不能为每个内容设置打开方式
+Feeder 不能为每个内容设置打开方式...
+
+> 可以订阅 twitter, 但是需要收费. 例如订阅源直接为 `https://www.twitter.com/elonmusk`
 
 ```
 电脑用 full 模式,更好用.
