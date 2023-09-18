@@ -4,7 +4,7 @@ tags:
   - blog
   - windows
 date: 2023-06-29
-lastmod: 2023-09-02
+lastmod: 2023-09-15
 categories:
   - blog
 description: "[[笔记/point/windows|windows]] 现在是我主要使用的桌面平台. 因为我挑选并使用了大量的软件工具, 而且经常会跨多设备工作. 所以这里我记录下来, 也给大家做一个参考."
@@ -21,6 +21,8 @@ description: "[[笔记/point/windows|windows]] 现在是我主要使用的桌面
 | 对象 | 选择                       | 说明                                                                    | 参考                                                                                                                                                                                                                                                            |
 | ---- | -------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 字体 | `Caskaydia Cove Nerd Font` | 首先 `Cascadia Code` 是一个等宽字体, 而 `Nerd Font` 为其加入了大量图标. | [GitHub - ryanoasis/nerd-fonts: Iconic font aggregator, collection, & patcher. 3,600+ icons, 50+ patched fonts: Hack, Source Code Pro, more. Glyph collections: Font Awesome, Material Design Icons, Octicons, & more](https://github.com/ryanoasis/nerd-fonts) |
+
+#todo/笔记 开启 windows 沙箱
 
 ## 软件安装
 
@@ -80,7 +82,6 @@ description: "[[笔记/point/windows|windows]] 现在是我主要使用的桌面
 - 中键去掉无用内容, 保留 - 置顶窗口
 - Listen 1 快速启动
 - Wsl 2 distronmananger 快速启动
--
 
 ## 相关内容
 
