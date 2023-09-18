@@ -6,7 +6,7 @@ date: 2023-09-16
 lastmod: 2023-09-18
 categories:
   - blog
-description: 
+description: "csharp 的编码配置 .editorconfig 文件."
 ---
 
 ## 简介
