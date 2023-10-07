@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-08-30
+lastmod: 2023-09-28
 keywords:
   - clash
   - 配置文件
@@ -87,7 +87,7 @@ proxy-providers:
       interval: 300
 ```
 
-2. 保存成 yml 文件, 然后 `Clash=>Profiles=>Import` 导入
+1. 保存成 yml 文件, 然后 `Clash=>Profiles=>Import` 导入
 
 ### 配置示例细节
 
@@ -467,7 +467,10 @@ stream {
 使用方法
 
 ```shell
+# linux
 export all_proxy=https://user1:pass1@a.kentxxq.com:17890; 
+# windows
+set all_proxy=https://user1:pass1@a.kentxxq.com:17890; 
 ```
 
 ## Clash-windows 追加配置

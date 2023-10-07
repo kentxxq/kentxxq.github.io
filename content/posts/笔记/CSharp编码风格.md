@@ -1,9 +1,10 @@
 ---
-title: CSharp编码风格
+title: csharp编码风格
 tags:
   - blog
+  - csharp
 date: 2023-09-16
-lastmod: 2023-09-18
+lastmod: 2023-09-27
 categories:
   - blog
 description: "csharp 的编码配置 .editorconfig 文件."

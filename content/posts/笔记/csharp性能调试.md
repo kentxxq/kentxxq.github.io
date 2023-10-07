@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-08-16
-lastmod: 2023-08-16
+lastmod: 2023-09-27
 categories:
   - blog
 description: "记录 [[笔记/point/csharp|csharp]] 的性能调试. #todo/笔记"
@@ -14,7 +14,13 @@ description: "记录 [[笔记/point/csharp|csharp]] 的性能调试. #todo/笔�
 
 记录 [[笔记/point/csharp|csharp]] 的性能调试. #todo/笔记
 
+所有的 dotnet 全局工具在这里 [.NET Diagnostic tools overview - .NET | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/tools-overview)
+
 ## 内容
+
+### 采集所有监控数据
+
+[dotnet-monitor](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-monitor)
 
 ### 查看 dotnet 应用
 

@@ -1,0 +1,260 @@
+---
+title: csharp的json教程
+tags:
+  - blog
+  - csharp
+date: 2023-09-27
+lastmod: 2023-10-07
+categories:
+  - blog
+description: "介绍 [[笔记/point/csharp|csharp]] 关于 json 的用法. 本文的所有源码均存放在 [kentxxq/csharpDEMO (github.com)](https://github.com/kentxxq/csharpDEMO). 为什么会有这篇文章? 因为 json 非常的流行, 而且存在有很多细节. 例如性能, 格式, 类库用法等等."
+---
+
+## 简介
+
+介绍 [[笔记/point/csharp|csharp]] 关于 json 的用法. 本文的所有源码均存放在 [kentxxq/csharpDEMO (github.com)](https://github.com/kentxxq/csharpDEMO).
+
+为什么会有这篇文章?
+
+因为 json 非常的流行, 而且存在有很多细节. 例如性能, 格式, 类库用法等等.
+
+## 准备数据
+
+准备一个用于演示的示例对象 `Person`. 同时涵盖了 `List`, `string`, `int`, `枚举`, `日期`.
+
+```cs
+/// <summary>人</summary>  
+public class Person  
+{  
+    [Display(Name = "人名", Description = "人的名字")]  
+    public string Name { get; set; } = null!;  
+  
+    [Display(Name = "性别", Description = "人的性别")]  
+    public Sex SexType { get; set; }  
+
+    [Display(Name = "生日", Description = "人的生日")]  
+    public DateTime Birthday { get; set; }
+
+    [Display(Name = "年纪", Description = "人的年纪")]  
+    public int Age { get; set; }  
+  
+    [Display(Name = "头", Description = "人的头")]  
+    public Head PersonHead { get; set; } = null!;  
+  
+    [Display(Name = "鞋子", Description = "人的鞋子")]  
+    public List<Shoes>? PersonShoes { get; set; }  
+}
+
+/// <summary>头</summary>  
+public class Head  
+{  
+    [Display(Name = "宽", Description = "头的宽")]  
+    public int Width { get; set; }  
+  
+    [Display(Name = "高", Description = "头的高")]  
+    public int Height { get; set; }  
+}
+
+/// <summary>性别</summary>  
+public enum Sex  
+{  
+    [Display(Name = "男")] Man,  
+    [Display(Name = "女")] Woman  
+}
+
+/// <summary>鞋子</summary>  
+public class Shoes  
+{  
+    [Display(Name = "鞋名", Description = "鞋子的名字")]  
+    public string ShoesName { get; set; } = null!;  
+  
+    [Display(Name = "鞋颜色", Description = "鞋子的颜色")]  
+    public Color ShoesColor { get; set; }  
+}
+```
+
+初始化一下:
+
+```csharp
+public static readonly Person DemoPerson = new()
+{
+    Name = "ken", Age = 1, PersonHead = new Head { Height = 50, Width = 50 }, PersonShoes = new List<Shoes>
+    {
+        new() { ShoesColor = Color.Blue, ShoesName = "蓝色" },
+        new() { ShoesColor = Color.Red, ShoesName = "红色" }
+    }
+};
+```
+
+## 对象转 json
+
+```csharp
+var str = JsonSerializer.Serialize(StaticData.DemoPerson, new JsonSerializerOptions
+{
+    // 空格
+    WriteIndented = true,
+    // 宽松转义规则,虽然不规范,但中文会正常打印出来. 否则中文会变成unicode字符,例如'蓝'-'\u84DD'
+    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+});
+```
+
+得到字符串
+
+```json
+{
+  "Name": "ken",
+  "SexType": 0,
+  "Birthday": "1234-05-06T00:00:00",
+  "Age": 1,
+  "PersonHead": {
+    "Width": 50,
+    "Height": 50
+  },
+  "PersonShoes": [
+    {
+      "ShoesName": "蓝色",
+      "ShoesColor": {
+        "R": 0,
+        "G": 0,
+        "B": 255,
+        "A": 255,
+        "IsKnownColor": true,
+        "IsEmpty": false,
+        "IsNamedColor": true,
+        "IsSystemColor": false,
+        "Name": "Blue"
+      }
+    },
+    {
+      "ShoesName": "红色",
+      "ShoesColor": {
+        "R": 255,
+        "G": 0,
+        "B": 0,
+        "A": 255,
+        "IsKnownColor": true,
+        "IsEmpty": false,
+        "IsNamedColor": true,
+        "IsSystemColor": false,
+        "Name": "Red"
+      }
+    }
+  ]
+}
+
+```
+
+## json 字符串数据查询
+
+### 如何使用
+
+什么情况使用? **json 数据没有固定的字段, 或者数据类型**.
+
+使用选型:
+
+- [JsonDocument](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.jsondocument?view=net-7.0): 只读, 性能更好.
+- [JsonNode](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.nodes.jsonnode?view=net-7.0): 可改动, [且改动方便](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/use-dom#create-a-jsonnode-dom-with-object-initializers-and-make-changes)
+
+> 在不规范的 json 中, 存在有重复的 key.
+> JsonDocument 取最后一个 key 的值. JsonNode 会报错!
+
+### JsonNode
+
+```csharp
+var jNode = JsonNode.Parse(str)!;  
+var name = jNode["Name"]!.GetValue<string>();  
+// 修改
+jNode["Name"] = "kent";  
+name = jNode["Name"]!.GetValue<string>();
+// 移除, JsonObject继承JsonNode
+var jObject = jNode.AsObject();
+jObject.Remove("Name");
+```
+
+### JsonDocument
+
+```csharp
+using var jDoc = JsonDocument.Parse(str);  
+name = jDoc.RootElement.GetProperty("Name").Deserialize<string>();
+```
+
+## JsonSerializerOptions 对象
+
+#todo/笔记  [JsonSerializerOptions.UnmappedMemberHandling Property](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializeroptions.unmappedmemberhandling?view=net-8.0#system-text-json-jsonserializeroptions-unmappedmemberhandling)
+
+```csharp
+var opt = new JsonSerializerOptions
+{
+    // 空格
+    WriteIndented = true,
+    // 宽松转义规则,虽然不规范,但中文会正常打印出来. 否则中文会变成unicode字符,例如'蓝'-'\u84DD'
+    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+
+    // 下面的不常用
+    // 默认不包含字段
+    IncludeFields = true,
+    // 允许存在注释,例如 "a":1, // a是id
+    ReadCommentHandling = JsonCommentHandling.Skip,
+    // 允许结尾的逗号
+    AllowTrailingCommas = true,
+    // 默认大小写不敏感
+    PropertyNameCaseInsensitive = true,
+    // 默认允许从string中读取数字
+    NumberHandling = JsonNumberHandling.AllowReadingFromString,
+    // 默认驼峰,可以 UpperCaseNamingPolicy:JsonNamingPolicy 然后重写 public override string ConvertName(string name) =>name.ToUpper();来修改
+    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    // 对象内部驼峰 "AB":{"aB":1,"bB":1}
+    DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
+    // enum用名称,而不是数字表示
+    Converters =
+    {
+        new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+    }
+};
+```
+
+## 相关特性 attribute
+
+这些特性都是用在 POCO/实例类的.
+
+### 自定义转化名称 JsonPropertyName
+
+```csharp
+[JsonPropertyName("Wind")]
+public int WindSpeed { get; set; }
+```
+
+[How to customize property names and values with System.Text.Json - .NET | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/customize-properties?pivots=dotnet-8-0#customize-individual-property-names)
+
+### 必须存在 JsonRequired
+
+```csharp
+[JsonRequired]
+public int WindSpeed { get; set; }
+```
+
+[Require properties for deserialization - .NET | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/required-properties)
+
+### 忽略 ignore
+
+常用
+
+- `[JsonIgnore]`: 总是忽略
+- `[JsonIgnore(Condition = JsonIgnoreCondition.Never)]`: 永远显示, 是 `JsonSerializerOptions` 对象中, `DefaultIgnoreCondition`,`IgnoreReadOnlyProperties`, `IgnoreReadOnlyFields` 的默认值
+- `[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]`: null 就忽略
+- `[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]`: 忽略 null 或者值类型的默认值 (例如 int 默认值是 0 )
+
+[How to ignore properties with System.Text.Json - .NET | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/ignore-properties?pivots=dotnet-7-0)
+
+### 多余字段 JsonExtensionData
+
+```csharp
+[JsonExtensionData]
+public Dictionary<string, JsonElement>? ExtensionData { get; set; }
+```
+
+[How to handle overflow JSON or use JsonElement or JsonNode in System.Text.Json - .NET | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/handle-overflow?pivots=dotnet-7-0#handle-overflow-json)
+
+## 不常用的东西
+
+- [处理引用和循环引用](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/preserve-references?pivots=dotnet-7-0)

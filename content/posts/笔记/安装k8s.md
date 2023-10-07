@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-16
-lastmod: 2023-08-30
+lastmod: 2023-09-25
 categories:
   - blog
 description: "安装 [[笔记/point/k8s|k8s]] 的记录."
@@ -150,12 +150,23 @@ apt update -y
 apt install -y kubelet kubeadm kubectl -y
 
 systemctl enable kubelet
+```
 
+### kubeadm 初始化
+
+> [!info]
+> 如果网络有问题, 参考 [[笔记/docker镜像源|docker镜像源]] 从国内先拉取镜像再打上 `tag`.
+> -  `kubeadm config images list` 查看需要用到的镜像
+> -  `kubeadm config images pull` 可以实现拉取镜像
+
+也可以使用参数 `--image-repository` 指定国内源. 初始化命令如下:
+
+```
 # 初始化
 kubeadm init --image-repository='registry.cn-hangzhou.aliyuncs.com/google_containers' --kubernetes-version=v1.27.2 --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.31.221 --cri-socket unix:///var/run/containerd/containerd.sock
 ```
 
-**可以跳过**, 或使用文件初始化
+**可以跳过**, 或使用参数 `--config config.yml` 文件初始化
 
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta3

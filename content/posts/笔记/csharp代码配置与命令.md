@@ -2,8 +2,9 @@
 title: csharp代码配置与命令
 tags:
   - blog
+  - csharp
 date: 2023-08-15
-lastmod: 2023-08-16
+lastmod: 2023-09-27
 categories:
   - blog
 description: "记录 [[笔记/point/csharp|csharp]] 的代码配置."

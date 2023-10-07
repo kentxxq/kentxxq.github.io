@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-09-08
+lastmod: 2023-09-19
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -33,6 +33,15 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install ./google-chrome-stable_current_amd64.deb
 
 google-chrome -v
+```
+
+### 环境变量
+
+```shell
+# export 会话生效,或者加入到 ~/.bashrc 中
+PATH=~/opt/bin:$PATH
+# 或者
+PATH=$PATH:~/opt/bin
 ```
 
 ### alias
@@ -97,7 +106,7 @@ ssh-copy-id root@1.1.1.1
 # 测试效果
 ssh root@1.1.1.1
 
-# 如果目标ip重装过,需要清理本地的拷贝记录
+# 如果目标ip重装过,需要c清理本地的拷贝记录
 ssh-keygen -R 1.1.1.1
 ```
 

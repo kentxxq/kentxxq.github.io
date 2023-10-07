@@ -2,8 +2,9 @@
 title: csharp的efcore命令
 tags:
   - blog
+  - csharp
 date: 2023-07-11
-lastmod: 2023-07-11
+lastmod: 2023-09-27
 categories:
   - blog
 description: 
@@ -14,7 +15,6 @@ description:
 这里记录 [[笔记/point/csharp|csharp]] 的 efcore 命令.
 
 ## 内容
-
 
 ### 数据库连接池
 
