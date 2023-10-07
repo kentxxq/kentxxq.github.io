@@ -1,0 +1,309 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>csharp的json教程 - 运维个人技术栈</title><meta name=Description content="介绍 [[笔记/point/csharp|csharp]] 关于 json 的用法. 本文的所有源码均存放在 [kentxxq/csharpDEMO (github.com)](https://github.com/kentxxq/csharpDEMO). 为什么会有这篇文章? 因为 json 非常的流行, 而且存在有很多细节. 例如性能, 格式, 类库用法等等."><meta property="og:title" content="csharp的json教程"><meta property="og:description" content="介绍 [[笔记/point/csharp|csharp]] 关于 json 的用法. 本文的所有源码均存放在 [kentxxq/csharpDEMO (github.com)](https://github.com/kentxxq/csharpDEMO). 为什么会有这篇文章? 因为 json 非常的流行, 而且存在有很多细节. 例如性能, 格式, 类库用法等等."><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E7%9A%84json%E6%95%99%E7%A8%8B/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-09-27T00:00:00+00:00"><meta property="article:modified_time" content="2023-10-07T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="csharp的json教程"><meta name=twitter:description content="介绍 [[笔记/point/csharp|csharp]] 关于 json 的用法. 本文的所有源码均存放在 [kentxxq/csharpDEMO (github.com)](https://github.com/kentxxq/csharpDEMO). 为什么会有这篇文章? 因为 json 非常的流行, 而且存在有很多细节. 例如性能, 格式, 类库用法等等."><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E7%9A%84json%E6%95%99%E7%A8%8B/><link rel=prev href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC/><link rel=next href=https://kentxxq.com/posts/%E6%97%A5%E8%AE%B0/2023-10-06/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"csharp的json教程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/csharp%E7%9A%84json%E6%95%99%E7%A8%8B\/"},"genre":"posts","keywords":"blog, csharp","wordcount":1720,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/csharp%E7%9A%84json%E6%95%99%E7%A8%8B\/","datePublished":"2023-09-27T00:00:00+00:00","dateModified":"2023-10-07T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"介绍 [[笔记/point/csharp|csharp]] 关于 json 的用法. 本文的所有源码均存放在 [kentxxq/csharpDEMO (github.com)](https://github.com/kentxxq/csharpDEMO). 为什么会有这篇文章? 因为 json 非常的流行, 而且存在有很多细节. 例如性能, 格式, 类库用法等等."}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class="toc-content always-active" id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#准备数据>准备数据</a></li><li><a href=#对象转-json>对象转 json</a></li><li><a href=#json-字符串数据查询>json 字符串数据查询</a><ul><li><a href=#如何使用>如何使用</a></li><li><a href=#jsonnode>JsonNode</a></li><li><a href=#jsondocument>JsonDocument</a></li></ul></li><li><a href=#jsonserializeroptions-对象>JsonSerializerOptions 对象</a></li><li><a href=#相关特性-attribute>相关特性 attribute</a><ul><li><a href=#自定义转化名称-jsonpropertyname>自定义转化名称 JsonPropertyName</a></li><li><a href=#必须存在-jsonrequired>必须存在 JsonRequired</a></li><li><a href=#忽略-ignore>忽略 ignore</a></li><li><a href=#多余字段-jsonextensiondata>多余字段 JsonExtensionData</a></li></ul></li><li><a href=#不常用的东西>不常用的东西</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">csharp的json教程</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/blog/><i class="far fa-folder fa-fw"></i>blog</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-09-27>2023-09-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-10-07>2023-10-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1720 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#准备数据>准备数据</a></li><li><a href=#对象转-json>对象转 json</a></li><li><a href=#json-字符串数据查询>json 字符串数据查询</a><ul><li><a href=#如何使用>如何使用</a></li><li><a href=#jsonnode>JsonNode</a></li><li><a href=#jsondocument>JsonDocument</a></li></ul></li><li><a href=#jsonserializeroptions-对象>JsonSerializerOptions 对象</a></li><li><a href=#相关特性-attribute>相关特性 attribute</a><ul><li><a href=#自定义转化名称-jsonpropertyname>自定义转化名称 JsonPropertyName</a></li><li><a href=#必须存在-jsonrequired>必须存在 JsonRequired</a></li><li><a href=#忽略-ignore>忽略 ignore</a></li><li><a href=#多余字段-jsonextensiondata>多余字段 JsonExtensionData</a></li></ul></li><li><a href=#不常用的东西>不常用的东西</a></li></ul></nav></div></div><div class=content id=content><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p>介绍 <a href=/posts/%E7%AC%94%E8%AE%B0/point/csharp/>csharp</a> 关于 json 的用法. 本文的所有源码均存放在 <a href=https://github.com/kentxxq/csharpDEMO target=_blank rel="noopener noreferrer">kentxxq/csharpDEMO (github.com)</a>.</p><p>为什么会有这篇文章?</p><p>因为 json 非常的流行, 而且存在有很多细节. 例如性能, 格式, 类库用法等等.</p><h2 id=准备数据 class=headerLink><a href=#%e5%87%86%e5%a4%87%e6%95%b0%e6%8d%ae class=header-mark></a>准备数据</h2><p>准备一个用于演示的示例对象 <code>Person</code>. 同时涵盖了 <code>List</code>, <code>string</code>, <code>int</code>, <code>枚举</code>, <code>日期</code>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cs data-lang=cs><span class=line><span class=cl><span class=cs>/// &lt;summary&gt;人&lt;/summary&gt;  </span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>Person</span>  
+</span></span><span class=line><span class=cl><span class=p>{</span>  
+</span></span><span class=line><span class=cl><span class=na>    [Display(Name = &#34;人名&#34;, Description = &#34;人的名字&#34;)]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>string</span> <span class=n>Name</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span> <span class=p>=</span> <span class=k>null</span><span class=p>!;</span>  
+</span></span><span class=line><span class=cl><span class=na>  
+</span></span></span><span class=line><span class=cl><span class=na>    [Display(Name = &#34;性别&#34;, Description = &#34;人的性别&#34;)]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>Sex</span> <span class=n>SexType</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=na>
+</span></span></span><span class=line><span class=cl><span class=na>    [Display(Name = &#34;生日&#34;, Description = &#34;人的生日&#34;)]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>DateTime</span> <span class=n>Birthday</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=na>
+</span></span></span><span class=line><span class=cl><span class=na>    [Display(Name = &#34;年纪&#34;, Description = &#34;人的年纪&#34;)]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>int</span> <span class=n>Age</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=na>  
+</span></span></span><span class=line><span class=cl><span class=na>    [Display(Name = &#34;头&#34;, Description = &#34;人的头&#34;)]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>Head</span> <span class=n>PersonHead</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span> <span class=p>=</span> <span class=k>null</span><span class=p>!;</span>  
+</span></span><span class=line><span class=cl><span class=na>  
+</span></span></span><span class=line><span class=cl><span class=na>    [Display(Name = &#34;鞋子&#34;, Description = &#34;人的鞋子&#34;)]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>List</span><span class=p>&lt;</span><span class=n>Shoes</span><span class=p>&gt;?</span> <span class=n>PersonShoes</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cs>/// &lt;summary&gt;头&lt;/summary&gt;  </span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>Head</span>  
+</span></span><span class=line><span class=cl><span class=p>{</span>  
+</span></span><span class=line><span class=cl><span class=na>    [Display(Name = &#34;宽&#34;, Description = &#34;头的宽&#34;)]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>int</span> <span class=n>Width</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=na>  
+</span></span></span><span class=line><span class=cl><span class=na>    [Display(Name = &#34;高&#34;, Description = &#34;头的高&#34;)]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>int</span> <span class=n>Height</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cs>/// &lt;summary&gt;性别&lt;/summary&gt;  </span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>enum</span> <span class=n>Sex</span>  
+</span></span><span class=line><span class=cl><span class=p>{</span>  
+</span></span><span class=line><span class=cl><span class=na>    [Display(Name = &#34;男&#34;)]</span> <span class=n>Man</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl><span class=na>    [Display(Name = &#34;女&#34;)]</span> <span class=n>Woman</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cs>/// &lt;summary&gt;鞋子&lt;/summary&gt;  </span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>Shoes</span>  
+</span></span><span class=line><span class=cl><span class=p>{</span>  
+</span></span><span class=line><span class=cl><span class=na>    [Display(Name = &#34;鞋名&#34;, Description = &#34;鞋子的名字&#34;)]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>string</span> <span class=n>ShoesName</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span> <span class=p>=</span> <span class=k>null</span><span class=p>!;</span>  
+</span></span><span class=line><span class=cl><span class=na>  
+</span></span></span><span class=line><span class=cl><span class=na>    [Display(Name = &#34;鞋颜色&#34;, Description = &#34;鞋子的颜色&#34;)]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>Color</span> <span class=n>ShoesColor</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>初始化一下:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=k>static</span> <span class=k>readonly</span> <span class=n>Person</span> <span class=n>DemoPerson</span> <span class=p>=</span> <span class=k>new</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>Name</span> <span class=p>=</span> <span class=s>&#34;ken&#34;</span><span class=p>,</span> <span class=n>Age</span> <span class=p>=</span> <span class=m>1</span><span class=p>,</span> <span class=n>PersonHead</span> <span class=p>=</span> <span class=k>new</span> <span class=n>Head</span> <span class=p>{</span> <span class=n>Height</span> <span class=p>=</span> <span class=m>50</span><span class=p>,</span> <span class=n>Width</span> <span class=p>=</span> <span class=m>50</span> <span class=p>},</span> <span class=n>PersonShoes</span> <span class=p>=</span> <span class=k>new</span> <span class=n>List</span><span class=p>&lt;</span><span class=n>Shoes</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>new</span><span class=p>()</span> <span class=p>{</span> <span class=n>ShoesColor</span> <span class=p>=</span> <span class=n>Color</span><span class=p>.</span><span class=n>Blue</span><span class=p>,</span> <span class=n>ShoesName</span> <span class=p>=</span> <span class=s>&#34;蓝色&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=k>new</span><span class=p>()</span> <span class=p>{</span> <span class=n>ShoesColor</span> <span class=p>=</span> <span class=n>Color</span><span class=p>.</span><span class=n>Red</span><span class=p>,</span> <span class=n>ShoesName</span> <span class=p>=</span> <span class=s>&#34;红色&#34;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=对象转-json class=headerLink><a href=#%e5%af%b9%e8%b1%a1%e8%bd%ac-json class=header-mark></a>对象转 json</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=kt>var</span> <span class=n>str</span> <span class=p>=</span> <span class=n>JsonSerializer</span><span class=p>.</span><span class=n>Serialize</span><span class=p>(</span><span class=n>StaticData</span><span class=p>.</span><span class=n>DemoPerson</span><span class=p>,</span> <span class=k>new</span> <span class=n>JsonSerializerOptions</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 空格</span>
+</span></span><span class=line><span class=cl>    <span class=n>WriteIndented</span> <span class=p>=</span> <span class=k>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 宽松转义规则,虽然不规范,但中文会正常打印出来. 否则中文会变成unicode字符,例如&#39;蓝&#39;-&#39;\u84DD&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>Encoder</span> <span class=p>=</span> <span class=n>JavaScriptEncoder</span><span class=p>.</span><span class=n>UnsafeRelaxedJsonEscaping</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>得到字符串</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;Name&#34;</span><span class=p>:</span> <span class=s2>&#34;ken&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;SexType&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;Birthday&#34;</span><span class=p>:</span> <span class=s2>&#34;1234-05-06T00:00:00&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;Age&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;PersonHead&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;Width&#34;</span><span class=p>:</span> <span class=mi>50</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;Height&#34;</span><span class=p>:</span> <span class=mi>50</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;PersonShoes&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;ShoesName&#34;</span><span class=p>:</span> <span class=s2>&#34;蓝色&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;ShoesColor&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;R&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;G&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;B&#34;</span><span class=p>:</span> <span class=mi>255</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;A&#34;</span><span class=p>:</span> <span class=mi>255</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;IsKnownColor&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;IsEmpty&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;IsNamedColor&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;IsSystemColor&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;Name&#34;</span><span class=p>:</span> <span class=s2>&#34;Blue&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;ShoesName&#34;</span><span class=p>:</span> <span class=s2>&#34;红色&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;ShoesColor&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;R&#34;</span><span class=p>:</span> <span class=mi>255</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;G&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;B&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;A&#34;</span><span class=p>:</span> <span class=mi>255</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;IsKnownColor&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;IsEmpty&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;IsNamedColor&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;IsSystemColor&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;Name&#34;</span><span class=p>:</span> <span class=s2>&#34;Red&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=json-字符串数据查询 class=headerLink><a href=#json-%e5%ad%97%e7%ac%a6%e4%b8%b2%e6%95%b0%e6%8d%ae%e6%9f%a5%e8%af%a2 class=header-mark></a>json 字符串数据查询</h2><h3 id=如何使用 class=headerLink><a href=#%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8 class=header-mark></a>如何使用</h3><p>什么情况使用? <strong>json 数据没有固定的字段, 或者数据类型</strong>.</p><p>使用选型:</p><ul><li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.text.json.jsondocument?view=net-7.0" target=_blank rel="noopener noreferrer">JsonDocument</a>: 只读, 性能更好.</li><li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.text.json.nodes.jsonnode?view=net-7.0" target=_blank rel="noopener noreferrer">JsonNode</a>: 可改动, <a href=https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/use-dom#create-a-jsonnode-dom-with-object-initializers-and-make-changes target=_blank rel="noopener noreferrer">且改动方便</a></li></ul><blockquote><p>在不规范的 json 中, 存在有重复的 key.
+JsonDocument 取最后一个 key 的值. JsonNode 会报错!</p></blockquote><h3 id=jsonnode class=headerLink><a href=#jsonnode class=header-mark></a>JsonNode</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=kt>var</span> <span class=n>jNode</span> <span class=p>=</span> <span class=n>JsonNode</span><span class=p>.</span><span class=n>Parse</span><span class=p>(</span><span class=n>str</span><span class=p>)!;</span>  
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>name</span> <span class=p>=</span> <span class=n>jNode</span><span class=p>[</span><span class=s>&#34;Name&#34;</span><span class=p>]!.</span><span class=n>GetValue</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;();</span>  
+</span></span><span class=line><span class=cl><span class=c1>// 修改</span>
+</span></span><span class=line><span class=cl><span class=n>jNode</span><span class=p>[</span><span class=s>&#34;Name&#34;</span><span class=p>]</span> <span class=p>=</span> <span class=s>&#34;kent&#34;</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl><span class=n>name</span> <span class=p>=</span> <span class=n>jNode</span><span class=p>[</span><span class=s>&#34;Name&#34;</span><span class=p>]!.</span><span class=n>GetValue</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;();</span>
+</span></span><span class=line><span class=cl><span class=c1>// 移除, JsonObject继承JsonNode</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>jObject</span> <span class=p>=</span> <span class=n>jNode</span><span class=p>.</span><span class=n>AsObject</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=n>jObject</span><span class=p>.</span><span class=n>Remove</span><span class=p>(</span><span class=s>&#34;Name&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=jsondocument class=headerLink><a href=#jsondocument class=header-mark></a>JsonDocument</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>using</span> <span class=nn>var</span> <span class=n>jDoc</span> <span class=p>=</span> <span class=n>JsonDocument</span><span class=p>.</span><span class=n>Parse</span><span class=p>(</span><span class=n>str</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl><span class=n>name</span> <span class=p>=</span> <span class=n>jDoc</span><span class=p>.</span><span class=n>RootElement</span><span class=p>.</span><span class=n>GetProperty</span><span class=p>(</span><span class=s>&#34;Name&#34;</span><span class=p>).</span><span class=n>Deserialize</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;();</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=jsonserializeroptions-对象 class=headerLink><a href=#jsonserializeroptions-%e5%af%b9%e8%b1%a1 class=header-mark></a>JsonSerializerOptions 对象</h2><p>#todo/笔记 <a href="https://learn.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializeroptions.unmappedmemberhandling?view=net-8.0#system-text-json-jsonserializeroptions-unmappedmemberhandling" target=_blank rel="noopener noreferrer">JsonSerializerOptions.UnmappedMemberHandling Property</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=kt>var</span> <span class=n>opt</span> <span class=p>=</span> <span class=k>new</span> <span class=n>JsonSerializerOptions</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 空格</span>
+</span></span><span class=line><span class=cl>    <span class=n>WriteIndented</span> <span class=p>=</span> <span class=k>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 宽松转义规则,虽然不规范,但中文会正常打印出来. 否则中文会变成unicode字符,例如&#39;蓝&#39;-&#39;\u84DD&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>Encoder</span> <span class=p>=</span> <span class=n>JavaScriptEncoder</span><span class=p>.</span><span class=n>UnsafeRelaxedJsonEscaping</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 下面的不常用</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 默认不包含字段</span>
+</span></span><span class=line><span class=cl>    <span class=n>IncludeFields</span> <span class=p>=</span> <span class=k>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 允许存在注释,例如 &#34;a&#34;:1, // a是id</span>
+</span></span><span class=line><span class=cl>    <span class=n>ReadCommentHandling</span> <span class=p>=</span> <span class=n>JsonCommentHandling</span><span class=p>.</span><span class=n>Skip</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 允许结尾的逗号</span>
+</span></span><span class=line><span class=cl>    <span class=n>AllowTrailingCommas</span> <span class=p>=</span> <span class=k>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 默认大小写不敏感</span>
+</span></span><span class=line><span class=cl>    <span class=n>PropertyNameCaseInsensitive</span> <span class=p>=</span> <span class=k>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 默认允许从string中读取数字</span>
+</span></span><span class=line><span class=cl>    <span class=n>NumberHandling</span> <span class=p>=</span> <span class=n>JsonNumberHandling</span><span class=p>.</span><span class=n>AllowReadingFromString</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 默认驼峰,可以 UpperCaseNamingPolicy:JsonNamingPolicy 然后重写 public override string ConvertName(string name) =&gt;name.ToUpper();来修改</span>
+</span></span><span class=line><span class=cl>    <span class=n>PropertyNamingPolicy</span> <span class=p>=</span> <span class=n>JsonNamingPolicy</span><span class=p>.</span><span class=n>CamelCase</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 对象内部驼峰 &#34;AB&#34;:{&#34;aB&#34;:1,&#34;bB&#34;:1}</span>
+</span></span><span class=line><span class=cl>    <span class=n>DictionaryKeyPolicy</span> <span class=p>=</span> <span class=n>JsonNamingPolicy</span><span class=p>.</span><span class=n>CamelCase</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// enum用名称,而不是数字表示</span>
+</span></span><span class=line><span class=cl>    <span class=n>Converters</span> <span class=p>=</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>new</span> <span class=n>JsonStringEnumConverter</span><span class=p>(</span><span class=n>JsonNamingPolicy</span><span class=p>.</span><span class=n>CamelCase</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=相关特性-attribute class=headerLink><a href=#%e7%9b%b8%e5%85%b3%e7%89%b9%e6%80%a7-attribute class=header-mark></a>相关特性 attribute</h2><p>这些特性都是用在 POCO/实例类的.</p><h3 id=自定义转化名称-jsonpropertyname class=headerLink><a href=#%e8%87%aa%e5%ae%9a%e4%b9%89%e8%bd%ac%e5%8c%96%e5%90%8d%e7%a7%b0-jsonpropertyname class=header-mark></a>自定义转化名称 JsonPropertyName</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=na>[JsonPropertyName(&#34;Wind&#34;)]</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=kt>int</span> <span class=n>WindSpeed</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/customize-properties?pivots=dotnet-8-0#customize-individual-property-names" target=_blank rel="noopener noreferrer">How to customize property names and values with System.Text.Json - .NET | Microsoft Learn</a></p><h3 id=必须存在-jsonrequired class=headerLink><a href=#%e5%bf%85%e9%a1%bb%e5%ad%98%e5%9c%a8-jsonrequired class=header-mark></a>必须存在 JsonRequired</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=na>[JsonRequired]</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=kt>int</span> <span class=n>WindSpeed</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><a href=https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/required-properties target=_blank rel="noopener noreferrer">Require properties for deserialization - .NET | Microsoft Learn</a></p><h3 id=忽略-ignore class=headerLink><a href=#%e5%bf%bd%e7%95%a5-ignore class=header-mark></a>忽略 ignore</h3><p>常用</p><ul><li><code>[JsonIgnore]</code>: 总是忽略</li><li><code>[JsonIgnore(Condition = JsonIgnoreCondition.Never)]</code>: 永远显示, 是 <code>JsonSerializerOptions</code> 对象中, <code>DefaultIgnoreCondition</code>,<code>IgnoreReadOnlyProperties</code>, <code>IgnoreReadOnlyFields</code> 的默认值</li><li><code>[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]</code>: null 就忽略</li><li><code>[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]</code>: 忽略 null 或者值类型的默认值 (例如 int 默认值是 0 )</li></ul><p><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/ignore-properties?pivots=dotnet-7-0" target=_blank rel="noopener noreferrer">How to ignore properties with System.Text.Json - .NET | Microsoft Learn</a></p><h3 id=多余字段-jsonextensiondata class=headerLink><a href=#%e5%a4%9a%e4%bd%99%e5%ad%97%e6%ae%b5-jsonextensiondata class=header-mark></a>多余字段 JsonExtensionData</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=na>[JsonExtensionData]</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=n>Dictionary</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>,</span> <span class=n>JsonElement</span><span class=p>&gt;?</span> <span class=n>ExtensionData</span> <span class=p>{</span> <span class=k>get</span><span class=p>;</span> <span class=k>set</span><span class=p>;</span> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/handle-overflow?pivots=dotnet-7-0#handle-overflow-json" target=_blank rel="noopener noreferrer">How to handle overflow JSON or use JsonElement or JsonNode in System.Text.Json - .NET | Microsoft Learn</a></p><h2 id=不常用的东西 class=headerLink><a href=#%e4%b8%8d%e5%b8%b8%e7%94%a8%e7%9a%84%e4%b8%9c%e8%a5%bf class=header-mark></a>不常用的东西</h2><ul><li><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/preserve-references?pivots=dotnet-7-0" target=_blank rel="noopener noreferrer">处理引用和循环引用</a></li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-10-07</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E7%9A%84json%E6%95%99%E7%A8%8B/ data-title=csharp的json教程 data-hashtags=blog,csharp><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E7%9A%84json%E6%95%99%E7%A8%8B/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E7%9A%84json%E6%95%99%E7%A8%8B/ data-title=csharp的json教程 data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E7%9A%84json%E6%95%99%E7%A8%8B/ data-title=csharp的json教程><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E7%9A%84json%E6%95%99%E7%A8%8B/ data-title=csharp的json教程><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E7%9A%84json%E6%95%99%E7%A8%8B/ data-title=csharp的json教程 data-description="介绍 [[笔记/point/csharp|csharp]] 关于 json 的用法. 本文的所有源码均存放在 [kentxxq/csharpDEMO (github.com)](https://github.com/kentxxq/csharpDEMO). 为什么会有这篇文章? 因为 json 非常的流行, 而且存在有很多细节. 例如性能, 格式, 类库用法等等."><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E7%9A%84json%E6%95%99%E7%A8%8B/ data-title=csharp的json教程 data-description="介绍 [[笔记/point/csharp|csharp]] 关于 json 的用法. 本文的所有源码均存放在 [kentxxq/csharpDEMO (github.com)](https://github.com/kentxxq/csharpDEMO). 为什么会有这篇文章? 因为 json 非常的流行, 而且存在有很多细节. 例如性能, 格式, 类库用法等等."><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E7%9A%84json%E6%95%99%E7%A8%8B/ data-title=csharp的json教程><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a>,&nbsp;<a href=/tags/csharp/>csharp</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/csharp%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC/ class=prev rel=prev title=csharp编码风格><i class="fas fa-angle-left fa-fw"></i>csharp编码风格</a>
+<a href=/posts/%E6%97%A5%E8%AE%B0/2023-10-06/ class=next rel=next title=2023-10-06>2023-10-06<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a target=_blank href=https://beian.miit.gov.cn>湘ICP备2021002319号-1</a></span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NLLDC353PJ",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-NLLDC353PJ" async></script></div></body></html>
