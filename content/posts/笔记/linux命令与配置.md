@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-09-19
+lastmod: 2023-10-09
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -354,6 +354,28 @@ Welcome to Alibaba Cloud Elastic Compute Service !
 ```
 
 ## 常见操作
+
+### jq 处理 json
+
+[jq官网文档](https://jqlang.github.io/jq/manual/#basic-filters)
+
+```shell
+# 计算每个remote_addr请求每个host主机的次数
+cat kentxxq.com.log | jq '.["@fields"] | .remote_addr + " " + .host' | sort | uniq -c | sort -k1n
+
+# 条件过滤
+'select(.["@timestamp"] <= $end_time and .["@fields"].remote_addr == $target_remote_addr)'
+
+# 在上面的基础上,限制时间不能早于11点,晚于13点
+jq -r 'select(.["@timestamp"] >= "2023-10-09T11:00:05+0800" and .["@timestamp"] <= "2023-10-09T13:00:05+0800" ) | .["@fields"] | .remote_addr + " " + .host' kentxxq.com.log | sort | uniq -c | sort -k1n
+# 效果,性能差不多. 但可以用tail -f xxx来监控
+cat kentxxq.com.log | jq -c 'select(.["@timestamp"] >= "2023-10-09T11:00:05+0800" and .["@timestamp"] <= "2023-10-09T13:00:05+0800" ) | .["@fields"] | .remote_addr + " " + .host' | sort | uniq -c | sort -k1n
+
+# 输出到新文件
+jq --arg start "2023-10-09T00:00:00+08:00" --arg end "2023-10-09T23:59:59+08:00" 'select(.["@timestamp"] >= $start and .["@timestamp"] <= $end)' log.json > filtered_log.json
+# tail -f 版本
+tail -f log.json | jq --arg start "2023-10-09T00:00:00+08:00" --arg end "2023-10-09T23:59:59+08:00" 'select(.["@timestamp"] >= $start and .["@timestamp"] <= $end)' > filtered_log.json
+```
 
 ### curl
 

@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-07-26
-lastmod: 2023-08-29
+lastmod: 2023-10-09
 categories:
   - blog
 description: "[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."
@@ -188,7 +188,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 
 #### 拷贝文件 Copy
 
-构建的时候, 拷贝 xx 文件到 xx 目录下面
+构建的时候, 拷贝 xx 文件到 xx 目录下面.
 
 ```xml
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -197,16 +197,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <ip2regionDB>https://ghproxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>  
 </PropertyGroup>  
   
-<Target Name="DownloadContentFiles" BeforeTargets="Build" Condition="!Exists('$(OutputPath)/ip2region.xdb')">  
+<Target Name="DownloadContentFiles" BeforeTargets="Build" Condition="!Exists('$(PublishDir)/ip2region.xdb')">  
     <DownloadFile 
         SourceUrl="$(ip2regionDB)"  
-        DestinationFolder="$(OutputPath)">  
+        DestinationFolder="$(PublishDir)">  
         <Output TaskParameter="DownloadedFile" ItemName="Content" />  
     </DownloadFile>
 </Target>
 
 </Project>
 ```
+
+> [!info]
+> dotnet publish 的 `-o,--output` 是映射到 MSBUILD 的 `PublishDir`,而不是 `OutputPath`
 
 #### 下载任务 DownloadFile
 

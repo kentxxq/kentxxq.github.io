@@ -5,6 +5,11 @@ tags:
   - csharp
 date: 2023-09-27
 lastmod: 2023-10-07
+keywords:
+  - csharp
+  - json
+  - 教程
+  - 转换
 categories:
   - blog
 description: "介绍 [[笔记/point/csharp|csharp]] 关于 json 的用法. 本文的所有源码均存放在 [kentxxq/csharpDEMO (github.com)](https://github.com/kentxxq/csharpDEMO). 为什么会有这篇文章? 因为 json 非常的流行, 而且存在有很多细节. 例如性能, 格式, 类库用法等等."
@@ -86,9 +91,12 @@ public static readonly Person DemoPerson = new()
 };
 ```
 
-## 对象转 json
+## 对象/json 互转
+
+### 标准做法
 
 ```csharp
+// 转json
 var str = JsonSerializer.Serialize(StaticData.DemoPerson, new JsonSerializerOptions
 {
     // 空格
@@ -96,6 +104,9 @@ var str = JsonSerializer.Serialize(StaticData.DemoPerson, new JsonSerializerOpti
     // 宽松转义规则,虽然不规范,但中文会正常打印出来. 否则中文会变成unicode字符,例如'蓝'-'\u84DD'
     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
 });
+
+// 转对象
+var d1 = JsonSerializer.Deserialize<Person>(str);
 ```
 
 得到字符串
@@ -142,6 +153,52 @@ var str = JsonSerializer.Serialize(StaticData.DemoPerson, new JsonSerializerOpti
   ]
 }
 
+```
+
+### 源生成
+
+## 自定义类型转换
+
+- [enum枚举](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/customize-properties?pivots=dotnet-8-0#enums-as-strings) 默认是枚举值 (数字), 使用名称替代
+- 日期/timestamp 互转示例
+
+```csharp
+public class DateTimeJsonConverter2Timestamp : JsonConverter<DateTime>
+{
+    public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var tsDatetime = reader.GetInt64().MillisecondsToDateTime();
+        return tsDatetime;
+    }
+
+    public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+    {
+        var jsonDateTimeFormat = value.ToTimestampMilliseconds();
+        writer.WriteNumberValue(jsonDateTimeFormat);
+    }
+}
+```
+
+加入到 [[笔记/csharp的json教程#JsonSerializerOptions 对象|JsonSerializerOptions]] 中:
+
+```csharp
+var opt = new JsonSerializerOptions
+{
+    // enum用名称,而不是数字表示
+    Converters =
+    {
+        new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+    }
+};
+```
+
+aspnetcore 使用
+
+```csharp
+services.AddControllers()
+        .AddJsonOptions(
+            opt => opt.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter2Timestamp())
+        );
 ```
 
 ## json 字符串数据查询
@@ -258,3 +315,39 @@ public Dictionary<string, JsonElement>? ExtensionData { get; set; }
 ## 不常用的东西
 
 - [处理引用和循环引用](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/preserve-references?pivots=dotnet-7-0)
+- 使用 [Utf8JsonWriter](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/use-utf8jsonwriter) 和 [Utf8JsonReader](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/use-utf8jsonreader) 这样的低级 api 处理 json, 甚至可以处理不完整或残缺的字符串
+
+    ```csharp
+    var options = new JsonWriterOptions
+    {
+        Indented = true
+    };
+    
+    using var stream = new MemoryStream();
+    using var writer = new Utf8JsonWriter(stream, options);
+    
+    writer.WriteStartObject();
+    writer.WriteString("date", DateTimeOffset.UtcNow);
+    writer.WriteNumber("temp", 42);
+    // writer.WriteEndObject(); // 不输出结尾的大括号
+    writer.Flush();
+    var json = Encoding.UTF8.GetString(stream.ToArray());
+    Console.WriteLine(json);
+    
+    // 读取这个不完整的json
+    // 因为最后的42没有截止符,无法读取
+    var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(json),isFinalBlock:false,state:default);
+    while (reader.Read())
+    {
+        Console.WriteLine(reader.TokenType);
+        if (reader.TokenType == JsonTokenType.PropertyName)
+        {
+            var property = reader.GetString();
+            if (property == "date")
+            {
+                reader.Read();
+                Console.WriteLine(reader.GetDateTime());
+            }
+        }
+    }
+    ```

@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-09-01
+lastmod: 2023-10-09
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例."
@@ -17,6 +17,8 @@ description: "[[笔记/point/nginx|nginx]] 的配置示例."
 ## 基础配置
 
 ### nginx.conf 主配置
+
+> 日志格式解析可以参考 [[笔记/linux命令与配置#jq 处理 json|jq 处理 json]]
 
 ```nginx
 # user nobody;
@@ -557,6 +559,9 @@ server {
 }
 
 ```
+
+> 多个 server_name 公用同一个 zone, 会导致低限速的一直影响高限速.
+> 如果需要独立开, 应该配置多个 zone=xxx
 
 ### 代理 openai
 
