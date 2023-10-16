@@ -7,7 +7,7 @@ date: 2023-07-06
 lastmod: 2023-10-09
 categories:
   - blog
-description: "[[笔记/point/nginx|nginx]] 的配置示例."
+description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
 ---
 
 ## 简介

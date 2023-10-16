@@ -4,7 +4,7 @@ tags:
   - blog
   - shell
 date: 2023-08-10
-lastmod: 2023-09-20
+lastmod: 2023-10-10
 categories:
   - blog
 description: "虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔记/point/shell|shell]] 是高效的."
@@ -348,6 +348,7 @@ if (( $( echo "$memory_usage > 80" | bc -l ) )); then
         fi
     fi
 fi
+echo "====================================="
 ```
 
 ### 清空 log 结尾的日志文件

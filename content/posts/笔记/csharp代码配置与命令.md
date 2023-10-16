@@ -54,6 +54,12 @@ options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")); }
 dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\win-x64.pubxml
 ```
 
+### nuget 缓存路径配置
+
+```shell
+setx /M NUGET_PACKAGES D:\<username>\.nuget\packages
+```
+
 ### nuget 推包
 
 ```shell

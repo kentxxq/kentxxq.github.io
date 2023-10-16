@@ -7,7 +7,7 @@ tags:
   - point
   - js
 date: 2023-07-06
-lastmod: 2023-09-05
+lastmod: 2023-10-16
 categories:
   - point
 ---
@@ -20,8 +20,23 @@ categories:
 - 社区非常庞大
 - 浏览器 web 上统一标准
 
+## 命令
+
 ### 镜像源
 
 ```shell
 npm config set registry https://registry.npmmirror.com
+```
+
+### 配置缓存
+
+[npm缓存配置](https://docs.npmjs.com/cli/v6/commands/npm-cache) 默认路径 `~/.npm on Posix` 或者 `%AppData%/npm-cache on Windows`
+
+```shell
+# 配置缓存路径
+npm config set cache q:\cache\js
+# 或者
+setx /M npm_config_cache q:\cache\js
+# 验证命令. 包会存放在配置的路径,而不是默认路径
+npm install -g typescript
 ```

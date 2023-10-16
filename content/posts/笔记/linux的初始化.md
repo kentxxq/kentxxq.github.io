@@ -1,10 +1,10 @@
 ---
-title: linux的初始化配置
+title: linux的初始化
 tags:
   - blog
   - linux
 date: 2023-07-08
-lastmod: 2023-07-19
+lastmod: 2023-10-16
 categories:
   - blog
 description: 

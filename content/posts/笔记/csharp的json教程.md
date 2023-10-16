@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-09-27
-lastmod: 2023-10-07
+lastmod: 2023-10-12
 keywords:
   - csharp
   - json
@@ -17,7 +17,7 @@ description: "介绍 [[笔记/point/csharp|csharp]] 关于 json 的用法. 本�
 
 ## 简介
 
-介绍 [[笔记/point/csharp|csharp]] 关于 json 的用法. 本文的所有源码均存放在 [kentxxq/csharpDEMO (github.com)](https://github.com/kentxxq/csharpDEMO).
+介绍 [[笔记/point/csharp|csharp]] 关于 json 的用法. 本文的所有源码均存放在 [kentxxq/csharpDEMO (github.com)](https://github.com/kentxxq/csharpDEMO/blob/main/PackageUsage/Convert/MyConvert/Program.cs).
 
 为什么会有这篇文章?
 
@@ -157,6 +157,29 @@ var d1 = JsonSerializer.Deserialize<Person>(str);
 
 ### 源生成
 
+#todo/笔记  [net8新增UseStringEnumConverter](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/source-generation-modes?pivots=dotnet-8-0#blanket-policy)
+
+编写一个 Context 类
+
+```csharp
+[JsonSourceGenerationOptions(WriteIndented = true)] // 全局设置
+[JsonSerializable(typeof(Person))] // 需要转换的类
+[JsonSerializable(typeof(User))]   // 可以多个
+internal partial class JsonContext : JsonSerializerContext
+{
+}
+```
+
+使用:
+
+```csharp
+var s1 = JsonSerializer.Serialize(StaticData.DemoPerson, JsonContext.Default.Person);
+var o1 = JsonSerializer.Deserialize(s1, JsonContext.Default.Person);
+var s2 = JsonSerializer.Serialize(StaticData.DemoUser, JsonContext.Default.User);
+Console.WriteLine(s1);
+Console.WriteLine(s2);
+```
+
 ## 自定义类型转换
 
 - [enum枚举](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/customize-properties?pivots=dotnet-8-0#enums-as-strings) 默认是枚举值 (数字), 使用名称替代
@@ -179,7 +202,19 @@ public class DateTimeJsonConverter2Timestamp : JsonConverter<DateTime>
 }
 ```
 
-加入到 [[笔记/csharp的json教程#JsonSerializerOptions 对象|JsonSerializerOptions]] 中:
+**推荐**使用 `JsonConverter` 特性:
+
+```csharp
+public class WeatherForecastWithConverterAttribute
+{
+    [JsonConverter(typeof(DateTimeJsonConverter2Timestamp))]
+    public DateTime Date { get; set; }
+    public int TemperatureCelsius { get; set; }
+    public string? Summary { get; set; }
+}
+```
+
+或加入到 [[笔记/csharp的json教程#JsonSerializerOptions 对象|JsonSerializerOptions]] 中:
 
 ```csharp
 var opt = new JsonSerializerOptions
@@ -267,6 +302,8 @@ var opt = new JsonSerializerOptions
     {
         new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
     }
+    // 从源生成中获取类型转换信息
+    TypeInfoResolver = JsonContext.Default
 };
 ```
 
@@ -311,6 +348,29 @@ public Dictionary<string, JsonElement>? ExtensionData { get; set; }
 ```
 
 [How to handle overflow JSON or use JsonElement or JsonNode in System.Text.Json - .NET | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/handle-overflow?pivots=dotnet-7-0#handle-overflow-json)
+
+## 不规范的 json 字符串
+
+下面是一些可能遇到的情况:
+
+- 不传递值, 会使用实体类的默认值. 所以实体类如果不能为 null, 一定要配置默认值.
+- `null` 会破坏代码中不允许为 `null` 的问题. 需要 [特殊处理](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/converters-how-to?pivots=dotnet-7-0#handle-null-values). 因此**建议在 json 字符串中去掉值为 `null` 的数据!**
+- 也可以不管这些, 报错了再去处理. 但用户请求是一定要进行验证的.
+
+```csharp
+// 不标准的json
+// 不完整的json,缺少的字段默认值
+var j1 = """{"Name": "ken"}""";
+var j11 = JsonSerializer.Deserialize(j1, JsonContext.Default.Person);
+// 带null的json
+// age为null报错.
+// name为null则会传递到对象里,即使Name不允许为null值
+var j2 = """{"Name": null,"Age":4}""";
+var j22 = JsonSerializer.Deserialize(j2, JsonContext.Default.Person);
+// 多余的字段不受影响.正常默认值  
+var j3 = """{"HHH":null}""";  
+var j33 = JsonSerializer.Deserialize(j3, JsonContext.Default.Person);
+```
 
 ## 不常用的东西
 
