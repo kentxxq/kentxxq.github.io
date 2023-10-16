@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-09-27
-lastmod: 2023-10-12
+lastmod: 2023-10-16
 keywords:
   - csharp
   - json
@@ -354,8 +354,8 @@ public Dictionary<string, JsonElement>? ExtensionData { get; set; }
 下面是一些可能遇到的情况:
 
 - 不传递值, 会使用实体类的默认值. 所以实体类如果不能为 null, 一定要配置默认值.
-- `null` 会破坏代码中不允许为 `null` 的问题. 需要 [特殊处理](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/converters-how-to?pivots=dotnet-7-0#handle-null-values). 因此**建议在 json 字符串中去掉值为 `null` 的数据!**
-- 也可以不管这些, 报错了再去处理. 但用户请求是一定要进行验证的.
+- `null` 会破坏代码中不允许为 `null` 的问题. 需要 [等待这个讨论完结](https://github.com/dotnet/runtime/issues/1256) 来最终加入一个新的 `jsonserializerOptions` 选项或者 [特殊处理](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/converters-how-to?pivots=dotnet-7-0#handle-null-values). 因此**建议在 json 字符串中去掉值为 ` null ` 的数据!**
+- 也可以不管这些, 通过用户提交的数据进行验证避免错误. 因为用户请求是一定要进行验证的.
 
 ```csharp
 // 不标准的json
