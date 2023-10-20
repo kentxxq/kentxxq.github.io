@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-09-04
+lastmod: 2023-10-19
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -65,12 +65,13 @@ Environment="HTTPS_PROXY=https://proxy.example.com:3129"
 Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
 ```
 
-## 配置解析
+## 命令解析
 
 ```shell
 # -d 后台运行,--restart=always 总是重启,
 # -v /mydata/:/data/ 本地/mydata/挂载到容器/data/
-# 暴露本地12端口,映射到容器34端口
+# 暴露本地12端口,映射到容器34端口. 
+# 仅本地示例 -p 127.0.0.1:8000:8080
 # 默认启动,如果加上/bin/bash,就是进入bash命令
 docker run -d --name testserver \
 -v /mydata/:/data/ \
