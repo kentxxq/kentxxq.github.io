@@ -5,7 +5,7 @@ tags:
   - mimir
   - grafana
 date: 2023-07-22
-lastmod: 2023-08-02
+lastmod: 2023-10-26
 categories:
   - blog
 description: 
@@ -24,11 +24,11 @@ description:
 下载对应版本
 
 ```shell
-curl https://github.com/grafana/mimir/releases/latest/download/mimir-linux-amd64 -o mimir
+curl -Lo mimir https://github.com/grafana/mimir/releases/latest/download/mimir-linux-amd64
 chmod +x mimir
 ```
 
-配置文件 `vim mimir-demo.yml`
+配置文件 `vim mimir.yml`
 
 ```yml
 # 禁用多租户
@@ -83,34 +83,68 @@ store_gateway:
     replication_factor: 1
 ```
 
+### minio 存储
+
+参考 [官方存储文档](https://grafana.com/docs/mimir/latest/configure/configure-object-storage-backend/) 写一个配置文件 `mimir.yaml` 保存到 [[笔记/point/minio|minio]],
+
+```yaml
+common:
+  storage:
+    backend: s3
+    s3:
+      endpoint: s3.us-east-2.amazonaws.com
+      region: us-east-2
+      access_key_id: "${AWS_ACCESS_KEY_ID}" # This is a secret injected via an environment variable
+      secret_access_key: "${AWS_SECRET_ACCESS_KEY}" # This is a secret injected via an environment variable
+
+blocks_storage:
+  s3:
+    bucket_name: mimir-blocks
+
+alertmanager_storage:
+  s3:
+    bucket_name: mimir-alertmanager
+
+ruler_storage:
+  s3:
+    bucket_name: mimir-ruler
+```
+
 运行 `./mimir --config.file=mimir-demo.yml`
 
 ### 守护进程
 
-[[笔记/point/supervisor|supervisor]] 配置文件 `/etc/supervisor/conf.d/mimir.conf`
+[[笔记/point/Systemd|Systemd]] 守护进程配置 `/etc/systemd/system/mimir.service`
 
-```toml
-[program:mimir]
-directory = /root
-command = /root/mimir --config.file=/root/mimir-demo.yml
+```ini
+[Unit]
+Description=mimir
+# 启动区间30s内,尝试启动3次
+StartLimitIntervalSec=30
+StartLimitBurst=3
 
-# 自动重启
-autorestart = true
-# 启动失败的尝试次数
-startretries = 3
-# 进程20s没有退出，则判断启动成功
-startsecs = 20
 
-# 标准输出的文件路径
-stdout_logfile = /tmp/mimir-supervisor.log
-# 日志文件最大大小
-stdout_logfile_maxbytes=20MB
-# 日志文件保持数量 默认为10 设置为0 表示不限制
-stdout_logfile_backups = 5
-# 标准输出的文件路径
-stderr_logfile = /tmp/mimir-supervisor.log
-# 日志文件最大大小
-stderr_logfile_maxbytes=20MB
-# 日志文件保持数量 默认为10 设置为0 表示不限制
-stderr_logfile_backups = 5
+[Service]
+# 环境变量 $MY_ENV1
+# Environment=MY_ENV1=value1
+# Environment="MY_ENV2=value2"
+# 环境变量文件,文件内容"MY_ENV3=value3" $MY_ENV3
+# EnvironmentFile=/path/to/environment/file1
+
+#WorkingDirectory=/root/myApp/TestServer
+ExecStart=/root/mimir -config.file=/root/mimir.yaml
+
+# 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
+RestartSec=30s 
+Restart=always
+# 相关资源都发送term后,后发送kill
+KillMode=mixed
+# 最大文件打开数不限制
+LimitNOFILE=infinity
+# 子线程数量不限制
+TasksMax=infinity
+
+[Install]
+WantedBy=multi-user.target
+#Alias=testserver.service
 ```

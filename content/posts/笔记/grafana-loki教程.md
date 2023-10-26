@@ -6,7 +6,7 @@ tags:
   - loki
   - grafana
 date: 2023-07-17
-lastmod: 2023-08-02
+lastmod: 2023-10-25
 categories:
   - blog
 description: "grafana-loki 是 [[笔记/point/grafana|grafana]] 公司的日志采集组件"
@@ -16,16 +16,20 @@ description: "grafana-loki 是 [[笔记/point/grafana|grafana]] 公司的日志�
 
 `grafana-loki` 是 [[笔记/point/grafana|grafana]] 公司的日志采集组件
 
-## 内容
+## 安装
 
-### 安装
+### 快速验证
 
-1. 下载 Loki 和 Promtail 的 zip 压缩文件 [Releases · grafana/loki](https://github.com/grafana/loki/releases/)
+[Loki安装文档链接](https://grafana.com/docs/loki/latest/setup/install/local/),因为网络不佳, 所以使用二进制安装方式.
+
+1. 去 [Releases · grafana/loki](https://github.com/grafana/loki/releases/) 下载 `loki-linux-amd64.zip` 和 `promtail-linux-amd64.zip` 压缩文件
 2. 下载配置文件
 
     ```shell
+    # loki启动配置文件
     wget https://raw.githubusercontent.com/grafana/loki/main/cmd/loki/loki-local-config.yaml
 
+    # promtail启动配置文件
     wget https://raw.githubusercontent.com/grafana/loki/main/clients/cmd/promtail/promtail-local-config.yaml
     ```
 
@@ -38,61 +42,109 @@ description: "grafana-loki 是 [[笔记/point/grafana|grafana]] 公司的日志�
     ./loki-linux-amd64 -config.file=loki-local-config.yaml
     ```
 
-4. 守护进程 [[笔记/point/supervisor|supervisor]]
+### loki 配置文件
 
-    ```toml
-    [program:promtail]
-    directory = /root
-    command = /root/promtail-linux-amd64 -config.file=promtail-local-config.yaml
-    
-    # 自动重启
-    autorestart = true
-    # 启动失败的尝试次数
-    startretries = 3
-    # 进程20s没有退出，则判断启动成功
-    startsecs = 20
-    # 标准输出的文件路径
-    stdout_logfile = /tmp/promtail-supervisor.log
-    # 日志文件最大大小
-    stdout_logfile_maxbytes=20MB
-    # 日志文件保持数量 默认为10 设置为0 表示不限制
-    stdout_logfile_backups = 5
-    # 标准输出的文件路径
-    stderr_logfile = /tmp/promtail-supervisor.log
-    # 日志文件最大大小
-    stderr_logfile_maxbytes=20MB
-    # 日志文件保持数量 默认为10 设置为0 表示不限制
-    stderr_logfile_backups = 5
+相关配置链接:
 
+- [loki的Storage文档](https://grafana.com/docs/loki/v2.9.x/storage/#on-premise-deployment-minio-single-store)
+- [阿里云OSS配置](https://grafana.com/docs/loki/latest/configure/examples/#alibaba-cloud-storage-configyaml)
+- [s3集群配置](https://grafana.com/docs/loki/latest/configure/examples/#2-s3-cluster-exampleyaml)
 
+#todo/笔记  loki 集群的配置?
 
-    [program:loki]
-    directory = /root
-    command = /root/loki-linux-amd64 -config.file=loki-local-config.yaml
-    
-    # 自动重启
-    autorestart = true
-    # 启动失败的尝试次数
-    startretries = 3
-    # 进程20s没有退出，则判断启动成功
-    startsecs = 20
-    # 标准输出的文件路径
-    stdout_logfile = /tmp/loki-supervisor.log
-    # 日志文件最大大小
-    stdout_logfile_maxbytes=20MB
-    # 日志文件保持数量 默认为10 设置为0 表示不限制
-    stdout_logfile_backups = 5
-    # 标准输出的文件路径
-    stderr_logfile = /tmp/loki-supervisor.log
-    # 日志文件最大大小
-    stderr_logfile_maxbytes=20MB
-    # 日志文件保持数量 默认为10 设置为0 表示不限制
-    stderr_logfile_backups = 5
-    ```
+[[笔记/point/minio|minio]] 版本:
 
-### 查询日志 LogQL
+```yml
+# 多租户的话,要启用这个. 每个租户一个文件夹
+# 一个租户的话, 数据都会放在 fake 文件夹下面
+auth_enabled: false
 
-#### 常用语法
+server:
+  http_listen_port: 3100
+  grpc_listen_port: 9096
+
+common:
+  instance_addr: 0.0.0.0
+  replication_factor: 1
+  ring:
+    kvstore:
+      store: inmemory
+
+query_range:
+  results_cache:
+    cache:
+      embedded_cache:
+        enabled: true
+        max_size_mb: 100
+
+storage_config:
+  aws:
+    # Note: use a fully qualified domain name, like localhost.
+    # full example: http://loki:supersecret@localhost.:9000
+    s3: https://秘钥id:秘钥key@minio-api.mashibing.cc.:443/loki
+    s3forcepathstyle: true
+  boltdb_shipper:
+    active_index_directory: /loki/boltdb-shipper-active
+    cache_location: /loki/boltdb-shipper-cache
+    cache_ttl: 24h         # Can be increased for faster performance over longer query periods, uses more disk space
+    shared_store: s3
+
+schema_config:
+  configs:
+    - from: 2020-10-24
+      store: boltdb-shipper
+      object_store: s3
+      schema: v11
+      index:
+        prefix: index_
+        period: 24h
+
+compactor:
+  working_directory: /loki/compactor
+  shared_store: s3
+  compaction_interval: 5m
+```
+
+### 守护进程
+
+[[笔记/point/Systemd|Systemd]] 配置文件 `/etc/systemd/system/loki.service`
+
+```ini
+[Unit]
+Description=loki
+# 启动区间30s内,尝试启动3次
+StartLimitIntervalSec=30
+StartLimitBurst=3
+
+[Service]
+# 环境变量 $MY_ENV1
+# Environment=MY_ENV1=value1
+# Environment="MY_ENV2=value2"
+# 环境变量文件,文件内容"MY_ENV3=value3" $MY_ENV3
+# EnvironmentFile=/path/to/environment/file1
+
+#WorkingDirectory=/root/myApp/TestServer
+
+ExecStart=/root/loki -config.file=/root/loki-minio-config.yaml
+
+# 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
+RestartSec=30s 
+Restart=always
+# 相关资源都发送term后,后发送kill
+KillMode=mixed
+# 最大文件打开数不限制
+LimitNOFILE=infinity
+# 子线程数量不限制
+TasksMax=infinity
+
+[Install]
+WantedBy=multi-user.target
+#Alias=testserver.service
+```
+
+## 查询日志 LogQL
+
+### 常用语法
 
 ```shell
 # 查询标签
@@ -108,7 +160,7 @@ description: "grafana-loki 是 [[笔记/point/grafana|grafana]] 公司的日志�
 count_over_time({filename="/var/log/syslog"}[$__range])
 ```
 
-#### 日志分割
+### 日志分割
 
 官网有几个日志分析的示例放在 [LogQL Analyzer | Grafana Loki documentation](https://grafana.com/docs/loki/latest/logql/analyzer/),下面写一个日常会遇到的.
 

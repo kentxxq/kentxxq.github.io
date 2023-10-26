@@ -83,6 +83,8 @@ http {
                          '"http_x_forwarded_for":"$http_x_forwarded_for", '
                          '"http_user_agent":"$http_user_agent" } }';
 
+    # 允许配置很多的server_name
+    server_names_hash_max_size 1024;
     # 配置字符集
     charset utf-8;
     # 访问日志

@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-10-19
+lastmod: 2023-10-20
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -16,7 +16,7 @@ description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操�
 
 ## 安装/卸载 docker
 
-[官方文档Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+[官方文档Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) 速度慢? 可以试试 [阿里源](https://developer.aliyun.com/mirror/docker-ce?spm=a2c6h.13651102.0.0.74f31b11uNneF2) 和 [华为源](https://mirrors.huaweicloud.com/mirrorDetail/5ea14d84b58d16ef329c5c13)
 
 ```shell
 # 前置准备

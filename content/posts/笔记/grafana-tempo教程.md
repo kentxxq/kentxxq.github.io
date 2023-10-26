@@ -5,7 +5,7 @@ tags:
   - tempo
   - grafana
 date: 2023-07-19
-lastmod: 2023-08-02
+lastmod: 2023-10-26
 categories:
   - blog
 description: "grafana-tempo 是 [[笔记/point/grafana|grafana]] 公司的链路追踪组件"
@@ -27,10 +27,8 @@ description: "grafana-tempo 是 [[笔记/point/grafana|grafana]] 公司的链路
 开始安装
 
 ```shell
-curl -Lo tempo_2.1.1_linux_amd64.deb https://github.com/grafana/tempo/releases/download/v2.1.1/tempo_2.1.1_linux_amd64.deb
-# 校验输出tempo_2.1.1_linux_amd64.deb: OK
-echo 6e031625b2046d360cf8c4897614523869f45b52286e4fb69e25811d2509b651 \
-  tempo_2.1.1_linux_amd64.deb | sha256sum -c
+curl -Lo tempo_2.2.4_linux_amd64.tar.gz https://github.com/grafana/tempo/releases/download/v2.2.4/tempo_2.2.4_linux_amd64.tar.gz
+
 # 安装
 dpkg -i tempo_2.1.1_linux_amd64.deb
 ```

@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-10-09
+lastmod: 2023-10-26
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -439,6 +439,15 @@ tcpdump tcp
 tcpdump 'ip && tcp'
 ```
 
+### 校验 sha 256
+
+```shell
+curl -Lo tempo_2.1.1_linux_amd64.deb https://github.com/grafana/tempo/releases/download/v2.1.1/tempo_2.1.1_linux_amd64.deb
+# 校验输出tempo_2.1.1_linux_amd64.deb: OK
+echo 6e031625b2046d360cf8c4897614523869f45b52286e4fb69e25811d2509b651 \
+  tempo_2.1.1_linux_amd64.deb | sha256sum -c
+```
+
 ### 清除历史记录
 
 ```shell
@@ -454,6 +463,15 @@ cat /dev/null >  /var/log/secure ;
 cat /dev/null >  /var/log/message ;
 echo > /var/log/btmp ;
 echo > /var/log/wtmp ;
+```
+
+### dpkg 软件包查找
+
+```shell
+# 查看列表,过滤列表
+dpkg -l | grep kubelet
+# 查看kubelet相关的文件
+dpkg -L kubelet
 ```
 
 ### 用户会话处理

@@ -7,7 +7,7 @@ tags:
   - prometheus
   - csharp
 date: 2023-07-20
-lastmod: 2023-08-02
+lastmod: 2023-10-20
 keywords:
   - OpenTelemetry
   - grafana
@@ -19,14 +19,30 @@ keywords:
   - tempo
 categories:
   - blog
-description: "[[笔记/point/OpenTelemetry|OpenTelemetry]] 实践会涉及到 [[笔记/point/csharp|csharp]] 应用的集成, [[笔记/grafana-ui教程|grafana-ui的展示]] + [[笔记/grafana-loki教程|grafana-loki日志处理]] + [[笔记/grafana-tempo教程|grafana-tempo链路追踪处理]] + [[笔记/prometheus教程|prometheus指标处理]] + [[笔记/minio教程|minio存储]] + [prometheus存储后端Mimir](https://grafana.com/oss/mimir/)."
+description: "这篇文章会把关于 [[笔记/point/OpenTelemetry|OpenTelemetry]] 的相关文章串联起来, 从 0 到 1 完成所有的实践."
 ---
 
 ## 简介
 
-[[笔记/point/OpenTelemetry|OpenTelemetry]] 实践会涉及到 [[笔记/point/csharp|csharp]] 应用的集成, [[笔记/grafana-ui教程|grafana-ui的展示]] + [[笔记/grafana-loki教程|grafana-loki日志处理]] + [[笔记/grafana-tempo教程|grafana-tempo链路追踪处理]] + [[笔记/prometheus教程|prometheus指标处理]] + [[笔记/minio教程|minio存储]] + [prometheus存储后端Mimir](https://grafana.com/oss/mimir/).
+这篇文章会把关于 [[笔记/point/OpenTelemetry|OpenTelemetry]] 的相关文章串联起来, 从 0 到 1 完成所有的实践.
 
-## 内容
+其中会涉及到如下组件:
+
+- [APP代码放着这里](https://github.com/kentxxq/csharpDEMO/tree/main/Aspnetcore/AddOpentelemetry),是 [[笔记/point/csharp|csharp-aspnetcore]] Web 应用
+- [[笔记/OpenTelemetry-Collector教程|OpenTelemetry-Collector]] 接收应用数据
+- [[笔记/grafana-loki教程|loki]] 处理日志
+- [[笔记/grafana-mimir教程|mimir]] 处理指标
+- [[笔记/grafana-tempo教程|tempo]] 处理链路追踪
+- [[笔记/point/minio|minio]] 存放着所有的数据
+- [[笔记/grafana-ui教程|grafana]] 做展示
+
+![[附件/opentelemetry架构图.excalidraw.svg]]
+
+## 搭建
+
+1. 根据 [[笔记/minio教程|minio教程]] 搭建
+
+## 原内容
 
 组件非常的多, 但是现在 `2023年7月20日20:32:49` 还不完善, 后续再更新.
 
@@ -43,6 +59,6 @@ description: "[[笔记/point/OpenTelemetry|OpenTelemetry]] 实践会涉及到 [[
 - [Send logs to Loki with filelog receiver | OpenTelemetry documentation](https://grafana.com/docs/opentelemetry/collector/send-logs-to-loki/filelog-receiver/) opentelemetry-collector 收集到日志以后, 如何转发给 loki
 - [Configuration | OpenTelemetry](https://opentelemetry.io/docs/collector/configuration/#receivers) opentelemetry-collector 的配置文档
 
-## 参考内容
+## 相关内容
 
 - Java 通过 agent 方式注入即可 [opentelemetry-java-instrumentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation)

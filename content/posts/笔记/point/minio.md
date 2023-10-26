@@ -4,7 +4,7 @@ tags:
   - point
   - minio
 date: 2023-07-19
-lastmod: 2023-07-19
+lastmod: 2023-10-25
 categories:
   - point
 ---
@@ -14,4 +14,4 @@ categories:
 要点:
 
 - 开源免费
-- 兼容 S 3 协议, 社区庞大
+- 兼容 `S3` 协议, 社区庞大
