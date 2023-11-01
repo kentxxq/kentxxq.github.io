@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-10-26
+lastmod: 2023-10-28
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -397,6 +397,16 @@ curl -vvv 'https://kentxxq.com/Count' -H 'Origin: http://localhost:3000'
 # 请求es
 curl -H "Content-Type: application/json"  -XPUT --user elastic:password   es-cn-oew1whnk60023e4s9.elasticsearch.aliyuncs.com:9200/flow_user_index/_settings -d '{"index.mapping.total_fields.limit":0}'
 结果 {"acknowledged":true}
+
+# 计时 https://susam.net/blog/timing-with-curl.html
+curl -L -w "time_namelookup: %{time_namelookup}
+time_connect: %{time_connect}
+time_appconnect: %{time_appconnect}
+time_pretransfer: %{time_pretransfer}
+time_redirect: %{time_redirect}
+time_starttransfer: %{time_starttransfer}
+time_total: %{time_total}
+" https://example.com/
 ```
 
 报错

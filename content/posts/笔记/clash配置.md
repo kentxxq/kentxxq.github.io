@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-09-28
+lastmod: 2023-11-01
 keywords:
   - clash
   - 配置文件
@@ -27,69 +27,9 @@ description: "记录 [[笔记/point/clash|clash]] 的配置, 以及是如何使�
 - 为什么不用第三方订阅转换? 因为担心隐私.
 - 为什么不自建订阅转换? 因为觉得麻烦, 懒得维护.
 
-## 写配置文件
+## 快速配置
 
-### 绕过系统代理
-
-参考链接 [绕过系统代理 | Clash for Windows](https://docs.cfw.lbyczf.com/contents/bypass.html#%E8%AE%BE%E7%BD%AE%E6%96%B9%E5%BC%8F)
-
-`Settings` => `System Proxy` => `Bypass Domain/IPNet`
-
-```yml
-bypass:
-  - localhost
-  - 127.*
-  - 10.*
-  - 172.16.*
-  - 172.17.*
-  - 172.18.*
-  - 172.19.*
-  - 172.20.*
-  - 172.21.*
-  - 172.22.*
-  - 172.23.*
-  - 172.24.*
-  - 172.25.*
-  - 172.26.*
-  - 172.27.*
-  - 172.28.*
-  - 172.29.*
-  - 172.30.*
-  - 172.31.*
-  - 192.168.*
-  - <local>
-```
-
-### 绕过 windows 应用
-
-类似于 [[笔记/point/windows|windows]] 的应用商店, 邮箱等应用开启代理后会无法访问.
-
-可以通过 `UWP Loopback` 跳过.
-
-![[附件/clash的UWP操作图.png]]
-
-### 配置文件使用
-
-1. 修改配置示例
-
-```yml
-proxy-providers:
-  AMY-HongKong:
-    type: http
-    path: ./ProxySet/HongKong.yaml
-    url: "你的订阅地址"
-    interval: 3600
-    # 你的香港节点包含"香港"两个字,就填香港.包含"HK",就填"HK"
-    filter: "香港"
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 300
-```
-
-1. 保存成 yml 文件, 然后 `Clash=>Profiles=>Import` 导入
-
-### 配置示例细节
+### 配置模板 - 复制保存成 yml
 
 ```yml
 port: 7890
@@ -361,7 +301,26 @@ rules:
   - MATCH,所有-auto
 ```
 
-### 自定义规则
+### 配置模板 - 修改必要信息
+
+修改订阅信息:
+
+```yml
+proxy-providers:
+  AMY-HongKong:
+    type: http
+    path: ./ProxySet/HongKong.yaml
+    url: "你的订阅地址"
+    interval: 3600
+    # 你的香港节点包含"香港"两个字,就填香港.包含"HK",就填"HK"
+    filter: "香港"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+```
+
+如果有自己特定的规则, 例如特定 ip, 特定网站需要走代理节点. 可以添加自定义规则:
 
 - `DOMAIN-SUFFIX`：域名后缀匹配
 - `DOMAIN`：域名匹配
@@ -374,6 +333,83 @@ rules:
 - `PROCESS-NAME`：源进程名匹配
 - `RULE-SET`：Rule Provider 规则匹配
 - `MATCH`：全匹配
+
+### 导入配置文件
+
+- 通过 `Clash=>Profiles=>Import`, 将配置文件 `xxx.yml` 导入 clash 并生效
+
+## clash 应用配置
+
+### 绕过系统代理
+
+参考链接 [绕过系统代理 | Clash for Windows](https://docs.cfw.lbyczf.com/contents/bypass.html#%E8%AE%BE%E7%BD%AE%E6%96%B9%E5%BC%8F)
+
+`Settings` => `System Proxy` => `Bypass Domain/IPNet`
+
+```yml
+bypass:
+  - localhost
+  - 127.*
+  - 10.*
+  - 172.16.*
+  - 172.17.*
+  - 172.18.*
+  - 172.19.*
+  - 172.20.*
+  - 172.21.*
+  - 172.22.*
+  - 172.23.*
+  - 172.24.*
+  - 172.25.*
+  - 172.26.*
+  - 172.27.*
+  - 172.28.*
+  - 172.29.*``
+  - 172.30.*
+  - 172.31.*
+  - 192.168.*
+  - <local>
+```
+
+### 绕过 windows 应用
+
+类似于 [[笔记/point/windows|windows]] 的应用商店, 邮箱等应用开启代理后会无法访问.
+
+可以通过 `UWP Loopback` 跳过.
+
+![[附件/clash的UWP操作图.png]]
+
+### 覆盖现有配置内容
+
+[配置文件预处理](https://docs.cfw.lbyczf.com/contents/parser.html#%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95-yaml) 适用于**不想修改配置文件, 特定于当前机器的特殊配置**
+
+|键|值类型|操作|
+|---|---|---|
+|append-rules|数组|数组合并至原配置 `rules` 数组**后**|
+|prepend-rules|数组|数组合并至原配置 `rules` 数组**前**|
+|append-proxies|数组|数组合并至原配置 `proxies` 数组**后**|
+|prepend-proxies|数组|数组合并至原配置 `proxies` 数组**前**|
+|append-proxy-groups|数组|数组合并至原配置 `proxy-groups` 数组**后**|
+|prepend-proxy-groups|数组|数组合并至原配置 `proxy-groups` 数组**前**|
+|mix-proxy-providers|对象|对象合并至原配置 `proxy-providers` 中|
+|mix-rule-providers|对象|对象合并至原配置 `rule-providers` 中|
+|mix-object|对象|对象合并至原配置最外层中|
+|commands|数组|在上面操作完成后执行简单命令操作配置文件|
+
+`Settings=>Profiles=>Parsers=>edit` 进入
+
+```yml
+parsers:
+  - url: https://example.com/profile.yaml
+    yaml:
+      prepend-rules:
+        - DOMAIN,test.com,DIRECT # rules最前面增加一个规则
+      append-proxies:
+        - name: test # proxies最后面增加一个服务
+          type: http
+          server: 123.123.123.123
+          port: 456
+```
 
 ## 安装
 
@@ -471,38 +507,6 @@ stream {
 export all_proxy=https://user1:pass1@a.kentxxq.com:17890; 
 # windows
 set all_proxy=https://user1:pass1@a.kentxxq.com:17890; 
-```
-
-## Clash-windows 追加配置
-
-[配置文件预处理](https://docs.cfw.lbyczf.com/contents/parser.html#%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95-yaml) 适用于**不想修改配置文件, 特定于当前机器的特殊配置**
-
-|键|值类型|操作|
-|---|---|---|
-|append-rules|数组|数组合并至原配置 `rules` 数组**后**|
-|prepend-rules|数组|数组合并至原配置 `rules` 数组**前**|
-|append-proxies|数组|数组合并至原配置 `proxies` 数组**后**|
-|prepend-proxies|数组|数组合并至原配置 `proxies` 数组**前**|
-|append-proxy-groups|数组|数组合并至原配置 `proxy-groups` 数组**后**|
-|prepend-proxy-groups|数组|数组合并至原配置 `proxy-groups` 数组**前**|
-|mix-proxy-providers|对象|对象合并至原配置 `proxy-providers` 中|
-|mix-rule-providers|对象|对象合并至原配置 `rule-providers` 中|
-|mix-object|对象|对象合并至原配置最外层中|
-|commands|数组|在上面操作完成后执行简单命令操作配置文件|
-
-`Settings=>Profiles=>Parsers=>edit` 进入
-
-```yml
-parsers:
-  - url: https://example.com/profile.yaml
-    yaml:
-      prepend-rules:
-        - DOMAIN,test.com,DIRECT # rules最前面增加一个规则
-      append-proxies:
-        - name: test # proxies最后面增加一个服务
-          type: http
-          server: 123.123.123.123
-          port: 456
 ```
 
 ## API

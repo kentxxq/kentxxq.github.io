@@ -4,7 +4,7 @@ tags:
   - blog
   - minio
 date: 2023-07-19
-lastmod: 2023-10-25
+lastmod: 2023-10-26
 categories:
   - blog
 description: "[[笔记/point/minio|minio]] 的搭建和使用."
@@ -170,7 +170,7 @@ server {
 server {
     listen 443 ssl http2;
     server_name minio-api.kentxxq.com;
-    include /usr/local/nginx/conf/options/ssl_mashibing_cc.conf;
+    include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
     access_log /usr/local/nginx/conf/hosts/logs/minio-api.kentxxq.com.log k-json;
     # Allow special characters in headers
     ignore_invalid_headers off;
@@ -207,7 +207,7 @@ server {
     listen 443 ssl http2;
     server_name minio-ui.kentxxq.com;
 
-    include /usr/local/nginx/conf/options/ssl_mashibing_cc.conf;
+    include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
     access_log /usr/local/nginx/conf/hosts/logs/minio-ui.kentxxq.com.log k-json;
 
     # Allow special characters in headers

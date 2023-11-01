@@ -4,7 +4,7 @@ tags:
   - blog
   - golang
 date: 2023-06-26
-lastmod: 2023-06-30
+lastmod: 2023-10-26
 categories:
   - blog
 description: "[[笔记/point/golang|golang]] 用的很少, 记录一下相关的安装, 配置, 构建."
@@ -18,11 +18,9 @@ description: "[[笔记/point/golang|golang]] 用的很少, 记录一下相关的
 
 ### 安装 golang
 
-```shell
-# 去这里下载最新的jar包
-# https://go.dev/dl/
-# 拿 go1.20.6.linux-amd64.tar.gz 举例
+去 [这里下载](https://go.dev/dl/) 最新的 tar 包, 拿 `go1.20.6.linux-amd64.tar.gz` 举例
 
+```shell
 # 解压到/usr/local/
 tar -C /usr/local/ -xzf go1.20.6.linux-amd64.tar.gz
 
@@ -50,6 +48,10 @@ export PATH=$PATH:/usr/local/go/bin:/root/go/bin/
 # 此次终端生效
 source ~/.bashrc
 
+# 强烈建议配置代理
+go env -w GOPROXY=https://goproxy.cn,direct
+# 这个也行 https://proxy.golang.com.cn,direct
+
 # 验证效果
 go version
 go version go1.20.6 windows/amd64
@@ -61,7 +63,7 @@ go version go1.20.6 windows/amd64
 # 查看变量
 go env
 
-# 配置代理
+# 配置GOPROXY变量,让go使用代理源加速
 go env -w GOPROXY=https://goproxy.cn,direct
 
 # 常用构建配置

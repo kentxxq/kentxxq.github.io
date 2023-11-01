@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2023-09-02
+lastmod: 2023-10-26
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."
@@ -51,7 +51,7 @@ git config --global http.maxRequestBuffer 100M
 
 ```shell
 # 添加remote
-git remote add gitea https://ken.mashibing.cn/admin1/learn-actions.git
+git remote add gitea https://ken.kentxxq.com/admin1/learn-actions.git
 # 修改origin地址
 git remote set-url origin https://github.com/kentxxq/hugo.git
 # 删除

@@ -6,7 +6,7 @@ tags:
   - loki
   - grafana
 date: 2023-07-17
-lastmod: 2023-10-25
+lastmod: 2023-10-26
 categories:
   - blog
 description: "grafana-loki 是 [[笔记/point/grafana|grafana]] 公司的日志采集组件"
@@ -61,7 +61,7 @@ auth_enabled: false
 
 server:
   http_listen_port: 3100
-  grpc_listen_port: 9096
+  grpc_listen_port: 3101
 
 common:
   instance_addr: 0.0.0.0
@@ -81,7 +81,7 @@ storage_config:
   aws:
     # Note: use a fully qualified domain name, like localhost.
     # full example: http://loki:supersecret@localhost.:9000
-    s3: https://秘钥id:秘钥key@minio-api.mashibing.cc.:443/loki
+    s3: https://秘钥id:秘钥key@minio-api.kentxxq.com.:443/loki
     s3forcepathstyle: true
   boltdb_shipper:
     active_index_directory: /loki/boltdb-shipper-active

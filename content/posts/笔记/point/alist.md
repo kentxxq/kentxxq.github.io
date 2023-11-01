@@ -46,7 +46,7 @@ server {
     return 301 https://$server_name$request_uri;
 
     include /usr/local/nginx/conf/options/normal.conf;
-    access_log /usr/local/nginx/conf/hosts/logs/tmp.mashibing.cn.log k-json;
+    access_log /usr/local/nginx/conf/hosts/logs/alist.kentxxq.com.log k-json;
 }
 
 server {
@@ -57,7 +57,7 @@ server {
     ssl_certificate /usr/local/nginx/conf/ssl/a.pem;
     ssl_certificate_key /usr/local/nginx/conf/ssl/a.key;
 
-    access_log /usr/local/nginx/conf/hosts/logs/tmp.mashibing.cn.log k-json;
+    access_log /usr/local/nginx/conf/hosts/logs/alist.kentxxq.com.log k-json;
 
     location / {
         proxy_pass http://10.0.1.157:5244;

@@ -15,25 +15,20 @@ description: "grafana-tempo 是 [[笔记/point/grafana|grafana]] 公司的链路
 
 `grafana-tempo` 是 [[笔记/point/grafana|grafana]] 公司的链路追踪组件
 
-## 内容
+## 安装
 
-### 安装
-
-前置条件:
-
-- [[笔记/minio教程#安装|安装minio]]
-- [[笔记/grafana-ui教程#安装|安装grafana-ui]]
-
-开始安装
+### 下载
 
 ```shell
 curl -Lo tempo_2.2.4_linux_amd64.tar.gz https://github.com/grafana/tempo/releases/download/v2.2.4/tempo_2.2.4_linux_amd64.tar.gz
 
-# 安装
-dpkg -i tempo_2.1.1_linux_amd64.deb
+# 解压,得到可执行文件 tempo
+tar xf tempo_2.2.4_linux_amd64.tar.gz 
 ```
 
-配置文件 `/etc/tempo/config.yml`
+### 配置文件
+
+配置示例 `tempo.yaml`
 
 ```yml
 server:
@@ -50,7 +45,7 @@ distributor:
 
 compactor:
   compaction:
-    block_retention: 48h                # configure total trace retention here
+    block_retention: 48h   # configure total trace retention here
 
       #metrics_generator:
       #  registry:
@@ -67,23 +62,56 @@ storage:
   trace:
     backend: s3
     s3:
-      endpoint: 192.168.31.210:9000
-      bucket: demo1
+      endpoint: minio-api.kentxxq.com
+      bucket: tempo
       forcepathstyle: true
       #set to true if endpoint is https
       insecure: true
       access_key:  # TODO - Add S3 access key
       secret_key:  # TODO - Add S3 secret key
     wal:
-      path: /tmp/tempo/wal         # where to store the the wal locally
+      path: /tmp/tempo/wal   # where to store the the wal locally
     local:
       path: /tmp/tempo/blocks
 overrides:
   metrics_generator_processors: [service-graphs, span-metrics]
 ```
 
-启动:
+### 守护进程
 
-```shell
-systemctl enable tempo --now
+[[笔记/point/Systemd|Systemd]] 守护进程配置文件 `/etc/systemd/system/tempo.service`
+
+```ini
+[Unit]
+Description=tempo
+# 启动区间30s内,尝试启动3次
+StartLimitIntervalSec=30
+StartLimitBurst=3
+
+
+[Service]
+# 环境变量 $MY_ENV1
+# Environment=MY_ENV1=value1
+# Environment="MY_ENV2=value2"
+# 环境变量文件,文件内容"MY_ENV3=value3" $MY_ENV3
+# EnvironmentFile=/path/to/environment/file1
+
+#WorkingDirectory=/root/myApp/TestServer
+
+ExecStart=/root/tempo -config.file=/root/tempo.yaml
+
+# 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
+RestartSec=30s 
+Restart=always
+# 相关资源都发送term后,后发送kill
+KillMode=mixed
+# 最大文件打开数不限制
+LimitNOFILE=infinity
+# 子线程数量不限制
+TasksMax=infinity
+
+
+[Install]
+WantedBy=multi-user.target
+#Alias=testserver.service
 ```

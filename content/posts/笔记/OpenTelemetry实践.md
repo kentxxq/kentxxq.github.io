@@ -7,7 +7,7 @@ tags:
   - prometheus
   - csharp
 date: 2023-07-20
-lastmod: 2023-10-20
+lastmod: 2023-10-27
 keywords:
   - OpenTelemetry
   - grafana
@@ -26,7 +26,7 @@ description: "这篇文章会把关于 [[笔记/point/OpenTelemetry|OpenTelemetr
 
 这篇文章会把关于 [[笔记/point/OpenTelemetry|OpenTelemetry]] 的相关文章串联起来, 从 0 到 1 完成所有的实践.
 
-其中会涉及到如下组件:
+其中会涉及到如下组件, 搭建顺序是**从下往上**:
 
 - [APP代码放着这里](https://github.com/kentxxq/csharpDEMO/tree/main/Aspnetcore/AddOpentelemetry),是 [[笔记/point/csharp|csharp-aspnetcore]] Web 应用
 - [[笔记/OpenTelemetry-Collector教程|OpenTelemetry-Collector]] 接收应用数据
@@ -38,9 +38,18 @@ description: "这篇文章会把关于 [[笔记/point/OpenTelemetry|OpenTelemetr
 
 ![[附件/opentelemetry架构图.excalidraw.svg]]
 
-## 搭建
+## 使用
 
-1. 根据 [[笔记/minio教程|minio教程]] 搭建
+按照教程搭建完成以后, 应该有如下端口:
+
+| 服务                    | 地址                                                                                                     |
+| ----------------------- | -------------------------------------------------------------------------------------------------------- |
+| minio                   | api 请求 `minio-api.kentxxq.com`, ui 操作 `minio-ui.kentxxq.com`                                                          |
+| loki                    | 接收 oc 发送的日志数据 `http_listen_port/3100`, `grpc_listen_port/3101`                                                         |
+| mimir                   | 接收 oc 发送的指标数据 `http_listen_port/9009`, `grpc_listen_port/9010`                                                         |
+| tempo                   | 接收 oc 发送的追踪数据 `http_listen_port/3200`, `distributor.receivers.otlp.http/3201`, `distributor.receivers.otlp.grpc/3202` |
+| opentelemetry-collector | 接收应用数据 `grpc/4317`, `http/4318`                                                                                 |
+| grafana-ui              | ui 操作 `ip:3000`                                                                                                |
 
 ## 原内容
 
