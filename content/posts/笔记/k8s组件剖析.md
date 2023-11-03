@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-01
-lastmod: 2023-09-02
+lastmod: 2023-11-01
 categories:
   - blog
 description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
@@ -126,6 +126,15 @@ client 访问 service 的时候有 2 种方式。
 3. pv 对象被 pv-controller 观察到，于是把 pv 和 pvc 对象绑定
 4. 提交的 pod 被调度到 node，kubelet 使用通过 csi-plugin2 挂载对应的 pv 到容器，再启动容器
 
+如果 pvc 没有使用 `name`, `label`, `storage-class` 等方式指定, 会启用自动匹配机制. DefaultStorageClass 将 PVC 与 PV 会自动绑定，根据 PVC 的大小、权限等进行自动匹配后绑定的。
+
+```shell
+# 查看默认的storageclass
+kubectl get storageclass
+NAME              PROVISIONER        RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local (default)   openebs.io/local   Delete          WaitForFirstConsumer   false                  558d
+```
+
 ## 网络组件
 
 #### Flannel
@@ -135,8 +144,8 @@ client 访问 service 的时候有 2 种方式。
 ![[附件/Flannel通信示意图.png]]
 
 >1. 数据从源容器中发出后，经由所在主机的 docker0 虚拟网卡转发到 flannel0 虚拟网卡，这是个 P2P 的虚拟网卡，flanneld 服务监听在网卡的另外一端。
-> 2. Flannel 通过 Etcd 服务维护了一张节点间的路由表，该张表里保存了各个节点主机的子网网段信息。
-> 3. 源主机的 flanneld 服务将原本的数据内容 UDP 封装后根据自己的路由表投递给目的节点的 flanneld 服务，数据到达以后被解包，然后直接进入目的节点的 flannel0 虚拟网卡，然后被转发到目的主机的 docker0 虚拟网卡，最后就像本机容器通信一样的由 docker0 路由到达目标容器。
+> 1. Flannel 通过 Etcd 服务维护了一张节点间的路由表，该张表里保存了各个节点主机的子网网段信息。
+> 2. 源主机的 flanneld 服务将原本的数据内容 UDP 封装后根据自己的路由表投递给目的节点的 flanneld 服务，数据到达以后被解包，然后直接进入目的节点的 flannel0 虚拟网卡，然后被转发到目的主机的 docker0 虚拟网卡，最后就像本机容器通信一样的由 docker0 路由到达目标容器。
 
 #todo/笔记 自己搭建一个测试?
 

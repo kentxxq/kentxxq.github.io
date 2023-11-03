@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-10-28
+lastmod: 2023-11-02
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -34,6 +34,38 @@ apt install ./google-chrome-stable_current_amd64.deb
 
 google-chrome -v
 ```
+
+### 挂载磁盘
+
+已知新盘 (有数据) 的分区类型,
+
+```shell
+# fdisk -l 
+# Disk /dev/vdb 是硬盘
+# Device /dev/vdb1 是分区
+# mount挂载的是分区
+mount -t exfat /dev/vdb1 /mnt/exfat
+```
+
+新盘 (无数据):
+
+```shell
+# 创建一个目录,后续把新盘挂载到这里
+mkdir -p /data/new-data
+# 查看并发现新磁盘 /dev/sdb
+fdisk -l 
+
+# 进行格式化, y继续.会变成一个分区
+mkfs -t ext4 /dev/sdb
+# 查看格式化后的磁盘, 记录UUID
+blkid
+# 追加UUID, 按照对应的格式加入到 /etc/fstab
+echo 'UUID=你的UUID /data/new-data ext4 defaults 0 0'
+# 生效
+mount -a
+```
+
+> 如果是阿里云, 参考 [[笔记/阿里云操作#新加硬盘]]
 
 ### 环境变量
 
@@ -345,7 +377,7 @@ sysctl -p
 lsmod | grep bbr
 ```
 
-### 登录后的提示信息
+### 修改登录后的提示信息
 
 ```shell
 vim /etc/motd

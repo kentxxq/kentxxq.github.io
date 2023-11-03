@@ -4,7 +4,7 @@ tags:
   - point
   - obsidian
 date: 2023-06-24
-lastmod: 2023-07-24
+lastmod: 2023-11-03
 categories:
   - point
 ---
@@ -20,3 +20,9 @@ categories:
 - 社区活跃
 
 使用 [Prism](https://prismjs.com/#supported-languages) 进行代码块渲染
+
+## 快捷键
+
+- 编辑
+    - 缩进 `Ctrl/Cmd ]` 或 tab
+    - 取消缩进 `Ctrl/Cmd [`

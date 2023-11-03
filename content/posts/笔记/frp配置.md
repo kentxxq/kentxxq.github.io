@@ -4,7 +4,7 @@ tags:
   - blog
   - frp
 date: 2023-08-16
-lastmod: 2023-08-16
+lastmod: 2023-11-02
 categories:
   - blog
 description: "`frp` 是一个内网穿透工具.这里记录一下之前用过的配置."
@@ -56,7 +56,7 @@ token = frp-python5
 [common]
 server_addr = frp.kentxxq.com
 server_port = 7000
-token = diangdiang.
+token = 验证密码,对应服务端
 log_file = console
 
 [frp-python5000]

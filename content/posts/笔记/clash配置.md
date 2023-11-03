@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-11-01
+lastmod: 2023-11-03
 keywords:
   - clash
   - 配置文件
@@ -26,6 +26,8 @@ description: "记录 [[笔记/point/clash|clash]] 的配置, 以及是如何使�
 
 - 为什么不用第三方订阅转换? 因为担心隐私.
 - 为什么不自建订阅转换? 因为觉得麻烦, 懒得维护.
+
+> `ClashForWindows` 停更了. 本文 windows 操作基于 [clash-verge](https://github.com/zzzgydi/clash-verge).因为都基于 [[笔记/point/clash|clash]], 所以是无痛切换.
 
 ## 快速配置
 
@@ -336,82 +338,10 @@ proxy-providers:
 
 ### 导入配置文件
 
-- 通过 `Clash=>Profiles=>Import`, 将配置文件 `xxx.yml` 导入 clash 并生效
+- 通过 `ClashVerge=>配置=>新建`, 类型 `local`,选择配置文件导入即可
+- 也可以使用类型 `remote`, 不过这里会用到我的 [[笔记/TestServer工具|TestServer工具]].
 
-## clash 应用配置
-
-### 绕过系统代理
-
-参考链接 [绕过系统代理 | Clash for Windows](https://docs.cfw.lbyczf.com/contents/bypass.html#%E8%AE%BE%E7%BD%AE%E6%96%B9%E5%BC%8F)
-
-`Settings` => `System Proxy` => `Bypass Domain/IPNet`
-
-```yml
-bypass:
-  - localhost
-  - 127.*
-  - 10.*
-  - 172.16.*
-  - 172.17.*
-  - 172.18.*
-  - 172.19.*
-  - 172.20.*
-  - 172.21.*
-  - 172.22.*
-  - 172.23.*
-  - 172.24.*
-  - 172.25.*
-  - 172.26.*
-  - 172.27.*
-  - 172.28.*
-  - 172.29.*``
-  - 172.30.*
-  - 172.31.*
-  - 192.168.*
-  - <local>
-```
-
-### 绕过 windows 应用
-
-类似于 [[笔记/point/windows|windows]] 的应用商店, 邮箱等应用开启代理后会无法访问.
-
-可以通过 `UWP Loopback` 跳过.
-
-![[附件/clash的UWP操作图.png]]
-
-### 覆盖现有配置内容
-
-[配置文件预处理](https://docs.cfw.lbyczf.com/contents/parser.html#%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95-yaml) 适用于**不想修改配置文件, 特定于当前机器的特殊配置**
-
-|键|值类型|操作|
-|---|---|---|
-|append-rules|数组|数组合并至原配置 `rules` 数组**后**|
-|prepend-rules|数组|数组合并至原配置 `rules` 数组**前**|
-|append-proxies|数组|数组合并至原配置 `proxies` 数组**后**|
-|prepend-proxies|数组|数组合并至原配置 `proxies` 数组**前**|
-|append-proxy-groups|数组|数组合并至原配置 `proxy-groups` 数组**后**|
-|prepend-proxy-groups|数组|数组合并至原配置 `proxy-groups` 数组**前**|
-|mix-proxy-providers|对象|对象合并至原配置 `proxy-providers` 中|
-|mix-rule-providers|对象|对象合并至原配置 `rule-providers` 中|
-|mix-object|对象|对象合并至原配置最外层中|
-|commands|数组|在上面操作完成后执行简单命令操作配置文件|
-
-`Settings=>Profiles=>Parsers=>edit` 进入
-
-```yml
-parsers:
-  - url: https://example.com/profile.yaml
-    yaml:
-      prepend-rules:
-        - DOMAIN,test.com,DIRECT # rules最前面增加一个规则
-      append-proxies:
-        - name: test # proxies最后面增加一个服务
-          type: http
-          server: 123.123.123.123
-          port: 456
-```
-
-## 安装
+## linux 下的 clash 安装
 
 #todo/笔记 来个示意图, 同时把守护进程换了
 
@@ -532,11 +462,121 @@ curl -X GET http://127.0.0.1:9090/proxies/GLOBAL
 curl -v -X PUT 'http://127.0.0.1:9090/proxies/GLOBAL'  -H "Content-Type: application/json" --data-raw '{"name": "美国 A"}'
 ```
 
+## ClashForWindows 应用配置
+
+### 过期说明
+
+虽然 `ClashForWindows` 已经被删, 但是网上还是有一些 fork/中文包版本存在.
+
+因此此章节内容仍然具备可操作性. 同时也可以帮助理解 `UWP Loopback`, `bypass` 等相关概念.
+
+### 绕过系统代理
+
+参考链接 [绕过系统代理 | Clash for Windows](https://docs.cfw.lbyczf.com/contents/bypass.html#%E8%AE%BE%E7%BD%AE%E6%96%B9%E5%BC%8F)
+
+`Settings` => `System Proxy` => `Bypass Domain/IPNet`
+
+```yml
+bypass:
+  - localhost
+  - 127.*
+  - 10.*
+  - 172.16.*
+  - 172.17.*
+  - 172.18.*
+  - 172.19.*
+  - 172.20.*
+  - 172.21.*
+  - 172.22.*
+  - 172.23.*
+  - 172.24.*
+  - 172.25.*
+  - 172.26.*
+  - 172.27.*
+  - 172.28.*
+  - 172.29.*``
+  - 172.30.*
+  - 172.31.*
+  - 192.168.*
+  - <local>
+```
+
+### 绕过 windows 应用
+
+类似于 [[笔记/point/windows|windows]] 的应用商店, 邮箱等应用开启代理后会无法访问.
+
+可以通过 `UWP Loopback` 跳过.
+
+![[附件/clash的UWP操作图.png]]
+
+### 覆盖现有配置内容
+
+[配置文件预处理](https://docs.cfw.lbyczf.com/contents/parser.html#%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95-yaml) 适用于**不想修改配置文件, 特定于当前机器的特殊配置**
+
+|键|值类型|操作|
+|---|---|---|
+|append-rules|数组|数组合并至原配置 `rules` 数组**后**|
+|prepend-rules|数组|数组合并至原配置 `rules` 数组**前**|
+|append-proxies|数组|数组合并至原配置 `proxies` 数组**后**|
+|prepend-proxies|数组|数组合并至原配置 `proxies` 数组**前**|
+|append-proxy-groups|数组|数组合并至原配置 `proxy-groups` 数组**后**|
+|prepend-proxy-groups|数组|数组合并至原配置 `proxy-groups` 数组**前**|
+|mix-proxy-providers|对象|对象合并至原配置 `proxy-providers` 中|
+|mix-rule-providers|对象|对象合并至原配置 `rule-providers` 中|
+|mix-object|对象|对象合并至原配置最外层中|
+|commands|数组|在上面操作完成后执行简单命令操作配置文件|
+
+`Settings=>Profiles=>Parsers=>edit` 进入
+
+```yml
+parsers:
+  - url: https://example.com/profile.yaml
+    yaml:
+      prepend-rules:
+        - DOMAIN,test.com,DIRECT # rules最前面增加一个规则
+      append-proxies:
+        - name: test # proxies最后面增加一个服务
+          type: http
+          server: 123.123.123.123
+          port: 456
+```
+
 ## 测试
 
 #todo/笔记 快速验证代理走的什么网络!
 
-## 参考地址
+## 疑难杂症
 
+### 安卓 app 不兼容代理
+
+京东, bilibili, 知乎等 app 兼容性有问题.
+
+1. 在 clash 中，关闭 [为 vpn service 附加 http 代理] 就 ok 了，图片加载就很流畅了。
+2. 配置应用分流. 允许服务跳过白名单/黑名单模式. 让指定应用绕过代理.
+
+相关讨论:
+
+- [Android 版 Clash 的“系统代理”选项是什么意思 - V2EX](https://www.v2ex.com/t/926870)
+- [京东故意降低 vpn 用户体验 - V2EX](https://v2ex.com/t/933158)
+
+## 相关资源
+
+- clash 相关工具
+    - [clash-verge](https://github.com/zzzgydi/clash-verge)
+    - [clashN](https://github.com/2dust/clashN)
+    - [v2rayN](https://github.com/2dust/v2rayN)
+    - `ClashForWindows` 被删了, 但还有汉化版存在
+        - [Releases · Z-Siqi/Clash-for-Windows_Chinese (github.com)](https://github.com/Z-Siqi/Clash-for-Windows_Chinese)
+        - [BoyceLig/Clash_Chinese_Patch: Clash For Windows 汉化补丁和汉化脚本 (github.com)](https://github.com/BoyceLig/Clash_Chinese_Patch)
+- ios 工具
+    - QuantumultX (圈 X) 强大工具
+    - Loon 新工具, 对标 QuantumultX
+    - Stash ,兼容 clash
+    - Surge 最老牌, ios+mac
+    - Shadowrocket 大众化 + 便宜
+    - Spectre 免费
+- 服务商
+    - 佩奇小站 [Client Area - AmyTelecom](https://www.amysecure.com/clientarea.php?action=productdetails&id=14674)
+    - 魅影小站 [请稍候…](https://ark.to/user)
 - [Clash分流策略 | 配置文件 | 订阅防覆盖 | 硬核教程](https://a-nomad.com/clash)
 - [Clash规则大全](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash)

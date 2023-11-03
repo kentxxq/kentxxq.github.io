@@ -6,7 +6,7 @@ tags:
   - 监控
   - devops
 date: 2023-07-03
-lastmod: 2023-08-02
+lastmod: 2023-11-02
 categories:
   - blog
 description: "这里记录一下 supervisor 在 [[笔记/point/linux|linux]] 下的常用配置, 方便复用."
@@ -71,3 +71,7 @@ stderr_logfile_maxbytes=20MB
 # 日志文件保持数量 默认为10 设置为0 表示不限制
 stderr_logfile_backups = 3
 ```
+
+## 参考资料
+
+- [官方文档](http://supervisord.org/)
