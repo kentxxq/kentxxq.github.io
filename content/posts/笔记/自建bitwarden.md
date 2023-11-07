@@ -33,21 +33,21 @@ description:
 初次启动进行初始化, 随后关闭 `SIGNUPS_ALLOWED` 和 `ADMIN_TOKEN`.
 
 ```yml
-version: '3'
+version: "3"
 services:
-    server:
-        container_name: bitwarden
-        volumes:
-            - '/data/bitwarden/:/data/'
-        environment:
-            - SIGNUPS_ALLOWED=true # false
-            - WEBSOCKET_ENABLED=true
-            - ADMIN_TOKEN=你的admin密码 # 注释这一行
-        ports:
-            - '6000:80'
-            - '3012:3012'
-        restart: always
-        image: 'vaultwarden/server:1.29.1'
+  server:
+    container_name: bitwarden
+    volumes:
+      - "/data/bitwarden/:/data/"
+    environment:
+      - SIGNUPS_ALLOWED=true # false
+      - WEBSOCKET_ENABLED=true
+      - ADMIN_TOKEN=你的admin密码 # 注释这一行
+    ports:
+      - "6000:80"
+      - "3012:3012"
+    restart: always
+    image: "vaultwarden/server:1.29.1"
 ```
 
 ### 反向代理

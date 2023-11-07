@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-11-03
+lastmod: 2023-11-04
 keywords:
   - clash
   - 配置文件
@@ -347,6 +347,9 @@ proxy-providers:
 
 ### 服务搭建
 
+> [!warning]
+> cfw 已经被删, 建议下载 https://github.com/MetaCubeX/Clash.Meta/releases 替代下面的 cfw 路径
+
 [[笔记/point/linux|linux]] 下的安装流程:
 
 ```shell
@@ -561,10 +564,14 @@ parsers:
 
 ## 相关资源
 
-- clash 相关工具
-    - [clash-verge](https://github.com/zzzgydi/clash-verge)
-    - [clashN](https://github.com/2dust/clashN)
-    - [v2rayN](https://github.com/2dust/v2rayN)
+- [hysteria内核](https://github.com/apernet/hysteria)
+- [Xray-core是v2ray-core的超集](https://github.com/XTLS/Xray-core) 内核
+- [sing-box](https://github.com/SagerNet/sing-box) 内核
+- clash 内核
+    - [Clash.Meta](https://github.com/MetaCubeX/Clash.Meta/tree/Alpha) 内核
+    - [clash-verge](https://github.com/zzzgydi/clash-verge) 客户端
+    - [clashN](https://github.com/2dust/clashN) 客户端
+    - [v2rayN](https://github.com/2dust/v2rayN) 客户端
     - `ClashForWindows` 被删了, 但还有汉化版存在
         - [Releases · Z-Siqi/Clash-for-Windows_Chinese (github.com)](https://github.com/Z-Siqi/Clash-for-Windows_Chinese)
         - [BoyceLig/Clash_Chinese_Patch: Clash For Windows 汉化补丁和汉化脚本 (github.com)](https://github.com/BoyceLig/Clash_Chinese_Patch)
@@ -576,7 +583,8 @@ parsers:
     - Shadowrocket 大众化 + 便宜
     - Spectre 免费
 - 服务商
-    - 佩奇小站 [Client Area - AmyTelecom](https://www.amysecure.com/clientarea.php?action=productdetails&id=14674)
-    - 魅影小站 [请稍候…](https://ark.to/user)
+    - [佩奇小站 - AmyTelecom](https://www.amysecure.com/clientarea.php?action=productdetails&id=14674)
+    - [魅影小站 - Ark](https://ark.to/user)
 - [Clash分流策略 | 配置文件 | 订阅防覆盖 | 硬核教程](https://a-nomad.com/clash)
 - [Clash规则大全](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash)
+- [GFW是如何工作的](https://gfw.report/publications/usenixsecurity23/zh/)
