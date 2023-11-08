@@ -4,7 +4,7 @@ tags:
   - blog
   - minio
 date: 2023-07-19
-lastmod: 2023-10-26
+lastmod: 2023-11-08
 categories:
   - blog
 description: "[[笔记/point/minio|minio]] 的搭建和使用."
@@ -68,7 +68,7 @@ useradd -M -r -g minio-user minio-user
 chown minio-user:minio-user /mnt/minio{1,2}
 ```
 
-环境配置文件 `/etc/default/minio`
+环境配置文件 `/etc/default/minio`, [[笔记/linux命令与配置#挂载磁盘|如何挂载磁盘可以参考这里]]
 
 ```shell
 # 用户名和密码,集群之间是通过这个来校验的
@@ -89,7 +89,7 @@ MINIO_BROWSER_REDIRECT_URL="https://minio-ui.kentxxq.com"
 
 #### 守护进程
 
-[[笔记/point/Systemd|Systemd]] 守护配置 [官方推荐使用](https://min.io/docs/minio/linux/operations/install-deploy-manage/deploy-minio-single-node-multi-drive.html#id5) `/etc/systemd/system/minio.service`
+[官方推荐](https://min.io/docs/minio/linux/operations/install-deploy-manage/deploy-minio-single-node-multi-drive.html#id5) 的 [[笔记/point/Systemd|Systemd]] 守护配置存在位置 `/etc/systemd/system/minio.service`
 
 ```toml
 [Unit]

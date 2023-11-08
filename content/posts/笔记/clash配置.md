@@ -582,6 +582,8 @@ parsers:
     - Surge 最老牌, ios+mac
     - Shadowrocket 大众化 + 便宜
     - Spectre 免费
+    - 相关讨论
+        - https://www.v2ex.com/t/989650
 - 服务商
     - [佩奇小站 - AmyTelecom](https://www.amysecure.com/clientarea.php?action=productdetails&id=14674)
     - [魅影小站 - Ark](https://ark.to/user)
