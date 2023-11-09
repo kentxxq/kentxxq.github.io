@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-11-04
+lastmod: 2023-11-09
 keywords:
   - clash
   - 配置文件
@@ -552,13 +552,14 @@ parsers:
 
 ### 安卓 app 不兼容代理
 
-京东, bilibili, 知乎等 app 兼容性有问题.
+即使配置了合适的分流规则, 京东, bilibili, 知乎等 app 兼容性还是有问题.
 
-1. 在 clash 中，关闭 [为 vpn service 附加 http 代理] 就 ok 了，图片加载就很流畅了。
-2. 配置应用分流. 允许服务跳过白名单/黑名单模式. 让指定应用绕过代理.
+- **推荐**配置应用分流. 允许服务跳过白名单/黑名单模式. 让指定应用绕过代理. 因为无法选择 `google play store` 之类的系统应用, 因此只能进行黑名单机制. 然后反选.
+- 在 clash 中，关闭 <为 vpn service 附加 http 代理> 对我来说**效果不好**
 
-相关讨论:
+相关内容:
 
+- 安卓的 vpn 是 `vpnservice` 实例. 白名单/黑名单是安卓 api, 因此并不是在 app 内进行分流判断, 更省电. [安卓文档地址](https://developer.android.com/develop/connectivity/vpn?hl=zh-cn#java)
 - [Android 版 Clash 的“系统代理”选项是什么意思 - V2EX](https://www.v2ex.com/t/926870)
 - [京东故意降低 vpn 用户体验 - V2EX](https://v2ex.com/t/933158)
 
@@ -575,6 +576,9 @@ parsers:
     - `ClashForWindows` 被删了, 但还有汉化版存在
         - [Releases · Z-Siqi/Clash-for-Windows_Chinese (github.com)](https://github.com/Z-Siqi/Clash-for-Windows_Chinese)
         - [BoyceLig/Clash_Chinese_Patch: Clash For Windows 汉化补丁和汉化脚本 (github.com)](https://github.com/BoyceLig/Clash_Chinese_Patch)
+- 安卓
+    - [Surfboard - Apps on Google Play](https://play.google.com/store/apps/details?id=com.getsurfboard&hl=en_US)
+    - clashforandroid
 - ios 工具
     - QuantumultX (圈 X) 强大工具
     - Loon 新工具, 对标 QuantumultX
@@ -587,6 +591,9 @@ parsers:
 - 服务商
     - [佩奇小站 - AmyTelecom](https://www.amysecure.com/clientarea.php?action=productdetails&id=14674)
     - [魅影小站 - Ark](https://ark.to/user)
+    - 唯云四杰好像是有口碑的
+    - [一个机场收录站点](https://dh.duangks.com/)
 - [Clash分流策略 | 配置文件 | 订阅防覆盖 | 硬核教程](https://a-nomad.com/clash)
 - [Clash规则大全](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash)
 - [GFW是如何工作的](https://gfw.report/publications/usenixsecurity23/zh/)
+ 

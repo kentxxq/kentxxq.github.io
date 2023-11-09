@@ -4,7 +4,7 @@ tags:
   - blog
   - powershell
 date: 2023-06-26
-lastmod: 2023-08-16
+lastmod: 2023-11-08
 categories:
   - blog
 description: "这里记录 [[笔记/point/powershell|powershell]] 的常用命令."
@@ -17,6 +17,13 @@ description: "这里记录 [[笔记/point/powershell|powershell]] 的常用命�
 ## 操作手册
 
 ### 日常操作
+
+#### grep 过滤
+
+```powershell
+# 类似 ls | grep xxx 搜索
+winget list | Select-String nodejs
+```
 
 #### 重载配置文件
 
