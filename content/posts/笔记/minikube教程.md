@@ -4,7 +4,7 @@ tags:
   - blog
   - minikube
 date: 2023-08-17
-lastmod: 2023-08-22
+lastmod: 2023-11-19
 categories:
   - blog
 description: "这里记录 [[笔记/point/minikube|minikube]] 的一些配置和用法."
@@ -52,6 +52,8 @@ minikube addons enable ingress
 # 内存大小 --memory 4096  或者 max
 # root启动需要使用--force
 # --docker-env 使用代理
+# --kubernetes-version v1.7.0
+# apiserver添加额外参数 --extra-config=apiserver.feature-gates=RemoveSelfLink=false
 minikube start --cpus='max' --nodes 3 --memory max --force --listen-address=0.0.0.0 --apiserver-ips=minikube机器ip --docker-env HTTP_PROXY=${http_proxy} --docker-env HTTPS_PROXY=${https_proxy} --docker-env NO_PROXY=localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.test.example.com
 ```
 

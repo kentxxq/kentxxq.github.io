@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-14
-lastmod: 2023-08-31
+lastmod: 2023-11-19
 categories:
   - blog
 description: "CKA 是 [[笔记/point/k8s|k8s]] 的一个管理员认证, 我也弄了一个证书 [[附件/CKA证书.pdf|CKA证书]]"
@@ -476,6 +476,191 @@ kubectl top pod -l name=cpu-utilizer --sort-by="cpu" –A
 
 ```bash
 kubectl get nodes |grep worker|grep Ready|wc -l
+```
+
+## 练习
+
+### nfs 相关
+
+全部指定命名空间 `kubectl create namespace kentxxq`
+
+创建 [[笔记/point/NFS|NFS]] 的 pv 和 pvc. 其中 pv 是集群级别的，而 pvc 是有命名空间的。
+
+`04_kubernetes-storage_pv_pvc.yml`
+
+```yml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: kentxxq-pv
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    # nfs的exports里配置的路径
+    path: /data/nfs
+    server: 10.0.1.157
+---
+apiVersion: v1	
+kind: PersistentVolumeClaim
+metadata:
+  name: kentxxq-pvc
+  # 默认default
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+```
+
+### storageClass 相关
+
+相关权限 `02_kubernetes_sc_rbac.yaml`
+
+```yml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kentxxq
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nfs-provisioner
+  namespace: kentxxq
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+   name: nfs-provisioner
+   namespace: kentxxq
+rules:
+#  - apiGroups: [""] # "" 标明 core API 组
+#    resources: ["*"]
+#    verbs: ["*"]
+  - apiGroups: [""]
+    resources: ["persistentvolumes"]
+    verbs: ["get", "list", "watch", "create", "delete"]
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims"]
+    verbs: ["get", "list", "watch", "update"]
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["storageclasses"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["watch", "create", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["services", "endpoints"]
+    verbs: ["get","create","patch","list", "watch","update"]
+  - apiGroups: ["extensions"]
+    resources: ["podsecuritypolicies"]
+    resourceNames: ["nfs-provisioner"]
+    verbs: ["use"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: nfs-provisioner
+  namespace: kentxxq
+subjects:
+  - kind: ServiceAccount
+    name: nfs-provisioner
+    namespace: kentxxq
+roleRef:
+  kind: ClusterRole
+  name: nfs-provisioner
+  apiGroup: rbac.authorization.k8s.io
+
+```
+
+`01_kubernetes_sc_provisioner.yaml`
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-client-provisioner
+  # 命名空间要与定制的rbac的一致
+  namespace: kentxxq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nfs-client-provisioner
+    spec:
+      serviceAccount: nfs-provisioner
+      containers:
+      - name: nfs-client-provisioner
+        # image: kubernetes-register.superopsmsb.com/google_containers/nfs-client-provisioner:latest
+        image: registry.cn-beijing.aliyuncs.com/pylixm/nfs-subdir-external-provisioner:v4.0.0
+        volumeMounts:
+        - name: nfs-client-root
+          mountPath: /persistentvolumes
+        env:
+        - name: PROVISIONER_NAME
+             # 该变量的值，必须与nfs的storageclass的provisioner的值一致
+          value: "nfsprovisioner"
+        - name: NFS_SERVER
+              # 设置NFS服务器的ip地址
+          value: "10.0.1.157"
+        - name: NFS_PATH
+              # 设置NFS服务器分享的目录
+          value: "/data/nfs"
+      volumes:
+      - name: nfs-client-root
+        nfs:
+          # 直接使用nfs来挂载该目录，方便storageclass基于该pod对pv和pvc进行自动处理
+          server: "10.0.1.157"
+          path: "/data/nfs"
+```
+
+`03_kubernetes_sc_pv.yaml`
+
+```yml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: storageclass
+  namespace: kentxxq
+# 每个 StorageClass 都包含 provisioner、parameters 和 reclaimPolicy 字段
+# provisioner用来决定使用哪个卷插件分配PV，必须与nfs-client的容器内部的 PROVISIONER_NAME 变量一致
+# reclaimPolicy指定创建的Persistent Volume的回收策略
+provisioner: "nfsprovisioner"
+reclaimPolicy: Retain
+parameters:
+  # archiveOnDelete: "false"表示在删除时不会对数据进行打包，当设置为true时表示删除时会对数据进行打包
+  archiveOnDelete: "false"
+```
+
+`08_kubernetes_storage_sc_pvc.yaml`
+
+```yml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sc-pvc
+  namespace: kentxxq
+  labels:
+    role: pvc
+spec:
+  storageClassName: storageclass
+  accessModes:
+    - ReadWriteOnce
+  # 定义资源要求PV满足这个PVC的要求才会匹配到
+  resources:
+    requests:
+      storage: 1Gi
 ```
 
 ## 相关链接
