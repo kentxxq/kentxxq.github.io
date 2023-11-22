@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-08-15
-lastmod: 2023-09-27
+lastmod: 2023-11-22
 categories:
   - blog
 description: "记录 [[笔记/point/csharp|csharp]] 的代码配置."
@@ -53,6 +53,9 @@ options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")); }
 ```shell
 dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\win-x64.pubxml
 ```
+
+> -r runtime 可以指定系统和架构，例如 linux-64
+> [完整的支持列表在这里](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog)
 
 ### nuget 缓存路径配置
 

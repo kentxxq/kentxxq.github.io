@@ -31,10 +31,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <PropertyGroup>
         <Configuration>Release</Configuration>
         <Platform>Any CPU</Platform>
-        <PublishDir>bin\Release\net7.0\win-x64\publish\win-x64\</PublishDir>
+        <PublishDir>bin\Release\net8.0\win-x64\publish\win-x64\</PublishDir>
         <PublishProtocol>FileSystem</PublishProtocol>
         <_TargetId>Folder</_TargetId>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <RuntimeIdentifier>win-x64</RuntimeIdentifier>
         <SelfContained>true</SelfContained>
         <PublishSingleFile>false</PublishSingleFile>
@@ -53,7 +53,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <!-- 减少空指针异常 -->
         <Nullable>enable</Nullable>
         <!-- 全局using -->

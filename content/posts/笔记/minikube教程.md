@@ -4,7 +4,7 @@ tags:
   - blog
   - minikube
 date: 2023-08-17
-lastmod: 2023-11-19
+lastmod: 2023-11-20
 categories:
   - blog
 description: "这里记录 [[笔记/point/minikube|minikube]] 的一些配置和用法."
@@ -34,7 +34,7 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-
 install minikube-linux-amd64 /usr/local/bin/minikube
 ```
 
-`ingress-nginx` 安装
+`ingress-nginx` 安装或者看 [[笔记/安装k8s#Ingress|yml安装Ingress]]
 
 ```shell
 minikube addons enable ingress

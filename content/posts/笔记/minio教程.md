@@ -4,7 +4,7 @@ tags:
   - blog
   - minio
 date: 2023-07-19
-lastmod: 2023-11-08
+lastmod: 2023-11-22
 categories:
   - blog
 description: "[[笔记/point/minio|minio]] 的搭建和使用."
@@ -41,13 +41,22 @@ MINIO_ROOT_USER=admin MINIO_ROOT_PASSWORD=password ./minio server /mnt/data --co
 
 #### 二进制安装
 
-给每个节点加上一个统一的名称:
+我有 2 个机器。给每个节点加上一个 DNS 解析记录, 最好有统一的名称:
 
 ```shell
 minio1.kentxxq.com
 minio2.kentxxq.com
-minio3.kentxxq.com
-minio4.kentxxq.com
+```
+
+除了系统盘外，每个节点还有 2 个空的数据盘 (必须)。[[笔记/linux命令与配置#挂载磁盘|把数据盘挂载到系统]] 的 `/mnt/minio{1,2}` 目录
+
+用户和目录准备:
+
+```shell
+groupadd -r minio-user
+useradd -M -r -g minio-user minio-user
+# 模拟2个硬盘,2个节点
+chown minio-user:minio-user /mnt/minio{1,2}
 ```
 
 安装 `minio`, [官网安装页面](https://min.io/download#/linux)
@@ -58,17 +67,7 @@ chmod +x minio
 mv minio /usr/local/bin/
 ```
 
-用户和目录准备:
-
-```shell
-mkdir -p /minio{1,2}
-groupadd -r minio-user
-useradd -M -r -g minio-user minio-user
-# 模拟2个硬盘,2个节点
-chown minio-user:minio-user /mnt/minio{1,2}
-```
-
-环境配置文件 `/etc/default/minio`, [[笔记/linux命令与配置#挂载磁盘|如何挂载磁盘可以参考这里]]
+环境配置文件 `/etc/default/minio`
 
 ```shell
 # 用户名和密码,集群之间是通过这个来校验的

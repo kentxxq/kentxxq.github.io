@@ -43,7 +43,7 @@ k3d registry create registry.k8s.io.localhost -p 5001 --proxy-remote-url https:/
 
 #### 创建集群
 
-创建配置文件 `vim k3d-config.yaml`
+创建配置文件 `vim k3d-default.yaml`
 
 ```yml
 ---
