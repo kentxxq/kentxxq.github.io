@@ -19,6 +19,7 @@ description:
 - `docker build` 是最简单, 最普遍的构建方式.
 - `buildx` 适用于跨平台构建，通过 --platform 参数可以 `x86`，arm 等架构构建
 - `kaniko` 适用于 rootless ，或无法访问 docker 守护进程的环境（容器内部构建）
+- `buildkid` #todo/笔记  [如何使用 docker buildx 构建跨平台 Go 镜像 | Shall We Code?](https://waynerv.com/posts/building-multi-architecture-images-with-docker-buildx/)
 
 ## 构建细节
 
