@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-09-05
-lastmod: 2023-09-05
+lastmod: 2023-11-24
 categories:
   - blog
 description: 
@@ -14,16 +14,22 @@ description:
 
 存放我如何编写 Dockerfile 以及一些构建示例.
 
-## 内容
+## 构建工具
+
+- `docker build` 是最简单, 最普遍的构建方式.
+- `buildx` 适用于跨平台构建，通过 --platform 参数可以 `x86`，arm 等架构构建
+- `kaniko` 适用于 rootless ，或无法访问 docker 守护进程的环境（容器内部构建）
+
+## 构建细节
 
 ### 构建分层划分
 
 | 镜像名称 | 镜像作用   | 示例                          | 说明                           |
 | -------- | ---------- | ----------------------------- | ------------------------------ |
-| base     | 基础镜像层   | `FROM openjdk:8 AS base`      | 多次使用, 统一底层镜像         |
-| build    | 构建层 | `FROM maven:3-jdk-8 AS build` | 专门构建使用，验证是否正确构建 |
-| publish  | 汇总部署层   | `FROM build AS publish`       | 基于 build 层来生成最终构建物  |
-| final    | 最终镜像层 | FROM base AS final            | 复用干净的 base 层，打包 image |
+| base     | 基础镜像层 | `FROM openjdk:8 AS base`      | 多次使用, 统一底层镜像         |
+| build    | 构建层     | `FROM maven:3-jdk-8 AS build` | 专门构建使用，验证是否正确构建 |
+| publish  | 汇总部署层 | `FROM build AS publish`       | 基于 build 层来生成最终构建物  |
+| final    | 最终镜像层 | `FROM base AS final`          | 复用干净的 base 层，打包 image |
 
 ### 镜像文件夹
 

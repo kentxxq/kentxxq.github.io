@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-01
-lastmod: 2023-11-01
+lastmod: 2023-11-24
 categories:
   - blog
 description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
@@ -135,11 +135,71 @@ NAME              PROVISIONER        RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLO
 local (default)   openebs.io/local   Delete          WaitForFirstConsumer   false                  558d
 ```
 
-## 网络组件
+## 网络
+
+### 本地容器网络
+
+#### 网络模型
+
+docker 默认网络模型：![[附件/docker默认网络模型.png]]
+
+`ifconfig` 命令可以看到 `docker0` 和 `veth73abaa8` 这样的
+
+- docker0
+  - 是一个二层网络设备，即网桥
+  - 通过网桥可以将 Linux 支持的不同的端口连接起来
+  - 实现类交换机多对多的通信
+- veth pair
+  - 虚拟以太网（Ethernet）设备
+  - 成对出现,用于解决网络命名空间之间的隔离
+  - 一端连接 Container network namespace，另一端连接 host network namespace
+
+所有网络模型
+
+- 默认 `--network bridge` Bridge 桥接子网络
+- `--network host` 共享宿主机网络接口
+- `--network none` 仅本机 lo 通信
+
+>  `--network container:c1(容器名称或容器 ID)` 并不是一种类型，而是加入目标相同的网络
+
+`docker network ls` 查看已有的网络模型， `docker network inspect minikube` 查看 [[笔记/point/minikube|minikube]] 网络细节
+
+#### 外部通信
+
+容器访问外网: ![[附件/容器访问外网.png]]
+
+外网访问容器: ![[附件/外网访问容器.png]]
+
+### 跨主机网络
+
+#### 所有方案
+
+[[笔记/point/docker|docker]] 原生方案
+
+- overlay
+  - 基于 VXLAN 封装实现 Docker 原生 overlay 网络
+- macvlan
+  - Docker 主机网卡接口逻辑上分为多个子接口，每个子接口标识一个 VLAN，容器接口直接连接 Docker Host
+- 网卡接口
+  - 通过路由策略转发到另一台 Docker Host
+
+第三方方案
+
+- Flannel
+  - 支持 UDP 和 VLAN 封装传输方式
+- Weave
+  - 支持 UDP 和 VXLAN
+- OpenvSwitch
+  - 支持 VXLAN 和 GRE 协议
+- Calico
+  - 支持 BGP 协议和 IPIP 隧道
+  - 每台宿主机作为虚拟路由，通过 BGP 协议实现不同主机容器间通信。
 
 #### Flannel
 
 [[笔记/point/docker|docker]] 容器无法跨主机通信, `Flannel` 分配子网网段, 然后记录在 `etcd` 中实现通信.
+
+安装也不难。安装并启动 etcd 以后设置一个 key，flannel 配置文件加入这个 key，配置好并启动。可以参考这里 [[笔记/point/Flannel|搭建Flannel]]
 
 ![[附件/Flannel通信示意图.png]]
 

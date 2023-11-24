@@ -5,7 +5,7 @@ tags:
   - devops
   - ACME
 date: 2023-08-16
-lastmod: 2023-09-02
+lastmod: 2023-11-23
 keywords:
   - acme
   - acme.sh
@@ -36,9 +36,10 @@ export Ali_Secret="sk"
 
 ```shell
 # 安装
+apt install socat -y
 git clone https://github.com/acmesh-official/acme.sh.git
 cd ./acme.sh
-./acme.sh --install -m 我的邮箱@qq.com
+./acme.sh --install -m 我的邮箱
 
 # 生成证书
 acme.sh --issue --dns dns_ali -d "*.kentxxq.com" -d "kentxxq.com" --ecc
@@ -78,6 +79,13 @@ acme.sh --set-default-ca --server letsencrypt
 acme --upgrade --auto-upgrade
 # 自动更新证书
 acme.sh --install-cronjob
+```
+
+### 卸载
+
+```shell
+acme.sh --uninstall
+rm -rf  ~/.acme.sh
 ```
 
 ## 错误处理

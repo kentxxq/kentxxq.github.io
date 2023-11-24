@@ -4,7 +4,7 @@ tags:
   - blog
   - containerd
 date: 2023-08-02
-lastmod: 2023-08-21
+lastmod: 2023-11-24
 categories:
   - blog
 description: "[[笔记/point/Containerd|Containerd]] 的操作配置."
@@ -266,12 +266,14 @@ ctr t rm test-server
 
 # 查看容器限制
 ctr task metrics test-server
-# 查看容器在主机在进程名
+# 查看容器在主机的进程名
 ctr task ps test-server
 PID      INFO
 52022    -
-52022运行着dotnet TestServer.dll
-52022的父进程52004为containerd-shim-runc-v2 -namespace default -id test-server -address /run/containerd/containerd.sock
+# 我们接着用 ps -ef|grep 52022
+# 发现 52022 52004 dotnet TestServer.dll
+# 接着 ps -ef|grep 52004
+# 发现 52004 containerd-shim-runc-v2 -namespace default -id test-server -address /run/containerd/containerd.sock
 ```
 
 ### crictl 操作

@@ -3,7 +3,7 @@ title: k3d教程
 tags:
   - blog
 date: 2023-08-22
-lastmod: 2023-08-23
+lastmod: 2023-11-24
 categories:
   - blog
 description: 
@@ -32,11 +32,16 @@ mv k3d /usr/local/sbin/k3d
 创建 registry , 将请求代理到国内可以访问的地址.
 
 ```shell
+# k3d节点内可以通过 k3d-节点名 例如 k3d-docker.io.localhost:5000 连接
+# -p 5000说明宿主机也是5000端口访问
+
 k3d registry create docker.io.localhost -p 5000 --proxy-remote-url https://hub-mirror.c.163.com
-# k3d节点内可以通过 k3d-docker.io.localhost:5000 连接
 
 k3d registry create registry.k8s.io.localhost -p 5001 --proxy-remote-url https://k8s.dockerproxy.com
-# k3d节点内可以通过 k3d-registry.k8s.io.localhost:5000 连接,而5001是组主机端口
+
+k3d registry create ghcr.io.localhost -p 5002 --proxy-remote-url https://ghcr.dockerproxy.com
+
+k3d registry list
 ```
 
 ### 使用集群
@@ -68,7 +73,7 @@ registries:
   # 这里的配置,让内部可以通过域名方式请求到registry
   use:
     - k3d-docker.io.localhost:5000
-    - k3d-registry.k8s.io.localhost:5000
+    - k3d-registry.k8s.io.localhost:5001
   # 这里配置你想要代理的源
   config: |
     mirrors:
@@ -77,7 +82,7 @@ registries:
           - "http://k3d-docker.io.localhost:5000"
       registry.k8s.io:
         endpoint:
-          - "http://k3d-registry.k8s.io.localhost:5000"
+          - "http://k3d-registry.k8s.io.localhost:5001"
 options:
   k3s:
     extraArgs: # --k3s-arg的额外参数

@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-15
-lastmod: 2023-08-30
+lastmod: 2023-11-23
 categories:
   - blog
 description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
@@ -15,6 +15,22 @@ description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
 记录 [[笔记/point/k8s|k8s]] 的常用命令
 
 ## 命令
+
+### 资源简写
+
+`kubectl api-resources` 可以查看资源简写。常用如下:
+
+| name                   | alias  | apiversion             | namespace | lkind                 |
+| ---------------------- | ------ | ---------------------- | --------- | --------------------- |
+| namespaces             | ns     | `v1`                   | false     | Namespace             |
+| deployments            | deploy | `apps/v1`              | true      | Deployment            |
+| ingresses              | ing    | `networking.k8s.io/v1` | true      | Ingress               |
+| configmaps             | cm     | `v1`                   | true      | ConfigMap             |
+| services               | svc    | `v1`                   | true      | Service               |
+| serviceaccounts        | sa     | `v1`                   | true      | ServiceAccount        |
+| nodes                  | no     | `v1`                   | false     | Node                  |
+| persistentvolumeclaims | pvc    | `v1`                   | true      | PersistentVolumeClaim |
+| persistentvolumes      | pv     | `v1`                   | false     | PersistentVolume      |
 
 ### 查询信息
 

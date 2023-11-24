@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-10-20
+lastmod: 2023-11-24
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -86,6 +86,20 @@ docker build -t myapp .
 ```
 
 ## 操作命令
+
+### 查看容器映射的端口
+
+```shell
+docker port 容器名
+```
+
+### 进入和退出容器
+
+```shell
+docker exec --rm -it 容器id /bin/bash
+# 如果不想关闭容器
+ctrl+p ctrl+q
+```
 
 ### 导入导出
 
