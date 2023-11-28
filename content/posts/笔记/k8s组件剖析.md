@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-01
-lastmod: 2023-11-24
+lastmod: 2023-11-27
 categories:
   - blog
 description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
@@ -33,10 +33,15 @@ description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
 - [[笔记/point/docker|docker]] 操作 [[笔记/point/Containerd|Containerd]]
 - [[笔记/point/Containerd|Containerd]] 操作符合 [[笔记/point/OCI|OCI]] 标准的容器运行时. 采用 [[笔记/point/runc|runc]] 为默认容器运行时.
 
-![[附件/容器生态图.png]]
+![[附件/容器生态图1.png]]
+
+同上图:
+
+![[附件/容器生态图2.png]]
 
 > 题外话
 > [[笔记/point/docker|docker]] 其实从 1.12 版本开始, 已经可以通过 [组件方式](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker) 支持 [[笔记/point/CRI|CRI]] 标准. 但是 [[笔记/point/Containerd|Containerd]] 直接集成 [[笔记/point/CRI|CRI]] 到了自己内部, 这样就少了 [[笔记/point/docker|docker]] 和 [[笔记/point/CRI|CRI]] 组件两个环节. 同时 [[笔记/point/Containerd|Containerd]] 不像 [[笔记/point/docker|docker]] 属于公司, 所以 [[笔记/point/k8s|k8s]] 从 1.24 版本开始切换到了 [[笔记/point/Containerd|Containerd]].
+> ![[附件/k8s操作容器流程演变.png]]
 
 ## master 节点
 
@@ -137,6 +142,18 @@ local (default)   openebs.io/local   Delete          WaitForFirstConsumer   fals
 
 ## 网络
 
+安装了网络组件以后，`kubectl get nodes` 才回是 ready 状态
+
+### 默认地址段
+
+#### pod
+
+pod 网络默认地址为 `10.244.0.0/16`，**集群节点都可以 `curl ip:port` 访问到**.
+
+#### service
+
+service 网络默认地址为 `10.96.0.0/12`
+
 ### 本地容器网络
 
 #### 网络模型
@@ -195,6 +212,17 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
   - 支持 BGP 协议和 IPIP 隧道
   - 每台宿主机作为虚拟路由，通过 BGP 协议实现不同主机容器间通信。
 
+[[笔记/point/k8s|k8s]] 的 CNI 方案有 3 种，主要用 flannel 和 calico。他们 2 个都支持 3 种。
+
+- flannel 是普遍使用。小规模
+- calico 主打网络策略。限制策略。大规模性能更好
+
+![[附件/CNI方案.png]]
+
+方案选择：
+
+![[附件/CNI方案选择.png]]
+
 #### Flannel
 
 [[笔记/point/docker|docker]] 容器无法跨主机通信, `Flannel` 分配子网网段, 然后记录在 `etcd` 中实现通信.
@@ -206,6 +234,14 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
 >1. 数据从源容器中发出后，经由所在主机的 docker0 虚拟网卡转发到 flannel0 虚拟网卡，这是个 P2P 的虚拟网卡，flanneld 服务监听在网卡的另外一端。
 > 1. Flannel 通过 Etcd 服务维护了一张节点间的路由表，该张表里保存了各个节点主机的子网网段信息。
 > 2. 源主机的 flanneld 服务将原本的数据内容 UDP 封装后根据自己的路由表投递给目的节点的 flanneld 服务，数据到达以后被解包，然后直接进入目的节点的 flannel0 虚拟网卡，然后被转发到目的主机的 docker0 虚拟网卡，最后就像本机容器通信一样的由 docker0 路由到达目标容器。
+
+[[笔记/point/k8s|k8s]] 中的 flannel：
+
+![[附件/k8s中的flannel流量图.png]]
+
+##  ingress 的流量方案对比
+
+![[附件/ingress的流量方案对比.png]]
 
 #todo/笔记 自己搭建一个测试?
 
@@ -227,6 +263,12 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
 4. [[笔记/k8s组件剖析#kubelet|kubelet]] 进行 watch，执行具体的调整动作
 
 如果调整整个 deployment 资源，那么会新建一个 replicas 来替换。回滚也是一样
+
+## service 控制器
+
+1. service 创建后，创建一个同名 endpoint
+2. endpoint controller 筛选符合的 pod，绑定到 endpoint 对象
+3. service 通过 cluster-ip 对外提供 endpoint 内的信息
 
 ## k8s 配置管理
 

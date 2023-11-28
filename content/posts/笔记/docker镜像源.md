@@ -5,7 +5,7 @@ tags:
   - k8s
   - docker
 date: 2023-08-18
-lastmod: 2023-08-24
+lastmod: 2023-11-27
 keywords:
   - k8s
   - docker
@@ -26,9 +26,7 @@ description:
 
 统一在这里进行测试解决, 并且做成可用的方案. 工作和学习中无限使用!
 
-## 内容
-
-### 搭建 registry
+## 搭建 registry
 
 ```yml
 registry-demo:
@@ -97,3 +95,15 @@ curl -v --location 'https://hub-mirror.c.163.com/v2/library/nginx/manifests/1.24
 而 `image-digest` 是镜像 manifest 的 sha256 的哈希值. 而 manifest 记录着镜像每一层的 layers 哈希值.
 
 也就是说, 网易源和 dockerhub 的每一层 layers 完全一致.
+
+## 镜像 tag 脚本
+
+```shell
+for i in 镜像名1 镜像名2 镜像名3
+do
+    docker pull $i
+    docker tag $i 镜像源.com/xxx/$i
+    docker push 镜像源.com/xxx/$i
+    docker rmi $i
+done
+```

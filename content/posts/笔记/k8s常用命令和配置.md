@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-15
-lastmod: 2023-11-23
+lastmod: 2023-11-27
 categories:
   - blog
 description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
@@ -38,6 +38,9 @@ description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
 # 获取实时deployment信息
 kubectl get --watch deployments
 
+# 查询所有ingressClassName
+kubectl get ingressclasses
+
 # 查询具体权限
 kubectl describe ClusterRole tzedu:developer
 ```
@@ -51,6 +54,15 @@ kubectl delete pod pod名称 -n 命名空间 --force --grace-period=0
 ```
 
 ## 配置
+
+### 命令补全
+
+加入到 `~/.bashrc` 中，然后 `source` 生效
+
+```shell
+source <(kubectl completion bash)
+source <(kubeadm completion bash)
+```
 
 ### 应用示例
 

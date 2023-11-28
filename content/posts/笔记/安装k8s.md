@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-16
-lastmod: 2023-09-25
+lastmod: 2023-11-28
 categories:
   - blog
 description: "安装 [[笔记/point/k8s|k8s]] 的记录."
@@ -13,6 +13,23 @@ description: "安装 [[笔记/point/k8s|k8s]] 的记录."
 ## 简介
 
 安装 [[笔记/point/k8s|k8s]] 的记录 -20230606.
+
+## 安装方式对比
+
+![[附件/k8s的传统安装与Pod方式安装.png]]
+
+| 安装方式 | 主要区别                                                            |
+| -------- | ------------------------------------------------------------------- |
+| 传统方式 | 支撑性软件都是以服务的样式来进行运行，其他的组件以 pod 的方式来运行 |
+| Pod 方式 | 除了 kubelet 和容器环境基于服务的方式运行，其他的都以 pod 的方式来运行。<br>所有的 pod 都被 kubelet 以 manifest(配置清单) 的方式进行统一管理。<br>由于这种 pod 是基于节点指定目录下的配置文件统一管理的，所有我们将这些 pod 称为静态 pod                                                                   |
+
+- 传统方式
+    - 软件源
+    - 二进制
+    - ansible 自动化
+- pod 方式
+    - kubeadm
+    - minikube
 
 ## kubeadm 安装
 
@@ -154,6 +171,41 @@ systemctl enable kubelet
 
 ### kubeadm 初始化
 
+[kubeadm-init](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/#init-workflow) 具体做了什么？
+
+- master 节点启动：
+    - 当前环境检查，确保当前主机可以部署 kubernetes
+        - 检查容器引擎，镜像拉取情况
+    - 生成 kubernetes 对外提供服务所需要的各种私钥以及数字证书
+        - 证书存放在 `/etc/kubernetes/pki` 的 `*.key *.cer`
+    - 生成 kubernetes 控制组件的 kubeconfig 文件
+        - 存放在 `/etc/kubernetes` 的 `*.conf`
+    - 生成 kubernetes 控制组件的 pod 对象需要的 manifest 文件
+        - `/etc/kubernetes/manifests` 下
+        - `etcd.yaml`
+        - `kube-apiserver.yaml`
+        - `kube-controller-manager.yaml`
+        - `kube-scheduler.yaml`
+    - 为集群控制节点添加相关的标识，不让主节点参与 node 角色工作
+        - 输入命令 `kubectl describe nodes master1` 看到 `Taints: node-role.kubernetes.io/master:NoSchedule`
+        - 如果没有在 yaml 配置，这可以手动配置 `kubectl taint nodes master1 node-role.kubernetes.io/master:NoSchedule`
+    - 生成集群的统一认证的 token 信息，方便其他节点加入到当前的集群
+        - `kube-public` 有一个 `configmap` 叫 `cluster-info`，里面存放着 token 等连接信息
+    - 进行基于 TLS 的安全引导相关的配置、角色策略、签名请求、自动配置策略
+        - kubelet 会使用这个 `/etc/kubernetes/kubelet.conf` 配置文件
+    - 为集群安装 DNS 和 kube-porxy 插件
+        - `kube-system` 空间下面
+        - 如果 cni 网络插件没有弄好，coredns 等几个容器会运行失败
+- node 节点加入
+    - 当前环境检查，读取相关集群配置信息
+        - 容器引擎是否安装，通过 `kubectl -n kube-system get cm kubeadm-config -o yaml` 获取配置
+  - 获取集群相关数据后启动 kubelet 服务
+      - 证书信息 `/var/lib/kubelet/config.yaml`
+      - 启动参数信息 `/var/lib/kubelet/kubeadm-flags.env`
+      - 启动
+  - 获取认证信息后，基于证书方式进行通信
+
+
 > [!info]
 > 如果网络有问题, 参考 [[笔记/docker镜像源|docker镜像源]] 从国内先拉取镜像再打上 `tag`.
 > -  `kubeadm config images list` 查看需要用到的镜像
@@ -161,15 +213,21 @@ systemctl enable kubelet
 
 也可以使用参数 `--image-repository` 指定国内源. 初始化命令如下:
 
-```
+```shell
 # 初始化
-kubeadm init --image-repository='registry.cn-hangzhou.aliyuncs.com/google_containers' --kubernetes-version=v1.27.2 --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.31.221 --cri-socket unix:///var/run/containerd/containerd.sock
+kubeadm init --image-repository='registry.cn-hangzhou.aliyuncs.com/google_containers' \
+--kubernetes-version=v1.27.2 \
+--service-cidr=10.96.0.0/12 \
+--pod-network-cidr=10.244.0.0/16 \
+--apiserver-advertise-address=192.168.31.221 \
+--cri-socket unix:///var/run/containerd/containerd.sock
 ```
 
-**可以跳过**, 或使用参数 `--config config.yml` 文件初始化
+**可以跳过**, 或使用参数 `--config config.yml` 文件初始化 (kubeadm config print init-defaults)
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta3 # 不同版本的api版本不一样
+# 节点加入时，认证token授权相关的基本信息。一般在内网比较安全，无需改动
 bootstrapTokens:
 - groups:
   - system:bootstrappers:kubeadm:default-node-token
@@ -179,30 +237,43 @@ bootstrapTokens:
   - signing
   - authentication
 kind: InitConfiguration
+# 第一个master节点配置的入口
 localAPIEndpoint:
-  advertiseAddress: 192.168.31.221
+  advertiseAddress: 192.168.31.221 # 第一个master的ip
   bindPort: 6443
+# node节点注册到master集群的通信方式
 nodeRegistration:
   criSocket: unix:///var/run/containerd/containerd.sock
   imagePullPolicy: IfNotPresent
-  name: master1
+  name: master1 # 第一个master的名字
   taints: null
+  # taints: 
+  #   - effect: NoSchedule
+  #     key: node-role.kubernets.io/master
 ---
+# 基本的集群属性信息
 apiServer:
   timeoutForControlPlane: 4m0s
 apiVersion: kubeadm.k8s.io/v1beta3
 certificatesDir: /etc/kubernetes/pki
 clusterName: kubernetes
+# 默认没有这个，多个master的时候，这里填keepalived的vip地址
+# controlPlaneEndpoint: vip:6443
 controllerManager: {}
 dns: {}
+# kubernetes的数据管理方式
 etcd:
   local:
     dataDir: /var/lib/etcd
+# 镜像仓库的配置
 imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
 kind: ClusterConfiguration
+# kubernetes版本的定制
 kubernetesVersion: 1.27.0
+# kubernetes的网络基本信息
 networking:
   dnsDomain: cluster.local
+  serviceSubnet: "10.96.0.0/12"
   podSubnet: "10.244.0.0/16"
 scheduler: {}
 ---
@@ -263,6 +334,62 @@ kubectl logs kube-proxy-xxx -n kube-system | grep "Using ipvs Proxier"
 ```shell
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.1/deploy/static/provider/cloud/deploy.yaml
 ```
+
+## kubeadm 管理操作
+
+### 节点重置
+
+1. 冻结节点
+2. 驱离现有资源
+3. 删除节点
+4. 清理环境
+5. 清理遗留信息
+6. 重启主机
+
+```shell
+# 冻结
+kubectl cordon xxxx-node
+
+# 驱离
+kubectl drain xxx-node --force=true --ignore-daemonsets=true --delete-emptydir-data=true
+
+# 删除节点
+kubectl delete nodes xxx-node
+
+# 在被移除节点上操作
+kubeadm reset
+
+# 清理资源
+rm -rf /etc/cni/net.d/*
+# master节点要删除 ~/.kube
+
+# 可以跳过，直接到重启部分
+tree /etc/kubernetes # 如果有文件就清理
+# 重启一下
+systemctl restart kubelet docker
+# 如果有网络组件，应该清理掉
+ifconfig
+# 手动关闭网卡，如果是calico也使用一样的方法清理掉
+ifconfig flannel.1 down
+# 清理ip route
+ip route list
+ip route del 192.168.1.0/24
+# 刷新缓存
+ip route flush cache
+
+# 重启一下
+reboot
+
+# 重新加入
+kubeadm join ...
+```
+
+### 多 master 节点
+
+第一台 master 的 kubeadm 初始化后：
+
+1. `kubeadm init phase upload-certs --upload-certs` 得到 key
+2. `kubeadm join ... --certificate-key {上面的key}`
 
 ## kubekey 安装
 
@@ -381,7 +508,6 @@ spec:
 
 ## 参考链接
 
-- [kubeadm-YouTube安装k8s视频](https://www.youtube.com/watch?v=7k9Rdlx30OY&t=808s)
-- [kubeadm-视频中的文档地址](https://www.itsgeekhead.com/tuts/kubernetes-126-ubuntu-2204.txt)
+- [kubeadm-YouTube安装k8s视频](https://www.youtube.com/watch?v=7k9Rdlx30OY&t=808s)，[kubeadm-视频中的文档地址](https://www.itsgeekhead.com/tuts/kubernetes-126-ubuntu-2204.txt)
 - [kubekey-多节点安装 (kubesphere.io)](https://www.kubesphere.io/zh/docs/v3.3/installing-on-linux/introduction/multioverview/)
 - [ingress官方文档地址](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)
