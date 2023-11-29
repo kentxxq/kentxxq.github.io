@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-14
-lastmod: 2023-11-19
+lastmod: 2023-11-29
 categories:
   - blog
 description: "CKA 是 [[笔记/point/k8s|k8s]] 的一个管理员认证, 我也弄了一个证书 [[附件/CKA证书.pdf|CKA证书]]"
@@ -512,6 +512,9 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
+  # storageClassName如果不写，可能会使用默认sc。从而导致无法匹配
+  # 查看默认sc命令 kubectl get sc
+  storageClassName: ""
   resources:
     requests:
       storage: 1Gi
@@ -539,7 +542,7 @@ metadata:
    name: nfs-provisioner
    namespace: kentxxq
 rules:
-#  - apiGroups: [""] # "" 标明 core API 组
+#  - apiGroups: ["*"] # "" 标明 core API 组
 #    resources: ["*"]
 #    verbs: ["*"]
   - apiGroups: [""]
@@ -635,8 +638,8 @@ metadata:
   namespace: kentxxq
 # 每个 StorageClass 都包含 provisioner、parameters 和 reclaimPolicy 字段
 # provisioner用来决定使用哪个卷插件分配PV，必须与nfs-client的容器内部的 PROVISIONER_NAME 变量一致
-# reclaimPolicy指定创建的Persistent Volume的回收策略
 provisioner: "nfsprovisioner"
+# reclaimPolicy指定创建的Persistent Volume的回收策略
 reclaimPolicy: Retain
 parameters:
   # archiveOnDelete: "false"表示在删除时不会对数据进行打包，当设置为true时表示删除时会对数据进行打包

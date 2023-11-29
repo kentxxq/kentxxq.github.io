@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-01
-lastmod: 2023-11-27
+lastmod: 2023-11-28
 categories:
   - blog
 description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
@@ -85,7 +85,7 @@ kube-proxy 会监听 api-Server 的资源变化，配置 nodePort 和本地的 i
 
 因此负载均衡直接请求 worker 节点的特定网卡 ip 地址，即可请求到对应 pod。同时云商做了优化，性能比传统方式好。
 
-在创建一个 service 后，通常会创建一个 endpoint 对象。
+在创建一个 service 后，通常会创建一个 endpoint 对象 (除了 headless，headless 是在 dns 搞了一个别名)。
 
 client 访问 service 的时候有 2 种方式。
 
@@ -239,7 +239,18 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
 
 ![[附件/k8s中的flannel流量图.png]]
 
-##  ingress 的流量方案对比
+相关命令：
+
+- 查看 svc 模式 `cat kube-flannel.yml`
+- 查看 Vxlan 数据包流转
+    - `ip route list | grep flannel` 路由表关系
+    - `ip neigh | grep flannel` 数据包转发关系
+    - `bridge fdb show flannel.1 |grep flannel.1` 隧道转发关系
+    - **说明：**`ip neigh | grep flannel` 看到对应 ip 网段转发的网卡，在 `bridge fdb show flannel.1 |grep flannel.1` 找到对应的网卡和主机 ip 对应规则。ifconfig 中的 vethxxxx 就是 pod 内的网卡地址
+
+##  ingress
+
+### 流量方案对比
 
 ![[附件/ingress的流量方案对比.png]]
 
@@ -273,3 +284,33 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
 ## k8s 配置管理
 
 ![[附件/k8s配置管理.png]]
+
+## 存储
+
+### 存储挂载
+
+- 同个 volumn 或者多个 volumn 都可以按照下面的方式挂在到不同路径
+- mountPath 是主机路径
+- subPath 是 volumn 路径。避免每个 volumn 的路径/文件名重复造成的冲突
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: my-container
+    image: my-image
+    volumeMounts:
+    - name: my-volume
+      mountPath: /data/data1
+      subPath: data1/file.txt
+    - name: my-volume
+      mountPath: /data/data2
+      subPath: data2/file.txt
+  volumes:
+  - name: my-volume
+    persistentVolumeClaim:
+      name: my-pvc
+```

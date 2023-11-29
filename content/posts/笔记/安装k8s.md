@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-16
-lastmod: 2023-11-28
+lastmod: 2023-11-29
 categories:
   - blog
 description: "安装 [[笔记/point/k8s|k8s]] 的记录."
@@ -285,7 +285,8 @@ mode: ipvs
 ### 网络组件
 
 ```shell
-# calico网络插件
+# calico网络插件网段
+# 这里应该和kubeadm init --pod-network-cidr=192.168.0.0/16 一致!!!
 10.244.0.0/16
 # https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
@@ -327,6 +328,17 @@ kubectl edit configmap kube-proxy -n kube-system
 mode: ipvs
 kubectl delete po -n kube-system kube-proxy-xxx
 kubectl logs kube-proxy-xxx -n kube-system | grep "Using ipvs Proxier"
+
+# 验证
+apt install ipvsadm -y
+ipavsadm -Ln
+```
+
+验证安装情况:
+
+```shell
+# 每个节点都会有一个 pod/calico-node 处于 running 状态
+kubectl get all -A -o wide |grep calico
 ```
 
 ### Ingress
@@ -384,12 +396,42 @@ reboot
 kubeadm join ...
 ```
 
-### 多 master 节点
+### 生成加入集群的命令
+
+```shell
+# 这是node节点的加入命令
+kubeadm token create --print-join-command
+```
+
+### 加入新的 master 节点
 
 第一台 master 的 kubeadm 初始化后：
 
 1. `kubeadm init phase upload-certs --upload-certs` 得到 key
-2. `kubeadm join ... --certificate-key {上面的key}`
+2. `kubeadm join ... --control-plane --certificate-key {上面的key}`
+
+### 升级集群
+
+1. 确定 [[笔记/point/k8s|k8s]] 的版本一致
+    - kubeadm version
+    - kubectl version
+    - kubectl get nodes
+2. 升级 kubeadm 的版本
+3. 升级
+    - kubeadm upgrade plan
+    - kubeadm upgrade apply v 1.28.4
+4. 升级 kubectl，kubelet 版本
+    - systemctl daemon-reload
+    - systemctl restart kubelet
+5. 升级 worker 节点
+    - kubectl drain worker-node --ignore-daemonsets
+    - 升级 kubelet 版本
+    - systemctl daemon-reload
+    - systemctl restart kubelet
+    - kubectl uncordon  worker-node
+6. 重复第一步来验证升级
+
+> 升级完成 kubeadm 后，可以 `kubeadm config images pull` 来提前拉取镜像
 
 ## kubekey 安装
 

@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-15
-lastmod: 2023-11-27
+lastmod: 2023-11-28
 categories:
   - blog
 description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
@@ -43,6 +43,14 @@ kubectl get ingressclasses
 
 # 查询具体权限
 kubectl describe ClusterRole tzedu:developer
+```
+
+### 日志查询
+
+```shell
+kubectl logs <pod-name> -c <container-name>
+# 通过label查询多个容器的日志
+kubectl logs -f -n kube-system -l k8s-app=calico-node
 ```
 
 ### 清理残存容器

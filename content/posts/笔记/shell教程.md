@@ -4,7 +4,7 @@ tags:
   - blog
   - shell
 date: 2023-08-10
-lastmod: 2023-10-10
+lastmod: 2023-11-28
 categories:
   - blog
 description: "虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔记/point/shell|shell]] 是高效的."
@@ -17,6 +17,14 @@ description: "虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔
 这里记录一些用法和技巧.
 
 ## 常用内容
+
+### 一行命令
+
+```shell
+# 循环ssh不同机器执行命令
+for i in {12..17};do ssh root@l0.0.0.si "ifconfig grep -Al flannel.1";done
+# 也可以用 for i in item1 item2 ... itemN;
+```
 
 ### 基础
 
