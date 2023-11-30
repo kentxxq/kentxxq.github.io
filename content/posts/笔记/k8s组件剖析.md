@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-01
-lastmod: 2023-11-28
+lastmod: 2023-11-30
 categories:
   - blog
 description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
@@ -133,6 +133,8 @@ client 访问 service 的时候有 2 种方式。
 
 如果 pvc 没有使用 `name`, `label`, `storage-class` 等方式指定, 会启用自动匹配机制. DefaultStorageClass 将 PVC 与 PV 会自动绑定，根据 PVC 的大小、权限等进行自动匹配后绑定的。
 
+![[附件/k8s的自动绑定规则.png]]
+
 ```shell
 # 查看默认的storageclass
 kubectl get storageclass
@@ -254,6 +256,16 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
 
 ![[附件/ingress的流量方案对比.png]]
 
+### externaltrafficpolicy
+
+- cluster：跨节点转发，负载更好。但多了一次 snat。获取源 ip 可能会有问题，性能差一点。并且会让上层的负载均衡权重失效。
+- local：永远不会跨节点转发。不丢失源 ip。性能好一点。如果 3 个节点，但是只有 2 个 nginx 提供服务，会导致 node3 无法转发。如果发版切换到了 node3，上层负载均衡无法感知。需要控制器 Cloud Controller Management（简称：CCM） 感应 endpoint 变化。通知给 ELB。ELB 其实就是 load-balance。
+- 云厂商就是用的 local 模式 + load-balance 。负载均衡和权重在外部做了，可以跨节点转发，又不会失去源 ip。云厂商自己也有配套的 [CCE](https://help.aliyun.com/zh/ack/product-overview/cloud-controller-manager)
+
+> [使用Service对外暴露应用\_容器服务 Kubernetes 版 ACK-阿里云帮助中心](https://help.aliyun.com/document_detail/86512.html?spm=5176.2020520152.0.0.13e416ddRkjpI0#section-qr2-2yu-zk9)
+> [externalTrafficPolicy为Local的服务重启时如何保证zero downtime - 知乎](https://zhuanlan.zhihu.com/p/595874037)
+> 参考 [externaltrafficpolicy的有关问题说明 - 紫色飞猪 - 博客园](https://www.cnblogs.com/zisefeizhu/p/13262239.html)
+
 #todo/笔记 自己搭建一个测试?
 
 ## 设计模式 sidecar
@@ -274,6 +286,10 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
 4. [[笔记/k8s组件剖析#kubelet|kubelet]] 进行 watch，执行具体的调整动作
 
 如果调整整个 deployment 资源，那么会新建一个 replicas 来替换。回滚也是一样
+
+## stateful 有状态应用
+
+- 通过 mysql 的实例学习 [运行一个有状态的应用程序 | Kubernetes](https://kubernetes.io/zh-cn/docs/tasks/run-application/run-replicated-stateful-application/#understanding-stateful-pod-init)
 
 ## service 控制器
 
@@ -314,3 +330,9 @@ spec:
     persistentVolumeClaim:
       name: my-pvc
 ```
+
+## coredns
+
+- 可以使用 `nslookup` 来解析 ip 或者域名
+- 每个容器的 `/etc/resolv.conf` 都有 coredns 的配置信息
+- 在初始化集群的时候，会有一个 dnsDoimain 是 `cluster.local`，所以 svc ，pod 等资源的结尾是 `资源名称xxx-svc.命名空间default.资源类型svc.cluster.local`

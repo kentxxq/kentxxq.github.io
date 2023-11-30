@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-16
-lastmod: 2023-11-29
+lastmod: 2023-11-30
 categories:
   - blog
 description: "安装 [[笔记/point/k8s|k8s]] 的记录."
@@ -326,12 +326,21 @@ spec: {}
 ```shell
 kubectl edit configmap kube-proxy -n kube-system
 mode: ipvs
-kubectl delete po -n kube-system kube-proxy-xxx
-kubectl logs kube-proxy-xxx -n kube-system | grep "Using ipvs Proxier"
 
-# 验证
+kubectl rollout restart daemonset kube-proxy -n kube-system
+# 或者一个一个来 kubectl delete po -n kube-system kube-proxy-xxx
+
+# 验证使用了ipvs
+kubectl logs kube-proxy-xxx -n kube-system | grep "Using ipvs Proxier"
+# 新建service应该会有日志出现
+kubectl logs -f -n kube-system -l k8s-app=kube-proxy
+
+# ipvsadm可以帮助我们查看规则
 apt install ipvsadm -y
-ipavsadm -Ln
+# 查看所有规则
+ipvsadm -Ln
+# 出来的记录指向多个ip，正好就是service的endpoint里面的ip
+ipvsadm -Ln | egrep -A2 'service的cluster-ip'
 ```
 
 验证安装情况:
@@ -349,7 +358,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 
 ## kubeadm 管理操作
 
-### 节点重置
+### 节点重置/扩缩容
 
 1. 冻结节点
 2. 驱离现有资源

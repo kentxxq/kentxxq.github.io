@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-14
-lastmod: 2023-11-29
+lastmod: 2023-11-30
 categories:
   - blog
 description: "CKA 是 [[笔记/point/k8s|k8s]] 的一个管理员认证, 我也弄了一个证书 [[附件/CKA证书.pdf|CKA证书]]"
@@ -344,11 +344,20 @@ command:
 ...
 ```
 
+#### 查看相关节点
+
+```shell
+etcdctl member list --cacert=/etc/ssl/etcd/ssl/ca.pem --cert=/etc/ssl/etcd/ssl/admin-master1.pem --key=/etc/ssl/etcd/ssl/admin-master1-key.pem
+# 或者
+etcdctl endpoint status --cacert=/etc/ssl/etcd/ssl/ca.pem --cert=/etc/ssl/etcd/ssl/admin-master1.pem --key=/etc/ssl/etcd/ssl/admin-master1-key.pem
+```
+
 #### 数据备份
 
 答题:
 
 ```shell
+# 备份只需要1个节点
 etcdctl snapshot save /data/backup/etcd-snapshot.db
 --endpoints=https://127.0.0.1:2379
 --cacert=/xxx/ca.crt
@@ -398,8 +407,14 @@ mv /etc/kubernetes/manifests /etc/kubernetes/manifests-bak
 crictl ps
 # 备份etcd
 mv /var/lib/etcd /var/lib/etcd-bak
-# 恢复数据
-ETCDCTL_API=3 etcdctl snapshot restore /data/backup/snapshot-etcd-previous.db --data-dir=/var/lib/etcd ...endpoint...ca...cert...key...
+# 恢复数据，每个master节点都要改动参数，然后执行
+ETCDCTL_API=3 etcdctl snapshot restore /data/backup/snapshot-etcd-previous.db \
+--name=etcd-0 \
+--data-dir=/var/lib/etcd \
+--initial-cluster="kubernetes-master1=https://10.0.0.12:2380,kubernetes-master2=https://10.0.0.13:2380,kubernetes-master3=https://10.0.0.14:2380" \
+--initial-cluster-token=etcd-cluster \
+--initial-advertise-peer-urls=https://10.0.0.12:2380 \
+...endpoint...ca...cert...key...
 # 恢复容器
 mv /etc/kubernetes/manifests-bak /etc/kubernetes/manifests
 ```
@@ -664,6 +679,46 @@ spec:
   resources:
     requests:
       storage: 1Gi
+```
+
+### 绑定 pv 和 pvc
+
+pvc 会寻找合适的 pv，而 pv 可能会被其他 pvc 使用。
+
+所以最好**同时指定** `pvc的volumeName` , `pv的claimRef`。关于自动绑定可以看 [[笔记/k8s组件剖析#pv 和 pvc|这里]]
+
+```yaml
+ apiVersion: v1
+ kind: PersistentVolume
+ metadata:
+   name: pv0003
+ spec:
+   storageClassName: ""
+   capacity:
+     storage: 5Gi
+   accessModes:
+     - ReadWriteOnce
+   persistentVolumeReclaimPolicy: Retain
+   claimRef:
+     namespace: default
+     name: myclaim
+   nfs:
+     path: /tmp
+     server: 172.17.0.2
+---
+ kind: PersistentVolumeClaim
+ apiVersion: v1
+ metadata:
+   name: myclaim
+ spec:
+   # 避免被default storageClass创建
+   storageClassName: ""
+   volumeName: "pv0003"
+   accessModes:
+     - ReadWriteOnce
+   resources:
+     requests:
+       storage: 5Gi
 ```
 
 ## 相关链接
