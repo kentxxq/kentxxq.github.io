@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-01
-lastmod: 2023-11-30
+lastmod: 2023-12-01
 categories:
   - blog
 description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
@@ -336,3 +336,11 @@ spec:
 - 可以使用 `nslookup` 来解析 ip 或者域名
 - 每个容器的 `/etc/resolv.conf` 都有 coredns 的配置信息
 - 在初始化集群的时候，会有一个 dnsDoimain 是 `cluster.local`，所以 svc ，pod 等资源的结尾是 `资源名称xxx-svc.命名空间default.资源类型svc.cluster.local`
+
+## 第三方组件
+
+### 监控
+
+- cadvisor 监控容器的资源使用率，但是 [[笔记/point/k8s|k8s]] 已经内置了 [google/cadvisor](https://github.com/google/cadvisor)
+- KSM 收集集群相关的内容，需要自己部署 [kubernetes/kube-state-metrics: Add-on agent to generate and expose cluster-level metrics.](https://github.com/kubernetes/kube-state-metrics)
+- 收集使用信息，计算成本 [Kubecost Documentation](https://docs.kubecost.com/)

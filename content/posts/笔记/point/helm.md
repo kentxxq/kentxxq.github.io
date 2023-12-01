@@ -4,7 +4,7 @@ tags:
   - point
   - helm
 date: 2023-07-08
-lastmod: 2023-09-04
+lastmod: 2023-12-01
 categories:
   - point
 ---
@@ -24,17 +24,26 @@ categories:
 - charts 是一个应用所需资源的概括
 - release 是一个 charts 发布到 k8s 后的实例
 
+### 安装
+
+1. [Releases · helm/helm](https://github.com/helm/helm/releases)
+2. `tar xf xxx.tar.gz`
+3. `mv helm /usr/local/sbin/helm`
+
 ### 基础操作
 
-|  说明   | 操作  |
-|  ---  | ---  |
-| 添加 repo 仓库  | helm repo add `bitnami` `https://charts.bitnami.com/bitnami` |
-| 更新仓库  | helm repo update |
-| 搜索 charts 包  | helm search repo `redis` |
-| 安装 charts 包  | helm install `name` bitnami/mysql |
-| 查看当前部署  | helm ls |
-| 查看应用详情  | helm status `name` |
-| 卸载指定的 release | helm uninstall `name` |
+| 说明                     | 操作                                                         |
+| ------------------------ | ------------------------------------------------------------ |
+| 添加 repo 仓库           | helm repo add `bitnami` `https://charts.bitnami.com/bitnami` |
+| 更新仓库                 | helm repo update                                             |
+| 搜索 charts 包           | helm search repo `redis`                                     |
+| 拉取 charts 包到当前目录 | helm pull `apisix/apisix`                                    |
+| 安装 charts 包           | helm install `name` bitnami/mysql                            |
+| 查看当前部署             | helm ls                                                      |
+| 查看应用详情             | helm status `name`                                           |
+| 卸载指定的 release       | helm uninstall `name`                                        |
+
+- install 命令可以通过 - `--set image.tag=latest` 或 `--values my-values.yaml` 修改默认值
 
 编写 helm 脚本:
 
