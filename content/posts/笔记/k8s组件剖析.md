@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-01
-lastmod: 2023-12-01
+lastmod: 2023-12-04
 categories:
   - blog
 description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
@@ -250,6 +250,8 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
     - `bridge fdb show flannel.1 |grep flannel.1` 隧道转发关系
     - **说明：**`ip neigh | grep flannel` 看到对应 ip 网段转发的网卡，在 `bridge fdb show flannel.1 |grep flannel.1` 找到对应的网卡和主机 ip 对应规则。ifconfig 中的 vethxxxx 就是 pod 内的网卡地址
 
+#### calico
+
 ##  ingress
 
 ### 流量方案对比
@@ -262,7 +264,11 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
 - local：永远不会跨节点转发。不丢失源 ip。性能好一点。如果 3 个节点，但是只有 2 个 nginx 提供服务，会导致 node3 无法转发。如果发版切换到了 node3，上层负载均衡无法感知。需要控制器 Cloud Controller Management（简称：CCM） 感应 endpoint 变化。通知给 ELB。ELB 其实就是 load-balance。
 - 云厂商就是用的 local 模式 + load-balance 。负载均衡和权重在外部做了，可以跨节点转发，又不会失去源 ip。云厂商自己也有配套的 [CCE](https://help.aliyun.com/zh/ack/product-overview/cloud-controller-manager)
 
-> [使用Service对外暴露应用\_容器服务 Kubernetes 版 ACK-阿里云帮助中心](https://help.aliyun.com/document_detail/86512.html?spm=5176.2020520152.0.0.13e416ddRkjpI0#section-qr2-2yu-zk9)
+> 阿里云
+> [使用Service对外暴露应用](https://help.aliyun.com/document_detail/86512.html?spm=5176.2020520152.0.0.13e416ddRkjpI0#section-qr2-2yu-zk9)
+> [自建K8s集群如何部署CCM组件](https://help.aliyun.com/zh/eci/user-guide/deploy-the-ccm)
+> [ccm 的开源地址](https://github.com/kubernetes/cloud-provider-alibaba-cloud)
+> 其他相关资料
 > [externalTrafficPolicy为Local的服务重启时如何保证zero downtime - 知乎](https://zhuanlan.zhihu.com/p/595874037)
 > 参考 [externaltrafficpolicy的有关问题说明 - 紫色飞猪 - 博客园](https://www.cnblogs.com/zisefeizhu/p/13262239.html)
 
@@ -330,6 +336,12 @@ spec:
     persistentVolumeClaim:
       name: my-pvc
 ```
+
+### 存储方案
+
+如果不用第三方，不用 nfs 之类的。就用 ceph
+
+- [Gluster和Ceph对比 — Cloud Atlas beta 文档](https://cloud-atlas.readthedocs.io/zh-cn/latest/gluster/gluster_vs_ceph.html)
 
 ## coredns
 

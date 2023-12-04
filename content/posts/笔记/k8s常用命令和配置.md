@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-15
-lastmod: 2023-11-28
+lastmod: 2023-12-04
 categories:
   - blog
 description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
@@ -31,6 +31,8 @@ description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
 | nodes                  | no     | `v1`                   | false     | Node                  |
 | persistentvolumeclaims | pvc    | `v1`                   | true      | PersistentVolumeClaim |
 | persistentvolumes      | pv     | `v1`                   | false     | PersistentVolume      |
+
+> 如果你安装了 [[笔记/lstio|lstio]] 这样有自定义资源的组件，一样也会出现在这里
 
 ### 查询信息
 
