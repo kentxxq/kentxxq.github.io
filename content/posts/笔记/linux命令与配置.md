@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-11-08
+lastmod: 2023-12-05
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -13,6 +13,15 @@ description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通�
 ## 简介
 
 这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法.
+
+## 常见依赖
+
+### c/c++ 项目依赖
+
+```shell
+# 安装编译需要用的依赖
+apt install libpcre3 libpcre3-dev openssl libssl-dev build-essential -y
+```
 
 ## 常用配置
 

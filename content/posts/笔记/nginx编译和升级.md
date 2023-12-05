@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-09-07
+lastmod: 2023-12-05
 categories:
   - blog
 description: "这里记录 [[笔记/point/nginx|nginx]] 的模块编译和升级操作."
@@ -17,6 +17,8 @@ description: "这里记录 [[笔记/point/nginx|nginx]] 的模块编译和升级
 ## 编译
 
 ### 正常编译
+
+ [[笔记/linux命令与配置#c/c++ 项目依赖|装好依赖]] 后开始编译
 
 ```shell
 # 准备目录
@@ -31,8 +33,6 @@ tar xf tengine-3.0.0.tar.gz
 curl http://nginx.org/download/nginx-1.24.0.tar.gz -o nginx-1.24.0.tar.gz
 tar -xf nginx-1.24.0.tar.gz
 cd nginx-1.24.0
-# 安装编译需要用的依赖
-apt install libpcre3 libpcre3-dev openssl libssl-dev build-essential -y
 
 # 监控信息 --with-http_stub_status_module 
 # ssl证书 --with-http_ssl_module

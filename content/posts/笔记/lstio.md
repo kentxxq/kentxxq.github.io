@@ -4,7 +4,7 @@ tags:
   - blog
   - lstio
 date: 2023-12-04
-lastmod: 2023-12-04
+lastmod: 2023-12-05
 categories:
   - blog
 description: 
@@ -57,7 +57,12 @@ description:
 初始命令：
 
 - `istioctl profile list` 查看所有组合。每个组合对应 `manifests/profiles` 下面的一个 yml 文件。
-    - `demo` 最全最完整。
+    - `demo` 比较完整。有采集指标，适合**演示**
+    - `default` 默认适合**生产环境**
+    - `minimal` 仅部署控制平面
+    - `preview` 更高级别 demo，**新功能尝鲜**
+- `istioctl profile diff demo empty` 查看 2 个配置的区别
+- `istioctl manifest generate --set profile=demo` 生成 yml 文件
 - `istioctl install`
     - `--set profile=demo` 选择配置
     - `--set xxx.xxx.xxx=true` 修改某个 profile 的值
@@ -65,6 +70,7 @@ description:
 操作命令：
 - `istioctl analyze -n default` 检测 xxx 空间是否正常注入
 - `istioctl experimental precheck` 检测更新，部署，调整后控制平面是否正常
+- `istioctl uninstall -f demo.yml` 或 `istioctl uninstall --purge` 卸载
 
 ## 相关操作
 
