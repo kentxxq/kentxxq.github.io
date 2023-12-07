@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-07-28
-lastmod: 2023-08-30
+lastmod: 2023-12-07
 categories:
   - blog
 description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
@@ -166,3 +166,93 @@ Number of node(s)with BGP peering established =0
     ```
 
 3. 重新部署 `kubectl apply -f calico.yaml`
+
+### cri-dockerd
+
+情景：
+
+`kubeadm init` 或 `crictl ps` 的时候报错：
+
+`validate CRI v1 runtime API for endpoint "unix:///var/run/cri-dockerd.sock"`
+
+解答：
+
+- 网上很多的教程都有一定的滞后性。如果无法保证所有组件的版本，架构一致，可能会出现问题。包括但不限于：[[笔记/point/k8s|k8s]] 版本，cni 版本，docker 版本，containerd 版本，arm 架构， x 86 架构等等。
+- cri-dockerd 是为了不停兼容 cri 标准。所以 cri-dockerd 和 [[笔记/point/k8s|k8s]] 的版本兼容性比较好。而 dockerd 的内部 api 可能会经常变动，比如下图 cri-dockerd 的 `v0.3.8` 开始兼容 [[笔记/point/docker|docker]] 的 `v24.0.7` 版本 ![[附件/cri-dockerd兼容docker版本.png]]
+
+处理:
+
+1. **建议下载最新**的 cri-dockerd 版本，配置 cri-dockerd：
+
+    ```shell
+    # 获取软件
+    mkdir /data/softs && cd /data/softs
+    wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.2.1/cri-dockerd-0.3.8.amd64.tgz
+    # 解压软件
+    tar xf cri-dockerd-0.3.8.amd64.tgz
+    mv cri-dockerd/cri-dockerd /usr/local/bin/
+    # 检查效果
+    cri-dockerd --version
+    
+    # 守护进程
+    vim /etc/systemd/system/cri-dockerd.service
+    [Unit]
+    Description=CRI Interface for Docker Application Container Engine
+    Documentation=https://docs.mirantis.com
+    After=network-online.target firewalld.service docker.service
+    Wants=network-online.target
+    [Service]
+    Type=notify
+    ExecStart=/usr/local/bin/cri-dockerd --network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/opt/cni/bin --container-runtime-endpoint=unix:///var/run/cri-dockerd.sock --image-pull-progress-deadline=30s --pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.6 --cri-dockerd-root-directory=/var/lib/dockershim --docker-endpoint=unix:///var/run/docker.sock --cri-dockerd-root-directory=/var/lib/docker
+    ExecReload=/bin/kill -s HUP $MAINPID
+    TimeoutSec=0
+    RestartSec=2
+    Restart=always
+    StartLimitBurst=3
+    StartLimitInterval=60s
+    LimitNOFILE=infinity
+    LimitNPROC=infinity
+    LimitCORE=infinity
+    TasksMax=infinity
+    Delegate=yes
+    KillMode=process
+    [Install]
+    WantedBy=multi-user.target
+    
+    
+    vim /usr/lib/systemd/system/cri-dockerd.socket
+    [Unit]
+    Description=CRI Docker Socket for the API
+    PartOf=cri-docker.service
+    [Socket]
+    ListenStream=/var/run/cri-dockerd.sock
+    SocketMode=0660
+    SocketUser=root
+    SocketGroup=docker
+    [Install]
+    WantedBy=sockets.target
+    
+    
+    # 启动服务
+    systemctl daemon-reload
+    systemctl enable cri-dockerd.service
+    systemctl restart cri-dockerd.service
+    # 检测效果
+    crictl --runtime-endpoint /var/run/cri-dockerd.sock ps
+    ```
+
+2. `vim /etc/containerd/config.toml` **去除** `disabled_plugins = ["cri"]`. 重启 [[笔记/point/Containerd|Containerd]] `systemctl restart containerd`
+3. 测试是否可以通过 cri-dockerd 联通 docker
+
+    ```shell
+    # cat /etc/crictl.yaml
+    runtime-endpoint: "unix:///var/run/cri-dockerd.sock"
+    image-endpoint: "unix:///var/run/cri-dockerd.sock"
+    timeout: 10
+    debug: false
+    pull-image-on-create: true
+    disable-pull-on-run: false
+    
+    # 测试效果
+    crictl ps
+    ```
