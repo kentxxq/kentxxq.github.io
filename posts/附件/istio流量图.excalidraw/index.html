@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>- 运维个人技术栈</title><meta name=Description content="kentxxq个人站点"><meta property="og:title" content><meta property="og:description" content="==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== Text Elementsk8s集群 ^f788j2ZP istio-ingress-gateway ^F3mBci1G 外部流量 ^Nmdejm4t Gateway ^QsvIUQTj VirtualService ^ljvgSDUB envoy ^Goth2t7M app ^kDjLQwUi service ^uxOwwsQ2 &mldr; ^CTEyeUYO pod ^PR8I0S4y ingress-svc ^93J0Or0x ingress-controller ^XE38ufrg DestiationRule ^lrIcr275 DestiationRule ^e3DDbWrJ %% Drawing 1 2 3 4 5 6"><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E9%99%84%E4%BB%B6/istio%E6%B5%81%E9%87%8F%E5%9B%BE.excalidraw/"><meta property="article:section" content="posts"><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== Text Elementsk8s集群 ^f788j2ZP istio-ingress-gateway ^F3mBci1G 外部流量 ^Nmdejm4t Gateway ^QsvIUQTj VirtualService ^ljvgSDUB envoy ^Goth2t7M app ^kDjLQwUi service ^uxOwwsQ2 &mldr; ^CTEyeUYO pod ^PR8I0S4y ingress-svc ^93J0Or0x ingress-controller ^XE38ufrg DestiationRule ^lrIcr275 DestiationRule ^e3DDbWrJ %% Drawing 1 2 3 4 5 6"><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E9%99%84%E4%BB%B6/istio%E6%B5%81%E9%87%8F%E5%9B%BE.excalidraw/><link rel=prev href=https://kentxxq.com/posts/%E9%99%84%E4%BB%B6/opentelemetry%E6%9E%B6%E6%9E%84%E5%9B%BE.excalidraw/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E9%85%8D%E7%BD%AE%E8%A7%A3%E8%AF%BB/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E9%99%84%E4%BB%B6\/istio%E6%B5%81%E9%87%8F%E5%9B%BE.excalidraw\/"},"genre":"posts","keywords":"excalidraw","wordcount":5042,"url":"https:\/\/kentxxq.com\/posts\/%E9%99%84%E4%BB%B6\/istio%E6%B5%81%E9%87%8F%E5%9B%BE.excalidraw\/","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":""}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>- 运维个人技术栈</title><meta name=Description content="kentxxq个人站点"><meta property="og:title" content><meta property="og:description" content="==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== Text Elementsk8s集群 ^f788j2ZP istio-ingress-gateway ^F3mBci1G 外部流量 ^Nmdejm4t Gateway ^QsvIUQTj VirtualService ^ljvgSDUB envoy ^Goth2t7M app ^kDjLQwUi service ^uxOwwsQ2 &mldr; ^CTEyeUYO pod ^PR8I0S4y ingress-svc ^93J0Or0x ingress-controller ^XE38ufrg %% Drawing 1 2 3 4 5 6 7 8 9 10"><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E9%99%84%E4%BB%B6/istio%E6%B5%81%E9%87%8F%E5%9B%BE.excalidraw/"><meta property="article:section" content="posts"><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== Text Elementsk8s集群 ^f788j2ZP istio-ingress-gateway ^F3mBci1G 外部流量 ^Nmdejm4t Gateway ^QsvIUQTj VirtualService ^ljvgSDUB envoy ^Goth2t7M app ^kDjLQwUi service ^uxOwwsQ2 &mldr; ^CTEyeUYO pod ^PR8I0S4y ingress-svc ^93J0Or0x ingress-controller ^XE38ufrg %% Drawing 1 2 3 4 5 6 7 8 9 10"><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E9%99%84%E4%BB%B6/istio%E6%B5%81%E9%87%8F%E5%9B%BE.excalidraw/><link rel=prev href=https://kentxxq.com/posts/%E9%99%84%E4%BB%B6/opentelemetry%E6%9E%B6%E6%9E%84%E5%9B%BE.excalidraw/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mysql%E9%85%8D%E7%BD%AE%E8%A7%A3%E8%AF%BB/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E9%99%84%E4%BB%B6\/istio%E6%B5%81%E9%87%8F%E5%9B%BE.excalidraw\/"},"genre":"posts","keywords":"excalidraw","wordcount":4796,"url":"https:\/\/kentxxq.com\/posts\/%E9%99%84%E4%BB%B6\/istio%E6%B5%81%E9%87%8F%E5%9B%BE.excalidraw\/","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":""}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
@@ -7,8 +7,8 @@
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
 <span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class="toc-content always-active" id=toc-content-auto><nav id=TableOfContents></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5042 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 11 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div></div><div class=content id=content><p>==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==</p><h1 id=text-elements class=headerLink><a href=#text-elements class=header-mark></a>Text Elements</h1><p>k8s集群 ^f788j2ZP</p><p>istio-ingress-gateway ^F3mBci1G</p><p>外部流量 ^Nmdejm4t</p><p>Gateway ^QsvIUQTj</p><p>VirtualService ^ljvgSDUB</p><p>envoy ^Goth2t7M</p><p>app ^kDjLQwUi</p><p>service ^uxOwwsQ2</p><p>&mldr; ^CTEyeUYO</p><p>pod ^PR8I0S4y</p><p>ingress-svc ^93J0Or0x</p><p>ingress-controller ^XE38ufrg</p><p>DestiationRule ^lrIcr275</p><p>DestiationRule ^e3DDbWrJ</p><p>%%</p><h1 id=drawing class=headerLink><a href=#drawing class=header-mark></a>Drawing</h1><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>   1
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class="toc-content always-active" id=toc-content-auto><nav id=TableOfContents></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4796 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div></div><div class=content id=content><p>==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==</p><h1 id=text-elements class=headerLink><a href=#text-elements class=header-mark></a>Text Elements</h1><p>k8s集群 ^f788j2ZP</p><p>istio-ingress-gateway ^F3mBci1G</p><p>外部流量 ^Nmdejm4t</p><p>Gateway ^QsvIUQTj</p><p>VirtualService ^ljvgSDUB</p><p>envoy ^Goth2t7M</p><p>app ^kDjLQwUi</p><p>service ^uxOwwsQ2</p><p>&mldr; ^CTEyeUYO</p><p>pod ^PR8I0S4y</p><p>ingress-svc ^93J0Or0x</p><p>ingress-controller ^XE38ufrg</p><p>%%</p><h1 id=drawing class=headerLink><a href=#drawing class=header-mark></a>Drawing</h1><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>   1
 </span><span class=lnt>   2
 </span><span class=lnt>   3
 </span><span class=lnt>   4
@@ -1667,90 +1667,6 @@
 </span><span class=lnt>1657
 </span><span class=lnt>1658
 </span><span class=lnt>1659
-</span><span class=lnt>1660
-</span><span class=lnt>1661
-</span><span class=lnt>1662
-</span><span class=lnt>1663
-</span><span class=lnt>1664
-</span><span class=lnt>1665
-</span><span class=lnt>1666
-</span><span class=lnt>1667
-</span><span class=lnt>1668
-</span><span class=lnt>1669
-</span><span class=lnt>1670
-</span><span class=lnt>1671
-</span><span class=lnt>1672
-</span><span class=lnt>1673
-</span><span class=lnt>1674
-</span><span class=lnt>1675
-</span><span class=lnt>1676
-</span><span class=lnt>1677
-</span><span class=lnt>1678
-</span><span class=lnt>1679
-</span><span class=lnt>1680
-</span><span class=lnt>1681
-</span><span class=lnt>1682
-</span><span class=lnt>1683
-</span><span class=lnt>1684
-</span><span class=lnt>1685
-</span><span class=lnt>1686
-</span><span class=lnt>1687
-</span><span class=lnt>1688
-</span><span class=lnt>1689
-</span><span class=lnt>1690
-</span><span class=lnt>1691
-</span><span class=lnt>1692
-</span><span class=lnt>1693
-</span><span class=lnt>1694
-</span><span class=lnt>1695
-</span><span class=lnt>1696
-</span><span class=lnt>1697
-</span><span class=lnt>1698
-</span><span class=lnt>1699
-</span><span class=lnt>1700
-</span><span class=lnt>1701
-</span><span class=lnt>1702
-</span><span class=lnt>1703
-</span><span class=lnt>1704
-</span><span class=lnt>1705
-</span><span class=lnt>1706
-</span><span class=lnt>1707
-</span><span class=lnt>1708
-</span><span class=lnt>1709
-</span><span class=lnt>1710
-</span><span class=lnt>1711
-</span><span class=lnt>1712
-</span><span class=lnt>1713
-</span><span class=lnt>1714
-</span><span class=lnt>1715
-</span><span class=lnt>1716
-</span><span class=lnt>1717
-</span><span class=lnt>1718
-</span><span class=lnt>1719
-</span><span class=lnt>1720
-</span><span class=lnt>1721
-</span><span class=lnt>1722
-</span><span class=lnt>1723
-</span><span class=lnt>1724
-</span><span class=lnt>1725
-</span><span class=lnt>1726
-</span><span class=lnt>1727
-</span><span class=lnt>1728
-</span><span class=lnt>1729
-</span><span class=lnt>1730
-</span><span class=lnt>1731
-</span><span class=lnt>1732
-</span><span class=lnt>1733
-</span><span class=lnt>1734
-</span><span class=lnt>1735
-</span><span class=lnt>1736
-</span><span class=lnt>1737
-</span><span class=lnt>1738
-</span><span class=lnt>1739
-</span><span class=lnt>1740
-</span><span class=lnt>1741
-</span><span class=lnt>1742
-</span><span class=lnt>1743
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>	<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;excalidraw&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>	<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>2</span><span class=p>,</span>
@@ -1862,8 +1778,8 @@
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;rectangle&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>90</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1614969553</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>103</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1401450289</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;kQKZM3F10KhHUF2BQQ_5L&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -1872,8 +1788,8 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mi>-241</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>-147.765625</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-256.55555555555554</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>-123.32118055555554</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#e03131&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mi>218</span><span class=p>,</span>
@@ -1898,14 +1814,14 @@
 </span></span><span class=line><span class=cl>					<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span>
 </span></span><span class=line><span class=cl>				<span class=p>}</span>
 </span></span><span class=line><span class=cl>			<span class=p>],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701830756016</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934731519</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span>
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;text&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>122</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>391386815</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>135</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1542807825</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;F3mBci1G&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -1914,8 +1830,8 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-233.96988677978516</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>-142.765625</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-249.5254423353407</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>-118.32118055555554</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#e03131&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>203.9397735595703</span><span class=p>,</span>
@@ -1925,7 +1841,7 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;frameId&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roundness&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701830756016</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934731519</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fontSize&#34;</span><span class=p>:</span> <span class=mi>20</span><span class=p>,</span>
@@ -1993,8 +1909,8 @@
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>114</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1037474769</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>146</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1145170833</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;SZMLBzVqR-03t-3wCPVfK&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -2003,12 +1919,12 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-143.95143141254886</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-145.69574807305506</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>-177.765625</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#e03131&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>3.7798583396328524</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mi>23</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>14.54574925670289</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>47.44444444444446</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;seed&#34;</span><span class=p>:</span> <span class=mi>82113855</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;groupIds&#34;</span><span class=p>:</span> <span class=p>[],</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;frameId&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
@@ -2016,7 +1932,7 @@
 </span></span><span class=line><span class=cl>				<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=mi>2</span>
 </span></span><span class=line><span class=cl>			<span class=p>},</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851374111</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934732944</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;startBinding&#34;</span><span class=p>:</span> <span class=p>{</span>
@@ -2038,8 +1954,8 @@
 </span></span><span class=line><span class=cl>					<span class=mi>0</span>
 </span></span><span class=line><span class=cl>				<span class=p>],</span>
 </span></span><span class=line><span class=cl>				<span class=p>[</span>
-</span></span><span class=line><span class=cl>					<span class=mf>-3.7798583396328524</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>					<span class=mi>23</span>
+</span></span><span class=line><span class=cl>					<span class=mf>-14.54574925670289</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=mf>47.44444444444446</span>
 </span></span><span class=line><span class=cl>				<span class=p>]</span>
 </span></span><span class=line><span class=cl>			<span class=p>]</span>
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
@@ -2170,8 +2086,8 @@
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;rectangle&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>114</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>401768927</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>128</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>747703121</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;xSN3RPzU-yZvXuxa7nlL4&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -2180,8 +2096,8 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-289.8518518518518</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>77.75289351851859</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-300.9629629629629</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>96.6417824074075</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#e03131&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>182.99999999999997</span><span class=p>,</span>
@@ -2210,14 +2126,14 @@
 </span></span><span class=line><span class=cl>					<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span>
 </span></span><span class=line><span class=cl>				<span class=p>}</span>
 </span></span><span class=line><span class=cl>			<span class=p>],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701850458045</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934730136</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span>
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;text&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>131</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1717861905</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>145</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>500529457</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;ljvgSDUB&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -2226,8 +2142,8 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-264.4017862390588</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>83.75289351851859</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-275.5128973501699</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>102.6417824074075</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#e03131&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>132.09986877441406</span><span class=p>,</span>
@@ -2237,7 +2153,7 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;frameId&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roundness&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701850747610</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934730136</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fontSize&#34;</span><span class=p>:</span> <span class=mi>20</span><span class=p>,</span>
@@ -2253,8 +2169,8 @@
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>118</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>169192273</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>156</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>326834961</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;bxz5zZN9t-KC4t1gnXYab&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -2263,12 +2179,12 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-167.90819868218162</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>-108.765625</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-182.99518425339332</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>-84.32118055555554</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#e03131&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>42.77484905387385</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>76.55555555555554</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>28.140819719399843</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>52.11111111111108</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;seed&#34;</span><span class=p>:</span> <span class=mi>710024383</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;groupIds&#34;</span><span class=p>:</span> <span class=p>[],</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;frameId&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
@@ -2276,7 +2192,7 @@
 </span></span><span class=line><span class=cl>				<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=mi>2</span>
 </span></span><span class=line><span class=cl>			<span class=p>},</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851374112</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934732948</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;startBinding&#34;</span><span class=p>:</span> <span class=p>{</span>
@@ -2298,15 +2214,15 @@
 </span></span><span class=line><span class=cl>					<span class=mi>0</span>
 </span></span><span class=line><span class=cl>				<span class=p>],</span>
 </span></span><span class=line><span class=cl>				<span class=p>[</span>
-</span></span><span class=line><span class=cl>					<span class=mf>-42.77484905387385</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>					<span class=mf>76.55555555555554</span>
+</span></span><span class=line><span class=cl>					<span class=mf>-28.140819719399843</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=mf>52.11111111111108</span>
 </span></span><span class=line><span class=cl>				<span class=p>]</span>
 </span></span><span class=line><span class=cl>			<span class=p>]</span>
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>186</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1821440721</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>226</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>450923153</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;h7AyNRNWydzBOFAHJUkMm&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -2315,12 +2231,12 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-213.76492860645487</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-216.94533137621283</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>37.78993055555555</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#e03131&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>2.96153292409565</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>31.96296296296304</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>9.004259469257875</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>50.851851851851954</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;seed&#34;</span><span class=p>:</span> <span class=mi>1249485585</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;groupIds&#34;</span><span class=p>:</span> <span class=p>[],</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;frameId&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
@@ -2328,7 +2244,7 @@
 </span></span><span class=line><span class=cl>				<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=mi>2</span>
 </span></span><span class=line><span class=cl>			<span class=p>},</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851374114</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934732950</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;startBinding&#34;</span><span class=p>:</span> <span class=p>{</span>
@@ -2350,8 +2266,8 @@
 </span></span><span class=line><span class=cl>					<span class=mi>0</span>
 </span></span><span class=line><span class=cl>				<span class=p>],</span>
 </span></span><span class=line><span class=cl>				<span class=p>[</span>
-</span></span><span class=line><span class=cl>					<span class=mf>-2.96153292409565</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>					<span class=mf>31.96296296296304</span>
+</span></span><span class=line><span class=cl>					<span class=mf>-9.004259469257875</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=mf>50.851851851851954</span>
 </span></span><span class=line><span class=cl>				<span class=p>]</span>
 </span></span><span class=line><span class=cl>			<span class=p>]</span>
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
@@ -2465,8 +2381,8 @@
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>306</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1535777183</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>347</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>2095426001</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;wZGaCTJEtbUCzCkGn7se8&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -2475,25 +2391,20 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-222.9398779529974</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>127.60474537037044</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-230.53586397557888</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>146.49363425925935</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#e03131&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>38.46758958246974</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>104.1851851851851</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>43.707308972791</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>85.29629629629619</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;seed&#34;</span><span class=p>:</span> <span class=mi>1087162833</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;groupIds&#34;</span><span class=p>:</span> <span class=p>[],</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;frameId&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roundness&#34;</span><span class=p>:</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>				<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=mi>2</span>
 </span></span><span class=line><span class=cl>			<span class=p>},</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[</span>
-</span></span><span class=line><span class=cl>				<span class=p>{</span>
-</span></span><span class=line><span class=cl>					<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;text&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>					<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;lrIcr275&#34;</span>
-</span></span><span class=line><span class=cl>				<span class=p>}</span>
-</span></span><span class=line><span class=cl>			<span class=p>],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851414449</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934732954</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;startBinding&#34;</span><span class=p>:</span> <span class=p>{</span>
@@ -2515,47 +2426,10 @@
 </span></span><span class=line><span class=cl>					<span class=mi>0</span>
 </span></span><span class=line><span class=cl>				<span class=p>],</span>
 </span></span><span class=line><span class=cl>				<span class=p>[</span>
-</span></span><span class=line><span class=cl>					<span class=mf>38.46758958246974</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>					<span class=mf>104.1851851851851</span>
+</span></span><span class=line><span class=cl>					<span class=mf>43.707308972791</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=mf>85.29629629629619</span>
 </span></span><span class=line><span class=cl>				<span class=p>]</span>
 </span></span><span class=line><span class=cl>			<span class=p>]</span>
-</span></span><span class=line><span class=cl>		<span class=p>},</span>
-</span></span><span class=line><span class=cl>		<span class=p>{</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;lrIcr275&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;text&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-275.526014192036</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>167.197337962963</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>143.63986206054688</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mi>25</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#e03131&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeWidth&#34;</span><span class=p>:</span> <span class=mi>2</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;groupIds&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;frameId&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;roundness&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;seed&#34;</span><span class=p>:</span> <span class=mi>1077027121</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>19</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1803329919</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851413825</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;text&#34;</span><span class=p>:</span> <span class=s2>&#34;DestiationRule&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;rawText&#34;</span><span class=p>:</span> <span class=s2>&#34;DestiationRule&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;fontSize&#34;</span><span class=p>:</span> <span class=mi>20</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;fontFamily&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;textAlign&#34;</span><span class=p>:</span> <span class=s2>&#34;center&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;verticalAlign&#34;</span><span class=p>:</span> <span class=s2>&#34;middle&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;baseline&#34;</span><span class=p>:</span> <span class=mi>18</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;containerId&#34;</span><span class=p>:</span> <span class=s2>&#34;wZGaCTJEtbUCzCkGn7se8&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;originalText&#34;</span><span class=p>:</span> <span class=s2>&#34;DestiationRule&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;lineHeight&#34;</span><span class=p>:</span> <span class=mf>1.25</span>
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;rectangle&#34;</span><span class=p>,</span>
@@ -2759,8 +2633,8 @@
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>367</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>796245361</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>379</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>20056273</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;jfdyEECj2AHwjCXNZqMLX&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -2769,11 +2643,11 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>129.28979014032888</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>129.34381498928025</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>147.45659722222229</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#1e1e1e&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>119.63232254264842</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>119.6740239008748</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>82.77777777777771</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;seed&#34;</span><span class=p>:</span> <span class=mi>1879229247</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;groupIds&#34;</span><span class=p>:</span> <span class=p>[],</span>
@@ -2782,7 +2656,7 @@
 </span></span><span class=line><span class=cl>				<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=mi>2</span>
 </span></span><span class=line><span class=cl>			<span class=p>},</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851398841</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934732962</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;startBinding&#34;</span><span class=p>:</span> <span class=p>{</span>
@@ -2804,15 +2678,15 @@
 </span></span><span class=line><span class=cl>					<span class=mi>0</span>
 </span></span><span class=line><span class=cl>				<span class=p>],</span>
 </span></span><span class=line><span class=cl>				<span class=p>[</span>
-</span></span><span class=line><span class=cl>					<span class=mf>-119.63232254264842</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=mf>-119.6740239008748</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>					<span class=mf>82.77777777777771</span>
 </span></span><span class=line><span class=cl>				<span class=p>]</span>
 </span></span><span class=line><span class=cl>			<span class=p>]</span>
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>247</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>673999185</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>259</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1624922385</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;Hd2JXGGHyG_HfWQl0efwa&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -2834,7 +2708,7 @@
 </span></span><span class=line><span class=cl>				<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=mi>2</span>
 </span></span><span class=line><span class=cl>			<span class=p>},</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851374116</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934732959</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;startBinding&#34;</span><span class=p>:</span> <span class=p>{</span>
@@ -2909,8 +2783,8 @@
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>442</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1858105375</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>448</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>2008074385</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;xXtBSMWRI8bcgWMqJbkoJ&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -2919,12 +2793,12 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>156.31519242818177</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>156.58952900977476</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>143.45659722222229</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#1e1e1e&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>3.9351408477969585</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>45.084533439765465</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>4.09831733183708</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>45.13748045382255</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;seed&#34;</span><span class=p>:</span> <span class=mi>516095793</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;groupIds&#34;</span><span class=p>:</span> <span class=p>[],</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;frameId&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
@@ -2932,7 +2806,7 @@
 </span></span><span class=line><span class=cl>				<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=mi>2</span>
 </span></span><span class=line><span class=cl>			<span class=p>},</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851404341</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934732963</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;startBinding&#34;</span><span class=p>:</span> <span class=p>{</span>
@@ -2954,15 +2828,15 @@
 </span></span><span class=line><span class=cl>					<span class=mi>0</span>
 </span></span><span class=line><span class=cl>				<span class=p>],</span>
 </span></span><span class=line><span class=cl>				<span class=p>[</span>
-</span></span><span class=line><span class=cl>					<span class=mf>-3.9351408477969585</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>					<span class=mf>45.084533439765465</span>
+</span></span><span class=line><span class=cl>					<span class=mf>-4.09831733183708</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=mf>45.13748045382255</span>
 </span></span><span class=line><span class=cl>				<span class=p>]</span>
 </span></span><span class=line><span class=cl>			<span class=p>]</span>
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>407</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>2050499409</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>442</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1112685073</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;9k2TjAoc9jZY6gl6xckY3&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -2971,25 +2845,20 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-137.2679561751314</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>128.12326388888897</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-123.17608826400061</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>147.01215277777789</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#e03131&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>260.82351173068696</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>70.52596013266185</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>246.73164381955615</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>52.76783565639761</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;seed&#34;</span><span class=p>:</span> <span class=mi>1870308081</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;groupIds&#34;</span><span class=p>:</span> <span class=p>[],</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;frameId&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roundness&#34;</span><span class=p>:</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>				<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=mi>2</span>
 </span></span><span class=line><span class=cl>			<span class=p>},</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[</span>
-</span></span><span class=line><span class=cl>				<span class=p>{</span>
-</span></span><span class=line><span class=cl>					<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;text&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>					<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;e3DDbWrJ&#34;</span>
-</span></span><span class=line><span class=cl>				<span class=p>}</span>
-</span></span><span class=line><span class=cl>			<span class=p>],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851417128</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934732951</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;startBinding&#34;</span><span class=p>:</span> <span class=p>{</span>
@@ -3011,47 +2880,10 @@
 </span></span><span class=line><span class=cl>					<span class=mi>0</span>
 </span></span><span class=line><span class=cl>				<span class=p>],</span>
 </span></span><span class=line><span class=cl>				<span class=p>[</span>
-</span></span><span class=line><span class=cl>					<span class=mf>260.82351173068696</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>					<span class=mf>70.52596013266185</span>
+</span></span><span class=line><span class=cl>					<span class=mf>246.73164381955615</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=mf>52.76783565639761</span>
 </span></span><span class=line><span class=cl>				<span class=p>]</span>
 </span></span><span class=line><span class=cl>			<span class=p>]</span>
-</span></span><span class=line><span class=cl>		<span class=p>},</span>
-</span></span><span class=line><span class=cl>		<span class=p>{</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;e3DDbWrJ&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;text&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>-78.67613134006135</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>150.8862439552199</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>143.63986206054688</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mi>25</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#e03131&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeWidth&#34;</span><span class=p>:</span> <span class=mi>2</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;groupIds&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;frameId&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;roundness&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;seed&#34;</span><span class=p>:</span> <span class=mi>213649055</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>4</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1367767409</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851416337</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;text&#34;</span><span class=p>:</span> <span class=s2>&#34;DestiationRule&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;rawText&#34;</span><span class=p>:</span> <span class=s2>&#34;DestiationRule&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;fontSize&#34;</span><span class=p>:</span> <span class=mi>20</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;fontFamily&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;textAlign&#34;</span><span class=p>:</span> <span class=s2>&#34;center&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;verticalAlign&#34;</span><span class=p>:</span> <span class=s2>&#34;middle&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;baseline&#34;</span><span class=p>:</span> <span class=mi>18</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;containerId&#34;</span><span class=p>:</span> <span class=s2>&#34;9k2TjAoc9jZY6gl6xckY3&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;originalText&#34;</span><span class=p>:</span> <span class=s2>&#34;DestiationRule&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;lineHeight&#34;</span><span class=p>:</span> <span class=mf>1.25</span>
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
@@ -3223,8 +3055,8 @@
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>437</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>589502545</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>443</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1846769681</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;BQnP1XyoTA84P5SNoMpu9&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -3233,11 +3065,11 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>147.8572693510071</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>147.92901733163404</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>-172.2776331018518</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#1e1e1e&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>18.39059990725221</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>18.43674067735097</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>48.518518518518476</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;seed&#34;</span><span class=p>:</span> <span class=mi>1136056959</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;groupIds&#34;</span><span class=p>:</span> <span class=p>[],</span>
@@ -3246,7 +3078,7 @@
 </span></span><span class=line><span class=cl>				<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=mi>2</span>
 </span></span><span class=line><span class=cl>			<span class=p>},</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851388276</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934732966</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;startBinding&#34;</span><span class=p>:</span> <span class=p>{</span>
@@ -3268,7 +3100,7 @@
 </span></span><span class=line><span class=cl>					<span class=mi>0</span>
 </span></span><span class=line><span class=cl>				<span class=p>],</span>
 </span></span><span class=line><span class=cl>				<span class=p>[</span>
-</span></span><span class=line><span class=cl>					<span class=mf>-18.39059990725221</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=mf>-18.43674067735097</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>					<span class=mf>48.518518518518476</span>
 </span></span><span class=line><span class=cl>				<span class=p>]</span>
 </span></span><span class=line><span class=cl>			<span class=p>]</span>
@@ -3354,8 +3186,8 @@
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>164</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1162082321</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>176</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>2078435217</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;gL3F6rVXnvCQsew86dA46&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -3364,11 +3196,11 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>134.36376543512458</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>134.37235745864848</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>-68.94429976851842</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#1e1e1e&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>3.566081624992961</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>3.5717489879242805</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>47.777777777777715</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;seed&#34;</span><span class=p>:</span> <span class=mi>1260369727</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;groupIds&#34;</span><span class=p>:</span> <span class=p>[],</span>
@@ -3377,7 +3209,7 @@
 </span></span><span class=line><span class=cl>				<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=mi>2</span>
 </span></span><span class=line><span class=cl>			<span class=p>},</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851388277</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934732969</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;startBinding&#34;</span><span class=p>:</span> <span class=p>{</span>
@@ -3399,15 +3231,15 @@
 </span></span><span class=line><span class=cl>					<span class=mi>0</span>
 </span></span><span class=line><span class=cl>				<span class=p>],</span>
 </span></span><span class=line><span class=cl>				<span class=p>[</span>
-</span></span><span class=line><span class=cl>					<span class=mf>-3.566081624992961</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=mf>-3.5717489879242805</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>					<span class=mf>47.777777777777715</span>
 </span></span><span class=line><span class=cl>				<span class=p>]</span>
 </span></span><span class=line><span class=cl>			<span class=p>]</span>
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
 </span></span><span class=line><span class=cl>		<span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>142</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>46595313</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>154</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;versionNonce&#34;</span><span class=p>:</span> <span class=mi>1063810897</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;isDeleted&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;Fzi4jywi7Fw0cFQcjvjOg&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;fillStyle&#34;</span><span class=p>:</span> <span class=s2>&#34;solid&#34;</span><span class=p>,</span>
@@ -3416,12 +3248,12 @@
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;roughness&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;opacity&#34;</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;angle&#34;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>150.55292548937874</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>34.389033564814845</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;x&#34;</span><span class=p>:</span> <span class=mf>150.8885481497005</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;y&#34;</span><span class=p>:</span> <span class=mf>34.38903356481484</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;strokeColor&#34;</span><span class=p>:</span> <span class=s2>&#34;#1e1e1e&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;backgroundColor&#34;</span><span class=p>:</span> <span class=s2>&#34;transparent&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>13.251149734105269</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>55.55555555555565</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;width&#34;</span><span class=p>:</span> <span class=mf>13.018788967282035</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;height&#34;</span><span class=p>:</span> <span class=mf>55.55555555555566</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;seed&#34;</span><span class=p>:</span> <span class=mi>241010737</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;groupIds&#34;</span><span class=p>:</span> <span class=p>[],</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;frameId&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
@@ -3429,7 +3261,7 @@
 </span></span><span class=line><span class=cl>				<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=mi>2</span>
 </span></span><span class=line><span class=cl>			<span class=p>},</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;boundElements&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701851398842</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;updated&#34;</span><span class=p>:</span> <span class=mi>1701934732971</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;link&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;locked&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;startBinding&#34;</span><span class=p>:</span> <span class=p>{</span>
@@ -3451,8 +3283,8 @@
 </span></span><span class=line><span class=cl>					<span class=mi>0</span>
 </span></span><span class=line><span class=cl>				<span class=p>],</span>
 </span></span><span class=line><span class=cl>				<span class=p>[</span>
-</span></span><span class=line><span class=cl>					<span class=mf>13.251149734105269</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>					<span class=mf>55.55555555555565</span>
+</span></span><span class=line><span class=cl>					<span class=mf>13.018788967282035</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=mf>55.55555555555566</span>
 </span></span><span class=line><span class=cl>				<span class=p>]</span>
 </span></span><span class=line><span class=cl>			<span class=p>]</span>
 </span></span><span class=line><span class=cl>		<span class=p>}</span>
@@ -3472,8 +3304,8 @@
 </span></span><span class=line><span class=cl>		<span class=nt>&#34;currentItemTextAlign&#34;</span><span class=p>:</span> <span class=s2>&#34;left&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>		<span class=nt>&#34;currentItemStartArrowhead&#34;</span><span class=p>:</span> <span class=kc>null</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>		<span class=nt>&#34;currentItemEndArrowhead&#34;</span><span class=p>:</span> <span class=s2>&#34;arrow&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>		<span class=nt>&#34;scrollX&#34;</span><span class=p>:</span> <span class=mf>418.38888888888886</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>		<span class=nt>&#34;scrollY&#34;</span><span class=p>:</span> <span class=mf>518.1254340277776</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;scrollX&#34;</span><span class=p>:</span> <span class=mf>416.16666666666663</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;scrollY&#34;</span><span class=p>:</span> <span class=mf>517.0143229166665</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>		<span class=nt>&#34;zoom&#34;</span><span class=p>:</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>			<span class=nt>&#34;value&#34;</span><span class=p>:</span> <span class=mf>0.9</span>
 </span></span><span class=line><span class=cl>		<span class=p>},</span>
