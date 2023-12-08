@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-15
-lastmod: 2023-12-04
+lastmod: 2023-12-08
 categories:
   - blog
 description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
@@ -62,6 +62,55 @@ kubectl logs -f -n kube-system -l k8s-app=calico-node
 ```shell
 kubectl delete pod pod名称 -n 命名空间 --force --grace-period=0
 ```
+
+### 创建用户和 token
+
+创建这个 yaml
+
+- 创建用户 admin-user
+- 创建 clusterrolebindding，绑定权限到 cluster-admin（权限很高）
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kubernetes-dashboard
+```
+
+临时 token：
+
+```shell
+kubectl -n kubernetes-dashboard create token admin-user
+```
+
+长期 token：
+
+```yml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+  annotations:
+    kubernetes.io/service-account.name: "admin-user"
+type: kubernetes.io/service-account-token
+```
+
+> 文档地址在 [这里](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md)，来自/适用于 [kubernetes/dashboard](https://github.com/kubernetes/dashboard)
 
 ## 配置
 

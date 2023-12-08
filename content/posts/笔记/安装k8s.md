@@ -164,7 +164,7 @@ deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
 EOF
 
 apt update -y
-apt install -y kubelet kubeadm kubectl -y
+apt install -y kubelet kubeadm kubectl
 
 systemctl enable kubelet
 ```

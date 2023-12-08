@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-07-28
-lastmod: 2023-12-07
+lastmod: 2023-12-08
 categories:
   - blog
 description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
@@ -169,6 +169,8 @@ Number of node(s)with BGP peering established =0
 
 ### cri-dockerd
 
+#### validate CRI v 1 runtime API for endpoint
+
 情景：
 
 `kubeadm init` 或 `crictl ps` 的时候报错：
@@ -256,3 +258,18 @@ Number of node(s)with BGP peering established =0
     # 测试效果
     crictl ps
     ```
+
+#### kubeadm 无法指定 --cri-socket
+
+准备一个配置文件 `kube-init.yaml`
+
+```yml
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: InitConfiguration
+nodeRegistration:
+  criSocket: unix:///var/run/cri-dockerd.sock
+```
+
+引入配置文件即可：
+
+`kubeadm init phase upload-certs --upload-certs --config kube-init.yml`
