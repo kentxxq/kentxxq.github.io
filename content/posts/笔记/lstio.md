@@ -349,6 +349,34 @@ pod 内部存在 app 和 sidecar
 
 ## istio 资源使用实践
 
+### 测试客户端
+
+准备一个测试客户端，后面的 curl 都会在这里进行测试
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: client
+  name: client
+  namespace: istio-traffic-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+      - image: busybox:v0.1
+        name: client
+        command: ["/bin/sh","-c","sleep 72000"]
+```
+
 ### 基础使用
 
 创建
@@ -742,7 +770,6 @@ kubectl get vs
 curl ingressgateway-clusterIP或者loadbalanceIP
 ```
 
-
 ### Sidecar
 
 #### Sidecar.spec
@@ -780,6 +807,36 @@ spec:								# 定义了 Sidecar 对象的规范
         number: 8080
         protocol: HTTP
       defaultEndpoint: my-service.default.svc.cluster.local    # 默认端点
+```
+
+#### 实践
+
+仅开放对当前命名空间下的 httpd-2-svc 的访问，而且对于其他应用禁止访问
+
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Sidecar
+metadata:
+  name: sswang-sidecar
+  namespace: "istio-traffic-test"
+spec:
+  workloadSelector:
+    labels:
+      app: tomcat
+  outboundTrafficPolicy:         # 定义了 Sidecar 的出站流量策略
+    mode: REGISTRY_ONLY
+  egress:
+  - hosts:
+    - "./httpd-2-svc.istio-traffic-test.svc.cluster.local"
+```
+
+[[笔记/lstio#测试客户端|测试客户端]] 的请求无法联通 httpd-1-svc
+
+```shell
+curl httpd-2-svc:8080 
+HTTP Web Page-2
+# 下面的无法
+curl httpd-1-svc:8080
 ```
 
 ## 参考案例
