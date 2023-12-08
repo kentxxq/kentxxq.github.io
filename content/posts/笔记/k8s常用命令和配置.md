@@ -110,6 +110,12 @@ metadata:
 type: kubernetes.io/service-account-token
 ```
 
+获取长期 token
+
+```shell
+kubectl get secret admin-user -n kubernetes-dashboard -o jsonpath={".data.token"} | base64 -d
+```
+
 > 文档地址在 [这里](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md)，来自/适用于 [kubernetes/dashboard](https://github.com/kubernetes/dashboard)
 
 ## 配置
