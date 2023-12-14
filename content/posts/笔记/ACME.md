@@ -45,7 +45,8 @@ cd ./acme.sh
 acme.sh --issue --dns dns_ali -d "*.kentxxq.com" -d "kentxxq.com" --ecc
 
 # 安装证书
-acme.sh --installcert -d "*.kentxxq.com" -d "kentxxq.com" \
+acme.sh --installcert \
+-d "*.kentxxq.com" -d "kentxxq.com" \
 --key-file /usr/local/nginx/conf/ssl/kentxxq.key \
 --fullchain-file /usr/local/nginx/conf/ssl/kentxxq.cer \
 --reloadcmd "/usr/local/nginx/sbin/nginx -s reload"

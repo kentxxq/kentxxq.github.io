@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-11-24
+lastmod: 2023-12-14
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -67,6 +67,8 @@ Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
 
 ## 命令解析
 
+### 示例解析
+
 ```shell
 # -d 后台运行,--restart=always 总是重启,
 # -v /mydata/:/data/ 本地/mydata/挂载到容器/data/
@@ -83,6 +85,16 @@ kentxqq/testserver:1.2 \
 
 # -t指定名字myapp .代表Dockerfile在当前目录
 docker build -t myapp .
+```
+
+### nodejs 示例
+
+```shell
+# 挂载前端node项目到 /app 目录，然后 npm start 启动
+docker run -d -p3000:3000 \
+-v /data/frontend/shop-pc:/app \
+-w /app \
+node:14 /bin/bash -c "npm start"
 ```
 
 ## 操作命令

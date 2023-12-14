@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-14
-lastmod: 2023-12-08
+lastmod: 2023-12-14
 categories:
   - blog
 description: "CKA 是 [[笔记/point/k8s|k8s]] 的一个管理员认证, 我也弄了一个证书 [[附件/CKA证书.pdf|CKA证书]]"
@@ -727,5 +727,5 @@ pvc 会寻找合适的 pv，而 pv 可能会被其他 pvc 使用。
     1. [登录The Linux Foundation](https://sso.linuxfoundation.org/login)
     2. [进入My Portal](https://trainingportal.linuxfoundation.org/learn/dashboard/)
     3. 查看对应证书的分数, 下载证书
-- [全部考试流程](https://training.linuxfoundation.cn/news/308)
+- [认证考试前准备全介绍--考生姓名篇](https://training.linuxfoundation.cn/news/297)，[全部考试流程](https://training.linuxfoundation.cn/news/308)
 - [登录账号核销考试码，进行考试](https://trainingportal.linuxfoundation.org/learn/dashboard)

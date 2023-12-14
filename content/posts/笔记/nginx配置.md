@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-11-28
+lastmod: 2023-12-13
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -559,7 +559,13 @@ http {
 server {
     limit_req zone=iplimit burst=100 nodelay;
 }
+```
 
+修改默认的 503 状态码（在 http 部分）
+
+```nginx
+limit_req_status 429; # 状态码
+limit_req_log_level warn; # 记录warn级别的日志
 ```
 
 > 多个 server_name 公用同一个 zone, 会导致低限速的一直影响高限速.
