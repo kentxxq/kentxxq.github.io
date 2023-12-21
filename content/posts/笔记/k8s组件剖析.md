@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-01
-lastmod: 2023-12-04
+lastmod: 2023-12-21
 categories:
   - blog
 description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
@@ -93,6 +93,8 @@ client 访问 service 的时候有 2 种方式。
 2. 通过 ip 地址访问。这是一个虚拟的 ip 地址，请求在转发到 kube-proxy 后，通过本地的 iptables 规则转发到对应的 pod
 
 **服务拓扑**就需要监听 node 信息，实现一个服务可以指定流量是被优先路由到一个和客户端在同一个 Node 或者在同一可用区域的端点。
+
+ipvs 是 iptables 是使用了 ipset 拓展。它和默认方式否是基于 Netfilter 实现的。默认是做防火墙，而 ipvs 是做负载均衡的。
 
 ## scheduler 调度
 
@@ -274,16 +276,6 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
 
 #todo/笔记 自己搭建一个测试?
 
-## 设计模式 sidecar
-
-作用:
-
-- **可以收集日志**。docker 应用写入到 volume，然后通过 initContainer 来收集日志。
-- 访问外部集群的时候，通过它可以进行一个反向代理。这样就不需要修改容器代码。访问一个地址即可实现。**例如 zk，我们是一个集群。通过一个统一的 proxy 代理，即可让所有 docker 复用这一配置**。
-- **适配器**。可以做到类似 nginx 的 rewrite 域名转发。访问/a 的时候请求转到应用 docker 的/b 路径。
-
-![[附件/sidecar示意图.png]]
-
 ## deployment 控制器
 
 1. 判断是否是新的版本，选择更新 replicaset 或者整个 deployment 资源
@@ -292,6 +284,28 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
 4. [[笔记/k8s组件剖析#kubelet|kubelet]] 进行 watch，执行具体的调整动作
 
 如果调整整个 deployment 资源，那么会新建一个 replicas 来替换。回滚也是一样
+
+## Pod
+
+### pod 详解
+
+- 顺序启动 2 个容器。一个是 init 容器，然后是程序容器
+- 程序容器中有一个 infra 或者说 pause 容器
+    - 因为容器被 linux namespace 和 cgroups 隔离，所以让容器都加入 infra 的网络空间。所以 mac 地址，ip，网络设备都是一样的。
+    - pause 启用 pid 命名空间，开启 init 进程。**比 init 容器更早创建出来**
+- **启动失败**：back-off delay (10 s, 20 s, 40 s, …)，最长 5 分钟。一旦启动成功了 10 分钟，就会重置 delay 时间
+
+> [Pause 容器 · Kubernetes 中文指南——云原生应用架构实战手册](https://jimmysong.io/kubernetes-handbook/concepts/pause-container.html)
+
+### 设计模式 sidecar
+
+作用:
+
+- **可以收集日志**。docker 应用写入到 volume，然后通过 initContainer 来收集日志。
+- 访问外部集群的时候，通过它可以进行一个反向代理。这样就不需要修改容器代码。访问一个地址即可实现。**例如 zk，我们是一个集群。通过一个统一的 proxy 代理，即可让所有 docker 复用这一配置**。
+- **适配器**。可以做到类似 nginx 的 rewrite 域名转发。访问/a 的时候请求转到应用 docker 的/b 路径。
+
+![[附件/sidecar示意图.png]]
 
 ## stateful 有状态应用
 
@@ -356,3 +370,9 @@ spec:
 - cadvisor 监控容器的资源使用率，但是 [[笔记/point/k8s|k8s]] 已经内置了 [google/cadvisor](https://github.com/google/cadvisor)
 - KSM 收集集群相关的内容，需要自己部署 [kubernetes/kube-state-metrics: Add-on agent to generate and expose cluster-level metrics.](https://github.com/kubernetes/kube-state-metrics)
 - 收集使用信息，计算成本 [Kubecost Documentation](https://docs.kubecost.com/)
+
+### KEDA 缩放
+
+使用 `crontab` 的方式定时扩缩容
+
+[Cron | KEDA](https://keda.sh/docs/2.12/scalers/cron/)

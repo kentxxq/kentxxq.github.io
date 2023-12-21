@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-12-05
+lastmod: 2023-12-17
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -189,6 +189,10 @@ fc-list :lang=zh
 
 ```shell
 mount -t cifs -o username=Administrator,password=密码 //共享机器的ip地址/data /mnt/pythondata
+
+# 另一个示例
+mkdir /mnt/win
+mount -t cifs -o username="Everyone" //192.168.2.100/vm_share  /mnt/win
 ```
 
 ### 配置 limit
@@ -660,6 +664,17 @@ sudo apt-get --purge remove 'dotnet-*'
 
 # 如果不想自己手动输入Y确认的话则使用
 echo "Y" |sudo apt-get --purge remove 'dotnet-*'
+```
+
+### 端口状态检查
+
+```shell
+# 端口正常为0，否则状态码/退出码为1
+nc -zv 127.0.0.1 6443
+echo $?
+
+nc -zv 127.0.0.1 6444
+echo $?
 ```
 
 ### 查看文件

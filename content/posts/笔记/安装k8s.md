@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-16
-lastmod: 2023-11-30
+lastmod: 2023-12-17
 categories:
   - blog
 description: "安装 [[笔记/point/k8s|k8s]] 的记录."
@@ -43,6 +43,13 @@ reboot
 # 防火墙
 ufw disable
 
+# 更新一下
+apt update -y
+apt upgrade -y
+
+# 相关组件
+apt install selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg build-essential gperf ipset ipvsadm -y
+
 # selinux
 vim /etc/selinux/config
 SELINUX=disabled
@@ -50,6 +57,10 @@ SELINUX=disabled
 # 时间同步
 crontab -e
 0 */1 * * * /usr/sbin/ntpdate time1.aliyun.com
+
+# swap
+vim /etc/fstab
+# 注释掉swap
 
 # 内核
 vim /etc/sysctl.d/k8s.conf
@@ -74,8 +85,9 @@ overlay               151552  0
 sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward
 
 # ipvs相关
-apt install ipset ipvsadm -y
-/etc/modules-load.d/k8s.conf 加入
+# apt install ipset ipvsadm -y
+# 加入
+vim /etc/modules-load.d/k8s.conf 
 overlay
 br_netfilter
 ip_vs
@@ -88,13 +100,18 @@ nf_conntrack
 ### 容器相关
 
 ```shell
+# 共享盘，可以忽略
+mkdir /mnt/win 
+mount -t cifs -o username="Everyone" //192.168.2.100/vm_share /mnt/win
+cp /mnt/win/* .
 
-# 下载cri-containerd-cni？  https://github.com/containerd/containerd/releases
-tar Cxzvf /usr/local containerd-1.6.2-linux-amd64.tar.gz
+# cri-containerd-cni版本会有问题  https://github.com/containerd/containerd/releases
+tar Cxzvf /usr/local containerd-1.6.26-linux-amd64.tar.gz
 
 # 试试systemctl daemon-reload
 # 如果不行就找到它。放到/etc/systemd/system/下面重新daemon-reload
 find / -name containerd.service
+vim /etc/systemd/system/containerd.service
 
 [Unit]
 Description=containerd container runtime
@@ -129,13 +146,12 @@ vim /etc/containerd/config.toml
 systemdGroup = true
 sandbox_image = "registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.9"
 
-systemctl enable containerd
-systemctl start containerd
+systemctl enable containerd --now
 
 
 # 开始安装runc
 # 安装c编译器和gperf
-apt install build-essential gperf -y
+# apt install build-essential gperf -y
 # 下载https://github.com/opencontainers/runc/releases libseccomp-2.5.4.tar.gz和runc.amd64
 tar xf libseccomp-2.5.4.tar.gz
 cd libseccomp-2.5.4/
@@ -150,23 +166,24 @@ install -m 755 runc.amd64 /usr/local/sbin/runc
 
 # 下载https://github.com/containernetworking/plugins/releases
 mkdir -p /opt/cni/bin
-tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.3.0.tgz
+tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.4.0.tgz
 ```
 
 ### 安装 kubeadm
 
 ```shell
-#  阿里源
-curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
+# 阿里源
+curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg -o k8s.gpg
+gpg --dearmor -o /etc/apt/keyrings/k8s.gpg k8s.gpg
 
 cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
-deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+deb [signed-by=/etc/apt/keyrings/k8s.gpg] https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
 EOF
 
 apt update -y
 apt install -y kubelet kubeadm kubectl
 
-systemctl enable kubelet
+systemctl enable kubelet --now
 ```
 
 ### kubeadm 初始化
@@ -216,10 +233,10 @@ systemctl enable kubelet
 ```shell
 # 初始化
 kubeadm init --image-repository='registry.cn-hangzhou.aliyuncs.com/google_containers' \
---kubernetes-version=v1.27.2 \
+--kubernetes-version=v1.28.2 \
 --service-cidr=10.96.0.0/12 \
 --pod-network-cidr=10.244.0.0/16 \
---apiserver-advertise-address=192.168.31.221 \
+--apiserver-advertise-address=192.168.2.180 \
 --cri-socket unix:///var/run/containerd/containerd.sock
 ```
 
@@ -372,6 +389,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 kubectl cordon xxxx-node
 
 # 驱离
+# 会先让apiserver删除pod，然后被replicateSet发现后，写入新信息到etcd。然后etcd
 kubectl drain xxx-node --force=true --ignore-daemonsets=true --delete-emptydir-data=true
 
 # 删除节点

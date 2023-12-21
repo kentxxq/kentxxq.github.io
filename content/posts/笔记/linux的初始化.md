@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-08
-lastmod: 2023-10-16
+lastmod: 2023-12-16
 categories:
   - blog
 description: 
@@ -16,17 +16,76 @@ description:
 
 ## 操作手册
 
-- 时间同步
-- 防火墙关闭
-- Selinux 关闭
-- Supervisor 安装和默认配置
+#todo/笔记
+
 - Alias
-- Htop, nethogs, lrzsz, tree, nload, iotop, vmstat, iptraf-ng, zip, unzip 等等命令
 - Truncate 定时清空日志
-- Docker 镜像?
 - Limit 配置
 
-因为已经有了 linux 命令和其他工具的文档, 这里只要记录一下必要的点, 然后写成一个 shell 脚本就好了. #todo/笔记
+## 虚拟机初始化
+
+安装配置 [清华源](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/) `https://mirrors.tuna.tsinghua.edu.cn/ubuntu/`
+
+允许 root 远程登录后，开始用 tabby 连接操作
+
+```shell
+vim /etc/ssh/sshd_config
+PermitRootLogin yes
+
+passwd root
+systemctl restart ssh
+```
+
+开始运行
+
+```shell
+#!/bin/bash
+
+ufw disable
+
+apt install selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg -y
+
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt update -y
+apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+
+ntpdate ntp.aliyun.com
+hwclock -w
+timedatectl set-timezone Asia/Shanghai
+
+
+
+
+
+
+
+# 需要手动
+apt update -y
+apt upgrade -y
+
+vim /etc/selinux/config
+SELINUX=disabled
+
+crontab -e
+0 * * * * /usr/sbin/ntpdate ntp.aliyun.com
+
+vim /etc/docker/daemon.json
+{
+  "registry-mirrors": [
+    "https://hub-mirror.c.163.com",
+    "https://mirror.baidubce.com"
+  ]
+}
+systemctl daemon-reload
+systemctl restart docker
+```
 
 ## Home-server 初始化
 

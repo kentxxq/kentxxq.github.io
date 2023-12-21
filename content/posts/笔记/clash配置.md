@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-11-09
+lastmod: 2023-12-17
 keywords:
   - clash
   - 配置文件
@@ -565,6 +565,8 @@ parsers:
 
 ## 相关资源
 
+### 代理工具
+
 - [hysteria内核](https://github.com/apernet/hysteria)
 - [Xray-core是v2ray-core的超集](https://github.com/XTLS/Xray-core) 内核
 - [sing-box](https://github.com/SagerNet/sing-box) 内核
@@ -597,3 +599,8 @@ parsers:
 - [Clash规则大全](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash)
 - [GFW是如何工作的](https://gfw.report/publications/usenixsecurity23/zh/)
  
+
+### 代理站点
+
+- [[笔记/docker镜像源|docker镜像源]]
+- [github 代理](https://mirror.ghproxy.com)

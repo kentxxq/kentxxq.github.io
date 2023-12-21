@@ -5,7 +5,7 @@ tags:
   - mysql
   - docker
 date: 1993-07-06
-lastmod: 2023-08-16
+lastmod: 2023-12-21
 categories:
   - blog
 description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置. 所以记录一下配置和操作."
@@ -91,6 +91,23 @@ MASTER_LOG_POS=769 ;
 # 验证
 show slave status\G
 ```
+
+### 双主集群
+
+主要原理：
+
+- 不同的 `server_id`，使得节点在集群内唯一
+- 开启 `gtid` 配置
+- 通过不同的 `auto_increment_offset` 确定初始时的 id 不重复，通过 `auto_increment_increment` 确保自增 id 不重复
+- 开启 `log-salve-updates` 使得节点直接的数据会互相同步
+- `sync_binlog` 为 1 确保事务的完整性
+- 创建数据同步账户，执行 `change master to...`，然后 `start slave`
+
+参考链接：
+
+- [MySQL集群部署：多主多从 | 程序猿DD](https://www.didispace.com/installation-guide/middleware/mysql-cluster-2.html#master%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE)
+- [MySql集群之双主双从架构&集群主从配置（四）\_双服务器主从模式怎么设置-CSDN博客](https://blog.csdn.net/tianzhonghaoqing/article/details/125922812)
+- [MYSQL-双主集群搭建 - 掘金](https://juejin.cn/post/7004991624061124622)
 
 ## 操作
 
