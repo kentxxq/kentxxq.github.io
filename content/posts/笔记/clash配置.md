@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-12-17
+lastmod: 2023-12-24
 keywords:
   - clash
   - 配置文件
@@ -26,8 +26,6 @@ description: "记录 [[笔记/point/clash|clash]] 的配置, 以及是如何使�
 
 - 为什么不用第三方订阅转换? 因为担心隐私.
 - 为什么不自建订阅转换? 因为觉得麻烦, 懒得维护.
-
-> `ClashForWindows` 停更了. 本文 windows 操作基于 [clash-verge](https://github.com/zzzgydi/clash-verge).因为都基于 [[笔记/point/clash|clash]], 所以是无痛切换.
 
 ## 快速配置
 
@@ -338,7 +336,14 @@ proxy-providers:
 
 ### 导入配置文件
 
+#### clash-verge
+
 - 通过 `ClashVerge=>配置=>新建`, 类型 `local`,选择配置文件导入即可
+- 也可以使用类型 `remote`, 不过这里会用到我的 [[笔记/TestServer工具|TestServer工具]].
+
+#### clash-for-windows
+
+- `clash界面=>Profiles=>Import选择你的yml文件`
 - 也可以使用类型 `remote`, 不过这里会用到我的 [[笔记/TestServer工具|TestServer工具]].
 
 ## linux 下的 clash 安装
