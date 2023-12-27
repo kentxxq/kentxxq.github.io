@@ -6,7 +6,7 @@ tags:
   - devops
   - 监控
 date: 2023-07-11
-lastmod: 2023-08-02
+lastmod: 2023-12-27
 categories:
   - blog
 description: "记录 [[笔记/point/prometheus|prometheus]] 的相关使用."
@@ -30,35 +30,41 @@ description: "记录 [[笔记/point/prometheus|prometheus]] 的相关使用."
     tar -xzvf prometheus-2.45.0.linux-amd64.tar.gz
     ```
 
-2. [[笔记/point/supervisor|supervisor]] 配置文件 `/etc/supervisor/conf.d/prometheus.yml`
+2. [[笔记/point/Systemd|Systemd]] 配置文件 `/etc/systemd/system/prometheus.service`
 
     ```toml
-    [program:prometheus]
-    command = /root/prometheus-2.45.0.linux-amd64/prometheus --config.file=/root/prometheus-2.45.0.linux-amd64/prometheus.yml
+    [Unit]
+    Description=prometheus
+    # 启动区间30s内,尝试启动3次
+    StartLimitIntervalSec=30
+    StartLimitBurst=3
     
-    # 自动重启
-    autorestart = true
-    # 启动失败的尝试次数
-    startretries = 3
-    # 进程20s没有退出，则判断启动成功
-    startsecs = 20
+    [Service]
+    # 环境变量 $MY_ENV1
+    # Environment=MY_ENV1=value1
+    # Environment="MY_ENV2=value2"
+    # 环境变量文件,文件内容"MY_ENV3=value3" $MY_ENV3
+    # EnvironmentFile=/path/to/environment/file1
     
-    # 标准输出的文件路径
-    stdout_logfile = /tmp/prometheus-supervisor.log
-    # 日志文件最大大小
-    stdout_logfile_maxbytes=20MB
-    # 日志文件保持数量 默认为10 设置为0 表示不限制
-    stdout_logfile_backups = 5
+    WorkingDirectory=/root/prometheus-2.48.1.linux-amd64
+    ExecStart=/root/prometheus-2.48.1.linux-amd64/prometheus --config.file=/root/prometheus-2.48.1.linux-amd64/prometheus.yml
+    # 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
+    RestartSec=30s 
+    Restart=always
+    # 相关资源都发送term后,后发送kill
+    KillMode=mixed
+    # 最大文件打开数不限制
+    LimitNOFILE=infinity
+    # 子线程数量不限制
+    TasksMax=infinity
     
-    # 标准输出的文件路径
-    stderr_logfile = /tmp/prometheus-supervisor.log
-    # 日志文件最大大小
-    stderr_logfile_maxbytes=20MB
-    # 日志文件保持数量 默认为10 设置为0 表示不限制
-    stderr_logfile_backups = 5
+    [Install]
+    WantedBy=multi-user.target
+    Alias=prometheus.service
     ```
 
-3. 验证 `curl 127.0.0.1:9090`
+3. 启动 `systemctl daemon-reload ; systemctl enable prometheus.service --now`
+4. 验证 `curl 127.0.0.1:9090`
 
 ### 常用配置
 

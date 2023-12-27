@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-12-13
+lastmod: 2023-12-27
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -312,12 +312,18 @@ add_header 'Access-Control-Max-Age' 86400;
 
 #### 全部 options 跨域
 
-`/usr/local/nginx/conf/options/allow_all_cross_origin.conf`
+`/usr/local/nginx/conf/options/allow_all_options_cross_origin.conf`
 
 ```nginx
 if ($request_method = 'OPTIONS') {
     # 前两条的配置为固定格式！兼容性最强。原因是客户端发送ajax请求，包含withCredentials的时候，origin不能为*，且Credentials必须为true。
-    # 参考链接 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials
+    # 原因
+    # 为了防止信息泄露的风险，需要Credentials为true。才能获取cookie等信息
+    # 如果origin为*，那么不安全。这是因为浏览器的同源策略。让浏览器内的js不能拿a网站的信息请求b站点
+    # 参考链接 
+    # https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials
+    # https://segmentfault.com/a/1190000015552557
+    # 
     add_header 'Access-Control-Allow-Origin' $http_origin always;
     add_header 'Access-Control-Allow-Credentials' 'true';
     add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS,HEAD,PUT,DELETE, TRACE, CONNECT';

@@ -5,7 +5,7 @@ tags:
   - devops
   - ACME
 date: 2023-08-16
-lastmod: 2023-11-23
+lastmod: 2023-12-27
 keywords:
   - acme
   - acme.sh
@@ -42,7 +42,8 @@ cd ./acme.sh
 ./acme.sh --install -m 我的邮箱
 
 # 生成证书
-acme.sh --issue --dns dns_ali -d "*.kentxxq.com" -d "kentxxq.com" --ecc
+# -k, --keylength 通过长度指定算法 Specifies the domain key length: 2048, 3072, 4096, 8192 or ec-256, ec-384, ec-521.
+acme.sh --issue --dns dns_ali -d "*.kentxxq.com" -d "kentxxq.com"
 
 # 安装证书
 acme.sh --installcert \

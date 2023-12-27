@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-12-24
+lastmod: 2023-12-27
 keywords:
   - clash
   - 配置文件
@@ -353,14 +353,13 @@ proxy-providers:
 ### 服务搭建
 
 > [!warning]
-> cfw 已经被删, 建议下载 https://github.com/MetaCubeX/Clash.Meta/releases 替代下面的 cfw 路径
+> clash 相关资源已经被删, 建议去 https://github.com/MetaCubeX/mihomo 下载替代下面的路径
 
 [[笔记/point/linux|linux]] 下的安装流程:
 
 ```shell
-mkdir clash
-cd clash
-# 下载clash https://github.com/Dreamacro/clash/releases/tag/premium
+mkdir clash ; cd clash
+# 下载clash
 wget https://github.com/Dreamacro/clash/releases/download/premium/clash-linux-amd64-2023.06.30.gz
 
 # 配置
@@ -377,41 +376,38 @@ vim config.yaml
 
 ### 守护进程
 
-[[笔记/point/supervisor|supervisor]] 配置文件 `/etc/supervisor/conf.d/clash.conf`
+[[笔记/point/Systemd|Systemd]] 配置文件 `/etc/systemd/system/clash.service`
 
 ```toml
-[program:clash]
-directory = /root/clash
-command = /root/clash/clash -d /root/clash
+[Unit]
+Description=clash
+# 启动区间30s内,尝试启动3次
+StartLimitIntervalSec=30
+StartLimitBurst=3
 
-# 启动进程数目默认为1
-numprocs = 1
-# 如果supervisord是root启动的 设置此用户可以管理该program
-user = root
-# 程序运行的优先级 默认999
-priority = 996
+[Service]
+# 环境变量 $MY_ENV1
+# Environment=MY_ENV1=value1
+# Environment="MY_ENV2=value2"
+# 环境变量文件,文件内容"MY_ENV3=value3" $MY_ENV3
+# EnvironmentFile=/path/to/environment/file1
 
-# 随着supervisord 自启动
-autostart = true
-# 子进程挂掉后无条件自动重启
-autorestart = true
-# 子进程启动多少秒之后 状态为running 表示运行成功
-startsecs = 20
-# 进程启动失败 最大尝试次数 超过将把状态置为FAIL
-startretries = 3
+WorkingDirectory=/root/clash
+ExecStart=/root/clash/clash -d /root/clash
+# 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
+RestartSec=30s 
+Restart=always
+# 相关资源都发送term后,后发送kill
+KillMode=mixed
+# 最大文件打开数不限制
+LimitNOFILE=infinity
+# 子线程数量不限制
+TasksMax=infinity
 
-# 标准输出的文件路径
-stdout_logfile = /tmp/clash-supervisor.log
-# 日志文件最大大小
-stdout_logfile_maxbytes=20MB
-# 日志文件保持数量 默认为10 设置为0 表示不限制
-stdout_logfile_backups = 3
-# 错误输出的文件路径
-stderr_logfile = /tmp/clash-supervisor.log
-# 日志文件最大大小
-stderr_logfile_maxbytes=20MB
-# 日志文件保持数量 默认为10 设置为0 表示不限制
-stderr_logfile_backups = 3
+
+[Install]
+WantedBy=multi-user.target
+Alias=clash.service
 ```
 
 ### 反向 nginx 代理
