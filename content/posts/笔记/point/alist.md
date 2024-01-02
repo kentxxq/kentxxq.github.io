@@ -4,7 +4,7 @@ tags:
   - point
   - 未命名
 date: 2023-08-31
-lastmod: 2023-09-08
+lastmod: 2024-01-02
 categories:
   - point
 ---
@@ -15,7 +15,7 @@ categories:
 
 ### 服务启动
 
-[[笔记/point/docker-compose|docker-compose]] 配置
+[[笔记/point/docker-compose|docker-compose]] 配置文件 `docker-compose.yml`
 
 ```yml
 version: "3.3"
@@ -54,8 +54,8 @@ server {
     server_name alist.kentxxq.com;
     client_max_body_size 204800M;
 
-    ssl_certificate /usr/local/nginx/conf/ssl/a.pem;
-    ssl_certificate_key /usr/local/nginx/conf/ssl/a.key;
+    ssl_certificate /usr/local/nginx/conf/ssl/kentxxq.cer;
+    ssl_certificate_key /usr/local/nginx/conf/ssl/kentxxq.key;
 
     access_log /usr/local/nginx/conf/hosts/logs/alist.kentxxq.com.log k-json;
 

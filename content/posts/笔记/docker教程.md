@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-12-16
+lastmod: 2023-12-29
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -16,7 +16,7 @@ description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操�
 
 ## 安装/卸载 docker
 
-[官方文档Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) 速度慢? 可以试试 [阿里源](https://developer.aliyun.com/mirror/docker-ce?spm=a2c6h.13651102.0.0.74f31b11uNneF2) 和 [华为源](https://mirrors.huaweicloud.com/mirrorDetail/5ea14d84b58d16ef329c5c13)
+[官方文档Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) 速度慢? 可以试试 [清华源](https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/), [阿里源](https://developer.aliyun.com/mirror/docker-ce?spm=a2c6h.13651102.0.0.74f31b11uNneF2) 和 [华为源](https://mirrors.huaweicloud.com/mirrorDetail/5ea14d84b58d16ef329c5c13)
 
 ```shell
 # 前置准备
@@ -39,6 +39,8 @@ apt remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-com
 ```
 
 华为国内源：
+
+#todo/笔记 下面有问题
 
 ```shell
 curl -fsSL https://mirrors.huaweicloud.com/docker-ce/linux/debian/gpg | sudo apt-key add -

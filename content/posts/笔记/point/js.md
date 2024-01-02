@@ -7,7 +7,7 @@ tags:
   - point
   - js
 date: 2023-07-06
-lastmod: 2023-10-16
+lastmod: 2023-12-29
 categories:
   - point
 ---
@@ -26,6 +26,8 @@ categories:
 
 ```shell
 npm config set registry https://registry.npmmirror.com
+
+yarn config set registry https://registry.npmmirror.com/
 ```
 
 ### 配置缓存

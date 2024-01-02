@@ -5,7 +5,7 @@ tags:
   - devops
   - ACME
 date: 2023-08-16
-lastmod: 2023-12-27
+lastmod: 2024-01-02
 keywords:
   - acme
   - acme.sh
@@ -96,14 +96,21 @@ rm -rf  ~/.acme.sh
 
 创建多个 `account.conf` 文件, 然后编辑 `crontab`.
 
-假设你有 `a.com`, `b.com`, `c.om`, 而**a.com 和 b.com 都是阿里云提供 dns 解析, 但是需要用到不同的 ak/sk**
+假设你有 `a.com`, `b.com`, 而**a.com 和 b.com 都是阿里云提供 dns 解析, 但是需要用到不同的 ak/sk**
 
 操作如下:
 
-- `/root/.acme.sh/account.conf` 存放着 `a.com`, `c.com` 的 ak/sk.
-- `/root/.acme.sh/account_b.conf` 存放着 `b.com` 的 ak/sk.
-- 第一条 `crontab记录` 刷新 `a.com`, `c.com` 证书成功, `b.com` 会失败.
-- 第二条 `crontab记录` 会发现 `a.com`, `c.com` 证书已经不需要刷新了, 只会刷新 `b.com` 的证书.
+1. acme 正常获取 `a.com` 的证书
+2. 备份一下 `cp /root/.acme.sh/account.conf /root/.acme.sh/account.conf.bak`
+3. acme 正常获取 `b.com` 的证书. 此时 `/root/.acme.sh/account.conf` 的内容变成了 `b.com` 的配置
+
+开始配置:
+
+- `mv /root/.acme.sh/account.conf /root/.acme.sh/account_b.conf` 重命名配置文件，这是 `b.com` 的 ak/sk.
+- `mv /root/.acme.sh/account.conf.bak /root/.acme.sh/account.conf` 恢复原来的配置文件，这是 `a.com` 的 ak/sk.
+- 开始配置 crontab 定时任务
+- 第一条 `crontab记录` 刷新 `a.com` 证书成功, `b.com` 会失败.
+- 第二条 `crontab记录` 会发现 `a.com` 证书已经不需要刷新了, 只会刷新 `b.com` 的证书.
 
 ```shell
 38 0 * * * "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null

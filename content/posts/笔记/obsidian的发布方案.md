@@ -56,7 +56,7 @@ description: "这里是我在确定使用 [[笔记/point/obsidian|obsidian]] 记
 ```powershell
 # 设置源文件夹和目标文件夹的路径
 $sourceRootFolder = "obsidian文档路径"
-$targetRootFolder = "博客路径"
+$targetRootFolder = "博客路径\content\posts"
 
 # 切换到目标文件夹
 Set-Location -Path $targetRootFolder
