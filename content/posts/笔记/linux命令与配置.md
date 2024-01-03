@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2023-12-17
+lastmod: 2024-01-03
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -160,6 +160,21 @@ PermitRootLogin yes
 
 # 设置密码
 passwd root
+# 重启ssh服务
+systemctl restart ssh
+```
+
+### 禁用密码登录/密钥登录
+
+```shell
+vim /etc/ssh/sshd_config
+# 禁用密码登录
+PasswordAuthentication no
+
+# 把公钥加入到认证文件中
+cat id_rsa.pub >> /root/.ssh/authorized_keys
+# 配置一下这个文件的权限，保证安全
+chmod 644 ~/.ssh/authorized_keys
 # 重启ssh服务
 systemctl restart ssh
 ```

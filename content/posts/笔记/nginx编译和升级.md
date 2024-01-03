@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-12-05
+lastmod: 2024-01-03
 categories:
   - blog
 description: "这里记录 [[笔记/point/nginx|nginx]] 的模块编译和升级操作."
@@ -37,7 +37,7 @@ cd nginx-1.24.0
 # 监控信息 --with-http_stub_status_module 
 # ssl证书 --with-http_ssl_module
 # tcp代理和tcp代理证书 --with-stream --with-stream_ssl_module
-# tcp代理的时候，把客户端ip传到PROXY协议的header头部 --with-stream_realip_module,虽然我一直用header传输
+# tcp代理的时候，把客户端ip传到PROXY协议的header头部 --with-stream_realip_module和--with-http_realip_module建议开启,虽然我一直用header传输
 # 启用http2  --with-http_v2_module
 ./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --with-http_ssl_module --with-stream --with-stream_ssl_module --with-stream_realip_module --with-http_v2_module --with-http_stub_status_module
 make && make install

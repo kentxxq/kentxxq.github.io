@@ -41,6 +41,8 @@ git clone https://github.com/acmesh-official/acme.sh.git
 cd ./acme.sh
 ./acme.sh --install -m 我的邮箱
 
+source ~/.bashrc
+
 # 生成证书
 # -k, --keylength 通过长度指定算法 Specifies the domain key length: 2048, 3072, 4096, 8192 or ec-256, ec-384, ec-521.
 acme.sh --issue --dns dns_ali -d "*.kentxxq.com" -d "kentxxq.com"

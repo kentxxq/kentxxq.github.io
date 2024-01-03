@@ -4,7 +4,7 @@ tags:
   - blog
   - shell
 date: 2023-08-10
-lastmod: 2023-11-28
+lastmod: 2024-01-02
 categories:
   - blog
 description: "虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔记/point/shell|shell]] 是高效的."
@@ -338,6 +338,8 @@ echo `expr index "$string" io`  # 输出4.因为o在第4个,i在第8位
 
 ### 内存检测重启 nginx
 
+> `*/10 * * * * /opt/memory-check.sh >>/tmp/memory_check.log 2>&1`
+
 ```shell
 #!/bin/bash
 echo `date +'%Y-%m-%d %H:%M:%S'`
@@ -360,6 +362,8 @@ echo "====================================="
 ```
 
 ### 清空 log 结尾的日志文件
+
+> `0 3 * * * /opt/rm-log.sh`
 
 ```shell
 #!/bin/bash
