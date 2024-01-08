@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-01-03
+lastmod: 2024-01-04
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -144,8 +144,13 @@ alias novpn='unset http_proxy; unset https_proxy;'
 ssh-keygen -t rsa
 # 拷贝公钥到远程机器,需要输入密码
 ssh-copy-id root@1.1.1.1
+# 手动拷贝
+# 把 /root/.ssh/id_rsa.pub 放到目标机器的 /root/.ssh/authorized_keys 里
+
 # 测试效果
 ssh root@1.1.1.1
+# 测试效果，ssh远程执行命令
+ssh root@1.1.1.1 "ls"
 
 # 如果目标ip重装过,需要c清理本地的拷贝记录
 ssh-keygen -R 1.1.1.1
@@ -766,7 +771,7 @@ tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* *
 
 #### scp
 
-简单高效, 日常使用.
+简单高效, 日常使用. 只支持文件名
 
 ```shell
 # 本地到远程
@@ -774,7 +779,7 @@ scp /path/thing root@10.10.10.10:/path/thing
 # 远程到本地
 # -r遍历
 # -C压缩
-sshpass -p 密码 -o StrictHostKeyChecking=no scp -Cr root@10.10.10.10:/path/folder /path/folder
+sshpass -p 密码 -o StrictHostKeyChecking=no scp -Cr root@10.10.10.10:/taget/path/file /source/path/file
 
 # 使用sshpass免密一条命令
 # scp支持所有ssh的参数
@@ -790,7 +795,7 @@ sshpass -p 密码 -o StrictHostKeyChecking=no scp -Cr root@10.10.10.10:/path/fol
 ```shell
 # 把1这个文件/文件夹 拷贝到远程的/tmp/t1/下面
 # at保持文件信息不变
-# VP先是进度
+# VP显示进度
 # -z 可以开启压缩
 rsync -atvP /tmp/t1/1 root@1.1.1.1:/tmp/t1/
 

@@ -4,7 +4,7 @@ tags:
   - blog
   - powershell
 date: 2023-06-26
-lastmod: 2023-11-08
+lastmod: 2024-01-04
 categories:
   - blog
 description: "这里记录 [[笔记/point/powershell|powershell]] 的常用命令."

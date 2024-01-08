@@ -28,6 +28,9 @@ categories:
 npm config set registry https://registry.npmmirror.com
 
 yarn config set registry https://registry.npmmirror.com/
+
+# 加速二进制文件下载
+npm i --registry=https://registry.npmmirror.com --disturl=https://npmmirror.com/dist
 ```
 
 ### 配置缓存
