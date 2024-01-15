@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2023-12-28
+lastmod: 2024-01-09
 keywords:
   - clash
   - 配置文件
@@ -248,37 +248,37 @@ rule-providers:
   ChinaMax:
     type: http
     behavior: classical
-    url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml"
+    url: "https://mirror.ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml"
     path: ./RuleSet/ChinaMax.yaml
     interval: 86400
   OpenAI:
     type: http
     behavior: classical
-    url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/OpenAI/OpenAI.yaml"
+    url: "https://mirror.ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/OpenAI/OpenAI.yaml"
     path: ./RuleSet/OpenAI.yaml
     interval: 86400
   Microsoft:
     type: http
     behavior: classical
-    url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Microsoft/Microsoft.yaml"
+    url: "https://mirror.ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Microsoft/Microsoft.yaml"
     path: ./RuleSet/Microsoft.yaml
     interval: 86400
   GitLab:
     type: http
     behavior: classical
-    url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitLab/GitLab.yaml"
+    url: "https://mirror.ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitLab/GitLab.yaml"
     path: ./RuleSet/GitLab.yaml
     interval: 86400
   GitHub:
     type: http
     behavior: classical
-    url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitHub/GitHub.yaml"
+    url: "https://mirror.ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitHub/GitHub.yaml"
     path: ./RuleSet/GitHub.yaml
     interval: 86400
   Google:
     type: http
     behavior: classical
-    url: "https://ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitHub/GitHub.yaml"
+    url: "https://mirror.ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitHub/GitHub.yaml"
     path: ./RuleSet/Google.yaml
     interval: 86400
 

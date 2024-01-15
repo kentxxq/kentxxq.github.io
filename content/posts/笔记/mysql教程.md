@@ -5,7 +5,7 @@ tags:
   - mysql
   - docker
 date: 1993-07-06
-lastmod: 2023-12-21
+lastmod: 2024-01-11
 categories:
   - blog
 description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置. 所以记录一下配置和操作."
@@ -125,6 +125,18 @@ GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX,TRIGGER,CREATE VIEW,SH
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
 FLUSH PRIVILEGES;
 
+```
+
+### 查看 binlog
+
+使用 [[笔记/point/docker|docker]] 镜像来临时解析 binlog 是不错的。
+
+使用哪个版本可以在 [mysql的docker页面](https://hub.docker.com/_/mysql) 找到。**注意**只有 `8.0.35-bullseye, 8.0-bullseye, 8.0.35-debian, 8.0-debian` 这几个 `-debian` 的版本里有 mysqlbinlog 工具
+
+```shell
+docker run -d -v /root/binlog_folder/:/tmp/binlog_folder/ -e MYSQL_ROOT_PASSWORD=123456 --name mysql mysql:8.0-debia
+
+mysqlbinlog /tmp/binlog_folder/binlog_file > xxx.txt
 ```
 
 ## 配置
