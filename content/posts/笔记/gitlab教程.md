@@ -4,7 +4,7 @@ tags:
   - blog
   - gitlab
 date: 2023-08-15
-lastmod: 2023-08-16
+lastmod: 2024-01-16
 categories:
   - blog
 description: 
@@ -15,6 +15,129 @@ description:
 这里记录 [[笔记/point/gitlab|gitlab]] 的安装, 配置.
 
 ## 内容
+
+### 安装
+
+#### 环境准备
+
+```shell
+# 拉取镜像
+docker pull gitlab/gitlab-ce:16.7.3-ce.0
+
+# 跑起来
+docker run \
+--privileged=true \
+--hostname git.kentxxq.com \
+--detach \
+--publish 80:80 \
+--publish 443:443 \
+--publish 222:22 \
+--name gitlab \
+--restart unless-stopped \
+--volume /root/gitlab/config:/etc/gitlab \
+--volume /root/gitlab/logs:/var/log/gitlab \
+--volume /root/gitlab/data:/var/opt/gitlab \
+gitlab/gitlab-ce:16.7.3-ce.0
+
+# 停止，修改端口和url
+docker stop gitlab
+```
+
+#### 修改端口和 url
+
+- 主机配置文件路径 `/root/gitlab/config/gitlab.rb`
+- 容器内 `/etc/gitlab/gitlab.rb`
+
+```rb
+# 配置域名地址
+external_url 'https://git.kentxxq.com'
+# ssh地址
+gitlab_rails['gitlab_ssh_host'] = 'git.kentxxq.com'
+# ssh端口
+gitlab_rails['gitlab_shell_ssh_port'] = 10022
+# nginx的地址,允许它代理gitlab
+gitlab_rails['trusted_proxies'] = ['nginx的ip地址']
+# 禁用自带的 nginx
+nginx['enable'] = false
+# 服务监听方式
+gitlab_workhorse['listen_network'] = "tcp"
+gitlab_workhorse['listen_addr'] = "0.0.0.0:80"
+```
+
+如果不生效, 可以在容器内使用环境变量（遇到过配置文件不生效的 bug，用来临时解决问题）。
+
+```shell
+export external_url="https://git.kentxxq.com"
+gitlab-ctl reconfigure
+gitlab-ctl restart
+```
+
+**重新启动 docker start gitlab**
+
+#### 配置 nginx 转发
+
+stream 放置在 `nginx.conf` 的最外层配置，用于 ssh 方式拉取代码
+
+```nginx
+stream {
+    upstream gitlab {
+        hash   $remote_addr consistent;
+        server 172.16.0.52:222;
+    }
+
+    server {
+        listen  10022;
+        proxy_connect_timeout   30s;
+        proxy_timeout 300s;
+        proxy_pass  gitlab;
+    }
+}
+```
+
+配置域名代理
+
+```nginx
+server {
+    listen 80;
+    server_name git.kentxxq.com;
+    return 301 https://$server_name$request_uri;
+    access_log /usr/local/nginx/conf/hosts/logs/git.kentxxq.com.log k-json;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name git.kentxxq.com;
+    access_log /usr/local/nginx/conf/hosts/logs/git.kentxxq.com.log k-json;
+
+    # 普通header头,ip之类的
+    include /usr/local/nginx/conf/options/normal.conf;
+    # 证书相关
+    include /usr/local/nginx/conf/options/ssl_chinnshi.conf;
+
+    location / {
+        proxy_pass http://172.16.0.52:80;
+    }
+}
+```
+
+### 常用配置
+
+#### 全局变量数
+
+[[笔记/point/gitlab|gitlab]] 的全局变量数有上限.
+
+```bash
+gitlab-rails console
+# 等待出现控制台
+Plan.default.actual_limits.update!(ci_instance_level_variables: 100)
+```
+
+#### 配置生效
+
+```shell
+gitlab-ctl reconfigure
+gitlab-ctl restart
+```
 
 ### 升级
 
@@ -61,54 +184,9 @@ docker exec -it gitlab gitlab-backup restore BACKUP=1686724904_2023_06_14_14.8.4
 docker restart gitlab
 ```
 
-### 配置修改
-
-#### 配置生效
-
-```shell
-gitlab-ctl reconfigure
-gitlab-ctl restart
-```
-
-#### 全局变量数
-
-[[笔记/point/gitlab|gitlab]] 的全局变量数有上限.
-
-```bash
-gitlab-rails console
-# 等待出现控制台
-Plan.default.actual_limits.update!(ci_instance_level_variables: 100)
-```
-
-#### 端口和 url
-
-配置文件路径 `/etc/gitlab/gitlab.rb`
-
-```rb
-# 配置域名地址
-external_url 'https://git.kentxxq.com'
-# ssh地址
-gitlab_rails['gitlab_ssh_host'] = 'xxx.kentxxq.com'
-# ssh端口
-gitlab_rails['gitlab_shell_ssh_port'] = 10022
-# nginx的地址,允许它代理gitlab
-gitlab_rails['trusted_proxies'] = ['nginx的ip地址']
-# 禁用自带的 nginx
-nginx['enable'] = false
-# 服务监听方式
-gitlab_workhorse['listen_network'] = "tcp"
-gitlab_workhorse['listen_addr'] = "0.0.0.0:80"
-```
-
-如果不生效, 可以使用环境变量
-
-```shell
-export external_url="https://git.kentxxq.com"
-gitlab-ctl reconfigure
-gitlab-ctl restart
-```
-
 ### CICD
+
+这里只是 [[笔记/point/CICD|CICD]] 的安装调试，具体使用看 [[笔记/gitlab-cicd教程|gitlab-cicd教程]].
 
 #### Shell-runner
 
@@ -191,6 +269,19 @@ check_interval = 0
 ```shell
 # vim /etc/sudoers加入 
 gitlab-runner ALL=(ALL) NOPASSWD: ALL
+```
+
+#### docker-runner
+
+```shell
+# 注册
+docker run --rm -it -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register
+
+# 启动
+docker run -d --name gitlab-runner --restart always \
+  -v /root/gitlab-runner/config:/etc/gitlab-runner \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  gitlab/gitlab-runner:latest
 ```
 
 ### 服务端 git-server-hook

@@ -5,7 +5,7 @@ tags:
   - k8s
   - docker
 date: 2023-08-18
-lastmod: 2023-11-29
+lastmod: 2024-01-16
 keywords:
   - k8s
   - docker
@@ -48,6 +48,19 @@ registry-demo:
 可以参考, 做个 k 3 d 的教程?! [k8s 代理问题一站式解决 - 知乎](https://zhuanlan.zhihu.com/p/545327043)
 
 ## 公共镜像源
+
+配置示例
+
+```json
+{
+    "registry-mirrors": [
+        "https://docker.m.daocloud.io",
+        "https://dockerproxy.com",
+        "https://docker.mirrors.ustc.edu.cn",
+        "https://docker.nju.edu.cn"
+    ]
+}
+```
 
 | 提供者      | 地址                                       |
 | ----------- | ------------------------------------------ |

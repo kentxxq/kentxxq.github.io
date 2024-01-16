@@ -4,7 +4,7 @@ tags:
   - blog
   - minio
 date: 2023-07-19
-lastmod: 2023-11-22
+lastmod: 2024-01-16
 categories:
   - blog
 description: "[[笔记/point/minio|minio]] 的搭建和使用."
@@ -22,8 +22,9 @@ description: "[[笔记/point/minio|minio]] 的搭建和使用."
 
 ```shell
 # 数据存在容器/data目录
-# 端口 api/9000 http/9001
-docker run -p 9000:9000 -p 9001:9001 minio/minio server /data --console-address ":9001"
+# 端口 api接口/9000 ui操作/9001
+# 默认 minioadmin/minioadmin
+docker run --rm -d -p 9000:9000 -p 9001:9001 minio/minio server /data --console-address ":9001"
 ```
 
 或者二进制版本:
