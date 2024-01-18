@@ -4,10 +4,10 @@ tags:
   - blog
   - gitlab
 date: 2023-08-15
-lastmod: 2024-01-16
+lastmod: 2024-01-17
 categories:
   - blog
-description: 
+description: "这里记录 [[笔记/point/gitlab|gitlab]] 的安装, 配置."
 ---
 
 ## 简介
@@ -282,6 +282,41 @@ docker run -d --name gitlab-runner --restart always \
   -v /root/gitlab-runner/config:/etc/gitlab-runner \
   -v /var/run/docker.sock:/var/run/docker.sock \
   gitlab/gitlab-runner:latest
+```
+
+#### 缓存配置
+
+配置 runner 文件 `~/gitlab-runner/config/config.toml` 的 `runners.cache` 部分。
+
+> [[笔记/point/minio|minio]] 的安装看 [[笔记/minio教程|minio教程]].
+
+```toml
+concurrent = 5
+check_interval = 0
+shutdown_timeout = 0
+
+[session_server]
+  session_timeout = 1800
+
+[[runners]]
+  name = "shared"
+  url = "https://gitlab.kentxxq.com/"
+  id = 1
+  token = "1"
+  token_obtained_at = 2024-01-16T07:29:28Z
+  token_expires_at = 0001-01-01T00:00:00Z
+  executor = "docker"
+  [runners.cache]
+#    MaxUploadedArchiveSize = 0
+    Type = "s3"
+    Path = "cicd"
+    Shared = true
+    [runners.cache.s3]
+      ServerAddress = "minio-cicd.kentxxq.com"
+      AccessKey = "1"
+      SecretKey = "2"
+      BucketName = "runner"
+      Insecure = false
 ```
 
 ### 服务端 git-server-hook

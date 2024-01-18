@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2023-10-26
+lastmod: 2024-01-17
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."
@@ -14,7 +14,41 @@ description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]
 
 这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证..
 
-## 具体操作
+## 配置
+
+### config 配置
+
+`~/.ssh/config` 文件可以处理多种问题。
+
+- 多个密钥，不同密钥服务于不同仓库/用户
+- github 的连接问题 `ssh connect to host github.com port 22 connection timed out` ，[github官方也有对此说明](https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port)
+
+下面是一个示例
+
+```
+Host qs_codeup
+HostName codeup.aliyun.com
+IdentityFile ~/.ssh/2_rsa
+PreferredAuthentications publickey
+User kentxxq
+
+Host github.com
+HostName ssh.github.com
+Port 443
+IdentityFile ~/.ssh/id_rsa
+PreferredAuthentications publickey
+User kentxxq
+```
+
+- 两个配置文件，对应你的 2 个账号
+- Port 参数可以让你从默认的 22 端口，改成连接 443 端口
+- 使用了不同的密钥
+
+### 相关内容
+
+- [[笔记/git-openssh的免密|在windows上使用ssh-agent，让git免密ssh拉取]]
+
+## 操作
 
 ### 规范 commit
 

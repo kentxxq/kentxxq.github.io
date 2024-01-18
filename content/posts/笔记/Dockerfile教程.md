@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-09-05
-lastmod: 2023-11-24
+lastmod: 2024-01-18
 categories:
   - blog
 description: 
@@ -256,4 +256,20 @@ FROM base AS final
 WORKDIR /workload
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY dist /usr/share/nginx/html
+```
+
+alpine 版本
+
+```Dockerfile
+FROM nginx:alpine
+
+# sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+# 设置时区
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
+    apk add --update tzdata && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
+
+COPY dist/build/h5 /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 ```

@@ -5,7 +5,7 @@ tags:
   - k8s
   - docker
 date: 2023-08-18
-lastmod: 2024-01-16
+lastmod: 2024-01-17
 keywords:
   - k8s
   - docker
@@ -17,7 +17,7 @@ keywords:
   - 代理
 categories:
   - blog
-description: 
+description: "为什么会有这篇文章, 是因为我总是会遇到 docker, Containerd, k8s, minikube 等等网络问题. 统一在这里进行测试解决, 并且做成可用的方案. 工作和学习中无限使用!"
 ---
 
 ## 简介
