@@ -4,7 +4,7 @@ tags:
   - blog
   - shell
 date: 2023-08-10
-lastmod: 2024-01-02
+lastmod: 2024-01-23
 categories:
   - blog
 description: "虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔记/point/shell|shell]] 是高效的."
@@ -371,5 +371,53 @@ files=`find / -name '*.log'`
 for file in $files
 do
   truncate -s 0 $file
+done
+```
+
+### 同步 nginx 配置
+
+1. 先要对远程主机进行 [[笔记/linux命令与配置#免密 ssh|免密 ssh]]
+2. `chmod +x sync_nginx.sh`
+3. 移动到 `mv sync_nginx.sh /usr/local/bin/sync_nginx.sh`
+
+```shell
+#!/bin/bash
+
+# 本地验证配置是否ok
+/usr/local/bin/nginx -t
+# 验证没问题，就reload
+if [ $? -eq 0 ]; then
+    # 返回值为0，表示执行成功
+    echo "本地验证成功"
+    # 执行xxx操作
+    /usr/local/bin/nginx -s reload
+    echo "nginx reload完成"
+else
+    echo "本地验证失败，停止运行"
+    exit 1;
+fi
+
+# 远程主机验证
+host_list=("stage-prod-nginx2")
+for host in "${host_list[@]}"
+do
+    echo "$host 开始同步配置文件..."
+    # 同步下面3个路径
+    /usr/bin/rsync -atvP /usr/local/nginx/conf/nginx.conf "root@$host:/usr/local/nginx/conf/nginx.conf"
+    /usr/bin/rsync -atvP /usr/local/nginx/conf/hosts/*.conf "root@$host:/usr/local/nginx/conf/hosts/"
+    /usr/bin/rsync -atvP /usr/local/nginx/conf/options/*.conf "root@$host:/usr/local/nginx/conf/options/"
+    # 远程测试nginx配置
+    /usr/bin/ssh "root@$host" "/usr/local/bin/nginx -t"
+    # 远程机器测试成功，进行reload
+    if [ $? -eq 0 ]; then
+        # 返回值为0，表示执行成功
+        echo "$host 验证成功"
+        # 执行xxx操作
+        /usr/bin/ssh "root@$host" "/usr/local/bin/nginx -s reload"
+        echo "$host nginx reload完成"
+    else
+        echo "$host 验证失败，停止运行"
+        exit 1;
+    fi
 done
 ```

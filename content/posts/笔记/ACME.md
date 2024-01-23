@@ -5,7 +5,7 @@ tags:
   - devops
   - ACME
 date: 2023-08-16
-lastmod: 2024-01-04
+lastmod: 2024-01-23
 keywords:
   - acme
   - acme.sh
@@ -48,7 +48,7 @@ source ~/.bashrc
 acme.sh --issue --dns dns_ali -d "*.kentxxq.com" -d "kentxxq.com"
 
 # 安装证书
-acme.sh --installcert \
+acme.sh --install-cert \
 -d "*.kentxxq.com" -d "kentxxq.com" \
 --key-file /usr/local/nginx/conf/ssl/kentxxq.key \
 --fullchain-file /usr/local/nginx/conf/ssl/kentxxq.cer \
@@ -92,7 +92,7 @@ acme.sh --uninstall
 rm -rf  ~/.acme.sh
 ```
 
-## 错误处理
+## 问题处理
 
 #### 多个域名,同 dns 服务商,不同 ak
 
@@ -127,6 +127,18 @@ rm -rf  ~/.acme.sh
 
 - 使用 `--insecure` 不检查服务器证书
 - 使用 `--use-wget` ,排除是 curl 的问题
+
+#### 修改 reload-cmd
+
+重新运行 `--install-cert` 命令即可覆盖。`sync_nginx.sh` 的内容 [[笔记/shell教程#同步 nginx 配置|在这里]]
+
+```shell
+acme.sh --install-cert \
+-d "*.kentxxq.com" -d "kentxxq.com" \
+--key-file /usr/local/nginx/conf/ssl/kentxxq.key \
+--fullchain-file /usr/local/nginx/conf/ssl/kentxxq.cer \
+--reloadcmd "/bin/bash /usr/local/bin/sync_nginx.sh"
+```
 
 ## 协议了解
 

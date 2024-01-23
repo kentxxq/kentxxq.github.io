@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2023-12-27
+lastmod: 2024-01-23
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -537,6 +537,22 @@ server {
 
 ## 功能配置
 
+### 黑/白名单
+
+`/usr/local/nginx/conf/options/whitelist.conf`
+
+```nginx
+# ip
+allow 1.1.1.1;
+# 网段
+allow 10.0.0.0/16; 
+
+# 默认拒绝所有
+deny all;
+```
+
+> 可以包含在 	http, server, location, limit_except 中。limit_except 是用来在 location 内部限制请求 method
+
 ### IP 限速
 
 ```nginx
@@ -775,6 +791,27 @@ error_page 405 =200 $uri;
 add_header Content-Security-Policy "frame-ancestors 'self' a.com b.com *.a.com *.b.com; frame-src 'self' a.com b.com *.a.com *.b.com";
 ```
 
+###  官网非 www 跳转
+
+```nginx
+server {
+    listen 80;
+    server_name kentxxq.com;
+    return 301 https://$server_name$request_uri;
+    include /usr/local/nginx/conf/options/normal.conf;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name kentxxq.com;
+    client_max_body_size 2048M;
+    include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
+    access_log /usr/local/nginx/conf/hosts/logs/kentxxq.com.log k-json;
+    # 302临时跳转
+    return 302 https://www.kentxxq.com$request_uri;
+}
+```
+
 ## 守护进程
 
 [[笔记/point/Systemd|Systemd]] 守护配置 `/etc/systemd/system/nginx.service`
@@ -973,3 +1010,7 @@ server {
         return 301 https://$server_name$request_uri;
 }
 ```
+
+## 相关内容
+
+- 使用 [[笔记/ACME|ACME]] 免费 ssl 证书
