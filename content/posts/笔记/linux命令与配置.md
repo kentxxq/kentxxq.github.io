@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-01-04
+lastmod: 2024-01-25
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -395,6 +395,39 @@ apt search language-pack*
 apt search language-pack-zh*
 # 建议选用
 apt install language-pack-zh-hans -y
+```
+
+### sftp 配置
+
+sftp 只需要 1 个端口，强制加密，所有环境都自带。
+
+```shell
+# 准备一个ftp目录
+mkdir /ftp-data
+# 创建一个共享目录，所有sftp用户都可以访问
+mkdir -p /ftp-data/shared
+chmod 777 /ftp-data/shared
+
+# 创建用户sftp_a，指定默认shell为sftp，用户目录/ftp-data
+useradd -m -s /usr/lib/sftp-server -d /ftp-data sftp_a
+# 密码
+passwd sftp_a
+# 用户独有的目录
+mkdir -p /ftp-data/a
+# 授权只有自己可以使用（root不受限制）
+chown sftp_a:sftp_a /ftp-data/a
+chmod 700 /ftp-data/a
+# 编辑ssh配置文件，限制登录和命令
+vim /etc/ssh/sshd_config
+Match User sftp_a
+    ChrootDirectory /ftp-data
+    ForceCommand internal-sftp
+    AllowTcpForwarding no
+    X11Forwarding no
+# 重启ssh服务生效
+systemctl restart ssh
+
+# 可以上面的步骤创建更多的用户
 ```
 
 ### 开启 bbr

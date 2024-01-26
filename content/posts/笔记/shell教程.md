@@ -4,7 +4,7 @@ tags:
   - blog
   - shell
 date: 2023-08-10
-lastmod: 2024-01-23
+lastmod: 2024-01-24
 categories:
   - blog
 description: "虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔记/point/shell|shell]] 是高效的."
