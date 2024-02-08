@@ -1,0 +1,230 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>jenkins教程 - 运维个人技术栈</title><meta name=Description content="kentxxq个人站点"><meta property="og:title" content="jenkins教程"><meta property="og:description" content="简介本来以为不会再使用 jenkins 了。但是遇到了这样的情况： 公司现在使用火山云 cicd，很烂，bug 多，很不好用 多种仓库结构 前后端在同一个仓库 后端多个"><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/jenkins%E6%95%99%E7%A8%8B/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2024-01-29T00:00:00+00:00"><meta property="article:modified_time" content="2024-02-02T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="jenkins教程"><meta name=twitter:description content="简介本来以为不会再使用 jenkins 了。但是遇到了这样的情况： 公司现在使用火山云 cicd，很烂，bug 多，很不好用 多种仓库结构 前后端在同一个仓库 后端多个"><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/jenkins%E6%95%99%E7%A8%8B/><link rel=prev href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ipsec-vpn%E6%90%AD%E5%BB%BA/><link rel=next href=https://kentxxq.com/posts/%E6%97%A5%E8%AE%B0/2024-02-07/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"jenkins教程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/jenkins%E6%95%99%E7%A8%8B\/"},"genre":"posts","keywords":"blog","wordcount":982,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/jenkins%E6%95%99%E7%A8%8B\/","datePublished":"2024-01-29T00:00:00+00:00","dateModified":"2024-02-02T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":""}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class="toc-content always-active" id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#安装>安装</a><ul><li><a href=#安装-jenkins>安装 jenkins</a></li><li><a href=#配置-nginx>配置 nginx</a></li><li><a href=#配置-jenkins>配置 jenkins</a></li></ul></li><li><a href=#使用>使用</a><ul><li><a href=#流水线示例>流水线示例</a></li></ul></li><li><a href=#参考资料>参考资料</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">jenkins教程</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/blog/><i class="far fa-folder fa-fw"></i>blog</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2024-01-29>2024-01-29</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2024-02-02>2024-02-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 982 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#安装>安装</a><ul><li><a href=#安装-jenkins>安装 jenkins</a></li><li><a href=#配置-nginx>配置 nginx</a></li><li><a href=#配置-jenkins>配置 jenkins</a></li></ul></li><li><a href=#使用>使用</a><ul><li><a href=#流水线示例>流水线示例</a></li></ul></li><li><a href=#参考资料>参考资料</a></li></ul></nav></div></div><div class=content id=content><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p>本来以为不会再使用 jenkins 了。但是遇到了这样的情况：</p><ul><li>公司现在使用火山云 cicd，很烂，bug 多，很不好用</li><li>多种仓库结构<ul><li>前后端在同一个仓库</li><li>后端多个微服务都在同一个仓库</li><li>小程序独立项目结构。多种构建命令，产出不同端，不同目录</li><li>前端独立仓库</li></ul></li><li><a href=/posts/%E7%AC%94%E8%AE%B0/gitlab-cicd%E6%95%99%E7%A8%8B/>gitlab-cicd</a> 需要迁移代码到 gitlab。发版相关需要结合仓库的权限，分支的命名等。除非自己做二次开发</li></ul><p>而 jenkins 这种久经沙场的万金油就不存在这些问题。</p><h2 id=安装 class=headerLink><a href=#%e5%ae%89%e8%a3%85 class=header-mark></a>安装</h2><h3 id=安装-jenkins class=headerLink><a href=#%e5%ae%89%e8%a3%85-jenkins class=header-mark></a>安装 jenkins</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 安装jdk</span>
+</span></span><span class=line><span class=cl>apt install openjdk-21-jdk -y
+</span></span></code></pre></td></tr></table></div></div><p><a href=https://www.jenkins.io/download/ target=_blank rel="noopener noreferrer">官网下载</a> war 包，配置守护进程</p><p><code>/etc/systemd/system/jenkins.service</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ini data-lang=ini><span class=line><span class=cl><span class=k>[Unit]</span>
+</span></span><span class=line><span class=cl><span class=na>Description</span><span class=o>=</span><span class=s>jenkins</span>
+</span></span><span class=line><span class=cl><span class=c1># 启动区间30s内,尝试启动3次</span>
+</span></span><span class=line><span class=cl><span class=na>StartLimitIntervalSec</span><span class=o>=</span><span class=s>30</span>
+</span></span><span class=line><span class=cl><span class=na>StartLimitBurst</span><span class=o>=</span><span class=s>3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Service]</span>
+</span></span><span class=line><span class=cl><span class=c1># 环境变量 $MY_ENV1</span>
+</span></span><span class=line><span class=cl><span class=c1># Environment=MY_ENV1=value1</span>
+</span></span><span class=line><span class=cl><span class=c1># Environment=&#34;MY_ENV2=value2&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># 环境变量文件,文件内容&#34;MY_ENV3=value3&#34; $MY_ENV3</span>
+</span></span><span class=line><span class=cl><span class=c1># EnvironmentFile=/path/to/environment/file1</span>
+</span></span><span class=line><span class=cl><span class=na>WorkingDirectory</span><span class=o>=</span><span class=s>/root</span>
+</span></span><span class=line><span class=cl><span class=na>ExecStart</span><span class=o>=</span><span class=s>/usr/bin/java -jar /root/jenkins.war</span>
+</span></span><span class=line><span class=cl><span class=c1># 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启</span>
+</span></span><span class=line><span class=cl><span class=na>RestartSec</span><span class=o>=</span><span class=s>30s </span>
+</span></span><span class=line><span class=cl><span class=na>Restart</span><span class=o>=</span><span class=s>always</span>
+</span></span><span class=line><span class=cl><span class=c1># 相关资源都发送term后,后发送kill</span>
+</span></span><span class=line><span class=cl><span class=na>KillMode</span><span class=o>=</span><span class=s>mixed</span>
+</span></span><span class=line><span class=cl><span class=c1># 最大文件打开数不限制</span>
+</span></span><span class=line><span class=cl><span class=na>LimitNOFILE</span><span class=o>=</span><span class=s>infinity</span>
+</span></span><span class=line><span class=cl><span class=c1># 子线程数量不限制</span>
+</span></span><span class=line><span class=cl><span class=na>TasksMax</span><span class=o>=</span><span class=s>infinity</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Install]</span>
+</span></span><span class=line><span class=cl><span class=na>WantedBy</span><span class=o>=</span><span class=s>multi-user.target</span>
+</span></span><span class=line><span class=cl><span class=c1># Alias=testserver.service</span>
+</span></span></code></pre></td></tr></table></div></div><p>启动</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>systemctl <span class=nb>enable</span> jenkins --now
+</span></span></code></pre></td></tr></table></div></div><p>因为国内的网络问题，启动大概率会有问题。</p><p>此时找到 <code>/root/.jenkins/hudson.model.UpdateCenter.xml</code> 文件，修改 url 为国内源</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=cp>&lt;?xml version=&#39;1.1&#39; encoding=&#39;UTF-8&#39;?&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;sites&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;site&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;id&gt;</span>default<span class=nt>&lt;/id&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;url&gt;</span>https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json<span class=nt>&lt;/url&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&lt;/site&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/sites&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>重启</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>systemctl restart jenkins
+</span></span></code></pre></td></tr></table></div></div><h3 id=配置-nginx class=headerLink><a href=#%e9%85%8d%e7%bd%ae-nginx class=header-mark></a>配置 nginx</h3><p>配置一个 <a href=/posts/%E7%AC%94%E8%AE%B0/point/nginx/>nginx</a> 反向代理</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=line><span class=cl><span class=k>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kn>listen</span> <span class=mi>80</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>server_name</span> <span class=s>jenkins.kentxxq.com</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>return</span> <span class=mi>301</span> <span class=s>https://</span><span class=nv>$server_name$request_uri</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>access_log</span> <span class=s>/usr/local/nginx/conf/hosts/logs/jenkins.kentxxq.com.log</span> <span class=s>k-json</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kn>listen</span> <span class=mi>443</span> <span class=s>ssl</span> <span class=s>http2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>server_name</span> <span class=s>jenkins.kentxxq.com</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>access_log</span> <span class=s>/usr/local/nginx/conf/hosts/logs/jenkins.kentxxq.com.log</span> <span class=s>k-json</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 普通header头,ip之类的
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kn>include</span> <span class=s>/usr/local/nginx/conf/options/normal.conf</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 证书相关
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kn>include</span> <span class=s>/usr/local/nginx/conf/options/ssl_kentxxq.conf</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kn>location</span> <span class=s>/</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kn>proxy_pass</span> <span class=s>http://172.16.0.58:8080</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=配置-jenkins class=headerLink><a href=#%e9%85%8d%e7%bd%ae-jenkins class=header-mark></a>配置 jenkins</h3><ol><li>查看 <code>/root/.jenkins/secrets/initialAdminPassword</code> 拿到密码</li><li>安装插件，可能会有一些插件报错。这是因为我们的 jenkins 不是最新版本，而我们的插件源是最新的版本，我们晚点处理。继续做下面的步骤</li><li>在 <code>admin管理界面</code> 通常会有 <code>升级jenkins的选项</code>，升级然后重启 jenkins</li><li>再次检查插件是否有问题，有问题的话就更新或重装插件。</li></ol><h2 id=使用 class=headerLink><a href=#%e4%bd%bf%e7%94%a8 class=header-mark></a>使用</h2><h3 id=流水线示例 class=headerLink><a href=#%e6%b5%81%e6%b0%b4%e7%ba%bf%e7%a4%ba%e4%be%8b class=header-mark></a>流水线示例</h3><ol><li>参数化构建过程, 字符参数 <code>branch</code>, 默认值 <code>prod</code></li><li>配置流水线</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-groovy data-lang=groovy><span class=line><span class=cl><span class=n>pipeline</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>agent</span> <span class=n>any</span>
+</span></span><span class=line><span class=cl>    <span class=n>environment</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>PRO_GROUP</span> <span class=o>=</span> <span class=s1>&#39;prod&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=n>PROJECT</span> <span class=o>=</span> <span class=s1>&#39;ooo&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=n>GIT_URL</span> <span class=o>=</span> <span class=s2>&#34;https://git.kentxxq.com/xxx/ooo.git&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>GIT_DIR</span> <span class=o>=</span> <span class=s2>&#34;/opt/git/$PRO_GROUP/$PROJECT&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>HOST</span><span class=o>=</span><span class=s1>&#39;目标IP地址&#39;</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=n>JAVA_DIR</span><span class=o>=</span><span class=s2>&#34;/app/$PROJECT&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>JAVA_NAME</span> <span class=o>=</span> <span class=s1>&#39;ooo.jar&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=n>PROT</span><span class=o>=</span><span class=mi>9077</span>
+</span></span><span class=line><span class=cl>        <span class=n>PKG_DIR</span> <span class=o>=</span> <span class=s2>&#34;$GIT_DIR/ooo/target&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// SCRIPTS_FILE = &#34;$JAVA_DIR/app.sh restart  $JAVA_NAME&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>SCRIPTS_FILE</span> <span class=o>=</span> <span class=s2>&#34;supervisorctl stop ooo ; supervisorctl start ooo&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>stages</span><span class=o>{</span>    
+</span></span><span class=line><span class=cl>        <span class=n>stage</span><span class=o>(</span><span class=s1>&#39; git pull&#39;</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>         <span class=n>steps</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// &#34;*/${branch}&#34; 无法使用sha256发版
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=n>checkout</span><span class=o>([</span><span class=n>$class</span><span class=o>:</span> <span class=s1>&#39;GitSCM&#39;</span><span class=o>,</span> <span class=nl>branches:</span> <span class=o>[[</span><span class=nl>name:</span> <span class=s2>&#34;${env.branch}&#34;</span><span class=o>]],</span>
+</span></span><span class=line><span class=cl>                <span class=nl>doGenerateSubmoduleConfigurations:</span> <span class=kc>false</span><span class=o>,</span> 
+</span></span><span class=line><span class=cl>                <span class=nl>extensions:</span> <span class=o>[[</span><span class=n>$class</span><span class=o>:</span> <span class=s1>&#39;RelativeTargetDirectory&#39;</span><span class=o>,</span> 
+</span></span><span class=line><span class=cl>                <span class=nl>relativeTargetDir:</span> <span class=s2>&#34;$GIT_DIR&#34;</span><span class=o>]],</span>
+</span></span><span class=line><span class=cl>                <span class=nl>submoduleCfg:</span> <span class=o>[],</span> 
+</span></span><span class=line><span class=cl>                <span class=nl>userRemoteConfigs:</span> <span class=o>[[</span><span class=nl>credentialsId:</span> <span class=s1>&#39;gitlab_xiangqiang&#39;</span><span class=o>,</span>
+</span></span><span class=line><span class=cl>                <span class=nl>url:</span> <span class=s2>&#34;$GIT_URL&#34;</span><span class=o>]]])</span>
+</span></span><span class=line><span class=cl>              <span class=o>}</span>
+</span></span><span class=line><span class=cl>          <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=n>stage</span><span class=o>(</span><span class=s1>&#39;mvn package&#39;</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>            <span class=n>steps</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>sh</span> <span class=s2>&#34;cd $GIT_DIR/  &amp;&amp; mvn clean package -Pprod&#34;</span>        
+</span></span><span class=line><span class=cl>                <span class=c1>// sh &#34;cd $GIT_DIR/  &amp;&amp; mvn clean install -U -Dmaven.test.skip=true -Ptest&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>         <span class=n>stage</span><span class=o>(</span><span class=s1>&#39;scp java&#39;</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>              <span class=n>steps</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>                  <span class=n>sh</span> <span class=s2>&#34;ansible $HOST -m synchronize -a &#39;src=$PKG_DIR/$JAVA_NAME dest=$JAVA_DIR&#39; &#34;</span>
+</span></span><span class=line><span class=cl>                <span class=c1>//   sh &#34;ansible $HOST2 -m synchronize -a &#39;src=$PKG_DIR/$JAVA_NAME dest=$JAVA_DIR&#39; &#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span>              <span class=o>}</span>
+</span></span><span class=line><span class=cl>          <span class=o>}</span>
+</span></span><span class=line><span class=cl>          <span class=n>stage</span><span class=o>(</span><span class=s1>&#39;restart java&#39;</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>              <span class=n>steps</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>                  <span class=n>sh</span>  <span class=s2>&#34;ansible $HOST -m shell -a &#39;$SCRIPTS_FILE&#39;&#34;</span>
+</span></span><span class=line><span class=cl>              <span class=o>}</span>
+</span></span><span class=line><span class=cl>          <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=参考资料 class=headerLink><a href=#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99 class=header-mark></a>参考资料</h2><ul><li>所有的内置变量 <a href=https://jenkins.chinnshi.com/env-vars.html/ target=_blank rel="noopener noreferrer">jenkins.chinnshi.com/env-vars.html/</a></li><li><a href=https://wiki.eryajf.net/pages/2280.html#_18-hidden-parameter-plugin target=_blank rel="noopener noreferrer">Jenkins常用插件汇总以及简单介绍 | 二丫讲梵</a></li><li><a href=https://mafeifan.com/DevOps/Jenkins/Jenkins2-%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%973----Groovy%E8%AF%AD%E6%B3%95%E4%BB%8B%E7%BB%8D.html target=_blank rel="noopener noreferrer">mafeifan 的编程技术分享 | mafeifan 的编程技术分享</a></li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2024-02-02</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/jenkins%E6%95%99%E7%A8%8B/ data-title=jenkins教程 data-hashtags=blog><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/jenkins%E6%95%99%E7%A8%8B/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/jenkins%E6%95%99%E7%A8%8B/ data-title=jenkins教程 data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/jenkins%E6%95%99%E7%A8%8B/ data-title=jenkins教程><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/jenkins%E6%95%99%E7%A8%8B/ data-title=jenkins教程><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/jenkins%E6%95%99%E7%A8%8B/ data-title=jenkins教程 data-description><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/jenkins%E6%95%99%E7%A8%8B/ data-title=jenkins教程 data-description><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/jenkins%E6%95%99%E7%A8%8B/ data-title=jenkins教程><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/ipsec-vpn%E6%90%AD%E5%BB%BA/ class=prev rel=prev title=ipsec-vpn搭建><i class="fas fa-angle-left fa-fw"></i>ipsec-vpn搭建</a>
+<a href=/posts/%E6%97%A5%E8%AE%B0/2024-02-07/ class=next rel=next title=2024-02-07>2024-02-07<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2024</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a target=_blank href=https://beian.miit.gov.cn>湘ICP备2021002319号-1</a></span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NLLDC353PJ",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-NLLDC353PJ" async></script></div></body></html>

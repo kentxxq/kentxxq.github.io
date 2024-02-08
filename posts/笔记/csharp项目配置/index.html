@@ -1,0 +1,1127 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>csharp项目配置 - 运维个人技术栈</title><meta name=Description content="[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."><meta property="og:title" content="csharp项目配置"><meta property="og:description" content="[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-07-26T00:00:00+00:00"><meta property="article:modified_time" content="2024-02-06T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="csharp项目配置"><meta name=twitter:description content="[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/><link rel=prev href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/efk/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cicd-actions/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"csharp项目配置","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE\/"},"genre":"posts","keywords":"blog, csharp","wordcount":2380,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE\/","datePublished":"2023-07-26T00:00:00+00:00","dateModified":"2024-02-06T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":"[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class="toc-content always-active" id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#常用命令>常用命令</a><ul><li><a href=#dotnet-new-模板>dotnet-new 模板</a></li><li><a href=#nuget-推包>nuget 推包</a></li><li><a href=#nuget-缓存路径配置>nuget 缓存路径配置</a></li><li><a href=#更新所有-dotnet-tools>更新所有 dotnet-tools</a></li></ul></li><li><a href=#项目配置>项目配置</a><ul><li><a href=#配置项参考>配置项参考</a><ul><li><a href=#发布文件配置>发布文件配置</a></li><li><a href=#项目文件配置>项目文件配置</a></li></ul></li><li><a href=#项目引入-aspnetcore>项目引入 aspnetcore</a></li><li><a href=#执行-msbuild-任务>执行 msbuild 任务</a><ul><li><a href=#官方文档>官方文档</a></li><li><a href=#拷贝文件-copy>拷贝文件 Copy</a></li><li><a href=#下载任务-downloadfile>下载任务 DownloadFile</a></li></ul></li><li><a href=#single-file>single file</a></li></ul></li><li><a href=#运行配置>运行配置</a></li><li><a href=#杂项>杂项</a><ul><li><a href=#gitignore><code>.gitignore</code></a></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">csharp项目配置</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/blog/><i class="far fa-folder fa-fw"></i>blog</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-07-26>2023-07-26</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2024-02-06>2024-02-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2380 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#常用命令>常用命令</a><ul><li><a href=#dotnet-new-模板>dotnet-new 模板</a></li><li><a href=#nuget-推包>nuget 推包</a></li><li><a href=#nuget-缓存路径配置>nuget 缓存路径配置</a></li><li><a href=#更新所有-dotnet-tools>更新所有 dotnet-tools</a></li></ul></li><li><a href=#项目配置>项目配置</a><ul><li><a href=#配置项参考>配置项参考</a><ul><li><a href=#发布文件配置>发布文件配置</a></li><li><a href=#项目文件配置>项目文件配置</a></li></ul></li><li><a href=#项目引入-aspnetcore>项目引入 aspnetcore</a></li><li><a href=#执行-msbuild-任务>执行 msbuild 任务</a><ul><li><a href=#官方文档>官方文档</a></li><li><a href=#拷贝文件-copy>拷贝文件 Copy</a></li><li><a href=#下载任务-downloadfile>下载任务 DownloadFile</a></li></ul></li><li><a href=#single-file>single file</a></li></ul></li><li><a href=#运行配置>运行配置</a></li><li><a href=#杂项>杂项</a><ul><li><a href=#gitignore><code>.gitignore</code></a></li></ul></li></ul></nav></div></div><div class=content id=content><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p><a href=/posts/%E7%AC%94%E8%AE%B0/point/csharp/>csharp</a> 的项目配置文章中，没有任何代码相关内容。</p><h2 id=常用命令 class=headerLink><a href=#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4 class=header-mark></a>常用命令</h2><h3 id=dotnet-new-模板 class=headerLink><a href=#dotnet-new-%e6%a8%a1%e6%9d%bf class=header-mark></a>dotnet-new 模板</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 新建git项目,clone下来后使用。建议用 kentxxq.Kscheduler 标识.产品名</span>
+</span></span><span class=line><span class=cl><span class=c1># 创建一个当前文件夹同名sln文件，可以执行-n kentxxq.Kscheduler</span>
+</span></span><span class=line><span class=cl>dotnet new sln 
+</span></span><span class=line><span class=cl><span class=c1># 创建项目。使用 标识.产品名.模块</span>
+</span></span><span class=line><span class=cl>dotnet new webapi --name kentxxq.Kscheduler.webapi --use-controllers --no-https
+</span></span><span class=line><span class=cl><span class=c1># 添加项目</span>
+</span></span><span class=line><span class=cl>dotnet sln add .<span class=se>\k</span>entxxq.Kscheduler.webapi<span class=se>\k</span>entxxq.Kscheduler.webapi.csproj
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看所有的包</span>
+</span></span><span class=line><span class=cl>dotnet new --list
+</span></span><span class=line><span class=cl><span class=c1># 卸载包</span>
+</span></span><span class=line><span class=cl>dotnet new --uninstall
+</span></span><span class=line><span class=cl><span class=c1># 搜包</span>
+</span></span><span class=line><span class=cl>dotnet new search kentxxq.Templates
+</span></span><span class=line><span class=cl><span class=c1># 安装</span>
+</span></span><span class=line><span class=cl>dotnet new install kentxxq.Templates
+</span></span><span class=line><span class=cl><span class=c1># 使用</span>
+</span></span><span class=line><span class=cl>dotnet new k-webapi --name certmanager 
+</span></span></code></pre></td></tr></table></div></div><h3 id=nuget-推包 class=headerLink><a href=#nuget-%e6%8e%a8%e5%8c%85 class=header-mark></a>nuget 推包</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 先打包成nupkg</span>
+</span></span><span class=line><span class=cl>dotnet nuget push kentxxq.Extensions.1.1.0.nupkg --api-key key
+</span></span></code></pre></td></tr></table></div></div><h3 id=nuget-缓存路径配置 class=headerLink><a href=#nuget-%e7%bc%93%e5%ad%98%e8%b7%af%e5%be%84%e9%85%8d%e7%bd%ae class=header-mark></a>nuget 缓存路径配置</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>setx /M NUGET_PACKAGES D:<span class=se>\&lt;</span>username&gt;<span class=se>\.</span>nuget<span class=se>\p</span>ackages
+</span></span></code></pre></td></tr></table></div></div><h3 id=更新所有-dotnet-tools class=headerLink><a href=#%e6%9b%b4%e6%96%b0%e6%89%80%e6%9c%89-dotnet-tools class=header-mark></a>更新所有 dotnet-tools</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=n>dotnet</span> <span class=n>tool</span> <span class=n>list</span> <span class=n>-g</span> <span class=p>|</span> <span class=nb>ForEach-Object</span> <span class=p>{</span><span class=nv>$index</span> <span class=p>=</span> <span class=mf>0</span><span class=p>}</span> <span class=p>{</span> <span class=nv>$index</span><span class=p>++;</span> <span class=k>if</span><span class=p>(</span><span class=nv>$index</span> <span class=o>-gt</span> <span class=mf>2</span><span class=p>)</span> <span class=p>{</span> <span class=n>dotnet</span> <span class=n>tool</span> <span class=n>update</span> <span class=n>-g</span> <span class=nv>$_</span><span class=p>.</span><span class=py>split</span><span class=p>(</span><span class=s2>&#34; &#34;</span><span class=p>)[</span><span class=mf>0</span><span class=p>]</span> <span class=p>}</span> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=项目配置 class=headerLink><a href=#%e9%a1%b9%e7%9b%ae%e9%85%8d%e7%bd%ae class=header-mark></a>项目配置</h2><p><a href=https://learn.microsoft.com/zh-cn/dotnet/core/project-sdk/overview target=_blank rel="noopener noreferrer">.NET 项目 SDK 概述 | Microsoft Learn</a></p><h3 id=配置项参考 class=headerLink><a href=#%e9%85%8d%e7%bd%ae%e9%a1%b9%e5%8f%82%e8%80%83 class=header-mark></a>配置项参考</h3><h4 id=发布文件配置 class=headerLink><a href=#%e5%8f%91%e5%b8%83%e6%96%87%e4%bb%b6%e9%85%8d%e7%bd%ae class=header-mark></a>发布文件配置</h4><p>发布文件配置 <code>win-x64.pubxml</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>dotnet publish -c Release /p:PublishProfile<span class=o>=</span>Properties<span class=se>\P</span>ublishProfiles<span class=se>\w</span>in-x64.pubxml
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=cp>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span class=line><span class=cl><span class=c>&lt;!--
+</span></span></span><span class=line><span class=cl><span class=c>https://go.microsoft.com/fwlink/?LinkID=208121.
+</span></span></span><span class=line><span class=cl><span class=c>--&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;Project&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;PropertyGroup&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Configuration&gt;</span>Release<span class=nt>&lt;/Configuration&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Platform&gt;</span>Any CPU<span class=nt>&lt;/Platform&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PublishDir&gt;</span>bin\Release\net8.0\win-x64\publish\win-x64\<span class=nt>&lt;/PublishDir&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PublishProtocol&gt;</span>FileSystem<span class=nt>&lt;/PublishProtocol&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;_TargetId&gt;</span>Folder<span class=nt>&lt;/_TargetId&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;TargetFramework&gt;</span>net8.0<span class=nt>&lt;/TargetFramework&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;RuntimeIdentifier&gt;</span>win-x64<span class=nt>&lt;/RuntimeIdentifier&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;SelfContained&gt;</span>true<span class=nt>&lt;/SelfContained&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PublishSingleFile&gt;</span>false<span class=nt>&lt;/PublishSingleFile&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PublishReadyToRun&gt;</span>false<span class=nt>&lt;/PublishReadyToRun&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/PropertyGroup&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/Project&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>已知 aot 的时候 IncludeNativeLibrariesInSingleFile 会失败
+如果没有生效, 可以 -p 手动传参.
+dotnet publish -c Release -r linux-x 64 -p:IncludeNativeLibrariesInSingleFile=true
+-r runtime 可以指定系统和架构，例如 linux-64
+<a href=https://learn.microsoft.com/en-us/dotnet/core/rid-catalog target=_blank rel="noopener noreferrer">完整的支持列表在这里</a></p></blockquote><h4 id=项目文件配置 class=headerLink><a href=#%e9%a1%b9%e7%9b%ae%e6%96%87%e4%bb%b6%e9%85%8d%e7%bd%ae class=header-mark></a>项目文件配置</h4><p>项目文件配置 <code>xxx.csproj</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;Project</span> <span class=na>Sdk=</span><span class=s>&#34;Microsoft.NET.Sdk&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;PropertyGroup&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;TargetFramework&gt;</span>net8.0<span class=nt>&lt;/TargetFramework&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 减少空指针异常 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Nullable&gt;</span>enable<span class=nt>&lt;/Nullable&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 全局using --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;ImplicitUsings&gt;</span>enable<span class=nt>&lt;/ImplicitUsings&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 默认linux容器 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;DockerDefaultTargetOS&gt;</span>Linux<span class=nt>&lt;/DockerDefaultTargetOS&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 锁定包版本 https://learn.microsoft.com/zh-cn/nuget/consume-packages/package-references-in-project-files#locking-dependencies --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;RestorePackagesWithLockFile&gt;</span>true<span class=nt>&lt;/RestorePackagesWithLockFile&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 可以被Version替代,弃用 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 生成包信息 https://learn.microsoft.com/zh-cn/dotnet/core/project-sdk/msbuild-props#generateassemblyinfo --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- &lt;GenerateAssemblyInfo&gt;true&lt;/GenerateAssemblyInfo&gt; --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 版本信息 kentxxq.cli通过这个定义版本号 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- &lt;InformationalVersion&gt;1.0.0&lt;/InformationalVersion&gt; --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Version&gt;</span>1.0.0<span class=nt>&lt;/Version&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 删除已存在的文件 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;DeleteExistingFiles&gt;</span>true<span class=nt>&lt;/DeleteExistingFiles&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 需要机制优化的时候使用 https://learn.microsoft.com/zh-cn/dotnet/core/deploying/trimming/trimming-options?pivots=dotnet-7-0#trimming-framework-library-features --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 删除debug信息,祝你好运... --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;DebuggerSupport&gt;</span>false<span class=nt>&lt;/DebuggerSupport&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 删除eventsource,无法trace追踪了.. --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;EventSourceSupport&gt;</span>false<span class=nt>&lt;/EventSourceSupport&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- http诊断 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;HttpActivityPropagationSupport&gt;</span>false<span class=nt>&lt;/HttpActivityPropagationSupport&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 删除过时的序列化 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;EnableUnsafeBinaryFormatterSerialization&gt;</span>false<span class=nt>&lt;/EnableUnsafeBinaryFormatterSerialization&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 全球化,我总是用一组固定的ui展示 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;InvariantGlobalization&gt;</span>true<span class=nt>&lt;/InvariantGlobalization&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- System.* 的异常信息会被简化变成相当差 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;UseSystemResourceKeys&gt;</span>true<span class=nt>&lt;/UseSystemResourceKeys&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- ilc https://devblogs.microsoft.com/dotnet/performance_improvements_in_net_7/ --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;IlcOptimizationPreference&gt;</span>Size<span class=nt>&lt;/IlcOptimizationPreference&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;IlcGenerateStackTraceData&gt;</span>false<span class=nt>&lt;/IlcGenerateStackTraceData&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 默认会混合,不建议开启下面2个 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- &lt;OptimizationPreference&gt;Size&lt;/OptimizationPreference&gt; --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- &lt;OptimizationPreference&gt;Speed&lt;/OptimizationPreference&gt; --&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- Cli --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;OutputType&gt;</span>Exe<span class=nt>&lt;/OutputType&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 构建出来的名字 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;AssemblyName&gt;</span>ken<span class=nt>&lt;/AssemblyName&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 自包含 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;SelfContained&gt;</span>true<span class=nt>&lt;/SelfContained&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 启用 aot, 和 PublishSingleFile 冲突 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PublishAot&gt;</span>true<span class=nt>&lt;/PublishAot&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 单个文件, 和aot冲突 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PublishSingleFile&gt;</span>true<span class=nt>&lt;/PublishSingleFile&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 缩减大小 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PublishTrimmed&gt;</span>true<span class=nt>&lt;/PublishTrimmed&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 分离pdb调试文件,可执行文件 https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/?tabs=net8plus#native-debug-information --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;StripSymbols&gt;</span>true<span class=nt>&lt;/StripSymbols&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 压缩一下大小 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;EnableCompressionInSingleFile&gt;</span>true<span class=nt>&lt;/EnableCompressionInSingleFile&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 包含二进制库 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;IncludeNativeLibrariesForSelfExtract&gt;</span>true<span class=nt>&lt;/IncludeNativeLibrariesForSelfExtract&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 打包所有文件,然后解压使用 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;IncludeAllContentForSelfExtract&gt;</span>true<span class=nt>&lt;/IncludeAllContentForSelfExtract&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- Web --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 拷贝swagger文件 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;DocumentationFile&gt;</span>bin\Debug\MyApi.xml<span class=nt>&lt;/DocumentationFile&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- Nuget --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 打包常用 https://learn.microsoft.com/zh-cn/nuget/reference/msbuild-targets#pack-target --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Authors&gt;</span>kentxxq<span class=nt>&lt;/Authors&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Company&gt;</span>kentxxq.com<span class=nt>&lt;/Company&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PackageProjectUrl&gt;</span>https://github.com/kentxxq/kentxxq.Cli<span class=nt>&lt;/PackageProjectUrl&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;RepositoryUrl&gt;</span>https://github.com/kentxxq/kentxxq.Cli<span class=nt>&lt;/RepositoryUrl&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PackageLicenseFile&gt;</span>LICENSE.md<span class=nt>&lt;/PackageLicenseFile&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;GeneratePackageOnBuild&gt;</span>false<span class=nt>&lt;/GeneratePackageOnBuild&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 你分发插件库,又依赖了其他项目的时候,把lock文件拷贝过去 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;CopyLocalLockFileAssemblies&gt;</span>true<span class=nt>&lt;/CopyLocalLockFileAssemblies&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 这个库是否兼容aot --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;IsAotCompatible&gt;</span>true<span class=nt>&lt;/IsAotCompatible&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/PropertyGroup&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;ItemGroup&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- 配合 PropertyGroup.PackageLicenseFile 使用 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;None</span> <span class=na>Include=</span><span class=s>&#34;..\..\LICENSE.md&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&lt;Pack&gt;</span>True<span class=nt>&lt;/Pack&gt;</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&lt;PackagePath&gt;&lt;/PackagePath&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;/None&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- docker构建时候忽略文件 --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Content</span> <span class=na>Include=</span><span class=s>&#34;..\.dockerignore&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&lt;Link&gt;</span>.dockerignore<span class=nt>&lt;/Link&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;/Content&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!-- grpc --&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Protobuf</span> <span class=na>Include=</span><span class=s>&#34;Proto\greet.proto&#34;</span> <span class=na>GrpcServices=</span><span class=s>&#34;Server&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/ItemGroup&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;ItemGroup&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PackageReference</span> <span class=na>Include=</span><span class=s>&#34;Grpc.AspNetCore&#34;</span> <span class=na>Version=</span><span class=s>&#34;2.55.0&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PackageReference</span> <span class=na>Include=</span><span class=s>&#34;IP2Region.Net&#34;</span> <span class=na>Version=</span><span class=s>&#34;1.0.10&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PackageReference</span> <span class=na>Include=</span><span class=s>&#34;Serilog.AspNetCore&#34;</span> <span class=na>Version=</span><span class=s>&#34;7.0.0&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PackageReference</span> <span class=na>Include=</span><span class=s>&#34;Serilog.Enrichers.Thread&#34;</span> <span class=na>Version=</span><span class=s>&#34;3.1.0&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;PackageReference</span> <span class=na>Include=</span><span class=s>&#34;Swashbuckle.AspNetCore&#34;</span> <span class=na>Version=</span><span class=s>&#34;6.5.0&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/ItemGroup&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/Project&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=项目引入-aspnetcore class=headerLink><a href=#%e9%a1%b9%e7%9b%ae%e5%bc%95%e5%85%a5-aspnetcore class=header-mark></a>项目引入 aspnetcore</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;Project</span> <span class=na>Sdk=</span><span class=s>&#34;Microsoft.NET.Sdk&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;ItemGroup&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;FrameworkReference</span> <span class=na>Include=</span><span class=s>&#34;Microsoft.AspNetCore.App&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/ItemGroup&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/Project&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=执行-msbuild-任务 class=headerLink><a href=#%e6%89%a7%e8%a1%8c-msbuild-%e4%bb%bb%e5%8a%a1 class=header-mark></a>执行 msbuild 任务</h3><h4 id=官方文档 class=headerLink><a href=#%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3 class=header-mark></a>官方文档</h4><p><a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-task-reference?view=vs-2022" target=_blank rel="noopener noreferrer">MSBuild Task Reference - MSBuild | Microsoft Learn</a></p><h4 id=拷贝文件-copy class=headerLink><a href=#%e6%8b%b7%e8%b4%9d%e6%96%87%e4%bb%b6-copy class=header-mark></a>拷贝文件 Copy</h4><p>构建的时候, 拷贝 xx 文件到 xx 目录下面.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;Project</span> <span class=na>xmlns=</span><span class=s>&#34;http://schemas.microsoft.com/developer/msbuild/2003&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nt>&lt;PropertyGroup&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;ip2regionDB&gt;</span>https://ghproxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb<span class=nt>&lt;/ip2regionDB&gt;</span>  
+</span></span><span class=line><span class=cl><span class=nt>&lt;/PropertyGroup&gt;</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=nt>&lt;Target</span> <span class=na>Name=</span><span class=s>&#34;DownloadContentFiles&#34;</span> <span class=na>BeforeTargets=</span><span class=s>&#34;Build&#34;</span> <span class=na>Condition=</span><span class=s>&#34;!Exists(&#39;$(PublishDir)/ip2region.xdb&#39;)&#34;</span><span class=nt>&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;DownloadFile</span> 
+</span></span><span class=line><span class=cl>        <span class=na>SourceUrl=</span><span class=s>&#34;$(ip2regionDB)&#34;</span>  
+</span></span><span class=line><span class=cl>        <span class=na>DestinationFolder=</span><span class=s>&#34;$(PublishDir)&#34;</span><span class=nt>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;Output</span> <span class=na>TaskParameter=</span><span class=s>&#34;DownloadedFile&#34;</span> <span class=na>ItemName=</span><span class=s>&#34;Content&#34;</span> <span class=nt>/&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/DownloadFile&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/Target&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/Project&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>[!info]
+dotnet publish 的 <code>-o,--output</code> 是映射到 MSBUILD 的 <code>PublishDir</code>,而不是 <code>OutputPath</code></p></blockquote><h4 id=下载任务-downloadfile class=headerLink><a href=#%e4%b8%8b%e8%bd%bd%e4%bb%bb%e5%8a%a1-downloadfile class=header-mark></a>下载任务 DownloadFile</h4><p>在构建之前, 下载文件到本地. <code>ip2region</code> 就用到了.</p><ul><li><code>MSBuildProjectDirectory</code>: 是 csproj 所在的目录</li><li><code>OutputPath</code>: 是构建物输出的目录</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;Project</span> <span class=na>xmlns=</span><span class=s>&#34;http://schemas.microsoft.com/developer/msbuild/2003&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;PropertyGroup&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;ip2regionDB&gt;</span>https://ghproxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb<span class=nt>&lt;/ip2regionDB&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/PropertyGroup&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;Target</span> <span class=na>Name=</span><span class=s>&#34;DownloadContentFiles&#34;</span> <span class=na>BeforeTargets=</span><span class=s>&#34;Build&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;DownloadFile</span>
+</span></span><span class=line><span class=cl>                <span class=na>SourceUrl=</span><span class=s>&#34;$(ip2regionDB)&#34;</span>
+</span></span><span class=line><span class=cl>                <span class=na>DestinationFolder=</span><span class=s>&#34;$(OutputPath)&#34;</span><span class=nt>&gt;</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&lt;Output</span> <span class=na>TaskParameter=</span><span class=s>&#34;DownloadedFile&#34;</span> <span class=na>ItemName=</span><span class=s>&#34;Content&#34;</span> <span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;/DownloadFile&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/Target&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/Project&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=single-file class=headerLink><a href=#single-file class=header-mark></a>single file</h3><ul><li>设计文档 <a href=https://github.com/dotnet/designs/blob/main/accepted/2020/single-file/design.md#optional-settings target=_blank rel="noopener noreferrer">design.md</a></li></ul><h2 id=运行配置 class=headerLink><a href=#%e8%bf%90%e8%a1%8c%e9%85%8d%e7%bd%ae class=header-mark></a>运行配置</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-docker data-lang=docker><span class=line><span class=cl><span class=c># 多gc节省 0-9之间 https://learn.microsoft.com/zh-cn/dotnet/core/runtime-config/garbage-collector#conserve-memory</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=k>ENV</span> <span class=nv>DOTNET_GCConserveMemory</span><span class=o>=</span><span class=m>9</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=杂项 class=headerLink><a href=#%e6%9d%82%e9%a1%b9 class=header-mark></a>杂项</h2><h3 id=gitignore class=headerLink><a href=#gitignore class=header-mark></a><code>.gitignore</code></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span><span class=lnt>292
+</span><span class=lnt>293
+</span><span class=lnt>294
+</span><span class=lnt>295
+</span><span class=lnt>296
+</span><span class=lnt>297
+</span><span class=lnt>298
+</span><span class=lnt>299
+</span><span class=lnt>300
+</span><span class=lnt>301
+</span><span class=lnt>302
+</span><span class=lnt>303
+</span><span class=lnt>304
+</span><span class=lnt>305
+</span><span class=lnt>306
+</span><span class=lnt>307
+</span><span class=lnt>308
+</span><span class=lnt>309
+</span><span class=lnt>310
+</span><span class=lnt>311
+</span><span class=lnt>312
+</span><span class=lnt>313
+</span><span class=lnt>314
+</span><span class=lnt>315
+</span><span class=lnt>316
+</span><span class=lnt>317
+</span><span class=lnt>318
+</span><span class=lnt>319
+</span><span class=lnt>320
+</span><span class=lnt>321
+</span><span class=lnt>322
+</span><span class=lnt>323
+</span><span class=lnt>324
+</span><span class=lnt>325
+</span><span class=lnt>326
+</span><span class=lnt>327
+</span><span class=lnt>328
+</span><span class=lnt>329
+</span><span class=lnt>330
+</span><span class=lnt>331
+</span><span class=lnt>332
+</span><span class=lnt>333
+</span><span class=lnt>334
+</span><span class=lnt>335
+</span><span class=lnt>336
+</span><span class=lnt>337
+</span><span class=lnt>338
+</span><span class=lnt>339
+</span><span class=lnt>340
+</span><span class=lnt>341
+</span><span class=lnt>342
+</span><span class=lnt>343
+</span><span class=lnt>344
+</span><span class=lnt>345
+</span><span class=lnt>346
+</span><span class=lnt>347
+</span><span class=lnt>348
+</span><span class=lnt>349
+</span><span class=lnt>350
+</span><span class=lnt>351
+</span><span class=lnt>352
+</span><span class=lnt>353
+</span><span class=lnt>354
+</span><span class=lnt>355
+</span><span class=lnt>356
+</span><span class=lnt>357
+</span><span class=lnt>358
+</span><span class=lnt>359
+</span><span class=lnt>360
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>#</span> <span class=nx>User</span><span class=o>-</span><span class=nx>specific</span> <span class=nx>files</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>rsuser</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>suo</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>user</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>userosscache</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>sln</span><span class=p>.</span><span class=nx>docstates</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>User</span><span class=o>-</span><span class=nx>specific</span> <span class=nf>files</span> <span class=p>(</span><span class=nx>MonoDevelop</span><span class=o>/</span><span class=nx>Xamarin</span> <span class=nx>Studio</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>userprefs</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Mono</span> <span class=nx>auto</span> <span class=nx>generated</span> <span class=nx>files</span>
+</span></span><span class=line><span class=cl><span class=nx>mono_crash</span><span class=p>.</span><span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Build</span> <span class=nx>results</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Dd</span><span class=p>]</span><span class=nx>ebug</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Dd</span><span class=p>]</span><span class=nx>ebugPublic</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Rr</span><span class=p>]</span><span class=nx>elease</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Rr</span><span class=p>]</span><span class=nx>eleases</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=nx>x64</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=nx>x86</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Ww</span><span class=p>][</span><span class=nx>Ii</span><span class=p>][</span><span class=nx>Nn</span><span class=p>]</span><span class=mi>32</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Aa</span><span class=p>][</span><span class=nx>Rr</span><span class=p>][</span><span class=nx>Mm</span><span class=p>]</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Aa</span><span class=p>][</span><span class=nx>Rr</span><span class=p>][</span><span class=nx>Mm</span><span class=p>]</span><span class=mi>64</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=nx>bld</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Bb</span><span class=p>]</span><span class=nx>in</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Oo</span><span class=p>]</span><span class=nx>bj</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Oo</span><span class=p>]</span><span class=nx>ut</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Ll</span><span class=p>]</span><span class=nx>og</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Ll</span><span class=p>]</span><span class=nx>ogs</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Visual</span> <span class=nx>Studio</span> <span class=mi>2015</span><span class=o>/</span><span class=mi>2017</span> <span class=nx>cache</span><span class=o>/</span><span class=nx>options</span> <span class=nx>directory</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>vs</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Uncomment</span> <span class=k>if</span> <span class=nx>you</span> <span class=nx>have</span> <span class=nx>tasks</span> <span class=nx>that</span> <span class=nx>create</span> <span class=nx>the</span> <span class=nx>project</span><span class=err>&#39;</span><span class=nx>s</span> <span class=nx>static</span> <span class=nx>files</span> <span class=nx>in</span> <span class=nx>wwwroot</span>
+</span></span><span class=line><span class=cl><span class=err>#</span><span class=nx>wwwroot</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Visual</span> <span class=nx>Studio</span> <span class=mi>2017</span> <span class=nx>auto</span> <span class=nx>generated</span> <span class=nx>files</span>
+</span></span><span class=line><span class=cl><span class=nx>Generated</span><span class=err>\</span> <span class=nx>Files</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>MSTest</span> <span class=nx>test</span> <span class=nx>Results</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Tt</span><span class=p>]</span><span class=nx>est</span><span class=p>[</span><span class=nx>Rr</span><span class=p>]</span><span class=nx>esult</span><span class=o>*/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Bb</span><span class=p>]</span><span class=nx>uild</span><span class=p>[</span><span class=nx>Ll</span><span class=p>]</span><span class=nx>og</span><span class=p>.</span><span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>NUnit</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>VisualState</span><span class=p>.</span><span class=nx>xml</span>
+</span></span><span class=line><span class=cl><span class=nx>TestResult</span><span class=p>.</span><span class=nx>xml</span>
+</span></span><span class=line><span class=cl><span class=nx>nunit</span><span class=o>-*</span><span class=p>.</span><span class=nx>xml</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Build</span> <span class=nx>Results</span> <span class=nx>of</span> <span class=nx>an</span> <span class=nx>ATL</span> <span class=nx>Project</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Dd</span><span class=p>]</span><span class=nx>ebugPS</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Rr</span><span class=p>]</span><span class=nx>eleasePS</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=nx>dlldata</span><span class=p>.</span><span class=nx>c</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Benchmark</span> <span class=nx>Results</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkDotNet</span><span class=p>.</span><span class=nx>Artifacts</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=p>.</span><span class=nx>NET</span> <span class=nx>Core</span>
+</span></span><span class=line><span class=cl><span class=nx>project</span><span class=p>.</span><span class=nx>lock</span><span class=p>.</span><span class=nx>json</span>
+</span></span><span class=line><span class=cl><span class=nx>project</span><span class=p>.</span><span class=nx>fragment</span><span class=p>.</span><span class=nx>lock</span><span class=p>.</span><span class=nx>json</span>
+</span></span><span class=line><span class=cl><span class=nx>artifacts</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>ASP</span><span class=p>.</span><span class=nx>NET</span> <span class=nx>Scaffolding</span>
+</span></span><span class=line><span class=cl><span class=nx>ScaffoldingReadMe</span><span class=p>.</span><span class=nx>txt</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>StyleCop</span>
+</span></span><span class=line><span class=cl><span class=nx>StyleCopReport</span><span class=p>.</span><span class=nx>xml</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Files</span> <span class=nx>built</span> <span class=nx>by</span> <span class=nx>Visual</span> <span class=nx>Studio</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=nx>_i</span><span class=p>.</span><span class=nx>c</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=nx>_p</span><span class=p>.</span><span class=nx>c</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=nx>_h</span><span class=p>.</span><span class=nx>h</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>ilk</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>meta</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>obj</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>iobj</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>pch</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>pdb</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>ipdb</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>pgc</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>pgd</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>rsp</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>sbr</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>tlb</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>tli</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>tlh</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>tmp</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>tmp_proj</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=nx>_wpftmp</span><span class=p>.</span><span class=nx>csproj</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>log</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>vspscc</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>vssscc</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>builds</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>pidb</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>svclog</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>scc</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Chutzpah</span> <span class=nx>Test</span> <span class=nx>files</span>
+</span></span><span class=line><span class=cl><span class=nx>_Chutzpah</span><span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Visual</span> <span class=nx>C</span><span class=o>++</span> <span class=nx>cache</span> <span class=nx>files</span>
+</span></span><span class=line><span class=cl><span class=nx>ipch</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>aps</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>ncb</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>opendb</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>opensdf</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>sdf</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>cachefile</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>VC</span><span class=p>.</span><span class=nx>db</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>VC</span><span class=p>.</span><span class=nx>VC</span><span class=p>.</span><span class=nx>opendb</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Visual</span> <span class=nx>Studio</span> <span class=nx>profiler</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>psess</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>vsp</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>vspx</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>sap</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Visual</span> <span class=nx>Studio</span> <span class=nx>Trace</span> <span class=nx>Files</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>e2e</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>TFS</span> <span class=mi>2012</span> <span class=nx>Local</span> <span class=nx>Workspace</span>
+</span></span><span class=line><span class=cl><span class=err>$</span><span class=nx>tf</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Guidance</span> <span class=nx>Automation</span> <span class=nx>Toolkit</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>gpState</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>ReSharper</span> <span class=nx>is</span> <span class=nx>a</span> <span class=p>.</span><span class=nx>NET</span> <span class=nx>coding</span> <span class=nx>add</span><span class=o>-</span><span class=nx>in</span>
+</span></span><span class=line><span class=cl><span class=nx>_ReSharper</span><span class=o>*/</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.[</span><span class=nx>Rr</span><span class=p>]</span><span class=nx>e</span><span class=p>[</span><span class=nx>Ss</span><span class=p>]</span><span class=nx>harper</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>DotSettings</span><span class=p>.</span><span class=nx>user</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>TeamCity</span> <span class=nx>is</span> <span class=nx>a</span> <span class=nx>build</span> <span class=nx>add</span><span class=o>-</span><span class=nx>in</span>
+</span></span><span class=line><span class=cl><span class=nx>_TeamCity</span><span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>DotCover</span> <span class=nx>is</span> <span class=nx>a</span> <span class=nx>Code</span> <span class=nx>Coverage</span> <span class=nx>Tool</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>dotCover</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>AxoCover</span> <span class=nx>is</span> <span class=nx>a</span> <span class=nx>Code</span> <span class=nx>Coverage</span> <span class=nx>Tool</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>axoCover</span><span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>!.axoCover/settings.json
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm># Coverlet is a free, cross platform Code Coverage Tool
+</span></span></span><span class=line><span class=cl><span class=cm>coverage*.json
+</span></span></span><span class=line><span class=cl><span class=cm>coverage*.xml
+</span></span></span><span class=line><span class=cl><span class=cm>coverage*.info
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm># Visual Studio code coverage results
+</span></span></span><span class=line><span class=cl><span class=cm>*.coverage
+</span></span></span><span class=line><span class=cl><span class=cm>*.coveragexml
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm># NCrunch
+</span></span></span><span class=line><span class=cl><span class=cm>_NCrunch_*
+</span></span></span><span class=line><span class=cl><span class=cm>.*crunch*.local.xml
+</span></span></span><span class=line><span class=cl><span class=cm>nCrunchTemp_*
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm># MightyMoose
+</span></span></span><span class=line><span class=cl><span class=cm>*.mm.*
+</span></span></span><span class=line><span class=cl><span class=cm>AutoTest.Net/
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm># Web workbench (sass)
+</span></span></span><span class=line><span class=cl><span class=cm>.sass-cache/
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm># Installshield output folder
+</span></span></span><span class=line><span class=cl><span class=cm>[Ee]xpress/
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm># DocProject is a documentation generator add-in
+</span></span></span><span class=line><span class=cl><span class=cm>DocProject/buildhelp/
+</span></span></span><span class=line><span class=cl><span class=cm>DocProject/Help/*.HxT
+</span></span></span><span class=line><span class=cl><span class=cm>DocProject/Help/*.HxC
+</span></span></span><span class=line><span class=cl><span class=cm>DocProject/Help/*.hhc
+</span></span></span><span class=line><span class=cl><span class=cm>DocProject/Help/*.hhk
+</span></span></span><span class=line><span class=cl><span class=cm>DocProject/Help/*.hhp
+</span></span></span><span class=line><span class=cl><span class=cm>DocProject/Help/Html2
+</span></span></span><span class=line><span class=cl><span class=cm>DocProject/Help/html
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm># Click-Once directory
+</span></span></span><span class=line><span class=cl><span class=cm>publish/
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm># Publish Web Output
+</span></span></span><span class=line><span class=cl><span class=cm>*.[Pp]ublish.xml
+</span></span></span><span class=line><span class=cl><span class=cm>*.azurePubxml
+</span></span></span><span class=line><span class=cl><span class=cm># Note: Comment the next line if you want to checkin your web deploy settings,
+</span></span></span><span class=line><span class=cl><span class=cm># but database connection strings (with potential passwords) will be unencrypted
+</span></span></span><span class=line><span class=cl><span class=cm>*.pubxml
+</span></span></span><span class=line><span class=cl><span class=cm>*.publishproj
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm># Microsoft Azure Web App publish settings. Comment the next line if you want to
+</span></span></span><span class=line><span class=cl><span class=cm># checkin your Azure Web App publish settings, but sensitive information contained
+</span></span></span><span class=line><span class=cl><span class=cm># in these scripts will be unencrypted
+</span></span></span><span class=line><span class=cl><span class=cm>PublishScripts/
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm># NuGet Packages
+</span></span></span><span class=line><span class=cl><span class=cm>*.nupkg
+</span></span></span><span class=line><span class=cl><span class=cm># NuGet Symbol Packages
+</span></span></span><span class=line><span class=cl><span class=cm>*.snupkg
+</span></span></span><span class=line><span class=cl><span class=cm># The packages folder can be ignored because of Package Restore
+</span></span></span><span class=line><span class=cl><span class=cm>**/</span><span class=p>[</span><span class=nx>Pp</span><span class=p>]</span><span class=nx>ackages</span><span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm># except build/, which is used as an MSBuild target.
+</span></span></span><span class=line><span class=cl><span class=cm>!**/</span><span class=p>[</span><span class=nx>Pp</span><span class=p>]</span><span class=nx>ackages</span><span class=o>/</span><span class=nx>build</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Uncomment</span> <span class=k>if</span> <span class=nx>necessary</span> <span class=nx>however</span> <span class=nx>generally</span> <span class=nx>it</span> <span class=nx>will</span> <span class=nx>be</span> <span class=nx>regenerated</span> <span class=nx>when</span> <span class=nx>needed</span>
+</span></span><span class=line><span class=cl><span class=err>#</span><span class=p>!</span><span class=o>**/</span><span class=p>[</span><span class=nx>Pp</span><span class=p>]</span><span class=nx>ackages</span><span class=o>/</span><span class=nx>repositories</span><span class=p>.</span><span class=nx>config</span>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>NuGet</span> <span class=nx>v3</span><span class=err>&#39;</span><span class=nx>s</span> <span class=nx>project</span><span class=p>.</span><span class=nx>json</span> <span class=nx>files</span> <span class=nx>produces</span> <span class=nx>more</span> <span class=nx>ignorable</span> <span class=nx>files</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>nuget</span><span class=p>.</span><span class=nx>props</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>nuget</span><span class=p>.</span><span class=nx>targets</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Microsoft</span> <span class=nx>Azure</span> <span class=nx>Build</span> <span class=nx>Output</span>
+</span></span><span class=line><span class=cl><span class=nx>csx</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>build</span><span class=p>.</span><span class=nx>csdef</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Microsoft</span> <span class=nx>Azure</span> <span class=nx>Emulator</span>
+</span></span><span class=line><span class=cl><span class=nx>ecf</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=nx>rcf</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Windows</span> <span class=nx>Store</span> <span class=nx>app</span> <span class=kn>package</span> <span class=nx>directories</span> <span class=nx>and</span> <span class=nx>files</span>
+</span></span><span class=line><span class=cl><span class=nx>AppPackages</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=nx>BundleArtifacts</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=nx>Package</span><span class=p>.</span><span class=nx>StoreAssociation</span><span class=p>.</span><span class=nx>xml</span>
+</span></span><span class=line><span class=cl><span class=nx>_pkginfo</span><span class=p>.</span><span class=nx>txt</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>appx</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>appxbundle</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>appxupload</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Visual</span> <span class=nx>Studio</span> <span class=nx>cache</span> <span class=nx>files</span>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>files</span> <span class=nx>ending</span> <span class=nx>in</span> <span class=p>.</span><span class=nx>cache</span> <span class=nx>can</span> <span class=nx>be</span> <span class=nx>ignored</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.[</span><span class=nx>Cc</span><span class=p>]</span><span class=nx>ache</span>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>but</span> <span class=nx>keep</span> <span class=nx>track</span> <span class=nx>of</span> <span class=nx>directories</span> <span class=nx>ending</span> <span class=nx>in</span> <span class=p>.</span><span class=nx>cache</span>
+</span></span><span class=line><span class=cl><span class=p>!</span><span class=err>?</span><span class=o>*</span><span class=p>.[</span><span class=nx>Cc</span><span class=p>]</span><span class=nx>ache</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Others</span>
+</span></span><span class=line><span class=cl><span class=nx>ClientBin</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=err>~$</span><span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=err>~</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>dbmdl</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>dbproj</span><span class=p>.</span><span class=nx>schemaview</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>jfm</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>pfx</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>publishsettings</span>
+</span></span><span class=line><span class=cl><span class=nx>orleans</span><span class=p>.</span><span class=nx>codegen</span><span class=p>.</span><span class=nx>cs</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Including</span> <span class=nx>strong</span> <span class=nx>name</span> <span class=nx>files</span> <span class=nx>can</span> <span class=nx>present</span> <span class=nx>a</span> <span class=nx>security</span> <span class=nx>risk</span>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=p>(</span><span class=nx>https</span><span class=p>:</span><span class=c1>//github.com/github/gitignore/pull/2483#issue-259490424)
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=err>#</span><span class=o>*</span><span class=p>.</span><span class=nx>snk</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Since</span> <span class=nx>there</span> <span class=nx>are</span> <span class=nx>multiple</span> <span class=nx>workflows</span><span class=p>,</span> <span class=nx>uncomment</span> <span class=nx>next</span> <span class=nx>line</span> <span class=nx>to</span> <span class=nx>ignore</span> <span class=nx>bower_components</span>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=p>(</span><span class=nx>https</span><span class=p>:</span><span class=c1>//github.com/github/gitignore/pull/1529#issuecomment-104372622)
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=err>#</span><span class=nx>bower_components</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>RIA</span><span class=o>/</span><span class=nx>Silverlight</span> <span class=nx>projects</span>
+</span></span><span class=line><span class=cl><span class=nx>Generated_Code</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Backup</span> <span class=o>&amp;</span> <span class=nx>report</span> <span class=nx>files</span> <span class=nx>from</span> <span class=nx>converting</span> <span class=nx>an</span> <span class=nx>old</span> <span class=nx>project</span> <span class=nx>file</span>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>to</span> <span class=nx>a</span> <span class=nx>newer</span> <span class=nx>Visual</span> <span class=nx>Studio</span> <span class=nx>version</span><span class=p>.</span> <span class=nx>Backup</span> <span class=nx>files</span> <span class=nx>are</span> <span class=nx>not</span> <span class=nx>needed</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>because</span> <span class=nx>we</span> <span class=nx>have</span> <span class=nx>git</span> <span class=p>;</span><span class=o>-</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>_UpgradeReport_Files</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=nx>Backup</span><span class=o>*/</span>
+</span></span><span class=line><span class=cl><span class=nx>UpgradeLog</span><span class=o>*</span><span class=p>.</span><span class=nx>XML</span>
+</span></span><span class=line><span class=cl><span class=nx>UpgradeLog</span><span class=o>*</span><span class=p>.</span><span class=nx>htm</span>
+</span></span><span class=line><span class=cl><span class=nx>ServiceFabricBackup</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>rptproj</span><span class=p>.</span><span class=nx>bak</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>SQL</span> <span class=nx>Server</span> <span class=nx>files</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>mdf</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>ldf</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>ndf</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Business</span> <span class=nx>Intelligence</span> <span class=nx>projects</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>rdl</span><span class=p>.</span><span class=nx>data</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>bim</span><span class=p>.</span><span class=nx>layout</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>bim_</span><span class=o>*</span><span class=p>.</span><span class=nx>settings</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>rptproj</span><span class=p>.</span><span class=nx>rsuser</span>
+</span></span><span class=line><span class=cl><span class=o>*-</span> <span class=p>[</span><span class=nx>Bb</span><span class=p>]</span><span class=nx>ackup</span><span class=p>.</span><span class=nx>rdl</span>
+</span></span><span class=line><span class=cl><span class=o>*-</span> <span class=p>[</span><span class=nx>Bb</span><span class=p>]</span><span class=nf>ackup</span> <span class=p>([</span><span class=mi>0</span><span class=o>-</span><span class=mi>9</span><span class=p>]).</span><span class=nx>rdl</span>
+</span></span><span class=line><span class=cl><span class=o>*-</span> <span class=p>[</span><span class=nx>Bb</span><span class=p>]</span><span class=nf>ackup</span> <span class=p>([</span><span class=mi>0</span><span class=o>-</span><span class=mi>9</span><span class=p>][</span><span class=mi>0</span><span class=o>-</span><span class=mi>9</span><span class=p>]).</span><span class=nx>rdl</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Microsoft</span> <span class=nx>Fakes</span>
+</span></span><span class=line><span class=cl><span class=nx>FakesAssemblies</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>GhostDoc</span> <span class=nx>plugin</span> <span class=nx>setting</span> <span class=nx>file</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>GhostDoc</span><span class=p>.</span><span class=nx>xml</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Node</span><span class=p>.</span><span class=nx>js</span> <span class=nx>Tools</span> <span class=k>for</span> <span class=nx>Visual</span> <span class=nx>Studio</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>ntvs_analysis</span><span class=p>.</span><span class=nx>dat</span>
+</span></span><span class=line><span class=cl><span class=nx>node_modules</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Visual</span> <span class=nx>Studio</span> <span class=mi>6</span> <span class=nx>build</span> <span class=nx>log</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>plg</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Visual</span> <span class=nx>Studio</span> <span class=mi>6</span> <span class=nx>workspace</span> <span class=nx>options</span> <span class=nx>file</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>opt</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Visual</span> <span class=nx>Studio</span> <span class=mi>6</span> <span class=nx>auto</span><span class=o>-</span><span class=nx>generated</span> <span class=nx>workspace</span> <span class=nf>file</span> <span class=p>(</span><span class=nx>contains</span> <span class=nx>which</span> <span class=nx>files</span> <span class=nx>were</span> <span class=nx>open</span> <span class=nx>etc</span><span class=p>.)</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>vbw</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Visual</span> <span class=nx>Studio</span> <span class=nx>LightSwitch</span> <span class=nx>build</span> <span class=nx>output</span>
+</span></span><span class=line><span class=cl><span class=o>**</span><span class=cm>/*.HTMLClient/GeneratedArtifacts
+</span></span></span><span class=line><span class=cl><span class=cm>**/</span><span class=o>*</span><span class=p>.</span><span class=nx>DesktopClient</span><span class=o>/</span><span class=nx>GeneratedArtifacts</span>
+</span></span><span class=line><span class=cl><span class=o>**</span><span class=cm>/*.DesktopClient/ModelManifest.xml
+</span></span></span><span class=line><span class=cl><span class=cm>**/</span><span class=o>*</span><span class=p>.</span><span class=nx>Server</span><span class=o>/</span><span class=nx>GeneratedArtifacts</span>
+</span></span><span class=line><span class=cl><span class=o>**/*</span><span class=p>.</span><span class=nx>Server</span><span class=o>/</span><span class=nx>ModelManifest</span><span class=p>.</span><span class=nx>xml</span>
+</span></span><span class=line><span class=cl><span class=nx>_Pvt_Extensions</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Paket</span> <span class=nx>dependency</span> <span class=nx>manager</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>paket</span><span class=o>/</span><span class=nx>paket</span><span class=p>.</span><span class=nx>exe</span>
+</span></span><span class=line><span class=cl><span class=nx>paket</span><span class=o>-</span><span class=nx>files</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>FAKE</span> <span class=o>-</span> <span class=nx>F</span><span class=err>#</span> <span class=nx>Make</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>fake</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>CodeRush</span> <span class=nx>personal</span> <span class=nx>settings</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>cr</span><span class=o>/</span><span class=nx>personal</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Python</span> <span class=nx>Tools</span> <span class=k>for</span> <span class=nx>Visual</span> <span class=nf>Studio</span> <span class=p>(</span><span class=nx>PTVS</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>__pycache__</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>pyc</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Cake</span> <span class=o>-</span> <span class=nx>Uncomment</span> <span class=k>if</span> <span class=nx>you</span> <span class=nx>are</span> <span class=nx>using</span> <span class=nx>it</span>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>tools</span><span class=o>/**</span>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=p>!</span><span class=nx>tools</span><span class=o>/</span><span class=nx>packages</span><span class=p>.</span><span class=nx>config</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Tabs</span> <span class=nx>Studio</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>tss</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Telerik</span><span class=err>&#39;</span><span class=nx>s</span> <span class=nx>JustMock</span> <span class=nx>configuration</span> <span class=nx>file</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>jmconfig</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>BizTalk</span> <span class=nx>build</span> <span class=nx>output</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>btp</span><span class=p>.</span><span class=nx>cs</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>btm</span><span class=p>.</span><span class=nx>cs</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>odx</span><span class=p>.</span><span class=nx>cs</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>xsd</span><span class=p>.</span><span class=nx>cs</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>OpenCover</span> <span class=nx>UI</span> <span class=nx>analysis</span> <span class=nx>results</span>
+</span></span><span class=line><span class=cl><span class=nx>OpenCover</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Azure</span> <span class=nx>Stream</span> <span class=nx>Analytics</span> <span class=nx>local</span> <span class=nx>run</span> <span class=nx>output</span>
+</span></span><span class=line><span class=cl><span class=nx>ASALocalRun</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>MSBuild</span> <span class=nx>Binary</span> <span class=nx>and</span> <span class=nx>Structured</span> <span class=nx>Log</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>binlog</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>NVidia</span> <span class=nx>Nsight</span> <span class=nx>GPU</span> <span class=nx>debugger</span> <span class=nx>configuration</span> <span class=nx>file</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>.</span><span class=nx>nvuser</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nf>MFractors</span> <span class=p>(</span><span class=nx>Xamarin</span> <span class=nx>productivity</span> <span class=nx>tool</span><span class=p>)</span> <span class=nx>working</span> <span class=nx>folder</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>mfractor</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Local</span> <span class=nx>History</span> <span class=k>for</span> <span class=nx>Visual</span> <span class=nx>Studio</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>localhistory</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>BeatPulse</span> <span class=nx>healthcheck</span> <span class=nx>temp</span> <span class=nx>database</span>
+</span></span><span class=line><span class=cl><span class=nx>healthchecksdb</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Backup</span> <span class=nx>folder</span> <span class=k>for</span> <span class=nx>Package</span> <span class=nx>Reference</span> <span class=nx>Convert</span> <span class=nx>tool</span> <span class=nx>in</span> <span class=nx>Visual</span> <span class=nx>Studio</span> <span class=mi>2017</span>
+</span></span><span class=line><span class=cl><span class=nx>MigrationBackup</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nf>Ionide</span> <span class=p>(</span><span class=nx>cross</span> <span class=nx>platform</span> <span class=nx>F</span><span class=err>#</span> <span class=nx>VS</span> <span class=nx>Code</span> <span class=nx>tools</span><span class=p>)</span> <span class=nx>working</span> <span class=nx>folder</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>ionide</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>Fody</span> <span class=o>-</span> <span class=nx>auto</span><span class=o>-</span><span class=nx>generated</span> <span class=nx>XML</span> <span class=nx>schema</span>
+</span></span><span class=line><span class=cl><span class=nx>FodyWeavers</span><span class=p>.</span><span class=nx>xsd</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>idea</span><span class=o>/</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2024-02-06</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/ data-title=csharp项目配置 data-hashtags=blog,csharp><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/ data-title=csharp项目配置 data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/ data-title=csharp项目配置><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/ data-title=csharp项目配置><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/ data-title=csharp项目配置 data-description="[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/ data-title=csharp项目配置 data-description="[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/csharp%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/ data-title=csharp项目配置><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a>,&nbsp;<a href=/tags/csharp/>csharp</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/point/efk/ class=prev rel=prev title=EFK><i class="fas fa-angle-left fa-fw"></i>EFK</a>
+<a href=/posts/%E7%AC%94%E8%AE%B0/cicd-actions/ class=next rel=next title=CICD-Actions>CICD-Actions<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2024</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a target=_blank href=https://beian.miit.gov.cn>湘ICP备2021002319号-1</a></span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NLLDC353PJ",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-NLLDC353PJ" async></script></div></body></html>
