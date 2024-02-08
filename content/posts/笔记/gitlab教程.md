@@ -4,7 +4,7 @@ tags:
   - blog
   - gitlab
 date: 2023-08-15
-lastmod: 2024-01-17
+lastmod: 2024-02-08
 categories:
   - blog
 description: "这里记录 [[笔记/point/gitlab|gitlab]] 的安装, 配置."
@@ -195,7 +195,7 @@ docker restart gitlab
 - 多机器共享一个 nas, 缓存加速
 - 放置 Maven 或 nodejs 等仓库配置文件
 - `ossutil64` 帮助拉取 OSS 上的隐私文件 `wget -q http://gosspublic.alicdn.com/ossutil/1.7.9/ossutil64 /opt/ossutil64`
-- 安装 [[笔记/point/docker|docker]],并配置 [[笔记/docker教程#配置参数|镜像源]]
+- 安装 [[笔记/point/docker|docker]],并配置 [[笔记/docker镜像源|docker镜像源]]
 - 安装 `helm`
 
     ```bash

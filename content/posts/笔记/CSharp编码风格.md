@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-09-16
-lastmod: 2023-09-27
+lastmod: 2024-02-05
 categories:
   - blog
 description: "csharp 的编码配置 .editorconfig 文件."
@@ -33,6 +33,8 @@ description: "csharp 的编码配置 .editorconfig 文件."
 - 编译器只能理解 `dotnet_diagnostic.<rule-ID>.severity = <severity-level>`
 
 ## 配置文件
+
+项目根路径创建 `.editorconfig` 文件.
 
 ```ini
 # only record change

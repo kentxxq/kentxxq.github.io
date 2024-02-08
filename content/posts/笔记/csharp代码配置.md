@@ -1,10 +1,10 @@
 ---
-title: csharp代码配置与命令
+title: csharp代码配置
 tags:
   - blog
   - csharp
 date: 2023-08-15
-lastmod: 2023-11-22
+lastmod: 2024-02-05
 categories:
   - blog
 description: "记录 [[笔记/point/csharp|csharp]] 的代码配置."
@@ -12,7 +12,7 @@ description: "记录 [[笔记/point/csharp|csharp]] 的代码配置."
 
 ## 简介
 
-记录 [[笔记/point/csharp|csharp]] 的代码配置.
+记录 [[笔记/point/csharp|csharp]] 的代码配置仅在开发过程中会用到。
 
 ## 配置
 
@@ -48,53 +48,10 @@ options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")); }
 
 ## 命令
 
-### dotnet-publish 命令
-
-```shell
-dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\win-x64.pubxml
-```
-
-> -r runtime 可以指定系统和架构，例如 linux-64
-> [完整的支持列表在这里](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog)
-
-### nuget 缓存路径配置
-
-```shell
-setx /M NUGET_PACKAGES D:\<username>\.nuget\packages
-```
-
-### nuget 推包
-
-```shell
-# 先打包成nupkg
-dotnet nuget push kentxxq.Extensions.1.1.0.nupkg --api-key key
-```
-
-### dotnet-new 模板
-
-```shell
-# 查看所有的包
-dotnet new --list
-# 卸载包
-dotnet new --uninstall
-# 搜包
-dotnet new search kentxxq.Templates
-# 安装
-dotnet new install kentxxq.Templates
-# 使用
-dotnet new k-webapi --name certmanager 
-```
-
 ### 生成 user-jwts
 
 ```shell
 dotnet user-jwts create  --role admin --role superadmin --audience ken(一般是url地址)  --claim is_allow=true(自定义claim)
-```
-
-### 更新所有 dotnet-tools
-
-```powershell
-dotnet tool list -g | ForEach-Object {$index = 0} { $index++; if($index -gt 2) { dotnet tool update -g $_.split(" ")[0] } }
 ```
 
 ### 生成 model

@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-08
-lastmod: 2023-12-16
+lastmod: 2024-02-05
 categories:
   - blog
 description: 
@@ -23,6 +23,8 @@ description:
 - Limit 配置
 
 ## 虚拟机初始化
+
+> [快速配置LinuxMirrors](https://linuxmirrors.cn/use/)，依赖 curl
 
 安装配置 [清华源](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/) `https://mirrors.tuna.tsinghua.edu.cn/ubuntu/`
 
@@ -43,7 +45,7 @@ systemctl restart ssh
 
 ufw disable
 
-apt install selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass -y -y
+apt install selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass -y
 
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg

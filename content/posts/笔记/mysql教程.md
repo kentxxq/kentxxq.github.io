@@ -5,7 +5,7 @@ tags:
   - mysql
   - docker
 date: 1993-07-06
-lastmod: 2024-01-11
+lastmod: 2024-02-06
 categories:
   - blog
 description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置. 所以记录一下配置和操作."
@@ -111,9 +111,70 @@ show slave status\G
 
 ## 操作
 
-### sql 命令
+### 处理锁
 
-```shell
+1. 查看是否有锁等待
+
+    ```sql
+    # state是running说明持有锁
+    select 
+    trx_id 事务id,
+    trx_state 事务状态,
+    trx_started 事务开始时间,
+    trx_tables_locked 锁表数量,
+    trx_rows_locked 锁行数量
+    from information_schema.innodb_trx;
+    ```
+
+2. 查看锁的详细信息
+
+    ```sql
+    # 拿到进程id
+    select 
+    wait_started 开始等待的时间,
+    wait_age 等待时长,
+    wait_age_secs 等待秒数,
+    locked_table 锁住的表,
+    blocking_lock_id 事务id,
+    blocking_pid 进程id,
+    sql_kill_blocking_connection 解决办法
+    from sys.innodb_lock_waits
+    where blocking_lock_id = '事务id';
+
+    # 你可以通过进程id，查询线程id
+    select 
+    thread_id 线程id,
+    processlist_id 进程id
+    from performance_schema.threads 
+    where processlist_id=32;
+
+    # 然后找到会话sql内容
+    select thread_id,sql_text 
+    from performance_schema.events_statements_history 
+    where thread_id=线程id
+
+    select * from sys.innodb_lock_waits;
+    ```
+
+3. 杀掉连接
+
+    ```sql
+    # 上一步的解决办法一般会是告诉你杀掉会话
+    kill 32
+    ```
+
+可以设置锁超时时间，自动杀掉超时会话
+
+```sql
+# 会话级别的锁超时，当前连接生效
+set innodb_lock_wait_timeout=50;
+# 全局级别的锁超时，对新连接生效
+set global innodb_lock_wait_timeout=50;
+```
+
+### 用户/授权/密码
+
+```sql
 # 创建用户
 CREATE USER 'ttt'@'%' IDENTIFIED BY '123456';
 grant all privileges on  *.* to 'ttt'@'%';
@@ -124,7 +185,6 @@ GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX,TRIGGER,CREATE VIEW,SH
 # 改密码
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
 FLUSH PRIVILEGES;
-
 ```
 
 ### 查看 binlog

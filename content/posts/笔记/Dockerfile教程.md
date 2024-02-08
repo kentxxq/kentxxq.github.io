@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-09-05
-lastmod: 2024-01-18
+lastmod: 2024-02-05
 categories:
   - blog
 description: 
@@ -45,6 +45,33 @@ description:
 - `copy` 在 multistage 时，拷贝之前的文件
 
 ## 示例
+
+### 工具 dockerfile
+
+这个 dockerfile 是为了帮助调试，会持续维护。
+
+采用最新的 [[笔记/point/ubuntu|ubuntu]] LTS 版本
+
+```dockerfile
+# jammy lts
+FROM ubuntu:22.04
+
+# 避免对话式弹窗
+ENV DEBIAN_FRONTEND=noninteractive
+# 进行时区基本信息的设置
+ENV TZ Asia/Shanghai
+
+# 软件源和基础配置
+RUN mv /etc/apt/sources.list sources.list.bak && \
+    touch /etc/apt/sources.list && \
+    echo "deb http://mirrors.ivolces.com/ubuntu/ jammy main restricted universe multiverse" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.ivolces.com/ubuntu/ jammy-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.ivolces.com/ubuntu/ jammy-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.ivolces.com/ubuntu/ jammy-security main restricted universe multiverse" >> /etc/apt/sources.list && \
+    apt update -y && \
+    apt install lftp apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass -y && \
+    ls
+```
 
 ### Dockerfile-java 示例
 
@@ -272,4 +299,36 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/re
 
 COPY dist/build/h5 /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+```
+
+#### Dockerfile-golang 示例
+
+```Dockerfile
+FROM golang:1.21
+
+# 设置时区
+RUN mv /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/debian.sources.bak && \
+    touch /etc/apt/sources.list && \
+    echo "deb http://mirrors.ivolces.com/debian/ bookworm main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    echo "#deb-src http://mirrors.ivolces.com/debian/ bookworm main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.ivolces.com/debian-security/ bookworm-security main" >> /etc/apt/sources.list && \
+    echo "#deb-src http://mirrors.ivolces.com/debian-security/ bookworm-security main" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.ivolces.com/debian/ bookworm-updates main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    echo "#deb-src http://mirrors.ivolces.com/debian/ bookworm-updates main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.ivolces.com/debian/ bookworm-backports main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    echo "#deb-src http://mirrors.ivolces.com/debian/ bookworm-backports main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    apt-get install apt-transport-https ca-certificates && \
+    apt-get update -y && \
+    apt-get install vim telnet less -y
+
+ENV TZ=Asia/Shanghai
+
+ARG filename
+ENV FILENAME=$filename
+
+WORKDIR /app
+
+COPY bin/$FILENAME .
+
+CMD ./$FILENAME
 ```

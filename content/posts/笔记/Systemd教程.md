@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-29
-lastmod: 2023-08-29
+lastmod: 2024-01-29
 categories:
   - blog
 description: "[[笔记/point/Systemd|systemd]] 的相关概念, 使用, 操作示例."
@@ -54,7 +54,6 @@ lrwxrwxrwx  1 root root   38 Jul 29 22:10 supervisor.service -> /lib/systemd/sys
 ```ini
 [Unit]
 Description=测试服务
-Documentation=https://github.com/kentxxq/TestServer/
 # 启动区间30s内,尝试启动3次
 StartLimitIntervalSec=30
 StartLimitBurst=3
@@ -82,7 +81,7 @@ TasksMax=infinity
 
 [Install]
 WantedBy=multi-user.target
-Alias=testserver.service
+# Alias=testserver.service
 ```
 
 > 配置文件的默认值在 `/etc/systemd/system.conf` 中.
