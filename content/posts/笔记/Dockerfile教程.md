@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-09-05
-lastmod: 2024-02-05
+lastmod: 2024-02-19
 categories:
   - blog
 description: 
@@ -46,9 +46,9 @@ description:
 
 ## 示例
 
-### 工具 dockerfile
+### 镜像基础环境 - 持续更新
 
-这个 dockerfile 是为了帮助调试，会持续维护。
+#### ubuntu
 
 采用最新的 [[笔记/point/ubuntu|ubuntu]] LTS 版本
 
@@ -69,8 +69,78 @@ RUN mv /etc/apt/sources.list sources.list.bak && \
     echo "deb http://mirrors.ivolces.com/ubuntu/ jammy-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
     echo "deb http://mirrors.ivolces.com/ubuntu/ jammy-security main restricted universe multiverse" >> /etc/apt/sources.list && \
     apt update -y && \
-    apt install lftp apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass -y && \
+    apt install lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass -y && \
     ls
+```
+
+#### debian
+
+使用最新的 debian 版本
+
+```dockerfile
+# bookworm 12
+FROM debian:12
+
+# apt install 的软件和 ubuntu 相同
+RUN mv /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/debian.sources.bak && \
+    touch /etc/apt/sources.list && \
+    echo "deb http://mirrors.ivolces.com/debian/ bookworm main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    echo "#deb-src http://mirrors.ivolces.com/debian/ bookworm main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.ivolces.com/debian-security/ bookworm-security main" >> /etc/apt/sources.list && \
+    echo "#deb-src http://mirrors.ivolces.com/debian-security/ bookworm-security main" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.ivolces.com/debian/ bookworm-updates main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    echo "#deb-src http://mirrors.ivolces.com/debian/ bookworm-updates main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.ivolces.com/debian/ bookworm-backports main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    echo "#deb-src http://mirrors.ivolces.com/debian/ bookworm-backports main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
+    apt update -y && \
+    apt install lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass -y && \
+    ls
+
+ENV TZ=Asia/Shanghai
+```
+
+#### alpine
+
+```dockerfile
+from alpine:latest
+
+# sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+# 设置时区和源，lrzsz因为缺少维护，所以在testing仓库中，无法直接下载
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
+    apk add --no-cache --update tzdata vim chrony lftp ca-certificates tzdata less iproute2 iputils bind-tools busybox-extras htop nethogs nload tree iotop iptraf-ng zip unzip curl gnupg pcre pcre-dev openssl openssl-dev build-base rsync sshpass && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
+```
+
+### dockerfile-dotnet 示例
+
+```Dockerfile
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+# apt install 的软件和 ubuntu 相同
+#RUN apt update -y && \
+#    apt install lftp ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass -y && \
+#    ls
+# ENV TZ=Asia/Shanghai
+WORKDIR /app
+# 去掉警告
+ENV ASPNETCORE_HTTP_PORTS=''
+EXPOSE 5000
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY ["TestServer.csproj", "TestServer/"]
+RUN dotnet restore "TestServer/TestServer.csproj"
+COPY . TestServer/
+RUN dotnet publish TestServer/TestServer.csproj -o /app/build /p:PublishProfile=Properties/PublishProfiles/linux-x64.pubxml
+
+FROM base AS publish
+WORKDIR /app
+COPY --from=build /app/build /app
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app /app
+ENTRYPOINT ["dotnet","TestServer.dll"]
 ```
 
 ### Dockerfile-java 示例
@@ -290,12 +360,7 @@ alpine 版本
 ```Dockerfile
 FROM nginx:alpine
 
-# sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
-# 设置时区
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
-    apk add --update tzdata && \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" > /etc/timezone
+# 使用alpine基础配置
 
 COPY dist/build/h5 /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
@@ -306,22 +371,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 ```Dockerfile
 FROM golang:1.21
 
-# 设置时区
-RUN mv /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/debian.sources.bak && \
-    touch /etc/apt/sources.list && \
-    echo "deb http://mirrors.ivolces.com/debian/ bookworm main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
-    echo "#deb-src http://mirrors.ivolces.com/debian/ bookworm main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
-    echo "deb http://mirrors.ivolces.com/debian-security/ bookworm-security main" >> /etc/apt/sources.list && \
-    echo "#deb-src http://mirrors.ivolces.com/debian-security/ bookworm-security main" >> /etc/apt/sources.list && \
-    echo "deb http://mirrors.ivolces.com/debian/ bookworm-updates main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
-    echo "#deb-src http://mirrors.ivolces.com/debian/ bookworm-updates main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
-    echo "deb http://mirrors.ivolces.com/debian/ bookworm-backports main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
-    echo "#deb-src http://mirrors.ivolces.com/debian/ bookworm-backports main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
-    apt-get install apt-transport-https ca-certificates && \
-    apt-get update -y && \
-    apt-get install vim telnet less -y
-
-ENV TZ=Asia/Shanghai
+# 使用debian基础配置
 
 ARG filename
 ENV FILENAME=$filename

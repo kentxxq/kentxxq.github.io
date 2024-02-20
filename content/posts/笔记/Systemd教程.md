@@ -81,6 +81,7 @@ TasksMax=infinity
 
 [Install]
 WantedBy=multi-user.target
+# Alias常见用法还有 ftp用ftpd
 # Alias=testserver.service
 ```
 

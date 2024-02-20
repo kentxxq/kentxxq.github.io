@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2023-12-29
+lastmod: 2024-02-19
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -110,6 +110,15 @@ node:14 /bin/bash -c "npm start"
 ```
 
 ## 操作命令
+
+### 构建镜像
+
+```shell
+# 当前文件夹下的Dockerfile文件
+# -t 指定名称，默认前缀是docker.io
+# --progress=plain 详细日志 --no-cache 禁用缓存
+docker build --progress=plain --no-cache -t kentxxq/test-server:latest .
+```
 
 ### 查看容器映射的端口
 

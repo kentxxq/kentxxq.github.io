@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-07-26
-lastmod: 2024-02-06
+lastmod: 2024-02-19
 categories:
   - blog
 description: "[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."
@@ -67,10 +67,20 @@ dotnet tool list -g | ForEach-Object {$index = 0} { $index++; if($index -gt 2) {
 
 #### 发布文件配置
 
-发布文件配置 `win-x64.pubxml`
+命令行的简化版本
 
 ```shell
-dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\win-x64.pubxml
+dotnet restore
+dotnet publish -c Release -o out -r linux-x64  -p:PublishSingleFile=true --self-contained true
+```
+
+发布文件配置 `linux-x64.pubxml`
+
+```shell
+# 指定csproj使用，因为sln解决方案级别的不支持指定-o
+# -c Release 覆盖文件里的 Configuration
+# -o 覆盖文件里的 PublishDir
+dotnet publish .\TestServer\TestServer.csproj -o out1 /p:PublishProfile=Properties\PublishProfiles\linux-x64.pubxml
 ```
 
 ```xml
@@ -80,23 +90,24 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
     <PropertyGroup>
+        <DeleteExistingFiles>true</DeleteExistingFiles>
         <Configuration>Release</Configuration>
         <Platform>Any CPU</Platform>
-        <PublishDir>bin\Release\net8.0\win-x64\publish\win-x64\</PublishDir>
+        <PublishDir>out2</PublishDir>
         <PublishProtocol>FileSystem</PublishProtocol>
         <_TargetId>Folder</_TargetId>
         <TargetFramework>net8.0</TargetFramework>
-        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
         <SelfContained>true</SelfContained>
-        <PublishSingleFile>false</PublishSingleFile>
+        <PublishSingleFile>true</PublishSingleFile>
         <PublishReadyToRun>false</PublishReadyToRun>
     </PropertyGroup>
 </Project>
 ```
 
-> 已知 aot 的时候 IncludeNativeLibrariesInSingleFile 会失败
+> 已知 aot 的时候 IncludeNativeLibrariesForSelfExtract 会失败
 > 如果没有生效, 可以 -p 手动传参.
-> dotnet publish -c Release -r linux-x 64 -p:IncludeNativeLibrariesInSingleFile=true
+> dotnet publish -c Release -r linux-x 64 -p:IncludeNativeLibrariesForSelfExtract=true
 > -r runtime 可以指定系统和架构，例如 linux-64
 > [完整的支持列表在这里](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog)
 
@@ -272,6 +283,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 
 - `MSBuildProjectDirectory`: 是 csproj 所在的目录
 - `OutputPath`: 是构建物输出的目录
+- `PublishDir`: 是 `dotnet publish -o` 指定的目录
 
 ```xml
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -279,13 +291,20 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
         <ip2regionDB>https://ghproxy.com/https://github.com/lionsoul2014/ip2region/blob/master/data/ip2region.xdb</ip2regionDB>
     </PropertyGroup>
 
-    <Target Name="DownloadContentFiles" BeforeTargets="Build">
-        <DownloadFile
-                SourceUrl="$(ip2regionDB)"
-                DestinationFolder="$(OutputPath)">
-            <Output TaskParameter="DownloadedFile" ItemName="Content" />
-        </DownloadFile>
-    </Target>
+  <Target Name="DownloadPublishDirFiles" AfterTargets="Publish" Condition="!Exists('$(PublishDir)/ip2region.xdb')">
+    <DownloadFile
+      SourceUrl="$(ip2regionDB)"
+      DestinationFolder="$(PublishDir)">
+      <Output TaskParameter="DownloadedFile" ItemName="Content"/>
+    </DownloadFile>
+  </Target>
+
+  <Target Name="DownloadOutputPathFiles" BeforeTargets="Build" Condition="!Exists('$(OutputPath)/ip2region.xdb')">
+    <DownloadFile
+      SourceUrl="$(ip2regionDB)"
+      DestinationFolder="$(OutputPath)">
+      <Output TaskParameter="DownloadedFile" ItemName="Content"/>
+    </DownloadFile>
 </Project>
 ```
 
@@ -486,7 +505,7 @@ publish/
 *.azurePubxml
 # Note: Comment the next line if you want to checkin your web deploy settings,
 # but database connection strings (with potential passwords) will be unencrypted
-*.pubxml
+# *.pubxml
 *.publishproj
 
 # Microsoft Azure Web App publish settings. Comment the next line if you want to
@@ -665,4 +684,63 @@ MigrationBackup/
 FodyWeavers.xsd
 
 .idea/
+```
+
+### .dockerignore
+
+```dockerignore
+**/.classpath  
+**/.dockerignore  
+**/.env  
+**/.git  
+**/.gitignore  
+**/.project  
+**/.settings  
+**/.toolstarget  
+**/.vs  
+**/.vscode  
+**/*.*proj.user  
+**/*.dbmdl  
+**/*.jfm  
+**/azds.yaml  
+**/bin  
+**/charts  
+**/docker-compose*  
+**/Dockerfile*  
+**/node_modules  
+**/npm-debug.log  
+**/obj  
+**/secrets.dev.yaml  
+**/values.dev.yaml  
+LICENSE  
+README.md
+```
+
+### launchSettings
+
+`launchSettings.json` 在调试的时候，workingDirectory 配合下载任务使用，避免找不到文件的情况
+
+```json
+{
+  "profiles": {
+    "TestServer": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "launchUrl": "swagger",
+      "workingDirectory": "$(OutputPath)",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5000"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json"
+}
 ```
