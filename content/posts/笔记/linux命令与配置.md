@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-01-25
+lastmod: 2024-02-20
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -346,20 +346,89 @@ MinProtocol = TLSv1.2
 
 ### 时间同步
 
-```shell
-apt install ntp ntpdate -y
-# 同步时间
-ntpdate ntp.aliyun.com
-0 * * * * /usr/sbin/ntpdate ntp.aliyun.com
-# 写入系统
-hwclock -w
+#### NTP 源
 
+> [阿里NTP](https://help.aliyun.com/zh/ecs/user-guide/alibaba-cloud-ntp-server#c731489b76nog)
+> [腾讯NTP](https://www.tencentcloud.com/zh/document/product/213/32379)
+> [pool.ntp.org公益组织](https://www.ntppool.org/zh/)
+> 微软 NTP `time.windows.com`
+> [谷歌NTP](https://developers.google.com/time/guides?hl=zh-cn)
+> [Cloudflare-NTP](https://www.cloudflare.com/zh-cn/time/)
+
+#### 时区
+
+```
 # 查看当前时间和配置
 timedatectl
 # 查询可用的时区
 timedatectl list-timezones | grep -i shang
 # 设置时区
 timedatectl set-timezone Asia/Shanghai
+```
+
+#### chrony - 主机环境
+
+[chrony](https://chrony-project.org/documentation.html) 在各方面有优势，但是**依赖 chronyd 守护进程**，chronyc 只是一个客户端。所以不适用于容器
+
+```shell
+# 通常自带chrony
+apt install chrony -y
+
+# 查看当前的源
+# ^* 当前使用  ^+ 备用  ^? 不可用
+chronyc sources -v
+# 查看当前状态
+chronyc tracking
+
+# 手动同步时间
+chronyc makestep
+# 写入RTC硬件时间。如果开启chronyd守护进程会11分钟自动同步一次，但是手动操作的话建议还是主动同步一下
+hwclock -w
+
+# systemd管理自动同步，通常自带
+systemctl enable chrony --now
+```
+
+如果没有源，`vim /etc/chrony/chrony.conf` 参考下面
+
+```shell
+# 配置不同的源
+server ntp.cloud.aliyuncs.com minpoll 4 maxpoll 10 iburst
+server ntp.aliyun.com minpoll 4 maxpoll 10 iburst
+
+# Ignore stratum in source selection.
+stratumweight 0.05
+# Record the rate at which the system clock gains/losses time.
+driftfile /var/lib/chrony/drift
+# Enable kernel RTC synchronization.
+rtcsync
+# In first three updates step the system clock instead of slew
+# if the adjustment is larger than 10 seconds.
+makestep 10 3
+# Allow NTP client access from local network.
+#allow 192.168/16
+# Listen for commands only on localhost.
+bindcmdaddress 127.0.0.1
+bindcmdaddress ::1
+# Disable logging of client accesses.
+noclientlog
+# Send a message to syslog if a clock adjustment is larger than 0.5 seconds.
+logchange 0.5
+logdir /var/log/chrony
+#log measurements statistics tracking
+```
+
+#### ntp - 原始/容器
+
+ntp 版本：
+
+```shell
+apt install ntp ntpdate -y
+# 同步时间
+ntpdate ntp.aliyun.com
+0 * * * * /usr/sbin/ntpdate ntp.aliyun.com
+# 写入RTC硬件时间
+hwclock -w
 ```
 
 ### 配置中文

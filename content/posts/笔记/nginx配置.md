@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-01-23
+lastmod: 2024-02-29
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -192,12 +192,13 @@ proxy_set_header Host $host;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-Host $host;
 proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Real-Port $remote_port;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 ```
 
 ### 长连接 websocket 配置
 
-`/usr/local/nginx/conf/options/### upgrade_to_websocket.conf`
+`/usr/local/nginx/conf/options/upgrade_to_websocket.conf`
 
 ```nginx
 proxy_http_version 1.1;
@@ -770,6 +771,14 @@ location /json {
 location /metrics {
     default_type text/plain;
     return 200 'metrics';
+}
+```
+
+### 微信验证文件
+
+```nginx
+location /MP_verify_ {
+    root /usr/local/nginx/data;
 }
 ```
 

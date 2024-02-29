@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-29
-lastmod: 2024-01-29
+lastmod: 2024-02-20
 categories:
   - blog
 description: "[[笔记/point/Systemd|systemd]] 的相关概念, 使用, 操作示例."
@@ -81,8 +81,8 @@ TasksMax=infinity
 
 [Install]
 WantedBy=multi-user.target
-# Alias常见用法还有 ftp用ftpd
 # Alias=testserver.service
+# Alias常见用法还有 ftp别名ftpd ssh别名sshd
 ```
 
 > 配置文件的默认值在 `/etc/systemd/system.conf` 中.
