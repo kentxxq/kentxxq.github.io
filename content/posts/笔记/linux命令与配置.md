@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-02-20
+lastmod: 2024-03-02
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -135,6 +135,8 @@ alias vpn='export http_proxy=http://1.1.1.1:7890; export https_proxy=http://1.1.
 alias vpn='export http_proxy=http://user1:pass1@1.1.1.1:7890; export https_proxy=http://user1:pass1@1.1.1.1:7890;'
 # 清空
 alias novpn='unset http_proxy; unset https_proxy;'
+# 查看自己的ip
+alias myip='curl -k -L test.kentxxq.com/ip'
 ```
 
 ### 免密 ssh

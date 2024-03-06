@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2024-01-17
+lastmod: 2024-03-01
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."
@@ -125,3 +125,18 @@ git branch -m main
 # 强制推送
 git push -f origin main
 ```
+
+## git 工作流
+
+常见模式
+
+- github-flow：一个主分支。hotfix 和 feature 合并过来就 ok。主分支发布。问题是我合并特性到了 master，发布到开发环境测试。这时候生产有 bug，我要修复。我不能简单从 master 拉出分支来修复。
+- git-flow：dev 和 master 是主分支。存在一个分支发布多个环境的情况，或者说需要通过 tag 方式来发布。而我通常用不同分支发布到不同环境。因此不用这种。
+
+我使用的，其实是在 github-flow 上加了环境分支：
+
+- dev 是主分支
+- 4 个环境的长期分支，每个环境对应流水线发布。`dev=>test=>pre=>prod`
+- feature：不一定立即合并，因为不一定上线。上线完成以后再删除。只会合并到 dev
+- 小步快跑，避免代码在某环境节点停留时间长的情况。中间存在功能删减的情况，也要遵循从 dev 开始的流程。
+- hotfix 可以从 prod 拉取。然后快速修复回到 prod。然后合并到 dev 后删除。

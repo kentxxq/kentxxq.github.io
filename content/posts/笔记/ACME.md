@@ -59,6 +59,8 @@ acme.sh --install-cert \
 
 ```shell
 acme.sh --renew -d "*.kentxxq.com" -d "kentxxq.com" --force --server letsencrypt
+
+acme.sh --renew-all --force
 ```
 
 ### 删除证书
