@@ -4,7 +4,7 @@ tags:
   - obsidian
   - blog
 date: 2023-06-21
-lastmod: 2023-10-11
+lastmod: 2024-03-11
 categories:
   - blog
 description: "这里介绍我如何使用 [[笔记/point/obsidian|obsidian]] 来记录, 多总结, 总思考. 让 obsidian 真正成为最后一个笔记软件. (除非有其他革命性的创造, ar? 植入芯片?)"
@@ -166,4 +166,13 @@ xxx
 
 ## 黄金守则
 
-- `Eat Your Own Dogfood 吃自己的狗食`,我需要时时刻刻用到我自己写的内容, 这样才能进步.
+- `Eat Your Own Dogfood 吃自己的狗食`, 我需要时时刻刻用到我自己写的内容, 这样才能进步.
+- 收集=>整理=>消化=>输出. 必须要有输出! 输出来决定输入
+    - para
+        - project 要做的项目
+        - area 长期关注的内容
+        - resources 要用的资源
+        - archive 不再使用的笔记
+    - 囤积症老是把可能有用的记录下来, 可是很难兑现.
+    - 输入足够多, 你输出也会更给力
+- 脑子里时刻有问题, 总会遇到解决办法.

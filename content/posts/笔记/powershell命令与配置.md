@@ -4,7 +4,7 @@ tags:
   - blog
   - powershell
 date: 2023-06-26
-lastmod: 2024-01-04
+lastmod: 2024-03-12
 categories:
   - blog
 description: "这里记录 [[笔记/point/powershell|powershell]] 的常用命令."
@@ -71,13 +71,14 @@ Alias           mv -> Move-Item
 
 #### $profile 配置
 
-1. 安装 `oh-my-post`: `winget install JanDeDobbeleer.OhMyPosh -s winget`
+1. 不想用主题了...~~安装 `oh-my-post`: `winget install JanDeDobbeleer.OhMyPosh -s winget`~~
 2. 编辑配置文件 `notepad $profile` 或者 `code $profile`
 3. 贴入配置文件
 
 ```powershell
+# 不想用主题了...
 # 主题配置,主题列表 https://ohmyposh.dev/docs/themes
-oh-my-posh init pwsh --config "D:\OneDrive\kentxxq\config\oh-my-posh\theme.json" | Invoke-Expression
+# oh-my-posh init pwsh --config "D:\OneDrive\kentxxq\config\oh-my-posh\theme.json" | Invoke-Expression
 
 # vpn命令
 function vpn {
