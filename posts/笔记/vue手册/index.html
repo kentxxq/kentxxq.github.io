@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Vue手册 - 运维个人技术栈</title><meta name=Description content="kentxxq个人站点"><meta property="og:title" content="Vue手册"><meta property="og:description" content="简介个人学习 Vue 的手册. 工具 vite 自定义组件名现在 可以这样指定名字 1 2 3 4 defineOptions({ name: 'Foo', // ... 更多自定义属性 }) 以前写 vue 的时候组件名会是文件名. 无法配置组件名"><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2024-03-09T00:00:00+00:00"><meta property="article:modified_time" content="2024-03-09T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Vue手册"><meta name=twitter:description content="简介个人学习 Vue 的手册. 工具 vite 自定义组件名现在 可以这样指定名字 1 2 3 4 defineOptions({ name: 'Foo', // ... 更多自定义属性 }) 以前写 vue 的时候组件名会是文件名. 无法配置组件名"><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/><link rel=prev href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%85%AC%E5%8F%B8/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/vue/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Vue手册","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/vue%E6%89%8B%E5%86%8C\/"},"genre":"posts","keywords":"blog","wordcount":169,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/vue%E6%89%8B%E5%86%8C\/","datePublished":"2024-03-09T00:00:00+00:00","dateModified":"2024-03-09T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":""}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Vue手册 - 运维个人技术栈</title><meta name=Description content="kentxxq个人站点"><meta property="og:title" content="Vue手册"><meta property="og:description" content="简介个人学习 Vue 的手册. 开始前, 应该先搞定 前端迅速上手 里的 vue项目创建 和 vscode配置, 语法/概念 定义对象 Person 1 2 3 4 5 6 7 8 export interface Person { id: number name:"><meta property="og:type" content="article"><meta property="og:url" content="https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2024-03-09T00:00:00+00:00"><meta property="article:modified_time" content="2024-03-18T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Vue手册"><meta name=twitter:description content="简介个人学习 Vue 的手册. 开始前, 应该先搞定 前端迅速上手 里的 vue项目创建 和 vscode配置, 语法/概念 定义对象 Person 1 2 3 4 5 6 7 8 export interface Person { id: number name:"><meta name=application-name content="kentxxq"><meta name=apple-mobile-web-app-title content="kentxxq"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/><link rel=prev href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%85%AC%E5%8F%B8/><link rel=next href=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/vue/><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Vue手册","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/vue%E6%89%8B%E5%86%8C\/"},"genre":"posts","keywords":"blog, vue, 前端","wordcount":1347,"url":"https:\/\/kentxxq.com\/posts\/%E7%AC%94%E8%AE%B0\/vue%E6%89%8B%E5%86%8C\/","datePublished":"2024-03-09T00:00:00+00:00","dateModified":"2024-03-18T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"kentxxq"},"description":""}</script><script src=//instant.page/5.2.0 defer type=module integrity=sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else""==="light"||""==="dark"||""==="black"?(setTheme(""),saveTheme("")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=运维个人技术栈>运维个人技术栈</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Blog </a><a class=menu-item href=/categories/>Categories </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/about/>About </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
@@ -7,9 +7,327 @@
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
 <span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>Blog</a><a class=menu-item href=/categories/ title>Categories</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/about/ title>About</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class="toc-content always-active" id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#工具>工具</a><ul><li><a href=#vite>vite</a><ul><li><a href=#自定义组件名>自定义组件名</a></li></ul></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Vue手册</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
-</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/blog/><i class="far fa-folder fa-fw"></i>blog</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2024-03-09>2024-03-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2024-03-09>2024-03-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 169 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#工具>工具</a><ul><li><a href=#vite>vite</a><ul><li><a href=#自定义组件名>自定义组件名</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p>个人学习 <a href=/posts/%E7%AC%94%E8%AE%B0/point/Vue/>Vue</a> 的手册.</p><h2 id=工具 class=headerLink><a href=#%e5%b7%a5%e5%85%b7 class=header-mark></a>工具</h2><h3 id=vite class=headerLink><a href=#vite class=header-mark></a>vite</h3><h4 id=自定义组件名 class=headerLink><a href=#%e8%87%aa%e5%ae%9a%e4%b9%89%e7%bb%84%e4%bb%b6%e5%90%8d class=header-mark></a>自定义组件名</h4><p><strong>现在</strong> 可以这样指定名字</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class="toc-content always-active" id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#语法概念>语法/概念</a><ul><li><a href=#定义对象-person>定义对象 Person</a></li><li><a href=#路由-router>路由 router</a><ul><li><a href=#路由配置>路由配置</a></li><li><a href=#链接>链接</a></li><li><a href=#编程路由>编程路由</a></li></ul></li><li><a href=#状态管理-pinia>状态管理 pinia</a></li><li><a href=#for-循环>for 循环</a></li><li><a href=#defineprops-接收参数>defineProps 接收参数</a></li><li><a href=#computed-计算>computed 计算</a></li><li><a href=#watch-变化>watch 变化</a></li><li><a href=#生命周期>生命周期</a></li></ul></li><li><a href=#工具>工具</a><ul><li><a href=#vite>vite</a><ul><li><a href=#自定义组件名>自定义组件名</a></li></ul></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Vue手册</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class="author fas fa-user-circle fa-fw"></span><a href=https://kentxxq.com title=Author target=_blank rel="noopener noreferrer author" class=author>kentxxq</a>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/blog/><i class="far fa-folder fa-fw"></i>blog</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2024-03-09>2024-03-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2024-03-18>2024-03-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1347 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#语法概念>语法/概念</a><ul><li><a href=#定义对象-person>定义对象 Person</a></li><li><a href=#路由-router>路由 router</a><ul><li><a href=#路由配置>路由配置</a></li><li><a href=#链接>链接</a></li><li><a href=#编程路由>编程路由</a></li></ul></li><li><a href=#状态管理-pinia>状态管理 pinia</a></li><li><a href=#for-循环>for 循环</a></li><li><a href=#defineprops-接收参数>defineProps 接收参数</a></li><li><a href=#computed-计算>computed 计算</a></li><li><a href=#watch-变化>watch 变化</a></li><li><a href=#生命周期>生命周期</a></li></ul></li><li><a href=#工具>工具</a><ul><li><a href=#vite>vite</a><ul><li><a href=#自定义组件名>自定义组件名</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h2 id=简介 class=headerLink><a href=#%e7%ae%80%e4%bb%8b class=header-mark></a>简介</h2><p>个人学习 <a href=/posts/%E7%AC%94%E8%AE%B0/point/Vue/>Vue</a> 的手册.</p><p>开始前, 应该先搞定 <a href=/posts/%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E8%BF%85%E9%80%9F%E4%B8%8A%E6%89%8B/>前端迅速上手</a> 里的 <a href=/posts/%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E8%BF%85%E9%80%9F%E4%B8%8A%E6%89%8B/#VUE%20%E5%AE%98%E7%BD%91%E7%89%88%E6%9C%AC>vue项目创建</a> 和 <a href=/posts/%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E8%BF%85%E9%80%9F%E4%B8%8A%E6%89%8B/#Vscode>vscode配置</a>,</p><h2 id=语法概念 class=headerLink><a href=#%e8%af%ad%e6%b3%95%e6%a6%82%e5%bf%b5 class=header-mark></a>语法/概念</h2><h3 id=定义对象-person class=headerLink><a href=#%e5%ae%9a%e4%b9%89%e5%af%b9%e8%b1%a1-person class=header-mark></a>定义对象 Person</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>export</span> <span class=kr>interface</span> <span class=nx>Person</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>id</span>: <span class=kt>number</span>
+</span></span><span class=line><span class=cl>  <span class=nx>name</span>: <span class=kt>string</span>
+</span></span><span class=line><span class=cl>  <span class=nx>age</span>: <span class=kt>number</span>
+</span></span><span class=line><span class=cl>  <span class=nx>x?</span>: <span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>Persons</span> <span class=o>=</span> <span class=nb>Array</span><span class=p>&lt;</span><span class=nt>Person</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=路由-router class=headerLink><a href=#%e8%b7%af%e7%94%b1-router class=header-mark></a>路由 router</h3><h4 id=路由配置 class=headerLink><a href=#%e8%b7%af%e7%94%b1%e9%85%8d%e7%bd%ae class=header-mark></a>路由配置</h4><p><code>router.ts</code> 文件内容</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>createRouter</span><span class=p>,</span> <span class=nx>createWebHistory</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;vue-router&#39;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>HomeView</span> <span class=kr>from</span> <span class=s1>&#39;@/views/HomeView.vue&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>router</span> <span class=o>=</span> <span class=nx>createRouter</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>history</span>: <span class=kt>createWebHistory</span><span class=p>(</span><span class=kr>import</span><span class=p>.</span><span class=nx>meta</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>BASE_URL</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>routes</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>path</span><span class=o>:</span> <span class=s1>&#39;/&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;root&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 重定向到 /home
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>redirect</span><span class=o>:</span> <span class=s1>&#39;/home&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>path</span><span class=o>:</span> <span class=s1>&#39;/home&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;home&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>component</span>: <span class=kt>HomeView</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>path</span><span class=o>:</span> <span class=s1>&#39;/about&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;about&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 懒加载
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>component</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=kr>import</span><span class=p>(</span><span class=s1>&#39;../views/AboutView.vue&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=nx>router</span>
+</span></span></code></pre></td></tr></table></div></div><p>子路径嵌套</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl>    <span class=c1>// 子路径
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=err>path:</span> <span class=err>&#39;/home2&#39;,</span>
+</span></span><span class=line><span class=cl>      <span class=err>name:</span> <span class=err>&#39;home2&#39;,</span>
+</span></span><span class=line><span class=cl>      <span class=err>component:</span> <span class=err>HomeView,</span>
+</span></span><span class=line><span class=cl>      <span class=err>children:</span> <span class=err>[</span>
+</span></span><span class=line><span class=cl>        <span class=err>{</span>
+</span></span><span class=line><span class=cl>          <span class=err>name:</span> <span class=err>&#39;p1&#39;</span>
+</span></span><span class=line><span class=cl>          <span class=err>path:</span> <span class=err>&#39;p1&#39;,</span>
+</span></span><span class=line><span class=cl>          <span class=err>component:</span> <span class=err>Detail</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=err>]</span>
+</span></span><span class=line><span class=cl>    <span class=err>},</span>
+</span></span></code></pre></td></tr></table></div></div><p>路由参数. 在路径 url 里传递参数.</p><ul><li><code>title?</code> 说明 title 可以不传</li><li>routerlink 写法为 <code>:to="{name: 'p1', params:{id: 1, title:2}}"</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=err>path:</span> <span class=err>&#39;/home2&#39;,</span>
+</span></span><span class=line><span class=cl>      <span class=err>name:</span> <span class=err>&#39;home2&#39;,</span>
+</span></span><span class=line><span class=cl>      <span class=err>component:</span> <span class=err>HomeView,</span>
+</span></span><span class=line><span class=cl>      <span class=err>children:</span> <span class=err>[</span>
+</span></span><span class=line><span class=cl>        <span class=err>{</span>
+</span></span><span class=line><span class=cl>          <span class=err>name:</span> <span class=err>&#39;p1&#39;</span>
+</span></span><span class=line><span class=cl>          <span class=c1>// 传递参数
+</span></span></span><span class=line><span class=cl><span class=c1></span>          <span class=err>path:</span> <span class=err>&#39;p1/:id/:title?&#39;,</span>
+</span></span><span class=line><span class=cl>          <span class=err>component:</span> <span class=err>Detail</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=err>]</span>
+</span></span><span class=line><span class=cl>    <span class=err>},</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>props</code> 是配合上面路由参数使用的. 原因是有时候只配置了路由, 无法使用 <code>&lt;Component a="1"></code> 传参</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=c1>// 通过query传参的函数写法
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>props</span><span class=p>(</span><span class=nx>route</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>route</span><span class=p>.</span><span class=nx>query</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 返回params不如用属性 props: true
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=c1>// return route.params 
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 属性写法. 只能用来替代函数写法的 return route.params
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>props</span>: <span class=kt>true</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 对象写法
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>props</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>id</span>:<span class=kt>1</span>
+</span></span><span class=line><span class=cl>  <span class=nx>title</span>:<span class=kt>2</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 接收方
+</span></span></span><span class=line><span class=cl><span class=c1>// defineProps([&#39;id&#39;,&#39;title&#39;])
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=链接 class=headerLink><a href=#%e9%93%be%e6%8e%a5 class=header-mark></a>链接</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl><span class=c>&lt;!-- 传字符串 --&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>RouterLink</span> <span class=na>replace</span> <span class=na>:to</span><span class=o>=</span><span class=s>&#34;url&#34;</span> <span class=na>active-class</span><span class=o>=</span><span class=s>&#34;active-link&#34;</span><span class=p>&gt;</span>{{ index }}-{{ url }}<span class=p>&lt;/</span><span class=nt>RouterLink</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c>&lt;!-- 传对象 --&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>RouterLink</span> <span class=na>:to</span><span class=o>=</span><span class=s>&#34;{name: &#39;name&#39;, query:{a:1,b:2}}&#34;</span> <span class=na>active-class</span><span class=o>=</span><span class=s>&#34;active-link&#34;</span><span class=p>&gt;</span>{{ index }}-{{ url }}<span class=p>&lt;/</span><span class=nt>RouterLink</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>可以传递 url, 其实就是 path 路径</li><li>传递对象的话, 可以写 router 里面的 name, 用 query 传递 url 参数</li><li><code>replace</code> 属性, 使用户无法使用浏览器的返回按钮去到上一个页面</li></ul><p>css 内容</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=line><span class=cl><span class=p>.</span><span class=nc>active-link</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>background-color</span><span class=p>:</span> <span class=kc>skyblue</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=编程路由 class=headerLink><a href=#%e7%bc%96%e7%a8%8b%e8%b7%af%e7%94%b1 class=header-mark></a>编程路由</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>const</span> <span class=nx>router</span> <span class=o>=</span> <span class=nx>useRouter</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=c1>// 这里的push可以传递RouterLink里的 to 值
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>router</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=s1>&#39;/url1&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=状态管理-pinia class=headerLink><a href=#%e7%8a%b6%e6%80%81%e7%ae%a1%e7%90%86-pinia class=header-mark></a>状态管理 pinia</h3><p>定义一个 store</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>defineStore</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;pinia&#39;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>axios</span> <span class=kr>from</span> <span class=s1>&#39;axios&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>useDogStore</span> <span class=o>=</span> <span class=nx>defineStore</span><span class=p>(</span><span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>state() {</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>urls</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;https://images.dog.ceo/breeds/pekinese/n02086079_10613.jpg&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;https://images.dog.ceo/breeds/cockapoo/bubbles1.jpg&#39;</span>
+</span></span><span class=line><span class=cl>      <span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=nx>actions</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>async</span> <span class=nx>addDog() {</span>
+</span></span><span class=line><span class=cl>      <span class=kr>const</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>data</span><span class=o>:</span> <span class=p>{</span> <span class=nx>message</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>axios</span><span class=p>.</span><span class=kr>get</span><span class=p>(</span><span class=s1>&#39;https://dog.ceo/api/breeds/image/random&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=k>this</span><span class=p>.</span><span class=nx>urls</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=nx>message</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><p>读取</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>const</span> <span class=nx>dogStore</span> <span class=o>=</span> <span class=nx>useDogStore</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=c1>// store的解构用storeToRefs, storeToRefs只会处理数据,而不会处理store里的函数
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>const</span> <span class=p>{</span><span class=nx>urls</span><span class=p>}</span> <span class=o>=</span> <span class=nx>storeToRefs</span><span class=p>(</span><span class=nx>dogStore</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>img</span> <span class=na>v</span><span class=err>-</span><span class=na>for</span><span class=o>=</span><span class=s>&#34;url in dogStore.urls&#34;</span> <span class=err>:</span><span class=na>key</span><span class=o>=</span><span class=s>&#34;url&#34;</span> <span class=err>:</span><span class=na>src</span><span class=o>=</span><span class=s>&#34;url&#34;</span> <span class=na>mode</span><span class=o>=</span><span class=s>&#34;scaleToFill&#34;</span> <span class=p>/&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>修改</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=c1>// 1 直接修改
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>dogStore</span><span class=p>.</span><span class=nx>urls</span> <span class=o>=</span> <span class=p>[</span><span class=s1>&#39;1&#39;</span><span class=p>,</span><span class=s1>&#39;2&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 2 patch方式修改对象,一次提交多个修改
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>counterStore</span><span class=p>.</span><span class=nx>$patch</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>urls</span><span class=o>:</span> <span class=p>[</span><span class=s1>&#39;1&#39;</span><span class=p>,</span><span class=s1>&#39;2&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=nx>b</span>: <span class=kt>4</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 3 就是在store定义里, 用actions修改
+</span></span></span></code></pre></td></tr></table></div></div><p>订阅</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=c1>// 订阅
+</span></span></span><span class=line><span class=cl><span class=c1>// mutate里有id和事件.没什么用.
+</span></span></span><span class=line><span class=cl><span class=c1>// state则可以拿到数据
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>counterStore</span><span class=p>.</span><span class=nx>$subscribe</span><span class=p>((</span><span class=nx>mutate</span><span class=p>,</span> <span class=nx>state</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 一旦数据发生了变化,就存起来
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>localStorage</span><span class=p>.</span><span class=nx>setItem</span><span class=p>(</span><span class=s1>&#39;counter&#39;</span><span class=p>,</span> <span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=nx>state</span><span class=p>.</span><span class=nx>count</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=for-循环 class=headerLink><a href=#for-%e5%be%aa%e7%8e%af class=header-mark></a>for 循环</h3><ul><li>循环遍历数组 <code>(person, index) in Persons</code></li><li>循环遍历对象 <code>v-for="(value, key, index) in object"</code></li></ul><h3 id=defineprops-接收参数 class=headerLink><a href=#defineprops-%e6%8e%a5%e6%94%b6%e5%8f%82%e6%95%b0 class=header-mark></a>defineProps 接收参数</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=o>&lt;</span><span class=err>子组件</span> <span class=o>:</span><span class=nx>dataA</span><span class=o>=</span><span class=s2>&#34;dataA&#34;</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 接收特定key,例如字符串 &lt;子组件 a=&#34;a&#34; b=&#34;b&#34;&gt;
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>defineProps</span><span class=p>([</span><span class=s1>&#39;a&#39;</span><span class=p>,</span><span class=s1>&#39;b&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 接收父组件的Person对象
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>defineProps</span><span class=p>&lt;</span><span class=nt>dataA</span><span class=err>:</span><span class=na>Person</span><span class=p>&gt;()</span>
+</span></span><span class=line><span class=cl><span class=c1>// 可以不传 
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>defineProps</span><span class=p>&lt;</span><span class=nt>dataA</span><span class=err>?:</span><span class=na>Person</span><span class=p>&gt;()</span>
+</span></span><span class=line><span class=cl><span class=c1>// 默认值
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>withDefaults</span><span class=p>(</span><span class=nx>defineProps</span><span class=p>&lt;</span><span class=nt>dataA</span><span class=err>?:</span><span class=na>Person</span><span class=p>&gt;(),{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>dataA</span><span class=o>:</span> <span class=p>()</span><span class=o>=&gt;</span> <span class=p>[{</span><span class=nx>id</span>: <span class=kt>1</span><span class=p>,</span><span class=nx>name</span><span class=o>:</span> <span class=s2>&#34;ken&#34;</span><span class=p>,</span><span class=nx>age</span>: <span class=kt>1</span><span class=p>}]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=computed-计算 class=headerLink><a href=#computed-%e8%ae%a1%e7%ae%97 class=header-mark></a>computed 计算</h3><p><code>computed</code></p><ul><li>肯定有返回值</li><li>依赖项不变, 就可以用缓存. 性能好</li><li>不能异步.</li><li>场景: 购物车结算, 字符串拼接</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kd>let</span> <span class=nx>price</span> <span class=o>=</span> <span class=nx>ref</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span><span class=c1>//$0 
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=kd>let</span> <span class=nx>p</span> <span class=o>=</span> <span class=nx>computed</span><span class=p>&lt;</span><span class=nt>string</span><span class=p>&gt;(()</span><span class=o>=&gt;</span><span class=p>{</span> <span class=k>return</span> <span class=sb>`$`</span> <span class=o>+</span> <span class=nx>price</span><span class=p>.</span><span class=nx>value</span> <span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=watch-变化 class=headerLink><a href=#watch-%e5%8f%98%e5%8c%96 class=header-mark></a>watch 变化</h3><p><code>watch</code></p><ul><li>返回值是停止自己</li><li>每次都重新执行整体</li><li>可以异步</li><li>场景: 搜索框匹配内容, 做一些计算内容的限制</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=kr>const</span> <span class=nx>stopWatch</span> <span class=o>=</span> <span class=nx>watch</span><span class=p>(</span><span class=nx>sum</span><span class=p>,</span> <span class=p>(</span><span class=nx>newValue</span><span class=p>,</span> <span class=nx>oldValue</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;sum变化了&#39;</span><span class=p>,</span> <span class=nx>newValue</span><span class=p>,</span> <span class=nx>oldValue</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>newValue</span> <span class=o>&gt;=</span> <span class=mi>10</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 停止
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>stopWatch</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>},</span> <span class=p>{</span> <span class=nx>immediate</span>: <span class=kt>false</span><span class=p>,</span> <span class=nx>deep</span>: <span class=kt>false</span> <span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=生命周期 class=headerLink><a href=#%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f class=header-mark></a>生命周期</h3><ul><li><code>setup</code> 创建阶段</li><li><code>onBeforeMounted</code>, <code>onMounted</code> 挂载阶段</li><li><code>onBeforeUpdated</code>, <code>onUpdated</code> 更新阶段</li><li><code>onBeforeUpdated</code>, <code>onUnmounted</code> 卸载阶段</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=line><span class=cl><span class=nx>onMounted</span><span class=p>(()</span><span class=o>=&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=工具 class=headerLink><a href=#%e5%b7%a5%e5%85%b7 class=header-mark></a>工具</h2><h3 id=vite class=headerLink><a href=#vite class=header-mark></a>vite</h3><h4 id=自定义组件名 class=headerLink><a href=#%e8%87%aa%e5%ae%9a%e4%b9%89%e7%bb%84%e4%bb%b6%e5%90%8d class=header-mark></a>自定义组件名</h4><p><strong>现在</strong> 可以这样指定名字</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -53,6 +371,6 @@
 </span></span><span class=line><span class=cl>  <span class=nx>msg</span>: <span class=kt>string</span>
 </span></span><span class=line><span class=cl><span class=p>}</span><span class=o>&gt;</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
-</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2024-03-09</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册 data-hashtags=blog><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册 data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册 data-description><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册 data-description><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%85%AC%E5%8F%B8/ class=prev rel=prev title=开公司><i class="fas fa-angle-left fa-fw"></i>开公司</a>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2024-03-18</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><button title="分享到 Twitter" data-sharer=twitter data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册 data-hashtags=blog,vue,前端><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer=facebook data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-hashtag=blog><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer=whatsapp data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册 data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer=line data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册><span data-svg-src=/lib/simple-icons/icons/line.min.svg></span></button><button title="分享到 微博" data-sharer=weibo data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer=myspace data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册 data-description><span data-svg-src=/lib/simple-icons/icons/myspace.min.svg></span></button><button title="分享到 Blogger" data-sharer=blogger data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册 data-description><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer=evernote data-url=https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/vue%E6%89%8B%E5%86%8C/ data-title=Vue手册><span class="fab fa-evernote fa-fw"></span></button></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/blog/>blog</a>,&nbsp;<a href=/tags/vue/>Vue</a>,&nbsp;<a href=/tags/%E5%89%8D%E7%AB%AF/>前端</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/posts/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%85%AC%E5%8F%B8/ class=prev rel=prev title=开公司><i class="fas fa-angle-left fa-fw"></i>开公司</a>
 <a href=/posts/%E7%AC%94%E8%AE%B0/point/vue/ class=next rel=next title=Vue>Vue<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>1993 - 2024</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://kentxxq.com target=_blank rel="noopener noreferrer">kentxxq</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a> | <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43010402000934"><img src=/备案图标.png style=display:inline-block>湘公网安备 43010402000934号</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a target=_blank href=https://beian.miit.gov.cn>湘ICP备2021002319号-1</a></span></div><div class=footer-line></div><div class=footer-line></div></div><script>"serviceWorker"in navigator&&(navigator.serviceWorker.register("/sw.min.js",{scope:"/"}).then(function(){}),navigator.serviceWorker.ready.then(function(){}))</script></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:18},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,twemoji:!0}</script><script type=text/javascript src=/lib/twemoji/twemoji.min.js defer></script><script type=text/javascript src=/js/twemoji.min.js defer></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-NLLDC353PJ",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-NLLDC353PJ" async></script></div></body></html>
