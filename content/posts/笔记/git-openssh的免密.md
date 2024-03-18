@@ -6,7 +6,7 @@ tags:
   - ssh-agent
   - blog
 date: 2023-06-21
-lastmod: 2023-12-29
+lastmod: 2024-03-15
 categories:
   - blog
 description: "我的使用 [[笔记/point/git|git]] 操作代码. 而 git 的通信会用到 [[笔记/point/openssh|openssh]].openssh 为了保证安全. 提供了私钥和公钥. 其中私钥可以密码加密, 保证安全性. 所以我就加密了.导致了什么问题呢?每次我用到 git 的时候, 都提示我输入密码. 所以我今天就来配置 [[笔记/point/ssh-agent|ssh-agent]]."
@@ -47,11 +47,3 @@ openssh 为了保证安全. 提供了私钥和公钥. 其中私钥可以密码�
 
 4. 终端有效果, 但 `vscode` 等等软件没有生效? 按照这个老哥的做法, 改全局变量吧 [Git: Support git with private key password · Issue #13680 · microsoft/vscode · GitHub](https://github.com/microsoft/vscode/issues/13680#issuecomment-1202087713) ![[附件/GIT_SSH全局变量.png]]
 5. **重新打开终端**, 这里有一些 [[笔记/git教程|git教程]] 可以给你测试验证
-
-## 相关问题
-
-### 指定 key
-
-```shell
-git clone git@codeup.aliyun.com:oiasjdoajsdo/仓库名.git --config core.sshCommand="ssh -i ~/.ssh/你的私有key"
-```

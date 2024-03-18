@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2024-03-01
+lastmod: 2024-03-15
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."
@@ -79,6 +79,12 @@ git clone https://user:your_token@ghproxy.com/https://ghproxy.com/https://github
 git config --global core.compression 0
 git config --global http.postBuffer 500M
 git config --global http.maxRequestBuffer 100M
+```
+
+### 指定 key
+
+```shell
+git clone git@codeup.aliyun.com:oiasjdoajsdo/仓库名.git --config core.sshCommand="ssh -i ~/.ssh/你的私有key"
 ```
 
 ### 仓库 remote

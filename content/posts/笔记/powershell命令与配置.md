@@ -4,7 +4,7 @@ tags:
   - blog
   - powershell
 date: 2023-06-26
-lastmod: 2024-03-12
+lastmod: 2024-03-13
 categories:
   - blog
 description: "这里记录 [[笔记/point/powershell|powershell]] 的常用命令."
@@ -35,7 +35,7 @@ winget list | Select-String nodejs
 
 ```powershell
 # 示例是配置golang,启用cgo编译
-# 本地变量
+# 本地变量  脚本里建议用, Set-Variable
 set CGO_ENABLED "1"
 echo $CGO_ENABLED
 rv CGO_ENABLED
@@ -106,6 +106,12 @@ vpn
 
 # 配合ssh-agent使用
 $env:GIT_SSH = "C:\Windows\System32\OpenSSH\ssh.exe"
+
+# fnm源
+Set-Variable FNM_NODE_DIST_MIRROR https://mirrors.ivolces.com/nodejs-release/
+# fnm启用
+fnm env --use-on-cd | Out-String | Invoke-Expression
+
 ```
 
 #### 主题文件

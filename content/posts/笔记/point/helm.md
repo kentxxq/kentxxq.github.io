@@ -4,7 +4,7 @@ tags:
   - point
   - helm
 date: 2023-07-08
-lastmod: 2023-12-01
+lastmod: 2024-03-18
 categories:
   - point
 ---
@@ -51,3 +51,54 @@ categories:
 |  ---  | ---  |
 | 创建一个 helm 模板  | helm create `name` |
 | 打包一个 helm 模板  | helm package `name` |
+
+## 文件语法
+
+使用内容
+
+- `if如果`
+- `ne不等于`
+- `默认字符串value转int`
+
+```yaml
+{{- if .Values.service.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service-helm-service
+  labels:
+    name: backend-service-helm-service
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.port }}
+      targetPort: {{ .Values.port }}
+      protocol: TCP
+      name: backend-service-helm-service-pod-{{ .Values.port }}
+    {{- if ne (int .Values.grpc_port) 0 }}
+    - port: {{ .Values.grpc_port }}
+      targetPort: {{ .Values.grpc_port }}
+      protocol: TCP
+      name: backend-service-helm-service-pod-{{ .Values.grpc_port }}
+    {{- end }}
+  selector:
+    name: backend-service-helm-pod
+{{- end }}
+```
+
+写入格式化内容 (json 示例)
+
+```yaml
+apiVersion: v1
+data:
+  config.yaml: |
+    {{- if eq .Values.deploy_env "dev" }}
+    version: dev
+    nacos:
+      addr: 100.66.6.37
+      dataId: backend-service-helm.yaml
+      username: shini-dev
+      password: pKb2NHSnRiR
+      namespaceId: e2b13a92-d47b-4f9f-9d70-6eaa4beea75b
+    {{- end }}
+```

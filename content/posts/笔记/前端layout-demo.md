@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2023-11-11
-lastmod: 2023-12-09
+lastmod: 2024-03-13
 categories:
   - blog
 description: "`layout-demo` 是一个练习布局, 样式, 动画等内容的项目. "
@@ -73,7 +73,7 @@ description: "`layout-demo` 是一个练习布局, 样式, 动画等内容的项
     }
     ```
 
-- `absolute` 绝对定位，最近的父元素不为 `static` ，那么根据这个元素来定位
+- `absolute` 绝对定位，最近的父元素 `position` 不是 `static` ，那么根据这个元素来定位. 否则根据 `body` 定位
 
 > [参考资料](https://zh.learnlayout.com/position)
 
@@ -145,6 +145,32 @@ img {
 
 ## 问题处理
 
+### 居中
+
+#### 单页面, 无其他元素
+
+- 不要宽度的话, 就会使用 `app` 这个字符串的宽度
+- `top` 和 `left` 距离上面和左边 50%
+- `translate` 被向左和向上移动了自身宽度和高度的一半
+
+```vue
+<template>
+  <div class="app">
+    app
+  </div>
+</template>
+
+<style>
+.app {
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
+```
+
 ### meta 自动调整宽度
 
 参考默认 `vue` 模板网页 `header` 加入
@@ -158,7 +184,12 @@ img {
 #### width 宽度单位
 
 ```css
-width: xx%;
+/* 相对父元素10%,内部布局的时候用 */
+width: 10%;
+/* 窗口10分之一,响应式的时候会用 */
+width: 10vh;
+/* 相对于root字体,字体如果是16px,那么这里就是 16*2.2 像素 */
+with: 2.2rem
 width: auto;
 
 /* 替代下面 */
