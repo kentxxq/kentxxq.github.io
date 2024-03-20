@@ -5,7 +5,7 @@ tags:
   - mysql
   - docker
 date: 1993-07-06
-lastmod: 2024-02-06
+lastmod: 2024-03-20
 categories:
   - blog
 description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置. 所以记录一下配置和操作."
@@ -113,23 +113,23 @@ show slave status\G
 
 ### 处理锁
 
-1. 查看是否有锁等待
+开启 `performance_schema` 参数, 才能查询这个库
+
+1. 查看相关情况
 
     ```sql
-    # state是running说明持有锁
-    select 
+    # 事务表
+    # state是running说明事务持有锁
+    select
+    trx_mysql_thread_id '会话/线程id',
     trx_id 事务id,
     trx_state 事务状态,
     trx_started 事务开始时间,
     trx_tables_locked 锁表数量,
     trx_rows_locked 锁行数量
     from information_schema.innodb_trx;
-    ```
 
-2. 查看锁的详细信息
-
-    ```sql
-    # 拿到进程id
+    # 锁住的表
     select 
     wait_started 开始等待的时间,
     wait_age 等待时长,
@@ -141,25 +141,32 @@ show slave status\G
     from sys.innodb_lock_waits
     where blocking_lock_id = '事务id';
 
-    # 你可以通过进程id，查询线程id
-    select 
-    thread_id 线程id,
-    processlist_id 进程id
-    from performance_schema.threads 
-    where processlist_id=32;
+    # 查看客户端的连接信息:用户名,ip,端口,连接的数据库等
+    SELECT *
+    FROM performance_schema.threads
+    WHERE processlist_id = '会话/线程id'
+    ```
 
-    # 然后找到会话sql内容
-    select thread_id,sql_text 
-    from performance_schema.events_statements_history 
-    where thread_id=线程id
+2. 查看具体事务内容
 
-    select * from sys.innodb_lock_waits;
+    ```sql
+    SELECT trx.trx_mysql_thread_id '会话/线程id', # 不是所有线程都有进程记录 select thread_id 线程id,processlist_id 进程id from performance_schema.threads;
+            esh.event_name 'events_statements_history-事件名',
+            esh.sql_text 'events_statements_history-sql'
+    FROM information_schema.innodb_trx trx
+    JOIN information_schema.processlist ps ON trx.trx_mysql_thread_id = ps.id
+    JOIN performance_schema.threads th ON trx.trx_mysql_thread_id = th.processlist_id
+    JOIN performance_schema.events_statements_history esh ON esh.thread_id = th.thread_id
+    WHERE trx.trx_started < CURRENT_TIME - INTERVAL 10 SECOND
+      and trx.trx_mysql_thread_id = 35405
+      AND ps.USER != 'SYSTEM_USER'
+    ORDER BY esh.EVENT_ID;
     ```
 
 3. 杀掉连接
 
     ```sql
-    # 上一步的解决办法一般会是告诉你杀掉会话
+    # 杀死会话id
     kill 32
     ```
 
@@ -171,6 +178,8 @@ set innodb_lock_wait_timeout=50;
 # 全局级别的锁超时，对新连接生效
 set global innodb_lock_wait_timeout=50;
 ```
+
+> [Tracking MySQL query history in long running transactions](https://www.psce.com/en/blog/2015/01/22/tracking-mysql-query-history-in-long-running-transactions/)
 
 ### 用户/授权/密码
 

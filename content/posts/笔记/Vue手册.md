@@ -5,7 +5,7 @@ tags:
   - vue
   - 前端
 date: 2024-03-09
-lastmod: 2024-03-18
+lastmod: 2024-03-20
 categories:
   - blog
 description: 
@@ -160,13 +160,14 @@ const router = useRouter()
 router.push('/url1')
 ```
 
-### 状态管理 pinia
+### 全局传递/状态管理 pinia
 
 定义一个 store
 
 ```ts
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import { computed, ref } from 'vue'
 
 export const useDogStore = defineStore('dog', {
   state() {
@@ -175,6 +176,16 @@ export const useDogStore = defineStore('dog', {
         'https://images.dog.ceo/breeds/pekinese/n02086079_10613.jpg',
         'https://images.dog.ceo/breeds/cockapoo/bubbles1.jpg'
       ]
+    }
+  },
+  // 用于把state计算一下,字符串拼接一下来用
+  getters: {
+    doubleUrls(state) {
+      return state.urls.concat(state.urls)
+    },
+    doubleUrls2: (state) => state.urls.concat(state.urls),
+    doubleUrls3(): Array<string> {
+      return this.urls.concat(this.urls)
     }
   },
   actions: {
@@ -187,6 +198,29 @@ export const useDogStore = defineStore('dog', {
   }
 })
 
+// 组合式
+// ref() 就是 state 属性
+// computed() 就是 getters
+// function() 就是 actions
+export const useDog2Store = defineStore('dog', () => {
+  let urls = ref([
+    'https://images.dog.ceo/breeds/pekinese/n02086079_10613.jpg',
+    'https://images.dog.ceo/breeds/cockapoo/bubbles1.jpg'
+  ])
+
+  const doubleUrls = computed(() => urls.value.concat(urls.value))
+  const doubleUrls2 = computed(() => urls.value.concat(urls.value))
+  const doubleUrls3 = computed(() => urls.value.concat(urls.value))
+
+  async function addDog2() {
+    const {
+      data: { message }
+    } = await axios.get('https://dog.ceo/api/breeds/image/random')
+    urls.value.push(message)
+  }
+
+  return { urls, doubleUrls, doubleUrls2, doubleUrls3, addDog2 }
+})
 ```
 
 读取
@@ -226,19 +260,24 @@ counterStore.$subscribe((mutate, state) => {
 })
 ```
 
-###  for 循环
+###  信息传递
 
-- 循环遍历数组 `(person, index) in Persons`
-- 循环遍历对象 `v-for="(value, key, index) in object"`
+#### defineProps/父与子
 
-### defineProps 接收参数
+- 父传子 `使用props`.
+- 子传父 1: `父传子一个函数,子接收并带上参数来调用函数`
 
 ```ts
-<子组件 :dataA="dataA">
+// 父
+<子组件 :dataA="dataA" @click="fangfa">
+function fangfa(value:number){
+  consolo.log(value)
+}
 
+// 子
 // 接收特定key,例如字符串 <子组件 a="a" b="b">
-defineProps(['a','b'])
-
+defineProps(['dataA','fangfa'])
+fangfa(1)
 // 接收父组件的Person对象
 defineProps<dataA:Person>()
 // 可以不传 
@@ -248,6 +287,71 @@ withDefaults(defineProps<dataA?:Person>(),{
     dataA: ()=> [{id: 1,name: "ken",age: 1}]
 })
 ```
+
+#### emit 自定义事件/子传父
+
+只能子传父 2:
+
+- 自定义一个函数名 haha, 传入一个函数
+- 子组件接收特定名称, 然后 emit 传回去
+
+```ts
+// 父
+<子组件 @haha="fangfa">
+function fangfa(value:number){
+  consolo.log(value)
+}
+
+// 子
+<button @click="emit('haha',a)"></button>
+var a = ref(1)
+const emit = defineEmits(['haha'])
+```
+
+#### mitt 事件订阅传递/任意组件
+
+```ts
+import mitt from 'mitt'
+const emitter = mitt()
+
+// 监听
+emitter.on('foo', e => console.log('foo', e) )
+// 触发
+emitter.emit('foo', { a: 'b' })
+// 去掉所有事件
+emitter.all.clear()
+
+unMounted(()=>{
+  // 销毁的时候去掉这个
+  emitter.off('foo')
+})
+```
+
+#### v-model 底层原理/父与子
+
+关于 `$event`
+
+- 如果是原始 html 对象, 例如 input . 那么 `$event` 就是 dom 元素, 需要去 `target.value` 获取值
+- 如果是自己定义的事情或对象, 那么 `$event` 就是你传递的对象
+
+```ts
+// 父
+// <A-Input v-model="aa"/> 其实是下面的简写
+<A-Input :modelValue="username" @update:modelValue="username = $event"></A-Input>
+let username = ref('ken')
+
+// 子
+<input type="text" :value="modelValue" @input="emit('update:modelValue',(<HTMLInput>)$event.target.value)">
+// 接收传入的值
+defineProps(['modelValue'])
+// 接受传递的事件
+const emit = defineEmits(['update:modelValue'])
+```
+
+###  for 循环
+
+- 循环遍历数组 `(person, index) in Persons`
+- 循环遍历对象 `v-for="(value, key, index) in object"`
 
 ### computed 计算
 
