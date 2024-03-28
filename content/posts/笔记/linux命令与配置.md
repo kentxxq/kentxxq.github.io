@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-03-02
+lastmod: 2024-03-28
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -872,6 +872,18 @@ tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* *
 ```
 
 ### 拷贝文件
+
+#### lftp
+
+```shell
+ftp_user_test = '用户名,密码'
+ftp_url = 'ip:21'
+source = '/a/b/c'
+target = './c'
+# 最大重试2次
+# 一次传输20个文件,断点续传
+lftp -u ${env.ftp_webgl} ftp://${env.ftp_url} -e "set ssl:verify-certificate no; set net:max-retries 2; set pget:default-n 20; mirror --continue --verbose ${env.source} ${env.target}; quit"
+```
 
 #### scp
 

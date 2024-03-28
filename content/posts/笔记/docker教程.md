@@ -182,6 +182,7 @@ docker import xxx.tar 镜像:tag
 ```shell
 # vim /etc/crontab
 0 2 * * * root /usr/bin/docker rmi $(docker images -q) -f
+10 2 * * * root /usr/bin/docker image prune -a -f
 ```
 
 ### IO 问题 - 定位容器

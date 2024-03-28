@@ -5,7 +5,7 @@ tags:
   - devops
   - ACME
 date: 2023-08-16
-lastmod: 2024-01-23
+lastmod: 2024-03-27
 keywords:
   - acme
   - acme.sh
@@ -94,7 +94,7 @@ acme.sh --uninstall
 rm -rf  ~/.acme.sh
 ```
 
-## 问题处理
+## `ACME.SH` 问题处理
 
 #### 多个域名,同 dns 服务商,不同 ak
 
@@ -142,7 +142,83 @@ acme.sh --install-cert \
 --reloadcmd "/bin/bash /usr/local/bin/sync_nginx.sh"
 ```
 
-## 协议了解
+## cert-manager / 不可用
+
+亲测阿里云弄不好... 浪费生命...
+
+```shell
+# 安装
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.4/cert-manager.yaml
+# 确认启动完成
+kubectl get pods --namespace cert-manager
+```
+
+部署 [cert-manager-alidns-webhook](https://github.com/DEVmachine-fr/cert-manager-alidns-webhook)
+
+```shell
+helm repo add cert-manager-alidns-webhook https://devmachine-fr.github.io/cert-manager-alidns-webhook
+helm repo update
+helm install alidns-webhook cert-manager-alidns-webhook/alidns-webhook -n cert-manager
+
+
+kubectl create secret generic alidns-secrets -n cert-manager --from-literal="access-token=yourtoken" --from-literal="secret-key=yoursecretkey"
+```
+
+创建资源
+
+```yml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+  namespace: cert-manager
+spec:
+  acme:
+    # Change to your letsencrypt email
+    email: 805429509@qq.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging-account-key
+    solvers:
+    - dns01:
+        webhook:
+          groupName: acme.yourcompany.com
+          solverName: alidns
+          config:
+            region: ""
+            accessKeySecretRef:
+              name: alidns-secret
+              key: access-key
+            secretKeySecretRef:
+              name: alidns-secret
+              key: secret-key
+
+---
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: example-tls
+  namespace: cert-manager
+spec:
+  secretName: chinnshi-com-tls
+  commonName: chinnshi.com
+  dnsNames:
+  - chinnshi.com
+  - "*.chinnshi.com"
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+```
+
+创建签发工具. `ClusterIssuer` 和 `Issuer` 的区别只有 `ClusterIssuer` 能签发所有命名空间的证书.
+
+相关链接
+
+- 官网安装文档 [kubectl apply - cert-manager Documentation](https://cert-manager.io/docs/installation/kubectl/)
+- 腾讯云文档 [容器服务 使用 cert-manager 签发免费证书-最佳实践-文档中心-腾讯云](https://cloud.tencent.com/document/product/457/49368#.E9.85.8D.E7.BD.AE-dns)
+
+## 协议学习
 
 获取目录 `get https://acme.zerossl.com/v2/DV90`
 

@@ -406,6 +406,7 @@ do
     /usr/bin/rsync -atvP /usr/local/nginx/conf/nginx.conf "root@$host:/usr/local/nginx/conf/nginx.conf"
     /usr/bin/rsync -atvP /usr/local/nginx/conf/hosts/*.conf "root@$host:/usr/local/nginx/conf/hosts/"
     /usr/bin/rsync -atvP /usr/local/nginx/conf/options/*.conf "root@$host:/usr/local/nginx/conf/options/"
+    /usr/bin/rsync -atvP /data/files/* "root@$host:/data/files/"
     # 远程测试nginx配置
     /usr/bin/ssh "root@$host" "/usr/local/bin/nginx -t"
     # 远程机器测试成功，进行reload

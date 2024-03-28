@@ -5,7 +5,7 @@ tags:
   - vue
   - 前端
 date: 2024-03-09
-lastmod: 2024-03-20
+lastmod: 2024-03-26
 categories:
   - blog
 description: 
@@ -155,6 +155,7 @@ css 内容
 #### 编程路由
 
 ```ts
+import { useRouter } from "vue-router"
 const router = useRouter()
 // 这里的push可以传递RouterLink里的 to 值
 router.push('/url1')
@@ -348,6 +349,61 @@ defineProps(['modelValue'])
 const emit = defineEmits(['update:modelValue'])
 ```
 
+#### $attr 父传子
+
+父传子的时候, 如果子没有使用 `defineProps` 接收. 就会到子组件的 `$attr` 里.
+
+常见于把用户的配置通过 `attrs` 传递到下层组件. 所以常见场景是: 二次封装组件
+
+```ts
+// 父
+// {c:1,d:2} 等于 :c="1" :d="2"
+<child :a="a" :b="func" v-bind="{c:1,d:2}">
+
+// 子 原封不动传递一下
+<sun v-bind:"$attr">
+
+// 孙 直接可以接收到
+defineProps(["a","func"])
+```
+
+#### $refs 父传子 && $parent 子传父
+
+```ts
+// 父 给子一个ref
+<child ref="z">
+// 拿到子
+let z = ref()
+// 子暴露的都可以拿到
+z.value.a = 2
+// 自己的数据,也暴露出去
+let q = ref(1)
+defineExpose({q})
+
+// 子 暴露出去a
+a = ref(1)
+defineExpose({a})
+// 通过$parent拿到父暴露的q
+console.log($parent.q)
+```
+
+#### provide/inject 祖传
+
+祖辈向下一代传递
+
+```ts
+// 祖先
+let qian = ref(1)
+provide('money',qian)
+// 复杂的对象
+provide('money',{qian,func})
+
+// 子
+let q = inject('money',5) // 默认值5,顺便用来做类型推断
+// 复杂的对象
+let {qian,func} = inject('money',{q:5,f:()=>{}})  
+```
+
 ###  for 循环
 
 - 循环遍历数组 `(person, index) in Persons`
@@ -387,7 +443,70 @@ const stopWatch = watch(sum, (newValue, oldValue) => {
 }, { immediate: false, deep: false })
 ```
 
-### 生命周期
+### slot 插槽
+
+假设一个页面, 有一个热门推荐窗口.
+
+- 推荐图片
+- 推荐视频
+- 推荐文字
+
+那么用 `slot` 就可以传递不同的元素.
+
+```html
+// 父
+<h3>今日推荐</h3>
+<child>
+<img src="xxx">
+</child>
+
+// 子
+<template>
+<slot>默认没有内容</slot>
+</template>
+```
+
+`具名插槽` 给插槽一个名字, 对应插入内容.
+
+```html
+<!-- ParentComponent.vue -->
+<template>
+  <ChildComponent>
+    <template v-slot:header>
+      <h2>这是标题</h2>
+    </template>
+    <template v-slot:footer>
+      <p>这是页脚</p>
+    </template>
+  </ChildComponent>
+</template>
+
+<!-- ChildComponent.vue -->
+<template>
+  <div>
+    <header>
+      <slot name="header"></slot>
+    </header>
+    <main>
+      <slot></slot>
+    </main>
+    <footer>
+      <slot name="footer"></slot>
+    </footer>
+  </div>
+</template>
+```
+
+`作用域插槽`: 子组件有数据 `q={a:1}`. 而父组件需要定义如何展示. 就会用到 `q.a`. 就需要作用域插槽解决这个问题.
+
+常见于 ui 组件库.
+
+- 你在编写一个 ui 组件库的 table 组件, 有一个配套的搜索栏.
+- 这时候父组件就需要传入搜索的字段, 配置这个搜索框的样式.
+- 而可以使用哪些字段来搜索, 是 table 组件控制的.
+- 所以 table 子组件把可以用的字段通过 `slot` 传递给父组件.
+
+### lifetime 生命周期
 
 - `setup` 创建阶段
 - `onBeforeMounted`, `onMounted` 挂载阶段
@@ -398,6 +517,53 @@ const stopWatch = watch(sum, (newValue, oldValue) => {
 onMounted(()=>{
     console.log(1)
 })
+```
+
+### 其他
+
+- `shallowref({a:1,b:{c:2}})`: 包裹对象的第一层 `a` 响应式. 下级 `b` 不监测. 性能更好
+- `readonly({a:1,b:2})` 无法修改
+- `const rawObj = toRaw(reactiveObj)` 拿到 `reactive` 包装前的原对象.
+- `const nonReactiveObj = markRaw(copiedObj)` 相当于深拷贝一个新对象出来.
+- `teleport` 让一个组件渲染到不同的 dom 位置 (例如相对于 body 元素, 而不是当前位置)
+- `suspense` 自定义一个 loading 或加载失败时展示内容. 是占位符 + 加载状态展示
+- `customRef` 是 Vue 3 中的一个函数，用于创建一个自定义的 ref 对象。通过 `customRef`，你可以定义一个自定义的 getter 和 setter 函数来管理 ref 对象的值，并且可以手动控制依赖追踪和触发更新。这使得你可以更灵活地处理一些复杂的情况，例如惰性计算、异步更新等。
+
+```js
+import { customRef } from 'vue';
+
+function customComputedRef(getter, setter) {
+  let value = getter();
+  return customRef((track, trigger) => {
+    return {
+      get() {
+        track(); // 手动追踪依赖
+        return value;
+      },
+      set(newValue) {
+        setter(newValue);
+        value = newValue;
+        trigger(); // 手动触发更新
+      }
+    };
+  });
+}
+
+const myCustomRef = customComputedRef(
+  () => {
+    console.log('getter executed');
+    return 1;
+  },
+  (v) => {
+    console.log('setter executed', v);
+  }
+);
+
+console.log(myCustomRef.value); // 输出: "getter executed", 1
+
+myCustomRef.value = 2; // 输出: "setter executed", 2
+console.log(myCustomRef.value); // 输出: "getter executed", 2
+
 ```
 
 ## 工具
