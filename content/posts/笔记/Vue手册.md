@@ -5,7 +5,7 @@ tags:
   - vue
   - 前端
 date: 2024-03-09
-lastmod: 2024-03-26
+lastmod: 2024-03-30
 categories:
   - blog
 description: 
@@ -569,6 +569,146 @@ console.log(myCustomRef.value); // 输出: "getter executed", 2
 ## 工具
 
 ### vite
+
+#### 相关资源
+
+- [vite文档地址](https://cn.vitejs.dev/guide/env-and-mode.html#env-variables)
+- [GitHub - vbenjs/vite-plugin-svg-icons: Vite Plugin for fast creating SVG sprites.](https://github.com/vbenjs/vite-plugin-svg-icons)
+
+#### iconfont
+
+`iconfont` 是阿里的图标库. 这里介绍用法.
+
+安装插件
+
+```shell
+pnpm install vite-plugin-svg-icons -D
+```
+
+配置 `vite.config.ts`
+
+```ts
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import path from 'path'
+
+export default defineConfig({
+  plugins: [
+    // 关键内容
+    createSvgIconsPlugin({
+      iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+      symbolId: 'icon-[dir]-[name]'
+    })
+  ],
+})
+```
+
+配置 `main.ts`
+
+```ts
+// svg插件
+import 'virtual:svg-icons-register'
+```
+
+创建文件夹 `src/assets/icons`, 去 [iconfont](https://www.iconfont.cn/) 下载 svg 到这个文件夹.
+
+例如 `src/assets/icons/dollor.svg`
+
+使用方法:
+
+- `fill` 控制颜色
+- 样式控制大小
+
+```html
+<svg class="svg">
+    <use xlink:href="#icon-dollor" fill="red"></use>
+</svg>
+
+<style scoped>
+.svg {
+    width: 2rem;
+}
+</style>
+```
+
+封装一下 `src/components/SvgIcon/index.vue` 组件
+
+```html
+<template>
+    <svg :style="{ width: size, height: size }">
+        <use :xlink:href="prefix + name" :fill="fill"></use>
+    </svg>
+</template>
+
+<script lang="ts" setup>
+defineOptions({
+    name: "svg-component"
+})
+const prefix = "#icon-"
+
+withDefaults(defineProps<{ name?: string, size?: string, fill?: string }>(), {
+    // 默认图标
+    name: () => "info-circle",
+    // 大小
+    size: () => "1rem",
+    // 填充颜色
+    fill: () => ""
+})
+</script>
+```
+
+使用组件
+
+```html
+<svg-icon name="dollor" size="2rem" fill="red"></svg-icon>
+
+import SvgIcon from "@/components/SvgIcon/index.vue";
+```
+
+#### env 环境变量
+
+`vite` 使用 `.env` 文件区分使用环境变量, 暴露在 `import.meta.env` 对象里.
+
+已有的变量:
+
+- `import.meta.env.MODE`: {string} 应用运行的 [模式](https://cn.vitejs.dev/guide/env-and-mode.html#modes)。
+- `import.meta.env.BASE_URL`: {string} 部署应用时候的基础 url, 默认 `/`
+- `import.meta.env.PROD`: {boolean} 是否生产环境. `NODE_ENV='production'` 决定这个值
+- `import.meta.env.DEV`: {boolean} 是不是开发环境
+- `import.meta.env.SSR`: {boolean} 应用是否运行在 SSR 模式
+
+使用场景
+
+```shell
+# "dev":"vite" 所以等同于直接执行 vite 命令
+# 读取 .env.development
+pnpm dev
+
+# 等于并行运行 vue-tsc --build --force && vite build
+# 读取 .env.prodution
+pnpm build
+
+# 使用 --mode 指定读取的文件 .env.staging
+vite build --mode staging
+```
+
+> `process.env.NODE_ENV` 和 `vite build --mode env` 不是一个东西.
+> 但是建议在 `.env` 文件里加入加上这个变量. 使得统一
+
+```shell
+# 示例如下
+# .env
+VITE_APP_TITLE = '我是名字'
+
+# .env.development
+NODE_ENV = 'development'
+VITE_KEN = 'development'
+VITE_SERVER_URL = 'http://127.0.0.1:5000/'
+
+# .env.production
+NODE_ENV = 'production'
+VITE_KEN = 'production'
+VITE_SERVER_URL = 'http://127.0.0.1:5000/'
+```
 
 #### 自定义组件名
 

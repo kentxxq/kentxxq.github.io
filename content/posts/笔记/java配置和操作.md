@@ -4,7 +4,7 @@ tags:
   - blog
   - java
 date: 2023-07-04
-lastmod: 2023-07-05
+lastmod: 2024-04-01
 categories:
   - blog
 description: "我不怎么写 [[笔记/point/java|java]] 代码, 但是国内一般都是 java 后台, 所以记录一些配置和操作, 方便复用."
@@ -13,6 +13,14 @@ description: "我不怎么写 [[笔记/point/java|java]] 代码, 但是国内一
 ## 简介
 
 我不怎么写 [[笔记/point/java|java]] 代码, 但是国内一般都是 java 后台, 所以记录一些配置和操作, 方便复用.
+
+## 安装
+
+1. 下载对应版本的 jdk [OpenJDK JDK 21.0.2 GA Release](https://jdk.java.net/21/), 地址路径可以修改, 对应 jdk 的大版本
+2. 配置环境变量
+    - `JAVA_HOME`: `/path/21-jdk`
+    - `CLASSPATH`: `/path/21-jdk/lib/tools.jar`
+    - `PATH` 新增路径 `/path/21-jdk/bin`
 
 ## JVM 启动参数
 

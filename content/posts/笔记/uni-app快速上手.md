@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2024-01-20
-lastmod: 2024-01-24
+lastmod: 2024-03-29
 categories:
   - blog
 description: 
@@ -199,3 +199,14 @@ export const userStore = defineStore(
 ```
 
 `main.ts` 中引入使用 `app.use(pinia);`
+
+## 资源
+
+### uni-app  
+
+```shell
+# 项目模板代码  
+git clone -b template https://gitee.com/heima-fe/uniapp-shop-vue3-ts.git heima-shop  
+# 项目成品代码  
+git clone https://gitee.com/Megasu/uniapp-shop-vue3-ts.git
+```
