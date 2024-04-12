@@ -4,7 +4,7 @@ tags:
   - point
   - elastic
 date: 2023-07-19
-lastmod: 2023-12-13
+lastmod: 2024-04-11
 categories:
   - point
 ---
@@ -106,4 +106,19 @@ stderr_logfile =  /data/logs/es-stderr.log
 stderr_logfile_maxbytes=20MB
 # 日志文件保持数量 默认为10 设置为0 表示不限制
 stderr_logfile_backups = 5
+```
+
+## 工具
+
+[infini-console](https://infinilabs.cn/en/docs/latest/console/) 可以帮助我们管理多个 es 集群, 查询修改等操作.
+
+```yml
+version: "3.5"
+
+services:
+  infini-console:
+    image: infinilabs/console:latest
+    ports:
+      - 9000:9000
+    container_name: "infini-console"
 ```

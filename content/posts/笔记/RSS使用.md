@@ -3,7 +3,7 @@ title: RSS使用
 tags:
   - blog
 date: 2023-09-11
-lastmod: 2023-10-25
+lastmod: 2024-04-10
 categories:
   - blog
 description: 
@@ -17,7 +17,54 @@ description:
 
 - [男性和女性的评论区不一样？算法连这也不放过 - cnBeta.COM 移动版](https://m.cnbeta.com.tw/view/1382883.htm)
 
-## 内容
+## RSS 客户端
+
+- 移动端
+    - [yang991178/fluent-reader-lite](https://github.com/yang991178/fluent-reader-lite) 所有平台
+    - 安卓客户端 [Releases · Ashinch/ReadYou (github.com)](https://github.com/Ashinch/ReadYou)
+    - 苹果 [Ranchero-Software/NetNewsWire: RSS reader for macOS and iOS. (github.com)](https://github.com/Ranchero-Software/NetNewsWire)
+- [万物皆可RSSHub](https://docs.rsshub.app/routes/bbs#v2ex-zui-re-%2F-zui-xin-zhu-ti)
+- 桌面端
+    - 跨平台 [raven-reader](https://github.com/hello-efficiency-inc/raven-reader)
+    - 跨平台 [fluent-reader]( https://github.com/yang991178/fluent-reader )
+    - 苹果 [NetNewsWire](https://github.com/Ranchero-Software/NetNewsWire)
+- 自部署 web 端
+    - [commafeed](https://github.com/Athou/commafeed)
+    - [FreshRSS](https://github.com/FreshRSS/FreshRSS), php 写的
+    - [miniflux](https://github.com/miniflux/v2), go 写的
+    - [selfoss](https://selfoss.aditu.de/)
+    - [nkanaev/yarr](https://github.com/nkanaev/yarr)
+    - [Tiny Tiny RSS (tt-rss.org)](https://tt-rss.org/), php 写的
+    - Grafana 也可以订阅 rss 并展示 [RSS/Atom plugin for Grafana | Grafana Labs](https://grafana.com/grafana/plugins/volkovlabs-rss-datasource/?tab=installation)
+- 主流平台
+    - Feedly, 老牌生态好. 100 feed, 3 个文件夹. 内容列表嵌入广告
+    - [Inoreader – Build your own newsfeed](https://www.inoreader.com/zh-hans/)
+        - Pc 是站点, 有移动端.
+        - 内容嵌入广告.
+        - 功能比 feedly 多.
+        - 移动端没有底部导航栏, 使用不习惯 (不方便)
+    - [NewsBlur](https://newsblur.com/) 样式比较老, 64 个站点订阅. 不订阅一次只能看 3 篇文章, 可以专注, 但不实用....
+    - [reeder苹果收费](https://reederapp.com/) 苹果平台最好的
+    - [Feeder](https://feeder.co/), 200 免费订阅, 无广告
+    - [QiReader](https://www.qireader.com/) 30 个订阅有点少
+    - [FeedMe (RSS Reader | Podcast) - Apps on Google Play](https://play.google.com/store/apps/details?id=com.seazon.feedme&hl=en_US) 可以使用 feedly 账号.. 仅安卓
+- 可参考教程
+    - [重新捡起RSS：RSSHub + FreshRSS 建立信息流 (l3zc.com)](https://l3zc.com/2023/07/rsshub-freshrss-information-flow/)
+    - [用Miniflux自建轻便好用的RSS服务 (zoomyale.com)](http://zoomyale.com/2018/miniflux_rss/)
+
+## RSS 订阅源
+
+- ithome
+- [快科技(原驱动之家)--科技改变未来 (mydrivers.com)](https://rss.mydrivers.com/)
+- [奇客资讯网](https://www.solidot.org/)
+- b 站每周必看 `https://rsshub.app/bilibili/weekly`
+- 知乎热榜 `https://rsshub.app/zhihu/hotlist`
+
+因为记性不好, 我不喜欢的也记录一下
+
+- 忽左忽右
+- 大内密探
+- 谐星聊天会
 
 ## 临时记录
 

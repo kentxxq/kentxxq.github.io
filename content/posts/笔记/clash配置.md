@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2024-01-09
+lastmod: 2024-04-12
 keywords:
   - clash
   - 配置文件
@@ -596,6 +596,7 @@ parsers:
     - [魅影小站 - Ark](https://ark.to/user)
     - 唯云四杰好像是有口碑的
     - [一个机场收录站点](https://dh.duangks.com/)
+    - justmysocket
 - [Clash分流策略 | 配置文件 | 订阅防覆盖 | 硬核教程](https://a-nomad.com/clash)
 - [Clash规则大全](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash)
 - [GFW是如何工作的](https://gfw.report/publications/usenixsecurity23/zh/)
