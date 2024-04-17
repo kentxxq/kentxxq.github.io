@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-09-05
-lastmod: 2024-02-19
+lastmod: 2024-04-15
 categories:
   - blog
 description: 
@@ -22,6 +22,12 @@ description:
 - `buildkid` #todo/笔记  [如何使用 docker buildx 构建跨平台 Go 镜像 | Shall We Code?](https://waynerv.com/posts/building-multi-architecture-images-with-docker-buildx/)
 
 ## 构建细节
+
+### 构建传参
+
+```shell
+docker build -t 名字:哈希值-发版号 --build-arg filename=参数值 --build-arg a=b .
+```
 
 ### 构建分层划分
 
@@ -69,7 +75,7 @@ RUN mv /etc/apt/sources.list sources.list.bak && \
     echo "deb http://mirrors.ivolces.com/ubuntu/ jammy-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
     echo "deb http://mirrors.ivolces.com/ubuntu/ jammy-security main restricted universe multiverse" >> /etc/apt/sources.list && \
     apt update -y && \
-    apt install lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass -y && \
+    apt install lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass dnsutils -y && \
     ls
 ```
 
@@ -93,7 +99,7 @@ RUN mv /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/debian.sou
     echo "deb http://mirrors.ivolces.com/debian/ bookworm-backports main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
     echo "#deb-src http://mirrors.ivolces.com/debian/ bookworm-backports main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
     apt update -y && \
-    apt install lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass -y && \
+    apt install lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass dnsutils -y && \
     ls
 
 ENV TZ=Asia/Shanghai
@@ -260,7 +266,7 @@ ENV deploy_params=$DEPLOY_PARAMS
 COPY --from=publish /app/publish/dist/ /usr/share/nginx/html
 ```
 
-### CICD 外部构建版本
+### CICD 外部构建版本/仅容器/无构建
 
 #### Dockerfile-java 示例
 

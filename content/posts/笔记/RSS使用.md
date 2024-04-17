@@ -3,7 +3,7 @@ title: RSS使用
 tags:
   - blog
 date: 2023-09-11
-lastmod: 2024-04-10
+lastmod: 2024-04-17
 categories:
   - blog
 description: 
@@ -59,6 +59,9 @@ description:
 - [奇客资讯网](https://www.solidot.org/)
 - b 站每周必看 `https://rsshub.app/bilibili/weekly`
 - 知乎热榜 `https://rsshub.app/zhihu/hotlist`
+- 捕蛇者说
+- 二分电台
+- 代码之外
 
 因为记性不好, 我不喜欢的也记录一下
 
