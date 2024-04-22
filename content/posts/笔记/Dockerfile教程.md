@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-09-05
-lastmod: 2024-04-15
+lastmod: 2024-04-19
 categories:
   - blog
 description: 
@@ -65,7 +65,7 @@ FROM ubuntu:22.04
 # 避免对话式弹窗
 ENV DEBIAN_FRONTEND=noninteractive
 # 进行时区基本信息的设置
-ENV TZ Asia/Shanghai
+ENV TZ=Asia/Shanghai
 
 # 软件源和基础配置
 RUN mv /etc/apt/sources.list sources.list.bak && \
@@ -162,7 +162,7 @@ RUN mkdir -p /data/weblog \
 && apt-get update -y \
 && apt-get install vim telnet less -y
 # 时区
-ENV TZ Asia/Shanghai
+ENV TZ=Asia/Shanghai
 
 
 
@@ -222,7 +222,7 @@ RUN mkdir -p /data/weblog \
 && apt-get install apt-transport-https ca-certificates \
 && apt-get update -y \
 && apt-get install vim telnet less -y
-ENV TZ Asia/Shanghai
+ENV TZ=Asia/Shanghai
 
 
 
@@ -287,7 +287,7 @@ RUN mkdir -p /data/weblog \
     && apt-get install apt-transport-https ca-certificates -y \
     && apt-get install vim telnet less xfonts-utils iproute2 iputils-ping psmisc -y
 # 进行时区基本信息的设置
-ENV TZ Asia/Shanghai
+ENV TZ=Asia/Shanghai
 # 设置宋体
 RUN mkdir -p /usr/share/fonts/simsun \
     && wget -q http://gosspublic.alicdn.com/ossutil/1.7.9/ossutil64 \
@@ -353,7 +353,7 @@ RUN mkdir -p /data/weblog \
     && apt-get install apt-transport-https ca-certificates -y \
     && apt-get install vim telnet less iproute2 iputils-ping -y
 # 进行时区等基本信息的设置
-ENV TZ Asia/Shanghai
+ENV TZ=Asia/Shanghai
 
 FROM base AS final
 WORKDIR /workload

@@ -5,7 +5,7 @@ tags:
   - vue
   - 前端
 date: 2024-03-09
-lastmod: 2024-03-30
+lastmod: 2024-04-19
 categories:
   - blog
 description: 
@@ -280,11 +280,11 @@ function fangfa(value:number){
 defineProps(['dataA','fangfa'])
 fangfa(1)
 // 接收父组件的Person对象
-defineProps<dataA:Person>()
+defineProps<{dataA:Person}>()
 // 可以不传 
-defineProps<dataA?:Person>()
+defineProps<{dataA?:Person}>()
 // 默认值
-withDefaults(defineProps<dataA?:Person>(),{
+withDefaults(defineProps<{dataA?:Person}>(),{
     dataA: ()=> [{id: 1,name: "ken",age: 1}]
 })
 ```

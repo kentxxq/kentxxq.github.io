@@ -5,7 +5,7 @@ tags:
   - k8s
   - docker
 date: 2023-08-18
-lastmod: 2024-01-17
+lastmod: 2024-04-19
 keywords:
   - k8s
   - docker
@@ -56,7 +56,8 @@ registry-demo:
     "registry-mirrors": [
         "https://docker.m.daocloud.io",
         "https://dockerproxy.com",
-        "https://docker.mirrors.ustc.edu.cn",
+        "https://docker.mirrors.sjtug.sjtu.edu.cn",
+        "https://mirror.baidubce.com",
         "https://docker.nju.edu.cn"
     ]
 }

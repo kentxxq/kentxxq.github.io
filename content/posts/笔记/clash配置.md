@@ -348,8 +348,6 @@ proxy-providers:
 
 ## linux 下的 clash 安装
 
-#todo/笔记 来个示意图, 同时把守护进程换了
-
 ### 服务搭建
 
 > [!warning]
