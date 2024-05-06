@@ -5,7 +5,7 @@ tags:
   - mysql
   - docker
 date: 1993-07-06
-lastmod: 2024-03-20
+lastmod: 2024-04-22
 categories:
   - blog
 description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置. 所以记录一下配置和操作."
@@ -26,6 +26,18 @@ description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置
 # 配置了字符集
 # 优化资源占用 --table-open-cache=400 --table-definition-cache=400 --performance-schema=OFF
 docker run --name ken-mysql -v /data/mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123 -p3306:3306 -d mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+```
+
+### apt 仓库
+
+使用 [mysql-清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/mysql/)
+
+```shell
+vim /etc/apt/sources.list.d/mysql-community.list
+deb https://mirrors.tuna.tsinghua.edu.cn/mysql/apt/ubuntu jammy mysql-8.0 mysql-tools
+apt update -y
+apt install mysql-server
+systemctl status mysql
 ```
 
 ### deb 安装
@@ -51,6 +63,12 @@ password
 
 ### 集群 slave
 
+要点:
+
+- 主节点可以写. 从节点 `read_only=1` 不能写. 挂了以后切换到从节点, 只能读.
+- 或者
+- 从节点可以写. 但是主节点挂了以后, 不再自动切换过去
+
 `master` 节点操作
 
 ```bash
@@ -68,7 +86,7 @@ grant replication slave, replication client on *.* to 'slave'@'%';
 flush privileges;
 
 flush table with read lock;
-mysqldump -uroot -pmsb123 -A -B --events --master-data=2 > /root/mysql/db-bak-all.sql
+mysqldump -uroot -pmsb123 -A -B --events --source-data=2 > /root/mysql/db-bak-all.sql
 unlock tables;
 ```
 
@@ -84,13 +102,68 @@ change master to
 master_host='master节点的ip',
 master_user='slave',
 master_password='slave',
-# db-bak-all.sql会有写具体的值,抄过来就好
+# db-bak-all.sql的头部会有写这两个值. 
+# 示例 CHANGE MASTER TO MASTER_LOG_FILE='binlog.000003', MASTER_LOG_POS=157;
 MASTER_LOG_FILE='mysql-bin-bin.000001',
 MASTER_LOG_POS=769 ;
 
 # 验证
 show slave status\G
 ```
+
+正常情况切换主库.  或者主库坏了, 延迟很低. 不需要追补数据的时候.
+
+```shell
+# 主库只读
+set global read_only=ON;
+set global super_read_only=ON;
+# 查看状态
+# slave_io_runnning,slave_sql_runnning 是yes 说明同步正常
+# seconds_behind_master为0,说明没有延迟.10就是10秒
+show slave status\G
+# 确保gtid一致. 主从都执行
+select @@global.gtid_executed;
+# 从库停止slave,关闭只读
+stop slave;
+reset slave all;
+set global read_only=off;
+set global super_read_only=off;
+# 主库
+change master to ......
+start slave;
+# 验证状态yes,延迟很低
+show slave status\G
+```
+
+追补数据需要在**从库/新主库关闭 slave 后操作**
+
+- 主库无法启动. 但是有 binlog.
+
+```shell
+select @@global.gtid_executed
+# 出现类似uuid的记录
+
+# 生成sql,手动分析这还行
+mysqlbinlog -vv --base64-output=decode-rows --exclude-gtids='uuid,uuid' /xxx/binlog-file > /tmp/binlog-file.sql
+
+# 新主库没有写入数据,说明不会冲突,可以直接导入
+mysqlbinlog -vv --base64-output=decode-rows --exclude-gtids='uuid,uuid' /xxx/binlog-file > /tmp/binlog-file.sql | mysql -uroot -p -S /xxx/mysql.sock -P3306
+```
+
+- 主库可以启动. 新主库没有写入, 那么直接 changbe master 重新同步就好了.
+
+```shell
+# https://github.com/liuhr/my2sql
+# 如果新主库有写入
+my2sql -user xxx -password xxx -work-type 2sql -start-file /xxx/binlog-file -start-pos=10 --add-extraInfo --exclude-gtids='uuid' -output-dir /tmp/sql-folder
+# 会出现多个sql文件,选择性追加到新主库
+```
+
+相关链接
+
+- [基于Keepalive + MySQL主从实现高可用架构](https://yangcongchufang.com/keepalived-mysql-master-slave.html)
+- [MySQL集群部署：一主多从 | 程序猿DD](https://www.didispace.com/installation-guide/middleware/mysql-cluster-1.html#%E7%AC%AC%E4%BA%8C%E6%AD%A5-51%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AEslave)
+- [MySQL 主从切换步骤\_mysql主从切换-CSDN博客](https://blog.csdn.net/sinat_36757755/article/details/124049382)
 
 ### 双主集群
 
@@ -99,9 +172,12 @@ show slave status\G
 - 不同的 `server_id`，使得节点在集群内唯一
 - 开启 `gtid` 配置
 - 通过不同的 `auto_increment_offset` 确定初始时的 id 不重复，通过 `auto_increment_increment` 确保自增 id 不重复
-- 开启 `log-salve-updates` 使得节点直接的数据会互相同步
 - `sync_binlog` 为 1 确保事务的完整性
 - 创建数据同步账户，执行 `change master to...`，然后 `start slave`
+- A-master 认 B-master 是主节点. B-master 认 A-master 是主节点
+- 开启 `log-slave-updates` 使得节点直接的数据会互相同步.
+
+阿里云有 mgr 模式, 就是组复制. 这是更高级的集群模式
 
 参考链接：
 

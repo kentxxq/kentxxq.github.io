@@ -173,7 +173,8 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
+    http2 on;
+    listen 443 ssl;
     server_name minio-api.kentxxq.com;
     include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
     access_log /usr/local/nginx/conf/hosts/logs/minio-api.kentxxq.com.log k-json;
@@ -209,7 +210,8 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
+    http2 on;
+    listen 443 ssl;
     server_name minio-ui.kentxxq.com;
 
     include /usr/local/nginx/conf/options/ssl_kentxxq.conf;

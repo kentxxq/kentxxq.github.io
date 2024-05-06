@@ -4,7 +4,7 @@ tags:
   - blog
   - gitlab
 date: 2023-08-15
-lastmod: 2024-02-08
+lastmod: 2024-05-06
 categories:
   - blog
 description: "这里记录 [[笔记/point/gitlab|gitlab]] 的安装, 配置."
@@ -105,7 +105,8 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
+    http2 on;
+    listen 443 ssl;
     server_name git.kentxxq.com;
     access_log /usr/local/nginx/conf/hosts/logs/git.kentxxq.com.log k-json;
 

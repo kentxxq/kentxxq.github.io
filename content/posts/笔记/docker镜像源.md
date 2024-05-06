@@ -5,7 +5,7 @@ tags:
   - k8s
   - docker
 date: 2023-08-18
-lastmod: 2024-01-17
+lastmod: 2024-04-24
 keywords:
   - k8s
   - docker
@@ -56,7 +56,8 @@ registry-demo:
     "registry-mirrors": [
         "https://docker.m.daocloud.io",
         "https://dockerproxy.com",
-        "https://docker.mirrors.ustc.edu.cn",
+        "https://docker.mirrors.sjtug.sjtu.edu.cn",
+        "https://mirror.baidubce.com",
         "https://docker.nju.edu.cn"
     ]
 }
@@ -64,14 +65,12 @@ registry-demo:
 
 | 提供者      | 地址                                       |
 | ----------- | ------------------------------------------ |
-| [网易云](https://c.163yun.com/hub)      | `https://hub-mirror.c.163.com`             |
 | [Docker 镜像代理](https://dockerproxy.com/) | `https://dockerproxy.com`                  |
 | [百度云](https://cloud.baidu.com/doc/CCE/s/Yjxppt74z#%E4%BD%BF%E7%94%A8dockerhub%E5%8A%A0%E9%80%9F%E5%99%A8)      | `https://mirror.baidubce.com`              |
 | [上海交大镜像站](https://mirrors.sjtug.sjtu.edu.cn/)    | `https://docker.mirrors.sjtug.sjtu.edu.cn` |
 | [南京大学镜像站](https://doc.nju.edu.cn/books/35f4a)    | `https://docker.nju.edu.cn`                |
 | [DaoCloud](https://github.com/DaoCloud/public-image-mirror)    | `https://docker.m.daocloud.io`             |
 
-- `网易云` 年限比较久了，比较稳
 - `DaoCloud`, `dockerproxy`, `南京大学镜像站` 支持源站较多
 - 其他
     - [DaoCloud支持的镜像源列表](https://github.com/DaoCloud/public-image-mirror/blob/main/mirror.txt)

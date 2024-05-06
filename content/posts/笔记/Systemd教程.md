@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-29
-lastmod: 2024-02-20
+lastmod: 2024-05-06
 categories:
   - blog
 description: "[[笔记/point/Systemd|systemd]] 的相关概念, 使用, 操作示例."
@@ -326,8 +326,23 @@ systemctl status systemd-journald
 ```shell
 # 滚动查看日志
 journalctl -u nginx.service -f
+
 # 日志空间占用
 journalctl --disk-usage
+# 自动清理,默认是4G /etc/systemd/journald.conf
+SystemMaxUse=10G
+systemctl restart systemd-journald
+
+# 手动清理
+# 通常日志会存放在这样的目录里
+/var/log/journal/2195e6a94ece4443abc39350bd0f8b5f
+# 进入以后,手动清空所有日志
+:>system.journal
+
+# 保留1秒, 2d 保留2天 1w 保留一周
+journalctl --vacuum-time=1s
+# 保留500m
+journalctl --vacuum-size=500M
 ```
 
 ## 使用建议

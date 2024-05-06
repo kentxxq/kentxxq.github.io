@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-02-29
+lastmod: 2024-05-06
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -151,7 +151,8 @@ http {
     # 压缩类型，下面的配置压缩了接口。可配置项参考nginx目录下的mime.types
     # 参考google压缩了html,css,js,json. text/html 总是会压缩,加上去返回而报错.
     # 图片属于压缩过了的格式, 应该由专门的服务或CDN转换图片格式
-    gzip_types text/plain text/xml text/css application/javascript application/json;
+    # text/javascript 用于兼容html5之前写的项目
+    gzip_types text/plain text/xml text/css text/javascript application/javascript application/json;
     gzip_vary on;
 
     gzip_disable "msie6";
@@ -381,7 +382,8 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
+    http2 on;
+    listen 443 ssl;
     server_name www.kentxxq.com;
     access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log k-json;
 
@@ -480,7 +482,8 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
+    http2 on;
+    listen 443 ssl;
     server_name www.kentxxq.com;
     access_log /usr/local/nginx/conf/hosts/logs/www.kentxxq.com.log;
 
@@ -637,7 +640,8 @@ http {
     }
 
     server {
-        listen       8080 ssl http2;
+        http2 on;
+        listen       8080 ssl;
 
         # Mutual TLS between gRPC client and nginx
         ssl_certificate cert/server-cert.pem;
@@ -811,7 +815,8 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
+    http2 on;
+    listen 443 ssl;
     server_name kentxxq.com;
     client_max_body_size 2048M;
     include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
@@ -944,7 +949,8 @@ http {
 
 ```nginx
 server {
-    listen      443 ssl http2;
+    http2 on;
+    listen      443 ssl;
     server_name  a.kentxxq.com;
     access_log  /data/weblog/nginx/logs/a.kentxxq.com.access.log  main;
     lua_need_request_body on;

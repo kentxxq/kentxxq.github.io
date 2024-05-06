@@ -50,7 +50,8 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
+    http2 on;
+    listen 443 ssl;
     server_name om-grafana.chinnshi.com;
     access_log /usr/local/nginx/conf/hosts/logs/om-grafana.kentxxq.com.log k-json;
 

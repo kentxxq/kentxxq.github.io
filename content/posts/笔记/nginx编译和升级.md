@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-01-23
+lastmod: 2024-05-06
 categories:
   - blog
 description: "这里记录 [[笔记/point/nginx|nginx]] 的模块编译和升级操作."
@@ -24,15 +24,10 @@ description: "这里记录 [[笔记/point/nginx|nginx]] 的模块编译和升级
 # 准备目录
 mkdir nginx ; cd nginx
 
-# 下载tengine https://tengine.taobao.org/download_cn.html
-curl https://tengine.taobao.org/download/tengine-3.0.0.tar.gz -o 
-tengine-3.0.0.tar.gz
-tar xf tengine-3.0.0.tar.gz
-
 # 下载,解压 https://nginx.org/en/download.html
-curl http://nginx.org/download/nginx-1.24.0.tar.gz -o nginx-1.24.0.tar.gz
-tar -xf nginx-1.24.0.tar.gz
-cd nginx-1.24.0
+curl http://nginx.org/download/nginx-1.26.0.tar.gz -o nginx-1.26.0.tar.gz
+tar -xf nginx-1.26.0.tar.gz
+cd nginx-1.26.0
 
 # 监控信息 --with-http_stub_status_module 
 # ssl证书 --with-http_ssl_module
@@ -69,6 +64,10 @@ patch -p1 < ngx_http_proxy_connect_module/patch/proxy_connect_rewrite_102101.pat
 #### 第三方模块调试
 
 ```shell
+# 下载tengine https://tengine.taobao.org/download_cn.html
+curl https://tengine.taobao.org/download/tengine-3.0.0.tar.gz -o tengine-3.0.0.tar.gz
+tar xf tengine-3.0.0.tar.gz
+
 # 加入tengine的内存调试模块
 ./configure ... --add-module=/root/nginx/tengine-3.0.0/modules/ngx_debug_pool
 ```
@@ -77,8 +76,8 @@ patch -p1 < ngx_http_proxy_connect_module/patch/proxy_connect_rewrite_102101.pat
 
 ```shell
 # 下载,解压
-curl http://nginx.org/download/nginx-1.24.0.tar.gz -o ~/nginx-1.24.0.tar.gz
-tar xf ~/nginx-1.24.0.tar.gz
+curl http://nginx.org/download/nginx-1.26.0.tar.gz -o ~/nginx-1.26.0.tar.gz
+tar xf ~/nginx-1.26.0.tar.gz
 
 # nginx -V查看现有配置，然后到新版本nginx目录下执行同样配置
 ./configure 编译参数(configure-arguments)

@@ -13,6 +13,6 @@ categories:
 
 要点:
 
-- 开源
+- 开源 [Bitwarden · GitHub](https://github.com/bitwarden)
 - 大部分功能免费, 自建全免费
 - 所有端的全覆盖

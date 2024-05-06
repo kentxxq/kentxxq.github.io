@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-08
-lastmod: 2024-02-05
+lastmod: 2024-05-06
 categories:
   - blog
 description: 
@@ -14,7 +14,7 @@ description:
 
 经常会购买/重装 [[笔记/point/linux|linux]] 服务器, 制作过很多次的镜像. 这里记录一下的初始化配置, 以后搞成一个 shell 脚本来用.
 
-## 操作手册
+## 待添加
 
 #todo/笔记
 
@@ -22,21 +22,15 @@ description:
 - Truncate 定时清空日志
 - Limit 配置
 
-## 虚拟机初始化
+## server 初始化
 
-> [快速配置LinuxMirrors](https://linuxmirrors.cn/use/)，依赖 curl
+### 登录
 
-安装配置 [清华源](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/) `https://mirrors.tuna.tsinghua.edu.cn/ubuntu/`
+1. [[笔记/linux命令与配置#允许 root 远程登录|允许 root 远程登录]]
+2. 允许 root 远程登录后，开始用 tabby 连接操作
+3. [[笔记/linux命令与配置#禁用密码登录/密钥登录|禁用密码登录/密钥登录]]
 
-允许 root 远程登录后，开始用 tabby 连接操作
-
-```shell
-vim /etc/ssh/sshd_config
-PermitRootLogin yes
-
-passwd root
-systemctl restart ssh
-```
+### 执行 shell
 
 开始运行
 
@@ -62,32 +56,40 @@ ntpdate ntp.aliyun.com
 hwclock -w
 timedatectl set-timezone Asia/Shanghai
 
-
-
-
-
-
-
-# 需要手动
 apt update -y
 apt upgrade -y
+```
 
+### 手动配置
+
+[[笔记/linux命令与配置#关闭 selinux|关闭 selinux]]
+
+```shell
 vim /etc/selinux/config
 SELINUX=disabled
+```
 
-crontab -e
-0 * * * * /usr/sbin/ntpdate ntp.aliyun.com
+时间配置 [[笔记/linux命令与配置#ntp - 原始/容器|ntp - 原始/容器]]
 
+docker 配置 [[笔记/docker镜像源#公共镜像源|docker公共镜像源]]
+
+```shell
 vim /etc/docker/daemon.json
-{
-  "registry-mirrors": [
-    "https://hub-mirror.c.163.com",
-    "https://mirror.baidubce.com"
-  ]
-}
+# 放入公共镜像源
+
 systemctl daemon-reload
 systemctl restart docker
 ```
+
+配置 nginx [[笔记/nginx编译和升级|nginx编译和升级]] , [[笔记/nginx配置|nginx配置]]
+
+配置 [[笔记/ACME|ACME]]
+
+配置 [[笔记/point/alist|alist]]
+
+配置 [[笔记/自建bitwarden|自建bitwarden]]
+
+部署 testserver, pusher
 
 ## Home-server 初始化
 

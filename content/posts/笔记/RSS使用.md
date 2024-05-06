@@ -3,7 +3,7 @@ title: RSS使用
 tags:
   - blog
 date: 2023-09-11
-lastmod: 2024-04-04
+lastmod: 2024-05-05
 categories:
   - blog
 description: 
@@ -54,11 +54,25 @@ description:
 
 ## RSS 订阅源
 
-- ithome
-- [快科技(原驱动之家)--科技改变未来 (mydrivers.com)](https://rss.mydrivers.com/)
-- [奇客资讯网](https://www.solidot.org/)
+- 新闻
+    - ithome 
+    - [快科技(原驱动之家)--科技改变未来 (mydrivers.com)](https://rss.mydrivers.com/)
+    - [奇客资讯网](https://www.solidot.org/)
+    - 钛媒体 [tmtpost.com/rss](https://www.tmtpost.com/rss)
+    - [theverge](http://www.theverge.com/rss/index.xml)
+- 学习
+    - bbc 学英语 [feeds.bbci.co.uk/learningenglish/english/features/6-minute-english/rss](http://feeds.bbci.co.uk/learningenglish/english/features/6-minute-english/rss)
 - b 站每周必看 `https://rsshub.app/bilibili/weekly`
 - 知乎热榜 `https://rsshub.app/zhihu/hotlist`
+- 捕蛇者说
+- 二分电台
+- 代码之外
+
+因为记性不好, 我不喜欢的也记录一下
+
+- 忽左忽右
+- 大内密探
+- 谐星聊天会
 
 ## 临时记录
 

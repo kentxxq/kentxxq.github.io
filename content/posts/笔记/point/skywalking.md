@@ -4,7 +4,7 @@ tags:
   - point
   - skywalking
 date: 2023-07-19
-lastmod: 2024-03-05
+lastmod: 2024-05-06
 categories:
   - point
 ---
@@ -67,7 +67,8 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
+    http2 on;
+    listen 443 ssl;
     server_name skywalking-ui-dev.kentxxq.com;
     access_log /usr/local/nginx/conf/hosts/logs/skywalking-ui-dev.kentxxq.com.log k-json;
 

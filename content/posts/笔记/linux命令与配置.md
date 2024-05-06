@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-03-28
+lastmod: 2024-05-06
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -681,6 +681,8 @@ pkill -KILL -t pts/1
 apt install update-manager-core -y
 do-release-upgrade -d
 ```
+
+> 通常新 lts 发布只是发布镜像, 用于新机安装. 需要过一段时间才会提供升级选项.
 
 ### 跑分
 
