@@ -20,7 +20,7 @@ description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通�
 
 ```shell
 # 安装编译需要用的依赖
-apt install libpcre3 libpcre3-dev openssl libssl-dev build-essential -y
+apt install libpcre3 libpcre3-dev openssl libssl-dev build-essential cmake -y
 ```
 
 ## 常用配置

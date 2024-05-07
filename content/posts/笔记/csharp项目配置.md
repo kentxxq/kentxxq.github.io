@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-07-26
-lastmod: 2024-02-19
+lastmod: 2024-05-07
 categories:
   - blog
 description: "[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."
@@ -153,7 +153,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
         <!-- ilc https://devblogs.microsoft.com/dotnet/performance_improvements_in_net_7/ -->
         <IlcOptimizationPreference>Size</IlcOptimizationPreference>
         <IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
-        <!-- 默认会混合,不建议开启下面2个 -->
+        <!-- 默认会综合考虑size和speed,不建议单独开启下面2个 -->
         <!-- <OptimizationPreference>Size</OptimizationPreference> -->
         <!-- <OptimizationPreference>Speed</OptimizationPreference> -->
 
@@ -314,9 +314,58 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 
 ## 运行配置
 
+### gc 配置
+
 ```docker
 # 多gc节省 0-9之间 https://learn.microsoft.com/zh-cn/dotnet/core/runtime-config/garbage-collector#conserve-memory
 ENV DOTNET_GCConserveMemory=9
+
+# 工作站模式会更加节约内存
+ENV DOTNET_gcServer=0
+```
+
+### 守护进程
+
+这里是 [[笔记/point/Systemd|Systemd]] 配置文件示例
+
+`/etc/systemd/system/pusher-webapi-staging.service`
+
+```toml
+[Unit]
+Description=pusher
+Documentation=https://github.com/kentxxq/pusher.webapi/
+# 启动区间30s内,尝试启动3次
+StartLimitIntervalSec=30
+StartLimitBurst=3
+
+[Service]
+# 环境变量 $MY_ENV1
+# Environment=MY_ENV1=value1
+# Environment="MY_ENV2=value2"
+# 环境变量文件,文件内容"MY_ENV3=value3" $MY_ENV3
+# EnvironmentFile=/path/to/environment/file1
+
+# 这里是负优化!!!
+# 工作站模式,并且尽量回收内存.
+# Environment="DOTNET_GCConserveMemory=9"
+# Environment="DOTNET_gcServer=0"
+
+Environment="ASPNETCORE_ENVIRONMENT=Staging"
+# singlefile需要配置解压路径 https://learn.microsoft.com/en-us/dotnet/core/deploying/single-file/overview?tabs=cli#native-libraries
+Environment="DOTNET_BUNDLE_EXTRACT_BASE_DIR=%h/.net"
+WorkingDirectory=/root/myApp/pusher-webapi/staging
+ExecStart=/root/myApp/pusher-webapi/staging/pusher.webapi
+# 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
+RestartSec=30s 
+Restart=always
+# 相关资源都发送term后,后发送kill
+KillMode=mixed
+LimitNOFILE=infinity
+TasksMax=infinity
+
+[Install]
+WantedBy=multi-user.target
+Alias=pws.service
 ```
 
 ## 杂项

@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-05-06
+lastmod: 2024-05-07
 categories:
   - blog
 description: "这里记录 [[笔记/point/nginx|nginx]] 的模块编译和升级操作."
@@ -24,6 +24,18 @@ description: "这里记录 [[笔记/point/nginx|nginx]] 的模块编译和升级
 # 准备目录
 mkdir nginx ; cd nginx
 
+# br压缩模块
+git clone --recurse-submodules -j8 https://mirror.ghproxy.com/github.com/google/ngx_brotli
+cd ngx_brotli/deps/brotli
+mkdir out && cd out
+cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_C_FLAGS="-Ofast -m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections" -DCMAKE_CXX_FLAGS="-Ofast -m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections" -DCMAKE_INSTALL_PREFIX=./installed ..
+cmake --build . --config Release --target brotlienc
+cd ../../../..
+
+export CFLAGS="-m64 -march=native -mtune=native -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"
+export LDFLAGS="-m64 -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"
+
+
 # 下载,解压 https://nginx.org/en/download.html
 curl http://nginx.org/download/nginx-1.26.0.tar.gz -o nginx-1.26.0.tar.gz
 tar -xf nginx-1.26.0.tar.gz
@@ -34,7 +46,7 @@ cd nginx-1.26.0
 # tcp代理和tcp代理证书 --with-stream --with-stream_ssl_module
 # tcp代理的时候，把客户端ip传到PROXY协议的header头部 --with-stream_realip_module和--with-http_realip_module建议开启,虽然我一直用header传输
 # 启用http2  --with-http_v2_module
-./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --with-http_ssl_module --with-stream --with-stream_ssl_module --with-stream_realip_module --with-http_v2_module --with-http_stub_status_module
+./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --with-http_ssl_module --with-stream --with-stream_ssl_module --with-stream_realip_module --with-http_v2_module --with-http_stub_status_module --add-module=/root/ngx_brotli
 make && make install
 
 # 软连接

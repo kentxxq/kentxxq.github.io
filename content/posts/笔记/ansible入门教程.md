@@ -4,7 +4,7 @@ tags:
   - blog
   - ansible
 date: 2023-07-01
-lastmod: 2023-07-11
+lastmod: 2024-05-06
 categories:
   - blog
 description: "[[笔记/point/ansible|ansible]] 的使用记录, 用到的时候能快速重新捡起来.."
@@ -27,7 +27,7 @@ description: "[[笔记/point/ansible|ansible]] 的使用记录, 用到的时候�
 
    vim /etc/ansible/ansible.cfg
    [defaults]
-   host_key_checking = False    #不检测host key
+   host_key_checking = False    #不检测host key.我们采用的是密码访问,所以这么做可以加快速度
    ```
 
 ## 日常操作
@@ -203,7 +203,7 @@ sh-ecs01 ansible_ssh_host=1.1.1.1 ansible_ssh_user="root" ansible_ssh_pass="1234
     enabled: yes
 - name: 创建程序运行目录 "{{ program_dir }}"
   file:
-    path: "{{program_dir}}"
+    path: "{{ program_dir }}"
     state: directory
     owner: "{{ appuser }}"
     group: "{{ appuser }}"

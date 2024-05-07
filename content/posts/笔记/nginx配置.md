@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-05-06
+lastmod: 2024-05-07
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -143,9 +143,22 @@ http {
     # header允许下划线
     underscores_in_headers on;
 
-    # 打开gzip,10k内不压缩
+    # 网络>硬盘>内存>cpu,所以尽量减少网络占用.
+    # 1k内不压缩,因为1个数据包差不多能发送完.压缩也需要时间.
+    # 然后我们尽量压榨cpu. 如果能1个数据包发完,那么传输速度提升了.
+    # 打开br压缩
+    brotli on;
+    brotli_min_length 1k;
+    brotli_comp_level 6;
+    brotli_types application/atom+xml application/javascript application/json application/vnd.api+json application/rss+xml
+                 application/vnd.ms-fontobject application/x-font-opentype application/x-font-truetype
+                 application/x-font-ttf application/x-javascript application/xhtml+xml application/xml
+                 font/eot font/opentype font/otf font/truetype image/svg+xml image/vnd.microsoft.icon
+                 image/x-icon image/x-win-bitmap text/css text/javascript text/plain text/xml;
+
+    # 打开gzip
     gzip on;
-    gzip_min_length 10k;
+    gzip_min_length 1k;
     gzip_http_version 1.1;
     gzip_comp_level 7;
     # 压缩类型，下面的配置压缩了接口。可配置项参考nginx目录下的mime.types
