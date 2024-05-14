@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2024-04-12
+lastmod: 2024-05-12
 keywords:
   - clash
   - 配置文件
@@ -595,6 +595,7 @@ parsers:
     - 唯云四杰好像是有口碑的
     - [一个机场收录站点](https://dh.duangks.com/)
     - justmysocket
+    - [GitHub - aiboboxx/clashfree: clash节点、免费clash节点、免费节点、免费梯子、clash科学上网、clash翻墙、clash订阅链接、clash for Windows、clash教程、免费公益节点、最新clash免费节点订阅地址、clash免费节点每日更新](https://github.com/aiboboxx/clashfree)
 - [Clash分流策略 | 配置文件 | 订阅防覆盖 | 硬核教程](https://a-nomad.com/clash)
 - [Clash规则大全](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash)
 - [GFW是如何工作的](https://gfw.report/publications/usenixsecurity23/zh/)

@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-08
-lastmod: 2024-05-06
+lastmod: 2024-05-14
 categories:
   - blog
 description: 
@@ -91,15 +91,19 @@ systemctl restart docker
 
 部署 testserver, pusher
 
-## Home-server 初始化
+## homeserver 初始化
+
+[[笔记/树莓派初始化|树莓派初始化]] 也是这里的. 属于小主机.
+
+originpi zero3 1gb 99 元其实蛮不错的 . 它 orange 的 4 gb 版本 229. 好像是最便宜的了.
 
 - DDNS-go
 - rclone
 - filebrowser
 
 ```shell
-alias rc-check='rclone check aliyunpan:/  /data/backup/alist-backup  --exclude "video/**" --exclude "iso/**" -P'
-alias rc-copy='rclone copy aliyunpan:/  /data/backup/alist-backup  --exclude "video/**" --exclude "iso/**" --header "Referer:" -P'
+alias rc-check='rclone check aliyunpan:/  /data/backup/alist-backup  --exclude "video/**" --exclude "iso/**" --exclude "xiaoya/**" --exclude "yuwei/**" -P'
+alias rc-copy='rclone copy aliyunpan:/  /data/backup/alist-backup  --exclude "video/**" --exclude "iso/**" --exclude "xiaoya/**" --exclude "yuwei/**" --header "Referer:" -P'
 
 export PATH="/root/rclone/rclone-v1.62.2-linux-arm64:$PATH"
 ```

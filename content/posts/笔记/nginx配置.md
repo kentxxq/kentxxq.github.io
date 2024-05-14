@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-05-07
+lastmod: 2024-05-13
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -162,7 +162,7 @@ http {
     gzip_http_version 1.1;
     gzip_comp_level 7;
     # 压缩类型，下面的配置压缩了接口。可配置项参考nginx目录下的mime.types
-    # 参考google压缩了html,css,js,json. text/html 总是会压缩,加上去返回而报错.
+    # 参考google压缩了html,css,js,json. text/html 总是会压缩,加上去反而会报错.
     # 图片属于压缩过了的格式, 应该由专门的服务或CDN转换图片格式
     # text/javascript 用于兼容html5之前写的项目
     gzip_types text/plain text/xml text/css text/javascript application/javascript application/json;
