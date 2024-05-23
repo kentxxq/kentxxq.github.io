@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-05-06
+lastmod: 2024-05-14
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -42,6 +42,14 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install ./google-chrome-stable_current_amd64.deb
 
 google-chrome -v
+```
+
+### 磁盘/文件大小
+
+```shell
+apt install ncdu -y
+# 这个速度更快
+ncdu
 ```
 
 ### 挂载磁盘

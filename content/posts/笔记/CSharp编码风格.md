@@ -32,7 +32,7 @@ description: "csharp 的编码配置 .editorconfig 文件."
 - 只有 vs 可以理解 `:<severity-level>`
 - 编译器只能理解 `dotnet_diagnostic.<rule-ID>.severity = <severity-level>`
 
-## 配置文件
+## 配置文件 editorconfig
 
 项目根路径创建 `.editorconfig` 文件.
 

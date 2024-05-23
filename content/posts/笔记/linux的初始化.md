@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-08
-lastmod: 2024-05-14
+lastmod: 2024-05-21
 categories:
   - blog
 description: 
@@ -95,7 +95,22 @@ systemctl restart docker
 
 [[笔记/树莓派初始化|树莓派初始化]] 也是这里的. 属于小主机.
 
-originpi zero3 1gb 99 元其实蛮不错的 . 它 orange 的 4 gb 版本 229. 好像是最便宜的了.
+- originpi zero3 1gb 99 元其实蛮不错的 . 它 orange 的 4 gb 版本 229. 好像是最便宜的了.
+- 可以对比一下树莓派. 毕竟树莓派的兼容性是最好的, 而且一直没坏过
+
+- 支持普通电脑的内存长度的小主机?!!
+
+国内硬件扩展最推荐三个个牌子 geekworm 同伴科技，以及 mcuzone 野芯科技，还有 waveshare 微雪电子
+
+- originpi zero3 1gb 99 元其实蛮不错的 . 它 orange 的 4 gb 版本 229. 好像是最便宜的了.
+- 可以对比一下树莓派. 毕竟树莓派的兼容性是最好的, 而且一直没坏过
+- 支持普通电脑的内存长度的小主机?!!
+
+国内硬件扩展最推荐三个个牌子 geekworm 同伴科技，以及 mcuzone 野芯科技，还有 waveshare 微雪电子
+
+群晖 nas 也很稳定. [【群晖DS423+】群晖（Synology）DS423+ 四核心 4盘位 NAS网络存储 文件存储共享 照片自动备份 私有云（无内置硬盘 ）【行情 报价 价格 评测】-京东](https://item.jd.com/100047343428.html) 关注一下内存可以升级到多大
+
+路由器透传 nginx 失败?
 
 - DDNS-go
 - rclone
