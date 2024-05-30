@@ -262,7 +262,7 @@ theme = "DoIt"
     # DoIt 新增 | 0.2.0 是否使用 fraction 扩展语法
     fraction = true
     # DoIt 新增 | 0.2.0 是否使用 fontawesome 扩展语法
-    fontawesome = true
+    # fontawesome = true
     # 是否在文章页面显示原始 Markdown 文档链接
     linkToMarkdown = true
     # DoIt 新增 | 0.2.4 是否在 RSS 中显示全文内容
