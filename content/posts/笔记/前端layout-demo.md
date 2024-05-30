@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2023-11-11
-lastmod: 2024-03-25
+lastmod: 2024-05-23
 categories:
   - blog
 description: "`layout-demo` 是一个练习布局, 样式, 动画等内容的项目. "
@@ -241,9 +241,11 @@ img {
 容器内的元素会使用下面默认参数排列：
 
 - 默认 `flex-direction: row` 从左到右
-- 默认 `flex-wrap: nowrap` 不换行
-- 默认 `justify-content: flex-start` 水平左对齐
+- 默认 `flex-wrap: nowrap` 不换行. 可以设置成 `warp` 换行
+- 可以设置 `gap: 1rem;` 换行以后间隔一些元素
+- 默认 `justify-content: flex-start` 水平左对齐.
 - 默认 `align-items: flex-start` 垂直顶部对齐、
+
 
 > [Flex 布局教程：语法篇 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
 
