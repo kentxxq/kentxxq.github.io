@@ -5,7 +5,7 @@ tags:
   - devops
   - ACME
 date: 2023-08-16
-lastmod: 2024-03-27
+lastmod: 2024-06-05
 keywords:
   - acme
   - acme.sh
@@ -201,11 +201,11 @@ metadata:
   name: example-tls
   namespace: cert-manager
 spec:
-  secretName: chinnshi-com-tls
-  commonName: chinnshi.com
+  secretName: kentxxq-com-tls
+  commonName: kentxxq.com
   dnsNames:
-  - chinnshi.com
-  - "*.chinnshi.com"
+  - kentxxxq.com
+  - "*.kentxxq.com"
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer

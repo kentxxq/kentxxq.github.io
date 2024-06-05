@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-05-14
+lastmod: 2024-06-05
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -685,12 +685,18 @@ pkill -KILL -t pts/1
 
 ### 大版本升级
 
+在 `/etc/update-manager/release-upgrades` 文件夹里, 可以配置默认升级的版本. `Prompt=lts` 代表只在 lts 版本之间升级.  参考 [官方升级文档](https://help.ubuntu.com/community/Upgrades#Upgrade_policy)
+
 ```shell
 apt install update-manager-core -y
-do-release-upgrade -d
+# 建议禁用防火墙
+# 我选择保留自己的 /etc/sysctl.conf chrony.conf sshd_config 等配置文件
+# 因为我都是在云上购买的,所以有云商推荐或者自己的参数. 覆盖了可能就连不上或者参数不合适
+do-release-upgrade
 ```
 
-> 通常新 lts 发布只是发布镜像, 用于新机安装. 需要过一段时间才会提供升级选项.
+>  桌面端建议使用 ui 操作
+> 通常新 lts 发布只是发布镜像, 用于新机安装. 需要过一段时间才会提供升级选项. 参考 [NobleUpgrades - Community Help Wiki](https://help.ubuntu.com/community/NobleUpgrades)
 
 ### 跑分
 
@@ -937,6 +943,7 @@ rsync -atvP /tmp/t1/1 root@1.1.1.1:/tmp/t1/
 sed -i 's/old-a/new-b/g' `grep kentxxq -rl ./`
 
 # 文件替换
+# s 代表替换, # 是分隔符 g 代表全局替换
 sed -i 's#/etc/nginx/ssl/kentxxq.key#/usr/local/nginx/conf/ssl/kentxxq.key#g' *
 ```
 
@@ -1024,19 +1031,33 @@ fdisk -l
 iotop -oP
 ```
 
-#### 网络
+#### 网络流量
 
 ```shell
-# 用来进行查看各个网卡的总流量
+# 查看各网卡总流量
 nload
-# 用来监控各个进程的流量使用情况
+# 监控各个进程的流量
 nethogs
 # 图形化的工具，可以查看具体的端口情况
 iptraf-ng
+```
 
+#### 网络连接排查
 
+```shell
 # 各状态tcp连接统计
 netstat -n | awk '/^tcp/ {++state[$NF]} END {for(key in state) print key,"\t",state[key]}'
+
 # 外部ip连接最多的20条记录
 netstat -ant | awk '/^tcp/ {split($5, a, ":"); count[a[1]]++} END {for (ip in count) print ip "\t" count[ip]}' | sort -nrk2 | head -n 20
+
+# 查看本机监听中的端口
+# a是所有 n是数字,不进行主机解析 p是进程相关 l是监听
+ss -ltnp
+
+# 本机或远程使用了3306端口进行连接
+ss -anp |grep 3306
+
+# 排查特定端口nat转发路径
+conntrack -L |grep 3306
 ```

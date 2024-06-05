@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-07-26
-lastmod: 2024-05-07
+lastmod: 2024-06-05
 categories:
   - blog
 description: "[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."
@@ -323,6 +323,14 @@ ENV DOTNET_GCConserveMemory=9
 # 工作站模式会更加节约内存
 ENV DOTNET_gcServer=0
 ```
+
+- DynamicAdaptationMode 可能会到 dotnet 9 出现, 内存占用降低到 go 级别? [Dynamically Adapting To Application Sizes | by Maoni0 | Medium](https://maoni0.medium.com/dynamically-adapting-to-application-sizes-2d72fcb6f1ea)
+- 2024 年 6 月 5 日测试
+    - aspnetcore aot 20 m 内存 , 普通 demo 在 80 m 左右
+    - 我的应用普遍 120 m 内存左右
+    - sprintboot-3-helloworld 170 m 内存, 使用 -XX:+UseZGC 增大了
+    - 看 golang 的 demo 基本在 15~40 m. 程序 80 m 左右
+    - rust 的 bitwarden 是 50 m.
 
 ### 守护进程
 

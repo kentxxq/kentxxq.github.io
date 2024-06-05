@@ -5,7 +5,7 @@ tags:
   - k8s
   - docker
 date: 2023-08-18
-lastmod: 2024-04-24
+lastmod: 2024-06-04
 keywords:
   - k8s
   - docker
@@ -49,7 +49,7 @@ registry-demo:
 
 ## 公共镜像源
 
-配置示例
+配置示例 `/etc/docker/daemon.json`
 
 ```json
 {

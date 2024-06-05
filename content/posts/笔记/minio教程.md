@@ -4,7 +4,7 @@ tags:
   - blog
   - minio
 date: 2023-07-19
-lastmod: 2024-01-17
+lastmod: 2024-06-03
 categories:
   - blog
 description: "[[笔记/point/minio|minio]] 的搭建和使用."
@@ -16,7 +16,13 @@ description: "[[笔记/point/minio|minio]] 的搭建和使用."
 
 ## 安装
 
-### 单机版 - 快速验证
+### 单机版
+
+#### 前期准备
+
+- 创建数据存放目录 `mkdir -p /data/minio`
+
+#### 快速验证
 
 [[笔记/point/docker|docker]] 版本:
 
@@ -37,11 +43,60 @@ docker run --rm -d \
 ```shell
 wget https://dl.min.io/server/minio/release/linux-amd64/minio
 chmod +x minio
-MINIO_ROOT_USER=admin MINIO_ROOT_PASSWORD=password ./minio server /mnt/data --console-address ":9001"
+MINIO_ROOT_USER=admin MINIO_ROOT_PASSWORD=password ./minio server /data/minio --console-address ":9001"
 ```
 
 > [!info]
 > [官方快速验证文档地址](https://min.io/download)
+
+#### 守护进程
+
+创建配置文件 `vim minio.conf`
+
+```
+# 用户名和密码,集群之间是通过这个来校验的
+MINIO_ROOT_USER=admin
+MINIO_ROOT_PASSWORD=密码
+# api/9001 console-ui/9091
+MINIO_OPTS="--address :9000 --console-address :9001"
+MINIO_DATA_PATH=/data/minio
+```
+
+守护进程 `/etc/systemd/system/minio.service`
+
+```toml
+[Unit]
+Description=minio
+# 启动区间30s内,尝试启动3次
+StartLimitIntervalSec=30
+StartLimitBurst=3
+
+
+[Service]
+# 环境变量 $MY_ENV1
+# Environment=MY_ENV1=value1
+# Environment="MY_ENV2=value2"
+# 环境变量文件,文件内容"MY_ENV3=value3" $MY_ENV3
+# EnvironmentFile=/path/to/environment/file1
+
+EnvironmentFile=/root/om/minio/minio.conf
+
+WorkingDirectory=/root/om/minio
+ExecStart=/root/om/minio/minio server $MINIO_DATA_PATH $MINIO_OPTS
+# 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
+RestartSec=30s 
+Restart=always
+# 相关资源都发送term后,后发送kill
+KillMode=mixed
+# 最大文件打开数不限制
+LimitNOFILE=infinity
+# 子线程数量不限制
+TasksMax=infinity
+
+
+[Install]
+WantedBy=multi-user.target
+```
 
 ### 集群部署
 

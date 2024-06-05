@@ -3,7 +3,7 @@ title: jenkins教程
 tags:
   - blog
 date: 2024-01-29
-lastmod: 2024-02-02
+lastmod: 2024-06-05
 categories:
   - blog
 description: 
@@ -189,6 +189,6 @@ pipeline{
 
 ## 参考资料
 
-- 所有的内置变量 [jenkins.chinnshi.com/env-vars.html/](https://jenkins.chinnshi.com/env-vars.html/)
+- 所有的内置变量, 访问 `jenkins.kentxxq.com/env-vars.html`
 - [Jenkins常用插件汇总以及简单介绍 | 二丫讲梵](https://wiki.eryajf.net/pages/2280.html#_18-hidden-parameter-plugin)
 - [mafeifan 的编程技术分享 | mafeifan 的编程技术分享](https://mafeifan.com/DevOps/Jenkins/Jenkins2-%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%973----Groovy%E8%AF%AD%E6%B3%95%E4%BB%8B%E7%BB%8D.html)

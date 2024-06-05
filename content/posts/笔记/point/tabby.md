@@ -2,7 +2,7 @@
 title: tabby
 tags:
   - point
-  - 未命名
+  - tabby
 date: 2023-12-16
 lastmod: 2023-12-16
 categories:

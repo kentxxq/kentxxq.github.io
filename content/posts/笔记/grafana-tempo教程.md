@@ -5,7 +5,7 @@ tags:
   - tempo
   - grafana
 date: 2023-07-19
-lastmod: 2023-10-26
+lastmod: 2024-06-05
 categories:
   - blog
 description: "grafana-tempo 是 [[笔记/point/grafana|grafana]] 公司的链路追踪组件"
@@ -20,10 +20,10 @@ description: "grafana-tempo 是 [[笔记/point/grafana|grafana]] 公司的链路
 ### 下载
 
 ```shell
-curl -Lo tempo_2.2.4_linux_amd64.tar.gz https://github.com/grafana/tempo/releases/download/v2.2.4/tempo_2.2.4_linux_amd64.tar.gz
+curl -Lo tempo_2.5.0_linux_amd64.tar.gz https://github.com/grafana/tempo/releases/download/v2.5.0/tempo_2.5.0_linux_amd64.tar.gz
 
 # 解压,得到可执行文件 tempo
-tar xf tempo_2.2.4_linux_amd64.tar.gz 
+tar xf tempo_2.5.0_linux_amd64.tar.gz 
 ```
 
 ### 配置文件
@@ -65,8 +65,8 @@ storage:
       endpoint: minio-api.kentxxq.com
       bucket: tempo
       forcepathstyle: true
-      #set to true if endpoint is https
-      insecure: true
+      # 如果使用https,就注释掉下面这一行
+      # insecure: true
       access_key:  # TODO - Add S3 access key
       secret_key:  # TODO - Add S3 secret key
     wal:
@@ -98,7 +98,7 @@ StartLimitBurst=3
 
 #WorkingDirectory=/root/myApp/TestServer
 
-ExecStart=/root/tempo -config.file=/root/tempo.yaml
+ExecStart=/root/om/tempo/tempo -config.file=/root/om/tempo/tempo.yaml
 
 # 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
 RestartSec=30s 

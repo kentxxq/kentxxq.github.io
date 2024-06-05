@@ -4,7 +4,7 @@ tags:
   - blog
   - shell
 date: 2023-08-10
-lastmod: 2024-01-24
+lastmod: 2024-05-31
 categories:
   - blog
 description: "虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔记/point/shell|shell]] 是高效的."
@@ -332,6 +332,15 @@ echo `printf '#%.0s' $(seq 100)`
 ```shell
 string="runoob is a great site"
 echo `expr index "$string" io`  # 输出4.因为o在第4个,i在第8位
+```
+
+### 输出变成输入
+
+```shell
+/root/kubeconfigs/kubectl get pods -n default -o name --kubeconfig qs-test-kube.conf | while read pod; do 
+    echo $pod 
+    /root/kubeconfigs/kubectl exec $pod -n default --kubeconfig qs-test-kube.conf -- ss -anp | grep 3306 | wc -l 
+done
 ```
 
 ## 代码示例

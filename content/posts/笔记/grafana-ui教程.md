@@ -6,7 +6,7 @@ tags:
   - 监控
   - devops
 date: 2023-07-11
-lastmod: 2023-12-27
+lastmod: 2024-06-05
 categories:
   - blog
 description: "[[笔记/point/grafana|grafana]] 的使用教程"
@@ -28,6 +28,10 @@ apt install -y apt-transport-https software-properties-common wget
 wget -q -O /usr/share/keyrings/grafana.key https://apt.grafana.com/gpg.key
 # 添加repo
 echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+
+# 镜像源
+echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://mirrors.tuna.tsinghua.edu.cn/grafana/apt/ stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+
 # 安装, grafana-enterprise是企业版
 apt update -y; apt install grafana -y
 
@@ -44,7 +48,7 @@ curl 127.0.0.1:3000
 ```nginx
 server {
     listen 80;
-    server_name om-grafana.chinnshi.com;
+    server_name om-grafana.kentxxq.com;
     return 301 https://$server_name$request_uri;
     access_log /usr/local/nginx/conf/hosts/logs/om-grafana.kentxxq.com.log k-json;
 }
@@ -52,11 +56,11 @@ server {
 server {
     http2 on;
     listen 443 ssl;
-    server_name om-grafana.chinnshi.com;
+    server_name om-grafana.kentxxq.com;
     access_log /usr/local/nginx/conf/hosts/logs/om-grafana.kentxxq.com.log k-json;
 
     include /usr/local/nginx/conf/options/normal.conf;
-    include /usr/local/nginx/conf/options/ssl_chinnshi.conf;
+    include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
 
     location / {
         proxy_pass http://127.0.0.1:3000;

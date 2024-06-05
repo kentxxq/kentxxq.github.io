@@ -4,7 +4,7 @@ tags:
   - blog
   - gitlab
 date: 2023-08-15
-lastmod: 2024-05-06
+lastmod: 2024-06-05
 categories:
   - blog
 description: "这里记录 [[笔记/point/gitlab|gitlab]] 的安装, 配置."
@@ -113,7 +113,7 @@ server {
     # 普通header头,ip之类的
     include /usr/local/nginx/conf/options/normal.conf;
     # 证书相关
-    include /usr/local/nginx/conf/options/ssl_chinnshi.conf;
+    include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
 
     location / {
         proxy_pass http://172.16.0.52:80;

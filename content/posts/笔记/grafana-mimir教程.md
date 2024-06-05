@@ -5,7 +5,7 @@ tags:
   - mimir
   - grafana
 date: 2023-07-22
-lastmod: 2023-10-26
+lastmod: 2024-06-05
 categories:
   - blog
 description: 
@@ -83,19 +83,19 @@ store_gateway:
     replication_factor: 1
 ```
 
-### minio 存储
+### minio 配置文件
 
-参考 [官方存储文档](https://grafana.com/docs/mimir/latest/configure/configure-object-storage-backend/) 写一个配置文件 `mimir.yaml` 保存到 [[笔记/point/minio|minio]],
+参考 [官方存储文档](https://grafana.com/docs/mimir/latest/configure/configure-object-storage-backend/)
 
 ```yaml
-common:
-  storage:
-    backend: s3
-    s3:
-      endpoint: s3.us-east-2.amazonaws.com
-      region: us-east-2
-      access_key_id: "${AWS_ACCESS_KEY_ID}" # This is a secret injected via an environment variable
-      secret_access_key: "${AWS_SECRET_ACCESS_KEY}" # This is a secret injected via an environment variable
+# 禁用多租户
+multitenancy_enabled: false
+
+# 端口
+server:
+  http_listen_port: 9009
+  grpc_listen_port: 9010
+  log_level: error
 
 blocks_storage:
   s3:
@@ -108,9 +108,46 @@ alertmanager_storage:
 ruler_storage:
   s3:
     bucket_name: mimir-ruler
+
+# 压缩,加速查询
+compactor:
+  data_dir: /tmp/mimir/compactor
+  sharding_ring:
+    kvstore:
+      store: memberlist
+
+# 接收数据,验证准确性,无状态
+distributor:
+  ring:
+    instance_addr: 127.0.0.1
+    kvstore:
+      store: memberlist
+
+# 写入数据的组件,有状态
+ingester:
+  ring:
+    instance_addr: 127.0.0.1
+    kvstore:
+      store: memberlist
+    replication_factor: 1
+
+# 分片
+store_gateway:
+  sharding_ring:
+    replication_factor: 1
+
+
+common:
+  storage:
+    backend: s3
+    s3:
+      endpoint: minio-api.kentxxq.com
+      region: us-east-1
+      access_key_id: "你的id"
+      secret_access_key: "你的key"
 ```
 
-运行 `./mimir --config.file=mimir-demo.yml`
+运行 `./mimir -config.file=mimir.yml`
 
 ### 守护进程
 
@@ -132,7 +169,7 @@ StartLimitBurst=3
 # EnvironmentFile=/path/to/environment/file1
 
 #WorkingDirectory=/root/myApp/TestServer
-ExecStart=/root/mimir -config.file=/root/mimir.yaml
+ExecStart=/root/om/mimir/mimir -config.file=/root/om/mimir/mimir.yaml
 
 # 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
 RestartSec=30s 

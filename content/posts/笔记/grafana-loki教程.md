@@ -6,7 +6,7 @@ tags:
   - loki
   - grafana
 date: 2023-07-17
-lastmod: 2023-10-26
+lastmod: 2024-06-05
 categories:
   - blog
 description: "grafana-loki 是 [[笔记/point/grafana|grafana]] 公司的日志采集组件"
@@ -52,7 +52,7 @@ description: "grafana-loki 是 [[笔记/point/grafana|grafana]] 公司的日志�
 
 #todo/笔记  loki 集群的配置?
 
-[[笔记/point/minio|minio]] 版本:
+[[笔记/point/minio|minio]] 版本 (需要提前准备好 minio 的 key ,并创建名为 loki 的 buckets)
 
 ```yml
 # 多租户的话,要启用这个. 每个租户一个文件夹
@@ -81,27 +81,34 @@ storage_config:
   aws:
     # Note: use a fully qualified domain name, like localhost.
     # full example: http://loki:supersecret@localhost.:9000
-    s3: https://秘钥id:秘钥key@minio-api.kentxxq.com.:443/loki
+    s3: https://你的id:你的key@minio-api.kentxxq.com.:443/loki
     s3forcepathstyle: true
-  boltdb_shipper:
-    active_index_directory: /loki/boltdb-shipper-active
-    cache_location: /loki/boltdb-shipper-cache
+  tsdb_shipper:
+    active_index_directory: /loki/index
+    cache_location: /loki/index_cache
     cache_ttl: 24h         # Can be increased for faster performance over longer query periods, uses more disk space
-    shared_store: s3
 
 schema_config:
   configs:
     - from: 2020-10-24
-      store: boltdb-shipper
+      store: tsdb
       object_store: s3
-      schema: v11
+      schema: v13
       index:
         prefix: index_
         period: 24h
 
+limits_config:
+  # 全局保留一周数据
+  retention_period: 168h
+
 compactor:
-  working_directory: /loki/compactor
-  shared_store: s3
+  working_directory: /tmp/loki/compactor
+  # 必须配置要操作的store
+  delete_request_store: aws
+  retention_enabled: true
+  # 因为组件的机制问题,避免查询失败. 必须延迟删除. 所以要设置一个时间
+  retention_delete_delay: 2h
   compaction_interval: 5m
 ```
 
@@ -125,7 +132,7 @@ StartLimitBurst=3
 
 #WorkingDirectory=/root/myApp/TestServer
 
-ExecStart=/root/loki -config.file=/root/loki-minio-config.yaml
+ExecStart=/root/om/loki/loki -config.file=/root/loki.yaml
 
 # 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
 RestartSec=30s 
