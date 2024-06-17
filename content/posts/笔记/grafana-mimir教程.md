@@ -36,8 +36,8 @@ multitenancy_enabled: false
 
 # 端口
 server:
-  http_listen_port: 9009
-  grpc_listen_port: 9010
+  http_listen_port: 9090
+  grpc_listen_port: 9091
   log_level: error
 
 blocks_storage:
@@ -93,8 +93,8 @@ multitenancy_enabled: false
 
 # 端口
 server:
-  http_listen_port: 9009
-  grpc_listen_port: 9010
+  http_listen_port: 9090
+  grpc_listen_port: 9091
   log_level: error
 
 blocks_storage:
@@ -185,3 +185,9 @@ TasksMax=infinity
 WantedBy=multi-user.target
 #Alias=testserver.service
 ```
+
+## 使用
+
+- [[笔记/point/prometheus|prometheus]] 接口地址
+    - `remote_write` : `http://localhost:9090/api/v1/push`
+    - `grafana查询接口地址`: `http://localhost:9090/prometheus`

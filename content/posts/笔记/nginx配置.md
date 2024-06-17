@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-05-13
+lastmod: 2024-06-11
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -564,6 +564,7 @@ allow 1.1.1.1;
 # 网段
 allow 10.0.0.0/16; 
 
+# 这里的顺序很重要, deny all必须放在最后
 # 默认拒绝所有
 deny all;
 ```

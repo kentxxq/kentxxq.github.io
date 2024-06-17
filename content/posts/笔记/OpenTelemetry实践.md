@@ -7,7 +7,7 @@ tags:
   - prometheus
   - csharp
 date: 2023-07-20
-lastmod: 2023-11-07
+lastmod: 2024-06-05
 keywords:
   - OpenTelemetry
   - grafana
@@ -46,7 +46,7 @@ description: "这篇文章会把关于 [[笔记/point/OpenTelemetry|OpenTelemetr
 | ----------------------- | -------------------------------------------------------------------------------------------------------- |
 | minio                   | api 请求 `minio-api.kentxxq.com`, ui 操作 `minio-ui.kentxxq.com`                                                          |
 | loki                    | 接收 oc 发送的日志数据 `http_listen_port/3100`, `grpc_listen_port/3101`                                                         |
-| mimir                   | 接收 oc 发送的指标数据 `http_listen_port/9009`, `grpc_listen_port/9010`                                                         |
+| mimir                   | 接收 oc 发送的指标数据 `http_listen_port/9090`, `grpc_listen_port/9091`                                                         |
 | tempo                   | 接收 oc 发送的追踪数据 `http_listen_port/3200`, `distributor.receivers.otlp.http/3201`, `distributor.receivers.otlp.grpc/3202` |
 | opentelemetry-collector | 接收应用数据 `grpc/4317`, `http/4318`                                                                                 |
 | grafana-ui              | ui 操作 `ip:3000`                                                                                                |

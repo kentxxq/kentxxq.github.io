@@ -329,7 +329,7 @@ ENV DOTNET_gcServer=0
     - aspnetcore aot 20 m 内存 , 普通 demo 在 80 m 左右
     - 我的应用普遍 120 m 内存左右
     - sprintboot-3-helloworld 170 m 内存, 使用 -XX:+UseZGC 增大了
-    - 看 golang 的 demo 基本在 15~40 m. 程序 80 m 左右
+    - 看 golang 的 demo 基本在 15~40 m. 业务程序 80-120 m 左右
     - rust 的 bitwarden 是 50 m.
 
 ### 守护进程

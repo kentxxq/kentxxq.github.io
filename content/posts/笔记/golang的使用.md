@@ -4,7 +4,7 @@ tags:
   - blog
   - golang
 date: 2023-06-26
-lastmod: 2023-10-26
+lastmod: 2024-06-07
 categories:
   - blog
 description: "[[笔记/point/golang|golang]] 用的很少, 记录一下相关的安装, 配置, 构建."
@@ -75,3 +75,7 @@ linux arm64
 darwin amd64
 darwin amd64
 ```
+
+## 相关工具
+
+- 代码的问题检查 [Quick Start | golangci-lint](https://golangci-lint.run/welcome/quick-start/)

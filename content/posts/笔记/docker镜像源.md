@@ -5,7 +5,7 @@ tags:
   - k8s
   - docker
 date: 2023-08-18
-lastmod: 2024-06-04
+lastmod: 2024-06-14
 keywords:
   - k8s
   - docker
@@ -56,9 +56,7 @@ registry-demo:
     "registry-mirrors": [
         "https://docker.m.daocloud.io",
         "https://dockerproxy.com",
-        "https://docker.mirrors.sjtug.sjtu.edu.cn",
-        "https://mirror.baidubce.com",
-        "https://docker.nju.edu.cn"
+        "https://mirror.baidubce.com"
     ]
 }
 ```
@@ -67,8 +65,6 @@ registry-demo:
 | ----------- | ------------------------------------------ |
 | [Docker 镜像代理](https://dockerproxy.com/) | `https://dockerproxy.com`                  |
 | [百度云](https://cloud.baidu.com/doc/CCE/s/Yjxppt74z#%E4%BD%BF%E7%94%A8dockerhub%E5%8A%A0%E9%80%9F%E5%99%A8)      | `https://mirror.baidubce.com`              |
-| [上海交大镜像站](https://mirrors.sjtug.sjtu.edu.cn/)    | `https://docker.mirrors.sjtug.sjtu.edu.cn` |
-| [南京大学镜像站](https://doc.nju.edu.cn/books/35f4a)    | `https://docker.nju.edu.cn`                |
 | [DaoCloud](https://github.com/DaoCloud/public-image-mirror)    | `https://docker.m.daocloud.io`             |
 
 - `DaoCloud`, `dockerproxy`, `南京大学镜像站` 支持源站较多
@@ -102,12 +98,14 @@ Digest: sha256:a195f9fb6503531660b25f9aeefef1f48bbaf56f46da04bffe1568abb3d3aff6
 # 请求镜像源
 curl -v --location 'https://hub-mirror.c.163.com/v2/library/nginx/manifests/1.24' \
 --header 'Accept: application/vnd.docker.distribution.manifest.list.v2+json'
-# header中的Docker-Content-Digest与上面repo-digest一致 sha256:a195f9fb6503531660b25f9aeefef1f48bbaf56f46da04bffe1568abb3d3aff6
-# 找到对应架构的image-digest,例如amd64,linux
-# digest: sha256:4a1d2e00b08fce95e140e272d9a0223d2d059142ca783bf43cf121d7c11c7df8
+# 在返回的数据中:
+# 1 header的Docker-Content-Digest与上面repo-digest一致 sha256:a195f9fb6503531660b25f9aeefef1f48bbaf56f46da04bffe1568abb3d3aff6
+# 2 找到对应架构的image-digest用于在dockerhub进行核对
+# 例如amd64,linux的digest为
+# sha256:4a1d2e00b08fce95e140e272d9a0223d2d059142ca783bf43cf121d7c11c7df8
 ```
 
-打开 [DockerHub的站点](https://hub.docker.com/_/nginx/tags?page=1&name=1.24),可以发现 `image-digest` 匹配.
+开始核对. 打开 [DockerHub的站点](https://hub.docker.com/_/nginx/tags?page=1&name=1.24),可以发现 `image-digest` 匹配.
 
 ![[附件/dockerhub的nginx-1.24版本digest.png]]
 
@@ -116,6 +114,15 @@ curl -v --location 'https://hub-mirror.c.163.com/v2/library/nginx/manifests/1.24
 也就是说, 网易源和 dockerhub 的每一层 layers 完全一致.
 
 ## 镜像 tag 脚本
+
+```shell
+docker login --username=你的用户名 registry.cn-shanghai.aliyuncs.com
+# 输入密码
+docker tag 镜像id  xxx.com/a/b:v1
+docker push xxx.com/a/b:v1
+```
+
+或者
 
 ```shell
 for i in 镜像名1 镜像名2 镜像名3

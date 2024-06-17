@@ -5,7 +5,7 @@ tags:
   - mysql
   - docker
 date: 1993-07-06
-lastmod: 2024-04-22
+lastmod: 2024-06-14
 categories:
   - blog
 description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置. 所以记录一下配置和操作."
@@ -331,3 +331,28 @@ log_output = TABLE
 long_query_time = 1
 general_log = ON
 ```
+
+## 压测
+
+使用 [sysbench](https://github.com/akopytov/sysbench) 来压测.
+
+1. 安装
+
+    ```shell
+    # 安装
+    curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.deb.sh | sudo bash
+    apt -y install sysbench
+    ```
+
+2. 创建数据库 `sbtest`
+3. 准备数据
+
+    ```shell
+    sysbench --db-driver=mysql --mysql-host=XXX --mysql-port=XXX --mysql-user=XXX --mysql-password=XXX --mysql-db=sbtest --table_size=25000 --tables=250 --events=0 --time=600  oltp_read_write prepare
+    ```
+
+4. 执行压测
+
+    ```shell
+    sysbench --db-driver=mysql  --mysql-host=XXX --mysql-port=XXX --mysql-user=XXX --mysql-password=XXX --mysql-db=sbtest --table_size=25000 --tables=250 --events=0 --time=600   --threads=XXX --percentile=95 --report-interval=1 oltp_read_write run
+    ```
