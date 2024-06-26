@@ -4,7 +4,7 @@ tags:
   - blog
   - OpenTelemetry
 date: 2023-07-21
-lastmod: 2023-10-26
+lastmod: 2024-06-17
 categories:
   - blog
 description: "`OpenTelemetry-collector` 是 [[笔记/point/OpenTelemetry|OpenTelemetry]] 官方的数据采集软件. 它和 [[笔记/grafana-agent教程|grafana-agent]] 的功能有些类似."
@@ -132,7 +132,7 @@ dist:
   output_path: .
 exporters:
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/exporter/lokiexporter v0.88.0
-  # 内置木块 https://pkg.go.dev/go.opentelemetry.io/collector/exporter@v0.81.0#section-directories
+  # 内置模块 https://pkg.go.dev/go.opentelemetry.io/collector/exporter@v0.81.0#section-directories
   - gomod: go.opentelemetry.io/collector/exporter/loggingexporter v0.88.0
   - gomod: go.opentelemetry.io/collector/exporter/otlpexporter v0.88.0
   - gomod: go.opentelemetry.io/collector/exporter/otlphttpexporter v0.88.0

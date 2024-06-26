@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-06-11
+lastmod: 2024-06-24
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -108,6 +108,8 @@ http {
 
     # 会话保持120秒
     keepalive_timeout   120;
+    # 默认1000,一个tcp长连接在处理1000次http请求以后,就强制销毁掉. 如果你10000qps,那么你需要每秒创建10个连接, 就需要调大这个值.
+    # keepalive_requests 1000;
     types_hash_max_size 2048;
     server_tokens off;
 

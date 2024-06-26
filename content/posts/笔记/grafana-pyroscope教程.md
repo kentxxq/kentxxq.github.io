@@ -2,14 +2,18 @@
 title: grafana-pyroscope教程
 tags:
   - blog
+  - grafana
+  - pyroscope
 date: 2024-06-07
-lastmod: 2024-06-07
+lastmod: 2024-06-26
 categories:
   - blog
 description: 
 ---
 
 ## 简介
+
+`pyroscope` 是 [[笔记/point/grafana|grafana]] 的 [[笔记/point/持续性能分析|持续性能分析]] 工具.
 
 ## 内容
 
@@ -29,6 +33,14 @@ server:
   grpc_listen_port: 4041
 memberlist:
   bind_port: 4042
+storage:
+  backend: s3
+  s3:
+    bucket_name: pyroscope
+    endpoint: minio-api.kentxxq.com
+    # insecure: true
+    access_key_id: 你的id
+    secret_access_key: 你的key
 ```
 
 守护进程 `/etc/systemd/system/pyroscope.service`

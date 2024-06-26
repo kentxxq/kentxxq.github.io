@@ -3,7 +3,7 @@ title: jenkins教程
 tags:
   - blog
 date: 2024-01-29
-lastmod: 2024-06-05
+lastmod: 2024-06-25
 categories:
   - blog
 description: 
@@ -185,6 +185,33 @@ pipeline{
 }
 
 }
+```
+
+### golang 流水线加速
+
+在 `golang:1.21` 容器里构建的时候, 挂载 `-v /cache/golang:/go/pkg -v /cache/golang-build-cache:/root/.cache/go-build`
+
+```groovy
+stage("构建产物"){
+    agent {
+        docker { 
+            image "golang:${env.golang_version}"
+            args '-v /cache/golang:/go/pkg -v /cache/golang-build-cache:/root/.cache/go-build'
+        }
+    }
+    steps{
+        ...
+    }
+}
+```
+
+### 美化 UI
+
+`pipiline` 的描述开启使用 `safe html`, 操作路径 `Jenkins → Configure Global Security → Markup Formatter. Select Safe HTML for the Markup Formatter option`
+
+```html
+<p><a href="https://kentxxq.com">kentxxq.com</a></p>
+<p><a href="https://github.com/kentxxq/testserver">代码仓库地址<a/></p>
 ```
 
 ## 参考资料

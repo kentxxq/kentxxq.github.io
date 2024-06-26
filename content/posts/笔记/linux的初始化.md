@@ -123,8 +123,8 @@ systemctl restart docker
 - filebrowser
 
 ```shell
-alias rc-check='rclone check aliyunpan:/  /data/backup/alist-backup  --exclude "video/**" --exclude "iso/**" --exclude "xiaoya/**" --exclude "yuwei/**" -P'
-alias rc-copy='rclone copy aliyunpan:/  /data/backup/alist-backup  --exclude "video/**" --exclude "iso/**" --exclude "xiaoya/**" --exclude "yuwei/**" --header "Referer:" -P'
+alias rc-check='rclone check aliyunpan:/  /data/backup/alist-backup  --exclude "video/**" --exclude "iso/**" --exclude "xiaoya/**" --exclude "yuwei/**" --exclude "onedrive/posts/**" -P'
+alias rc-copy='rclone copy aliyunpan:/  /data/backup/alist-backup  --exclude "video/**" --exclude "iso/**" --exclude "xiaoya/**" --exclude "yuwei/**" --exclude "onedrive/posts/**" --header "Referer:" -P'
 
 export PATH="/root/rclone/rclone-v1.62.2-linux-arm64:$PATH"
 ```

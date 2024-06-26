@@ -5,7 +5,7 @@ tags:
   - k8s
   - docker
 date: 2023-08-18
-lastmod: 2024-06-14
+lastmod: 2024-06-21
 keywords:
   - k8s
   - docker
@@ -44,6 +44,10 @@ registry-demo:
 - Registery 全部走 [[笔记/point/clash|clash]] 代理! 因为域名确认, 所以这里的 url 是能够确认的!
 - Nginx 域名代理
 - Containerd, k 8 s, docker, minikube 统一都走 nginx 不同域名.
+- [cf-worker代理](https://mp.weixin.qq.com/s/gVP04sJpt8d0LLMNgquPGQ)
+- 用 horbar 或者 Nexus 来代理，缓存镜像？减少运行时的配置复杂度，统一管理
+    - [解决访问难题：使用Nexus 3搭建自己的Docker镜像代理加速服务 - 小z博客](https://blog.xiaoz.org/archives/20916)
+    - [使用 Nexus OSS 为 Docker 镜像提供代理 / 缓存功能 | 随遇而安](https://www.iszy.cc/posts/14/#%E4%B8%BA-docker-hub-%E6%B7%BB%E5%8A%A0-docker-proxy-repository)
 
 可以参考, 做个 k 3 d 的教程?! [k8s 代理问题一站式解决 - 知乎](https://zhuanlan.zhihu.com/p/545327043)
 
@@ -55,7 +59,6 @@ registry-demo:
 {
     "registry-mirrors": [
         "https://docker.m.daocloud.io",
-        "https://dockerproxy.com",
         "https://mirror.baidubce.com"
     ]
 }
@@ -63,7 +66,6 @@ registry-demo:
 
 | 提供者      | 地址                                       |
 | ----------- | ------------------------------------------ |
-| [Docker 镜像代理](https://dockerproxy.com/) | `https://dockerproxy.com`                  |
 | [百度云](https://cloud.baidu.com/doc/CCE/s/Yjxppt74z#%E4%BD%BF%E7%94%A8dockerhub%E5%8A%A0%E9%80%9F%E5%99%A8)      | `https://mirror.baidubce.com`              |
 | [DaoCloud](https://github.com/DaoCloud/public-image-mirror)    | `https://docker.m.daocloud.io`             |
 

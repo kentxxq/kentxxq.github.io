@@ -5,7 +5,7 @@ tags:
   - grafana
   - grafana-agent
 date: 2023-07-14
-lastmod: 2023-08-02
+lastmod: 2024-06-17
 categories:
   - blog
 description: "grafana-agent 是 [[笔记/point/grafana|grafana]] 公司的产品之一, 用于接收 OTLP 数据."
@@ -31,3 +31,7 @@ systemctl enable grafana-agent --now
 vim /etc/default/grafana-agent
 CUSTOM_ARGS="-server.http.address=0.0.0.0:9091 -server.grpc.address=0.0.0.0:9092"
 ```
+
+## 已弃用, 转 alloy
+
+[官方已弃用grafana-agent](https://grafana.com/docs/agent/latest/),请使用 [[笔记/grafana-alloy教程|grafana-alloy]] 替代.

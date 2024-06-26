@@ -4,7 +4,7 @@ tags:
   - blog
   - golang
 date: 2023-06-26
-lastmod: 2024-06-07
+lastmod: 2024-06-25
 categories:
   - blog
 description: "[[笔记/point/golang|golang]] 用的很少, 记录一下相关的安装, 配置, 构建."
@@ -75,6 +75,12 @@ linux arm64
 darwin amd64
 darwin amd64
 ```
+
+## 编译加速
+
+`golang` 在编译的时候除了第三方依赖可以缓存, 还有项目自己的构建内容需要缓存. 这样一改动 1 个文件, 就不需要编译所有内容
+
+`-v /cache/golang:/go/pkg -v /cache/golang-build-cache:/root/.cache/go-build`
 
 ## 相关工具
 

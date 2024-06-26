@@ -6,7 +6,7 @@ tags:
   - 监控
   - devops
 date: 2023-07-11
-lastmod: 2024-06-05
+lastmod: 2024-06-20
 categories:
   - blog
 description: "[[笔记/point/grafana|grafana]] 的使用教程"
@@ -75,4 +75,20 @@ server {
 ```shell
 # 如果报错找不到默认配置 --homepath "/usr/share/grafana" <new_password>
 grafana-cli admin reset-admin-password <new password>
+```
+
+## 关联日志
+
+```shell
+traceid
+regex in log line
+"traceid":\s*"([^"]+)"
+${__value.raw}    traceid
+internal link tempo
+
+
+{
+  "body": "请求成功",
+  "traceid": "ae87dfc2de7cd9425f5cc1e34e94c8a9"
+}
 ```
