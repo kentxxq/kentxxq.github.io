@@ -5,7 +5,7 @@ tags:
   - grafana
   - grafana-alloy
 date: 2024-06-17
-lastmod: 2024-06-20
+lastmod: 2024-06-26
 categories:
   - blog
 description: 
@@ -25,8 +25,9 @@ description:
 
 ## 配置文件
 
-- 参考 [官方文档](https://grafana.com/docs/alloy/latest/tasks/collect-opentelemetry-data/)
+- 参考 [alloy官方采集opentelmetry数据文档](https://grafana.com/docs/alloy/latest/tasks/collect-opentelemetry-data/)
     - `otlp` 是 `grpc` , `otlphttp` 是 `http1.1`
+- [支持的组件列表](https://grafana.com/docs/alloy/latest/reference/components/)
 
 ```
 // 接收
