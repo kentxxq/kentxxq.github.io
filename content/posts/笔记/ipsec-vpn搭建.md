@@ -4,7 +4,7 @@ tags:
   - blog
   - tools
 date: 2024-01-26
-lastmod: 2024-01-26
+lastmod: 2024-07-05
 categories:
   - blog
 description: 
@@ -46,11 +46,43 @@ docker run \
     hwdsl2/ipsec-vpn-server
 ```
 
-接下来 [配置各客户端](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/docs/clients-zh.md)。如果是安卓 12 以上，又不想下载第三方 App， [必须要配置标识符，所以只能使用IKEv2的方式连接](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/docs/ikev2-howto-zh.md#%E4%BD%BF%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%87%AA%E5%B8%A6%E7%9A%84-ikev2-%E5%AE%A2%E6%88%B7%E7%AB%AF)，`IKEv2` 的证书获取方式如下
+如果想要链接 vpn, 相关配置文件如下
 
 ```shell
-# 查看容器内的 /etc/ipsec.d 目录的文件
+# 容器内的 /etc/ipsec.d 目录用于存放配置文件
 docker exec -it ipsec-vpn-server ls -l /etc/ipsec.d
+
 # 示例：将一个客户端配置文件从容器复制到 Docker 主机当前目录
 docker cp ipsec-vpn-server:/etc/ipsec.d/vpnclient.p12 ./
+
+# 下面是3个有用的文件
+docker cp ipsec-vpn-server:/etc/ipsec.d/vpnclient.mobileconfig ~/vpn/vpnclient.mobileconfig
+docker cp ipsec-vpn-server:/etc/ipsec.d/vpnclient.p12 ~/vpn/vpnclient.p12
+docker cp ipsec-vpn-server:/etc/ipsec.d/vpnclient.sswan ~/vpn/vpnclient.sswan
 ```
+
+安装后的提示信息, 用于连接
+
+```shell
+server 服务器地址: 14.103.40.xxx
+IPsec PSK 预共享密钥: KZUrswNxxxxxxxxx
+Username 用户名: vpnuser
+Password 密码: y7Thxxxxxxxx
+```
+
+## 配置使用
+
+官方配置文档
+
+- [ipsec](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/docs/clients-zh.md)
+    - `windows` 注意事项
+        - 管理员 cmd 命令行 `REG ADD HKLM\SYSTEM\CurrentControlSet\Services\PolicyAgent /v AssumeUDPEncapsulationContextOnSendRule /t REG_DWORD /d 0x2 /f`
+        - 第一次配置的话, 重启一下
+    - `macos`
+        - 选项 tab 菜单中勾选 `通过VPN连接发送所有流量`
+        - `机器认证` 选择 `共享密钥`
+- [ikev2](https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/docs/ikev2-howto-zh.md#android)
+    - `ios`
+        - 需要用到 `vpnclient.mobileconfig`
+    - `android`
+        - 需要 `vpnclient.sswan` 以及客户端 **[Google Play](https://play.google.com/store/apps/details?id=org.strongswan.android)**，**[F-Droid](https://f-droid.org/en/packages/org.strongswan.android/)** 或 **[strongSwan 下载网站](https://download.strongswan.org/Android/)**

@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2024-05-12
+lastmod: 2024-07-04
 keywords:
   - clash
   - 配置文件
@@ -581,7 +581,7 @@ parsers:
     - [Surfboard - Apps on Google Play](https://play.google.com/store/apps/details?id=com.getsurfboard&hl=en_US)
     - clashforandroid
 - ios 工具
-    - QuantumultX (圈 X) 强大工具
+    - QuantumultX (圈 X) 强大工具, 全平台
     - Loon 新工具, 对标 QuantumultX
     - Stash ,兼容 clash
     - Surge 最老牌, ios+mac

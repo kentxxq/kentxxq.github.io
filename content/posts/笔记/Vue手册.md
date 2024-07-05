@@ -5,7 +5,7 @@ tags:
   - vue
   - 前端
 date: 2024-03-09
-lastmod: 2024-04-19
+lastmod: 2024-07-04
 categories:
   - blog
 description: 
@@ -575,7 +575,7 @@ console.log(myCustomRef.value); // 输出: "getter executed", 2
 - [vite文档地址](https://cn.vitejs.dev/guide/env-and-mode.html#env-variables)
 - [GitHub - vbenjs/vite-plugin-svg-icons: Vite Plugin for fast creating SVG sprites.](https://github.com/vbenjs/vite-plugin-svg-icons)
 
-#### iconfont
+#### iconfont / svg 图标封装
 
 `iconfont` 是阿里的图标库. 这里介绍用法.
 
@@ -710,9 +710,19 @@ VITE_KEN = 'production'
 VITE_SERVER_URL = 'http://127.0.0.1:5000/'
 ```
 
+代码使用
+
+```ts
+<script lang="ts" setup>
+...
+const title: string = import.meta.env.VITE_APP_TITLE
+...
+</script>
+```
+
 #### 自定义组件名
 
-**现在** 可以这样指定名字
+**现在**可以这样指定名字
 
 ```ts
 defineOptions({

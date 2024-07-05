@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-09-27
-lastmod: 2023-10-16
+lastmod: 2024-07-05
 keywords:
   - csharp
   - json
@@ -293,7 +293,8 @@ var opt = new JsonSerializerOptions
     PropertyNameCaseInsensitive = true,
     // 默认允许从string中读取数字
     NumberHandling = JsonNumberHandling.AllowReadingFromString,
-    // 默认驼峰,可以 UpperCaseNamingPolicy:JsonNamingPolicy 然后重写 public override string ConvertName(string name) =>name.ToUpper();来修改
+    // 默认驼峰. JsonNamingPolicy.SnakeCaseLower 是小写下划线分割
+    // https://learn.microsoft.com/zh-cn/dotnet/standard/serialization/system-text-json/customize-properties?pivots=dotnet-8-0#use-a-built-in-naming-policy
     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
     // 对象内部驼峰 "AB":{"aB":1,"bB":1}
     DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,

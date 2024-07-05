@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-06-24
+lastmod: 2024-07-05
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -841,6 +841,19 @@ server {
     return 302 https://www.kentxxq.com$request_uri;
 }
 ```
+
+### apple universal links
+
+```nginx
+location /app/ {
+        default_type application/json;
+        return 200 '{"applinks": {"apps": [],"details": [{"appID": "FTQ4RV3PQ8.com.kentxxq.app","paths": [ "/app/*"]}]}}';
+}
+```
+
+- 电脑浏览器打开 `https://ulink.kentxxq.com/app/` 响应 json
+- safari 打开 `https://ulink.kentxxq.com/app/` 显示 `打开按钮` + `json`
+- 微信开放平台配置 `Universal Links` 为 `https://ulink.kentxxq.com/app/`
 
 ## 守护进程
 
