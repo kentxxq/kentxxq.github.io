@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-08
-lastmod: 2024-06-04
+lastmod: 2024-07-09
 categories:
   - blog
 description: 
@@ -113,6 +113,7 @@ systemctl restart docker
 国内硬件扩展最推荐三个个牌子 geekworm 同伴科技，以及 mcuzone 野芯科技，还有 waveshare 微雪电子
 
 - 群晖 nas 也很稳定. [【群晖DS423+】群晖（Synology）DS423+ 四核心 4盘位 NAS网络存储 文件存储共享 照片自动备份 私有云（无内置硬盘 ）【行情 报价 价格 评测】-京东](https://item.jd.com/100047343428.html) 关注一下内存可以升级到多大. nas 可能又要考虑 ups 的问题, 不然停电对硬盘损害很大. ups 大概 400+, 不是特别贵. 可以监控停电使用 ups 的时候, 手动备份. 关机即可.
+- 威联通也是 nas 老玩家了. 比较稳, 但是玩法没那么多.
 - 自建 nas 也是可以的. 倍控有. all-in-boom
 - 断电，存储冗余，机器冗余，备份等等很麻烦
 

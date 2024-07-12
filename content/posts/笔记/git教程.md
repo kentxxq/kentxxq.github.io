@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2024-05-06
+lastmod: 2024-07-06
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."
@@ -152,3 +152,12 @@ git push -f origin main
 - 在特性分支上开发新功能，同步机器之间的代码
 - 合并到 main 自动触发流水线，验证测试环境
 - 手动 tag，发版线上
+
+github 工作流使用
+
+- [Site Unreachable](https://www.youtube.com/watch?v=uj8hjLyEBmU)
+- `git rebase main` 可以让你的改动是基于最新的代码, 如果操作这一步有冲突, 就解决冲突
+- `git push -f origin my-feature` 因为我们 rebase 了, 所以必须要用 -f 强制更新
+- feature 合并到 main, 使用 pull request 去合并请求
+- `main` 采用 `squash and merge`, 这样你的分支很乱, 但是会被整合到一起
+- [十分钟学会常用git撤销操作，全面掌握git的时光机 - YouTube](https://www.youtube.com/watch?v=ol7CMoJuAvI)  #todo/笔记

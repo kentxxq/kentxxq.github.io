@@ -4,7 +4,7 @@ tags:
   - blog
   - frp
 date: 2023-08-16
-lastmod: 2023-11-02
+lastmod: 2024-07-12
 categories:
   - blog
 description: "`frp` 是一个内网穿透工具.这里记录一下之前用过的配置."
@@ -14,9 +14,10 @@ description: "`frp` 是一个内网穿透工具.这里记录一下之前用过�
 
 `frp` 是一个内网穿透工具.
 
-这里记录一下之前用过的配置.
+- [官方文档地址](https://gofrp.org/zh-cn/docs/examples/ssh/)
+- windows 客户端 [GitHub - koho/frpmgr: Windows 平台的 FRP GUI 客户端 / A user-friendly desktop GUI client for FRP on Windows.](https://github.com/koho/frpmgr)
 
-## 内容
+## 配置文件
 
 #### 服务端 frps
 
@@ -111,4 +112,26 @@ server {
         server_name  frps-static.kentxxq.com;
         return 301 https://$server_name$request_uri;
 }
+```
+
+## 运行
+
+[[笔记/point/Systemd|systemd]] 守护起来, [官网也建议这么做](https://gofrp.org/zh-cn/docs/setup/systemd/)
+
+`vim /etc/systemd/system/frps.service`
+
+```ini
+[Unit]
+# 服务名称，可自定义
+Description = frp server
+After = network.target syslog.target
+Wants = network.target
+
+[Service]
+Type = simple
+# 启动frps的命令，需修改为您的frps的安装路径
+ExecStart = /path/to/frps -c /path/to/frps.toml
+
+[Install]
+WantedBy = multi-user.target
 ```
