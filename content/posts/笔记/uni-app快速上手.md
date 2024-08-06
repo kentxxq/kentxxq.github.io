@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2024-01-20
-lastmod: 2024-03-29
+lastmod: 2024-07-16
 categories:
   - blog
 description: 
@@ -20,8 +20,8 @@ description:
 
 - 创建项目 `npx degit dcloudio/uni-preset-vue#vite-ts my-vue3-project`
 - 安装依赖 `pnpm i`
-- 运行 `pnpm dev:h5`
-- 如果是运行 `mp-weixin`，把 `dist/dev/mp-weixin` 导入微信开发者工具。就可以在微信开发者工具中预览
+- 运行 `pnpm dev:h5` 即可看到 `h5` 页面
+- 如果是运行 `pnpm dev:mp-weixin`，会生成 `dist/dev/mp-weixin` 文件夹. 在微信开发者工具导入这个目录, 就可以在微信开发者工具实时预览改动了
 
 ### vscode
 

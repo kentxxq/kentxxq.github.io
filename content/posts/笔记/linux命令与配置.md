@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-06-05
+lastmod: 2024-07-23
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -91,6 +91,17 @@ mount -a
 PATH=~/opt/bin:$PATH
 # 或者
 PATH=$PATH:~/opt/bin
+```
+
+### bashrc
+
+如果发现 `~/.bashrc` 的配置不生效, 在 `~/.bash_profile` 或者 `~/.profile` 修改一下内容
+
+```shell
+# 添加
+if [ -f ~/.bashrc ]; then
+    source ~/.bashrc
+fi
 ```
 
 ### alias
@@ -885,6 +896,17 @@ tar -czvf dist.tgz /dad/path/.
 tar -czvf dist.tgz /data/path
 # 如果是在当前目录，可以手动指定
 tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* *
+```
+
+### 查看命令进度
+
+使用开源工具 [Xfennec/progress](https://github.com/Xfennec/progress)
+
+```shell
+apt install progress -y
+
+# 可以查看cp, mv, dd, tar, gzip/gunzip, cat这些命令
+progress -w
 ```
 
 ### 拷贝文件

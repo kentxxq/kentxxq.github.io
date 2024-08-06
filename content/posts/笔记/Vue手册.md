@@ -5,7 +5,7 @@ tags:
   - vue
   - 前端
 date: 2024-03-09
-lastmod: 2024-07-04
+lastmod: 2024-08-03
 categories:
   - blog
 description: 
@@ -574,6 +574,66 @@ console.log(myCustomRef.value); // 输出: "getter executed", 2
 
 - [vite文档地址](https://cn.vitejs.dev/guide/env-and-mode.html#env-variables)
 - [GitHub - vbenjs/vite-plugin-svg-icons: Vite Plugin for fast creating SVG sprites.](https://github.com/vbenjs/vite-plugin-svg-icons)
+
+#### i18n
+
+```shell
+npm install vue-i18n@9
+```
+
+创建 `@/src/locales/cn.json`
+
+```json
+{
+  "nav": "导航",
+  "login": "登录"
+}
+```
+
+创建 `@/src/locales/index.ts`
+
+```ts
+import { createI18n } from 'vue-i18n'
+import cn from './cn.json'
+
+type MessageSchema = typeof cn
+
+// 英文直接用key表示
+const generateEnTranslations = (translations: MessageSchema) => {
+  const enTranslations = { ...translations }
+  Object.keys(translations).forEach((key) => {
+    Object.defineProperty(enTranslations, key, {
+      value: key,
+      writable: true,
+      enumerable: true,
+      configurable: true
+    })
+  })
+  console.log(enTranslations)
+  console.log(translations)
+  return enTranslations
+}
+
+const en = generateEnTranslations(cn)
+
+const i18n = createI18n<[MessageSchema], 'en' | 'cn'>({
+  locale: 'cn',
+  fallbackLocale: 'cn',
+  messages: {
+    cn,
+    en
+  }
+})
+
+export default i18n
+```
+
+引入 `main.ts`
+
+```ts
+import i18n from '@/locales'
+app.use(i18n)
+```
 
 #### iconfont / svg 图标封装
 

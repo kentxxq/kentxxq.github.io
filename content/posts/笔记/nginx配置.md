@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-07-12
+lastmod: 2024-08-01
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -384,8 +384,6 @@ upstream backend {
 
 ### 域名转发
 
-#### 转发配置
-
 `/usr/local/nginx/conf/hosts/www.kentxxq.com.conf`
 
 ```nginx
@@ -414,63 +412,6 @@ server {
         include /usr/local/nginx/conf/options/allow_all_options_cross_origin.conf;
         proxy_pass http://1.1.1.1:80;
     }
-}
-```
-
-#### debug 配置
-
-`/usr/local/nginx/conf/hosts/debug.conf`
-
-```nginx
-server {
-    listen 8000;
-    access_log off;
-    server_name _;
-    include /usr/local/nginx/conf/options/time.conf;
-
-    # 显示处理过,处理中的请求
-    # https://nginx.org/en/docs/http/ngx_http_stub_status_module.html
-    location /status_string {
-        stub_status;
-    }
-
-    location /status_metrics {
-        default_type text/plain;
-        return 200 '# TYPE connections_active counter 
-# HELP The current number of active client connections including Waiting connections. 
-connections_active $connections_active $timestamp 
-
-# TYPE connections_reading counter 
-# HELP The current number of connections where nginx is reading the request header. 
-connections_reading $connections_reading $timestamp 
-
-# TYPE connections_writing counter 
-# HELP The current number of connections where nginx is writing the response back to the client. 
-connections_writing $connections_writing $timestamp
-
-# TYPE connections_waiting counter 
-# HELP The current number of idle client connections waiting for a request. 
-connections_waiting $connections_waiting $timestamp';
-}
-
-    # 在header中展示各个时间
-    location /time {
-        default_type text/plain;
-        return 200 'time';
-        add_header time_zh $time_zh;
-        add_header timestamp $timestamp;
-        add_header time_msec $msec;
-        add_header time_zh_ms $time_zh_ms;
-        add_header time_zh_ms2 $time_zh_ms2;
-        add_header time_local $time_local;
-        add_header time_iso8601 $time_iso8601;
-    }
-
-    # tengine的debug模块,需要编译加入模块
-    # https://tengine.taobao.org/document_cn/ngx_debug_pool_cn.html
-    # location = /debug_pool {
-    #    debug_pool;
-    # }
 }
 ```
 
@@ -555,6 +496,99 @@ server {
 ```
 
 ## 功能配置
+
+### 配置 default_server
+
+为什么需要 `default_server`?
+
+- 你使用泛域名解析 `*.kentxxq.com` 到 `1.1.1.1` 这个 ip
+- 你有 `www.kentxxq.com` , `b.kentxxq.com` , `2.kentxxq.com` 这 3 个域名配置
+- 此时用户请求了 `ijoasijdoais.kentxxq.com` 这个奇怪的域名, 你并没有配置对应的 `server_name`
+- nginx 会把请求转发到 `2.kentxxq.com` . 顺序依次是按照 nginx 的加载顺序.
+- 通常直接 include 某个文件夹下的配置, 所以就会按照文件名排序.
+
+**这会造成一些意料外的问题!!!** 一定要在上线站点以后, 添加一个默认配置.
+
+我之前使用阿里云的 slb 健康检查, 因为添加了一个 `2.kentxxq.com` 配置用于调试. 返回了非 200 状态码. **slb 判断服务异常, 终止了转发**
+
+```nginx
+server {
+    http2 on;
+    listen 443 ssl;
+    server_name 1.kentxxq.com;
+    include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
+
+    client_max_body_size 128M;
+
+    location / {
+        default_type text/html;
+        return 200 "1.kentxxq.com";
+    }
+}
+
+server {
+        listen 80;
+        server_name  1.kentxxq.com;
+        return 301 https://$server_name$request_uri;
+}
+```
+
+### debug 配置
+
+`/usr/local/nginx/conf/hosts/debug.conf`
+
+```nginx
+server {
+    listen 8000;
+    access_log off;
+    server_name _;
+    include /usr/local/nginx/conf/options/time.conf;
+
+    # 显示处理过,处理中的请求
+    # https://nginx.org/en/docs/http/ngx_http_stub_status_module.html
+    location /status_string {
+        stub_status;
+    }
+
+    location /status_metrics {
+        default_type text/plain;
+        return 200 '# TYPE connections_active counter 
+# HELP The current number of active client connections including Waiting connections. 
+connections_active $connections_active $timestamp 
+
+# TYPE connections_reading counter 
+# HELP The current number of connections where nginx is reading the request header. 
+connections_reading $connections_reading $timestamp 
+
+# TYPE connections_writing counter 
+# HELP The current number of connections where nginx is writing the response back to the client. 
+connections_writing $connections_writing $timestamp
+
+# TYPE connections_waiting counter 
+# HELP The current number of idle client connections waiting for a request. 
+connections_waiting $connections_waiting $timestamp';
+}
+
+    # 在header中展示各个时间
+    location /time {
+        default_type text/plain;
+        return 200 'time';
+        add_header time_zh $time_zh;
+        add_header timestamp $timestamp;
+        add_header time_msec $msec;
+        add_header time_zh_ms $time_zh_ms;
+        add_header time_zh_ms2 $time_zh_ms2;
+        add_header time_local $time_local;
+        add_header time_iso8601 $time_iso8601;
+    }
+
+    # tengine的debug模块,需要编译加入模块
+    # https://tengine.taobao.org/document_cn/ngx_debug_pool_cn.html
+    # location = /debug_pool {
+    #    debug_pool;
+    # }
+}
+```
 
 ### 黑/白名单
 

@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-09-05
-lastmod: 2024-04-19
+lastmod: 2024-07-19
 categories:
   - blog
 description: 
@@ -75,7 +75,7 @@ RUN mv /etc/apt/sources.list sources.list.bak && \
     echo "deb http://mirrors.ivolces.com/ubuntu/ jammy-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
     echo "deb http://mirrors.ivolces.com/ubuntu/ jammy-security main restricted universe multiverse" >> /etc/apt/sources.list && \
     apt update -y && \
-    apt install lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass dnsutils -y && \
+    apt install lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass dnsutils progress -y && \
     ls
 ```
 
@@ -99,7 +99,7 @@ RUN mv /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/debian.sou
     echo "deb http://mirrors.ivolces.com/debian/ bookworm-backports main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
     echo "#deb-src http://mirrors.ivolces.com/debian/ bookworm-backports main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
     apt update -y && \
-    apt install lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass dnsutils -y && \
+    apt install lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass dnsutils progress -y && \
     ls
 
 ENV TZ=Asia/Shanghai

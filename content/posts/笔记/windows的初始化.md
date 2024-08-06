@@ -14,7 +14,7 @@ description: "[[笔记/point/windows|windows]] 现在是我主要使用的桌面
 
 [[笔记/point/windows|windows]] 现在是我主要使用的桌面平台. 因为我挑选并使用了大量的软件工具, 而且经常会跨多设备工作. 所以这里我记录下来, 也给大家做一个参考.
 
-与 [[笔记/linux的初始化|linux的初始化]] 目的类似.
+与 [[笔记/linux初始化|linux初始化]] 目的类似.
 
 ## 分区配置
 

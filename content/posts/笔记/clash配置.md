@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2024-07-11
+lastmod: 2024-07-25
 keywords:
   - clash
   - 配置文件
@@ -551,7 +551,13 @@ parsers:
 
 ### 企业微信不兼容
 
-主动配置企业微信使用 socket 代理 `127.0.0.1:7890`
+- 主动配置企业微信使用 socket 代理 `127.0.0.1:7890`
+- 也可以尝试
+
+    ```yaml
+    prepend-rules:
+    - PROCESS-NAME, WXWork.exe, DIRECT
+    ```
 
 ### 安卓 app 不兼容代理
 
@@ -573,8 +579,9 @@ parsers:
 - [hysteria内核](https://github.com/apernet/hysteria)
 - [Xray-core是v2ray-core的超集](https://github.com/XTLS/Xray-core) 内核
 - [sing-box](https://github.com/SagerNet/sing-box) 内核
-- clash 内核
+- clash 内核 [友情链接](https://clash-verge-rev.github.io/friendship.html)
     - [Clash.Meta](https://github.com/MetaCubeX/Clash.Meta/tree/Alpha) 内核
+    - [GitHub - clash-verge-rev/clash-verge-rev: Continuation of Clash Verge - A Clash Meta GUI based on Tauri (Windows, MacOS, Linux)](https://github.com/clash-verge-rev/clash-verge-rev)
     - [clash-verge](https://github.com/zzzgydi/clash-verge) 客户端
     - [clashN](https://github.com/2dust/clashN) 客户端
     - [v2rayN](https://github.com/2dust/v2rayN) 客户端
@@ -598,6 +605,7 @@ parsers:
     - [魅影小站 - Ark](https://ark.to/user)
     - 唯云四杰好像是有口碑的
     - [一个机场收录站点](https://dh.duangks.com/)
+    - [狗狗加速](https://xn--yfrp36ea9901a.com/) clash-verge-dev 的赞助商
     - justmysocket
     - [GitHub - aiboboxx/clashfree: clash节点、免费clash节点、免费节点、免费梯子、clash科学上网、clash翻墙、clash订阅链接、clash for Windows、clash教程、免费公益节点、最新clash免费节点订阅地址、clash免费节点每日更新](https://github.com/aiboboxx/clashfree)
 - [Clash分流策略 | 配置文件 | 订阅防覆盖 | 硬核教程](https://a-nomad.com/clash)

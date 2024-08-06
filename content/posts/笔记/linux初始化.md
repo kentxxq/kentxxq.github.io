@@ -1,10 +1,10 @@
 ---
-title: linux的初始化
+title: linux初始化
 tags:
   - blog
   - linux
 date: 2023-07-08
-lastmod: 2024-07-09
+lastmod: 2024-07-31
 categories:
   - blog
 description: 
@@ -39,7 +39,7 @@ description:
 
 ufw disable
 
-apt install selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass -y
+apt install selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass progress -y
 
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -97,6 +97,8 @@ systemctl restart docker
 
 #todo 下面需要完整梳理, 整理.
 
+- 参考学习 [分享个人软路由、NAS 和家庭服务器的使用情况 - V2EX](https://www.v2ex.com/t/1061012)
+
 这里很多的选择, 可以参考 - 思想本的的选择
 
 - originpi zero3 1gb 99 元其实蛮不错的 . 它 orange 的 4 gb 版本 229. 好像是最便宜的了.
@@ -113,9 +115,16 @@ systemctl restart docker
 国内硬件扩展最推荐三个个牌子 geekworm 同伴科技，以及 mcuzone 野芯科技，还有 waveshare 微雪电子
 
 - 群晖 nas 也很稳定. [【群晖DS423+】群晖（Synology）DS423+ 四核心 4盘位 NAS网络存储 文件存储共享 照片自动备份 私有云（无内置硬盘 ）【行情 报价 价格 评测】-京东](https://item.jd.com/100047343428.html) 关注一下内存可以升级到多大. nas 可能又要考虑 ups 的问题, 不然停电对硬盘损害很大. ups 大概 400+, 不是特别贵. 可以监控停电使用 ups 的时候, 手动备份. 关机即可.
+    - 群晖售后更好. 文件丢失? 找售后远程找回. 开不了机? 硬盘拔下来, 机器寄回去修好. 回来直接插上硬盘就起来了
+    - 选择支持群晖不断电系统的 ups, 价格也不贵. 够用【京东】 https://3.cn/22j-i68b「山克 BK650 ups 不间断电源 360W 群晖 NAS 自动关机办公电脑路由网络设备家用商用停电应急备用电源」
+点击链接直接打开
 - 威联通也是 nas 老玩家了. 比较稳, 但是玩法没那么多.
+- 极空间是国产厂商
+- 小米 nas
 - 自建 nas 也是可以的. 倍控有. all-in-boom
 - 断电，存储冗余，机器冗余，备份等等很麻烦
+
+[停电， UPS 正常启动几分钟后， NAS 电源还是炸了 - V2EX](https://www.v2ex.com/t/1061996)
 
 路由器透传 nginx 失败?
 
