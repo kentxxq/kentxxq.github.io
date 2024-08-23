@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-08-01
+lastmod: 2024-08-22
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -828,14 +828,6 @@ location /metrics {
 }
 ```
 
-### 微信验证文件
-
-```nginx
-location /MP_verify_ {
-    root /usr/local/nginx/data;
-}
-```
-
 ### 405 错误 - post 请求静态文件
 
 ```nginx
@@ -873,6 +865,22 @@ server {
     access_log /usr/local/nginx/conf/hosts/logs/kentxxq.com.log k-json;
     # 302临时跳转
     return 302 https://www.kentxxq.com$request_uri;
+}
+```
+
+### 百度验证文件
+
+```nginx
+location /baidu_verify_ {
+    root /data/files;
+}
+```
+
+### 微信验证文件
+
+```nginx
+location /MP_verify_ {
+    root /usr/local/nginx/data;
 }
 ```
 

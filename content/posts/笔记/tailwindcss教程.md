@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2024-07-30
-lastmod: 2024-08-03
+lastmod: 2024-08-23
 categories:
   - blog
 description: 
@@ -57,6 +57,8 @@ description:
 - `text-wrap` 换行
     - `text-nowrap` 不换行
     - `text-pretty` 避免在新的一行只展示很少的字 (两个单词)
+- `break-all` 强制换行, 避免超出容器边界
+- `line-clamp-*` 太长了显示省略号, `line-clamp-1` 意思是保留一行. 需要配合 `break-all` 使用
 
 ### 字体
 
@@ -128,6 +130,16 @@ description:
     - `opacity-100`: 不透明
     - `opacity-50`: 按钮不可用的时候, 用这个
 
+### 动画
+
+- `hover:scale-110` 移动上去就会放大
+- `transition` 添加默认的动画效果
+    - `duration-100` 动画持续 100 ms
+    - `delay-100` 延迟 100 ms 触发
+    - `ease-in` 动画逐渐加速
+    - `ease-out` 动画逐渐减速
+    - `ease-in-out` 平滑开始, 平滑结束
+
 ### 布局
 
 `container`: 自带响应式. 不同宽度屏幕上, 会变窄. 通常搭配 `mx-auto` 做居中
@@ -171,10 +183,6 @@ description:
         - `flex-initial`: `flex: 0 1 auto;` 只准缩小, 不准放大. 按照元素已有的 width 比例计算
 
 ## 实践
-
-#todo
-
-- 动画
 
 ### 渐变色
 

@@ -3,7 +3,7 @@ title: API规范
 tags:
   - blog
 date: 2024-07-04
-lastmod: 2024-07-04
+lastmod: 2024-08-07
 categories:
   - blog
 description: 
@@ -71,10 +71,16 @@ description:
 下面的操作返回就是 `data` 的值 (不要存放在 data 对象内)
 
 - `insert`
+    - http-post
     - 返回创建的实体. 和查询实体返回的结果一致
     - 创建多个实体, 返回实体列表
 - `update`
+    - http-post
     - 修改返回修改后的实体. 和查询实体返回的结果一致
     - **不建议**提供同时修改多个对象的操作, 应该改成特定功能. 例如把多个用户变成管理员, 直接使用特定接口, 而不是提交每隔用户的信息.
+    - 代码
+        - 控制层处理 http 请求, 输入验证, 返回请求
+        - service 判断是否属于 xx 用户. 在这里把 ro 对象映射到 model
 - `delete`
+    - http-post
     - 返回 `true/false`

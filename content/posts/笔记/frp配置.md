@@ -4,7 +4,7 @@ tags:
   - blog
   - frp
 date: 2023-08-16
-lastmod: 2024-08-03
+lastmod: 2024-08-17
 categories:
   - blog
 description: "`frp` 是一个内网穿透工具.这里记录一下之前用过的配置."
@@ -40,7 +40,12 @@ log.to = "console"
 
 #### 客户端 frpc
 
-使用 windows 客户端 [GitHub - koho/frpmgr: Windows 平台的 FRP GUI 客户端 / A user-friendly desktop GUI client for FRP on Windows.](https://github.com/koho/frpmgr)
+客户端工具有
+
+- [GitHub - koho/frpmgr: Windows 平台的 FRP GUI 客户端 / A user-friendly desktop GUI client for FRP on Windows.](https://github.com/koho/frpmgr)
+- [GitHub - luckjiawei/frpc-desktop: 一个frpc桌面客户端](https://github.com/luckjiawei/frpc-desktop)
+
+下面是 [frpmgr](https://github.com/koho/frpmgr) 的使用方法
 
 如图配置基本信息, 认证 tab 栏配置 token 信息
 
