@@ -182,6 +182,13 @@ description:
         - `flex-auto`: `flex: 1 1 auto;` 自动缩放. 适用于元素有 width, 按照元素已有的 width 比例计算
         - `flex-initial`: `flex: 0 1 auto;` 只准缩小, 不准放大. 按照元素已有的 width 比例计算
 
+## 状态
+
+### hover 传递
+
+- `hover` 默认只会触发当前元素, 子元素不影响
+- 在当前元素加上 `group`, 子元素加上 `group-hover:text-primary"` ,就可以传递触发
+
 ## 实践
 
 ### 渐变色

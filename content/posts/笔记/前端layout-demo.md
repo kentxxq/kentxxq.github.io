@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2023-11-11
-lastmod: 2024-07-30
+lastmod: 2024-08-26
 categories:
   - blog
 description: "`layout-demo` 是一个练习布局, 样式, 动画等内容的项目. "
@@ -279,6 +279,10 @@ img {
 }
 </style>
 ```
+
+#### 新方法
+
+- `align-content` 一行 css 实现垂直居中
 
 #### 总结
 

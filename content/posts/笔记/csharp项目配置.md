@@ -325,6 +325,7 @@ ENV DOTNET_gcServer=0
 ```
 
 - DynamicAdaptationMode 可能会到 dotnet 9 出现, 内存占用降低到 go 级别? [Dynamically Adapting To Application Sizes | by Maoni0 | Medium](https://maoni0.medium.com/dynamically-adapting-to-application-sizes-2d72fcb6f1ea)
+- [Dynamic adaptation to application sizes (DATAS) - .NET | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/datas)
 - 2024 年 6 月 5 日测试
     - aspnetcore aot 20 m 内存 , 普通 demo 在 80 m 左右
     - 我的应用普遍 120 m 内存左右

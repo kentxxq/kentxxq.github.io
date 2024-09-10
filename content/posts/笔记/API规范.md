@@ -3,7 +3,7 @@ title: API规范
 tags:
   - blog
 date: 2024-07-04
-lastmod: 2024-08-07
+lastmod: 2024-08-28
 categories:
   - blog
 description: 
@@ -84,3 +84,9 @@ description:
 - `delete`
     - http-post
     - 返回 `true/false`
+
+## 时间
+
+- 前后端接口传输, 使用 `iso8601` 示例 `2024-08-28T16:35:39.0952381+08:00`
+- 后端代码内都使用 `DateTimeOffset`
+- 数据库存放 `Utc` 时间

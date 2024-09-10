@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-07-23
+lastmod: 2024-08-26
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -1062,6 +1062,10 @@ nload
 nethogs
 # 图形化的工具，可以查看具体的端口情况
 iptraf-ng
+
+
+[bandwhich](https://github.com/imsnif/bandwhich)
+查看当前什么程序在占用带宽，以及不同 IP 地址产生的流量
 ```
 
 #### 网络连接排查

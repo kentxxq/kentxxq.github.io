@@ -30,8 +30,6 @@ description: "这篇文章会把关于 [[笔记/point/OpenTelemetry|OpenTelemetr
 
 - [APP代码放着这里](https://github.com/kentxxq/TestServer),是 [[笔记/point/csharp|csharp-aspnetcore]] Web 应用
     - 引入了 [opentelemetry-dotnet](https://github.com/open-telemetry/opentelemetry-dotnet/tree/main/src),  [opentelemetry-dotnet-contrib](https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src)
-    -
-    -
 - [[笔记/grafana-alloy教程|alloy]] 接收应用数据.
     - 这里没有使用 [[笔记/OpenTelemetry-Collector教程|OpenTelemetry-Collector]], 是因为 `alloy` 会完全兼容它
     - 可以 [采集日志文件](https://grafana.com/docs/alloy/latest/tutorials/logs-and-relabeling-basics/) 等一些有用的拓展功能
