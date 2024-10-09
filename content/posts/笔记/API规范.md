@@ -3,7 +3,7 @@ title: API规范
 tags:
   - blog
 date: 2024-07-04
-lastmod: 2024-08-28
+lastmod: 2024-09-10
 categories:
   - blog
 description: 
@@ -89,4 +89,20 @@ description:
 
 - 前后端接口传输, 使用 `iso8601` 示例 `2024-08-28T16:35:39.0952381+08:00`
 - 后端代码内都使用 `DateTimeOffset`
-- 数据库存放 `Utc` 时间
+- 数据库存放 `Utc` 时间, 很多数据库不能保存时区
+
+```csharp
+// 不指定时区,不指定DateTimeKind为utc. 直接把datetime赋值给datetimeoffset,默认会加上服务器的时区
+
+Console.WriteLine(DateTime.Now);
+Console.WriteLine(DateTime.UtcNow);
+Console.WriteLine("---");
+Console.WriteLine(DateTimeOffset.Now);
+Console.WriteLine(DateTimeOffset.UtcNow);
+
+2024/7/13 13:40:52
+2024/7/13 5:40:52
+---
+2024/7/13 13:40:52 +08:00
+2024/7/13 5:40:52 +00:00
+```

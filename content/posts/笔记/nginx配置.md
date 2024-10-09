@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-08-22
+lastmod: 2024-09-24
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -739,6 +739,15 @@ location / {
 # 微信的验证文件
 location ^~ /MP_verify_ {
     root /usr/local/nginx/files;
+}
+```
+
+### path 改写
+
+```nginx
+location /api {
+    rewrite ^/api/(.*)$ /$1 break;
+    proxy_pass xxx;
 }
 ```
 

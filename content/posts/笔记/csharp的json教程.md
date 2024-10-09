@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-09-27
-lastmod: 2024-07-05
+lastmod: 2024-09-11
 keywords:
   - csharp
   - json
@@ -363,11 +363,13 @@ public Dictionary<string, JsonElement>? ExtensionData { get; set; }
 // 不完整的json,缺少的字段默认值
 var j1 = """{"Name": "ken"}""";
 var j11 = JsonSerializer.Deserialize(j1, JsonContext.Default.Person);
+
 // 带null的json
 // age为null报错.
 // name为null则会传递到对象里,即使Name不允许为null值
 var j2 = """{"Name": null,"Age":4}""";
 var j22 = JsonSerializer.Deserialize(j2, JsonContext.Default.Person);
+
 // 多余的字段不受影响.正常默认值  
 var j3 = """{"HHH":null}""";  
 var j33 = JsonSerializer.Deserialize(j3, JsonContext.Default.Person);

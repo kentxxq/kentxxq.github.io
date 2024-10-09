@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-07-26
-lastmod: 2024-06-05
+lastmod: 2024-09-19
 categories:
   - blog
 description: "[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."
@@ -316,16 +316,26 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 
 ### gc 配置
 
+#todo/笔记
+
 ```docker
 # 多gc节省 0-9之间 https://learn.microsoft.com/zh-cn/dotnet/core/runtime-config/garbage-collector#conserve-memory
 ENV DOTNET_GCConserveMemory=9
 
-# 工作站模式会更加节约内存
+# 启用工作站模式, 更加节约内存
 ENV DOTNET_gcServer=0
+
+# 禁用DATAS
+在csproj中添加
+<GarbageCollectionAdaptationMode>0</GarbageCollectionAdaptationMode>
 ```
 
-- DynamicAdaptationMode 可能会到 dotnet 9 出现, 内存占用降低到 go 级别? [Dynamically Adapting To Application Sizes | by Maoni0 | Medium](https://maoni0.medium.com/dynamically-adapting-to-application-sizes-2d72fcb6f1ea)
-- [Dynamic adaptation to application sizes (DATAS) - .NET | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/datas)
+- [ASP.NET Core 中的内存管理和模式 | Microsoft Learn](https://learn.microsoft.com/zh-cn/aspnet/core/performance/memory?view=aspnetcore-8.0)
+    - workstation gc 会频繁 gc, cpu 占用多
+    - server gc 会保证吞吐量, cpu 占用少
+- DATAS 模式减少了很多内存使用. 吞吐量降低降低不明显
+    - [Dynamically Adapting To Application Sizes | by Maoni0 | Medium](https://maoni0.medium.com/dynamically-adapting-to-application-sizes-2d72fcb6f1ea)
+    - [Dynamic adaptation to application sizes (DATAS) - .NET | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/datas)
 - 2024 年 6 月 5 日测试
     - aspnetcore aot 20 m 内存 , 普通 demo 在 80 m 左右
     - 我的应用普遍 120 m 内存左右

@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-08-26
+lastmod: 2024-09-27
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -708,6 +708,32 @@ do-release-upgrade
 
 >  桌面端建议使用 ui 操作
 > 通常新 lts 发布只是发布镜像, 用于新机安装. 需要过一段时间才会提供升级选项. 参考 [NobleUpgrades - Community Help Wiki](https://help.ubuntu.com/community/NobleUpgrades)
+
+#### ubuntu 22 升级到 24
+
+升级完成后 `apt update -y` 报错
+
+```
+Missing Signed-By in the sources.list(5) entry for
+```
+
+进入 `/etc/apt/sources.list.d/` 目录, 找到没有签名的字段, 加上对应的 gpg
+
+```
+Types: deb deb-src
+URIs: http://mirrors.cloud.aliyuncs.com/ubuntu/
+Suites: noble noble-updates noble-backports
+Components: main restricted universe multiverse
+# 加上下面这一句
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+Types: deb deb-src
+URIs: http://mirrors.cloud.aliyuncs.com/ubuntu
+Suites: noble-security
+Components: main restricted universe multiverse
+# 加上下面这一句
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+```
 
 ### 跑分
 
