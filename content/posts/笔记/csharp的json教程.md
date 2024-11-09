@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-09-27
-lastmod: 2024-09-11
+lastmod: 2024-10-16
 keywords:
   - csharp
   - json
@@ -272,7 +272,10 @@ name = jDoc.RootElement.GetProperty("Name").Deserialize<string>();
 
 ## JsonSerializerOptions 对象
 
-#todo/笔记  [JsonSerializerOptions.UnmappedMemberHandling Property](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializeroptions.unmappedmemberhandling?view=net-8.0#system-text-json-jsonserializeroptions-unmappedmemberhandling)
+#todo/笔记  
+
+- [JsonSerializerOptions.UnmappedMemberHandling Property](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializeroptions.unmappedmemberhandling?view=net-8.0#system-text-json-jsonserializeroptions-unmappedmemberhandling)
+- `TypeInfoResolver = JsonContext.Default` 没有了?
 
 ```csharp
 var opt = new JsonSerializerOptions

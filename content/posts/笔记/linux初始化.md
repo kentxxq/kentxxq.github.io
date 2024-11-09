@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-08
-lastmod: 2024-09-27
+lastmod: 2024-10-30
 categories:
   - blog
 description: 
@@ -24,7 +24,7 @@ description:
 
 ## server 初始化
 
-### 登录
+### 限制登录
 
 1. [[笔记/linux命令与配置#允许 root 远程登录|允许 root 远程登录]]
 2. 允许 root 远程登录后，开始用 tabby 连接操作
@@ -39,7 +39,7 @@ description:
 
 ufw disable
 
-apt install selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass progress -y
+apt install selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass progress jq -y
 
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -116,6 +116,8 @@ systemctl restart docker
 
 - 群晖 nas 也很稳定. [【群晖DS423+】群晖（Synology）DS423+ 四核心 4盘位 NAS网络存储 文件存储共享 照片自动备份 私有云（无内置硬盘 ）【行情 报价 价格 评测】-京东](https://item.jd.com/100047343428.html) 关注一下内存可以升级到多大. nas 可能又要考虑 ups 的问题, 不然停电对硬盘损害很大. ups 大概 400+, 不是特别贵. 可以监控停电使用 ups 的时候, 手动备份. 关机即可.
     - 923+ 的内存可以扩展更大
+    - 224+ 可以先基础的玩一玩,
+        - 加内存 [兼容性列表 | 群晖科技 Synology Inc.](https://www.synology.cn/zh-cn/compatibility?search_by=category&category=rams&filter_size=4GB)
     - 群晖售后更好. 文件丢失? 找售后远程找回. 开不了机? 硬盘拔下来, 机器寄回去修好. 回来直接插上硬盘就起来了
     - 选择支持群晖不断电系统的 ups, 价格也不贵. 够用【京东】 https://3.cn/22j-i68b「山克 BK650 ups 不间断电源 360W 群晖 NAS 自动关机办公电脑路由网络设备家用商用停电应急备用电源」
 点击链接直接打开

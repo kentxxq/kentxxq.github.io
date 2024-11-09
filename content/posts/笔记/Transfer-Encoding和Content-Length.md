@@ -81,16 +81,19 @@ var httpResponseMessage = await httpClient.SendAsync(req);
 ## httpClient 的正确姿势
 
 ```csharp
-using var req = new HttpRequestMessage(HttpMethod.Post, url);
-
-// 失败
-// JsonContent.Create会返回stream,所以不会计算长度,也就无法获得Content-Length
-// 即使设置req.Headers.TransferEncodingChunked = false,因为没有Content-Length, 导致TransferEncodingChunked也没有生效
-// req.Content = JsonContent.Create(data);
-// req.Headers.TransferEncodingChunked = false;
-
-// 这里提前序列化成string, 采用StringContent就会带上 Content-Length
-req.Content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, MediaTypeNames.Application.Json);
-
+// 1. 先创建HttpRequestMessage  
+using var req = new HttpRequestMessage(HttpMethod.Post, url);  
+  
+// 2 设置content,这会影响到Content-Length  
+// 采用 JsonContent, 即使设置req.Headers.TransferEncodingChunked = false,因为没有Content-Length, 导致TransferEncodingChunked也没有生效  
+// 根据这个issues https://github.com/dotnet/runtime/issues/30283 ,可以通过LoadIntoBufferAsync把内容加载到memory中,这样JsonContent也能使用Content-Length发送  
+// req.Content = JsonContent.Create(data);  
+// await req.Content.LoadIntoBufferAsync();  
+  
+// 2 设置content,这会影响到Content-Length  
+// 采用 StringContent. 手动序列化成string, 就会带上 Content-Length
+req.Content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, MediaTypeNames.Application.Json);  
+  
+// 3 发送请求,拿到结果  
 var httpResponseMessage = await httpClient.SendAsync(req);
 ```

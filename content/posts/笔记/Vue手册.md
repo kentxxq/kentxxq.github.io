@@ -5,7 +5,7 @@ tags:
   - vue
   - 前端
 date: 2024-03-09
-lastmod: 2024-08-03
+lastmod: 2024-10-29
 categories:
   - blog
 description: 
@@ -574,6 +574,7 @@ console.log(myCustomRef.value); // 输出: "getter executed", 2
 
 - [vite文档地址](https://cn.vitejs.dev/guide/env-and-mode.html#env-variables)
 - [GitHub - vbenjs/vite-plugin-svg-icons: Vite Plugin for fast creating SVG sprites.](https://github.com/vbenjs/vite-plugin-svg-icons)
+- 打包个单个文件 `index.html` [GitHub - richardtallent/vite-plugin-singlefile: Vite plugin for inlining JavaScript and CSS resources](https://github.com/richardtallent/vite-plugin-singlefile)
 
 #### i18n
 

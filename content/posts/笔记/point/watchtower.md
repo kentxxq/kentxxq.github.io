@@ -4,12 +4,12 @@ tags:
   - point
   - watchtower
 date: 2023-08-24
-lastmod: 2023-08-29
+lastmod: 2024-11-01
 categories:
   - point
 ---
 
-`watchtower` 是一个 [[笔记/point/docker|docker]] 容器过期, 自动更新的程序.
+[watchtower](https://github.com/containrrr/watchtower) 是一个 [[笔记/point/docker|docker]] 容器过期, 自动更新的程序.
 
 ### 部署
 

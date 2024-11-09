@@ -5,7 +5,7 @@ aliases:
 tags:
   - point
 date: 2024-05-29
-lastmod: 2024-09-20
+lastmod: 2024-10-24
 categories:
   - point
 ---
@@ -15,6 +15,10 @@ categories:
 - 群组
 - 频道
 - 私聊
+
+## 收益
+
+- [Super Channels, Star Reactions and Subscriptions](https://telegram.org/blog/superchannels-star-reactions-subscriptions)
 
 ## 机器人
 

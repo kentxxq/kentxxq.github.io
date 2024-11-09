@@ -6,7 +6,7 @@ tags:
   - 监控
   - devops
 date: 2023-07-11
-lastmod: 2024-07-01
+lastmod: 2024-10-28
 categories:
   - blog
 description: "[[笔记/point/grafana|grafana]] 的使用教程"
@@ -284,6 +284,19 @@ sum(sum(irate(node_cpu{mode!='idle'}[5m]))  / sum(irate(node_cpu[5m]))) by (inst
 ```shell
 # 环比增加与减少
 sum (rate(prometheus_http_requests_total[1m] offset 1h ) ) -sum (rate(prometheus_http_requests_total[1m]))
+```
+
+#### status page 状态页
+
+这里使用 blackbox 的采集数据作为示例
+
+```shell
+# 图形
+time series 
+# unit
+bool on/off
+# 查询语句, Min step 1h
+avg_over_time(probe_success{instance="https://www.qq.com/"}[1h])
 ```
 
 ## 展示

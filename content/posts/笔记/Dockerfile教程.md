@@ -75,7 +75,7 @@ RUN mv /etc/apt/sources.list sources.list.bak && \
     echo "deb http://mirrors.ivolces.com/ubuntu/ jammy-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
     echo "deb http://mirrors.ivolces.com/ubuntu/ jammy-security main restricted universe multiverse" >> /etc/apt/sources.list && \
     apt update -y && \
-    apt install lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass dnsutils progress -y && \
+    apt install jq lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass dnsutils progress -y && \
     ls
 ```
 
@@ -99,7 +99,7 @@ RUN mv /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/debian.sou
     echo "deb http://mirrors.ivolces.com/debian/ bookworm-backports main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
     echo "#deb-src http://mirrors.ivolces.com/debian/ bookworm-backports main non-free non-free-firmware contrib" >> /etc/apt/sources.list && \
     apt update -y && \
-    apt install lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass dnsutils progress -y && \
+    apt install jq lftp vim ca-certificates apt-transport-https tzdata telnet less iproute2 iputils-ping selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lrzsz iotop iptraf-ng zip unzip ca-certificates curl gnupg libpcre3 libpcre3-dev openssl libssl-dev build-essential rsync sshpass dnsutils progress -y && \
     ls
 
 ENV TZ=Asia/Shanghai
@@ -113,7 +113,7 @@ from alpine:latest
 # sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 # 设置时区和源，lrzsz因为缺少维护，所以在testing仓库中，无法直接下载
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
-    apk add --no-cache --update tzdata vim chrony lftp ca-certificates tzdata less iproute2 iputils bind-tools busybox-extras htop nethogs nload tree iotop iptraf-ng zip unzip curl gnupg pcre pcre-dev openssl openssl-dev build-base rsync sshpass && \
+    apk add --no-cache --update jq tzdata vim chrony lftp ca-certificates tzdata less iproute2 iputils bind-tools busybox-extras htop nethogs nload tree iotop iptraf-ng zip unzip curl gnupg pcre pcre-dev openssl openssl-dev build-base rsync sshpass && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone
 ```
