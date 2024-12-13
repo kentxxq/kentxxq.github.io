@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2024-11-03
+lastmod: 2024-07-06
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."
@@ -161,4 +161,4 @@ github 工作流使用
 - feature 合并到 main, 使用 pull request 去合并请求
 - `main` 采用 `squash and merge`, 这样你的分支很乱, 但是会被整合到一起
 - [十分钟学会常用git撤销操作，全面掌握git的时光机 - YouTube](https://www.youtube.com/watch?v=ol7CMoJuAvI)  #todo/笔记
-- [1. 引言 | 自己动手写 Git](https://wyag-zh.hanyujie.xyz/docs/1.-%E5%BC%95%E8%A8%80.html)
+-  [1. 引言 | 自己动手写 Git](https://wyag-zh.hanyujie.xyz/docs/1.-%E5%BC%95%E8%A8%80.html)

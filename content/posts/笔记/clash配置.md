@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2024-07-25
+lastmod: 2024-12-10
 keywords:
   - clash
   - 配置文件
@@ -474,40 +474,39 @@ curl -v -X PUT 'http://127.0.0.1:9090/proxies/GLOBAL'  -H "Content-Type: applica
 
 ### 绕过系统代理
 
-参考链接 [绕过系统代理 | Clash for Windows](https://docs.cfw.lbyczf.com/contents/bypass.html#%E8%AE%BE%E7%BD%AE%E6%96%B9%E5%BC%8F)
+- 功能说明: 配置后开启系统代理, 可以在操作系统的网络配置界面找到 (win 11 设置=>网络和 internet=>代理=>手动设置代理=>编辑)
+ - clash 配置:  `Settings` => `System Proxy` => `Bypass Domain/IPNet`
 
-`Settings` => `System Proxy` => `Bypass Domain/IPNet`
-
-```yml
-bypass:
-  - localhost
-  - 127.*
-  - 10.*
-  - 172.16.*
-  - 172.17.*
-  - 172.18.*
-  - 172.19.*
-  - 172.20.*
-  - 172.21.*
-  - 172.22.*
-  - 172.23.*
-  - 172.24.*
-  - 172.25.*
-  - 172.26.*
-  - 172.27.*
-  - 172.28.*
-  - 172.29.*``
-  - 172.30.*
-  - 172.31.*
-  - 192.168.*
-  - <local>
-```
+    ```yml
+    bypass:
+      - localhost
+      - 127.*
+      - 10.*
+      - 172.16.*
+      - 172.17.*
+      - 172.18.*
+      - 172.19.*
+      - 172.20.*
+      - 172.21.*
+      - 172.22.*
+      - 172.23.*
+      - 172.24.*
+      - 172.25.*
+      - 172.26.*
+      - 172.27.*
+      - 172.28.*
+      - 172.29.*``
+      - 172.30.*
+      - 172.31.*
+      - 192.168.*
+      - <local>
+    ```
 
 ### 绕过 windows 应用
 
-类似于 [[笔记/point/windows|windows]] 的应用商店, 邮箱等应用开启代理后会无法访问.
+开启代理后 [[笔记/point/windows|windows]] 的应用商店, 邮箱等应用网络无法访问.
 
-可以通过 `UWP Loopback` 跳过.
+这时候可以通过 `UWP Loopback` 跳过.
 
 ![[附件/clash的UWP操作图.png]]
 
@@ -592,12 +591,13 @@ parsers:
     - [Surfboard - Apps on Google Play](https://play.google.com/store/apps/details?id=com.getsurfboard&hl=en_US)
     - clashforandroid
 - ios 工具
-    - QuantumultX (圈 X) 强大工具, 全平台
+    - QuantumultX (圈 X) 强大工具, 全平台包含 mac
     - Loon 新工具, 对标 QuantumultX
-    - Stash ,兼容 clash
+    - Stash ,兼容 clash.
     - Surge 最老牌, ios+mac
     - Shadowrocket 大众化 + 便宜
     - Spectre 免费
+    - sing-box 免费
     - 相关讨论
         - https://www.v2ex.com/t/989650
 - 服务商
@@ -608,6 +608,16 @@ parsers:
     - [狗狗加速](https://xn--yfrp36ea9901a.com/) clash-verge-dev 的赞助商
     - justmysocket
     - [GitHub - aiboboxx/clashfree: clash节点、免费clash节点、免费节点、免费梯子、clash科学上网、clash翻墙、clash订阅链接、clash for Windows、clash教程、免费公益节点、最新clash免费节点订阅地址、clash免费节点每日更新](https://github.com/aiboboxx/clashfree)
+    - 一元机场
+        - [http://两元店.com/](http://xn--5hqx9equq.com/)  
+        - [http://一元机场.com](http://xn--4gq62f52gdss.com/)  
+        - [http://五毛机场.com/](http://xn--dlqs4sc0nope.com/)  
+        - [http://二角五.xyz/](http://xn--4kqqa1166b.xyz/)  
+        - [http://三分机场.xyz/](http://xn--ehq00hgtfdmt.xyz/)  
+        - [http://免费机场.com/](http://xn--94q57lcvpw50b.com/)  
+        - [http://性价比机场.com/](http://xn--6nq44r2uh9rhj7f.com/)  
+        - [http://低价机场.com/](http://xn--6nq0hk9tdjr.com/)  
+        - [http://翻墙机场.net/](http://xn--mest5a943ag8x.net/)
 - [Clash分流策略 | 配置文件 | 订阅防覆盖 | 硬核教程](https://a-nomad.com/clash)
 - [Clash规则大全](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash)
 - [GFW是如何工作的](https://gfw.report/publications/usenixsecurity23/zh/)
