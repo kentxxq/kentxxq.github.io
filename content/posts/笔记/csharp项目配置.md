@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-07-26
-lastmod: 2024-09-19
+lastmod: 2024-12-19
 categories:
   - blog
 description: "[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."
@@ -786,29 +786,32 @@ README.md
 
 ### launchSettings
 
-`launchSettings.json` 在调试的时候，workingDirectory 配合下载任务使用，避免找不到文件的情况
+`launchSettings.json` 在调试的时候，`workingDirectory` 配合下载任务使用，避免找不到文件的情况
 
 ```json
 {
+  "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "TestServer": {
+    "http": {
       "commandName": "Project",
+      "dotnetRunMessages": true,
       "launchBrowser": false,
-      "launchUrl": "swagger",
-      "workingDirectory": "$(OutputPath)",
+      "applicationUrl": "http://localhost:5068",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5000"
+      }
     },
-    "Docker": {
-      "commandName": "Docker",
-      "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-      "publishAllPorts": true
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "workingDirectory": "$(OutputPath)",
+      "launchUrl": "scalar/v1",
+      "applicationUrl": "http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
-  },
-  "$schema": "https://json.schemastore.org/launchsettings.json"
+  }
 }
 ```

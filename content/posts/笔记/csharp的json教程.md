@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-09-27
-lastmod: 2024-10-16
+lastmod: 2024-12-19
 keywords:
   - csharp
   - json
@@ -99,7 +99,7 @@ public static readonly Person DemoPerson = new()
 // 转json
 var str = JsonSerializer.Serialize(StaticData.DemoPerson, new JsonSerializerOptions
 {
-    // 空格
+    // 空格缩进
     WriteIndented = true,
     // 宽松转义规则,虽然不规范,但中文会正常打印出来. 否则中文会变成unicode字符,例如'蓝'-'\u84DD'
     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping

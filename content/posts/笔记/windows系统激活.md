@@ -4,7 +4,7 @@ tags:
   - blog
   - windows
 date: 2023-07-01
-lastmod: 2023-09-05
+lastmod: 2024-12-20
 categories:
   - blog
 keywords:
@@ -30,17 +30,20 @@ description: "推荐使用正版, 但用来学技术也是不错的."
 > 如果是新安装的系统，没有 cd-key 输入过，可以直接跳过前面 2 步
 
 ```powershell
-#执行,弹出(已成功卸载了产品密钥)
+# 执行,弹出(已成功卸载了产品密钥)
 slmgr.vbs /upk
 
-#执行,弹出(成功的安装了产品密钥)
+# 执行,弹出(成功的安装了产品密钥)
 slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX
 
-#执行,弹出(密钥管理服务计算机名成功的设置(kms.luody.info)
-slmgr /skms kms.luody.info
+# 执行,弹出(密钥管理服务计算机名成功的设置(kms.luody.info)
+slmgr /skms kms-default.cangshui.net
 
-#执行,弹出(成功的激活了产品)
+# 执行,弹出(成功的激活了产品)
 slmgr /ato
+
+# 查看激活详情
+slmgr.vbs -dlv
 ```
 
 ## 自己搭建
@@ -50,9 +53,9 @@ docker run -d -p 1688:1688 --name kms --restart=always teddysun/kms
 
 # 验证
 # 查看服务的版本信息
-vlmcs.exe -v kms.luody.info
+vlmcs.exe -v kms-default.cangshui.net
 # 查看支持的服务类型
-vlmcs.exe -x kms.luody.info
+vlmcs.exe -x kms-default.cangshui.net
 ```
 
 - [[附件/vlmcs.exe]]
