@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2024-01-20
-lastmod: 2024-07-16
+lastmod: 2024-12-20
 categories:
   - blog
 description: 
@@ -52,7 +52,7 @@ vscode 插件
 
 ### 结构
 
-- `manifest.json` 存放 appid，应用名称，logo，版本
+- `manifest.json` 存放 appid，应用名称，版本
 - `pages.json`
     - 注册页面
     - 全局样式

@@ -4,7 +4,7 @@ tags:
   - blog
   - shell
 date: 2023-08-10
-lastmod: 2024-05-31
+lastmod: 2024-12-26
 categories:
   - blog
 description: "虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔记/point/shell|shell]] 是高效的."
@@ -412,10 +412,10 @@ for host in "${host_list[@]}"
 do
     echo "$host 开始同步配置文件..."
     # 同步下面3个路径
-    /usr/bin/rsync -atvP /usr/local/nginx/conf/nginx.conf "root@$host:/usr/local/nginx/conf/nginx.conf"
-    /usr/bin/rsync -atvP /usr/local/nginx/conf/hosts/*.conf "root@$host:/usr/local/nginx/conf/hosts/"
-    /usr/bin/rsync -atvP /usr/local/nginx/conf/options/*.conf "root@$host:/usr/local/nginx/conf/options/"
-    /usr/bin/rsync -atvP /data/files/* "root@$host:/data/files/"
+    /usr/bin/rsync -atvP --delete /usr/local/nginx/conf/nginx.conf "root@$host:/usr/local/nginx/conf/nginx.conf"
+    /usr/bin/rsync -atvP --delete /usr/local/nginx/conf/hosts/*.conf "root@$host:/usr/local/nginx/conf/hosts/"
+    /usr/bin/rsync -atvP --delete /usr/local/nginx/conf/options/*.conf "root@$host:/usr/local/nginx/conf/options/"
+    /usr/bin/rsync -atvP --delete /data/files/* "root@$host:/data/files/"
     # 远程测试nginx配置
     /usr/bin/ssh "root@$host" "/usr/local/bin/nginx -t"
     # 远程机器测试成功，进行reload

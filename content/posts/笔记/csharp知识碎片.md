@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2024-09-13
-lastmod: 2024-12-20
+lastmod: 2024-12-29
 categories:
   - blog
 description: 
@@ -19,7 +19,7 @@ description:
 ### 枚举查询
 
 ```csharp
-// 示例
+// 使用
 [HttpGet]
 public ResultModel<List<EnumObject>> ResultStatusApi()
 {
@@ -27,6 +27,44 @@ public ResultModel<List<EnumObject>> ResultStatusApi()
     var data = ResultStatus.Success.EnumValueToEnumObject();
     return ResultModel.Ok(data);
 }
+
+// 枚举
+// https://github.com/EngRajabi/Enum.Source.Generator
+[EnumGenerator]  
+public enum ResultStatus  
+{  
+    /// <summary>  
+    ///     成功  
+    /// </summary>  
+    [Display(Name = "成功", Description = "请求成功返回")]  
+    Success = 20000,  
+  
+    /// <summary>  
+    ///     失败  
+    /// </summary>  
+    [Display(Name = "失败", Description = "内部服务异常")]  
+    Error = 50000  
+}
+
+// 也可以使用
+// https://github.com/andrewlock/NetEscapades.EnumGenerators
+using NetEscapades.EnumGenerators;
+[EnumExtensions]
+public enum ResultStatus
+{
+    /// <summary>
+    ///     成功
+    /// </summary>
+    [Display(Name = "成功", Description = "请求成功返回")]
+    Success = 20000,
+
+    /// <summary>
+    ///     失败
+    /// </summary>
+    [Display(Name = "失败", Description = "内部服务异常")]
+    Error = 50000
+}
+
 
 // 静态方法
 /// <summary>

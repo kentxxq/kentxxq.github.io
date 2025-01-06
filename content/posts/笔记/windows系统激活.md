@@ -27,7 +27,7 @@ description: "推荐使用正版, 但用来学技术也是不错的."
 
 ## 操作步骤
 
-> 如果是新安装的系统，没有 cd-key 输入过，可以直接跳过前面 2 步
+[微软官网](https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-client-activation-keys?tabs=server2025%2Cwindows1110ltsc%2Cversion1803%2Cwindows81) 写着对应产品的产品密钥, 其中 `win10` 和 `win11` 对应 `W269N-WFGWX-YVC9B-4J6C9-T83GX`
 
 ```powershell
 # 执行,弹出(已成功卸载了产品密钥)

@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-09-27
+lastmod: 2024-12-29
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -1092,6 +1092,9 @@ iptraf-ng
 
 [bandwhich](https://github.com/imsnif/bandwhich)
 查看当前什么程序在占用带宽，以及不同 IP 地址产生的流量
+
+[GitHub - hengyoush/kyanos](https://github.com/hengyoush/kyanos)
+基于eBPF,监控排查网络流量
 ```
 
 #### 网络连接排查

@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-15
-lastmod: 2024-08-14
+lastmod: 2024-12-29
 categories:
   - blog
 description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
@@ -127,6 +127,12 @@ kubectl get secret admin-user -n kubernetes-dashboard -o jsonpath={".data.token"
 ```
 
 > 文档地址在 [这里](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md)，来自/适用于 [kubernetes/dashboard](https://github.com/kubernetes/dashboard)
+
+### 更换镜像 statefulSet
+
+用于替换 statefulSet 的镜像
+
+`./kubectl set image statefulset/apinto-gateway-stateful apinto-gateway-stateful=shini-uat-cn-shanghai.cr.volces.com/shini-dev/apinto-dev:18b097e-10 -n apinto  --kubeconfig qs-dev-kube.conf.shishi --v=6`
 
 ## 配置
 

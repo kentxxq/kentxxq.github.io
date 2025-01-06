@@ -1,9 +1,9 @@
 ---
-title: API规范
+title: OpenAPI接口规范
 tags:
   - blog
 date: 2024-07-04
-lastmod: 2024-09-10
+lastmod: 2024-12-27
 categories:
   - blog
 description: 

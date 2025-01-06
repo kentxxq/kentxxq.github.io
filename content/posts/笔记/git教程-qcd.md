@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2024-12-23
+lastmod: 2024-11-03
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."
@@ -131,25 +131,6 @@ git branch -m main
 # 强制推送
 git push -f origin main
 ```
-
-### 清理敏感信息
-
-1. 找到包含敏感信息的 commit `git log -S "敏感信息" --oneline`
-2. 写一个文本文件 `replace.txt`, 写上需要替换的敏感信息
-
-    ```txt
-    敏感信息1==>REPLACE_ME
-    敏感信息2==>REPLACE_ME
-    ```
-
-3. 开始替换 `git filter-repo --replace-text /path/to/replace.txt --force --partial`
-4. 因为默认会删掉 remote, 所以重新添加 remote `git remote add origin git@your.git`
-5. 强推 `git push origin main --force`
-
-
-- 参考文档
-    - [Removing sensitive data from a repository - GitHub Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)
-    - [Git Clean, Git Remove file from commit - Cheatsheet - GitGuardian Blog](https://blog.gitguardian.com/rewriting-git-history-cheatsheet/)
 
 ## git 工作流
 

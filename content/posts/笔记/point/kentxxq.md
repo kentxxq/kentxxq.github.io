@@ -6,7 +6,7 @@ tags:
   - point
   - kentxxq
 date: 2023-06-21
-lastmod: 2023-08-08
+lastmod: 2025-01-03
 categories:
   - point
 ---
@@ -19,8 +19,4 @@ categories:
 >一般来说品牌合作都类似 `卧龙&凤雏` 或者 `卧龙X凤雏`.
 >我名字的缩写是 `xq`,于是就 "kentXxq"="kentxxq".
 
-联系方式我:<admin@kentxxq.com>
-
-配上自拍帅照一张
-
-![[附件/自拍头像.jpg]]
+联系方式我:<a805429509@gmail.com>
