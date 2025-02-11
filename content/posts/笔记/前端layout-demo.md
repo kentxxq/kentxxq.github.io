@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2023-11-11
-lastmod: 2024-08-26
+lastmod: 2025-01-23
 categories:
   - blog
 description: "`layout-demo` 是一个练习布局, 样式, 动画等内容的项目. "
@@ -226,9 +226,11 @@ img {
     height: 10rem;
     background-color: skyblue;
     display: flex;
-    /* 水平居中 */
+    /* 默认主轴是row, 从左到右 */
+    
+    /* 交叉轴对齐,默认row,所以垂直居中 */
     align-items: center;
-    /* 垂直居中 */
+    /* 主轴对齐,默认row,所以水平居中 */
     justify-content: center;
 }
 

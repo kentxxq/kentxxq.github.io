@@ -4,7 +4,7 @@ tags:
   - blog
   - powershell
 date: 2023-06-26
-lastmod: 2024-03-13
+lastmod: 2025-01-06
 categories:
   - blog
 description: "这里记录 [[笔记/point/powershell|powershell]] 的常用命令."
@@ -39,6 +39,9 @@ winget list | Select-String nodejs
 set CGO_ENABLED "1"
 echo $CGO_ENABLED
 rv CGO_ENABLED
+
+# set 是当前会话生效
+# setx 是设置用户/系统环境变量, 新会话生效
 
 # $env 用于访问用户变量和系统变量
 echo $env:CGO_ENABLED

@@ -813,7 +813,7 @@ export default defineConfig({
 于是我们就可以像 xml 一样写 name 的值
 
 ```ts
-<script setup lang="ts" name="自定义组件明">
+<script setup lang="ts" name="自定义组件名">
 defineProps<{
   msg: string
 }>()

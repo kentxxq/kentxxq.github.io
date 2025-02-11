@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2024-09-24
+lastmod: 2025-01-09
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -905,6 +905,8 @@ location /app/ {
 - 电脑浏览器打开 `https://ulink.kentxxq.com/app/` 响应 json 文本
 - safari 打开 `https://ulink.kentxxq.com/app/` 显示 `打开按钮` 和 json 文本
 - 微信开放平台配置 `Universal Links` 为 `https://ulink.kentxxq.com/app/`
+- 参考
+    - [Apple 通用链接 - .NET MAUI \| Microsoft Learn](https://learn.microsoft.com/zh-cn/dotnet/maui/macios/universal-links?view=net-maui-9.0)
 
 ## 守护进程
 

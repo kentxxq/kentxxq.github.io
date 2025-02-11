@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2024-12-10
+lastmod: 2025-02-08
 keywords:
   - clash
   - 配置文件
@@ -584,6 +584,7 @@ parsers:
     - [clash-verge](https://github.com/zzzgydi/clash-verge) 客户端
     - [clashN](https://github.com/2dust/clashN) 客户端
     - [v2rayN](https://github.com/2dust/v2rayN) 客户端
+    - [mihomo-party](https://github.com/mihomo-party-org/mihomo-party)
     - `ClashForWindows` 被删了, 但还有汉化版存在
         - [Releases · Z-Siqi/Clash-for-Windows_Chinese (github.com)](https://github.com/Z-Siqi/Clash-for-Windows_Chinese)
         - [BoyceLig/Clash_Chinese_Patch: Clash For Windows 汉化补丁和汉化脚本 (github.com)](https://github.com/BoyceLig/Clash_Chinese_Patch)
@@ -601,13 +602,16 @@ parsers:
     - 相关讨论
         - https://www.v2ex.com/t/989650
 - 服务商
-    - [佩奇小站 - AmyTelecom](https://www.amysecure.com/clientarea.php?action=productdetails&id=14674)
-    - [魅影小站 - Ark](https://ark.to/user)
-    - 唯云四杰好像是有口碑的
-    - [一个机场收录站点](https://dh.duangks.com/)
-    - [狗狗加速](https://xn--yfrp36ea9901a.com/) clash-verge-dev 的赞助商
-    - justmysocket
-    - [GitHub - aiboboxx/clashfree: clash节点、免费clash节点、免费节点、免费梯子、clash科学上网、clash翻墙、clash订阅链接、clash for Windows、clash教程、免费公益节点、最新clash免费节点订阅地址、clash免费节点每日更新](https://github.com/aiboboxx/clashfree)
+    - 不限制客户端数量
+        - [佩奇小站 - AmyTelecom](https://www.amysecure.com/clientarea.php?action=productdetails&id=14674)
+        - [狗狗加速](https://xn--yfrp36ea9901a.com/) clash-verge-dev 的赞助商
+    - 限制客户端数量
+        - [魅影小站 - Ark](https://ark.to/user)
+    - 其他
+        - 唯云四杰好像是有口碑的
+        - [一个机场收录站点](https://dh.duangks.com/)
+        - justmysocket
+        - [GitHub - aiboboxx/clashfree: clash节点、免费clash节点、免费节点、免费梯子、clash科学上网、clash翻墙、clash订阅链接、clash for Windows、clash教程、免费公益节点、最新clash免费节点订阅地址、clash免费节点每日更新](https://github.com/aiboboxx/clashfree)
     - 一元机场
         - [http://两元店.com/](http://xn--5hqx9equq.com/)  
         - [http://一元机场.com](http://xn--4gq62f52gdss.com/)  

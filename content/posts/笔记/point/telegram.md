@@ -5,7 +5,7 @@ aliases:
 tags:
   - point
 date: 2024-05-29
-lastmod: 2024-10-24
+lastmod: 2025-01-07
 categories:
   - point
 ---
@@ -48,3 +48,15 @@ categories:
         - 和你自己的叫人对话. `https://api.tg域名.org/bot<apiToken>/getUpdates` 里通过私有频道名称, 找到这个 json 结构体, 就可以拿到 chatid
         - `@username_to_id_bot` 拉进来, 然后把 `邀请链接invite link` 发到群里. 机器人就会把群的 chat_id 发出来, 然后**移除@username_to_id_bot**
         - `get_id_bot` 拉到群里, 发个消息即可
+
+## telegraph
+
+`telegraph` 是 telegram 推出的匿名博客平台. 地址 [telegra.ph](https://telegra.ph)
+
+- 匿名, 不需要登录
+- 清空浏览器缓存就会丢失编辑权限
+- 可以绑定 telegram 账号
+    - 添加 telegraph 机器人
+    - `account name` 是帮助作者自己多个账号切换, 管理不同文章
+    - `author name` 是文章公开的作者名, 对所有人公开
+    - `profile link` 点击 `author name` 跳转到对应的地址, 例如 telegram 用户, 或者 group, channel

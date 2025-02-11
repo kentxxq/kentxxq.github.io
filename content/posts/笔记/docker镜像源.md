@@ -5,7 +5,7 @@ tags:
   - k8s
   - docker
 date: 2023-08-18
-lastmod: 2024-11-01
+lastmod: 2025-02-10
 keywords:
   - k8s
   - docker
@@ -123,3 +123,7 @@ do
     docker rmi $i
 done
 ```
+
+## 文章
+
+- [OCI 镜像格式规范 :: Rectcircle Blog](https://www.rectcircle.cn/posts/oci-image-spec/#rootfs-diff-ids-vs-layers)

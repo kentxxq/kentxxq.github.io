@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-07-28
-lastmod: 2023-12-08
+lastmod: 2025-01-09
 categories:
   - blog
 description: "这里记录处理 [[笔记/point/k8s|k8s]] 的常见问题."
@@ -273,3 +273,8 @@ nodeRegistration:
 引入配置文件即可：
 
 `kubeadm init phase upload-certs --upload-certs --config kube-init.yml`
+
+### CrashLoopBackOff 排错
+
+- 看 stdout 日志 `kubectl logs pod-name`
+- `kubectl debug -it pod名称 --image=镜像名称 -- /bin/bash`, 然后手动跑命令测试

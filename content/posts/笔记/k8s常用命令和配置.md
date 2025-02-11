@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-15
-lastmod: 2024-12-29
+lastmod: 2025-01-09
 categories:
   - blog
 description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
@@ -51,6 +51,11 @@ kubectl describe ClusterRole tzedu:developer
 
 ```shell
 kubectl logs <pod-name> -c <container-name>
+
+# 容器名 9-787df6fcc-c42x9 单容器可以省略-c
+# --previous 查看上一个
+kubectl logs 9-787df6fcc-c42x9
+
 # 通过label查询多个容器的日志
 kubectl logs -f -n kube-system -l k8s-app=calico-node
 ```
@@ -146,6 +151,11 @@ source <(kubeadm completion bash)
 ```
 
 ### 应用示例
+
+有的时候程序总是自动退出, 无法查看到 stdout, 也无法进入容器. 这时候需要挂起程序不退出
+
+- `command: ["/bin/sh", "-c", "/app/myApp start; tail -f /dev/null"]`
+- `containers.image` 同级
 
 ```yml
 apiVersion: apps/v1
