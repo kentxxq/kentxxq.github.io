@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2023-11-11
-lastmod: 2025-01-23
+lastmod: 2025-02-25
 categories:
   - blog
 description: "`layout-demo` 是一个练习布局, 样式, 动画等内容的项目. "
@@ -12,7 +12,7 @@ description: "`layout-demo` 是一个练习布局, 样式, 动画等内容的项
 
 ## 简介
 
-`layout-demo` 是一个练习布局, 样式, 动画等内容的项目.
+`layout-demo` 是一个 [[笔记/point/CSS|CSS]] 练习布局, 样式, 动画等内容的项目.
 
 ## 语法
 

@@ -71,7 +71,7 @@ acme.sh --remove -d "*.kentxxq.com" -d "kentxxq.com" --force
 
 ### 修改 CA 服务商
 
-- [支持的 CA 服务商列表](https://github.com/acmesh-official/acme.sh/wiki/Server)
+- [支持的CA服务商列表](https://github.com/acmesh-official/acme.sh/wiki/Server)
 - [各个服务商的区别](https://github.com/acmesh-official/acme.sh/wiki/CA)
 
 ```shell
@@ -180,20 +180,21 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging-account-key
     solvers:
-      - dns01:
-          webhook:
-            groupName: acme.yourcompany.com
-            solverName: alidns
-            config:
-              region: ""
-              accessKeySecretRef:
-                name: alidns-secret
-                key: access-key
-              secretKeySecretRef:
-                name: alidns-secret
-                key: secret-key
+    - dns01:
+        webhook:
+          groupName: acme.yourcompany.com
+          solverName: alidns
+          config:
+            region: ""
+            accessKeySecretRef:
+              name: alidns-secret
+              key: access-key
+            secretKeySecretRef:
+              name: alidns-secret
+              key: secret-key
 
 ---
+
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -203,8 +204,8 @@ spec:
   secretName: kentxxq-com-tls
   commonName: kentxxq.com
   dnsNames:
-    - kentxxxq.com
-    - "*.kentxxq.com"
+  - kentxxxq.com
+  - "*.kentxxq.com"
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer
@@ -223,23 +224,23 @@ spec:
 
 ```json
 {
-  "newNonce": "https://acme.zerossl.com/v2/DV90/newNonce",
-  "newAccount": "https://acme.zerossl.com/v2/DV90/newAccount",
-  "newOrder": "https://acme.zerossl.com/v2/DV90/newOrder",
-  "revokeCert": "https://acme.zerossl.com/v2/DV90/revokeCert",
-  "keyChange": "https://acme.zerossl.com/v2/DV90/keyChange",
-  "meta": {
-    "termsOfService": "https://secure.trust-provider.com/repository/docs/Legacy/20221001_Certificate_Subscriber_Agreement_v_2_5_click.pdf",
-    "website": "https://zerossl.com",
-    "caaIdentities": [
-      "sectigo.com",
-      "trust-provider.com",
-      "usertrust.com",
-      "comodoca.com",
-      "comodo.com"
-    ],
-    "externalAccountRequired": true
-  }
+    "newNonce": "https://acme.zerossl.com/v2/DV90/newNonce",
+    "newAccount": "https://acme.zerossl.com/v2/DV90/newAccount",
+    "newOrder": "https://acme.zerossl.com/v2/DV90/newOrder",
+    "revokeCert": "https://acme.zerossl.com/v2/DV90/revokeCert",
+    "keyChange": "https://acme.zerossl.com/v2/DV90/keyChange",
+    "meta": {
+        "termsOfService": "https://secure.trust-provider.com/repository/docs/Legacy/20221001_Certificate_Subscriber_Agreement_v_2_5_click.pdf",
+        "website": "https://zerossl.com",
+        "caaIdentities": [
+            "sectigo.com",
+            "trust-provider.com",
+            "usertrust.com",
+            "comodoca.com",
+            "comodo.com"
+        ],
+        "externalAccountRequired": true
+    }
 }
 ```
 

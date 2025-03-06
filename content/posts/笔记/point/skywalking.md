@@ -4,7 +4,7 @@ tags:
   - point
   - skywalking
 date: 2023-07-19
-lastmod: 2024-05-06
+lastmod: 2025-02-27
 categories:
   - point
 ---
@@ -83,7 +83,7 @@ server {
 }
 ```
 
-### docker-compose
+### yaml 部署版本
 
 ```yaml
 apiVersion: apps/v1

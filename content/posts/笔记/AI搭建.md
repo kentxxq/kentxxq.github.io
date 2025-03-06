@@ -50,9 +50,12 @@ WantedBy=default.target
 1. 下载 [omdd](https://github.com/amirrezaDev1378/ollama-model-direct-download/releases)
 2. `omdd get qwen2.5-coder:3b` 拿到链接, 把 `manifest` 和 `所有layer` 都下载下来, 这时候在文件夹里有了 `sha256:aa` 和 `manifest` 文件
 3. 执行安装 `omdd install --model=mymodel --blobsPath=./`
+    - layer 文件安装后的格式 `sha256-40fb844194b25e429204e5163fb379ab462978a262b86aadd73d8944445c09fd`
+    - 模型可能存在放在 `/root/.ollama/models` 和 `/usr/share/ollama/.ollama/models`
 4. `ollama run mymodel:latest`
 
 >  其实就是通过 omdd 把 layer 和 manifest 下载下来, 然后放到 ollama 的目录下, ollama 就能检测并运行起来
+> 关键目录 /root/.ollama/models   /usr/share/ollama/.ollama/models
 
 ## ollama 导入 gguf 模型
 

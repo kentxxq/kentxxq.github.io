@@ -3,7 +3,7 @@ title: OpenAPI接口规范
 tags:
   - blog
 date: 2024-07-04
-lastmod: 2025-01-06
+lastmod: 2025-02-20
 categories:
   - blog
 description: 
@@ -64,7 +64,7 @@ description:
         - 可以考虑限制分页大小, 避免一次性超大数据量返回
         - [Model validation in ASP.NET Core MVC \| Microsoft Learn](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-9.0)
             - 使用 `aspnetcore` 内置的 [Model validation](https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-9.0)
-            - `[Range(1, 500, ErrorMessage = "PageSize必须大于0,小于500")]`
+                - `[Range(1, 500, ErrorMessage = "PageSize必须大于0,小于500")]` 直接也可以用在 controller 的参数上
             - 自定义实现 [ValidationAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.validationattribute?view=net-9.0)
 - 返回数据
     - `pageIndex` 同上

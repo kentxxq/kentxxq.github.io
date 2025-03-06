@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-09-16
-lastmod: 2024-02-05
+lastmod: 2025-02-17
 categories:
   - blog
 description: "csharp 的编码配置 .editorconfig 文件."
@@ -12,14 +12,19 @@ description: "csharp 的编码配置 .editorconfig 文件."
 
 ## 简介
 
-[[笔记/point/csharp|csharp]] 的编码配置 `.editorconfig` 文件.
+[[笔记/point/csharp|csharp]] 的 [官网编码风格](https://learn.microsoft.com/zh-cn/dotnet/fundamentals/code-analysis/style-rules/language-rules) 的总结如下
 
-[官网编码风格](https://learn.microsoft.com/zh-cn/dotnet/fundamentals/code-analysis/style-rules/language-rules) 主要有 3 种类别:
+- 代码质量分析
+    - `CAxxxx` 是质量格式
+- 代码样式分析
+    - `IDExxxx` 是样式格式, 同时还包含 `pascal_case` 这样的命名格式
+    - [Language rules 语言规则](https://learn.microsoft.com/zh-cn/dotnet/fundamentals/code-analysis/style-rules/language-rules)
+    - [Formatting rules 格式规则](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0055)
+    - [Naming rules 命名规则](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules)
+    - [Miscellaneous rules 杂项规则, 基本用不上](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/miscellaneous-rules)  
+- 第三方也可以自定义, 比如 [StyleCopAnalyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers) 就自定义了 [SA1633](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md) 这样的规则
 
-- [Language rules 语言规则](https://learn.microsoft.com/zh-cn/dotnet/fundamentals/code-analysis/style-rules/language-rules)
-- [Formatting rules 格式规则](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0055)
-- [Naming rules 命名规则](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules)
-- [Miscellaneous rules 杂项规则, 基本用不上](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/miscellaneous-rules)  
+要用 `stylecop` 代码样式, 就用 `stylecop.json` 来添加自定义的规则 . 如果是内置规则, 就用 `.editorconfig` 来配置. 所以我就直接用 `.editorconfig`
 
 ## 强制启用
 
@@ -27,10 +32,15 @@ description: "csharp 的编码配置 .editorconfig 文件."
 
 ## 配置警告
 
-`dotnet_style_readonly_field = true:suggestion` [配置警告参考链接](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/language-rules)
+[配置警告参考链接](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/language-rules)
 
-- 只有 vs 可以理解 `:<severity-level>`
-- 编译器只能理解 `dotnet_diagnostic.<rule-ID>.severity = <severity-level>`
+- 示例
+    - `dotnet_style_readonly_field = true:suggestion` 如果字段可以写成 `readonly`, 那么就在 IDE 以 `建议` 的形式提示用户
+    - `readonly_field` 是配置项
+    - `true` 是开启配置
+    - `suggestion` 是 `<severity-level>`
+- 只有 vs 可以理解 `:<severity-level>` 这种写法
+- 所以我们使用编译器能理解的方式 `dotnet_diagnostic.<rule-ID>.severity = <severity-level>`
 
 ## 配置文件 editorconfig
 

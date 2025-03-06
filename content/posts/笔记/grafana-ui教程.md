@@ -6,7 +6,7 @@ tags:
   - 监控
   - devops
 date: 2023-07-11
-lastmod: 2024-10-28
+lastmod: 2025-02-24
 categories:
   - blog
 description: "[[笔记/point/grafana|grafana]] 的使用教程"
@@ -297,6 +297,15 @@ time series
 bool on/off
 # 查询语句, Min step 1h
 avg_over_time(probe_success{instance="https://www.qq.com/"}[1h])
+```
+
+#### 最慢的 50 个接口
+
+```shell
+topk(50, 
+    max by (uri)
+        (http_request_seconds{application="order-service", quantile="0.9"})
+)
 ```
 
 ## 展示

@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2024-07-30
-lastmod: 2024-08-23
+lastmod: 2025-02-25
 categories:
   - blog
 description: 
@@ -12,7 +12,7 @@ description:
 
 ## 简介
 
-`tailwindcss` 是一个 css 原子化工具, 其实就是提供规范/便捷的类名. 包含布局
+`tailwindcss` 是一个 [[笔记/point/CSS|CSS]] 原子化工具, 其实就是提供规范/便捷的类名. 包含布局
 
 ## 常用类名
 
