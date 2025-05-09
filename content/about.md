@@ -9,4 +9,4 @@ description: "About Me"
 
 - Wechat: `kentxxq`
 - Github: [kentxxq](https://github.com/kentxxq)
-- Email: base64 decode `a2VudHh4cUBxcS5jb20=`
+- Email: base64 decode `a2VudHh4cUBnbWFpbC5jb20=`
