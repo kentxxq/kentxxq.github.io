@@ -22,8 +22,8 @@ description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操�
 # 阿里源
 
 # step 1: 安装必要的一些系统工具
-sudo apt-get update
-sudo apt-get install ca-certificates curl gnupg
+sudo apt-get update -y
+sudo apt-get install ca-certificates curl gnupg -y
 
 # step 2: 信任 Docker 的 GPG 公钥
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -37,8 +37,8 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
  
 # Step 4: 安装Docker
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get update -y
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
 vim /etc/docker/daemon.json
 systemctl daemon-reload

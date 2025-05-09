@@ -2,8 +2,12 @@
 title: AI搭建
 tags:
   - blog
+  - ai
+  - AI
+  - ollama
+  - deepseek
 date: 2025-02-11
-lastmod: 2025-02-11
+lastmod: 2025-03-14
 categories:
   - blog
 description: 

@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-09-27
-lastmod: 2024-12-19
+lastmod: 2025-03-26
 keywords:
   - csharp
   - json
@@ -267,7 +267,12 @@ jObject.Remove("Name");
 
 ```csharp
 using var jDoc = JsonDocument.Parse(str);  
-name = jDoc.RootElement.GetProperty("Name").Deserialize<string>();
+if (jDoc.RootElement.TryGetProperty("token", out var data))  
+{  
+    token = data.Deserialize<string>() ?? string.Empty;  
+}else{
+    _logger.LogWarning($"服务器token解析失败,{tokenResultString}");  
+}
 ```
 
 ## JsonSerializerOptions 对象

@@ -4,7 +4,7 @@ tags:
   - point
   - nexus
 date: 2023-08-18
-lastmod: 2023-08-18
+lastmod: 2025-03-21
 categories:
   - point
 ---
@@ -58,3 +58,10 @@ server {
 ### 配置
 
 可以通过设置一个代理, 这样就可以分流直接拉取国内无法访问的内容. [HTTP and HTTPS Request and Proxy Settings](https://help.sonatype.com/repomanager3/nexus-repository-administration/http-and-https-request-and-proxy-settings)
+
+### 替换镜像里的配置文件
+
+```sh
+sh "sed -i '/<mirrors>/a <mirror><id>nexus-server</id><mirrorOf>*</mirrorOf><name>nexus</name><url>https://1111111111111.com/repository/maven-public/</url><serverId>nexus-server</serverId></mirror>' /usr/share/maven/conf/settings.xml"
+sh "sed -i '/<servers>/a <server><id>nexus-server</id><username>1111111111111</username><password>1111111111111</password></server>' /usr/share/maven/conf/settings.xml"
+```

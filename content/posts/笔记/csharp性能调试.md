@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-08-16
-lastmod: 2023-09-27
+lastmod: 2025-03-13
 categories:
   - blog
 description: "记录 [[笔记/point/csharp|csharp]] 的性能调试. #todo/笔记"
@@ -16,7 +16,7 @@ description: "记录 [[笔记/point/csharp|csharp]] 的性能调试. #todo/笔�
 
 所有的 dotnet 全局工具在这里 [.NET Diagnostic tools overview - .NET | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/tools-overview)
 
-## 内容
+## 调试工具
 
 ### 采集所有监控数据
 
@@ -65,3 +65,14 @@ dotnet-trace collect -p pid
 # 抓到本地以后用perfview打开分析
 https://github.com/microsoft/perfview
 ```
+
+## AOT / JIT
+
+- 总结, 根据应用类型来选择
+    - 启动速度 aot
+    - 内存占用 aot
+    - binary 大小 aot
+    - 延迟 jit
+    - 吞吐量 jit
+- 参考
+    - [AOT和单文件发布对程序性能的影响 - InCerry - 博客园](https://www.cnblogs.com/InCerry/p/Single-File-And-AOT-Publish.html)

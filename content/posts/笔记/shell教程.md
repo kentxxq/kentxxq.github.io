@@ -4,7 +4,7 @@ tags:
   - blog
   - shell
 date: 2023-08-10
-lastmod: 2024-12-26
+lastmod: 2025-04-28
 categories:
   - blog
 description: "虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔记/point/shell|shell]] 是高效的."
@@ -407,7 +407,7 @@ else
 fi
 
 # 远程主机验证
-host_list=("stage-prod-nginx2")
+host_list=("host2" "host3" "host4")
 for host in "${host_list[@]}"
 do
     echo "$host 开始同步配置文件..."

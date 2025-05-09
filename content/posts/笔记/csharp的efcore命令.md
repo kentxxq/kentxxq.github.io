@@ -1,5 +1,5 @@
 ---
-title: csharp的efcore命令
+title: sharp的efcore命令
 tags:
   - blog
   - csharp

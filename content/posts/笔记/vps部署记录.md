@@ -3,7 +3,7 @@ title: vps部署记录
 tags:
   - blog
 date: 2023-08-16
-lastmod: 2023-09-13
+lastmod: 2025-03-17
 categories:
   - blog
 description: 
@@ -21,7 +21,3 @@ description:
 - [[笔记/mysql教程#docker 启动|docker启动]]
 - [[笔记/point/nacos|nacos]]
 - [[笔记/point/redis|redis]]
-
-### TestServer
-
-完善 cicd 的流程, 加入初始化的流程. #todo/笔记

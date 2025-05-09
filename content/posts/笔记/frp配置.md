@@ -4,7 +4,7 @@ tags:
   - blog
   - frp
 date: 2023-08-16
-lastmod: 2024-08-17
+lastmod: 2025-03-12
 categories:
   - blog
 description: "`frp` 是一个内网穿透工具.这里记录一下之前用过的配置."
@@ -23,14 +23,14 @@ description: "`frp` 是一个内网穿透工具.这里记录一下之前用过�
 配置 `frps.toml`
 
 ```toml
-# 限制主机、监听端口
+# frp-client连接地址
 bindAddr = "0.0.0.0"
 bindPort = 7000
 
-# 密码
-auth.token = "你的token"
+# frp-client连接密码
+auth.token = "你的密码"
 
-# http的web端口
+# http的web端口,nginx转发到这里,并且需要带上Host:xxx.kentxxq.com
 vhostHTTPPort = 20000
 subdomainHost = "kentxxq.com"
 

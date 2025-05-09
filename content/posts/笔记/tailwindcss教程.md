@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2024-07-30
-lastmod: 2025-02-25
+lastmod: 2025-04-23
 categories:
   - blog
 description: 
@@ -13,6 +13,13 @@ description:
 ## 简介
 
 `tailwindcss` 是一个 [[笔记/point/CSS|CSS]] 原子化工具, 其实就是提供规范/便捷的类名. 包含布局
+
+**注意事项**
+- 使用 tailwind, 里面的 [preflight]( https://tailwindcss.com/docs/preflight#margins-are-removed ) 会移除掉一些默认的样式设置, 例如 `margin`, `h1~h6`, `border` 等等
+
+## vscode 插件
+
+- [windicss IntelliSense](https://marketplace.visualstudio.com/items?itemName=voorjaar.windicss-intellisense) - windicss 提示插件
 
 ## 常用类名
 

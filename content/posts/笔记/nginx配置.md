@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2025-01-09
+lastmod: 2025-04-18
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -375,10 +375,14 @@ upstream backend {
     # ip_hash; 适合session等固定机器场景
     # least_conn; 最少连接数
     server backend1.example.com max_fails=1 weight=10;
-    server backend2.example.com max_fails=1 weight=5;
+    # 10s内失败一次,就会标记不可用. 且要等到10s后,才会检测是否可用
+    server backend2.example.com max_fails=1 fail_timeout=10s weight=5;
     server backend4.example.com;
     # 最大空闲连接数
     keepalive 10;
+    
+    # 只有上面都失败了,才会用这个服务器
+    server backup.com:80 backup;
 }
 ```
 
@@ -947,7 +951,7 @@ WantedBy=multi-user.target
 
 ## Ingress-nginx 配置
 
-双层 nginx,第二层的 ingress-nginx 需要配置这个
+双层 nginx,第二层的 ingress-nginx 需要配置才能 **传递传入的 X-Forwarded-* 标头 **
 
 ```yml
 use-forwarded-headers: 'true'

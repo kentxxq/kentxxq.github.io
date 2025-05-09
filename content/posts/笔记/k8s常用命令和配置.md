@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-15
-lastmod: 2025-01-09
+lastmod: 2025-04-03
 categories:
   - blog
 description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
@@ -157,27 +157,119 @@ source <(kubeadm completion bash)
 - `command: ["/bin/sh", "-c", "/app/myApp start; tail -f /dev/null"]`
 - `containers.image` 同级
 
+deployment
+
 ```yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
+  labels:
+    name: nginx-deployment
+    type: demo
 spec:
+  # 发布策略
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 34%
+  # 亲和性
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: name
+                  operator: In
+                  values:
+                    - nginx-pod
+            namespaces:
+              - default
+            topologyKey: topology.kubernetes.io/zone
+        - weight: 1
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: name
+                  operator: In
+                  values:
+                    - nginx-pod
+            namespaces:
+              - default
+            topologyKey: kubernetes.io/hostname
+  # 分片数
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: nginx-pod
   template:
     metadata:
+      # annotations:
+        # 火山发布到VCI
+        # vke.volcengine.com/burst-to-vci: enforce
       labels:
-        app: nginx
+        app: nginx-pod
     spec:
+      # 拉取镜像仓库凭证
+      # imagePullSecrets:
+      #   - name: image-pull-secrets
+      # 挂载configmap
+      # volumes:
+      #   - configMap:
+      #       defaultMode: 420
+      #       name: nginx-configmap
+      #     name: config
       containers:
-        - name: nginx
+        - name: nginx-pod
           image: nginx:latest
           ports:
-            - containerPort: 80
----
+            - name: port
+              containerPort: 80
+              protocol: TCP
+          # 资源限制
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1000Mi
+            requests:
+              cpu: 10m
+              memory: 100Mi
+          # 挂载到容器路径
+          # volumeMounts:
+          #   - mountPath: /tmp/config.yaml
+          #     name: config
+          #     readOnly: true
+          #     subPath: config.yaml
+          # 健康检查
+          startupProbe:
+            initialDelaySeconds: 5
+            exec:
+              command:
+                - ls
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 1
+            failureThreshold: 30
+            periodSeconds: 5
+            timeoutSeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 1
+            failureThreshold: 30
+            periodSeconds: 5
+            timeoutSeconds: 2
+```
+
+service
+
+```yml
 apiVersion: v1
 kind: Service
 metadata:
@@ -189,7 +281,11 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
----
+```
+
+ingress
+
+```yml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -206,6 +302,21 @@ spec:
                 name: nginx-service
                 port:
                   number: 80
+```
+
+configmap
+
+```yml
+apiVersion: v1
+data:
+  config.yaml: |
+    version: v1
+    kk:
+      a: b
+kind: ConfigMap
+metadata:
+  name: nginx-configmap
+  namespace: default
 ```
 
 ### 自定义开发者权限

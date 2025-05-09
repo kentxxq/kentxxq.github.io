@@ -3,8 +3,10 @@ title: csharp知识碎片
 tags:
   - blog
   - csharp
+  - 知识碎片
+  - 语言特性
 date: 2024-09-13
-lastmod: 2024-12-29
+lastmod: 2025-04-03
 categories:
   - blog
 description: 
@@ -13,6 +15,57 @@ description:
 ## 简介
 
 这里记录在使用 [[笔记/point/csharp|csharp]] 的过程中学习的内容, 主要是碎片化的知识点.
+
+## 语言特性
+
+### 属性和字段
+
+```csharp
+public class Person
+{
+    private int age;      // 这是一个字段field
+    public int Age       // 这是一个属性property
+    {
+        get { return age; }
+        set 
+        { 
+            if (value >= 0)
+            {
+                age = value; 
+            }
+        }
+    }
+}
+```
+
+- 字段 `field`: 通常是私有的, 通过属性对外保留
+- 属性 `properties`: 对外暴露访问, 可以进行数据验证
+- 虽然 `public int age` 和 `public int age{get;set;}` 的用法一样, 但是不符合设计理念. 如下:
+    - json 序列化默认不包含字段, 需要配置 [[笔记/csharp的json教程#JsonSerializerOptions 对象|JsonSerializerOptions对象]]
+
+### in , out, ref
+
+- `in`: 参数**必须**在传递前初始化，方法内部**只能读取**参数，不能修改其值（适用于只读引用传递）
+- `ref`: 参数**必须**在传递前初始化，方法内部可以读取和修改参数的值。
+- `out`: 参数**无需**在传递前初始化，但**必须**在方法内部初始化，方法内部可以读取和修改参数的值。
+
+因为 `in` 和 `ref` 需要初始化变量, 代码没有简化, 所以用的比较少.  在日常使用中默认函数是值传递, 使用 `in` 和 `ref` 可以进行性能优化.
+
+`out` 使用量是最大的, 因为有 `TryParse` 系列函数 : 返回 bool, 赋值给新变量
+
+下面是 `int.TryParse` 的示例.
+
+```csharp
+string input = "123";
+if (int.TryParse(input, out int result))  // 对解析结果进行判断
+{
+    Console.WriteLine($"解析成功: {result}");  // 解析成功时的处理
+}
+else
+{
+    Console.WriteLine("解析失败，输入不是有效的整数。");  // 解析失败时的处理
+}
+```
 
 ## 开发
 
@@ -202,6 +255,43 @@ builder.Services.AddSingleton<GlobalVar>();
 
 // 注入使用
 private readonly GlobalVar _globalVar;
+```
+
+### 遍历对象
+
+参考这 [一篇博客](https://www.claudiobernasconi.ch/2013/07/22/when-to-use-ienumerable-icollection-ilist-and-list/)，总结一下使用方法。
+
+1. `public interface IEnumerable<out T> : IEnumerable` 只能遍历使用
+2. `public interface ICollection<T> : IEnumerable<T>, IEnumerable` 你关心它的大小, 添加，删除，清空操作
+3. `public interface IList<T> : ICollection<T>, IEnumerable<T>, IEnumerable` 你要修改它并且需要排序，例如插入指定位置，查找指定下标数据。
+4. `List<>` 则是一个实现。
+
+List 是继承于接口 IEnumerable 的，所以返回 List 是可以的。
+
+### DateTimeOffset 打印
+
+```csharp
+// 默认会根据不同文化信息,有输出差异
+// 中国 2025/3/28 15:30:15 +08:00
+// 美国 3/28/2025 3:30:15 PM +08:00
+DateTimeOffset.Now.ToString()
+
+// ISO8601
+// 2025-03-28T17:30:54.2649425+08:00
+// 等同 yyyy-MM-ddTHH:mm:ss.fffffffzzz
+DateTimeOffset.Now.ToString("O")
+```
+
+### 时区信息
+
+- [[笔记/point/mysql|mysql]] 的 datetime 存储永远都是不带时区信息的, 不会因为切换 mysql 会话的 `time_zone` 而改变 sql 结果
+- 数据库时间就是当地时间, 建议**跨时区的数据查询必须通过上层服务进行转换! 不能跨时区查询!**
+
+保留毫秒数
+
+```csharp
+[SugarColumn(ColumnDataType = "DATETIME(3) ")]
+public DateTime CreateTime { get; set; }
 ```
 
 ## 打包

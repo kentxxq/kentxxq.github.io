@@ -49,7 +49,7 @@ tar -xzf apache-skywalking-java-agent-8.9.0.tgz skywalking-agent
 ```shell
 # 启动后台，并且消费kafka内的数据
 # 12800/http 11800/grpc
-docker run --name oap --restart always -d -p11800:11800 -p12800:12800 -e SW_KAFKA_FETCHER=default -e SW_KAFKA_FETCHER_SERVERS="地址:9092" -e SW_STORAGE=elasticsearch -e SW_STORAGE_ES_CLUSTER_NODES=地址:9200 -e SW_ES_USER=admin -e SW_ES_PASSWORD="密码" apache/skywalking-oap-server:9.7.0
+docker run --name oap --restart always -d -p11800:11800 -p12800:12800 -e SW_KAFKA_FETCHER=default -e SW_KAFKA_FETCHER_SERVERS="地址:9092" -e SW_STORAGE=elasticsearch -e SW_STORAGE_ES_CLUSTER_NODES="地址:9200" -e SW_ES_USER=admin -e SW_ES_PASSWORD="密码" apache/skywalking-oap-server:9.7.0
 
 # 启动ui，对接后台
 # 8080/http

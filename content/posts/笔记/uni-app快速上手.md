@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2024-01-20
-lastmod: 2024-12-20
+lastmod: 2025-04-17
 categories:
   - blog
 description: 
@@ -22,6 +22,7 @@ description:
 - 安装依赖 `pnpm i`
 - 运行 `pnpm dev:h5` 即可看到 `h5` 页面
 - 如果是运行 `pnpm dev:mp-weixin`，会生成 `dist/dev/mp-weixin` 文件夹. 在微信开发者工具导入这个目录, 就可以在微信开发者工具实时预览改动了
+- `npx @dcloudio/uvm@latest` 更新依赖到最新版本
 
 ### vscode
 
@@ -33,17 +34,17 @@ vscode 插件
 
 ### 类型提示
 
-安装类型 `pnpm i -D @types/wechat-miniprogram @uni-helper/uni-app-types`
+安装类型 `pnpm i -D @types/wechat-miniprogram @uni-helper/uni-types`
 
-配置 `tsconfig.json`。确保使用了 ts 类型，配置了 `vueCompilerOptions` 的 `nativeTags` 下面 4 个内容
+配置 `tsconfig.json`。确保使用了 ts 类型，配置了 `vueCompilerOptions` 的 `plugins`
 
 ```json
 {
   {
-    "types": ["@dcloudio/types","@types/wechat-miniprogram","@uni-helper/uni-app-types"]
+    "types": ["@dcloudio/types","@types/wechat-miniprogram","@uni-helper/uni-types"]
   },
   "vueCompilerOptions": {
-    "nativeTags": ["block", "component", "template", "slot"]
+    "plugins": ["@uni-helper/uni-types/volar-plugin"]
   }
 }
 ```
@@ -62,7 +63,7 @@ vscode 插件
 
 ### 开发配置
 
-#### UI 配置
+#### UI 配置组件
 
 安装 uni-ui：
 
@@ -70,12 +71,12 @@ vscode 插件
 - 安装 sass `pnpm i sass -D`
 - 项目根路径添加 `vue.config.js`
 
-    ```js
-    // vue.config.js
-    module.exports = {
-    	transpileDependencies:['@dcloudio/uni-ui']
-    }
-    ```
+```js
+// vue.config.js
+module.exports = {
+    transpileDependencies:['@dcloudio/uni-ui']
+}
+```
 
 配置组件自动引入
 
@@ -83,7 +84,7 @@ vscode 插件
 // pages.json
 {
   "easycom": {
-    "autoscan": true,
+  "autoscan": true,
    "custom": {
       // uni-ui 规则如下配置
       "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
@@ -95,37 +96,19 @@ vscode 插件
 }
 ```
 
-配置 ts 类型：`pnpm i -D @uni-helper/uni-ui-types`
+>  如果无法正常展示组件, 重启微信开发者工具
 
-```json
-// tsconfig.json
-{
-  "compilerOptions": {
-    "types": [
-    "@dcloudio/types",
-    "@types/wechat-miniprogram",
-    "@uni-helper/uni-app-types",
-  + "@uni-helper/uni-ui-types"
-    ]
-  },
-}
-```
+#### tailwindcss
 
-#### 安全边距
-
-```ts
-// 拿到安全区域距离，单位是px
-// 比如自定义导航栏。在拿到top以后，给导航加上样式 :style="{ paddingTop: safeAreaInsets?.top + 'px' }"
-const { safeAreaInsets } = uni.getSystemInfoSync()
-console.log(safeAreaInsets)
-```
+- 使用 tailwind 的 css 会发现无法覆盖 uniapp 自己的样式, 例如 `uni-view` 的 `display:block`, [参考这里](https://ice-tw.netlify.app/docs/quick-start/v4)
+- [weapp-tailwindcss配置](https://ice-tw.netlify.app/docs/quick-start/v4/uni-app-vite)
 
 #### 状态管理/持久化存储
 
 安装依赖
 
 ```shell
-pnpm i pinia pinia-plugin-persistedstate
+pnpm add pinia pinia-plugin-persistedstate
 ```
 
 创建 `src/stores/index.ts`
@@ -200,7 +183,22 @@ export const userStore = defineStore(
 
 `main.ts` 中引入使用 `app.use(pinia);`
 
-## 资源
+## 资料
+
+### 安全边距
+
+```ts
+// 拿到安全区域距离，单位是px
+// 比如自定义导航栏。在拿到top以后，给导航加上样式 :style="{ paddingTop: safeAreaInsets?.top + 'px' }"
+const { safeAreaInsets } = uni.getSystemInfoSync()
+console.log(safeAreaInsets)
+```
+
+### rpx 单位
+
+- [uniapp的rpx文档](https://zh.uniapp.dcloud.io/tutorial/syntax-css.html#flex-%E5%B8%83%E5%B1%80)
+    - 假定所有的屏幕都是 750 宽度, 所以 1rpx 就是 750/100 的宽度
+    - 所以屏幕越大, 像素越大. div 应该用 rpx, 字体应该用 px
 
 ### uni-app  
 

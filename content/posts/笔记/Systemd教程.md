@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-29
-lastmod: 2024-05-06
+lastmod: 2025-04-22
 categories:
   - blog
 description: "[[笔记/point/Systemd|systemd]] 的相关概念, 使用, 操作示例."
@@ -308,14 +308,14 @@ systemctl is-enabled nginx.service
 
 ### journal 日志
 
-`journald` 的配置文件路径 `/etc/systemd/journald.conf`
+`journald` 的配置文件路径 `/etc/systemd/journald.conf`, **建议设置比较小, 因为会影响 systemctl 的速度**
 
 ```ini
 [Journal]
-# 最大保存5G,默认最大4G.或者存储空间的10%
-SystemMaxUse=5G
-# 最多保留7天.默认为0.
-MaxRetentionSec=7day
+# 最大保存200M,默认最大4G.或者存储空间的10%
+SystemMaxUse=200M
+# 最多保留1天.默认为0.
+MaxRetentionSec=1day
 
 # 重启生效
 systemctl status systemd-journald

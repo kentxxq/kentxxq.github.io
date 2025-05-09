@@ -4,7 +4,7 @@ tags:
   - point
   - nacos
 date: 2023-08-16
-lastmod: 2023-09-20
+lastmod: 2025-03-17
 categories:
   - point
 ---
@@ -49,7 +49,7 @@ services:
       - "9848:9848"
 ```
 
-### 正常运行
+### 单点运行
 
 1. 到 [Releases · alibaba/nacos (github.com)](https://github.com/alibaba/nacos/releases) 下载最新版本, 解压
 2. 创建数据库 `nacos_config`, 执行 sql 文件 `conf/mysql-schema.sql `
@@ -63,13 +63,47 @@ services:
     db.user.0=root
     db.password.0=密码 
     # 开启授权
-    # 参考 https://nacos.io/zh-cn/docs/v2/guide/user/auth.html
+    # 参考 https://nacos.io/docs/latest/manual/admin/deployment/deployment-cluster/#11-%E4%BD%BF%E7%94%A8mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%A8%E8%8D%90
+    nacos.core.auth.enabled=true
+    nacos.core.auth.system.type=nacos
     nacos.core.auth.server.identity.key=你的key
     nacos.core.auth.server.identity.value=你的value
     nacos.core.auth.plugin.nacos.token.secret.key=base64后的
     ```
 
 4. 启动 `bin/startup.sh -m standalone`
+
+### 集群运行
+
+1. 到 [Releases · alibaba/nacos (github.com)](https://github.com/alibaba/nacos/releases) 下载最新版本, 解压
+2. 创建数据库 `nacos_config`, 执行 sql 文件 `conf/mysql-schema.sql`
+3. 编辑 `cluster.conf`
+
+```conf
+1.1.1.1:8848
+2.2.2.2:8848
+3.3.3.3:8848
+```
+
+1. 编辑配置文件 `conf/application.properties`
+
+    ```toml
+    # 数据库连接
+    spring.sql.init.platform=mysql
+    db.num=1
+    db.url.0=jdbc:mysql://127.0.0.1:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC 
+    db.user.0=root
+    db.password.0=密码 
+    # 开启授权
+    # 参考 https://nacos.io/docs/latest/manual/admin/deployment/deployment-cluster/#11-%E4%BD%BF%E7%94%A8mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%A8%E8%8D%90
+    nacos.core.auth.enabled=true
+    nacos.core.auth.system.type=nacos
+    nacos.core.auth.server.identity.key=你的key
+    nacos.core.auth.server.identity.value=你的value
+    nacos.core.auth.plugin.nacos.token.secret.key=base64后的
+    ```
+
+2. 启动 `bin/startup.sh -m standalone`
 
 ### 重要备注
 

@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2025-02-08
+lastmod: 2025-03-25
 keywords:
   - clash
   - 配置文件
@@ -350,23 +350,22 @@ proxy-providers:
 
 ### 服务搭建
 
-> [!warning]
-> clash 相关资源已经被删, 建议去 https://github.com/MetaCubeX/mihomo 下载替代下面的路径
-
 [[笔记/point/linux|linux]] 下的安装流程:
 
 ```shell
 mkdir clash ; cd clash
 # 下载clash
-wget https://github.com/Dreamacro/clash/releases/download/premium/clash-linux-amd64-2023.06.30.gz
+wget https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-amd64-alpha-7b38261.gz
 
 # 配置
-gunzip clash-linux-amd64-2023.06.30.gz
-mv clash-linux-amd64-2023.06.30 clash
+gunzip mihomo-linux-amd64-alpha-7b38261.gz
+mv mihomo-linux-amd64-alpha-7b38261 mihomo
 chmod +x clash
 
-# 下载geo数据库
+# 下载需要用到的文件到/root/clash
 wget https://github.com/Loyalsoldier/geoip/releases/download/202307060123/Country.mmdb
+wget https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat
+wget https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb
 
 # 贴入配置,建议加上用户名密码
 vim config.yaml
@@ -391,7 +390,7 @@ StartLimitBurst=3
 # EnvironmentFile=/path/to/environment/file1
 
 WorkingDirectory=/root/clash
-ExecStart=/root/clash/clash -d /root/clash
+ExecStart=/root/clash/mihomo -d /root/clash
 # 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
 RestartSec=30s 
 Restart=always
@@ -601,6 +600,7 @@ parsers:
     - sing-box 免费
     - 相关讨论
         - https://www.v2ex.com/t/989650
+        - https://www.v2ex.com/t/1121952
 - 服务商
     - 不限制客户端数量
         - [佩奇小站 - AmyTelecom](https://www.amysecure.com/clientarea.php?action=productdetails&id=14674)

@@ -5,7 +5,7 @@ tags:
   - vue
   - 前端
 date: 2024-03-09
-lastmod: 2024-10-29
+lastmod: 2025-04-24
 categories:
   - blog
 description: 
@@ -636,7 +636,62 @@ import i18n from '@/locales'
 app.use(i18n)
 ```
 
-#### iconfont / svg 图标封装
+#### iconify/tailwindcss 4
+
+先配置好 [[笔记/tailwindcss教程|tailwindcss4]]
+
+```shell
+pnpm add -D @iconify/tailwind4 @iconify/json
+
+# main.css
+@import 'tailwindcss';
+@plugin "@iconify/tailwind4";
+
+# 使用方法
+<span class="icon-[mdi--folder]"></span>
+```
+
+#### iconify/unplugin
+
+安装 [[笔记/point/vscode|vscode]] 插件 [Iconify IntelliSense](https://marketplace.visualstudio.com/items?itemName=antfu.iconify) - Iconify 图标插件
+
+安装配置
+
+```shell
+# 图标数据
+pnpm add -D @iconify/json
+
+# 安装配置插件
+pnpm add -D unplugin-icons unplugin-vue-components
+## vite.config.ts
+import Icons from 'unplugin-icons/vite'
+import Components from 'unplugin-vue-components/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+
+export default defineConfig({
+    plugins: [
+      Icons({
+        /* options */
+      }),
+      Components({
+        resolvers: [PrimeVueResolver(), IconsResolver()],
+      }),
+    ],
+})
+```
+
+使用
+
+```ts
+// 上面如果使用了IconsResolver, 可以省略这一步
+// import IconAccountBox from '~icons/mdi/account-box'
+
+<icon-mdi-account-box class=" text-red-400 text-2xl" />
+```
+
+- [Iconify图标查找](https://icon-sets.iconify.design/)
+
+#### iconfont / svg 图标封装 / icon
 
 `iconfont` 是阿里的图标库. 这里介绍用法.
 
@@ -725,7 +780,7 @@ withDefaults(defineProps<{ name?: string, size?: string, fill?: string }>(), {
 import SvgIcon from "@/components/SvgIcon/index.vue";
 ```
 
-#### env 环境变量
+#### dotenv 环境变量
 
 `vite` 使用 `.env` 文件区分使用环境变量, 暴露在 `import.meta.env` 对象里.
 

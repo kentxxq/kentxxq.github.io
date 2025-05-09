@@ -3,7 +3,7 @@ title: pnpm的monorepo实践
 tags:
   - blog
 date: 2024-12-30
-lastmod: 2024-12-31
+lastmod: 2025-04-22
 categories:
   - blog
 description: 
@@ -13,7 +13,7 @@ description:
 
 pnpm 的 monorepo 实践
 
-## 创建项目
+## 创建 monorepo 项目
 
 1. 创建项目 `mkdir w` , `cd w` ,
 2. 初始化 `pnpm init`, 会创建出 `package.json`
@@ -57,7 +57,8 @@ pnpm 的 monorepo 实践
     }
     ```
 
-8. `apps/app1` 初始化 vue 项目后,  添加依赖 `pnpm add @kentxxq/uni-tools --workspace`, 即可导入使用. (如果希望一直使用最新版本, 可以把 `"workspace:^"` 改成 `"workspace:*"` )
+8. `cd apps` 文件夹 `pnpm create vue@latest` 创建项目
+9. `apps/app1` 初始化 vue 项目后,  添加依赖 `pnpm add @kentxxq/uni-tools --workspace`, 即可导入使用. (如果希望一直使用最新版本, 可以把 `"workspace:^"` 改成 `"workspace:*"` )
 
     ```ts
     import { echo } from '@kentxxq/uni-tools';
@@ -65,7 +66,7 @@ pnpm 的 monorepo 实践
     echo()
     ```
 
-9. 把共享的依赖移动到最外层的 `package.json`, 添加启动命令.
+10. 把共享的依赖移动到最外层的 `package.json`, 添加启动命令.
 
 ```json
 {
@@ -97,7 +98,14 @@ pnpm 的 monorepo 实践
 }
 ```
 
-## 相关 pnpm 命令
+## 使用 monorepo
+
+1. `apps` 目录创建项目 `pnpm create vue@latest nav`
+2. 最外层 `/package.json` 加入命令 `"dev:nav": "pnpm run build:packages-browser && pnpm --filter nav dev"`
+3. 拷贝 `main.ts`, `app.ts`, 调整 `app.ts` 报错
+4. 拷贝 `vite.config.ts` 应该就能启动了
+
+## pnpm 命令
 
 ```shell
 # 添加全局依赖

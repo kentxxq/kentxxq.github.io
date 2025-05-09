@@ -11,7 +11,7 @@ categories:
   - point
 ---
 
-`golang` 是一个编程语言.
+`golang` 是一个编程语言. [golang 的 FAQ](https://go.dev/doc/faq)
 
 要点如下:
 

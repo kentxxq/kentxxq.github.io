@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2024-12-29
+lastmod: 2025-04-29
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -903,6 +903,7 @@ ps -eo pid,lstart,etime | grep 1310
 # v是查看细节
 # f是指定文件
 # --strip-components=1 去掉一层解压目录
+# tar xf source.tgz -C target_path --strip-components=4
 
 # 查看文件内容
 tar -tf xxx.tar.gz
@@ -959,7 +960,7 @@ scp /path/thing root@10.10.10.10:/path/thing
 # 远程到本地
 # -r遍历
 # -C压缩
-sshpass -p 密码 -o StrictHostKeyChecking=no scp -Cr root@10.10.10.10:/taget/path/file /source/path/file
+sshpass -p 密码 scp -o StrictHostKeyChecking=no -Cr root@10.10.10.10:/taget/path/file /source/path/file
 
 # 使用sshpass免密一条命令
 # scp支持所有ssh的参数
