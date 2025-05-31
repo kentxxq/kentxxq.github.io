@@ -480,7 +480,7 @@ duration = -1
 enable = true
 # Google Analytics
 [params.analytics.google]
-id = "G-NLLDC353PJ"
+id = "G-ZNPMV0HVBQ"
 # 是否匿名化用户 IP
 anonymizeIP = true
 # Fathom Analytics
