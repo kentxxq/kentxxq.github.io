@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2025-04-29
+lastmod: 2025-05-20
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -1001,13 +1001,11 @@ sed -i 's#/etc/nginx/ssl/kentxxq.key#/usr/local/nginx/conf/ssl/kentxxq.key#g' *
 ### 信息查询
 
 ```shell
-# 系统信息
-lsb_release -a
-LSB Version: :core-4.1-amd64:core-4.1-noarch
-Distributor ID: CentOS
-Description: CentOS Linux release 8.0.1905 (Core)
-Release: 8.0.1905
-Codename: Core
+# linux发行版
+cat /etc/os-release
+# linux内核版本
+cat /proc/version
+
 # cpu信息
 cat /proc/cpuinfo
 # 内存信息,2个16g代表32gb内存,双通道

@@ -6,7 +6,7 @@ tags:
   - 知识碎片
   - 语言特性
 date: 2024-09-13
-lastmod: 2025-04-03
+lastmod: 2025-07-25
 categories:
   - blog
 description: 
@@ -18,7 +18,7 @@ description:
 
 ## 语言特性
 
-### 属性和字段
+### 属性 properties 和字段 Fields
 
 ```csharp
 public class Person
@@ -67,6 +67,17 @@ else
 }
 ```
 
+### required
+
+```csharp
+public class WebhookConfig
+{
+    public required string NotifyUrl { get; set; }
+}
+```
+
+这里 `required` 代表初始化的时候必须赋值, 例如 `var config = new WebhookConfig();` 就会报错
+
 ## 开发
 
 ### 枚举查询
@@ -81,7 +92,7 @@ public ResultModel<List<EnumObject>> ResultStatusApi()
     return ResultModel.Ok(data);
 }
 
-// 枚举
+// 枚举,除了ToStringFast还有ToDisplayFast,ToDescriptionFast
 // https://github.com/EngRajabi/Enum.Source.Generator
 [EnumGenerator]  
 public enum ResultStatus  
@@ -292,6 +303,36 @@ DateTimeOffset.Now.ToString("O")
 ```csharp
 [SugarColumn(ColumnDataType = "DATETIME(3) ")]
 public DateTime CreateTime { get; set; }
+```
+
+### 密码存放/验证
+
+`bcrypt` 算法多语言兼容, 很难被暴力/彩虹表突破, 难度也可以设置
+
+```csharp
+// https://www.nuget.org/packages/BCrypt.Net-Next/
+using BCryptNet;
+
+// Hash a password
+string passwordHash =  BCrypt.HashPassword("my password");
+// Validate a password
+var isValid = BCrypt.Verify("my password", passwordHash);
+```
+
+### nacos/服务发现
+
+- 推荐根据 swagger 生成 cs 文件, 然后统一配置 http 策略,  [参考官方这部分内容](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-9.0#generated-clients)
+- 使用 [nacos-sdk-csharp注入的NacosNamingService](https://github.com/nacos-group/nacos-sdk-csharp/blob/dev/src/Nacos/V2/Naming/NacosNamingService.cs) 获取微服务信息
+
+```csharp
+// 即使每次服务发现到的是ip+port,也应该使用_httpClientFactory,这样会服用tcp连接,且复用polly,log规则
+
+var client = _httpClientFactory.CreateClient(); // ✅ 共享连接池
+// 下面使用INacosNamingService
+// https://github.com/nacos-group/nacos-sdk-csharp/blob/dev/src/Nacos/V2/Naming/NacosNamingService.cs
+var endpoint = await _svc_.SelectOneHealthyInstance("user-service");
+client.BaseAddress = new Uri($"http://{endpoint.Ip}:{endpoint.Port}");
+await client.GetAsync("/login");
 ```
 
 ## 打包

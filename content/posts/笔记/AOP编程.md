@@ -3,7 +3,7 @@ title: AOP编程
 tags:
   - blog
 date: 2024-12-27
-lastmod: 2024-12-27
+lastmod: 2025-06-04
 categories:
   - blog
 description: 
@@ -16,8 +16,7 @@ description:
 ## 分类
 
 - 类型
-    - 预处理, 添加源码. source generator.
-        - 在 aop 方面比
+    - 预处理, 添加源码. source generator
     - 后处理, 添加二进制命令. IL 代码.
         - 无运行时开销, 原生代码, 减少 jit 压力
         - 调试麻烦, 构建时长增加, 灵活度不够

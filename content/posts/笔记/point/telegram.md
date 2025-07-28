@@ -5,7 +5,7 @@ aliases:
 tags:
   - point
 date: 2024-05-29
-lastmod: 2025-02-25
+lastmod: 2025-06-23
 categories:
   - point
 ---
@@ -96,16 +96,16 @@ categories:
 - 建议用官方客户端
 - premium 建议用 web / desktop 支付, 避免被多收费
 - ios 会限制内容, 需要到 web 或者 desktop 端取消限制
+- 第三方版本
+    - [Swiftgram](https://github.com/Swiftgram/Telegram-iOS) 在 `v2ex` 评价比较高, 作者开发过 [Nicegram](https://github.com/nicegram/Nicegram-iOS)
+    - [Nagram](https://github.com/NextAlone/Nagram) 的 [频道](https://t.me/nagram_channel)
+    - 不开源 [Plus Messenger - Google Play 上的应用](https://play.google.com/store/apps/details?id=org.telegram.plus) , 但用户量大 [tg频道](https://t.me/plusmsgr)
 
-## 百科全书
+## 百科全书/资源
 
+- 频道资源 https://github.com/itgoyo/TelegramGroup
 - 机器人推荐
     - [机器人推荐 \| TGwiki - Telegram知识库](https://tgnav.github.io/tgwiki/robot.html#%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E4%BA%BA)
 - 邮箱登录
     - [邮箱登录 \| TGwiki - Telegram知识库](https://tgnav.github.io/tgwiki/emaillogin.html)
     - [据说 telegram 启用邮箱登录的方法售价四位数了？ 我来免费教大家 - V2EX](https://www.v2ex.com/t/1037251)
-- 新闻频道
-    - https://t.me/cnbeta_com  
-    - https://t.me/solidot  
-    - https://t.me/CE_Observe  
-    - https://t.me/TestFlightCN

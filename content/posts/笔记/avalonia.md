@@ -3,7 +3,7 @@ title: avalonia
 tags:
   - blog
 date: 2025-03-28
-lastmod: 2025-03-28
+lastmod: 2025-05-12
 categories:
   - blog
 description: 
@@ -36,7 +36,7 @@ dotnet publish -c Release
 
 ### 减少内存占用
 
-在 `Program.cs` 配置使用软件渲染, 不使用 gpu 加速. 就会加快
+在 `Program.cs` 配置使用软件渲染, 不使用 gpu 加速
 
 ```cs
 .With(new Win32PlatformOptions  

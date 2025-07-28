@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2025-04-02
+lastmod: 2025-07-07
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."
@@ -178,10 +178,16 @@ git reset --hard HEAD
 
 github 工作流使用
 
-- [Site Unreachable](https://www.youtube.com/watch?v=uj8hjLyEBmU)
-- `git rebase main` 可以让你的改动是基于最新的代码, 如果操作这一步有冲突, 就解决冲突
-- `git push -f origin my-feature` 因为我们 rebase 了, 所以必须要用 -f 强制更新
-- feature 合并到 main, 使用 pull request 去合并请求
-- `main` 采用 `squash and merge`, 这样你的分支很乱, 但是会被整合到一起
+- [码农高天视频教学](https://www.youtube.com/watch?v=uj8hjLyEBmU)
+    1. `git rebase main` 可以让你的改动是基于最新的代码, 如果操作这一步有冲突, 就解决冲突
+    2. `git push -f origin my-feature` 因为我们 rebase 了, 所以必须要用 -f 强制更新
+    3. feature 合并到 main, 使用 pull request 去合并请求
+    4. `main` 采用 `squash and merge`, 这样会把分支的所有提交都合并成一个提交, 变得很清晰
+        - 通常在 github, gitlab 等平台的 ui 都有这个合并选项
+        - 手动清理
+            1. `git checkout feature-branch`
+            2. `git rebase -i origin/main` 清理所有提交信息
+            3. `git push origin feature-branch -f`
+            4. 合并即可
 - [十分钟学会常用git撤销操作，全面掌握git的时光机 - YouTube](https://www.youtube.com/watch?v=ol7CMoJuAvI)  #todo/笔记
 - [1. 引言 | 自己动手写 Git](https://wyag-zh.hanyujie.xyz/docs/1.-%E5%BC%95%E8%A8%80.html)

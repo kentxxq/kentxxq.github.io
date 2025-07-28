@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-07-26
-lastmod: 2024-12-19
+lastmod: 2025-06-17
 categories:
   - blog
 description: "[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."
@@ -51,6 +51,8 @@ dotnet nuget push kentxxq.Extensions.1.1.0.nupkg --api-key key
 
 ```shell
 setx /M NUGET_PACKAGES D:\<username>\.nuget\packages
+// 默认linux下的缓存路径 mcr.microsoft.com/dotnet/sdk:9.0
+/root/.nuget/packages
 ```
 
 ### 更新所有 dotnet-tools

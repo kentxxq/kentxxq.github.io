@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-07-29
-lastmod: 2025-04-22
+lastmod: 2025-05-19
 categories:
   - blog
 description: "[[笔记/point/Systemd|systemd]] 的相关概念, 使用, 操作示例."
@@ -71,6 +71,8 @@ ExecStart=/root/myApp/TestServer/TestServer
 # 总是间隔30s重启,配合StartLimitIntervalSec实现无限重启
 RestartSec=30s 
 Restart=always
+# 资源限制 K,M,G,T
+# MemoryMax=500M
 # 相关资源都发送term后,后发送kill
 KillMode=mixed
 # 最大文件打开数不限制
@@ -173,6 +175,9 @@ RestartSec=30s
 # 重启的配置, 会受到Unit单元的StartLimit影响!!!
 # always,on-success、on-failure、on-abnormal、on-abort、on-watchdog. 
 Restart=always
+
+# 资源限制 K,M,G,T
+MemoryMax=500M
 
 # 杀死模式
 # 默认control-group

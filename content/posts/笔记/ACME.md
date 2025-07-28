@@ -5,7 +5,7 @@ tags:
   - devops
   - ACME
 date: 2023-08-16
-lastmod: 2024-06-05
+lastmod: 2025-06-18
 keywords:
   - acme
   - acme.sh
@@ -73,6 +73,7 @@ acme.sh --remove -d "*.kentxxq.com" -d "kentxxq.com" --force
 
 - [支持的CA服务商列表](https://github.com/acmesh-official/acme.sh/wiki/Server)
 - [各个服务商的区别](https://github.com/acmesh-official/acme.sh/wiki/CA)
+- [ssl-labs 做 ssl 检测](https://www.ssllabs.com/ssltest/)
 
 ```shell
 acme.sh --set-default-ca --server letsencrypt

@@ -4,7 +4,7 @@ tags:
   - blog
   - ansible
 date: 2023-07-01
-lastmod: 2024-05-06
+lastmod: 2025-07-15
 categories:
   - blog
 description: "[[笔记/point/ansible|ansible]] 的使用记录, 用到的时候能快速重新捡起来.."
@@ -43,6 +43,7 @@ ansible test -m shell -a "ls"
 ```yml
 ---
 - name: Install remote facts
+  # become: root # 提权到root执行
   hosts: test
   vars:
     test_dir: /tmp/test_dir
@@ -105,6 +106,35 @@ ansible test -m shell -a "ls"
         group: "root"
         extra_opts:
           - --strip-components= 1
+         
+    # 新增替换行 
+    - name: 设置 PASS_MAX_DAYS=90
+      lineinfile:
+        path: /etc/login.defs
+        regexp: '^PASS_MAX_DAYS'
+        line: 'PASS_MAX_DAYS 90'
+        state: present
+        
+    # 安装模块
+    - name: 安装 libpam-pwquality 模块
+      apt:
+        name: libpam-pwquality
+        state: present
+    - name: 检查 pam_pwquality.so 是否存在
+      stat:
+        path: /usr/lib/x86_64-linux-gnu/security/pam_pwquality.so
+      register: pam_module
+    - name: 显示 pam 模块是否存在
+      debug:
+        msg: "pam_pwquality.so 已安装 ✅"
+      when: pam_module.stat.exists
+    # 指定位置插入
+    - name: 修改 密码复杂度 设置   
+      lineinfile:
+        path: /etc/pam.d/common-password
+        line: 'password requisite pam_pwquality.so minlen=8 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1'
+        insertafter: EOF
+        state: present
 ```
 
 ## Role 方案

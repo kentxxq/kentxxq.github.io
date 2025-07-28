@@ -5,7 +5,7 @@ tags:
   - vue
   - 前端
 date: 2024-03-09
-lastmod: 2025-04-24
+lastmod: 2025-07-03
 categories:
   - blog
 description: 
@@ -638,7 +638,7 @@ app.use(i18n)
 
 #### iconify/tailwindcss 4
 
-先配置好 [[笔记/tailwindcss教程|tailwindcss4]]
+先配置好 [[笔记/tailwindcss手册|tailwindcss4]]
 
 ```shell
 pnpm add -D @iconify/tailwind4 @iconify/json
@@ -651,7 +651,7 @@ pnpm add -D @iconify/tailwind4 @iconify/json
 <span class="icon-[mdi--folder]"></span>
 ```
 
-#### iconify/unplugin
+#### iconify/unplugin 使用中
 
 安装 [[笔记/point/vscode|vscode]] 插件 [Iconify IntelliSense](https://marketplace.visualstudio.com/items?itemName=antfu.iconify) - Iconify 图标插件
 
@@ -689,7 +689,10 @@ export default defineConfig({
 <icon-mdi-account-box class=" text-red-400 text-2xl" />
 ```
 
-- [Iconify图标查找](https://icon-sets.iconify.design/)
+- 使用方法 `<i-图标名 />`
+    - 例如 `<i-ic:baseline-5mp class="size-4" />`
+    - [Icônes图标查找, 速度更快](https://icones.js.org/)
+    - [Iconify图标查找](https://icon-sets.iconify.design/)
 
 #### iconfont / svg 图标封装 / icon
 

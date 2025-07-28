@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2025-03-25
+lastmod: 2025-07-22
 keywords:
   - clash
   - 配置文件
@@ -32,6 +32,12 @@ description: "记录 [[笔记/point/clash|clash]] 的配置, 以及是如何使�
 ### 配置模板 - 复制保存成 yml
 
 ```yml
+# 默认走代理
+
+# 原版文档 https://clash-meta.gitbook.io/
+# mihomo文档 https://wiki.metacubex.one/
+# mihomo完整配置 https://github.com/MetaCubeX/mihomo/blob/Meta/docs/config.yaml
+# stash文档 https://stash.wiki/
 port: 7890
 socks-port: 7891
 redir-port: 7892
@@ -39,64 +45,119 @@ mixed-port: 7893
 # authentication:
 #   - "usr1:pass1"
 allow-lan: true
-mode: Rule
+mode: rule
 log-level: info
 ipv6: false
-hosts:
+# hosts:
 external-controller: 0.0.0.0:9090
 clash-for-android:
   append-system-dns: false
 profile:
   tracing: true
+# 嗅探
+sniffer:
+  sniff:
+    TLS: { ports: [0-65535], override-destination: true }
+    HTTP: { ports: [0-65535], override-destination: true }
+    QUIC: { ports: [0-65535], override-destination: true }
+  enable: true
+  parse-pure-ip: true
+  force-dns-mapping: true
+  skip-domain:
+    - "Mijia Cloud"
+    - "dlg.io.mi.com"
+    - "+.apple.com"
+# https://wiki.metacubex.one/config/dns/
 dns:
   enable: true
-  listen: 127.0.0.1:8853
+  ipv6: false # 都说可能会影响体验,关掉
+  prefer-h3: true
+  listen: 0.0.0.0:53
+  # default-nameserver 是用来解析 nameserver 和 fallback 里面的域名的
+  # 必须是ip, 可以是加密dns
   default-nameserver:
     - 223.5.5.5
-    - 1.0.0.1
-  ipv6: false
+    - 119.29.29.29
+    - 8.8.8.8
+    - 1.1.1.1
+  # 解析流程 https://wiki.metacubex.one/config/dns/diagram/
+  # 0级 先在这里解析
+  nameserver-policy:
+    "geosite:cn,private,apple":
+      - https://223.5.5.5/dns-query#h3=true
+      - https://dns.alidns.com/dns-query
+      - https://doh.pub/dns-query
+  # 2级 这里是默认解析配置
+  nameserver:
+    - https://223.5.5.5/dns-query#h3=true
+    - https://dns.alidns.com/dns-query
+    - https://dns.pub/dns-query
+    - https://8.8.8.8/dns-query
+    - https://1.1.1.1/dns-query
+  # 2025年3月10日 特殊的会议期间,下面2个dns都连接超时,无法访问.导致访问速度很慢. 所以建议不配置
+  # 1级 这里是特定解析配置. 如果这里匹配了, 这里优先级比nameserver高
+  # fallback 用来配置特定域名的dns解析使用fallback的dns服务器
+  # clash原版内核依赖这个功能分流, 但是clash meta可以不用 https://hk.v2ex.com/t/1015534
+  # fallback:
+  #   - https://8.8.8.8/dns-query
+  #   - https://1.1.1.1/dns-query
+  # fallback-filter:
+  #   geoip: true         #为真时，不匹配为geoip规则的使用fallback返回结果
+  #   geoip-code: CN      #geoip匹配区域设定
+  #   ipcidr:             #列表中的ip使用fallback返回解析结果
+  #     - 240.0.0.0/4
+  #     - 0.0.0.0/32
+  #     - 127.0.0.1/32
+  #   domain:             #列表中的域名使用fallback返回解析结果
+  #     - +.google.com
+  #     - +.facebook.com
+  #     - +.twitter.com
+  #     - +.youtube.com
+  #     - +.xn--ngstr-lra8j.com
+  #     - +.google.cn
+  #     - +.googleapis.cn
+  #     - +.googleapis.com
+  #     - +.gvt1.com
+  # 给域名一个内网地址fake-ip,连接完全通过自定义的方式和外部对接. 最大程度避免dns污染攻击 https://clash.wiki/configuration/dns.html
   enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  # 下面这些地址不会下发fake-ip
   fake-ip-filter:
     - "*.lan"
-    - stun.*.*.*
-    - stun.*.*
-    - time.windows.com
-    - time.nist.gov
-    - time.apple.com
-    - time.asia.apple.com
-    - "*.ntp.org.cn"
-    - "*.openwrt.pool.ntp.org"
-    - time1.cloud.tencent.com
-    - time.ustc.edu.cn
-    - pool.ntp.org
-    - ntp.ubuntu.com
-    - ntp.aliyun.com
-    - ntp1.aliyun.com
-    - ntp2.aliyun.com
-    - ntp3.aliyun.com
-    - ntp4.aliyun.com
-    - ntp5.aliyun.com
-    - ntp6.aliyun.com
-    - ntp7.aliyun.com
-    - time1.aliyun.com
-    - time2.aliyun.com
-    - time3.aliyun.com
-    - time4.aliyun.com
-    - time5.aliyun.com
-    - time6.aliyun.com
-    - time7.aliyun.com
+    - "*.localdomain"
+    - "*.example"
+    - "*.invalid"
+    - "*.localhost"
+    - "*.test"
+    - "*.local"
+    - "*.home.arpa"
+    - time.*.com
+    - time.*.gov
+    - time.*.edu.cn
+    - time.*.apple.com
+    - time1.*.com
+    - time2.*.com
+    - time3.*.com
+    - time4.*.com
+    - time5.*.com
+    - time6.*.com
+    - time7.*.com
+    - ntp.*.com
+    - ntp1.*.com
+    - ntp2.*.com
+    - ntp3.*.com
+    - ntp4.*.com
+    - ntp5.*.com
+    - ntp6.*.com
+    - ntp7.*.com
     - "*.time.edu.cn"
-    - time1.apple.com
-    - time2.apple.com
-    - time3.apple.com
-    - time4.apple.com
-    - time5.apple.com
-    - time6.apple.com
-    - time7.apple.com
-    - time1.google.com
-    - time2.google.com
-    - time3.google.com
-    - time4.google.com
+    - "*.ntp.org.cn"
+    - +.pool.ntp.org
+    - time1.cloud.tencent.com
+    - stun.*.*
+    - stun.*.*.*
+    - swscan.apple.com
+    - mesu.apple.com
     - music.163.com
     - "*.music.163.com"
     - "*.126.net"
@@ -107,7 +168,6 @@ dns:
     - "*.kuwo.cn"
     - api-jooxtt.sanook.com
     - api.joox.com
-    - joox.com
     - y.qq.com
     - "*.y.qq.com"
     - streamoc.music.tc.qq.com
@@ -116,95 +176,87 @@ dns:
     - dl.stream.qqmusic.qq.com
     - aqqmusic.tc.qq.com
     - amobile.music.tc.qq.com
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
     - "*.xiami.com"
     - "*.music.migu.cn"
     - music.migu.cn
-    - "*.msftconnecttest.com"
-    - "*.msftncsi.com"
-    - localhost.ptlogin2.qq.com
+    - +.wotgame.cn
+    - +.wggames.cn
+    - +.wowsgame.cn
+    - +.wargaming.net
     - "*.*.*.srv.nintendo.net"
     - "*.*.stun.playstation.net"
     - xbox.*.*.microsoft.com
-    - "*.ipv6.microsoft.com"
     - "*.*.xboxlive.com"
+    - "*.ipv6.microsoft.com"
+    - teredo.*.*.*
+    - teredo.*.*
     - speedtest.cros.wr.pvp.net
-  nameserver:
-    - https://223.6.6.6/dns-query
-    - https://rubyfish.cn/dns-query
-    - https://dns.pub/dns-query
-  fallback:
-    - https://dns.rubyfish.cn/dns-query
-    - https://public.dns.iij.jp/dns-query
-    - tls://8.8.4.4
-  fallback-filter:
-    geoip: true
-    ipcidr:
-      - 240.0.0.0/4
-      - 0.0.0.0/32
-      - 127.0.0.1/32
-    domain:
-      - +.google.com
-      - +.facebook.com
-      - +.twitter.com
-      - +.youtube.com
-      - +.xn--ngstr-lra8j.com
-      - +.google.cn
-      - +.googleapis.cn
-      - +.googleapis.com
-      - +.gvt1.com
-
+    - +.jjvip8.com
+    - www.douyu.com
+    - activityapi.huya.com
+    - activityapi.huya.com.w.cdngslb.com
+    - www.bilibili.com
+    - api.bilibili.com
+    - a.w.bilicdn1.com
+    # QQ快速登录检测失败
+    - localhost.ptlogin2.qq.com
+    - localhost.sec.qq.com
+    # 微信快速登录检测失败
+    - localhost.work.weixin.qq.com
 # 节点信息配置
 # 从你的订阅地址下载节点信息,过滤掉不包含香港的节点
 proxy-providers:
   AMY-HongKong:
     type: http
     path: ./ProxySet/HongKong.yaml
-    url: "你的订阅地址"
+    url: "订阅地址"
     interval: 3600
     filter: "香港"
     health-check:
       enable: true
-      url: http://www.gstatic.com/generate_204
+      url: https://www.google.com/favicon.ico
       interval: 300
   AMY-US:
     type: http
     path: ./ProxySet/US.yaml
-    url: "你的订阅地址"
+    url: "订阅地址"
     interval: 3600
     filter: "美国"
     health-check:
       enable: true
-      url: http://www.gstatic.com/generate_204
+      url: https://www.google.com/favicon.ico
       interval: 300
   AMY-Taiwan:
     type: http
     path: ./ProxySet/Taiwan.yaml
-    url: "你的订阅地址"
+    url: "订阅地址"
     interval: 3600
     filter: "台湾"
     health-check:
       enable: true
-      url: http://www.gstatic.com/generate_204
+      url: https://www.google.com/favicon.ico
       interval: 300
   AMY-Japan:
     type: http
     path: ./ProxySet/Japan.yaml
-    url: "你的订阅地址"
+    url: "订阅地址"
     interval: 3600
     filter: "日本"
     health-check:
       enable: true
-      url: http://www.gstatic.com/generate_204
+      url: https://www.google.com/favicon.ico
       interval: 300
   AMY-Singapore:
     type: http
     path: ./ProxySet/Singapore.yaml
-    url: "你的订阅地址"
+    url: "订阅地址"
     interval: 3600
     filter: "新加坡"
     health-check:
       enable: true
-      url: http://www.gstatic.com/generate_204
+      url: https://www.google.com/favicon.ico
       interval: 300
 
 # 策略组配置
@@ -219,22 +271,41 @@ proxy-providers:
 proxy-groups:
   - name: 香港-auto
     type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 600
+    url: https://www.google.com/favicon.ico
+    interval: 60
     tolerance: 100
     use:
       - AMY-HongKong
   - name: 美国-auto
     type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 600
-    tolerance: 150
+    url: https://www.google.com/favicon.ico
+    interval: 60
+    tolerance: 100
     use:
       - AMY-US
-  - name: 所有-auto
+  - name: no-hk-fallback
+    type: fallback
+    url: https://www.google.com/favicon.ico
+    interval: 60
+    use:
+      - AMY-Japan
+      - AMY-Singapore
+      - AMY-Taiwan
+      - AMY-US
+  - name: 所有-fallback
+    type: fallback
+    url: https://www.google.com/favicon.ico
+    interval: 60
+    use:
+      - AMY-HongKong
+      - AMY-US
+      - AMY-Singapore
+      - AMY-Japan
+      - AMY-Taiwan
+  - name: 所有-select
     type: select
-    url: http://www.gstatic.com/generate_204
-    interval: 600
+    url: https://www.google.com/favicon.ico
+    interval: 60
     use:
       - AMY-HongKong
       - AMY-US
@@ -245,60 +316,119 @@ proxy-groups:
 # 从github拿到规则集,用的时候注意behavior,一般readme文件会有写behavior的值
 # behavior的含义参考 https://github.com/Dreamacro/clash/issues/1165#issuecomment-753739205
 rule-providers:
-  ChinaMax:
+  # NeedProxy:
+  #   type: http
+  #   behavior: classical
+  #   url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy_Classical.yaml"
+  #   path: ./RuleSet/NeedProxy.yaml
+  #   interval: 86400
+  Github:
     type: http
     behavior: classical
-    url: "https://mirror.ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml"
-    path: ./RuleSet/ChinaMax.yaml
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.yaml"
+    path: ./RuleSet/Github.yaml
     interval: 86400
+  youtube:
+    type: http
+    behavior: classical
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml"
+    path: ./RuleSet/YouTube.yaml
+    interval: 86400
+  China:
+    type: http
+    behavior: classical
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China.yaml"
+    path: ./RuleSet/China.yaml
+    interval: 86400
+  # ChinaMax:
+  #   type: http
+  #   behavior: classical
+  #   url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml"
+  #   path: ./RuleSet/ChinaMax.yaml
+  #   interval: 86400
   OpenAI:
     type: http
     behavior: classical
-    url: "https://mirror.ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/OpenAI/OpenAI.yaml"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml"
     path: ./RuleSet/OpenAI.yaml
-    interval: 86400
-  Microsoft:
-    type: http
-    behavior: classical
-    url: "https://mirror.ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Microsoft/Microsoft.yaml"
-    path: ./RuleSet/Microsoft.yaml
-    interval: 86400
-  GitLab:
-    type: http
-    behavior: classical
-    url: "https://mirror.ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitLab/GitLab.yaml"
-    path: ./RuleSet/GitLab.yaml
-    interval: 86400
-  GitHub:
-    type: http
-    behavior: classical
-    url: "https://mirror.ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitHub/GitHub.yaml"
-    path: ./RuleSet/GitHub.yaml
     interval: 86400
   Google:
     type: http
     behavior: classical
-    url: "https://mirror.ghproxy.com/https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/GitHub/GitHub.yaml"
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml"
     path: ./RuleSet/Google.yaml
+    interval: 86400
+  Douyin:
+    type: http
+    behavior: classical
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/DouYin/DouYin.yaml"
+    path: ./RuleSet/Douyin.yaml
+    interval: 86400
+  amy-classical-DIRECT:
+    type: http
+    behavior: classical
+    url: "https://gh-proxy.com/https://raw.githubusercontent.com/kentxxq/public-config/main/clash/amy-classical-DIRECT.yaml"
+    path: ./RuleSet/amy-classical-DIRECT.yaml
     interval: 86400
 
 # 自定义规则
 # 1自定义,2规则集,3国内,4兜底
 rules:
-  - DOMAIN-SUFFIX,at.alicdn.com,香港-auto
-  - DOMAIN-SUFFIX,bet365.com,香港-auto
-  - DOMAIN-SUFFIX,ip-api.com,美国-auto
+  # 阿里云部分内容
+  - DOMAIN-SUFFIX,at.alicdn.com,所有-fallback
+  # 阿里云数据库
+  - DOMAIN-SUFFIX,aliyuncs.com,DIRECT
+  # qq
+  - DOMAIN-SUFFIX,qq.com,DIRECT
+  # pikpak网盘
+  - DOMAIN-SUFFIX,mypikpak.com,所有-fallback
+  # c#网站
+  - DOMAIN-SUFFIX,fuget.org,所有-fallback
+  # 菠菜
+  - DOMAIN-SUFFIX,bet365.com,所有-fallback
+  # ip查询
+  - DOMAIN-SUFFIX,ip-api.com,no-hk-fallback
+  # 算法学习
+  - DOMAIN-SUFFIX,hello-algo.com,no-hk-fallback
+  # wireshark抓包下载
+  - DOMAIN-SUFFIX,wireshark.org,所有-fallback
+  # dockerhub用到了
+  - DOMAIN-SUFFIX,cloudfront.net,所有-fallback
+  # nodejs项目vben用到了
+  - DOMAIN-SUFFIX,vben.vvbin.cn,所有-fallback
+  # sourceforge.net下载
+  - DOMAIN-SUFFIX,sourceforge.net,所有-fallback
+  # ide
+  - DOMAIN-SUFFIX,jetbrains.com,所有-fallback
+  # 其他
+  - DOMAIN-SUFFIX,v2ex.com,所有-fallback
+  - DOMAIN-SUFFIX,gh-proxy.com,DIRECT
+  - DOMAIN-SUFFIX,smtp.gmail.com,DIRECT
+  # windows更新
+  - DOMAIN-SUFFIX,windowsupdate.com,DIRECT
+  - DOMAIN-SUFFIX,npmmirror.com,DIRECT
+  # - DOMAIN-SUFFIX,kentxxq.com,DIRECT
+  - DOMAIN-SUFFIX,chinnshi.com,DIRECT
+  - DOMAIN-SUFFIX,imshini.com,DIRECT
+  - DOMAIN-SUFFIX,shimeow.com,DIRECT
   - IP-CIDR,10.0.0.0/8,DIRECT
   - IP-CIDR,172.16.0.0/12,DIRECT
   - IP-CIDR,192.168.0.0/16,DIRECT
-  - RULE-SET,Google,香港-auto
-  - RULE-SET,GitHub,香港-auto
-  - RULE-SET,GitLab,香港-auto
-  - RULE-SET,Microsoft,香港-auto
-  - RULE-SET,OpenAI,美国-auto
-  - RULE-SET,ChinaMax,DIRECT
+  # 规则集
+  - RULE-SET,Douyin,DIRECT
+  - RULE-SET,Github,所有-fallback
+  - RULE-SET,youtube,所有-fallback
+  - RULE-SET,Google,no-hk-fallback
+  - RULE-SET,OpenAI,no-hk-fallback
+  # amy
+  - RULE-SET,amy-classical-DIRECT,DIRECT
+  # - RULE-SET,NeedProxy,所有-fallback
+  # - RULE-SET,ChinaMax,DIRECT
+  - RULE-SET,China,DIRECT
   - GEOIP,CN,DIRECT
-  - MATCH,所有-auto
+  - MATCH,所有-fallback
+  # - MATCH,DIRECT
+
 ```
 
 ### 配置模板 - 修改必要信息
@@ -318,6 +448,29 @@ proxy-providers:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
+```
+
+注意 [Stash](https://stash.wiki/)
+
+- dns 不兼容 `nameserver-policy`
+- 修改 http3 使用方式 `http3://223.5.5.5/dns-query`
+
+```yaml
+# 不兼容的注释掉
+# nameserver-policy:
+#   "geosite:cn,private,apple":
+#     - https://223.5.5.5/dns-query#h3=true
+#     - https://dns.alidns.com/dns-query
+#     - https://doh.pub/dns-query
+
+# 使用stash支持的http3格式
+nameserver:
+  # - https://223.5.5.5/dns-query#h3=true
+  - http3://223.5.5.5/dns-query
+  - https://dns.alidns.com/dns-query
+  - https://dns.pub/dns-query
+  - https://8.8.8.8/dns-query
+  - https://1.1.1.1/dns-query
 ```
 
 如果有自己特定的规则, 例如特定 ip, 特定网站需要走代理节点. 可以添加自定义规则:
@@ -547,6 +700,29 @@ parsers:
 
 ## 疑难杂症
 
+### 配合 gost 内网转发
+
+```yaml
+- name: 名称-socks5
+  type: socks5
+  server: ip
+  port: 端口
+  username: 用户名
+  password: 密码
+- name: 名称-http
+  type: http
+  server: ip
+  port: 端口
+  username: 用户名
+  password: 密码
+```
+
+匹配规则
+
+```yaml
+- IP-CIDR,172.16.0.1/16,qskj,no-resolve
+```
+
 ### 企业微信不兼容
 
 - 主动配置企业微信使用 socket 代理 `127.0.0.1:7890`
@@ -574,6 +750,8 @@ parsers:
 
 ### 代理工具
 
+- [🐬海豚测速](https://www.haitunt.org/)
+- [KaringX/clashmi: Clash Mihomo for iOS/Android](https://github.com/KaringX/clashmi)
 - [hysteria内核](https://github.com/apernet/hysteria)
 - [Xray-core是v2ray-core的超集](https://github.com/XTLS/Xray-core) 内核
 - [sing-box](https://github.com/SagerNet/sing-box) 内核
@@ -602,15 +780,52 @@ parsers:
         - https://www.v2ex.com/t/989650
         - https://www.v2ex.com/t/1121952
 - 服务商
+    - 策略
+        - 主机场为大厂, 稳定/性能有保障
+        - 备用选相对小厂, 不和主机厂相同线路!  不限时间按量购买, 或者 1 元机场 , 或者 jms 这种企业级支持
+            - jms 有多重线路
+            - 自建通常就是用 CN2 线路的独立 VPS
+        - 需要考虑的特点
+            - 设备在线数限制
+            - 专线>公网中转>直连
+            - 支持 `ipv6`
+            - 不限时流量计费 [2025年按流量付费的机场推荐 | 适合作备用机场 - Kerry的学习笔记](https://kerrynotes.com/best-vpn-pay-by-traffic/)
+            - emby 等流媒体共享
+            - 流量结转
     - 不限制客户端数量
-        - [佩奇小站 - AmyTelecom](https://www.amysecure.com/clientarea.php?action=productdetails&id=14674)
-        - [狗狗加速](https://xn--yfrp36ea9901a.com/) clash-verge-dev 的赞助商
-    - 限制客户端数量
-        - [魅影小站 - Ark](https://ark.to/user)
-    - 其他
-        - 唯云四杰好像是有口碑的
+        - [佩奇小站 - AmyTelecom](https://www.amysecure.com/clientarea.php?action=productdetails&id=14674) 被攻击
+        - [狗狗加速](https://xn--yfrp36ea9901a.com/) clash-verge-dev 的赞助商, 支持 appleid 登录
+        - [大哥云](https://aff01.dgy02.com/#/login)
+        - [FlowerCloud - 花云](https://huacloud.dev/) , [花云帮助中心](https://help.huacloud.dev/) , 有 0.2 倍率, 大于 imm, 差于 amy
+        - [YToo - 国际加速个人版](https://stentvessel.shop/pricing/individual)
+        - [龙猫云机场-最具性价比IPLC专线机场](https://lmva-duyb01.cc/login) 被攻击
+        - [AIFUN](https://afun.la/) 被攻击
+        - [一云梯-最具性价比IPLC专线机场](https://1ytcom01.1yunti.net/login)
+        - [CTC](https://www.jinglongyu.com/#/login) 还有 ctc 02 被攻击
+        - [青云梯机场-最具性价比IPLC专线机场](https://qytcc01a.qingyunti.pro/login)
+        - [WestData - 西部数据 - 西数](https://wd-cloud.net/)
+        - [FlyingBird 飞鸟](https://fbva-dur01.pro/auth/register) usdt 不稳?
+        - [ssr](https://ace-taffy.com/auth/register) 被攻击
+        - [闪狐云-BGP入口+IPLC专线出口，稳定，延迟低](https://w06.ffwebb01.cc/login)
+        - [DlerCloud - 树洞](https://dlercloud.com/datacenter), 支持按量计费，似乎没有被 ddos 波及，口碑好. 墙洞，奶昔 affman 前女友频道管理员 - 雪王
+        - [LinkCube](https://www.linkcube.org/cart.php)
+        - [CYLINK](https://2cy.io/auth/register) 和 [DOGESS(原n3ro, 易主多次)](https://dddoge.xyz/auth/login) 应该是一家
+        - [魔戒 按量计费](https://mojie.ws/#/register) , 分站[八戒](https://bajie.pw/#/register) 被攻击
+        - [泰山](https://taishan.pro) 有按量
+    - 限制客户端数量/同时在线数
+        - [ByWave ](https://t.me/s/bywavego) 10 个在线
+        - [阿拉丁](https://tutorial.aladdinnet.cc/) 15 个 ip/30 元/月 emby/等账号
+        - [ark-魅影小站](https://ark.to/user)
+        - [库洛米 Kuromis](https://www.kuromis.com/)
+        - [imm](https://immtele.com/cart.php)
+        - 魅影极速,少数派,飞机云,疾风云,CreamData,泡芙云,蓝帆云,速云梯,奶瓶,尔湾云,优信云, [BoostNet](https://boostnet2.com/#/register?code=Pj4Wrfai)
+        - [tag 机场](https://tagxx.vip) 限制 10 个 , 有 emby , 家宽, 维云, 有被攻击
+        - [mesl](https://cdn9.meslcloud.com/) 6 个, 有新疆节点, 有被攻击
+    - 信息源参考
         - [一个机场收录站点](https://dh.duangks.com/)
-        - justmysocket
+        - [机场跑路追踪](https://github.com/limbopro/Paolujichang/issues)
+        - [机场推荐（2025年7月16日更新） - 毒奶 - 欢迎使用代理访问本站。](https://limbopro.com/865.html)
+        - [2025机场推荐与机场评测SSR/V2ray/Trojan订阅 - 机场推荐与机场评测](https://jichangtuijian.com/ssr-v2ray%E4%B8%93%E7%BA%BF%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90.html)
         - [GitHub - aiboboxx/clashfree: clash节点、免费clash节点、免费节点、免费梯子、clash科学上网、clash翻墙、clash订阅链接、clash for Windows、clash教程、免费公益节点、最新clash免费节点订阅地址、clash免费节点每日更新](https://github.com/aiboboxx/clashfree)
     - 一元机场
         - [http://两元店.com/](http://xn--5hqx9equq.com/)  
@@ -624,10 +839,7 @@ parsers:
         - [http://翻墙机场.net/](http://xn--mest5a943ag8x.net/)
 - [Clash分流策略 | 配置文件 | 订阅防覆盖 | 硬核教程](https://a-nomad.com/clash)
 - [Clash规则大全](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash)
-- [GFW是如何工作的](https://gfw.report/publications/usenixsecurity23/zh/)
+- GFW
+    - [GFW是如何工作的](https://gfw.report/publications/usenixsecurity23/zh/)
+    - [墙居然有连接数配额 - V2EX](https://www.v2ex.com/t/1144752)
  
-
-### 代理站点
-
-- [[笔记/docker镜像源|docker镜像源]]
-- [github 代理](https://mirror.ghproxy.com)

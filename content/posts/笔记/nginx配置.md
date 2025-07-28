@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2025-04-18
+lastmod: 2025-06-20
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -518,11 +518,9 @@ server {
 ```nginx
 server {
     http2 on;
-    listen 443 ssl;
+    listen 443 default_server ssl;
     server_name 1.kentxxq.com;
     include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
-
-    client_max_body_size 128M;
 
     location / {
         default_type text/html;
@@ -594,7 +592,7 @@ connections_waiting $connections_waiting $timestamp';
 }
 ```
 
-### 黑/白名单
+### 黑/白名单 (403)
 
 `/usr/local/nginx/conf/options/whitelist.conf`
 
@@ -611,7 +609,7 @@ deny all;
 
 > 可以包含在 	http, server, location, limit_except 中。limit_except 是用来在 location 内部限制请求 method
 
-### IP 限速
+### IP 限速 (503)
 
 ```nginx
 http {
@@ -629,7 +627,7 @@ http {
         1 "";
     }
     # 应用限速列表,分配50m内存,每秒10次
-    # 10r/m分钟 10r/h小时 10r/d天 10r/w周 10r/y年
+    # 10r/m分钟 只有s秒和m分钟,没有其他单位
     limit_req_zone $limit zone=iplimit:50m rate=10r/s;
 }
 
@@ -873,7 +871,6 @@ server {
     http2 on;
     listen 443 ssl;
     server_name kentxxq.com;
-    client_max_body_size 2048M;
     include /usr/local/nginx/conf/options/ssl_kentxxq.conf;
     access_log /usr/local/nginx/conf/hosts/logs/kentxxq.com.log k-json;
     # 302临时跳转

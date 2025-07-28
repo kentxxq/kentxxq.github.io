@@ -4,7 +4,7 @@ tags:
   - blog
   - bitwarden
 date: 2023-07-31
-lastmod: 2024-05-06
+lastmod: 2025-07-28
 categories:
   - blog
 description: 
@@ -30,7 +30,7 @@ description:
 | ------------------------- | ---------------- |
 | SIGNUPS_ALLOWED=false  | 禁止注册         |
 | WEBSOCKET_ENABLED=true | 启动 websocket   |
-| ADMIN_TOKEN=123444     | 启动 amdmin 界面 |
+| ADMIN_TOKEN=你的 admin 密码     | 启动 admin 界面 |
 
 初次启动进行初始化, 随后关闭 `SIGNUPS_ALLOWED` 和 `ADMIN_TOKEN`.
 

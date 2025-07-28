@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2025-02-10
+lastmod: 2025-05-23
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -17,6 +17,8 @@ description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操�
 ## 安装/卸载 docker
 
 [官方文档Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/) 速度慢? 可以试试 [清华源](https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/), [阿里源](https://developer.aliyun.com/mirror/docker-ce?spm=a2c6h.13651102.0.0.74f31b11uNneF2) 和 [华为源](https://mirrors.huaweicloud.com/mirrorDetail/5ea14d84b58d16ef329c5c13)
+
+放到脚本执行
 
 ```shell
 # 阿里源
@@ -39,7 +41,11 @@ echo \
 # Step 4: 安装Docker
 sudo apt-get update -y
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+```
 
+外部命令
+
+```shell
 vim /etc/docker/daemon.json
 systemctl daemon-reload
 systemctl enable docker --now

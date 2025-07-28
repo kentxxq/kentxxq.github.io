@@ -4,7 +4,7 @@ tags:
   - blog
   - dns
 date: 2023-07-01
-lastmod: 2024-07-26
+lastmod: 2025-07-07
 categories:
   - blog
 description: "经常要去网上查, 对比一些 dns 的信息. 记录一下, 以后直接用就行了."
@@ -55,6 +55,10 @@ https://doh.pub/dns-query
 2606:4700:4700::1001
 https://cloudflare-dns.com/dns-query
 
+## 字节跳动
+180.184.1.1
+180.184.2.2
+
 ## 欧盟的dns
 193.110.81.0
 185.253.5.0
@@ -80,3 +84,10 @@ https://dns.quad9.net/dns-query
 TLS
 tls://dns.quad9.net
 ```
+
+## 自建
+
+- [云解析DNS控制台](https://dnsnext.console.aliyun.com/selfHostedDNS)
+- [NLnetLabs/unbound: Unbound is a validating, recursive, and caching DNS resolver.](https://github.com/NLnetLabs/unbound)
+- https://github.com/AdguardTeam/dnsproxy
+- [DNSCrypt/dnscrypt-proxy: dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols.](https://github.com/DNSCrypt/dnscrypt-proxy)

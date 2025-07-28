@@ -1,10 +1,10 @@
 ---
-title: tailwindcss教程
+title: tailwindcss手册
 tags:
   - blog
   - 前端
 date: 2024-07-30
-lastmod: 2025-04-23
+lastmod: 2025-05-28
 categories:
   - blog
 description: 

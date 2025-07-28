@@ -4,7 +4,7 @@ tags:
   - blog
   - elastic
 date: 2024-04-22
-lastmod: 2024-04-22
+lastmod: 2025-07-02
 categories:
   - blog
 description: 
@@ -239,18 +239,101 @@ GET /_cluster/allocation/explain
 
 ## 工具
 
+### infini-console
+
 [infini-console](https://infinilabs.cn/en/docs/latest/console/) 可以帮助我们管理多个 es 集群, 查询修改等操作.
 
-```yml
-version: "3.5"
+现在最新是 `1.29.7` 版本, **初始化的时候会创建下划线开头的索引, 导致创建失败**, 所以下面会写一个能用的初始化步骤.
 
-services:
-  infini-console:
-    image: infinilabs/console:latest
-    ports:
-      - 9000:9000
-    container_name: "infini-console"
+- 创建目录和网络
+
+```shell
+# 1. 创建项目根目录
+mkdir -p ~/infini_compose_lab
+cd ~/infini_compose_lab
+
+# 2. 为 Console 和 Easysearch 创建持久化子目录
+# 这些目录将用于存储配置、数据和日志
+mkdir -p console/config console/data console/logs
+mkdir -p easysearch/config easysearch/data easysearch/logs
 ```
+
+- 提取初始化文件
+
+```shell
+# 确保在 ~/infini_compose_lab 目录下
+
+# console
+docker pull infinilabs/console:1.29.6
+docker run --rm \
+-v $PWD/console/config:/temp_host_config \
+infinilabs/console:1.29.6 \
+sh -c "cp -a /config/. /temp_host_config/ && chmod -R ugo+rw /temp_host_config/"
+
+# easysearch
+chmod -R 777 easysearch
+# 获取easycache的内用户的id号
+docker run --rm infinilabs/easysearch:1.13.0 id
+# 输出 uid=602 gid=602 groups=602
+chown -R 602:602 ./easysearch
+# 确保在 ~/infini_compose_lab 目录下
+docker pull infinilabs/easysearch:1.13.0
+docker run --rm \
+-e EASYSEARCH_INITIAL_ADMIN_PASSWORD="INFINILabs01" \
+-v $PWD/easysearch/config:/temp_host_config \
+infinilabs/easysearch:1.13.0 \
+sh -c "cp -a /app/easysearch/config/. /temp_host_config/ && chmod -R ugo+rw /temp_host_config/"
+```
+
+- 创建 `docker-compose.yml` 文件
+
+```yml
+services:
+  easysearch: 
+    image: infinilabs/easysearch:1.13.0
+    container_name: infini-easysearch
+    environment:
+      - cluster.name=infini_compose_cluster
+      - node.name=node-01
+      - cluster.initial_master_nodes=node-01
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - EASYSEARCH_INITIAL_ADMIN_PASSWORD=INFINILabs01
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./easysearch/config:/app/easysearch/config
+      - ./easysearch/data:/app/easysearch/data
+      - ./easysearch/logs:/app/easysearch/logs
+    ulimits:
+      memlock: {soft: -1, hard: -1}
+      nofile: {soft: 65536, hard: 65536}
+    networks:
+      - infini_app_net
+
+  console:
+    image: infinilabs/console:1.29.6
+    container_name: infini-console
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./console/config:/config
+      - ./console/data:/data
+      - ./console/logs:/log
+    networks:
+      - infini_app_net
+
+networks:
+  infini_app_net:
+    driver: bridge
+```
+
+- 修改 `sysctl` 内核参数.  在 `/etc/sysctl.conf` 配置 `vm.max_map_count=262144`. `sysctl -p` 生效
+
+初始化
+
+1. 启动后, 访问 `127.0.0.1:9000` 端口.  
+2. 初始化操作: 输入 `easysearch:9200` , 开启 `tls` 选项, 身份验证 `admin/INFINILabs01`
 
 ## 资料
 
