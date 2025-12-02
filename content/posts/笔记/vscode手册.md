@@ -12,7 +12,7 @@ description:
 
 ## 简介
 
-这里记录 [[笔记/point/vscode|vscode]] 的配置和技巧.
+这里记录 [[笔记/point/vscode|vscode]] 的配置和技巧
 
 ## 技巧
 
