@@ -6,7 +6,7 @@ tags:
   - 监控
   - devops
 date: 2023-07-11
-lastmod: 2025-02-24
+lastmod: 2025-10-30
 categories:
   - blog
 description: "[[笔记/point/grafana|grafana]] 的使用教程"
@@ -306,6 +306,32 @@ topk(50,
     max by (uri)
         (http_request_seconds{application="order-service", quantile="0.9"})
 )
+```
+
+### k8s 容器语句
+
+#### pod 读写排序
+
+读排序
+
+```shell
+topk(10,
+  sum(rate(container_fs_reads_bytes_total[5m])) by (namespace, pod) / 1024 / 1024
+)
+```
+
+写排序
+
+```shell
+topk(10,
+  sum(rate(container_fs_writes_bytes_total[5m])) by (namespace, pod) / 1024 / 1024
+)
+```
+
+#### cpu 百分比排序
+
+```shell
+sum(rate(container_cpu_usage_seconds_total{container!="POD"}[5m])) by (namespace, pod) * 100
 ```
 
 ## 展示

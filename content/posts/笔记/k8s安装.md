@@ -1,10 +1,10 @@
 ---
-title: 安装k8s
+title: k8s安装
 tags:
   - blog
   - k8s
 date: 2023-08-16
-lastmod: 2023-12-17
+lastmod: 2025-11-28
 categories:
   - blog
 description: "安装 [[笔记/point/k8s|k8s]] 的记录."
@@ -12,7 +12,10 @@ description: "安装 [[笔记/point/k8s|k8s]] 的记录."
 
 ## 简介
 
-安装 [[笔记/point/k8s|k8s]] 的记录 -20230606.
+安装 [[笔记/point/k8s|k8s]] 的记录
+
+- 20230606 第一版 1.28
+- 20251126 更新到 1.34
 
 ## 安装方式对比
 
@@ -30,6 +33,25 @@ description: "安装 [[笔记/point/k8s|k8s]] 的记录."
 - pod 方式
     - kubeadm
     - minikube
+
+## 安装路线
+
+目标
+
+- 支持扩展成高可用
+- 初期保持最小可用
+
+机器
+
+- master 最低 `4c16g/500g`，因为 `etcd` 等组件会在 master，内存大一点防止初期出现问题
+- node 节点 `8c64g/500g`
+
+方式
+
+- 域名解析到 nginx，nginx 作为 etcd 和 api-server 的负载均衡，才能支持后期拓展
+	- 负载均衡器后端的 upstream 服务器组中的节点上的请求，不能再经由此负载均衡器调度到后端 upstream 服务器自身（如阿里云就有此限定）
+	- metalLB 主要是本地，云厂商不允许这么做。metalLB 是自己配置 ip 地址池，然后分配 vip 给 service
+- 采用 pod 方式部署。加入 master 集群的时候自动完成 etcd 集群
 
 ## kubeadm 安装
 
@@ -54,13 +76,15 @@ apt install selinux-utils policycoreutils ntp ntpdate htop nethogs nload tree lr
 vim /etc/selinux/config
 SELINUX=disabled
 
-# 时间同步
+# 时间同步 https://help.aliyun.com/zh/ecs/user-guide/alibaba-cloud-ntp-server
 crontab -e
-0 */1 * * * /usr/sbin/ntpdate time1.aliyun.com
+0 */1 * * * /usr/sbin/ntpdate ntp.aliyun.com
 
 # swap
 vim /etc/fstab
 # 注释掉swap
+# 在命令行再手动关闭一次
+swapoff -a
 
 # 内核
 vim /etc/sysctl.d/k8s.conf
@@ -95,6 +119,9 @@ ip_vs_rr
 ip_vs_wrr
 ip_vs_sh
 nf_conntrack
+
+# 重启机器，查看是否生效
+lsmod | grep br_netfilter
 ```
 
 ### 容器相关
@@ -106,7 +133,7 @@ mount -t cifs -o username="Everyone" //192.168.2.100/vm_share /mnt/win
 cp /mnt/win/* .
 
 # cri-containerd-cni版本会有问题  https://github.com/containerd/containerd/releases
-tar Cxzvf /usr/local containerd-1.6.26-linux-amd64.tar.gz
+tar Cxzvf /usr/local containerd-2.2.0-linux-amd64.tar.gz
 
 # 试试systemctl daemon-reload
 # 如果不行就找到它。放到/etc/systemd/system/下面重新daemon-reload
@@ -143,8 +170,8 @@ mkdir -p /etc/containerd
 containerd config default > /etc/containerd/config.toml
 vim /etc/containerd/config.toml
 # https://github.com/containerd/containerd/issues/4203#issuecomment-651532765
-systemdGroup = true
-sandbox_image = "registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.9"
+SystemdGroup = true
+sandbox = 'registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.10.1'
 
 systemctl enable containerd --now
 
@@ -152,9 +179,9 @@ systemctl enable containerd --now
 # 开始安装runc
 # 安装c编译器和gperf
 # apt install build-essential gperf -y
-# 下载https://github.com/opencontainers/runc/releases libseccomp-2.5.4.tar.gz和runc.amd64
-tar xf libseccomp-2.5.4.tar.gz
-cd libseccomp-2.5.4/
+# 下载https://github.com/opencontainers/runc/releases libseccomp-2.5.6.tar.gz和runc.amd64
+tar xf libseccomp-2.5.6.tar.gz
+cd libseccomp-2.5.6/
 ./configure
 make && make install
 # 验证
@@ -166,23 +193,23 @@ install -m 755 runc.amd64 /usr/local/sbin/runc
 
 # 下载https://github.com/containernetworking/plugins/releases
 mkdir -p /opt/cni/bin
-tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.4.0.tgz
+tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.8.0.tgz
 ```
 
 ### 安装 kubeadm
 
 ```shell
-# 阿里源
-curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg -o k8s.gpg
-gpg --dearmor -o /etc/apt/keyrings/k8s.gpg k8s.gpg
+# 阿里源,版本 v1.34
+curl -fsSL https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.34/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
-cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
-deb [signed-by=/etc/apt/keyrings/k8s.gpg] https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
-EOF
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.34/deb/ /" | tee /etc/apt/sources.list.d/kubernetes.list
 
 apt update -y
 apt install -y kubelet kubeadm kubectl
+# 查看当前支持的具体版本号
+kubeadm version -o short
 
+# 这里会发现启动有问题，没关系
 systemctl enable kubelet --now
 ```
 
@@ -228,22 +255,16 @@ systemctl enable kubelet --now
 > -  `kubeadm config images list` 查看需要用到的镜像
 > -  `kubeadm config images pull` 可以实现拉取镜像
 
-也可以使用参数 `--image-repository` 指定国内源. 初始化命令如下:
 
-```shell
-# 初始化
-kubeadm init --image-repository='registry.cn-hangzhou.aliyuncs.com/google_containers' \
---kubernetes-version=v1.28.2 \
---service-cidr=10.96.0.0/12 \
---pod-network-cidr=10.244.0.0/16 \
---apiserver-advertise-address=192.168.2.180 \
---cri-socket unix:///var/run/containerd/containerd.sock
-```
 
-**可以跳过**, 或使用参数 `--config config.yml` 文件初始化 (kubeadm config print init-defaults)
+**官方推荐用配置文件来设置 ipvs**
+
+1. 文件初始化 `kubeadm config print init-defaults > config.yml`
+2. 修改配置文件
+3. `kubeadm init --config config.yml`
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3 # 不同版本的api版本不一样
+apiVersion: kubeadm.k8s.io/v1beta4 # 不同版本的api版本不一样
 # 节点加入时，认证token授权相关的基本信息。一般在内网比较安全，无需改动
 bootstrapTokens:
 - groups:
@@ -256,7 +277,7 @@ bootstrapTokens:
 kind: InitConfiguration
 # 第一个master节点配置的入口
 localAPIEndpoint:
-  advertiseAddress: 192.168.31.221 # 第一个master的ip
+  advertiseAddress: 192.168.6.181 # 第一个master的ip
   bindPort: 6443
 # node节点注册到master集群的通信方式
 nodeRegistration:
@@ -274,8 +295,8 @@ apiServer:
 apiVersion: kubeadm.k8s.io/v1beta3
 certificatesDir: /etc/kubernetes/pki
 clusterName: kubernetes
-# 默认没有这个，多个master的时候，这里填keepalived的vip地址
-# controlPlaneEndpoint: vip:6443
+# 默认没有controlPlaneEndpoint，多个master的时候，这里填keepalived的vip地址
+controlPlaneEndpoint: 192.168.6.180:6443
 controllerManager: {}
 dns: {}
 # kubernetes的数据管理方式
@@ -286,7 +307,7 @@ etcd:
 imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
 kind: ClusterConfiguration
 # kubernetes版本的定制
-kubernetesVersion: 1.27.0
+kubernetesVersion: 1.34.0
 # kubernetes的网络基本信息
 networking:
   dnsDomain: cluster.local
@@ -299,43 +320,89 @@ kind: KubeProxyConfiguration
 mode: ipvs
 ```
 
-### 网络组件
+**建议用上面的配置文件初始化**。下面的命令行初始化当做参考:
 
 ```shell
-# calico网络插件网段
-# 这里应该和kubeadm init --pod-network-cidr=192.168.0.0/16 一致!!!
-10.244.0.0/16
-# https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
+# 初始化
+kubeadm init --image-repository='registry.cn-hangzhou.aliyuncs.com/google_containers' \
+--kubernetes-version=v1.34.2 \
+--service-cidr=10.96.0.0/12 \
+--pod-network-cidr=10.244.0.0/16 \
+--apiserver-advertise-address=192.168.2.180 \
+--cri-socket unix:///var/run/containerd/containerd.sock
 ```
 
-kubectl 下面这个 yml
+设置 config
 
-```yaml
-# This section includes base Calico installation configuration.
-# For more information, see: https://projectcalico.docs.tigera.io/master/reference/installation/api#operator.tigera.io/v1.Installation
+```shell
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+
+# 这里 NotReady 是正常的
+kubectl get nodes
+NAME      STATUS     ROLES           AGE     VERSION
+master1   NotReady   control-plane   2m31s   v1.34.2
+```
+
+### 网络组件 calico
+
+步骤都来自于 [calico 官方文档](https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart)
+
+ 安装 operator
+
+```shell
+# 可以下载下来，修改里面的 image   quay.dockerproxy.net
+# https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
+kubectl create -f https://gh-proxy.org/https://raw.githubusercontent.com/projectcalico/calico/v3.31.2/manifests/tigera-operator.yaml
+```
+
+安装 custom resources。下载 [yaml](https://raw.githubusercontent.com/projectcalico/calico/v3.31.2/manifests/custom-resources.yaml) 只需要修改 cidr 为 `10.244.0.0/16`
+
+```shell
 apiVersion: operator.tigera.io/v1
 kind: Installation
 metadata:
   name: default
 spec:
-  # Configures Calico networking.
   calicoNetwork:
-    # Note: The ipPools section cannot be modified post-install.
     ipPools:
-    - blockSize: 26
-      cidr: 10.244.0.0/16
-      encapsulation: VXLANCrossSubnet
-      natOutgoing: Enabled
-      nodeSelector: all()
+      - name: default-ipv4-ippool
+        blockSize: 26
+        # calico网络插件网段
+        # 这里应该和kubeadm init --pod-network-cidr=10.244.0.0/16 一致!!!
+        # 修改 cidr 为 10.244.0.0/16
+        cidr: 10.244.0.0/16
+        encapsulation: VXLANCrossSubnet
+        natOutgoing: Enabled
+        nodeSelector: all()
+
 ---
-# This section configures the Calico API server.
-# For more information, see: https://projectcalico.docs.tigera.io/master/reference/installation/api#operator.tigera.io/v1.APIServer
 apiVersion: operator.tigera.io/v1
 kind: APIServer
 metadata:
   name: default
 spec: {}
+
+---
+apiVersion: operator.tigera.io/v1
+kind: Goldmane
+metadata:
+  name: default
+
+---
+apiVersion: operator.tigera.io/v1
+kind: Whisker
+metadata:
+  name: default
+```
+
+验证安装情况
+
+```shell
+# available/progressiing 都要是 true
+# 通常是镜像问题，弄到私有镜像仓库即可
+kubectl get tigerastatus
 ```
 
 启用 ipvs:
@@ -369,9 +436,11 @@ kubectl get all -A -o wide |grep calico
 
 ### Ingress
 
-```shell
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.1/deploy/static/provider/cloud/deploy.yaml
-```
+[参考官方文档](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)
+
+1. 下载 yaml https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.14.0/deploy/static/provider/cloud/deploy.yaml
+2. 修改里面的 image 地址
+3. apply 部署。默认单节点 master 有污点，所以不会正常启动
 
 ## kubeadm 管理操作
 
@@ -460,7 +529,52 @@ kubeadm token create --print-join-command
 
 > 升级完成 kubeadm 后，可以 `kubeadm config images pull` 来提前拉取镜像
 
-## kubekey 安装
+## 可选组件
+
+先安装 [[helm手册#安装]]
+
+### csi-driver-nfs
+
+[[linux命令与配置#nfs|先搭建一个 nfs]], 然后 [csi-driver-nfs文档](https://github.com/kubernetes-csi/csi-driver-nfs/blob/master/charts/README.md) 操作
+
+1. 添加 repo `helm repo add csi-driver-nfs https://gh-proxy.com/https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts`
+2. 查看支持的版本 `helm search repo -l csi-driver-nfs`
+3. 生成 values 文件 `helm show values csi-driver-nfs/csi-driver-nfs --namespace kube-system --version 4.12.1 > nfs-values.yaml`
+4. 修改 values 镜像
+5. 部署 `helm install csi-driver-nfs csi-driver-nfs/csi-driver-nfs --namespace kube-system --version 4.12.1 -f nfs-values.yaml`
+6. 检查 DaemonSet `csi-nfs-node` 和 Deployment `csi-nfs-controller` 是否启动成功
+
+配置使用
+
+1. 查看 `provisioner` 的名称 `kubectl get csidrivers`
+2. 配置 StorageClass
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs184
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: 192.168.6.184
+  share: /data/nfs  # 必须和nfs的exports路径保持一致
+  reclaimPolicy: Delete  # pvc 删除后哦，pv 自动删除
+  volumeBindingMode: Immediate  # 创建 pvc 后立即创建 pv
+```
+
+### cert-manager
+
+### dashboard
+
+1. 关掉内置的 ingress 和 charts
+2. 安装部署
+3. 配置 ingress 转发
+
+## kubekey 安装（不再使用）
+
+- 对于学习而言。要么用 kubeadm 学习全套，要么 [[k3d教程|k3d]]，[[minikube教程|minikube]] 极简
+- 社区版需要提交信息申请授权，授权还有时限。哪天收费了你咋弄？
+- `less is more` 做减法，做选型，少折腾各种路线
 
 ### 基础准备
 
@@ -577,6 +691,7 @@ spec:
 
 ## 参考链接
 
+- 去操作集群吧 [[k8s常用命令和配置]]
 - [kubeadm-YouTube安装k8s视频](https://www.youtube.com/watch?v=7k9Rdlx30OY&t=808s)，[kubeadm-视频中的文档地址](https://www.itsgeekhead.com/tuts/kubernetes-126-ubuntu-2204.txt)
 - [kubekey-多节点安装 (kubesphere.io)](https://www.kubesphere.io/zh/docs/v3.3/installing-on-linux/introduction/multioverview/)
 - [ingress官方文档地址](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)

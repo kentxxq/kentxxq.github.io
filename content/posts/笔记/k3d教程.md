@@ -117,7 +117,7 @@ k3d cluster delete
 
 ## 相关参考
 
-![[笔记/安装k8s#Ingress|安装Ingress]]
+![[k8s安装#Ingress|安装Ingress]]
 
 `k3d` 相关链接:
 

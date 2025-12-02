@@ -4,7 +4,7 @@ tags:
   - blog
   - elastic
 date: 2024-04-22
-lastmod: 2025-07-02
+lastmod: 2025-11-28
 categories:
   - blog
 description: 
@@ -36,6 +36,76 @@ sysctl -p
 # 启动并验证
 systemctl enable elasticsearch --now
 curl -X GET "localhost:9200/_cat/health?v"
+```
+
+## k8s 单点
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: es7
+  namespace: default
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 9200
+      targetPort: 9200
+  selector:
+    app: es7
+  type: NodePort
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: es7
+  namespace: elasticsearch
+spec:
+  serviceName: "es7"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: es7
+  template:
+    metadata:
+      labels:
+        app: es7
+    spec:
+      containers:
+        - name: elasticsearch
+          image: docker.elastic.co/elasticsearch/elasticsearch:7.17.29
+          ports:
+            - containerPort: 9200
+              name: http
+            - containerPort: 9300
+              name: transport
+          env:
+            - name: discovery.type
+              value: single-node
+            - name: ES_JAVA_OPTS
+              value: "-Xms512m -Xmx512m"
+            # 开启密码访问
+            - name: ELASTIC_PASSWORD
+              value: fake_password
+            - name: xpack.security.enabled
+              value: "true"
+            # 9300 是节点之间通信用的，单节点可以关闭
+            - name: xpack.security.transport.ssl.enabled
+              value: "false"
+          volumeMounts:
+            - name: es-data
+              mountPath: /usr/share/elasticsearch/data
+  volumeClaimTemplates:
+    - metadata:
+        name: es-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: nfs184
+        resources:
+          requests:
+            storage: 10Gi
 ```
 
 ## 集群部署

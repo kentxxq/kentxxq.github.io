@@ -3,7 +3,7 @@ title: RSS使用
 tags:
   - blog
 date: 2023-09-11
-lastmod: 2024-05-05
+lastmod: 2025-11-05
 categories:
   - blog
 description: 
@@ -19,15 +19,18 @@ description:
 
 ## RSS 客户端
 
+- 选型/思考
+	- 纯客户端，不依赖任何其他服务器。icloud 同步，但会有限制 [NetNewsWire Help: iCloud Syncing Limitations and Solutions](https://netnewswire.com/help/iCloud.html)
+	- 有服务端。可以通过订阅收费，可以定时推送特定的消息规则（每周推送股票，比特币信息）
 - 移动端
     - [yang991178/fluent-reader-lite](https://github.com/yang991178/fluent-reader-lite) 所有平台
     - 安卓客户端 [Releases · Ashinch/ReadYou (github.com)](https://github.com/Ashinch/ReadYou)
     - 苹果 [Ranchero-Software/NetNewsWire: RSS reader for macOS and iOS. (github.com)](https://github.com/Ranchero-Software/NetNewsWire)
 - [万物皆可RSSHub](https://docs.rsshub.app/routes/bbs#v2ex-zui-re-%2F-zui-xin-zhu-ti)
 - 桌面端
-    - 跨平台 [raven-reader](https://github.com/hello-efficiency-inc/raven-reader)
-    - 跨平台 [fluent-reader]( https://github.com/yang991178/fluent-reader )
-    - 苹果 [NetNewsWire](https://github.com/Ranchero-Software/NetNewsWire)
+    - 已归档 - [raven-reader](https://github.com/hello-efficiency-inc/raven-reader)
+    - 需要自建同步 [fluent-reader]( https://github.com/yang991178/fluent-reader )
+    - **推荐**苹果 [NetNewsWire](https://github.com/Ranchero-Software/NetNewsWire)
 - 自部署 web 端
     - [commafeed](https://github.com/Athou/commafeed)
     - [FreshRSS](https://github.com/FreshRSS/FreshRSS), php 写的
@@ -37,6 +40,7 @@ description:
     - [Tiny Tiny RSS (tt-rss.org)](https://tt-rss.org/), php 写的
     - Grafana 也可以订阅 rss 并展示 [RSS/Atom plugin for Grafana | Grafana Labs](https://grafana.com/grafana/plugins/volkovlabs-rss-datasource/?tab=installation)
 - 主流平台
+	- Thunderbird 和邮件集成到一起？不够小而美，功能和 ui 肯定不如专门的 rss 阅读器
     - Feedly, 老牌生态好. 100 feed, 3 个文件夹. 内容列表嵌入广告
     - [Inoreader – Build your own newsfeed](https://www.inoreader.com/zh-hans/)
         - Pc 是站点, 有移动端.
@@ -45,9 +49,10 @@ description:
         - 移动端没有底部导航栏, 使用不习惯 (不方便)
     - [NewsBlur](https://newsblur.com/) 样式比较老, 64 个站点订阅. 不订阅一次只能看 3 篇文章, 可以专注, 但不实用....
     - [reeder苹果收费](https://reederapp.com/) 苹果平台最好的
-    - [Feeder](https://feeder.co/), 200 免费订阅, 无广告
+    - **推荐**[Feeder](https://feeder.co/), 200 免费订阅, **无广告**
     - [QiReader](https://www.qireader.com/) 30 个订阅有点少
     - [FeedMe (RSS Reader | Podcast) - Apps on Google Play](https://play.google.com/store/apps/details?id=com.seazon.feedme&hl=en_US) 可以使用 feedly 账号.. 仅安卓
+    - **推荐** folo ，rsshub 契合
 - 可参考教程
     - [重新捡起RSS：RSSHub + FreshRSS 建立信息流 (l3zc.com)](https://l3zc.com/2023/07/rsshub-freshrss-information-flow/)
     - [用Miniflux自建轻便好用的RSS服务 (zoomyale.com)](http://zoomyale.com/2018/miniflux_rss/)
@@ -55,7 +60,7 @@ description:
 ## RSS 订阅源
 
 - 新闻
-    - ithome 
+    - ithome
     - [快科技(原驱动之家)--科技改变未来 (mydrivers.com)](https://rss.mydrivers.com/)
     - [奇客资讯网](https://www.solidot.org/)
     - 钛媒体 [tmtpost.com/rss](https://www.tmtpost.com/rss)

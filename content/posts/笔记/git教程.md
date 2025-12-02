@@ -4,7 +4,7 @@ tags:
   - git
   - blog
 date: 2023-06-21
-lastmod: 2025-07-07
+lastmod: 2025-11-28
 categories:
   - blog
 description: "这里用来记录一些我可能用到的 [[笔记/point/git|git]] 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证.."
@@ -132,7 +132,7 @@ git branch -m main
 git push -f origin main
 
 
-# 重置
+# 如果中途改变主意，可以重置掉上面的操作
 git reset --hard HEAD
 ```
 

@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-15
-lastmod: 2025-04-03
+lastmod: 2025-11-28
 categories:
   - blog
 description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
@@ -33,6 +33,37 @@ description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
 | persistentvolumes      | pv     | `v1`                   | false     | PersistentVolume      |
 
 > 如果你安装了 [[笔记/lstio|lstio]] 这样有自定义资源的组件，一样也会出现在这里
+
+### label
+
+```shell
+# 打 label
+kubectl label nodes master1 mylabel=example
+# 覆盖
+kubectl label nodes master1 mylabel=newvalue --overwrite
+# 删除 label
+kubectl label nodes master1 mylabel-
+
+# 查询label
+kubectl get nodes --show-labels
+```
+
+### 污点
+
+```shell
+# key=value 自定义污点
+# 不容忍时  
+# NoSchedule 不调度  
+# PreferNoSchedule 尽量不调度  
+# NoExecute 已在节点上的 Pod 也会被驱逐
+kubectl taint nodes master1 key=value:NoSchedule
+
+# 删除污点
+kubectl taint nodes master1 key:NoSchedule-
+
+# 查看污点
+kubectl describe node master1 | grep -i taint -A2
+```
 
 ### 查询信息
 
@@ -76,6 +107,14 @@ crictl rmi --prune
 
 ```shell
 kubectl delete pod pod名称 -n 命名空间 --force --grace-period=0
+```
+
+#### 清理自建 registry 镜像
+
+https://stackoverflow.com/a/55456150/8546363
+
+```shell
+docker exec local_registry bin/registry garbage-collect /etc/docker/registry/config.yml
 ```
 
 ### 创建用户和 token
@@ -150,14 +189,16 @@ source <(kubectl completion bash)
 source <(kubeadm completion bash)
 ```
 
-### 应用示例
+### 应用挂起
 
 有的时候程序总是自动退出, 无法查看到 stdout, 也无法进入容器. 这时候需要挂起程序不退出
 
 - `command: ["/bin/sh", "-c", "/app/myApp start; tail -f /dev/null"]`
 - `containers.image` 同级
 
-deployment
+### 应用示例
+
+#### deployment
 
 ```yml
 apiVersion: apps/v1
@@ -267,7 +308,7 @@ spec:
             timeoutSeconds: 2
 ```
 
-service
+#### service
 
 ```yml
 apiVersion: v1
@@ -283,7 +324,7 @@ spec:
       targetPort: 80
 ```
 
-ingress
+#### ingress
 
 ```yml
 apiVersion: networking.k8s.io/v1
@@ -304,7 +345,7 @@ spec:
                   number: 80
 ```
 
-configmap
+#### configmap
 
 ```yml
 apiVersion: v1
@@ -317,6 +358,36 @@ kind: ConfigMap
 metadata:
   name: nginx-configmap
   namespace: default
+```
+
+#### secret
+
+确认命名空间有没有设置默认拉取镜像的 secret
+
+`kubectl get serviceaccount default -n <namespace> -o yaml`
+
+创建拉取镜像的 secret
+
+```shell
+kubectl create secret docker-registry nexus-secret \
+  --docker-server=my-registry.example.com \
+  --docker-username=myuser \
+  --docker-password=mypassword \
+  --docker-email=myemail@example.com \
+  -n default \
+  --dry-run=client -o yaml > nexus-secret.yaml
+```
+
+编辑 `kubectl edit sa default` 绑定默认的 secret, 
+
+```shell
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: default
+imagePullSecrets:
+  - name: nexus-secret
 ```
 
 ### 自定义开发者权限

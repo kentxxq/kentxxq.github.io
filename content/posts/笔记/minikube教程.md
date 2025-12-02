@@ -53,7 +53,7 @@ minikube start --cpus='max' --memory max --force --listen-address=0.0.0.0 --apis
 
 #### 启用 ingress
 
-推荐使用 [[笔记/安装k8s#Ingress|yml安装Ingress]]
+推荐使用 [[k8s安装#Ingress|yml安装Ingress]]
 
 **如果网络不佳，不推荐使用 addons**
 

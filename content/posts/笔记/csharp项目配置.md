@@ -4,7 +4,7 @@ tags:
   - blog
   - csharp
 date: 2023-07-26
-lastmod: 2025-06-17
+lastmod: 2025-11-12
 categories:
   - blog
 description: "[[笔记/point/csharp|csharp]] 的项目相关配置, 帮助组织规范项目. 同时优化运行时的一些指标参数."
@@ -66,6 +66,34 @@ dotnet tool list -g | ForEach-Object {$index = 0} { $index++; if($index -gt 2) {
 [.NET 项目 SDK 概述 | Microsoft Learn](https://learn.microsoft.com/zh-cn/dotnet/core/project-sdk/overview)
 
 ### 配置项参考
+
+#### 统一版本号
+
+始终在项目的根目录使用 [global.json](https://learn.microsoft.com/en-us/dotnet/core/tools/global-json) 和 [Directory.Build.props](https://learn.microsoft.com/en-us/visualstudio/msbuild/customize-by-directory?view=vs-2022#directorybuildprops-and-directorybuildtargets) 。如果代码仓库不包含版本信息，那你推送代码以后 ci 不好做。
+
+`global.json`
+
+```json
+{  
+  "sdk": {  
+    "version": "10.0.100",  
+    "rollForward": "latestFeature",  
+    "allowPrerelease": false  
+  }  
+}
+```
+
+`Directory.Build.props`
+
+```xml
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+</Project>
+```
 
 #### 发布文件配置
 

@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2024-07-30
-lastmod: 2025-05-28
+lastmod: 2025-11-10
 categories:
   - blog
 description: 
@@ -16,10 +16,6 @@ description:
 
 **注意事项**
 - 使用 tailwind, 里面的 [preflight]( https://tailwindcss.com/docs/preflight#margins-are-removed ) 会移除掉一些默认的样式设置, 例如 `margin`, `h1~h6`, `border` 等等
-
-## vscode 插件
-
-- [windicss IntelliSense](https://marketplace.visualstudio.com/items?itemName=voorjaar.windicss-intellisense) - windicss 提示插件
 
 ## 常用类名
 
@@ -139,7 +135,10 @@ description:
 
 ### 动画
 
-- `hover:scale-110` 移动上去就会放大
+- hover
+	- `hover:scale-110` 移动上去就会放大
+	- `hover:-translate-y-1` 向上移动
+	- `hover:shadow-xl` 加深阴影
 - `transition` 添加默认的动画效果
     - `duration-100` 动画持续 100 ms
     - `delay-100` 延迟 100 ms 触发

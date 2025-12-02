@@ -3,7 +3,7 @@ title: etcd手册
 tags:
   - blog
 date: 2025-04-27
-lastmod: 2025-05-08
+lastmod: 2025-07-31
 categories:
   - blog
 description: 
@@ -90,6 +90,11 @@ TasksMax=infinity
 [Install]
 WantedBy=multi-user.target
 ```
+
+**校验**
+
+- `etcdctl member list`
+- `etcdctl get /apisix --prefix`
 
 ## 添加新节点
 

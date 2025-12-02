@@ -4,7 +4,7 @@ tags:
   - point
   - nacos
 date: 2023-08-16
-lastmod: 2025-03-17
+lastmod: 2025-11-28
 categories:
   - point
 ---
@@ -40,13 +40,89 @@ services:
       - NACOS_AUTH_ENABLE=true
       - NACOS_AUTH_IDENTITY_KEY=你的key
       - NACOS_AUTH_IDENTITY_VALUE=你的value
-      - NACOS_AUTH_TOKEN=你的秘钥SecretKey012345678901234567890123456789012345678901234567890123456789
+      - NACOS_AUTH_TOKEN=你的秘钥fake_password
     volumes:
       - ./data:/home/nacos/data
       - ./standalone-logs/:/home/nacos/logs
     ports:
+      - "8080:8080"
       - "8848:8848"
       - "9848:9848"
+```
+
+### k8s 单点
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nacos
+spec:
+  type: NodePort
+  selector:
+    app: nacos
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+    - name: rpc
+      port: 8848
+      targetPort: 8848
+    - name: cluster
+      port: 9848
+      targetPort: 9848
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nacos
+spec:
+  serviceName: "nacos"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nacos
+  template:
+    metadata:
+      labels:
+        app: nacos
+    spec:
+      containers:
+        - name: nacos
+          image: nacos/nacos-server:v2.5.2  
+          ports:
+            - containerPort: 8080
+              name: http
+            - containerPort: 8848
+              name: rpc
+            - containerPort: 9848
+              name: cluster
+          env:
+            - name: PREFER_HOST_MODE
+              value: "hostname"
+            - name: MODE
+              value: "standalone"
+            - name: NACOS_AUTH_ENABLE
+              value: "true"
+            - name: NACOS_AUTH_IDENTITY_KEY
+              value: "serverIdentity"
+            - name: NACOS_AUTH_IDENTITY_VALUE
+              value: "security"
+            - name: NACOS_AUTH_TOKEN
+              value: "fake_password"
+          volumeMounts:
+            - name: nacos-data
+              mountPath: /home/nacos/data
+  volumeClaimTemplates:
+    - metadata:
+        name: nacos-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: nfs184
+        resources:
+          requests:
+            storage: 10Gi
 ```
 
 ### 单点运行

@@ -4,7 +4,7 @@ tags:
   - blog
   - macos
 date: 2023-07-01
-lastmod: 2023-07-01
+lastmod: 2025-11-25
 categories:
   - blog
 description: "这里记录在使用 [[笔记/point/macos|macos]] 过程中遇到的问题."
@@ -15,6 +15,24 @@ description: "这里记录在使用 [[笔记/point/macos|macos]] 过程中遇到
 这里记录在使用 [[笔记/point/macos|macos]] 过程中遇到的问题.
 
 ## 问题列表
+
+### 制作启动盘
+
+```shell
+# 确认 u 盘名称
+# /dev/disk2 (external, physical)
+# Kingston 16.0GB
+diskutil list
+
+# 卸载
+diskutil unmountDisk /dev/disk2
+
+# 写入
+sudo dd if=/path/to/win11.iso of=/dev/rdisk2 bs=1m status=progress
+
+# 弹出
+diskutil eject /dev/disk2
+```
 
 ### 显示隐藏文件
 
@@ -72,3 +90,9 @@ sudo -i
 2. 打开手机上的开发者选项，开启 usb 调试
 3. `chrome://inspect/#devices` 就可以查看到设备，然后点开
 4. 手机上访问页面，就可以通过 devtools 调试了
+
+### 下载的 cli 被 killed
+
+```shell
+codesign --sign - --force --preserve-metadata=entitlements,requirements,flags,runtime /path/to/cli
+```

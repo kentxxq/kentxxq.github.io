@@ -3,7 +3,7 @@ title: OpenAPI接口规范
 tags:
   - blog
 date: 2024-07-04
-lastmod: 2025-02-20
+lastmod: 2025-10-31
 categories:
   - blog
 description: 
@@ -78,18 +78,35 @@ description:
 
 - `insert`
     - http-post
-    - 返回创建的实体. 和查询实体返回的结果一致
-    - 创建多个实体, 返回实体列表
+    - 传入 `InsertRO`
+    - 返回实体 id
+    - 批量 insert 返回 `true/false` 代表操作成功
 - `update`
     - http-post
-    - 修改返回修改后的实体. 和查询实体返回的结果一致
-    - **不建议**提供同时修改多个对象的操作, 应该改成特定功能. 例如把多个用户变成管理员, 直接使用特定接口, 而不是提交每隔用户的信息.
-    - 代码
-        - 控制层处理 http 请求, 输入验证, 返回请求
-        - service 判断是否属于 xx 用户. 在这里把 ro 对象映射到 model
+    - 传入 `UpdateRO`
+    - 返回 `true/false` 代表操作成功
+    - 批量修改，拿邮箱记录
+	    - 通常很少批量修改邮箱的整体内容, 传入 `List<UpdateRO>`
+	    - 批量修改成已读，未读，归档，标签
+		    - 1 个接口处理已读/未读状态
+		    - 1 个接口移动邮件到特定文件夹/归档
+		    - 1 个接口批量添加标签
 - `delete`
     - http-post
-    - 返回 `true/false`
+    - 传入 id 列表 `List<int>`
+    - 返回 `true/false` 代表操作成功
+- 优缺点，真有需要也可以单独改接口
+	- insert 返回 id 很有必要。而其他场景都是有 id 的
+		1. 进入详情页/展示详情页入口。比如提交订单以后，需要进入订单详情页
+		2. 新建后立即展示。聊天信息插入成功后本地 append，不需要重新拉取所有聊天记录
+		3. 拿到 id，绑定给其他实体
+			- 用户界面提交信息可能是一次性的，这个场景较少。
+			- 微服务调用接口会有问题，这里拿邮箱举例。创建邮件后添加邮件附件。这时候有 id 就可以直接添加到关联表。否则创建邮件的时候，邮件的发件人/内容/标题都空的，你没办法获取到刚创建的邮件对象。
+	- update/delete/批量 insert
+		- 接口简单清晰。true 就操作成功，false 就操作失败（可能是记录已经不存在，或者操作超时）。直接提示用户刷新重试
+		- 编写方便。通常数据库只返回了 true/false，减少了不必要的数据库查询和实体映射。
+		- 批量 update/delete/insert 操作都可以兼容，减少了认知成本。
+		- 无法获取影响的数据条数，数据是否有实际的变化。只有操作成功
 
 ## 时间
 
@@ -111,4 +128,54 @@ Console.WriteLine(DateTimeOffset.UtcNow);
 ---
 2024/7/13 13:40:52 +08:00
 2024/7/13 5:40:52 +00:00
+```
+
+## 上传文件
+
+使用 `multipart/form-data` 编写前后端 api 比较清晰。
+
+> `application/x-www-form-urlencoded` 传输文件需要先 `base64`，表单字段被编码为 `key=value&key2=value2`
+
+### axios
+
+```ts
+var data = new FormData();
+data.append('file', fs.createReadStream('C:\Users\Apifox\Desktop\Apifox 上传文件.txt'));
+data.append('name', '张三');
+await axios.post("/api/upload", data)
+```
+
+### aspnetcore
+
+```csharp
+public class WebdavUploadModel
+{
+    [Description("服务器: https://a.com/dav")]
+    public string Server { get; set; }
+    [Description("用户名")] public string Username { get; set; }
+    [Description("密码")] public string Password { get; set; }
+    [Description("文件夹路径(相对路径): a/b/c")] public string FolderPath { get; set; }
+    [Description("文件")] public IFormFile UserFile { get; set; }
+}
+
+
+// api
+[EndpointDescription("上传文件到webdav")]
+[HttpPost]
+[Consumes("multipart/form-data")] // FromForm同时支持multipart/form-data和application/x-www-form-urlencoded,强制使用form-data
+public async Task<ResultModel<bool>> PostWebdavFile([FromForm] WebdavUploadModel model)
+{
+    var clientParams = new WebDavClientParams
+    {
+        BaseAddress = new Uri(model.Server),
+        Credentials = new NetworkCredential(model.Username, model.Password)
+    };
+    var client = new WebDavClient(clientParams);
+    var streamContent = new StreamContent(model.UserFile.OpenReadStream());
+
+    var response =
+        await client.PutFile($"{model.Server.UrlCombine(model.FolderPath)}/{model.UserFile.FileName}",
+            streamContent);
+    return ResultModel.Ok(response.IsSuccessful);
+}
 ```

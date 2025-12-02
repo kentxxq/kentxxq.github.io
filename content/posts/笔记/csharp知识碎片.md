@@ -6,7 +6,7 @@ tags:
   - 知识碎片
   - 语言特性
 date: 2024-09-13
-lastmod: 2025-07-25
+lastmod: 2025-10-31
 categories:
   - blog
 description: 
@@ -297,12 +297,13 @@ DateTimeOffset.Now.ToString("O")
 
 - [[笔记/point/mysql|mysql]] 的 datetime 存储永远都是不带时区信息的, 不会因为切换 mysql 会话的 `time_zone` 而改变 sql 结果
 - 数据库时间就是当地时间, 建议**跨时区的数据查询必须通过上层服务进行转换! 不能跨时区查询!**
+- 或者用 pgsql？有时区，无需设置字符串长度
 
 保留毫秒数
 
 ```csharp
-[SugarColumn(ColumnDataType = "DATETIME(3) ")]
-public DateTime CreateTime { get; set; }
+[SugarColumn(ColumnDataType = "DATETIME(3)")]
+public DateTimeOffset CreateTime { get; set; }
 ```
 
 ### 密码存放/验证
@@ -334,6 +335,19 @@ var endpoint = await _svc_.SelectOneHealthyInstance("user-service");
 client.BaseAddress = new Uri($"http://{endpoint.Ip}:{endpoint.Port}");
 await client.GetAsync("/login");
 ```
+
+### SIGTERM 信号处理
+
+- [SIGTERM handling · Issue #5932 · dotnet/aspnetcore](https://github.com/dotnet/aspnetcore/issues/5932)
+
+### 代码分层 aspnetcore
+
+- controller 控制层
+	- 输入验证
+	- 返回请求，SO 对象映射
+- service
+	- 判断是否属于 xx 用户
+	- 在这里把 RO 对象映射到 model
 
 ## 打包
 

@@ -4,7 +4,7 @@ tags:
   - blog
   - linux
 date: 2023-06-29
-lastmod: 2025-05-20
+lastmod: 2025-11-26
 categories:
   - blog
 description: "这里记录 [[笔记/point/linux|linux]] 的命令与配置, 通常都是某种情况下的处理方法."
@@ -487,6 +487,26 @@ apt search language-pack-zh*
 apt install language-pack-zh-hans -y
 ```
 
+### nfs
+
+[Network File System (NFS) - Ubuntu Server documentation](https://documentation.ubuntu.com/server/how-to/networking/install-nfs/)
+
+```shell
+apt install nfs-kernel-server -y
+mkdir -p /data/nfs
+chmod 777 /data/nfs
+
+
+vim /etc/exports
+# 这里限制了特定来源
+/data/nfs 192.168.6.0/24(rw,sync,no_subtree_check,no_root_squash)
+
+# 启用生效
+exportfs -a
+# 验证
+exportfs -v
+```
+
 ### sftp 配置
 
 sftp 只需要 1 个端口，强制加密，所有环境都自带。
@@ -779,6 +799,26 @@ man 5 crontab
 hostnamectl set-hostname master1
 ```
 
+### 配置主机固定 ip
+
+目录 `/etc/netplan/xxx.yaml`，生效 `netplan apply`
+
+```shell
+network:
+  version: 2
+  ethernets:
+    ens18:
+      addresses:
+      - "192.168.6.191/24"
+      nameservers:
+        addresses:
+        - 223.5.5.5
+        search: []
+      routes:
+      - to: "default"
+        via: "192.168.6.1"
+```
+
 ### shell 退出码
 
 ```shell
@@ -925,6 +965,17 @@ tar -czvf dist.tgz /data/path
 tar -czvf dist.tgz tar -zcvf dist.tgz .[!.]* *
 ```
 
+解压特定文件
+
+```shell
+# 查看压缩包里的文件
+tar tf myfiles.tar
+
+# 只解压tar包里 a/1.jpg
+# a/1.jpg 是相对 tar 包里的路径
+tar xf myfiles.tar a/1.jpg
+```
+
 ### 查看命令进度
 
 使用开源工具 [Xfennec/progress](https://github.com/Xfennec/progress)
@@ -960,7 +1011,7 @@ scp /path/thing root@10.10.10.10:/path/thing
 # 远程到本地
 # -r遍历
 # -C压缩
-sshpass -p 密码 scp -o StrictHostKeyChecking=no -Cr root@10.10.10.10:/taget/path/file /source/path/file
+sshpass -p 密码 scp -o StrictHostKeyChecking=no -Cr root@10.10.10.10:/source/path/file /target/path/file
 
 # 使用sshpass免密一条命令
 # scp支持所有ssh的参数
@@ -1038,7 +1089,7 @@ top
 htop
 ```
 
-#### 文件与进程 lsof
+#### 文件 - 进程打开/关联的文件 lsof
 
 ```shell
 # 查看指定用户
@@ -1072,10 +1123,36 @@ vmstat 2 2
 ```shell
 # 磁盘分区等情况
 fdisk -l
+
+
+htop 可以查看硬盘 io 速度和进程
+
 # 硬盘监控
 # -o 只显示活动中的
 # -P 显示进程相关,而不是线程
+# -a 累计模式
+# 查看进程 瞬时速率
 iotop -oP
+# 查看进程的 长时间累计速率
+iotop -oP -a
+
+
+# 进程反复在打开某些文件
+strace -p <PID> -e trace=file
+# 输出，打开了 3 次
+openat(AT_FDCWD, "/var/log/nginx/access.log", O_WRONLY|O_APPEND, 0666) = 3
+
+# 读写数据量
+sudo strace -f -p <PID> -e trace=openat,read,write -s 0 -tt
+# 输出 从文件描述符 fd8 读了 576 字节，写入到文件描述符 fd2 了 184 字节
+[pid 2674766] 15:48:41.591046 read(8, ""..., 576) = 576
+[pid 2674766] 15:48:41.596999 write(2, ""..., 184) = 184
+
+# 查看文件描述符对应的内容
+ls -l /proc/<pid>/fd/ 
+l-wx------ 1 nginx nginx 64 Oct 31 06:45 10 -> /usr/local/nginx/conf/hosts/logs/demo.kentxxq.com.log
+l-wx------ 1 nginx nginx 64 Oct 31 06:45 11 -> /tmp/frp.kentxxq.com.log
+l-wx------ 1 nginx nginx 64 Oct 31 06:45 12 -> /usr/local/nginx/conf/hosts/logs/om-grafana.kentxxq.com.log
 ```
 
 #### 网络流量

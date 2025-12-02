@@ -4,7 +4,7 @@ tags:
   - blog
   - docker
 date: 2023-06-27
-lastmod: 2025-05-23
+lastmod: 2025-11-27
 categories:
   - blog
 description: "这里记录 [[笔记/point/docker|docker]] 的所有配置和操作."
@@ -114,6 +114,18 @@ node:14 /bin/bash -c "npm start"
 ```
 
 ## 操作命令
+
+### 访问宿主机端口
+
+```shell
+# 加上 --add-host="host.docker.internal:host-gateway"
+# 通过 host.docker.internal:6379 访问宿主机的 6379 端口
+docker run -d \
+  --add-host="host.docker.internal:host-gateway" \
+  --name $CONTAINER_NAME \
+  -p $port:$cport \
+  $IMAGE
+```
 
 ### 构建镜像
 

@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-01
-lastmod: 2023-12-21
+lastmod: 2025-11-27
 categories:
   - blog
 description: "[[笔记/point/k8s|k8s]] 的组件学习记录."
@@ -143,6 +143,14 @@ kubectl get storageclass
 NAME              PROVISIONER        RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
 local (default)   openebs.io/local   Delete          WaitForFirstConsumer   false                  558d
 ```
+
+- VolumeReclaimPolicy
+	- Delete 如果 pvc 被删除，pv 立即删除，磁盘空间释放
+	- Retain 如果 pvc 被删除，pv 不会被删除，需要手动去清理
+- VolumeBindingMode
+	- Immediate 适合大部分共享存储，默认
+	- WaitForFirstConsumer 等确定 pod 分配到某个节点后，在那个节点再创建 pv
+		- 如果你要是
 
 ## 网络
 
@@ -285,6 +293,229 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
 
 如果调整整个 deployment 资源，那么会新建一个 replicas 来替换。回滚也是一样
 
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-deploy
+  namespace: default
+  labels:
+    app: example
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    description: "完整 Deployment 示例"
+
+spec:
+  replicas: 3  # 副本数
+  revisionHistoryLimit: 10  # 保留多少历史 ReplicaSet
+  progressDeadlineSeconds: 600  # 超时判定
+  paused: false  # 是否暂停 rollout
+  minReadySeconds: 0  # Pod 需要 ready 保持多久
+  strategy:
+    type: RollingUpdate  # RollingUpdate 或 Recreate
+    rollingUpdate:
+      maxUnavailable: 1  # 滚动更新时最大不可用
+      maxSurge: 1        # 滚动更新时最大新增
+
+  selector:
+    matchLabels:
+      app: example
+
+  template:
+    metadata:
+      labels:
+        app: example
+      annotations:
+        checksum/config: "123456"  # 用于触发滚动更新
+    spec:
+      serviceAccountName: default
+      automountServiceAccountToken: true
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+
+      nodeSelector:                # 节点选择器
+        disktype: ssd
+
+      nodeName: ""                 # 指定调度到某个节点（一般不用）
+
+      schedulerName: default-scheduler
+
+      priorityClassName: ""        # Pod 优先级
+
+      runtimeClassName: ""         # 运行时类型，例如 kata
+
+      dnsPolicy: ClusterFirst
+      dnsConfig:
+        nameservers:
+          - 8.8.8.8
+        searches:
+          - svc.cluster.local
+        options:
+          - name: ndots
+            value: "2"
+
+      restartPolicy: Always         # Deployment 固定是 Always（不能改）
+
+      hostAliases:                  # Hosts 重写
+        - ip: "127.0.0.1"
+          hostnames:
+            - "my.local"
+
+      imagePullSecrets:
+        - name: myregistry-secret
+
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 2000
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+
+      terminationGracePeriodSeconds: 30
+
+      affinity:                     # 亲和性设置
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: disktype
+                    operator: In
+                    values:
+                      - ssd
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: important
+              topologyKey: "kubernetes.io/hostname"
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: example
+                topologyKey: "kubernetes.io/hostname"
+
+      tolerations:
+        - key: "key1"
+          operator: "Exists"
+          effect: "NoSchedule"
+          tolerationSeconds: 3600
+
+      topologySpreadConstraints:     # 跨节点分布控制
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: example
+
+      initContainers:
+        - name: init-myservice
+          image: busybox:latest
+          command:
+            - sh
+            - -c
+            - "sleep 5"
+          volumeMounts:
+            - name: data
+              mountPath: /data
+
+      containers:
+        - name: example
+          image: nginx:latest
+          imagePullPolicy: IfNotPresent
+
+          command: ["/bin/sh", "-c"]
+          args: ["nginx -g 'daemon off;'"]
+
+          workingDir: /app
+
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+
+          env:
+            - name: ENV
+              value: production
+            - name: FROM_CONFIGMAP
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: app.json
+
+          envFrom:
+            - configMapRef:
+                name: global-config
+            - secretRef:
+                name: global-secret
+
+          resources:                 # 资源限制
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              add: ["NET_ADMIN"]
+              drop: ["ALL"]
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+            successThreshold: 1
+
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+            failureThreshold: 30
+            periodSeconds: 10
+
+          lifecycle:
+            postStart:
+              exec:
+                command: ["sh", "-c", "echo postStart"]
+            preStop:
+              exec:
+                command: ["sh", "-c", "sleep 10"]
+
+          volumeMounts:
+            - name: data
+              mountPath: /usr/share/nginx/html
+
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: config
+          configMap:
+            name: app-config
+        - name: secret-volume
+          secret:
+            secretName: my-secret
+```
+
 ## Pod
 
 ### pod 详解
@@ -309,7 +540,12 @@ docker 默认网络模型：![[附件/docker默认网络模型.png]]
 
 ## stateful 有状态应用
 
-- 通过 mysql 的实例学习 [运行一个有状态的应用程序 | Kubernetes](https://kubernetes.io/zh-cn/docs/tasks/run-application/run-replicated-stateful-application/#understanding-stateful-pod-init)
+重要特性
+
+- rollout 重启是按照顺序重建，0,1,2 这样
+- 同名的 pod 永远不会同时存在。所以如果应用只允许单个 pod 运行，部署和 rollout 都不需要担心会有问题
+
+通过 mysql 的实例学习 [运行一个有状态的应用程序 | Kubernetes](https://kubernetes.io/zh-cn/docs/tasks/run-application/run-replicated-stateful-application/#understanding-stateful-pod-init)
 
 ## service 控制器
 

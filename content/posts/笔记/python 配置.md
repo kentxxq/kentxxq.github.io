@@ -1,9 +1,9 @@
 ---
-title: python配置
+title: python 配置
 tags:
   - blog
 date: 2024-12-23
-lastmod: 2025-07-03
+lastmod: 2025-10-22
 categories:
   - blog
 description: 
@@ -69,17 +69,41 @@ export UV_PYTHON_INSTALL_MIRROR=https://gh-proxy.com/https://github.com/astral-s
     - 常用命令 `uv tool upgrade/uninstall/list`  , 查看安装路径 `uv tool dir`
 - 安装 python
     - 最新版本 `uv python install`
+	- `uv python install 3.10` 特定版本
     - `uv python list` 查看所有的版本, 包括系统自带的
 - 运行脚本
     - `uv run 1.py` 运行脚本
 - 项目
     - `uv init hi` : 会创建项目文件夹, 锁定 python 版本
+    - `uv init --python 3.10` 在项目里锁定特定 python 版本
     - `pyproject.toml` 添加镜像源
 
         ```toml
+        [tool.uv]
+        python-install-mirror = "https://gh-proxy.com/https://github.com/astral-sh/python-build-standalone/releases/download"
+        
         [[tool.uv.index]]
         url = "https://mirrors.aliyun.com/pypi/simple/"
         default = true
         ```
 
     - `uv add requests`: 创建 `.venv` 环境, 锁包 `uv.lock`
+    - 项目锁定版本号，**同时修改** `.python-version` 为 `3.13.7` ，`pyproject.toml` 的 `requires-python = "==3.13.7"`
+
+
+
+## 项目初始化
+
+### fastapi
+
+```shell
+mkdir fastapi-demo && cd fastapi-demo
+
+uv add fastapi uvicorn
+# 开发命令
+import uvicorn
+uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info",reload=True)
+# 生产环境
+uvicorn main:app --host 0.0.0.0 --port 8080 --workers 4 
+```
+

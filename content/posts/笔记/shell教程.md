@@ -4,7 +4,7 @@ tags:
   - blog
   - shell
 date: 2023-08-10
-lastmod: 2025-04-28
+lastmod: 2025-10-30
 categories:
   - blog
 description: "虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔记/point/shell|shell]] 是高效的."
@@ -12,9 +12,18 @@ description: "虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔
 
 ## 简介
 
-虽然我不喜欢写 [[笔记/point/shell|shell]],但其实 [[笔记/point/shell|shell]] 是高效的.
+虽然我不喜欢写 [[笔记/point/shell|shell]], 但其实 `shell` 是高效的 . 
 
-这里记录一些用法和技巧.
+这里记录一些用法和技巧. 我用的都是 `bash`，不是 `sh` 
+
+## 执行 shell
+
+- `./1.sh` 或者 `/path/to/1.sh`
+	- 通常首行会有 `shebang` ，指定运行的程序路径，这样 [[python]] 之类的语言也能直接调用了
+	- `#!/usr/bin/env bash` 查找 bash 位置，然后用这个 bash 执行 shell 脚本
+- `bash 1.sh` 强制用当前 shell 环境的 bash，忽略 `shebang`
+
+> export a=1 是可以被脚本读取到的 echo "a=$a"
 
 ## 常用内容
 
@@ -430,4 +439,21 @@ do
         exit 1;
     fi
 done
+```
+
+### 清理容器
+
+```shell
+#!/bin/bash
+
+# 获取端口3306的连接数
+CONNECTIONS=$(/root/kubeconfigs/kubectl get pods -n shini-prod-web -o name --kubeconfig /root/kubeconfigs/qs-prod-kube.conf | grep shini-prod-user | xargs -I {} /root/kubeconfigs/kubectl exec {} -n shini-prod-web --kubeconfig /root/kubeconfigs/qs-prod-kube.conf -- netstat -anp | grep 3306 | wc -l)
+
+echo $CONNECTIONS
+
+# 检查连接数是否大于200
+if [ "$CONNECTIONS" -gt 200 ]; then
+    echo "清理中..."
+    /root/kubeconfigs/kubectl rollout restart deployment shini-prod-user -n shini-prod-web --kubeconfig /root/kubeconfigs/qs-prod-kube.conf
+fi
 ```

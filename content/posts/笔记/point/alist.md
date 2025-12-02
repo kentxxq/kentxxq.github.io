@@ -20,21 +20,18 @@ categories:
 [[笔记/point/docker-compose|docker-compose]] 配置文件 `docker-compose.yml`
 
 ```yml
-version: "3.3"
 services:
-  alist:
-    restart: always
+  openlist:
+    image: 'openlistteam/openlist:v4.1.2-aria2'
+    container_name: openlist
     volumes:
-      - "/etc/alist:/opt/alist/data"
-      - "/opt/alist/data/temp/aria2:/opt/alist/data/temp/aria2"
+      - '/etc/openlist:/opt/openlist/data'
     ports:
-      - "5244:5244"
+      - '5244:5244'
+      - '5246:5246'
     environment:
-      - PUID=0
-      - PGID=0
       - UMASK=022
-    container_name: alist
-    image: "xhofe/alist-aria2:latest"
+    restart: unless-stopped
 ```
 
 ### 反向代理

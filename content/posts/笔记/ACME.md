@@ -5,7 +5,7 @@ tags:
   - devops
   - ACME
 date: 2023-08-16
-lastmod: 2025-06-18
+lastmod: 2025-11-21
 keywords:
   - acme
   - acme.sh
@@ -37,7 +37,7 @@ export Ali_Secret="sk"
 ```shell
 # 安装
 apt install socat -y
-git clone https://github.com/acmesh-official/acme.sh.git
+git clone https://gh-proxy.org/https://github.com/acmesh-official/acme.sh.git
 cd ./acme.sh
 ./acme.sh --install -m 我的邮箱
 
@@ -73,7 +73,14 @@ acme.sh --remove -d "*.kentxxq.com" -d "kentxxq.com" --force
 
 - [支持的CA服务商列表](https://github.com/acmesh-official/acme.sh/wiki/Server)
 - [各个服务商的区别](https://github.com/acmesh-official/acme.sh/wiki/CA)
+	- letsencrypt 有限速，兼容性最佳
+	- zerossl 无限速，亲测可用
+	- 大厂 google，可能连接不稳定
+	- `ssl.com` 免费证书限制比较大，例如没有泛域名，内嵌域名数很少。它支持 acme 是为了商业用户方便使用，然后自动扣用户账户里的钱吧.
+	- 其他的 ca 没用过，但是没什么特别优势。否则我就会更新上来了
 - [ssl-labs 做 ssl 检测](https://www.ssllabs.com/ssltest/)
+
+> letsencrypt 知名度/使用量应该是最大的，所以兼容性在国内也比较好。2025 年 11 月 21 日发现在国内阿里云容器环境使用 blackbox 检测域名，zerossl 会出现异常大流量，但 letsencrypt 没问题。虽然是 blackbox 的 bug，但没必要避免
 
 ```shell
 acme.sh --set-default-ca --server letsencrypt

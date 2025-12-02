@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2025-06-20
+lastmod: 2025-11-19
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -909,7 +909,9 @@ location /app/ {
 - 参考
     - [Apple 通用链接 - .NET MAUI \| Microsoft Learn](https://learn.microsoft.com/zh-cn/dotnet/maui/macios/universal-links?view=net-maui-9.0)
 
-## 守护进程
+## 守护进程 systemd
+
+> 配置了 `nginx.conf 主配置` 后再使用
 
 [[笔记/point/Systemd|Systemd]] 守护配置 `/etc/systemd/system/nginx.service`
 

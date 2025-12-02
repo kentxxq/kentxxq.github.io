@@ -6,7 +6,7 @@ tags:
   - ssh-agent
   - blog
 date: 2023-06-21
-lastmod: 2024-03-15
+lastmod: 2025-11-06
 categories:
   - blog
 description: "我的使用 [[笔记/point/git|git]] 操作代码. 而 git 的通信会用到 [[笔记/point/openssh|openssh]].openssh 为了保证安全. 提供了私钥和公钥. 其中私钥可以密码加密, 保证安全性. 所以我就加密了.导致了什么问题呢?每次我用到 git 的时候, 都提示我输入密码. 所以我今天就来配置 [[笔记/point/ssh-agent|ssh-agent]]."
@@ -20,7 +20,7 @@ openssh 为了保证安全. 提供了私钥和公钥. 其中私钥可以密码�
 
 每次我用到 git 的时候, 都提示我输入密码. 所以我今天就来配置 [[笔记/point/ssh-agent|ssh-agent]].
 
-> 我暂时只用 windows, 所以下面主要是 windows 的配置.
+> 关键命令就是 ssh-add
 
 ## 操作流程
 

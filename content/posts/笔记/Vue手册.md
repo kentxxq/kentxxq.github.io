@@ -5,7 +5,7 @@ tags:
   - vue
   - 前端
 date: 2024-03-09
-lastmod: 2025-07-03
+lastmod: 2025-10-31
 categories:
   - blog
 description: 
@@ -263,10 +263,11 @@ counterStore.$subscribe((mutate, state) => {
 
 ###  信息传递
 
-#### defineProps/父与子
+#### defineProps/父传子
 
 - 父传子 `使用props`.
-- 子传父 1: `父传子一个函数,子接收并带上参数来调用函数`
+- 也可以子传父，但是通常用 emit 替代
+	- 子传父 1: `父传子一个函数,子接收并带上参数来调用函数`
 
 ```ts
 // 父
@@ -309,26 +310,40 @@ var a = ref(1)
 const emit = defineEmits(['haha'])
 ```
 
-#### mitt 事件订阅传递/任意组件
+#### v-model 底层原理/父与子
+
+推荐使用 `defineModel`，默认双向绑定！
 
 ```ts
-import mitt from 'mitt'
-const emitter = mitt()
+// 父组件
+<MyInput v-model="username" />
 
-// 监听
-emitter.on('foo', e => console.log('foo', e) )
-// 触发
-emitter.emit('foo', { a: 'b' })
-// 去掉所有事件
-emitter.all.clear()
+// 子组件
+<script setup lang="ts">
+const model = defineModel<string>()
+</script>
 
-unMounted(()=>{
-  // 销毁的时候去掉这个
-  emitter.off('foo')
-})
+<template>
+  <input v-model="model" />
+</template>
+
+
+// 父，多个 defineModel
+<UserForm v-model:name="user.name" v-model:age="user.age" />
+
+<!-- 子组件 UserForm.vue -->
+<script setup lang="ts">
+const name = defineModel<string>('name')
+const age = defineModel<number>('age')
+</script>
+
+<template>
+  <input v-model="name" placeholder="Name" />
+  <input type="number" v-model="age" placeholder="Age" />
+</template>
 ```
 
-#### v-model 底层原理/父与子
+下面是以前的用法，用于了解底层原理。
 
 关于 `$event`
 
@@ -385,6 +400,25 @@ a = ref(1)
 defineExpose({a})
 // 通过$parent拿到父暴露的q
 console.log($parent.q)
+```
+
+#### mitt 事件订阅传递/任意组件
+
+```ts
+import mitt from 'mitt'
+const emitter = mitt()
+
+// 监听
+emitter.on('foo', e => console.log('foo', e) )
+// 触发
+emitter.emit('foo', { a: 'b' })
+// 去掉所有事件
+emitter.all.clear()
+
+unMounted(()=>{
+  // 销毁的时候去掉这个
+  emitter.off('foo')
+})
 ```
 
 #### provide/inject 祖传
@@ -674,7 +708,7 @@ export default defineConfig({
         /* options */
       }),
       Components({
-        resolvers: [PrimeVueResolver(), IconsResolver()],
+        resolvers: [IconsResolver()],
       }),
     ],
 })
@@ -877,3 +911,20 @@ defineProps<{
 }>()
 </script>
 ```
+
+### ui 组件
+
+- 头像
+	- [DiceBear](https://www.dicebear.com/how-to-use/js-library/)
+- 图片预览
+	- [vue-easy-lightbox | vue-easy-lightbox](https://onycat.com/vue-easy-lightbox/guide/)
+	- v-viewer 下面是同一个人的仓库，代码和用法似乎是一致的
+		- 这个 star 多点 [mirari/v-viewer: Image viewer component for vue, supports rotation, scale, zoom and so on, based on viewer.js](https://github.com/mirari/v-viewer)
+		- [mirari/vue3-viewer: Image viewer component for vue 3.x, supports rotation, scale, zoom and so on, based on viewer.js](https://github.com/mirari/vue3-viewer)
+
+### 格式化
+
+- prettier
+	- `pnpm add -D prettier`
+	- 添加命令到 `package.json/scripts` ， `"format": "prettier --write src/"`
+	- `pnpm format` 即可

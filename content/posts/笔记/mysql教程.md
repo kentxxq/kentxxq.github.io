@@ -5,7 +5,7 @@ tags:
   - mysql
   - docker
 date: 1993-07-06
-lastmod: 2024-06-14
+lastmod: 2025-11-27
 categories:
   - blog
 description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置. 所以记录一下配置和操作."
@@ -26,6 +26,65 @@ description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置
 # 配置了字符集
 # 优化资源占用 --table-open-cache=400 --table-definition-cache=400 --performance-schema=OFF
 docker run --name ken-mysql -v /data/mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123 -p3306:3306 -d mysql:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+```
+
+### k8s 单点
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: default
+  labels:
+    app: mysql
+spec:
+  type: NodePort
+  selector:
+    app: mysql
+  ports:
+    - port: 3306
+      name: mysql
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: default
+spec:
+  serviceName: "mysql"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          ports:
+            - containerPort: 3306
+              name: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "fake_password"
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: nfs184
+        resources:
+          requests:
+            storage: 10Gi
 ```
 
 ### apt 仓库
@@ -282,6 +341,57 @@ FLUSH PRIVILEGES;
 docker run -d -v /root/binlog_folder/:/tmp/binlog_folder/ -e MYSQL_ROOT_PASSWORD=123456 --name mysql mysql:8.0-debia
 
 mysqlbinlog /tmp/binlog_folder/binlog_file > xxx.txt
+```
+
+### 数据库空间
+
+库大小排序
+
+```sql
+SELECT 
+    table_schema AS `Database`,
+    ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS `Size_MB`
+FROM 
+    information_schema.tables
+GROUP BY 
+    table_schema
+ORDER BY 
+    `Size_MB` DESC;
+```
+
+单库表大小排序
+
+```sql
+SELECT 
+    table_name AS `Table`,
+    ROUND((data_length + index_length) / 1024 / 1024, 2) AS `Size_MB`
+FROM 
+    information_schema.tables
+WHERE 
+    table_schema = 'your_database_name'
+ORDER BY 
+    `Size_MB` DESC;
+```
+
+### 导数据
+
+```sql
+INSERT INTO new_db.a SELECT * FROM old_db.b;
+```
+
+脚本复制库
+
+```shell
+#!/bin/bash
+# 假设将sakila数据库名改为new_sakila
+
+mysql -uroot -p123456 -e 'create database if not exists new_db'
+list_table=$(mysql -uroot -p123456 -Nse "select table_name from information_schema.TABLES where TABLE_SCHEMA='old_db'")
+
+for table in $list_table
+do
+    mysql -uroot -p123456 -e "rename table old_db.$table to new_db.$table"
+done
 ```
 
 ## 配置
