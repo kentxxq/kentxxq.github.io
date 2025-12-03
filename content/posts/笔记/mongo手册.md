@@ -3,7 +3,7 @@ title: mongo手册
 tags:
   - blog
 date: 2025-09-25
-lastmod: 2025-11-28
+lastmod: 2025-12-03
 categories:
   - blog
 description: 
@@ -104,6 +104,9 @@ mongorestore -d db_a db_a/
 
 # 恢复单个 mongodb 集合
 mongorestore --db db_target --collection 集合名 /path/to/dbname/集合名.bson
+
+# 恢复到远程
+./mongorestore --host 192.168.6.191:30798 --username fake_username --password fake_password --authenticationDatabase admin --db db_target /root/hl-2025-12-02/db_name
 ```
 
 ## 内部操作

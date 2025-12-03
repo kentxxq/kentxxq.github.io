@@ -5,7 +5,7 @@ tags:
   - vue
   - 前端
 date: 2024-03-09
-lastmod: 2025-10-31
+lastmod: 2025-12-02
 categories:
   - blog
 description: 
@@ -544,12 +544,32 @@ const stopWatch = watch(sum, (newValue, oldValue) => {
 
 - `setup` 创建阶段
 - `onBeforeMounted`, `onMounted` 挂载阶段
+	- api 请求
+	- 获取 dom
+	- 启动定时器、事件监听
 - `onBeforeUpdated`, `onUpdated` 更新阶段
 - `onBeforeUpdated`, `onUnmounted` 卸载阶段
+	- 清理监听，定时器
 
 ```ts
-onMounted(()=>{
-    console.log(1)
+// 并发请求，等待一起完成
+onMounted(async () => {
+  const [res1, res2, res3] = await Promise.all([
+    fetchData1(),
+    fetchData2(),
+    fetchData3()
+  ])
+
+  data1.value = res1
+  data2.value = res2
+  data3.value = res3
+})
+
+// 完全不阻塞
+onMounted(() => {
+  fetchData1().then(res => data1.value = res)
+  fetchData2().then(res => data2.value = res)
+  fetchData3().then(res => data3.value = res)
 })
 ```
 

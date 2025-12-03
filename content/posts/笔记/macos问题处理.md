@@ -4,7 +4,7 @@ tags:
   - blog
   - macos
 date: 2023-07-01
-lastmod: 2025-11-25
+lastmod: 2025-12-03
 categories:
   - blog
 description: "这里记录在使用 [[笔记/point/macos|macos]] 过程中遇到的问题."

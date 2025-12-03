@@ -4,7 +4,7 @@ tags:
   - blog
   - pve
 date: 2025-11-25
-lastmod: 2025-11-25
+lastmod: 2025-12-03
 categories:
   - blog
 description:
@@ -38,7 +38,7 @@ esxi 9 似乎停止了免费版本的发放，现在用这个怕被坑。windows
 5. 使用社区脚本，关闭 ha，关闭订阅提醒 [community-scripts/ProxmoxVE: Proxmox VE Helper-Scripts (Community Edition)](https://github.com/community-scripts/ProxmoxVE/)
 6. `apt update -y; apt upgrade -y;`
 
-## 使用概念
+## 使用/概念
 
 ### 网络
 
@@ -51,3 +51,32 @@ esxi 9 似乎停止了免费版本的发放，现在用这个怕被坑。windows
 - `local-lvm`
 	- `LVM_Thin`，支持 COW 快速快照
 	- 存放虚机实例
+
+扩容
+
+1 编辑磁盘，增加 100 gb 空间
+
+2 `fdisk -l` 确认磁盘已经增大
+
+3 修复 gpt 表
+
+```shell
+parted /dev/sda ---pretend-input-tty <<EOF
+print
+Fix
+quit
+EOF
+```
+
+4 拓展分区
+
+```shell
+parted /dev/sda resizepart 2 100%
+# 出现提示：
+# Warning: Partition /dev/sda2 is being used. Are you sure you want to continue?
+yes
+```
+
+5 扩容文件系统 `resize2fs /dev/sda2`
+
+6  `df -h` 验证

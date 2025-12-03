@@ -4,7 +4,7 @@ tags:
   - blog
   - taskfile
 date: 2025-09-08
-lastmod: 2025-09-09
+lastmod: 2025-12-03
 categories:
   - blog
 description: 
@@ -22,12 +22,33 @@ description:
 
 - `task --init` 初始化文件
     - 在 `$HOME` 下创建的文件，可以通过 `-g` 参数全局调用
-- `task` 直接调用 `tasks/default`
-- `task test lint -p/--parallel` 并发调用，不建议这么用。规则应该写到 yml 里
-- `task test -c/--concurrency 4` 限制并行 4 个任务
-- `task test RID=1` 传参 `RID` 为 1
+- `task` 调用
+	- 直接调用 `tasks/default`
+	- 查看所有命令 `task -a`，查看所有全局命令 `task -ag`
+- 调用 test 命令
+	- `task test lint -p/--parallel` 并发调用，不建议这么用。规则应该写到 yml 里
+	- `task test -c/--concurrency 4` 限制并行 4 个任务
+	- `task test RID=1` 传参 `RID` 为 1
 
 ## 示例
+
+### 全局
+
+```yml
+version: "3"
+
+tasks:
+  default:
+    cmds:
+      - echo "global default task"
+
+  clean-dev:
+    cmds:
+      - pnpm store prune
+      - dotnet nuget locals all --clear
+      - go clean -modcache
+      - go clean -cache
+```
 
 ### 极简示例
 

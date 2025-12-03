@@ -92,6 +92,7 @@ description:
 	- css 颜色展示 [color highlight](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)
 	- flex 布局展示 https://marketplace.visualstudio.com/items?itemName=dzhavat.css-flexbox-cheatsheet
 	- iconify 图标 https://marketplace.visualstudio.com/items?itemName=antfu.iconify
+	- 几乎所有 UI 库的代码提示 [common-intellisense](https://github.com/common-intellisense/common-intellisense)
 	- 格式化
 		- 文件格式化 [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 		- js 代码质量检查 [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) 

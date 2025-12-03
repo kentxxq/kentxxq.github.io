@@ -1007,6 +1007,7 @@ lftp -u ${env.ftp_webgl} ftp://${env.ftp_url} -e "set ssl:verify-certificate no;
 
 ```shell
 # 本地到远程
+# -i ~/.ssh/id_rsa
 scp /path/thing root@10.10.10.10:/path/thing
 # 远程到本地
 # -r遍历
