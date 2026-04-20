@@ -4,7 +4,7 @@ tags:
   - blog
   - mysql
 date: 1993-07-06
-lastmod: 2023-07-11
+lastmod: 2025-12-10
 categories:
   - blog
 keywords:
@@ -36,13 +36,25 @@ load data infile '/var/lib/mysql-files/20170628' into table test fields terminat
 
 ## mysqldump 导出为 sql 脚本，可以直接运行进行恢复
 
+指定机器 `--host 127.0.0.1 --port 3306`
+
+导出
+
 ```bash
 # 指定表
 mysqldump -u root -p databasename tablename > /tmp/20170628_databasename_tablename.sql
 # 指定数据库
 mysqldump -u root -p --databases databasename1 databasename2  > /tmp/20170628_databasename.sql
 # 备份全部数据库
-mysqldump -u root -p -all-databases  > /tmp/20170628_databasename.sql
+mysqldump -u root -p -all-databases  > /tmp/xxx_backup.sql
+```
+
+导入
+
+```shell
+# 导出以后里面会有 create database，use database
+# 修改成新库名后使用
+mysql -u root -p密码 新库名 < xxx_backup.sql
 ```
 
 ## innobackupex 的使用 (这个是 xtrabackup 的封装，可以备份多种类的存储引擎文件)

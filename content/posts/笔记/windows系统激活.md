@@ -4,7 +4,7 @@ tags:
   - blog
   - windows
 date: 2023-07-01
-lastmod: 2024-12-20
+lastmod: 2025-12-15
 categories:
   - blog
 keywords:
@@ -58,7 +58,7 @@ vlmcs.exe -v kms-default.cangshui.net
 vlmcs.exe -x kms-default.cangshui.net
 ```
 
-- [[附件/vlmcs.exe]]
+- `vlmcs.exe`
 - Dockerfile 在这里: [across/docker/kms/Dockerfile at master · teddysun/across · GitHub](https://github.com/teddysun/across/blob/master/docker/kms/Dockerfile)
 - 实现在这里: [GitHub - Wind4/vlmcsd: KMS Emulator in C (currently runs on Linux including Android, FreeBSD, Solaris, Minix, Mac OS, iOS, Windows with or without Cygwin)](https://github.com/Wind4/vlmcsd)
 

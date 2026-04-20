@@ -4,7 +4,7 @@ tags:
   - obsidian
   - blog
 date: 2023-06-21
-lastmod: 2024-03-11
+lastmod: 2026-03-09
 categories:
   - blog
 description: "这里介绍我如何使用 [[笔记/point/obsidian|obsidian]] 来记录, 多总结, 总思考. 让 obsidian 真正成为最后一个笔记软件. (除非有其他革命性的创造, ar? 植入芯片?)"
@@ -38,7 +38,9 @@ description: "这里介绍我如何使用 [[笔记/point/obsidian|obsidian]] 来
 
 ## 如何开始
 
-### 开始日记
+### 开始日记/notes
+
+> obsidian 的 ios 端不好用，同步也是老大难的问题。现在使用 apple notes 和 todo 来速记
 
 用日记开始每天的笔记.
 

@@ -6,7 +6,7 @@ tags:
   - devops
   - k8s
 date: 2025-11-26
-lastmod: 2025-11-28
+lastmod: 2025-12-15
 categories:
   - blog
 description:

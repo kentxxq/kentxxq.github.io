@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2024-01-20
-lastmod: 2025-12-01
+lastmod: 2026-04-18
 categories:
   - blog
 description: 
@@ -15,6 +15,21 @@ description:
 记录 uniapp 的快速上手
 
 ## 工具
+
+### ios 调试
+
+> 建议先用安卓调试...
+
+1. xcode 设置，登录。manage certificates，创建
+2. 打开应用 keychain，在 login 找到刚创建的证书，`导出 p12`，设置 `密码`
+3. xcode 新建应用，windows，device 找到连接的 iphone
+4. iphone 手机上开启开发者模式
+5. xcode 运行一下应用，查看项目属性。会发现有一个 `xcode managed profile`
+6. `cd ~/Library/Developer/Xcode/UserData/Provisioning\ Profiles/`，里面有文件 `XXXX-XXXX-XXXX.mobileprovision`
+7. 通过时间来确定是哪个配置文件，通过命令验证 bundleid 是否正确 `security cms -D -i xxx.mobileprovision | grep -A 1 application-identifier`
+8. 到这里，你已经有了 id，私钥，私钥密码，profile。
+9. 可以使用标准基座（图标，第三方 sdk，应用名都不生效）。自定义基座需要云打包一次，要求的 profile 比如是付费开发者的才行
+10. 安装成功后，手机 `通用=》vpn 和设备管理=》同意开发者`
 
 ### 命令
 
@@ -306,6 +321,7 @@ onShow(() => {
 
 1. 去 iconfont 选取图标
 2. 鼠标移动到图标，然后选择下载。设置图标颜色和 `pages.json 里 tabbar.selectedColor` 一致
+	1. 未选中的颜色是 999999
 3. 未选中就是 `user.png` , 选中就用 `user_HL.png`  ，**限制 40 kb，像素大小 81 x 81**
 
 **如果想折腾** 两者兼得（小程序自动使用 png，iconfont 用在其他端）
@@ -362,12 +378,15 @@ iconfont 配置方法如下
 
 >  img. src 的方式使用 svg 无法通过 css 设置样式
 
-作为 tabbar 图标使用 (不在乎小程序端的兼容)
+### 各组件高度信息
 
-```
-```
+#### 高度
 
-### 安全边距
+- [pages.json | uni-app x](https://doc.dcloud.net.cn/uni-app-x/collocation/pagesjson.html#pages-json)
+	- 导航栏高度为 44px (不含状态栏)
+	- tabBar 高度为 50px (不含安全区)
+
+#### 安全边距
 
 ```ts
 // 拿到安全区域距离，单位是px
@@ -381,6 +400,41 @@ console.log(safeAreaInsets)
 - [uniapp的rpx文档](https://zh.uniapp.dcloud.io/tutorial/syntax-css.html#flex-%E5%B8%83%E5%B1%80)
     - 设计稿永远是 750 px, 如果元素占用 100 px。那么就是 `750 * 100 / 750 = 100rpx`
     - 所以屏幕越大, 像素越大. div 应该用 rpx, 字体应该用 px
+
+### 字体
+
+> [微信小程序端只支持网络字体](https://uniapp.dcloud.net.cn/api/ui/font.html) ，否则就可以用本地字体
+>
+> [iconfont](https://www.iconfont.cn/fonts/detail?spm=a313x.7781069.1998910419.d9df05512&cnid=uman80Glfkzs) 提供特定字体的特定文字下载。这样文件就只会包含特定的文字，特别小！
+
+`APP.vue` 中配置后，直接使用 `style="font-family: POIAOTitle"`
+
+```ts
+<script setup lang="ts">
+import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
+
+const poiaoTitleFontFamily = "POIAOTitle";
+// 微信小程序端只支持网络字体 https://uniapp.dcloud.net.cn/api/ui/font.html
+// TODO 字体要走 CDN
+const poiaoTitleFontUrl = "https://demo.kentxxq.com/demo-files/title.woff";
+
+onLaunch(() => {
+  console.log("App Launch");
+
+  uni.loadFontFace({
+    global: true,
+    family: poiaoTitleFontFamily,
+    source: `url(\"${poiaoTitleFontUrl}\")`,
+    success() {
+      console.log(`${poiaoTitleFontFamily} loaded`);
+    },
+    fail(error) {
+      console.error(`${poiaoTitleFontFamily} load failed`, error);
+    },
+  });
+});
+</script>
+```
 
 ## 资源
 

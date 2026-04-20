@@ -1,9 +1,9 @@
 ---
-title: 视频分享
+title: 鸡血和chill
 tags:
   - blog
 date: 2023-12-24
-lastmod: 2025-03-17
+lastmod: 2025-12-09
 categories:
   - blog
 description: 
@@ -26,6 +26,7 @@ description:
 
 下面是视频
 
+- [黄仁勋小时候很困苦](https://v.douyin.com/tY40fg9g8fU/)
 - [人生第二次硬核的半佛仙人-纪录片-全集-高清正版在线观看-bilibili-哔哩哔哩](https://www.bilibili.com/bangumi/play/ep515452?spm_id_from=333.788.recommend_more_video.-1)
 - ["你没穷过，你不懂！"\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV13y4y1p7DD/?vd_source=3f8a7a9cfa796e140d94e90eb3af4c90)
 - [你没穷过，你不懂！\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1nD4y1X7Tx/?vd_source=3f8a7a9cfa796e140d94e90eb3af4c90)

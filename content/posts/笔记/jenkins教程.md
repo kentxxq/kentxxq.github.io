@@ -3,7 +3,7 @@ title: jenkins教程
 tags:
   - blog
 date: 2024-01-29
-lastmod: 2024-06-25
+lastmod: 2025-12-09
 categories:
   - blog
 description: 
@@ -212,6 +212,38 @@ stage("构建产物"){
 ```html
 <p><a href="https://kentxxq.com">kentxxq.com</a></p>
 <p><a href="https://github.com/kentxxq/testserver">代码仓库地址<a/></p>
+```
+
+### 插件
+
+- [List Git Branches Parameter](https://plugins.jenkins.io/list-git-branches-parameter/) 获取远程 git 信息
+- [Hidden Parameter](https://plugins.jenkins.io/hidden-parameter/) 隐藏参数
+
+## 问题处理
+
+### 待清理资源
+
+```groovy
+import org.jenkinsci.plugins.resourcedisposer.AsyncResourceDisposer
+
+def disposer = AsyncResourceDisposer.get()
+def queue = disposer.getBacklog()
+
+println "当前待清理的资源数量: ${queue.size()}"
+
+queue.eachWithIndex { item, i ->
+    def d = item.getDisposable()
+    println "---- #${i+1} ----"
+    println "资源类型: ${d?.getClass()?.name}"
+    println "资源描述: ${d?.getDisplayName()}"
+    println "资源详情: ${d?.toString()}"
+}
+```
+
+清理
+
+```shell
+chmod -R 777 无法删除的path
 ```
 
 ## 参考资料

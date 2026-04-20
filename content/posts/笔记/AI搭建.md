@@ -2,12 +2,11 @@
 title: AI搭建
 tags:
   - blog
-  - ai
   - AI
   - ollama
   - deepseek
 date: 2025-02-11
-lastmod: 2025-03-14
+lastmod: 2026-03-11
 categories:
   - blog
 description: 
@@ -15,7 +14,7 @@ description:
 
 ## 简介
 
-经常刷抖音会刷到搭建 ai 之类的, 一直不想看. 觉得自己不会搭建, 结果今天公司就说要搭建一个试试...
+经常刷抖音会刷到搭建 [[AI]] 之类的, 一直不想看. 觉得自己不会搭建, 结果今天公司就说要搭建一个试试...
 
 初步了解:
 

@@ -4,7 +4,7 @@ tags:
   - blog
   - vscode
 date: 2023-08-30
-lastmod: 2025-12-02
+lastmod: 2026-03-26
 categories:
   - blog
 description: 
@@ -18,9 +18,7 @@ description:
 
 ### 格式化
 
-因为安装了 [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) 保存时自动格式化代码.
-
-不格式化保存: `F1=>format=>不格式化保存`
+格式化保存: `F1=>format=>格式化保存`
 
 ### 代码片段 snippets
 
@@ -97,7 +95,7 @@ description:
 		- 文件格式化 [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 		- js 代码质量检查 [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) 
 		- css 代码质量检查 [Stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint) 
-		- oxc 替代 prettier 和 eslint 插件，暂还不支持 css，但通常使用 tailwind 即可 https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode
+		- [Vite Plus 的全家桶，内置 oxc 用来格式化和 lint](https://open-vsx.org/extension/void-zero/vite-plus-extension-pack)
 - 后端
 	- EditorConfig 配置文件 https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
 	- 各个语言 go，python，dotnet

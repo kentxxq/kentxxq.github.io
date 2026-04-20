@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2025-11-19
+lastmod: 2026-04-14
 categories:
   - blog
 description: "[[笔记/point/nginx|nginx]] 的配置示例. 文档中的配置文件, 目录结构最好结合 nginx编译和升级 使用."
@@ -613,6 +613,11 @@ deny all;
 
 ```nginx
 http {
+    # 限速 10mb/s
+    limit_rate 10m;
+    # 前 500m 不限速
+    # limit_rate_after 500m;
+
     # 白名单
     geo $whitelist {
         default 0;

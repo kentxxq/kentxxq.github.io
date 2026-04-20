@@ -3,7 +3,7 @@ title: mongo手册
 tags:
   - blog
 date: 2025-09-25
-lastmod: 2025-12-03
+lastmod: 2025-12-25
 categories:
   - blog
 description: 
@@ -107,6 +107,18 @@ mongorestore --db db_target --collection 集合名 /path/to/dbname/集合名.bso
 
 # 恢复到远程
 ./mongorestore --host 192.168.6.191:30798 --username fake_username --password fake_password --authenticationDatabase admin --db db_target /root/hl-2025-12-02/db_name
+```
+
+### 状态检查
+
+```shell
+# 连接
+mongosh -u root -p
+# 查询状态
+# name 确认节点
+# stateStr 确认状态为 PRIMARY / SECONDARY / RECOVERING
+# health 必须是 1 
+rs.status()
 ```
 
 ## 内部操作

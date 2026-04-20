@@ -4,7 +4,7 @@ tags:
   - blog
   - macos
 date: 2023-07-01
-lastmod: 2025-12-03
+lastmod: 2026-03-16
 categories:
   - blog
 description: "这里记录在使用 [[笔记/point/macos|macos]] 过程中遇到的问题."
@@ -15,6 +15,24 @@ description: "这里记录在使用 [[笔记/point/macos|macos]] 过程中遇到
 这里记录在使用 [[笔记/point/macos|macos]] 过程中遇到的问题.
 
 ## 问题列表
+
+### zprofile 和 zshrc
+
+**使用** `~/.zshrc`
+
+mac 上有 `~/.zprofile` 和 `~/.zshrc`，zprofile 只会在新窗口的时候执行一次，进入子 zsh 不生效。zshrc 每次进入都会执行
+
+### crontab 定时任务
+
+使用 `crontab -e`
+
+> 如果发现不生效，需要开启 cron 的完全磁盘访问权限.
+> 系统设置 -> 安全性与隐私 -> 完全磁盘访问权限
+> 终端 whereis cron 查询路径，open /usr/sbin 在 finder 中打开路径，可以把 cron 拖动到设置中，勾选允许
+
+```shell
+3 * * * * /path/to/your_script.sh >> /tmp/log 2>&1;
+```
 
 ### 制作启动盘
 

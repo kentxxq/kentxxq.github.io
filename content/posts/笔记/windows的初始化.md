@@ -4,7 +4,7 @@ tags:
   - blog
   - windows
 date: 2023-06-29
-lastmod: 2024-05-24
+lastmod: 2026-03-18
 categories:
   - blog
 description: "[[笔记/point/windows|windows]] 现在是我主要使用的桌面平台. 因为我挑选并使用了大量的软件工具, 而且经常会跨多设备工作. 所以这里我记录下来, 也给大家做一个参考."
@@ -59,7 +59,9 @@ description: "[[笔记/point/windows|windows]] 现在是我主要使用的桌面
 - [阿里云盘](https://www.aliyundrive.com/drive)
 - [WPS-需要关掉网盘,图片关联](https://www.wps.cn/)
 - 抓包 [Wireshark · Go Deep](https://www.wireshark.org/)
-- 远程 [向日葵远程控制软件\_远程控制电脑手机\_远程桌面连接\_远程办公|游戏|运维-贝锐向日葵官网](https://sunlogin.oray.com/)
+- 远程
+	- 网易 UU
+	- [向日葵远程控制软件\_远程控制电脑手机\_远程桌面连接\_远程办公|游戏|运维-贝锐向日葵官网](https://sunlogin.oray.com/)
 - 自动切换主题颜色 [GitHub - AutoDarkMode/Windows-Auto-Night-Mode: Automatically switches between the dark and light theme of Windows 10 and Windows 11](https://github.com/AutoDarkMode/Windows-Auto-Night-Mode)
 - [GitHub - zhongyang219/TrafficMonitor: 这是一个用于显示当前网速、CPU及内存利用率的桌面悬浮窗软件，并支持任务栏显示，支持更换皮肤。](https://github.com/zhongyang219/TrafficMonitor)
 - 本地执行 github-actions [GitHub - nektos/act: Run your GitHub Actions locally 🚀](https://github.com/nektos/act)

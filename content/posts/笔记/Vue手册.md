@@ -5,7 +5,7 @@ tags:
   - vue
   - 前端
 date: 2024-03-09
-lastmod: 2025-12-02
+lastmod: 2025-12-06
 categories:
   - blog
 description: 
@@ -941,6 +941,29 @@ defineProps<{
 	- v-viewer 下面是同一个人的仓库，代码和用法似乎是一致的
 		- 这个 star 多点 [mirari/v-viewer: Image viewer component for vue, supports rotation, scale, zoom and so on, based on viewer.js](https://github.com/mirari/v-viewer)
 		- [mirari/vue3-viewer: Image viewer component for vue 3.x, supports rotation, scale, zoom and so on, based on viewer.js](https://github.com/mirari/vue3-viewer)
+
+### 库
+
+#### 类型检测
+
+`vue-device-detect` 设备类型检测
+
+```ts
+import { isMobile } from 'vue-device-detect'
+```
+
+#### 防抖
+
+```ts
+// 防抖，300ms 内只触发一次
+import { debounce } from 'lodash-es'
+const debouncedGetMirrorStatus = debounce(getMirrorStatus, 300)
+
+// watch 一个不断变化的数据，通过防抖来确保只请求一次
+watch(historyDays, async () => {
+  await debouncedGetMirrorStatus()
+}, { immediate: false, deep: false })
+```
 
 ### 格式化
 

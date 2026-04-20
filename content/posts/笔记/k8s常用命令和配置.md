@@ -4,7 +4,7 @@ tags:
   - blog
   - k8s
 date: 2023-08-15
-lastmod: 2025-11-28
+lastmod: 2025-12-10
 categories:
   - blog
 description: "记录 [[笔记/point/k8s|k8s]] 的常用命令和配置"
@@ -168,6 +168,8 @@ type: kubernetes.io/service-account-token
 
 ```shell
 kubectl get secret admin-user -n kubernetes-dashboard -o jsonpath={".data.token"} | base64 -d
+
+kubectl -n kubernetes-dashboard create token dashboard-admin-sa --duration=720h
 ```
 
 > 文档地址在 [这里](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md)，来自/适用于 [kubernetes/dashboard](https://github.com/kubernetes/dashboard)
@@ -177,6 +179,15 @@ kubectl get secret admin-user -n kubernetes-dashboard -o jsonpath={".data.token"
 用于替换 statefulSet 的镜像
 
 `./kubectl set image statefulset/apinto-gateway-stateful apinto-gateway-stateful=shini-uat-cn-shanghai.cr.volces.com/shini-dev/apinto-dev:18b097e-10 -n apinto  --kubeconfig qs-dev-kube.conf.shishi --v=6`
+
+### port-forward 转发
+
+```shell
+# 随机端口
+kubectl port-forward 容器名 --address 0.0.0.0 -n 命名空间 :3306
+# 指定端口
+kubectl port-forward 容器名 --address 0.0.0.0 -n 命名空间 本地端口:3306
+```
 
 ## 配置
 
@@ -378,7 +389,7 @@ kubectl create secret docker-registry nexus-secret \
   --dry-run=client -o yaml > nexus-secret.yaml
 ```
 
-编辑 `kubectl edit sa default` 绑定默认的 secret, 
+编辑 `kubectl edit sa default` 绑定默认的 secret,
 
 ```shell
 apiVersion: v1

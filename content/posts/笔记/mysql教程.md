@@ -5,7 +5,7 @@ tags:
   - mysql
   - docker
 date: 1993-07-06
-lastmod: 2025-11-27
+lastmod: 2025-12-11
 categories:
   - blog
 description: "有时候会自建 mysql [[笔记/point/mysql|mysql]] 测试配置. 所以记录一下配置和操作."
@@ -322,12 +322,15 @@ set global innodb_lock_wait_timeout=50;
 # 创建用户
 CREATE USER 'ttt'@'%' IDENTIFIED BY '123456';
 grant all privileges on  *.* to 'ttt'@'%';
+# 授权 rm_ 开头的库所有权限
+GRANT ALL PRIVILEGES ON `rm_%`.* TO 'archery'@'%';
 
 # 授权
 GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX,TRIGGER,CREATE VIEW,SHOW VIEW ON `db`.`table` TO 'ttt'@'%';
 
 # 改密码
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
+# 8.0 以后不需要下面的内容
 FLUSH PRIVILEGES;
 ```
 
@@ -362,15 +365,23 @@ ORDER BY
 单库表大小排序
 
 ```sql
-SELECT 
-    table_name AS `Table`,
-    ROUND((data_length + index_length) / 1024 / 1024, 2) AS `Size_MB`
-FROM 
+SELECT
+    table_name AS `表名`,
+    ROUND(data_length / 1024 / 1024, 2) AS `数据大小_MB`,  -- 仅数据（不含索引）
+    ROUND(index_length / 1024 / 1024, 2) AS `索引总大小_MB`,-- 所有索引的总大小
+    ROUND((data_length + index_length) / 1024 / 1024, 2) AS `总占用_MB`,
+    table_rows AS `行数`,  -- InnoDB为估算值，MyISAM相对准确
+    ROUND((data_free / (data_length + index_length)) * 100, 2) AS `碎片率_%`,
+    engine AS `存储引擎`,
+    table_collation AS `字符集排序规则`
+FROM
     information_schema.tables
-WHERE 
-    table_schema = 'your_database_name'
-ORDER BY 
-    `Size_MB` DESC;
+WHERE
+    table_schema = 'uni'  -- 替换为你的库名
+  AND table_type = 'BASE TABLE'       -- 排除视图，只查物理表
+ORDER BY
+    `数据大小_MB` DESC ,
+    `索引总大小_MB` DESC;
 ```
 
 ### 导数据

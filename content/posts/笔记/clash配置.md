@@ -4,7 +4,7 @@ tags:
   - blog
   - clash
 date: 2023-07-12
-lastmod: 2025-07-22
+lastmod: 2026-04-13
 keywords:
   - clash
   - 配置文件
@@ -694,10 +694,6 @@ parsers:
           port: 456
 ```
 
-## 测试
-
-#todo/笔记 快速验证代理走的什么网络!
-
 ## 疑难杂症
 
 ### 配合 gost 内网转发
@@ -784,7 +780,8 @@ parsers:
         - 主机场为大厂, 稳定/性能有保障
         - 备用选相对小厂, 不和主机厂相同线路!  不限时间按量购买, 或者 1 元机场 , 或者 jms 这种企业级支持
             - jms 有多重线路
-            - 自建通常就是用 CN2 线路的独立 VPS
+            - 自建通常就是用 CN2 线路的独立 VPS，例如 dmit 比较有名，lisahost
+		- 30 元/月是一个可用的门槛大厂额度。或者直接 2 个 15 元 100 gb 的小厂做互备，确认一下线路不是一起的就好。
         - 需要考虑的特点
             - 设备在线数限制
             - 专线>公网中转>直连
@@ -793,27 +790,33 @@ parsers:
             - emby 等流媒体共享
             - 流量结转
     - 不限制客户端数量
-        - [佩奇小站 - AmyTelecom](https://www.amysecure.com/clientarea.php?action=productdetails&id=14674) 被攻击
-        - [狗狗加速](https://xn--yfrp36ea9901a.com/) clash-verge-dev 的赞助商, 支持 appleid 登录
-        - [大哥云](https://aff01.dgy02.com/#/login)
-        - [FlowerCloud - 花云](https://huacloud.dev/) , [花云帮助中心](https://help.huacloud.dev/) , 有 0.2 倍率, 大于 imm, 差于 amy
-        - [YToo - 国际加速个人版](https://stentvessel.shop/pricing/individual)
-        - [龙猫云机场-最具性价比IPLC专线机场](https://lmva-duyb01.cc/login) 被攻击
-        - [AIFUN](https://afun.la/) 被攻击
+        - 同线路
+	        - [佩奇小站 - AmyTelecom](https://www.amysecure.com/clientarea.php?action=productdetails&id=14674) 被攻击
+	        - 库洛米
+	        - Kuromis（库洛米）
+	        - imm
+        - 同线路
+	        - [FlowerCloud - 花云](https://huacloud.dev/) , [花云帮助中心](https://help.huacloud.dev/) , 有 0.2 倍率, 大于 imm, 差于 amy
+	        - [YToo - 国际加速个人版](https://stentvessel.shop/pricing/individual)
+        - 同一个面板，青云梯是龙猫云的 logo 图片..
+	        - [龙猫云机场-最具性价比IPLC专线机场](https://lmva-duyb01.cc/login)
+	        - [青云梯（QingYunTi）- 稳定高速的全球网络中继服务](https://qingyunti.org/)
         - [一云梯-最具性价比IPLC专线机场](https://1ytcom01.1yunti.net/login)
+        - [AIFUN](https://afun.la/) 被攻击
         - [CTC](https://www.jinglongyu.com/#/login) 还有 ctc 02 被攻击
-        - [青云梯机场-最具性价比IPLC专线机场](https://qytcc01a.qingyunti.pro/login)
-        - [WestData - 西部数据 - 西数](https://wd-cloud.net/)
+        - [WestData - 西部数据 - 西数](https://wd-cloud.net/) 二线不错的，也会被攻击，偶尔还挂主站
         - [FlyingBird 飞鸟](https://fbva-dur01.pro/auth/register) usdt 不稳?
-        - [ssr](https://ace-taffy.com/auth/register) 被攻击
+        - [ssr cloud](https://ace-taffy.com/auth/register) 被攻击
         - [闪狐云-BGP入口+IPLC专线出口，稳定，延迟低](https://w06.ffwebb01.cc/login)
-        - [DlerCloud - 树洞](https://dlercloud.com/datacenter), 支持按量计费，似乎没有被 ddos 波及，口碑好. 墙洞，奶昔 affman 前女友频道管理员 - 雪王
+        - [DlerCloud - 树洞,新官网oixcloud](https://oixcloud.com/), 支持按量计费，似乎没有被 ddos 波及，口碑好. 墙洞，奶昔 affman 前女友频道管理员 - 雪王。技术人员被抓了，频道订阅人数不多
         - [LinkCube](https://www.linkcube.org/cart.php)
         - [CYLINK](https://2cy.io/auth/register) 和 [DOGESS(原n3ro, 易主多次)](https://dddoge.xyz/auth/login) 应该是一家
-        - [魔戒 按量计费](https://mojie.ws/#/register) , 分站[八戒](https://bajie.pw/#/register) 被攻击
+        - [魔戒 按量计费](https://mojie.ws/#/register) , 分站 [八戒](https://bajie.pw/#/register) 被攻击
         - [泰山](https://taishan.pro) 有按量
     - 限制客户端数量/同时在线数
+	    - [狗狗加速](https://xn--yfrp36ea9901a.com/) clash-verge-dev 的赞助商, 支持 appleid 登录
         - [ByWave ](https://t.me/s/bywavego) 10 个在线
+        - [大哥云](https://dageyunguanwang.com/)
         - [阿拉丁](https://tutorial.aladdinnet.cc/) 15 个 ip/30 元/月 emby/等账号
         - [ark-魅影小站](https://ark.to/user)
         - [库洛米 Kuromis](https://www.kuromis.com/)
@@ -822,11 +825,14 @@ parsers:
         - [tag 机场](https://tagxx.vip) 限制 10 个 , 有 emby , 家宽, 维云, 有被攻击
         - [mesl](https://cdn9.meslcloud.com/) 6 个, 有新疆节点, 有被攻击
     - 信息源参考
+	    - 老帖子 51 楼有截图，观察变化 [求推荐高质量的梯 - V2EX](https://fast.v2ex.com/t/933080?p=1)
+	    - 直连机场 [https://jichanggo.com/vlesshysteria2/](https://jichanggo.com/vlesshysteria2/)
+	    - [BaoBao’s Blog——分享机场& VPS的真实使用体验](https://baobaoap.com/)
         - [一个机场收录站点](https://dh.duangks.com/)
         - [机场跑路追踪](https://github.com/limbopro/Paolujichang/issues)
-        - [机场推荐（2025年7月16日更新） - 毒奶 - 欢迎使用代理访问本站。](https://limbopro.com/865.html)
-        - [2025机场推荐与机场评测SSR/V2ray/Trojan订阅 - 机场推荐与机场评测](https://jichangtuijian.com/ssr-v2ray%E4%B8%93%E7%BA%BF%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90.html)
-        - [GitHub - aiboboxx/clashfree: clash节点、免费clash节点、免费节点、免费梯子、clash科学上网、clash翻墙、clash订阅链接、clash for Windows、clash教程、免费公益节点、最新clash免费节点订阅地址、clash免费节点每日更新](https://github.com/aiboboxx/clashfree)
+        - [机场推荐 - 毒奶](https://limbopro.com/865.html)
+        - [机场推荐与机场评测](https://jichangtuijian.com/ssr-v2ray%E4%B8%93%E7%BA%BF%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90.html)
+        - [GitHub - aiboboxx/clashfree](https://github.com/aiboboxx/clashfree)
     - 一元机场
         - [http://两元店.com/](http://xn--5hqx9equq.com/)  
         - [http://一元机场.com](http://xn--4gq62f52gdss.com/)  

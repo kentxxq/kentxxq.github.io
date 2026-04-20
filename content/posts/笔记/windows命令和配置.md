@@ -3,7 +3,7 @@ title: windows命令和配置
 tags:
   - blog
 date: 2023-08-15
-lastmod: 2023-08-15
+lastmod: 2026-04-05
 categories:
   - blog
 description: "记录一些 [[笔记/point/windows|windows]] 命令和配置"

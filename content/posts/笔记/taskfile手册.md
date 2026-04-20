@@ -4,7 +4,7 @@ tags:
   - blog
   - taskfile
 date: 2025-09-08
-lastmod: 2025-12-03
+lastmod: 2025-12-04
 categories:
   - blog
 description: 
@@ -42,12 +42,14 @@ tasks:
     cmds:
       - echo "global default task"
 
+  # 磁盘清理
   clean-dev:
     cmds:
       - pnpm store prune
       - dotnet nuget locals all --clear
       - go clean -modcache
       - go clean -cache
+      - brew cleanup
 ```
 
 ### 极简示例
