@@ -4,7 +4,7 @@ tags:
   - blog
   - 前端
 date: 2024-01-20
-lastmod: 2026-04-18
+lastmod: 2026-04-27
 categories:
   - blog
 description: 
@@ -19,6 +19,7 @@ description:
 ### ios 调试
 
 > 建议先用安卓调试...
+> 无法生成 profile 文件？mac 连接你的 iphone，xcode 的顶部搜索栏选择你的手机，再试一次
 
 1. xcode 设置，登录。manage certificates，创建
 2. 打开应用 keychain，在 login 找到刚创建的证书，`导出 p12`，设置 `密码`

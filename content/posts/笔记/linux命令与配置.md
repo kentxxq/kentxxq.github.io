@@ -1209,6 +1209,8 @@ iptraf-ng
 
 [GitHub - hengyoush/kyanos](https://github.com/hengyoush/kyanos)
 基于eBPF,监控排查网络流量
+
+[obdev/littlesnitch-linux: Open Source components of Little Snitch for Linux](https://github.com/obdev/littlesnitch-linux)
 ```
 
 #### 网络连接排查
