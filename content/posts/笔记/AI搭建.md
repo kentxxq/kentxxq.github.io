@@ -6,7 +6,7 @@ tags:
   - ollama
   - deepseek
 date: 2025-02-11
-lastmod: 2026-03-11
+lastmod: 2026-05-23
 categories:
   - blog
 description: 
@@ -73,3 +73,17 @@ WantedBy=default.target
 2. 运行模型 `ollama run dr7:latest`
 3. 查看 `ollama ps` 的 `PROCESSOR`, `100% CPU` 代表全是 cpu 计算
 4. 如果使用了 gpu, 可以用 `nvidia-smi` 查看 gpu 利用率
+
+## 华为 910b
+
+1. 安装显卡驱动和 CANN，确保 npu-smi 正常
+2. 拉取 MindIE docker 包（包含了 cann，atb，完全解决了依赖问题），拉取 qwen/deepseek 模型
+3. 配置 MindIE 的 `config.json` 文件
+	- modelWeightPath 模型路径
+	- modelName
+	- tensorParallelSize 多卡
+	- deviceIds 绑定的卡 id
+	- "maxSeqLen": 8192 最长上下文
+	- maxBatchSize 并发
+	- kvCacheBlockSize 缓存大小，影响推理速度
+4. 启动 mindie service ，就有 http api 可以用了

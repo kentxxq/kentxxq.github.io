@@ -4,7 +4,7 @@ tags:
   - blog
   - nginx
 date: 2023-07-06
-lastmod: 2025-11-19
+lastmod: 2026-05-15
 categories:
   - blog
 description: "这里记录 [[笔记/point/nginx|nginx]] 的模块编译和升级操作."
@@ -38,9 +38,10 @@ export LDFLAGS="-m64 -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"
 
 
 # 下载,解压 https://nginx.org/en/download.html
-curl http://nginx.org/download/nginx-1.28.0.tar.gz -o nginx-1.28.0.tar.gz
-tar -xf nginx-1.28.0.tar.gz
-cd nginx-1.28.0
+# 优先使用 mainline 版本，官方推荐 mainline，且 bug 修复比 stable 更及时
+curl http://nginx.org/download/nginx-1.31.0.tar.gz -o nginx-1.31.0.tar.gz
+tar -xf nginx-1.31.0.tar.gz
+cd nginx-1.31.0
 
 # 监控信息 --with-http_stub_status_module 
 # ssl证书 --with-http_ssl_module

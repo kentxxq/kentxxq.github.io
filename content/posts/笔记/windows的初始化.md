@@ -4,7 +4,7 @@ tags:
   - blog
   - windows
 date: 2023-06-29
-lastmod: 2026-03-18
+lastmod: 2026-05-10
 categories:
   - blog
 description: "[[笔记/point/windows|windows]] 现在是我主要使用的桌面平台. 因为我挑选并使用了大量的软件工具, 而且经常会跨多设备工作. 所以这里我记录下来, 也给大家做一个参考."
@@ -43,7 +43,9 @@ description: "[[笔记/point/windows|windows]] 现在是我主要使用的桌面
 
 ### 软件列表
 
-- 看图 [GitHub - d2phap/ImageGlass: 🏞 A lightweight, versatile image viewer](https://github.com/d2phap/ImageGlass)
+- 看图
+	- [GitHub - d2phap/ImageGlass: 🏞 A lightweight, versatile image viewer](https://github.com/d2phap/ImageGlass)
+	- 国人写的 [nscript-site/OmniImageViewer: This is a project for the release and progress tracking of OmniImageViewer. OmniImageViewer is a user-friendly image viewing software and a shareware. You can download and use it here, or get it from the Microsoft Store.](https://github.com/nscript-site/OmniImageViewer)
 - 终端 [Tabby - a terminal for a more modern age](https://tabby.sh/)
 - 编码 [Visual Studio Code - Code Editing. Redefined](https://code.visualstudio.com/)
 - 打开超大文本 [EmEditor (Text Editor) – Best Text Editor, Code Editor, CSV Editor, Large File Viewer for Windows (Free versions available)](https://www.emeditor.com/)
