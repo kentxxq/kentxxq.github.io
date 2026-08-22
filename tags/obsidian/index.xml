@@ -1,0 +1,185 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Obsidian - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/obsidian/</link><description>Obsidian - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 24 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/obsidian/" rel="self" type="application/rss+xml"/><item><title>obsidian</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/obsidian/</link><pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/obsidian/</guid><description><![CDATA[<p><code>obsidian</code> 是一个笔记软件.</p>
+<p>要点:</p>
+<ul>
+<li>本地离线, 安全保证</li>
+<li>除同步,发布都免费</li>
+<li>性能良好</li>
+<li>插件丰富</li>
+<li>社区活跃</li>
+</ul>
+<p>使用 <a href="https://prismjs.com/#supported-languages" target="_blank" rel="noopener noreferrer">Prism</a> 进行代码块渲染</p>
+<h2 id="使用技巧" class="headerLink">
+    <a href="#%e4%bd%bf%e7%94%a8%e6%8a%80%e5%b7%a7" class="header-mark"></a>使用技巧</h2><ul>
+<li><a href="https://help.obsidian.md/Plugins/Search#Search%20terms" target="_blank" rel="noopener noreferrer">搜索</a>
+<ul>
+<li><code>&quot;haha&quot;</code> 包含 haha</li>
+<li><code>meeting OR work</code> 包含其中一个</li>
+<li><code>meeting -work</code> 不包含 work</li>
+</ul>
+</li>
+<li>编辑
+<ul>
+<li>缩进 <code>Ctrl/Cmd ]</code> 或 tab</li>
+<li>取消缩进 <code>Ctrl/Cmd [</code></li>
+</ul>
+</li>
+</ul>]]></description></item><item><title>obsidian的发布方案</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/obsidian%E7%9A%84%E5%8F%91%E5%B8%83%E6%96%B9%E6%A1%88/</link><pubDate>Wed, 21 Jun 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/obsidian%E7%9A%84%E5%8F%91%E5%B8%83%E6%96%B9%E6%A1%88/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这里是我在确定使用 <a href="/posts/%E7%AC%94%E8%AE%B0/point/obsidian/">obsidian</a> 记录笔记以后. 对比选择我的博客发布方案.</p>
+<p>之前我的博客和笔记内容是割裂的. 一直使用 vscode 编写博客, 然后 <a href="/posts/%E7%AC%94%E8%AE%B0/point/hugo/">hugo</a> 发布. 而现在我想重新组合我的工作流.</p>
+<h2 id="发布方案" class="headerLink">
+    <a href="#%e5%8f%91%e5%b8%83%e6%96%b9%e6%a1%88" class="header-mark"></a>发布方案</h2><h3 id="现状" class="headerLink">
+    <a href="#%e7%8e%b0%e7%8a%b6" class="header-mark"></a>现状</h3><p>先说结果,我选的 <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer">HEIGE-PCloud/DoIt: A clean, elegant and advanced blog theme for Hugo.</a>.没有哪种方案是十全十美的, 于是我先确定了优先级.</p>]]></description></item><item><title>obsidian的方法论</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/obsidian%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA/</link><pubDate>Wed, 21 Jun 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/obsidian%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这里介绍我如何使用 <a href="/posts/%E7%AC%94%E8%AE%B0/point/obsidian/">obsidian</a> 来记录, 多总结, 总思考. 让 obsidian 真正成为最后一个笔记软件. (除非有其他革命性的创造, ar? 植入芯片?)</p>
+<h2 id="目标" class="headerLink">
+    <a href="#%e7%9b%ae%e6%a0%87" class="header-mark"></a>目标</h2><p>这部分是因为我刷到的一个 b 站视频, 我很认同他的观点. 于是想要来实践.</p>
+<p><img src="/posts/%E9%99%84%E4%BB%B6/%E6%95%B0%E5%AD%97%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%87%91%E5%AD%97%E5%A1%94.jpg"></p>]]></description></item><item><title>obsidian发布hugo-quartz</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/obsidian%E5%8F%91%E5%B8%83hugo-quartz/</link><pubDate>Tue, 20 Jun 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/obsidian%E5%8F%91%E5%B8%83hugo-quartz/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这里是用 <a href="/posts/%E7%AC%94%E8%AE%B0/point/obsidian/">obsidian</a> 发布到 <a href="/posts/%E7%AC%94%E8%AE%B0/point/hugo/">hugo</a> 的 quartz 主题详细操作步骤.</p>
+<p><code>quartz</code> 主题优点如下:</p>
+<ul>
+<li>支持双链语法</li>
+<li>有双链图</li>
+</ul>
+<h2 id="操作步骤" class="headerLink">
+    <a href="#%e6%93%8d%e4%bd%9c%e6%ad%a5%e9%aa%a4" class="header-mark"></a>操作步骤</h2><h3 id="fork-代码库" class="headerLink">
+    <a href="#fork-%e4%bb%a3%e7%a0%81%e5%ba%93" class="header-mark"></a>fork 代码库</h3><ol>
+<li>访问 hugo 模板仓库 <a href="https://github.com/jackyzha0/quartz" target="_blank" rel="noopener noreferrer">jackyzha0/quartz: 🌱 host your own second brain and digital garden for free (github.com)</a></li>
+<li>fork 仓库 <img src="/posts/%E9%99%84%E4%BB%B6/fork-quartz%E4%BB%93%E5%BA%93.png"></li>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/point/git/">git</a> 克隆到本地 <code>git clone https://github.com/YOUR-USERNAME/quartz</code></li>
+</ol>
+<h3 id="初始化动作" class="headerLink">
+    <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96%e5%8a%a8%e4%bd%9c" class="header-mark"></a>初始化动作</h3><ul>
+<li>
+<p>移除 <code>content</code> 内的所有内容</p>]]></description></item><item><title>obsidian插件与配置</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/obsidian%E6%8F%92%E4%BB%B6%E4%B8%8E%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 19 Jun 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/obsidian%E6%8F%92%E4%BB%B6%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这篇文章主要记录我使用 <a href="/posts/%E7%AC%94%E8%AE%B0/point/obsidian/">obsidian</a> 的配置和插件.</p>
+<p>方便自己记录, 也可以让你了解我做了什么让 <a href="/posts/%E7%AC%94%E8%AE%B0/point/obsidian/">obsidian</a> 变得更好用.</p>
+<h2 id="主要配置" class="headerLink">
+    <a href="#%e4%b8%bb%e8%a6%81%e9%85%8d%e7%bd%ae" class="header-mark"></a>主要配置</h2><h3 id="编辑器" class="headerLink">
+    <a href="#%e7%bc%96%e8%be%91%e5%99%a8" class="header-mark"></a>编辑器</h3><p><img src="/posts/%E9%99%84%E4%BB%B6/ob-%E7%BC%96%E8%BE%91%E5%99%A8%E9%85%8D%E7%BD%AE.png"></p>
+<h3 id="文件与链接" class="headerLink">
+    <a href="#%e6%96%87%e4%bb%b6%e4%b8%8e%e9%93%be%e6%8e%a5" class="header-mark"></a>文件与链接</h3><p><img src="/posts/%E9%99%84%E4%BB%B6/ob-%E6%96%87%E4%BB%B6%E4%B8%8E%E9%93%BE%E6%8E%A5%E9%85%8D%E7%BD%AE.png"></p>
+<h2 id="插件" class="headerLink">
+    <a href="#%e6%8f%92%e4%bb%b6" class="header-mark"></a>插件</h2><h3 id="使用中的插件" class="headerLink">
+    <a href="#%e4%bd%bf%e7%94%a8%e4%b8%ad%e7%9a%84%e6%8f%92%e4%bb%b6" class="header-mark"></a>使用中的插件</h3><table>
+	<thead>
+			<tr>
+					<th>插件名称</th>
+					<th>插件作用</th>
+					<th>总结说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Advanced Tables</td>
+					<td>快速写 markdown 的 table</td>
+					<td>非常好用</td>
+			</tr>
+			<tr>
+					<td>excalidraw</td>
+					<td>画图的</td>
+					<td>可以自动生成 svg，并且同步画图改动，兼容性很高</td>
+			</tr>
+			<tr>
+					<td>Find orphaned files and broken links</td>
+					<td>清理文件</td>
+					<td>整理出无效链接和孤儿文件</td>
+			</tr>
+			<tr>
+					<td>tag warpper</td>
+					<td>加强处理 tag</td>
+					<td>批量重命名</td>
+			</tr>
+			<tr>
+					<td>Linter</td>
+					<td>格式化笔记</td>
+					<td>选项很多，需要折腾</td>
+			</tr>
+			<tr>
+					<td>Webpage HTML Export</td>
+					<td>导出 html</td>
+					<td>兼容性非常好</td>
+			</tr>
+			<tr>
+					<td>auto-link-title</td>
+					<td>自动填写网页标题</td>
+					<td>挺好的，可以统一</td>
+			</tr>
+			<tr>
+					<td>easy-typing</td>
+					<td>输入时格式化</td>
+					<td>帮我在英文标点后加上空格</td>
+			</tr>
+			<tr>
+					<td>image-toolkit</td>
+					<td>点击放大图片</td>
+					<td>蛮好的</td>
+			</tr>
+			<tr>
+					<td>emoji-toolbar</td>
+					<td>插入 emoji</td>
+					<td>蛮好的</td>
+			</tr>
+			<tr>
+					<td>Templater</td>
+					<td>模板</td>
+					<td>方便创建日期和文件名模板</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="放弃了的插件" class="headerLink">
+    <a href="#%e6%94%be%e5%bc%83%e4%ba%86%e7%9a%84%e6%8f%92%e4%bb%b6" class="header-mark"></a>放弃了的插件</h3><table>
+	<thead>
+			<tr>
+					<th>插件名称</th>
+					<th>插件作用</th>
+					<th>总结说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Diagrams</td>
+					<td>画图</td>
+					<td>在 ob 没 excalidraw 好用，没导出 svg 这样的定制化功能</td>
+			</tr>
+			<tr>
+					<td>Digital Garden</td>
+					<td>发布站点</td>
+					<td>tag 效果不好、和 frontmatter 似乎冲突比较多、代码不是很活跃</td>
+			</tr>
+			<tr>
+					<td>Remotely Save</td>
+					<td>同步备份</td>
+					<td>全程使用 alist 的 webdav+ 阿里云盘。偶尔无法同步删除，无法删除 <code>.obsidian</code> 里的文件</td>
+			</tr>
+			<tr>
+					<td>livesync 同步</td>
+					<td>同步</td>
+					<td>需要搭建服务器端、其实没有备份功能</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="可能尝试的插件" class="headerLink">
+    <a href="#%e5%8f%af%e8%83%bd%e5%b0%9d%e8%af%95%e7%9a%84%e6%8f%92%e4%bb%b6" class="header-mark"></a>可能尝试的插件</h3><table>
+	<thead>
+			<tr>
+					<th>插件名称</th>
+					<th>插件作用</th>
+					<th>总结说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>sliding panes</td>
+					<td>横向卷动</td>
+					<td>打开多个标签页，然后配合触摸板横向浏览</td>
+			</tr>
+			<tr>
+					<td>obisidian links</td>
+					<td>链接类型转换</td>
+					<td>wikilink, markdown-link, 删除 link 等等</td>
+			</tr>
+	</tbody>
+</table>
+<ul>
+<li>Remote save 设置手动同步? 或者 obsidian 文件夹自己同步?!</li>
+<li><a href="https://github.com/acheong08/rev-obsidian-sync-plugin" target="_blank" rel="noopener noreferrer">GitHub - acheong08/rev-obsidian-sync-plugin</a></li>
+</ul>]]></description></item></channel></rss>

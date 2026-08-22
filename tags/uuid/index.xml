@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>UUID - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/uuid/</link><description>UUID - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 14 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/uuid/" rel="self" type="application/rss+xml"/><item><title>UUID</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/uuid/</link><pubDate>Thu, 14 Mar 2024 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/uuid/</guid><description><![CDATA[<p>UUID 是唯一标识符.</p>
+<ul>
+<li>没有绝对唯一, 但可能性忽略不计. <code>103 万亿个版本 4 UUID 中找到重复项的概率是十亿分之一</code></li>
+<li>通常是 8-4-4-4-12 格式. <code>0f8fad5b-d9cb-469f-a165-70867728950e</code></li>
+<li>有很多的版本标准. <a href="/posts/%E7%AC%94%E8%AE%B0/point/csharp/">csharp</a> 的 <a href="https://learn.microsoft.com/en-us/dotnet/api/system.guid.newguid?view=net-8.0" target="_blank" rel="noopener noreferrer">Guid</a> 就是实现之一
+<ul>
+<li>v 4 版本是现在最常用的版本 <code>Guid.NewGuid()</code></li>
+<li>v 7 版本最新兼容 v 4 格式, 同时支持排序! 理论上可以完全替代 v 4 <code>Guid.CreateVersion7()</code>
+<ul>
+<li>api 的相关讨论 <a href="https://github.com/dotnet/runtime/issues/103658" target="_blank" rel="noopener noreferrer">Extend System.Guid with a new creation API for v7 · Issue #103658 · dotnet/runtime · GitHub</a></li>
+<li>默认使用 <code>DateTime.UtcNow</code>, 没有时区信息</li>
+<li>建议使用 <code>DateTimeOffset.UtcNow</code> 的时区信息来解决全球分布式 id 的问题, 可以让全球的数据排序的时候更准确.</li>
+<li>如果想指定时区, 在 aspnetcore 通过依赖注入的方式就实现 <code>ITimeProvider</code> 接口, 然后注入 <code>_timeProvider</code>, 使用 <code>Guid.CreateVersion7(_timeProvider.GetUtcNow()</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>相关链接</p>]]></description></item></channel></rss>

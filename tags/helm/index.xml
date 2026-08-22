@@ -1,0 +1,82 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Helm - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/helm/</link><description>Helm - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 26 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/helm/" rel="self" type="application/rss+xml"/><item><title>helm手册</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/helm%E6%89%8B%E5%86%8C/</link><pubDate>Wed, 26 Nov 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/helm%E6%89%8B%E5%86%8C/</guid><description><![CDATA[<h3 id="基础概念" class="headerLink">
+    <a href="#%e5%9f%ba%e7%a1%80%e6%a6%82%e5%bf%b5" class="header-mark"></a>基础概念</h3><ul>
+<li>repo 是一个仓库
+<ul>
+<li>相当于 github 的一个用户，下面有很多的应用</li>
+<li>比如有 bitnami  <code>https://charts.bitnami.com/bitnami</code>  ，minio  <code>https://operator.min.io</code></li>
+</ul>
+</li>
+<li>chart 是一个应用模板，包含模板，values 等内容
+<ul>
+<li>values. yaml 可配置的变量，安装时替换模板</li>
+</ul>
+</li>
+<li>release 是一个 chart 发布到 k 8 s 后的实例</li>
+</ul>
+<h3 id="安装" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85" class="header-mark"></a>安装</h3><ol>
+<li><a href="https://github.com/helm/helm/releases" target="_blank" rel="noopener noreferrer">Releases · helm/helm</a></li>
+<li><code>tar xf xxx.tar.gz</code></li>
+<li><code>mv helm /usr/local/sbin/helm</code></li>
+</ol>
+<h3 id="基础操作" class="headerLink">
+    <a href="#%e5%9f%ba%e7%a1%80%e6%93%8d%e4%bd%9c" class="header-mark"></a>基础操作</h3><ul>
+<li>repo 仓库管理 <a href="https://artifacthub.io/" target="_blank" rel="noopener noreferrer">Artifact Hub</a>
+<ul>
+<li>查询所有 repo  <code>helm repo ls</code></li>
+<li>添加 <code>helm repo add bitnami https://charts.bitnami.com/bitnami</code></li>
+<li>更新 <code>helm repo update</code></li>
+</ul>
+</li>
+<li>chart 应用列表
+<ul>
+<li>搜索
+<ul>
+<li><code>helm search hub mysql</code> 网上搜索公共的</li>
+<li><code>helm search repo mysql</code> 只搜索自己 repo 里的</li>
+<li>查看 repo 下的所有版本 <code>helm search repo -l csi-driver-nfs</code></li>
+</ul>
+</li>
+<li>拉取 <code>helm pull bitnami/mysql</code></li>
+<li>安装
+<ul>
+<li>bitnami 仓库下的 mysql，并且自定义名称 <code>helm install my-mysql bitnami/mysql</code></li>
+<li>install 命令可以通过 <code>--set image.tag=latest</code> 或 <code>--values my-values.yaml</code> 修改默认值</li>
+<li>通过 template 渲染成 yaml ，修改 yaml 值</li>
+<li>通过 values 文件。<strong>可以在本地修改 values。然后把 values 放到服务器执行</strong>
+<ol>
+<li><code>helm show values csi-driver-nfs/csi-driver-nfs --namespace kube-system --version 4.12.1 &gt; nfs-values.yaml</code></li>
+<li>修改 values</li>
+<li><code>helm install csi-driver-nfs csi-driver-nfs/csi-driver-nfs --namespace kube-system --version 4.12.1 -f nfs-values.yaml</code></li>
+</ol>
+</li>
+</ul>
+</li>
+<li>升级，就是把 <code>install</code> 改成 <code>upgrade</code> 即可
+<ul>
+<li><code>helm upgrade csi-driver-nfs csi-driver-nfs/csi-driver-nfs --namespace kube-system --version 4.12.1 -f nfs-values.yaml</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>release 部署情况
+<ul>
+<li>部署了哪些应用 <code>helm ls -A</code></li>
+<li>应用详情
+<ul>
+<li><code>helm status my-mysql</code></li>
+<li>查看渲染后的内容 <code>helm get manifest my-mysql -n &lt;namespace&gt;</code></li>
+</ul>
+</li>
+<li>删除 <code>helm uninstall my-mysql</code></li>
+</ul>
+</li>
+</ul>
+<p>编写 helm 脚本:</p>]]></description></item><item><title>helm</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/helm/</link><pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/helm/</guid><description><![CDATA[<p><code>helm</code> 是 <a href="/posts/%E7%AC%94%E8%AE%B0/point/k8s/">k8s</a> 用来将应用所需资源打包为一个整体的工具。可类比为 yum/centos ,apt/ubuntu.</p>
+<h3 id="优势" class="headerLink">
+    <a href="#%e4%bc%98%e5%8a%bf" class="header-mark"></a>优势</h3><ul>
+<li><strong>整体部署</strong>: 例如后台 api 服务需要 deployment 对 pod 进行管理、同时需要 service 对外提供服务</li>
+<li><strong>统一管理</strong>: 整个应用的所有关联资源统一升级/回滚</li>
+<li><strong>版本化</strong>: 一些中间件的部署可以通过版本化来进行迭代</li>
+<li><strong>维护成本</strong>: 通过少数几个通用的 helm 模板来打包。不需要开发者对每个代码仓库进行改动</li>
+</ul>]]></description></item></channel></rss>

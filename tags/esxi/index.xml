@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Esxi - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/esxi/</link><description>Esxi - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 03 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/esxi/" rel="self" type="application/rss+xml"/><item><title>esxi手册</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/esxi%E6%89%8B%E5%86%8C/</link><pubDate>Wed, 03 Sep 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/esxi%E6%89%8B%E5%86%8C/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这里是操作学习 esxi 虚拟机的记录。</p>
+<h2 id="手册" class="headerLink">
+    <a href="#%e6%89%8b%e5%86%8c" class="header-mark"></a>手册</h2><h3 id="启用-sshesxi-shell" class="headerLink">
+    <a href="#%e5%90%af%e7%94%a8-sshesxi-shell" class="header-mark"></a>启用 ssh/esxi shell</h3><ol>
+<li>使用 windows 上的 VMware sphere client 连接服务器</li>
+<li>选择主机=》配置=》安全配置文件=》属性=》选择属性启用</li>
+</ol>
+<h3 id="ssh-连接报错" class="headerLink">
+    <a href="#ssh-%e8%bf%9e%e6%8e%a5%e6%8a%a5%e9%94%99" class="header-mark"></a>ssh 连接报错</h3><ul>
+<li>算法问题 <code>Unable to negotiate with 192.168.6.249 port 22: no matching host key type found. Their offer: ssh-rsa,ssh-dss</code>
+<ul>
+<li><code>ssh -oHostKeyAlgorithms=+ssh-rsa root@192.168.6.249</code> 临时启用</li>
+</ul>
+</li>
+</ul>]]></description></item></channel></rss>

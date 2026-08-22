@@ -1,0 +1,5 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>CRI - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/cri/</link><description>CRI - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 02 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/cri/" rel="self" type="application/rss+xml"/><item><title>CRI</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/cri/</link><pubDate>Wed, 02 Aug 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/cri/</guid><description><![CDATA[<p><code>CRI</code> 是 <code>容器运行时接口Container Runtime Interface</code> 的缩写.</p>
+<p>要点:</p>
+<ul>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/point/docker/">docker</a>, <code>CRI-O</code>, <a href="/posts/%E7%AC%94%E8%AE%B0/point/Containerd/">Containerd</a> 等等都实现了 <a href="/posts/%E7%AC%94%E8%AE%B0/point/CRI/">CRI</a> 规范.</li>
+</ul>]]></description></item></channel></rss>

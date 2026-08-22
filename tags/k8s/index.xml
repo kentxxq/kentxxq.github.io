@@ -1,0 +1,424 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>K8s - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/k8s/</link><description>K8s - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 26 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/k8s/" rel="self" type="application/rss+xml"/><item><title>helm手册</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/helm%E6%89%8B%E5%86%8C/</link><pubDate>Wed, 26 Nov 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/helm%E6%89%8B%E5%86%8C/</guid><description><![CDATA[<h3 id="基础概念" class="headerLink">
+    <a href="#%e5%9f%ba%e7%a1%80%e6%a6%82%e5%bf%b5" class="header-mark"></a>基础概念</h3><ul>
+<li>repo 是一个仓库
+<ul>
+<li>相当于 github 的一个用户，下面有很多的应用</li>
+<li>比如有 bitnami  <code>https://charts.bitnami.com/bitnami</code>  ，minio  <code>https://operator.min.io</code></li>
+</ul>
+</li>
+<li>chart 是一个应用模板，包含模板，values 等内容
+<ul>
+<li>values. yaml 可配置的变量，安装时替换模板</li>
+</ul>
+</li>
+<li>release 是一个 chart 发布到 k 8 s 后的实例</li>
+</ul>
+<h3 id="安装" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85" class="header-mark"></a>安装</h3><ol>
+<li><a href="https://github.com/helm/helm/releases" target="_blank" rel="noopener noreferrer">Releases · helm/helm</a></li>
+<li><code>tar xf xxx.tar.gz</code></li>
+<li><code>mv helm /usr/local/sbin/helm</code></li>
+</ol>
+<h3 id="基础操作" class="headerLink">
+    <a href="#%e5%9f%ba%e7%a1%80%e6%93%8d%e4%bd%9c" class="header-mark"></a>基础操作</h3><ul>
+<li>repo 仓库管理 <a href="https://artifacthub.io/" target="_blank" rel="noopener noreferrer">Artifact Hub</a>
+<ul>
+<li>查询所有 repo  <code>helm repo ls</code></li>
+<li>添加 <code>helm repo add bitnami https://charts.bitnami.com/bitnami</code></li>
+<li>更新 <code>helm repo update</code></li>
+</ul>
+</li>
+<li>chart 应用列表
+<ul>
+<li>搜索
+<ul>
+<li><code>helm search hub mysql</code> 网上搜索公共的</li>
+<li><code>helm search repo mysql</code> 只搜索自己 repo 里的</li>
+<li>查看 repo 下的所有版本 <code>helm search repo -l csi-driver-nfs</code></li>
+</ul>
+</li>
+<li>拉取 <code>helm pull bitnami/mysql</code></li>
+<li>安装
+<ul>
+<li>bitnami 仓库下的 mysql，并且自定义名称 <code>helm install my-mysql bitnami/mysql</code></li>
+<li>install 命令可以通过 <code>--set image.tag=latest</code> 或 <code>--values my-values.yaml</code> 修改默认值</li>
+<li>通过 template 渲染成 yaml ，修改 yaml 值</li>
+<li>通过 values 文件。<strong>可以在本地修改 values。然后把 values 放到服务器执行</strong>
+<ol>
+<li><code>helm show values csi-driver-nfs/csi-driver-nfs --namespace kube-system --version 4.12.1 &gt; nfs-values.yaml</code></li>
+<li>修改 values</li>
+<li><code>helm install csi-driver-nfs csi-driver-nfs/csi-driver-nfs --namespace kube-system --version 4.12.1 -f nfs-values.yaml</code></li>
+</ol>
+</li>
+</ul>
+</li>
+<li>升级，就是把 <code>install</code> 改成 <code>upgrade</code> 即可
+<ul>
+<li><code>helm upgrade csi-driver-nfs csi-driver-nfs/csi-driver-nfs --namespace kube-system --version 4.12.1 -f nfs-values.yaml</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>release 部署情况
+<ul>
+<li>部署了哪些应用 <code>helm ls -A</code></li>
+<li>应用详情
+<ul>
+<li><code>helm status my-mysql</code></li>
+<li>查看渲染后的内容 <code>helm get manifest my-mysql -n &lt;namespace&gt;</code></li>
+</ul>
+</li>
+<li>删除 <code>helm uninstall my-mysql</code></li>
+</ul>
+</li>
+</ul>
+<p>编写 helm 脚本:</p>]]></description></item><item><title>docker镜像源</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/docker%E9%95%9C%E5%83%8F%E6%BA%90/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/docker%E9%95%9C%E5%83%8F%E6%BA%90/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>为什么会有这篇文章, 是因为我总是会遇到 <a href="/posts/%E7%AC%94%E8%AE%B0/point/docker/">docker</a>, <a href="/posts/%E7%AC%94%E8%AE%B0/point/Containerd/">Containerd</a>, <a href="/posts/%E7%AC%94%E8%AE%B0/point/k8s/">k8s</a>, <a href="/posts/%E7%AC%94%E8%AE%B0/point/minikube/">minikube</a> 等等网络问题.</p>
+<p>统一在这里进行测试解决, 并且做成可用的方案. 工作和学习中无限使用!</p>
+<h2 id="搭建-registry" class="headerLink">
+    <a href="#%e6%90%ad%e5%bb%ba-registry" class="header-mark"></a>搭建 registry</h2><div class="code-block highlight is-open show-line-numbers  tw:group tw:my-2">
+  <div class="
+    
+    tw:flex 
+    tw:flex-row
+    tw:flex-1 
+    tw:justify-between 
+    tw:w-full tw:bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw:mx-2 
+        tw:flex
+        tw:flex-row
+        tw:flex-1"
+      aria-hidden="true">
+          <span class="tw:group-[.is-open]:rotate-90 tw:transition-[transform] tw:duration-500 tw:ease-in-out tw:print:hidden! tw:w-min tw:h-min tw:my-1 tw:mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></span>
+          <span class="tw:select-none tw:my-1! tw:block">yml</span>
+      </button>
+
+   <div class="tw:flex">
+      <button 
+        class="
+          line-number-button
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.show-line-numbers]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw:select-none 
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.is-wrap]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw:select-none
+          tw:mx-2 
+          tw:hidden
+          tw:group-[.is-open]:block
+          tw:hover:text-fgColor-link 
+          tw:print:hidden!"
+        title="Copy code">
+          <span class="copy-icon tw:block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw:hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw:select-none 
+          tw:mx-2 
+          tw:block 
+          tw:group-[.is-open]:hidden 
+          tw:print:hidden!" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw:block tw:m-0 tw:p-0"><code 
+    id="codeblock-id-1" 
+    class="
+      chroma 
+      tw:block! 
+      tw:p-0
+      tw:m-0
+      tw:transition-[max-height] 
+      tw:duration-500 
+      tw:ease-in-out 
+      tw:group-[.is-closed]:max-h-0! 
+      tw:group-[.is-wrap]:text-wrap
+      tw:overflow-y-hidden
+      tw:overflow-x-auto
+      tw:scrollbar-thin
+      "><span class="line"><span class="cl"><span class="nt">registry-demo</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">registry:2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="m">5000</span><span class="p">:</span><span class="m">5000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/data/registry:/var/lib/registry</span></span></span></code></pre>
+</div>
+<p>#todo/笔记 !!!!!!</p>]]></description></item><item><title>k8s安装</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/k8s%E5%AE%89%E8%A3%85/</link><pubDate>Wed, 16 Aug 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/k8s%E5%AE%89%E8%A3%85/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>安装 <a href="/posts/%E7%AC%94%E8%AE%B0/point/k8s/">k8s</a> 的记录</p>
+<ul>
+<li>20230606 第一版 1.28</li>
+<li>20251126 更新到 1.34</li>
+</ul>
+<h2 id="安装方式对比" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85%e6%96%b9%e5%bc%8f%e5%af%b9%e6%af%94" class="header-mark"></a>安装方式对比</h2><p><img src="/posts/%E9%99%84%E4%BB%B6/k8s%E7%9A%84%E4%BC%A0%E7%BB%9F%E5%AE%89%E8%A3%85%E4%B8%8EPod%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85.png"></p>
+<table>
+	<thead>
+			<tr>
+					<th>安装方式</th>
+					<th>主要区别</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>传统方式</td>
+					<td>支撑性软件都是以服务的样式来进行运行，其他的组件以 pod 的方式来运行</td>
+			</tr>
+			<tr>
+					<td>Pod 方式</td>
+					<td>除了 kubelet 和容器环境基于服务的方式运行，其他的都以 pod 的方式来运行。<br>所有的 pod 都被 kubelet 以 manifest(配置清单) 的方式进行统一管理。<br>由于这种 pod 是基于节点指定目录下的配置文件统一管理的，所有我们将这些 pod 称为静态 pod</td>
+			</tr>
+	</tbody>
+</table>
+<ul>
+<li>传统方式
+<ul>
+<li>软件源</li>
+<li>二进制</li>
+<li>ansible 自动化</li>
+</ul>
+</li>
+<li>pod 方式
+<ul>
+<li>kubeadm</li>
+<li>minikube</li>
+</ul>
+</li>
+</ul>
+<h2 id="安装路线" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85%e8%b7%af%e7%ba%bf" class="header-mark"></a>安装路线</h2><p>目标</p>]]></description></item><item><title>k8s常用命令和配置</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/k8s%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%92%8C%E9%85%8D%E7%BD%AE/</link><pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/k8s%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%92%8C%E9%85%8D%E7%BD%AE/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>记录 <a href="/posts/%E7%AC%94%E8%AE%B0/point/k8s/">k8s</a> 的常用命令</p>
+<h2 id="命令" class="headerLink">
+    <a href="#%e5%91%bd%e4%bb%a4" class="header-mark"></a>命令</h2><h3 id="资源简写" class="headerLink">
+    <a href="#%e8%b5%84%e6%ba%90%e7%ae%80%e5%86%99" class="header-mark"></a>资源简写</h3><p><code>kubectl api-resources</code> 可以查看资源简写。常用如下:</p>
+<table>
+	<thead>
+			<tr>
+					<th>name</th>
+					<th>alias</th>
+					<th>apiversion</th>
+					<th>namespace</th>
+					<th>lkind</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>namespaces</td>
+					<td>ns</td>
+					<td><code>v1</code></td>
+					<td>false</td>
+					<td>Namespace</td>
+			</tr>
+			<tr>
+					<td>deployments</td>
+					<td>deploy</td>
+					<td><code>apps/v1</code></td>
+					<td>true</td>
+					<td>Deployment</td>
+			</tr>
+			<tr>
+					<td>ingresses</td>
+					<td>ing</td>
+					<td><code>networking.k8s.io/v1</code></td>
+					<td>true</td>
+					<td>Ingress</td>
+			</tr>
+			<tr>
+					<td>configmaps</td>
+					<td>cm</td>
+					<td><code>v1</code></td>
+					<td>true</td>
+					<td>ConfigMap</td>
+			</tr>
+			<tr>
+					<td>services</td>
+					<td>svc</td>
+					<td><code>v1</code></td>
+					<td>true</td>
+					<td>Service</td>
+			</tr>
+			<tr>
+					<td>serviceaccounts</td>
+					<td>sa</td>
+					<td><code>v1</code></td>
+					<td>true</td>
+					<td>ServiceAccount</td>
+			</tr>
+			<tr>
+					<td>nodes</td>
+					<td>no</td>
+					<td><code>v1</code></td>
+					<td>false</td>
+					<td>Node</td>
+			</tr>
+			<tr>
+					<td>persistentvolumeclaims</td>
+					<td>pvc</td>
+					<td><code>v1</code></td>
+					<td>true</td>
+					<td>PersistentVolumeClaim</td>
+			</tr>
+			<tr>
+					<td>persistentvolumes</td>
+					<td>pv</td>
+					<td><code>v1</code></td>
+					<td>false</td>
+					<td>PersistentVolume</td>
+			</tr>
+	</tbody>
+</table>
+<blockquote>
+  <p>如果你安装了 <a href="/posts/%E7%AC%94%E8%AE%B0/lstio/">lstio</a> 这样有自定义资源的组件，一样也会出现在这里</p>]]></description></item><item><title>CKA认证</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cka%E8%AE%A4%E8%AF%81/</link><pubDate>Mon, 14 Aug 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/cka%E8%AE%A4%E8%AF%81/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>CKA 是 <a href="/posts/%E7%AC%94%E8%AE%B0/point/k8s/">k8s</a> 的一个管理员认证, 我也弄了一个证书 <a href="/posts/%E9%99%84%E4%BB%B6/CKA%E8%AF%81%E4%B9%A6.pdf">CKA证书</a>.</p>
+<h2 id="考试题" class="headerLink">
+    <a href="#%e8%80%83%e8%af%95%e9%a2%98" class="header-mark"></a>考试题</h2><h3 id="扩容" class="headerLink">
+    <a href="#%e6%89%a9%e5%ae%b9" class="header-mark"></a>扩容</h3><p>将名为 my-nginx 的 deployment 的数量，扩展至 10 个 pods.</p>
+<p>环境准备:</p>
+<div class="code-block highlight is-open show-line-numbers  tw:group tw:my-2">
+  <div class="
+    
+    tw:flex 
+    tw:flex-row
+    tw:flex-1 
+    tw:justify-between 
+    tw:w-full tw:bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw:mx-2 
+        tw:flex
+        tw:flex-row
+        tw:flex-1"
+      aria-hidden="true">
+          <span class="tw:group-[.is-open]:rotate-90 tw:transition-[transform] tw:duration-500 tw:ease-in-out tw:print:hidden! tw:w-min tw:h-min tw:my-1 tw:mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></span>
+          <span class="tw:select-none tw:my-1! tw:block">shell</span>
+      </button>
+
+   <div class="tw:flex">
+      <button 
+        class="
+          line-number-button
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.show-line-numbers]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw:select-none 
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.is-wrap]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw:select-none
+          tw:mx-2 
+          tw:hidden
+          tw:group-[.is-open]:block
+          tw:hover:text-fgColor-link 
+          tw:print:hidden!"
+        title="Copy code">
+          <span class="copy-icon tw:block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw:hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw:select-none 
+          tw:mx-2 
+          tw:block 
+          tw:group-[.is-open]:hidden 
+          tw:print:hidden!" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw:block tw:m-0 tw:p-0"><code 
+    id="codeblock-id-1" 
+    class="
+      chroma 
+      tw:block! 
+      tw:p-0
+      tw:m-0
+      tw:transition-[max-height] 
+      tw:duration-500 
+      tw:ease-in-out 
+      tw:group-[.is-closed]:max-h-0! 
+      tw:group-[.is-wrap]:text-wrap
+      tw:overflow-y-hidden
+      tw:overflow-x-auto
+      tw:scrollbar-thin
+      "><span class="line"><span class="cl">kubectl create deployment my-nginx --image<span class="o">=</span>nginx</span></span></code></pre>
+</div>
+<p>答题:</p>]]></description></item><item><title>k8s组件剖析</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/k8s%E7%BB%84%E4%BB%B6%E5%89%96%E6%9E%90/</link><pubDate>Tue, 01 Aug 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/k8s%E7%BB%84%E4%BB%B6%E5%89%96%E6%9E%90/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p><a href="/posts/%E7%AC%94%E8%AE%B0/point/k8s/">k8s</a> 的组件学习记录</p>
+<p>主要组件如下:</p>
+<ul>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/k8s%E7%BB%84%E4%BB%B6%E5%89%96%E6%9E%90/#%E5%AE%B9%E5%99%A8">容器技术</a></li>
+<li>Api-server: 提供 api 接口作为主要入口</li>
+<li>Etcd: 存储配置和状态信息</li>
+<li>Controller Manager: 控制器, 管理 Replication,Deployment 等等</li>
+<li>Scheduler: 调度分发应用程序</li>
+<li>kubelet: 管理容器的启动和停止, 健康状态</li>
+<li>kube-proxy: 每个节点上的代理,转发的实现</li>
+<li>CoreDNS: 内部的 dns 解析</li>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/k8s%E7%BB%84%E4%BB%B6%E5%89%96%E6%9E%90/#%E7%BD%91%E7%BB%9C%E7%BB%84%E4%BB%B6">网络组件</a>: 联通节点, 容器网络</li>
+<li>Ingress Controller: 提供对外的入口. 承接 Http, https 流量</li>
+</ul>
+<h2 id="容器" class="headerLink">
+    <a href="#%e5%ae%b9%e5%99%a8" class="header-mark"></a>容器</h2><ul>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/point/k8s/">k8s</a> 通过 <a href="/posts/%E7%AC%94%E8%AE%B0/point/CRI/">CRI</a> 规范来进行实际的编排操作.</li>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/point/docker/">docker</a> 操作 <a href="/posts/%E7%AC%94%E8%AE%B0/point/Containerd/">Containerd</a></li>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/point/Containerd/">Containerd</a> 操作符合 <a href="/posts/%E7%AC%94%E8%AE%B0/point/OCI/">OCI</a> 标准的容器运行时. 采用 <a href="/posts/%E7%AC%94%E8%AE%B0/point/runc/">runc</a> 为默认容器运行时.</li>
+</ul>
+<p><img src="/posts/%E9%99%84%E4%BB%B6/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81%E5%9B%BE1.png"></p>]]></description></item><item><title>k8s</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/k8s/</link><pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/k8s/</guid><description><![CDATA[<p><code>k8s</code> 是非常流行的容器编排工具.</p>
+<p>要点:</p>
+<ul>
+<li>免费</li>
+<li>社区,生态强大</li>
+<li>事实标准</li>
+</ul>]]></description></item></channel></rss>

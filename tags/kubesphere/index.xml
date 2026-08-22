@@ -1,0 +1,8 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Kubesphere - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/kubesphere/</link><description>Kubesphere - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 28 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/kubesphere/" rel="self" type="application/rss+xml"/><item><title>kubesphere</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/kubesphere/</link><pubDate>Fri, 28 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/kubesphere/</guid><description><![CDATA[<p><code>kubesphere</code> 是一个 <a href="/posts/%E7%AC%94%E8%AE%B0/point/k8s/">k8s</a> 工具, 帮助你搭建和展示.</p>
+<p>要点:</p>
+<ul>
+<li>开源</li>
+<li>免费</li>
+</ul>
+<h3 id="cicd" class="headerLink">
+    <a href="#cicd" class="header-mark"></a>CICD</h3><p><a href="/posts/%E7%AC%94%E8%AE%B0/point/jenkins/">jenkins</a> 的工作命名空间是 <code>kubesphere-devops-worker</code></p>]]></description></item></channel></rss>

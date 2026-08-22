@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Git - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/git/</link><description>Git - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 24 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/git/" rel="self" type="application/rss+xml"/><item><title>git</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/git/</link><pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/git/</guid><description><![CDATA[<p><code>git</code> 是一个代码管理工具.</p>
+<p>要点:</p>
+<ul>
+<li>非常流行, 社区庞大</li>
+<li>方便多人的协作办公</li>
+<li>人人本地一份代码</li>
+</ul>]]></description></item><item><title>git-openssh的免密</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/git-openssh%E7%9A%84%E5%85%8D%E5%AF%86/</link><pubDate>Wed, 21 Jun 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/git-openssh%E7%9A%84%E5%85%8D%E5%AF%86/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>我的使用 <a href="/posts/%E7%AC%94%E8%AE%B0/point/git/">git</a> 操作代码. 而 git 的通信会用到 <a href="/posts/%E7%AC%94%E8%AE%B0/point/openssh/">openssh</a>.</p>
+<p>openssh 为了保证安全. 提供了私钥和公钥. 其中私钥可以密码加密, 保证安全性. 所以我就加密了.导致了什么问题呢?</p>
+<p>每次我用到 git 的时候, 都提示我输入密码. 所以我今天就来配置 <a href="/posts/%E7%AC%94%E8%AE%B0/point/ssh-agent/">ssh-agent</a>.</p>]]></description></item><item><title>git教程</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/git%E6%95%99%E7%A8%8B/</link><pubDate>Wed, 21 Jun 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/git%E6%95%99%E7%A8%8B/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这里用来记录一些我可能用到的 <a href="/posts/%E7%AC%94%E8%AE%B0/point/git/">git</a> 命令. 每次去网上搜集都很麻烦, 还需要验证. 而这里的命令都经过了我的验证..</p>
+<h2 id="配置" class="headerLink">
+    <a href="#%e9%85%8d%e7%bd%ae" class="header-mark"></a>配置</h2><h3 id="config-配置" class="headerLink">
+    <a href="#config-%e9%85%8d%e7%bd%ae" class="header-mark"></a>config 配置</h3><p><code>~/.ssh/config</code> 文件可以处理多种问题。</p>
+<ul>
+<li>多个密钥，不同密钥服务于不同仓库/用户</li>
+<li>github 的连接问题 <code>ssh connect to host github.com port 22 connection timed out</code> ，<a href="https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port" target="_blank" rel="noopener noreferrer">github官方也有对此说明</a></li>
+</ul>
+<p>下面是一个示例</p>]]></description></item></channel></rss>

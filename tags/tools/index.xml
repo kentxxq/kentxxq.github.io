@@ -1,0 +1,67 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Tools - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/tools/</link><description>Tools - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 26 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/tools/" rel="self" type="application/rss+xml"/><item><title>ipsec-vpn搭建</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ipsec-vpn%E6%90%AD%E5%BB%BA/</link><pubDate>Fri, 26 Jan 2024 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ipsec-vpn%E6%90%AD%E5%BB%BA/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>公司有一个敏感站点，限制了特定的 ip 访问。</p>
+<p>可是过年在家，牛马还是要干活的。于是就需要一个可以可以鉴权的服务，进行请求的转发。</p>
+<p>常见的就是使用 vpn 连接到某个公网服务器，然后服务器接管流量，转发到特定站点。</p>]]></description></item><item><title>工具收集</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%B7%A5%E5%85%B7%E6%94%B6%E9%9B%86/</link><pubDate>Fri, 07 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%B7%A5%E5%85%B7%E6%94%B6%E9%9B%86/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>记录和收集工具, 做到笔记里感觉比书签要好用.</p>
+<h2 id="拼车" class="headerLink">
+    <a href="#%e6%8b%bc%e8%bd%a6" class="header-mark"></a>拼车</h2><p>每个 app 都有不一样的合租政策. 需要提前了解! microsoft365 对比 wps</p>
+<ul>
+<li><a href="https://www.nodeseek.com/categories/carpool" target="_blank" rel="noopener noreferrer">nodeseek拼车版块</a></li>
+<li><a href="https://v2ex.com/go/cosub" target="_blank" rel="noopener noreferrer">V2EX › 拼车</a></li>
+<li><a href="https://www.duyaoss.com/archives/1/" target="_blank" rel="noopener noreferrer">DuyaoSS</a>
+<ul>
+<li><a href="https://www.ihezu.cn/" target="_blank" rel="noopener noreferrer">奈飞小铺 - 智能账号合租平台</a></li>
+<li><a href="https://www.findstars.cn/" target="_blank" rel="noopener noreferrer">寻星 - 任天堂switch游戏试玩合租平台</a></li>
+<li><a href="https://nf.video/24MAX" target="_blank" rel="noopener noreferrer">银河录像局 次世代合租平台</a> 有备案</li>
+</ul>
+</li>
+<li><a href="https://universalbus.cn/?s=voyFIfa3lt" target="_blank" rel="noopener noreferrer">杭州十全信息科技有限公司-环球巴士</a> 有备案</li>
+<li><a href="https://www.fmlshop.com/" target="_blank" rel="noopener noreferrer">家庭E站 - 优质账号合租服务平台</a></li>
+<li><a href="https://naifei.pro/" target="_blank" rel="noopener noreferrer">奈飞Pro - Netflix|Spotify|YouTube|Disney+|HBO合租</a></li>
+</ul>
+<h2 id="开源自建" class="headerLink">
+    <a href="#%e5%bc%80%e6%ba%90%e8%87%aa%e5%bb%ba" class="header-mark"></a>开源自建</h2><ul>
+<li>论坛 <a href="https://github.com/discourse/discourse" target="_blank" rel="noopener noreferrer">GitHub - discourse/discourse: A platform for community discussion. Free, open, simple.</a>
+<ul>
+<li><a href="https://linux.do/" target="_blank" rel="noopener noreferrer">LINUX DO</a></li>
+<li><a href="https://community.openai.com/t/is-it-really-not-possible-to-change-the-email-name-and-phone-number-associated-with-an-account/72165/13" target="_blank" rel="noopener noreferrer">openai 社区</a></li>
+<li>bitwarden 的论坛</li>
+</ul>
+</li>
+<li>web 聊天 <a href="https://github.com/zulip/zulip/" target="_blank" rel="noopener noreferrer">GitHub - zulip/zulip: Zulip server and web application. Open-source team chat that helps teams stay productive and focused.</a></li>
+<li>基于 cf 的短链服务 <a href="https://github.com/oiov/wr.do" target="_blank" rel="noopener noreferrer">GitHub - oiov/wr.do: Set up your DNS and shorten URLs with a few clicks, build with cloudflare.</a></li>
+<li>邮件服务
+<ul>
+<li>自建 <a href="https://github.com/foxcpp/maddy" target="_blank" rel="noopener noreferrer">GitHub - foxcpp/maddy: ✉️ Composable all-in-one mail server.</a></li>
+<li>resend 发送邮件</li>
+<li><a href="https://github.com/beilunyang/moemail" target="_blank" rel="noopener noreferrer">GitHub - beilunyang/moemail: 一个基于 NextJS + Cloudflare 技术栈构建的可爱临时邮箱服务🎉</a></li>
+<li><a href="https://github.com/CH563/fakemail" target="_blank" rel="noopener noreferrer">GitHub - CH563/fakemail: 📪The free temporary email service powered by Cloudflare</a></li>
+<li><a href="https://javayhu.com/da-jian-mian-fei-de-qi-ye-you-xiang-gmail-resend-cloudflare/" target="_blank" rel="noopener noreferrer">搭建免费的企业邮箱(Gmail+Resend+Cloudflare)</a></li>
+<li>隐私邮箱 protonmail</li>
+</ul>
+</li>
+<li>自己部署 [🙏🏻🙏🏻🙏🏻我是个小公司桌面运维，老板让我给他开发个 AI 大</li>
+<li>模型…… - V2EX](<a href="https://www.v2ex.com/t/1066362" target="_blank" rel="noopener noreferrer">https://www.v2ex.com/t/1066362</a>)</li>
+</ul>
+<h2 id="ai" class="headerLink">
+    <a href="#ai" class="header-mark"></a>AI</h2><ul>
+<li>快速开发智能体工作流 <a href="https://github.com/strands-agents/sdk-python" target="_blank" rel="noopener noreferrer">strands-agents/sdk-python: A model-driven approach to building AI agents in just a few lines of code.</a></li>
+<li>捕捉脸部动作, 映射到人物/动物 <a href="https://github.com/KwaiVGI/LivePortrait/blob/main/readme_zh_cn.md" target="_blank" rel="noopener noreferrer">LivePortrait</a></li>
+<li>离线换脸 <a href="https://github.com/idootop/MagicMirror" target="_blank" rel="noopener noreferrer">GitHub - idootop/MagicMirror: Instant AI Face Swap, Hairstyles &amp; Outfits — One click to a brand new you! 一键 AI 换脸、发型、穿搭，发现更美的自己 ✨</a></li>
+<li>ai 客户端
+<ul>
+<li>nextchat <a href="https://github.com/Yidadaa/ChatGPT-Next-Web" target="_blank" rel="noopener noreferrer">pc客户端+自部署web端</a></li>
+<li>更多功能的 nextchat <a href="https://github.com/lobehub/lobe-chat" target="_blank" rel="noopener noreferrer">GitHub - lobehub/lobe-chat: 🤯 Lobe Chat </a></li>
+<li><a href="https://github.com/ai-shifu/ChatALL" target="_blank" rel="noopener noreferrer">GitHub - ai-shifu/ChatALL: Concurrently chat with ChatGPT, Bing Chat, Bard, Alpaca, Vicuna, Claude, ChatGLM, MOSS, 讯飞星火, 文心一言 and more, discover the best answers</a></li>
+</ul>
+</li>
+<li><a href="https://poe.com/" target="_blank" rel="noopener noreferrer">Poe</a> 提供各个公司的多种 AI 模型</li>
+<li><a href="https://chat.openai.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a> 有免费/付费服务</li>
+<li>模板
+<ul>
+<li><a href="https://atomgit.com/lingma/lingma-project-rule-template" target="_blank" rel="noopener noreferrer">通义灵码规则模板</a></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+  <p><a href="https://platform.openai.com/docs/models/overview" target="_blank" rel="noopener noreferrer">OpenAI的Models文档</a></p>]]></description></item></channel></rss>

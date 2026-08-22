@@ -1,0 +1,26 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>网盘 - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/%E7%BD%91%E7%9B%98/</link><description>网盘 - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 27 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/%E7%BD%91%E7%9B%98/" rel="self" type="application/rss+xml"/><item><title>网盘</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%9B%98/</link><pubDate>Mon, 27 May 2024 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%9B%98/</guid><description><![CDATA[<p>记录一下网盘特点, 帮助选择.</p>
+<ul>
+<li>onedrive 网盘.  国外存储, 不过审
+<ul>
+<li>250 gb 的上传下载限制, 如果 tb 级别数据, 需要注意 <a href="https://support.microsoft.com/zh-cn/office/onedrive-%E5%92%8C-sharepoint-%E4%B8%AD%E7%9A%84%E9%99%90%E5%88%B6%E5%92%8C%E9%99%90%E5%88%B6-64883a5d-228e-48f5-b3d2-eb39e07630fa#individualfilesize" target="_blank" rel="noopener noreferrer">OneDrive 和 SharePoint 中的限制和限制 - Microsoft 支持</a></li>
+</ul>
+</li>
+<li>阿里网盘. 资源挺多, 我的空间挺大
+<ul>
+<li>客户端 2 m/s</li>
+<li>webdav 500 kb/s</li>
+</ul>
+</li>
+<li>天翼网盘.
+<ul>
+<li><a href="https://www.hmxz.org/" target="_blank" rel="noopener noreferrer">海绵小站-天翼云盘资源分享社区</a> 搜资源</li>
+<li>绑定融合套餐, 免费用.</li>
+<li>mac 没有同步盘</li>
+</ul>
+</li>
+<li>google 云盘绑定 google one 套餐使用</li>
+<li>pikpak 和 google 一样下载上传都要代理</li>
+<li>115 不限速, 支持 webdav, 通过 alist 和阿里云盘秒传, 但是有很多 issues, 不太稳.  很多人也怕跑路, 永久的要 3800. 购买 20 年了, 不建议买永久。有官方 openapi，离线下载不错，但是官方对影视削刮有风控，但是允许关联 infuse，vidhub，飞牛等第三方</li>
+<li>123 网盘比 115 便宜，开会员也有官方 webdav，有官方 openapi。但是影视资源少</li>
+</ul>
+<p>对 <a href="/posts/%E7%AC%94%E8%AE%B0/point/alist/">alist</a> 支持不好, 淘汰</p>]]></description></item></channel></rss>

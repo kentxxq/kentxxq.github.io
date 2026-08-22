@@ -1,0 +1,84 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>AI - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/ai/</link><description>AI - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 11 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/ai/" rel="self" type="application/rss+xml"/><item><title>AI</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/ai/</link><pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/ai/</guid><description>&lt;p>现在的 AI 主要是都是生成式 AI&lt;/p></description></item><item><title>AI工具选型</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ai%E5%B7%A5%E5%85%B7%E9%80%89%E5%9E%8B/</link><pubDate>Thu, 30 Oct 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ai%E5%B7%A5%E5%85%B7%E9%80%89%E5%9E%8B/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p><a href="/posts/AI/">AI</a> 已经在编码的时候必不可少，记录一下选型/使用。</p>
+<h2 id="工作生活兼顾" class="headerLink">
+    <a href="#%e5%b7%a5%e4%bd%9c%e7%94%9f%e6%b4%bb%e5%85%bc%e9%a1%be" class="header-mark"></a>工作生活兼顾</h2><p><strong>chatgpt 日常，国内豆包国内资讯</strong></p>
+<ul>
+<li>需求
+<ul>
+<li>海外和国内独立。因为国内外咨询主要来源不一样。国内新闻可能更好，国外技术类知识更好</li>
+<li>支持个性化配置</li>
+<li>多平台</li>
+</ul>
+</li>
+<li>豆包
+<ul>
+<li>有头条 + 抖音资料库</li>
+<li>缺少个性化配置</li>
+</ul>
+</li>
+<li>千问
+<ul>
+<li>开源模型能力强</li>
+<li>资料库是淘宝，支付宝</li>
+</ul>
+</li>
+<li>元宝
+<ul>
+<li>有公众号做资料库</li>
+<li>自己的模型能力感觉不好，用的 deepseek 模型</li>
+</ul>
+</li>
+<li>chatgpt
+<ul>
+<li>默认选择，没有什么坑</li>
+<li>没有自己的资料库，但是海外资源不太依赖资料库</li>
+</ul>
+</li>
+<li>gemini
+<ul>
+<li>youtube，google 搜索作为资料库</li>
+</ul>
+</li>
+</ul>
+<h2 id="ai-编码" class="headerLink">
+    <a href="#ai-%e7%bc%96%e7%a0%81" class="header-mark"></a>AI 编码</h2><h3 id="模型对比" class="headerLink">
+    <a href="#%e6%a8%a1%e5%9e%8b%e5%af%b9%e6%af%94" class="header-mark"></a>模型对比</h3><ul>
+<li>Gemini <strong>前端专家</strong>，ui + 图生代码
+<ul>
+<li>原生多模态</li>
+<li>超长上下文</li>
+<li>审美在线</li>
+</ul>
+</li>
+<li>Claude Opus 均衡常用，<strong>日常主力</strong>
+<ul>
+<li>skills，rules 等工具调用的执行很不错</li>
+<li>前后端均可，规划/架构不错</li>
+<li>太复杂 bug 容易拧不清</li>
+</ul>
+</li>
+<li>Codex <strong>修 bug</strong>
+<ul>
+<li>严谨，单点问题处理很强</li>
+<li>数学家，算法也很厉害</li>
+<li>思考时间很长，很慢</li>
+</ul>
+</li>
+<li>随手工具
+<ul>
+<li>kimi，mino，deepseek，glm 价格优势，适合作为 tool</li>
+<li><strong>脚本</strong>都会需要重新 review 一次，差距不大</li>
+<li><strong>补全</strong>能力都其实差不多</li>
+</ul>
+</li>
+</ul>
+<h3 id="工具-ide" class="headerLink">
+    <a href="#%e5%b7%a5%e5%85%b7-ide" class="header-mark"></a>工具 IDE</h3><p>这是低纬度的事情，赚不到钱的。做真正重要的事情吧。懒猫微服 ceo 提供无限 token，会比你多释放 n 倍能力</p>]]></description></item><item><title>AI搭建</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ai%E6%90%AD%E5%BB%BA/</link><pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ai%E6%90%AD%E5%BB%BA/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>经常刷抖音会刷到搭建 <a href="/posts/AI/">AI</a> 之类的, 一直不想看. 觉得自己不会搭建, 结果今天公司就说要搭建一个试试&hellip;</p>
+<p>初步了解:</p>
+<ul>
+<li><a href="https://github.com/ollama/ollama" target="_blank" rel="noopener noreferrer">ollama</a> 是一个工具, 快速运行 ai 开源的模型</li>
+<li><a href="https://github.com/amirrezaDev1378/ollama-model-direct-download" target="_blank" rel="noopener noreferrer">omdd</a> 帮助下载模型</li>
+</ul>
+<h2 id="搭建" class="headerLink">
+    <a href="#%e6%90%ad%e5%bb%ba" class="header-mark"></a>搭建</h2><p>下载 <a href="https://github.com/ollama/ollama/releases" target="_blank" rel="noopener noreferrer">Releases · ollama/ollama</a>, <code>tar xf ollama-linux-amd64.tgz</code> 解压后 <code>mv bin/ollama /usr/bin/ollama</code></p>]]></description></item></channel></rss>

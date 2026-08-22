@@ -1,0 +1,6 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Mongodb - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/mongodb/</link><description>Mongodb - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 06 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/mongodb/" rel="self" type="application/rss+xml"/><item><title>mongodb</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/mongodb/</link><pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/mongodb/</guid><description><![CDATA[<p><code>mongodb</code> 是一个文本型数据库. 不同于 <a href="/posts/%E7%AC%94%E8%AE%B0/point/mysql/">mysql</a> 等关系型数据库.</p>
+<p>要点:</p>
+<ul>
+<li>免费</li>
+<li>和 <a href="/posts/%E7%AC%94%E8%AE%B0/point/js/">js</a> 匹配度高</li>
+</ul>]]></description></item></channel></rss>

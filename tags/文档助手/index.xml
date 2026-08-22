@@ -1,0 +1,23 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>文档助手 - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/%E6%96%87%E6%A1%A3%E5%8A%A9%E6%89%8B/</link><description>文档助手 - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 06 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/%E6%96%87%E6%A1%A3%E5%8A%A9%E6%89%8B/" rel="self" type="application/rss+xml"/><item><title>文档助手</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E6%96%87%E6%A1%A3%E5%8A%A9%E6%89%8B/</link><pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E6%96%87%E6%A1%A3%E5%8A%A9%E6%89%8B/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这里记录一些文档的格式, 有时候写文档不知道还要写一些什么方面, 维度信息. 可以做一个参考.</p>
+<h2 id="内容" class="headerLink">
+    <a href="#%e5%86%85%e5%ae%b9" class="header-mark"></a>内容</h2><h3 id="调研---主干" class="headerLink">
+    <a href="#%e8%b0%83%e7%a0%94---%e4%b8%bb%e5%b9%b2" class="header-mark"></a>调研 - 主干</h3><ol>
+<li>背景、问题</li>
+<li>整理分析、目的</li>
+<li>介绍、概览（图标）、对比（表格）</li>
+<li>细节</li>
+<li>概念统一、规范</li>
+<li>示例（代码）</li>
+<li>参考信息（链接）</li>
+</ol>
+<h3 id="计划任务---5w2h" class="headerLink">
+    <a href="#%e8%ae%a1%e5%88%92%e4%bb%bb%e5%8a%a1---5w2h" class="header-mark"></a>计划任务 - 5w2h</h3><ol>
+<li>why- 为什么做</li>
+<li>what- 做什么</li>
+<li>when- 何时</li>
+<li>where- 何地</li>
+<li>who- 谁来做</li>
+<li>how to- 如何做</li>
+<li>how much- 做到什么程度</li>
+</ol>]]></description></item></channel></rss>

@@ -1,0 +1,524 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>所有文章 - 运维个人技术栈</title><link>https://kentxxq.com/posts/</link><description>所有文章 | 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 11 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/posts/" rel="self" type="application/rss+xml"/><item><title>AI</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/ai/</link><pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/ai/</guid><description>&lt;p>现在的 AI 主要是都是生成式 AI&lt;/p></description></item><item><title>chrome 手册</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/chrome-%E6%89%8B%E5%86%8C/</link><pubDate>Tue, 10 Mar 2026 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/chrome-%E6%89%8B%E5%86%8C/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>记录 chrome 浏览器的内容</p>
+<h2 id="配置" class="headerLink">
+    <a href="#%e9%85%8d%e7%bd%ae" class="header-mark"></a>配置</h2><h3 id="开启-gemini" class="headerLink">
+    <a href="#%e5%bc%80%e5%90%af-gemini" class="header-mark"></a>开启 gemini</h3><p>浏览器，google 账号使用英文/美国</p>
+<div class="code-block highlight is-open show-line-numbers  tw:group tw:my-2">
+  <div class="
+    
+    tw:flex 
+    tw:flex-row
+    tw:flex-1 
+    tw:justify-between 
+    tw:w-full tw:bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw:mx-2 
+        tw:flex
+        tw:flex-row
+        tw:flex-1"
+      aria-hidden="true">
+          <span class="tw:group-[.is-open]:rotate-90 tw:transition-[transform] tw:duration-500 tw:ease-in-out tw:print:hidden! tw:w-min tw:h-min tw:my-1 tw:mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></span>
+          <span class="tw:select-none tw:my-1! tw:block">shell</span>
+      </button>
+
+   <div class="tw:flex">
+      <button 
+        class="
+          line-number-button
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.show-line-numbers]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw:select-none 
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.is-wrap]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw:select-none
+          tw:mx-2 
+          tw:hidden
+          tw:group-[.is-open]:block
+          tw:hover:text-fgColor-link 
+          tw:print:hidden!"
+        title="Copy code">
+          <span class="copy-icon tw:block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw:hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw:select-none 
+          tw:mx-2 
+          tw:block 
+          tw:group-[.is-open]:hidden 
+          tw:print:hidden!" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw:block tw:m-0 tw:p-0"><code 
+    id="codeblock-id-1" 
+    class="
+      chroma 
+      tw:block! 
+      tw:p-0
+      tw:m-0
+      tw:transition-[max-height] 
+      tw:duration-500 
+      tw:ease-in-out 
+      tw:group-[.is-closed]:max-h-0! 
+      tw:group-[.is-wrap]:text-wrap
+      tw:overflow-y-hidden
+      tw:overflow-x-auto
+      tw:scrollbar-thin
+      "><span class="line"><span class="cl">open -n -a <span class="s2">&#34;Google Chrome&#34;</span> --args --variations-override-country<span class="o">=</span>us</span></span></code></pre>
+</div>]]></description></item><item><title>openclaw手册</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/openclaw%E6%89%8B%E5%86%8C/</link><pubDate>Tue, 10 Mar 2026 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/openclaw%E6%89%8B%E5%86%8C/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>openclaw 太火了，稍微玩一下。</p>
+<h2 id="安装维护" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85%e7%bb%b4%e6%8a%a4" class="header-mark"></a>安装/维护</h2><p><a href="https://docs.openclaw.ai/install/migrating" target="_blank" rel="noopener noreferrer">迁移 Migration Guide - OpenClaw</a></p>
+<div class="code-block highlight is-open show-line-numbers  tw:group tw:my-2">
+  <div class="
+    
+    tw:flex 
+    tw:flex-row
+    tw:flex-1 
+    tw:justify-between 
+    tw:w-full tw:bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw:mx-2 
+        tw:flex
+        tw:flex-row
+        tw:flex-1"
+      aria-hidden="true">
+          <span class="tw:group-[.is-open]:rotate-90 tw:transition-[transform] tw:duration-500 tw:ease-in-out tw:print:hidden! tw:w-min tw:h-min tw:my-1 tw:mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></span>
+          <span class="tw:select-none tw:my-1! tw:block">shell</span>
+      </button>
+
+   <div class="tw:flex">
+      <button 
+        class="
+          line-number-button
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.show-line-numbers]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw:select-none 
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.is-wrap]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw:select-none
+          tw:mx-2 
+          tw:hidden
+          tw:group-[.is-open]:block
+          tw:hover:text-fgColor-link 
+          tw:print:hidden!"
+        title="Copy code">
+          <span class="copy-icon tw:block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw:hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw:select-none 
+          tw:mx-2 
+          tw:block 
+          tw:group-[.is-open]:hidden 
+          tw:print:hidden!" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw:block tw:m-0 tw:p-0"><code 
+    id="codeblock-id-1" 
+    class="
+      chroma 
+      tw:block! 
+      tw:p-0
+      tw:m-0
+      tw:transition-[max-height] 
+      tw:duration-500 
+      tw:ease-in-out 
+      tw:group-[.is-closed]:max-h-0! 
+      tw:group-[.is-wrap]:text-wrap
+      tw:overflow-y-hidden
+      tw:overflow-x-auto
+      tw:scrollbar-thin
+      "><span class="line"><span class="cl">pnpm install -g openclaw@latest
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 初始化</span>
+</span></span><span class="line"><span class="cl">openclaw onboard --install-daemon
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 重启，也会重启 gateway</span>
+</span></span><span class="line"><span class="cl">openclaw daemon restart
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 升级</span>
+</span></span><span class="line"><span class="cl">openclaw update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 卸载</span>
+</span></span><span class="line"><span class="cl">openclaw uninstall</span></span></code></pre>
+</div>
+<h2 id="使用常用命令" class="headerLink">
+    <a href="#%e4%bd%bf%e7%94%a8%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" class="header-mark"></a>使用/常用命令</h2><p>启动服务 gateway</p>]]></description></item><item><title>放松</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E6%94%BE%E6%9D%BE/</link><pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E6%94%BE%E6%9D%BE/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>老是会觉得放松的时间过得很快，好像什么都没做。从暖阳一下就过度到了傍晚 (yint)，没有睡觉，更没有觉得有放松。</p>
+<p>如何正确的放松自己？所以和 AI 聊了聊。</p>
+<p>我不喜欢存放 AI 生成的内容，因为我不喜欢用有限的资源保存可以无限制产生的内容。但是这一篇我觉得很有帮助，于是有了这篇文章。</p>]]></description></item><item><title>代码格式化</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96/</link><pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96/</guid><description><![CDATA[<ul>
+<li>前端 <a href="/posts/vscode%E6%89%8B%E5%86%8C/#%E6%A0%BC%E5%BC%8F%E5%8C%96">vscode手册#格式化</a>
+<ul>
+<li>确定使用 oxc 或者 prettier 工具</li>
+<li>使用 husky 设置 git hook，触发 lint-staged，lint-staged 只会修改工作区的内容</li>
+<li>使用 lint-staged 来管理如何格式化文件</li>
+<li>格式化完成就会 commit，然后 push</li>
+</ul>
+</li>
+<li><a href="/posts/csharp%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC/">csharp编码风格</a>
+<ul>
+<li>通过 editorconfig 来规范项目</li>
+<li>rider 和 dotnet 都会遵守规则</li>
+</ul>
+</li>
+</ul>]]></description></item><item><title>shardingsphere手册</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/shardingsphere%E6%89%8B%E5%86%8C/</link><pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/shardingsphere%E6%89%8B%E5%86%8C/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>记录使用 <a href="https://shardingsphere.apache.org/" target="_blank" rel="noopener noreferrer">shardingsphere</a></p>
+<h2 id="配置文件" class="headerLink">
+    <a href="#%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6" class="header-mark"></a>配置文件</h2><p><code>database-1.yaml</code> 用于配置第一个分片库</p>
+<div class="code-block highlight is-closed show-line-numbers  tw:group tw:my-2">
+  <div class="
+    
+    tw:flex 
+    tw:flex-row
+    tw:flex-1 
+    tw:justify-between 
+    tw:w-full tw:bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw:mx-2 
+        tw:flex
+        tw:flex-row
+        tw:flex-1"
+      aria-hidden="true">
+          <span class="tw:group-[.is-open]:rotate-90 tw:transition-[transform] tw:duration-500 tw:ease-in-out tw:print:hidden! tw:w-min tw:h-min tw:my-1 tw:mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></span>
+          <span class="tw:select-none tw:my-1! tw:block">yaml</span>
+      </button>
+
+   <div class="tw:flex">
+      <button 
+        class="
+          line-number-button
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.show-line-numbers]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw:select-none 
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.is-wrap]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw:select-none
+          tw:mx-2 
+          tw:hidden
+          tw:group-[.is-open]:block
+          tw:hover:text-fgColor-link 
+          tw:print:hidden!"
+        title="Copy code">
+          <span class="copy-icon tw:block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw:hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw:select-none 
+          tw:mx-2 
+          tw:block 
+          tw:group-[.is-open]:hidden 
+          tw:print:hidden!" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw:block tw:m-0 tw:p-0"><code 
+    id="codeblock-id-1" 
+    class="
+      chroma 
+      tw:block! 
+      tw:p-0
+      tw:m-0
+      tw:transition-[max-height] 
+      tw:duration-500 
+      tw:ease-in-out 
+      tw:group-[.is-closed]:max-h-0! 
+      tw:group-[.is-wrap]:text-wrap
+      tw:overflow-y-hidden
+      tw:overflow-x-auto
+      tw:scrollbar-thin
+      "><span class="line"><span class="cl"><span class="nt">databaseName</span><span class="p">:</span><span class="w"> </span><span class="l">sharding_enterprise</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">dataSources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ds_0</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:mysql://mysql:3306/database?useSSL=false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">fake_user</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">fake_password</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">connectionTimeoutMilliseconds</span><span class="p">:</span><span class="w"> </span><span class="m">30000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">idleTimeoutMilliseconds</span><span class="p">:</span><span class="w"> </span><span class="m">60000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maxLifetimeMilliseconds</span><span class="p">:</span><span class="w"> </span><span class="m">1800000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maxPoolSize</span><span class="p">:</span><span class="w"> </span><span class="m">50</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minPoolSize</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl">- !<span class="l">SHARDING</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">t_organization</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">actualDataNodes</span><span class="p">:</span><span class="w"> </span><span class="l">ds_0.t_organization_${0..19}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">tableStrategy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">standard</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">shardingColumn</span><span class="p">:</span><span class="w"> </span><span class="l">eid</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">shardingAlgorithmName</span><span class="p">:</span><span class="w"> </span><span class="l">t_organization_inline</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">keyGenerateStrategy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">column</span><span class="p">:</span><span class="w"> </span><span class="l">eid</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">keyGeneratorName</span><span class="p">:</span><span class="w"> </span><span class="l">snowflake</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">shardingAlgorithms</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">t_organization_inline</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">INLINE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">props</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">algorithm-expression</span><span class="p">:</span><span class="w"> </span><span class="l">t_organization_${eid % 20}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">keyGenerators</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">snowflake</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">SNOWFLAKE</span></span></span></code></pre>
+</div>]]></description></item><item><title>图标使用</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%9B%BE%E6%A0%87%E4%BD%BF%E7%94%A8/</link><pubDate>Fri, 28 Nov 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%9B%BE%E6%A0%87%E4%BD%BF%E7%94%A8/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>学习了一下图标知识</p>
+<h2 id="信息收集" class="headerLink">
+    <a href="#%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86" class="header-mark"></a>信息收集</h2><ul>
+<li>html 默认字体 16px，所以 1rem 就是 16px</li>
+<li>图标有 <code>16/32</code>   <code>24/48</code>   <code>64等等其他尺寸</code>
+<ul>
+<li>google，ic 是 24</li>
+<li>iconpark 是 48</li>
+<li>monotone 做 logo 是 64</li>
+</ul>
+</li>
+<li><a href="https://icones.js.org/" target="_blank" rel="noopener noreferrer">icones站点</a> 站点可以通过查看 svg symbol 里的 viewbox，知道这个图标是 16/32 还是 24,48 的。</li>
+<li>如果混用，等比缩放后可能有线条的粗细不一样的问题，尽量不能混用</li>
+</ul>
+<p>使用方式</p>]]></description></item><item><title>helm手册</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/helm%E6%89%8B%E5%86%8C/</link><pubDate>Wed, 26 Nov 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/helm%E6%89%8B%E5%86%8C/</guid><description><![CDATA[<h3 id="基础概念" class="headerLink">
+    <a href="#%e5%9f%ba%e7%a1%80%e6%a6%82%e5%bf%b5" class="header-mark"></a>基础概念</h3><ul>
+<li>repo 是一个仓库
+<ul>
+<li>相当于 github 的一个用户，下面有很多的应用</li>
+<li>比如有 bitnami  <code>https://charts.bitnami.com/bitnami</code>  ，minio  <code>https://operator.min.io</code></li>
+</ul>
+</li>
+<li>chart 是一个应用模板，包含模板，values 等内容
+<ul>
+<li>values. yaml 可配置的变量，安装时替换模板</li>
+</ul>
+</li>
+<li>release 是一个 chart 发布到 k 8 s 后的实例</li>
+</ul>
+<h3 id="安装" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85" class="header-mark"></a>安装</h3><ol>
+<li><a href="https://github.com/helm/helm/releases" target="_blank" rel="noopener noreferrer">Releases · helm/helm</a></li>
+<li><code>tar xf xxx.tar.gz</code></li>
+<li><code>mv helm /usr/local/sbin/helm</code></li>
+</ol>
+<h3 id="基础操作" class="headerLink">
+    <a href="#%e5%9f%ba%e7%a1%80%e6%93%8d%e4%bd%9c" class="header-mark"></a>基础操作</h3><ul>
+<li>repo 仓库管理 <a href="https://artifacthub.io/" target="_blank" rel="noopener noreferrer">Artifact Hub</a>
+<ul>
+<li>查询所有 repo  <code>helm repo ls</code></li>
+<li>添加 <code>helm repo add bitnami https://charts.bitnami.com/bitnami</code></li>
+<li>更新 <code>helm repo update</code></li>
+</ul>
+</li>
+<li>chart 应用列表
+<ul>
+<li>搜索
+<ul>
+<li><code>helm search hub mysql</code> 网上搜索公共的</li>
+<li><code>helm search repo mysql</code> 只搜索自己 repo 里的</li>
+<li>查看 repo 下的所有版本 <code>helm search repo -l csi-driver-nfs</code></li>
+</ul>
+</li>
+<li>拉取 <code>helm pull bitnami/mysql</code></li>
+<li>安装
+<ul>
+<li>bitnami 仓库下的 mysql，并且自定义名称 <code>helm install my-mysql bitnami/mysql</code></li>
+<li>install 命令可以通过 <code>--set image.tag=latest</code> 或 <code>--values my-values.yaml</code> 修改默认值</li>
+<li>通过 template 渲染成 yaml ，修改 yaml 值</li>
+<li>通过 values 文件。<strong>可以在本地修改 values。然后把 values 放到服务器执行</strong>
+<ol>
+<li><code>helm show values csi-driver-nfs/csi-driver-nfs --namespace kube-system --version 4.12.1 &gt; nfs-values.yaml</code></li>
+<li>修改 values</li>
+<li><code>helm install csi-driver-nfs csi-driver-nfs/csi-driver-nfs --namespace kube-system --version 4.12.1 -f nfs-values.yaml</code></li>
+</ol>
+</li>
+</ul>
+</li>
+<li>升级，就是把 <code>install</code> 改成 <code>upgrade</code> 即可
+<ul>
+<li><code>helm upgrade csi-driver-nfs csi-driver-nfs/csi-driver-nfs --namespace kube-system --version 4.12.1 -f nfs-values.yaml</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>release 部署情况
+<ul>
+<li>部署了哪些应用 <code>helm ls -A</code></li>
+<li>应用详情
+<ul>
+<li><code>helm status my-mysql</code></li>
+<li>查看渲染后的内容 <code>helm get manifest my-mysql -n &lt;namespace&gt;</code></li>
+</ul>
+</li>
+<li>删除 <code>helm uninstall my-mysql</code></li>
+</ul>
+</li>
+</ul>
+<p>编写 helm 脚本:</p>]]></description></item><item><title>dell服务器手册</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/dell%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%8B%E5%86%8C/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/dell%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%8B%E5%86%8C/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这里记录一下 dell 服务器的操作</p>
+<h2 id="perccli" class="headerLink">
+    <a href="#perccli" class="header-mark"></a>perccli</h2><p>可以查看磁盘，电源，raid，配置热备盘。</p>
+<h3 id="pve-安装-perccli" class="headerLink">
+    <a href="#pve-%e5%ae%89%e8%a3%85-perccli" class="header-mark"></a>pve 安装 perccli</h3><ol>
+<li>下载 <a href="https://www.dell.com/support/home/en-us/drivers/driversdetails?driverId=J91YG" target="_blank" rel="noopener noreferrer">LINUX PERCCLI Utility For All Dell HBA/PERC Controllers | Driver Details | Dell US</a></li>
+<li>解压</li>
+<li>安装 <code>dpkg -i perccli_007.1623.0000.0000_all.deb</code></li>
+<li><code>cd /opt/MegaRAID/perccli/</code></li>
+<li><code>./perccli64 /c0 show</code></li>
+</ol>
+<h3 id="esxi-安装-perccli" class="headerLink">
+    <a href="#esxi-%e5%ae%89%e8%a3%85-perccli" class="header-mark"></a>esxi 安装 perccli</h3><ol>
+<li>下载安装包 <a href="https://www.dell.com/support/home/zh-cn/drivers/driversdetails?driverid=ncwyh" target="_blank" rel="noopener noreferrer">PERCCLI Utility supporting VMWare for 5.5 and 6.0 | 驱动程序详情 | Dell 中国</a></li>
+<li>解压出来，把 <code>vib</code> 文件复制到 esxi 存储上</li>
+<li><code>esxcli software vib install -v /vmfs/volume/datastore1/vmware-esx-perccli.vib --no-sig-check</code> 安装</li>
+<li>进入目录 <code>cd /opt/lsi/perccli</code></li>
+<li><code>./perccli show</code></li>
+</ol>
+<h3 id="perccli-命令" class="headerLink">
+    <a href="#perccli-%e5%91%bd%e4%bb%a4" class="header-mark"></a>perccli 命令</h3><ul>
+<li>磁盘概念
+<ul>
+<li>raid 0 就是 <code>controller0/c0</code>，是物理卡
+<ul>
+<li>dg 0 硬盘组，物理盘可以加入组。使用不同的 raid 方案，这里用 raid 5
+<ul>
+<li>vd 0 虚拟出来的普通盘，虚拟机挂载</li>
+<li>vd 1</li>
+</ul>
+</li>
+<li>dg 1 这里用 raid 10
+<ul>
+<li>vd 2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查看磁盘信息。<code>c0</code> 代表第一块 raid 控制卡
+<ul>
+<li><code>perccli /c0/vall show all</code> 查看所有虚拟磁盘，<strong>概览</strong></li>
+<li><code>perccli /c0/eall/sall show all</code> 所有物理磁盘信息，<strong>很详细的信息</strong></li>
+<li><code>perccli /c0/v0 show all</code> 查看 raid 组的信息
+<ul>
+<li><code>/c0/v0</code> 代表第一个 raid 下的第一个虚拟磁盘</li>
+</ul>
+</li>
+<li><code>perccli /c0 /eall /sall show</code> 查看 <code>c0</code> 下所有的磁盘和 raid 信息 <strong>常用</strong>
+<ul>
+<li>可以看到那些盘是 online，ugood，jbod</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>设置磁盘状态。 <code>/e32</code> 是背板 id，有的机器只有一个背板。<code>/s3</code> 是 3 号物理盘插槽
+<ul>
+<li><code>perccli /c0/e32/s3 show all</code> 查看磁盘的详细信息，特别是检查 state 部分的 <code>Shield Counter</code>，<code>Media Error Count</code> 等参数，<strong>磁盘很可能已经不堪重负</strong></li>
+<li>恢复磁盘使用
+<ul>
+<li>如果 DG 状态是 F，清理 foreign 即可 <code>perccli /c0/fall delete</code></li>
+<li>ubad 改 ugood
+<ul>
+<li><code>perccli /c0/e32/s3 set good</code> 改状态</li>
+<li><code>perccli /c0/e32/s3 start initialization</code> 尝试初始化磁盘，全盘写入验证</li>
+<li><code>perccli /c0/e32/s3 show initialization</code> 查看初始数进度</li>
+<li><code>perccli /c0/eall/sall show</code> 查看是否正常</li>
+</ul>
+</li>
+<li><code>perccli /c0/e32/s3 set good force</code> 强制设置为 good 状态，<strong>会丢失盘内数据，仅用于误报坏盘或者更换盘后强制加入阵列</strong>。建议先用新盘把 raid 恢复过来，在看老盘是不是仅逻辑损坏</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>添加热备盘，坏了的话就会自动加入整列
+<ul>
+<li><code>perccli /c0/e32/s1 add hotsparedrive</code> 全局热备</li>
+<li><code>perccli /c0 /e32/s3 add hotsparedrive DGs=0</code> 专用热备</li>
+<li>加入热备盘以后，盘坏了会自动修复 raid，可以从查看命令，查看磁盘是否 rebuild 完成</li>
+</ul>
+</li>
+</ul>
+<h3 id="smartctl-命令" class="headerLink">
+    <a href="#smartctl-%e5%91%bd%e4%bb%a4" class="header-mark"></a>smartctl 命令</h3><p>smartctl 可以获取磁盘的具体数据信息（温度，运行时间，读写）</p>]]></description></item><item><title>PVE手册</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/pve%E6%89%8B%E5%86%8C/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/pve%E6%89%8B%E5%86%8C/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>公司老服务器需要重装，我以前都是用的 windows 玩虚拟机，这次把 esxi 和 pve 考虑了进来。</p>
+<p>esxi 9 似乎停止了免费版本的发放，现在用这个怕被坑。windows 以前都是个人用，现在商用不太好。所以决定用 pve 来试试，而且早有耳闻 pve 很强，以后家庭服务器也用得上。</p>]]></description></item></channel></rss>

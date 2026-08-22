@@ -1,0 +1,8 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Vitepress - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/vitepress/</link><description>Vitepress - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 19 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/vitepress/" rel="self" type="application/rss+xml"/><item><title>vitepress</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/vitepress/</link><pubDate>Sun, 19 May 2024 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/vitepress/</guid><description><![CDATA[<p><code>vitepress</code> 是一个静态站点生成工具.</p>
+<ul>
+<li>使用 vite ,性能不错</li>
+<li>基于 <a href="/posts/%E7%AC%94%E8%AE%B0/point/Vue/">Vue</a>, 生态不错</li>
+</ul>
+<h2 id="使用记录" class="headerLink">
+    <a href="#%e4%bd%bf%e7%94%a8%e8%ae%b0%e5%bd%95" class="header-mark"></a>使用记录</h2><h3 id="图片点击放大" class="headerLink">
+    <a href="#%e5%9b%be%e7%89%87%e7%82%b9%e5%87%bb%e6%94%be%e5%a4%a7" class="header-mark"></a>图片点击放大</h3><p><a href="https://github.com/vuejs/vitepress/issues/854" target="_blank" rel="noopener noreferrer">Allow images to be zoomed in on click · Issue #854 · vuejs/vitepress · GitHub</a></p>]]></description></item></channel></rss>

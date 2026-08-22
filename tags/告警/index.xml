@@ -1,0 +1,6 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>告警 - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/%E5%91%8A%E8%AD%A6/</link><description>告警 - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 24 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/%E5%91%8A%E8%AD%A6/" rel="self" type="application/rss+xml"/><item><title>elastalert2钉钉告警</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/elastalert2%E9%92%89%E9%92%89%E5%91%8A%E8%AD%A6/</link><pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/elastalert2%E9%92%89%E9%92%89%E5%91%8A%E8%AD%A6/</guid><description><![CDATA[<blockquote>
+  <p>elastalert2 是一个日志告警服务，原理其实很简单，就是查询 es 数据，并触发告警信息。刚好最近在自建 k8s 和 efk 相关的内容，顺便更新到博客吧。</p>
+
+</blockquote><h2 id="背景介绍" class="headerLink">
+    <a href="#%e8%83%8c%e6%99%af%e4%bb%8b%e7%bb%8d" class="header-mark"></a>背景介绍</h2><p>我们的日志通过 efk 套件采集、查询。</p>
+<p>日志数据是存储在 es 内部的，所以我们的告警可以通过查询 es 数据来实现</p>]]></description></item></channel></rss>

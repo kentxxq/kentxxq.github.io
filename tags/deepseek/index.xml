@@ -1,0 +1,9 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Deepseek - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/deepseek/</link><description>Deepseek - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 11 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/deepseek/" rel="self" type="application/rss+xml"/><item><title>AI搭建</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ai%E6%90%AD%E5%BB%BA/</link><pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/ai%E6%90%AD%E5%BB%BA/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>经常刷抖音会刷到搭建 <a href="/posts/AI/">AI</a> 之类的, 一直不想看. 觉得自己不会搭建, 结果今天公司就说要搭建一个试试&hellip;</p>
+<p>初步了解:</p>
+<ul>
+<li><a href="https://github.com/ollama/ollama" target="_blank" rel="noopener noreferrer">ollama</a> 是一个工具, 快速运行 ai 开源的模型</li>
+<li><a href="https://github.com/amirrezaDev1378/ollama-model-direct-download" target="_blank" rel="noopener noreferrer">omdd</a> 帮助下载模型</li>
+</ul>
+<h2 id="搭建" class="headerLink">
+    <a href="#%e6%90%ad%e5%bb%ba" class="header-mark"></a>搭建</h2><p>下载 <a href="https://github.com/ollama/ollama/releases" target="_blank" rel="noopener noreferrer">Releases · ollama/ollama</a>, <code>tar xf ollama-linux-amd64.tgz</code> 解压后 <code>mv bin/ollama /usr/bin/ollama</code></p>]]></description></item></channel></rss>

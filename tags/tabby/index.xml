@@ -1,0 +1,11 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Tabby - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/tabby/</link><description>Tabby - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 16 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/tabby/" rel="self" type="application/rss+xml"/><item><title>tabby</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/tabby/</link><pubDate>Sat, 16 Dec 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/tabby/</guid><description><![CDATA[<p>tabby 是一个终端软件。</p>
+<ul>
+<li><a href="https://github.com/Eugeny/tabby" target="_blank" rel="noopener noreferrer">开源</a></li>
+<li>免费</li>
+</ul>
+<h3 id="快捷键" class="headerLink">
+    <a href="#%e5%bf%ab%e6%8d%b7%e9%94%ae" class="header-mark"></a>快捷键</h3><ul>
+<li><code>ctrl+f11</code> 聚焦所有窗口</li>
+<li><code>ctrl+f12</code> 聚焦所有标签页</li>
+<li><code>点击选中</code> 任意标签页或窗口，取消聚焦</li>
+</ul>]]></description></item></channel></rss>

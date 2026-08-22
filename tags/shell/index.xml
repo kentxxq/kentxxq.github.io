@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Shell - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/shell/</link><description>Shell - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 10 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/shell/" rel="self" type="application/rss+xml"/><item><title>shell</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/shell/</link><pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/shell/</guid><description><![CDATA[<p><code>shell</code> 是一种命令程序语言, 是操作系统和用户之间的接口.</p>
+<p>要点:</p>
+<ul>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/point/linux/">linux</a> 通常默认使用 <code>bash</code></li>
+<li><code>sh</code> 全称 <code>Bourne Shell</code>, 而 <code>bash</code> 全称 <code>Bourne-Again Shell</code></li>
+<li>有变量, 条件, 循环, 函数, 管道, 重定向等等..</li>
+<li>有很多变种, 例如 <code>ksb</code>, <code>csh</code>, <code>zsh</code></li>
+</ul>]]></description></item><item><title>shell教程</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/shell%E6%95%99%E7%A8%8B/</link><pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/shell%E6%95%99%E7%A8%8B/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>虽然我不喜欢写 <a href="/posts/%E7%AC%94%E8%AE%B0/point/shell/">shell</a>, 但其实 <code>shell</code> 是高效的 .</p>
+<p>这里记录一些用法和技巧. 我用的都是 <code>bash</code>，不是 <code>sh</code></p>
+<h2 id="执行-shell" class="headerLink">
+    <a href="#%e6%89%a7%e8%a1%8c-shell" class="header-mark"></a>执行 shell</h2><ul>
+<li><code>./1.sh</code> 或者 <code>/path/to/1.sh</code>
+<ul>
+<li>通常首行会有 <code>shebang</code> ，指定运行的程序路径，这样 <a href="/posts/python/">python</a> 之类的语言也能直接调用了</li>
+<li><code>#!/usr/bin/env bash</code> 查找 bash 位置，然后用这个 bash 执行 shell 脚本</li>
+</ul>
+</li>
+<li><code>bash 1.sh</code> 强制用当前 shell 环境的 bash，忽略 <code>shebang</code></li>
+</ul>
+<blockquote>
+  <p>export a=1 是可以被脚本读取到的 echo &ldquo;a=$a&rdquo;</p>]]></description></item></channel></rss>

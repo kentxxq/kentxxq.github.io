@@ -1,0 +1,87 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>OpenTelemetry - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/opentelemetry/</link><description>OpenTelemetry - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 21 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/opentelemetry/" rel="self" type="application/rss+xml"/><item><title>OpenTelemetry-Collector教程</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/opentelemetry-collector%E6%95%99%E7%A8%8B/</link><pubDate>Fri, 21 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/opentelemetry-collector%E6%95%99%E7%A8%8B/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p><code>OpenTelemetry-collector</code> 是 <a href="/posts/%E7%AC%94%E8%AE%B0/point/OpenTelemetry/">OpenTelemetry</a> 官方的数据采集软件. 它和 <a href="/posts/%E7%AC%94%E8%AE%B0/grafana-agent%E6%95%99%E7%A8%8B/">grafana-agent</a> 的功能有些类似.</p>
+<h2 id="安装" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85" class="header-mark"></a>安装</h2><h3 id="安装形式" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85%e5%bd%a2%e5%bc%8f" class="header-mark"></a>安装形式</h3><ul>
+<li>直连: <img src="/posts/%E9%99%84%E4%BB%B6/opentelemetry-collector-%E5%8D%95%E7%82%B9%E9%83%A8%E7%BD%B2.png">
+<ul>
+<li>优点
+<ul>
+<li>简单, 方便开发测试</li>
+<li>上线不需要调整任何内容</li>
+</ul>
+</li>
+<li>缺点
+<ul>
+<li>改配置需要改动 app 代码</li>
+<li>强耦合</li>
+<li>每种开发语言处理起来都不一样</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Agent 采集 <img src="/posts/%E9%99%84%E4%BB%B6/opentelemetry-collector-agent%E9%87%87%E9%9B%86.png">
+<ul>
+<li>优点
+<ul>
+<li>简单 1:1</li>
+<li>处理数据的时候, 可以和 app/语言无关</li>
+<li>如果用作 sidecar 很不错, 可以集成 <a href="/posts/%E7%AC%94%E8%AE%B0/OpenTelemetry-Collector%E6%95%99%E7%A8%8B/">OpenTelemetry-Collector</a> 配置到代码库中, 在 <a href="/posts/%E7%AC%94%E8%AE%B0/point/CICD/">CICD</a> 的过程中使用</li>
+</ul>
+</li>
+<li>缺点
+<ul>
+<li>如果不采用 sidecar 模式, 扩展性不好</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Gateway 采集 <img src="/posts/%E9%99%84%E4%BB%B6/opentelemetry-collector-gateway%E9%87%87%E9%9B%86.png">
+<ul>
+<li>优点
+<ul>
+<li>负载均衡</li>
+<li>集中管理证书的内容</li>
+</ul>
+</li>
+<li>缺点
+<ul>
+<li>复杂性</li>
+<li>成本高</li>
+<li>延迟高了, 性能差了</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="单点-agent-采集安装" class="headerLink">
+    <a href="#%e5%8d%95%e7%82%b9-agent-%e9%87%87%e9%9b%86%e5%ae%89%e8%a3%85" class="header-mark"></a>单点 agent 采集安装</h3><p><a href="https://opentelemetry.io/docs/collector/getting-started/" target="_blank" rel="noopener noreferrer">Getting Started | OpenTelemetry</a> 有很多的安装方法, 我用 deb 安装包方便使用.</p>]]></description></item><item><title>OpenTelemetry实践</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/opentelemetry%E5%AE%9E%E8%B7%B5/</link><pubDate>Thu, 20 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/opentelemetry%E5%AE%9E%E8%B7%B5/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这篇文章会把关于 <a href="/posts/%E7%AC%94%E8%AE%B0/point/OpenTelemetry/">OpenTelemetry</a> 的相关文章串联起来, 从 0 到 1 完成所有的实践.</p>
+<p>其中会涉及到如下组件, 搭建顺序是<strong>从下往上</strong>:</p>
+<ul>
+<li><a href="https://github.com/kentxxq/TestServer" target="_blank" rel="noopener noreferrer">APP代码放着这里</a>,是 <a href="/posts/%E7%AC%94%E8%AE%B0/point/csharp/">csharp-aspnetcore</a> Web 应用
+<ul>
+<li>引入了 <a href="https://github.com/open-telemetry/opentelemetry-dotnet/tree/main/src" target="_blank" rel="noopener noreferrer">opentelemetry-dotnet</a>,  <a href="https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src" target="_blank" rel="noopener noreferrer">opentelemetry-dotnet-contrib</a></li>
+</ul>
+</li>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/grafana-alloy%E6%95%99%E7%A8%8B/">alloy</a> 接收应用数据.
+<ul>
+<li>这里没有使用 <a href="/posts/%E7%AC%94%E8%AE%B0/OpenTelemetry-Collector%E6%95%99%E7%A8%8B/">OpenTelemetry-Collector</a>, 是因为 <code>alloy</code> 会完全兼容它</li>
+<li>可以 <a href="https://grafana.com/docs/alloy/latest/tutorials/logs-and-relabeling-basics/" target="_blank" rel="noopener noreferrer">采集日志文件</a> 等一些有用的拓展功能</li>
+<li>如果你是 <a href="/posts/%E7%AC%94%E8%AE%B0/point/golang/">golang</a> , <a href="/posts/%E7%AC%94%E8%AE%B0/point/python/">python</a>, <code>rust</code> 等语言, 可以 <a href="https://grafana.com/docs/pyroscope/latest/configure-client/grafana-agent/ebpf/configuration/" target="_blank" rel="noopener noreferrer">无代码侵入采集指标</a></li>
+</ul>
+</li>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/grafana-loki%E6%95%99%E7%A8%8B/">loki</a> 处理日志</li>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/grafana-mimir%E6%95%99%E7%A8%8B/">mimir</a> 处理指标</li>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/grafana-tempo%E6%95%99%E7%A8%8B/">tempo</a> 处理链路追踪</li>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/grafana-pyroscope%E6%95%99%E7%A8%8B/">pyroscope</a> 持续性能分析</li>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/point/minio/">minio</a> 存放着所有的数据</li>
+<li><a href="/posts/%E7%AC%94%E8%AE%B0/grafana-ui%E6%95%99%E7%A8%8B/">grafana</a> 做展示</li>
+</ul>
+<p><img src="/posts/%E9%99%84%E4%BB%B6/opentelemetry%E6%9E%B6%E6%9E%84%E5%9B%BE.excalidraw.svg"></p>]]></description></item><item><title>OpenTelemetry</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/opentelemetry/</link><pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/opentelemetry/</guid><description><![CDATA[<p><code>OpenTelemetry</code> 是新一代的监控工具.</p>
+<p>要点:</p>
+<ul>
+<li>日志</li>
+<li>指标</li>
+<li>链路追踪</li>
+</ul>]]></description></item></channel></rss>

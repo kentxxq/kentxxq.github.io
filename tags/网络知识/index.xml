@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>网络知识 - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/</link><description>网络知识 - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 06 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/" rel="self" type="application/rss+xml"/><item><title>网络知识</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/</link><pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这里记录一些 ip, 包, 传输协议, 段, 和 7 层网络知识等等网络知识, 方便快速查阅.</p>
+<blockquote>
+  <p>参考资料
+<a href="https://lfool.gitbook.io/computer-network/" target="_blank" rel="noopener noreferrer">计算机网络 - Computer Network</a></p>
+
+</blockquote><h2 id="内容" class="headerLink">
+    <a href="#%e5%86%85%e5%ae%b9" class="header-mark"></a>内容</h2><h3 id="7-层通信" class="headerLink">
+    <a href="#7-%e5%b1%82%e9%80%9a%e4%bf%a1" class="header-mark"></a>7 层通信</h3><p><img src="/posts/%E9%99%84%E4%BB%B6/7%E5%B1%82%E9%80%9A%E4%BF%A1.png"></p>
+<ul>
+<li>路由器和 <code>3层交换机</code> 等价.</li>
+<li><code>2层交换机</code> 活动在数据链路层, 只是延长网络.</li>
+<li>每一层都加上自己的 <code>header头部数据</code>.</li>
+</ul>
+<h3 id="7-层模型各自的作用" class="headerLink">
+    <a href="#7-%e5%b1%82%e6%a8%a1%e5%9e%8b%e5%90%84%e8%87%aa%e7%9a%84%e4%bd%9c%e7%94%a8" class="header-mark"></a>7 层模型各自的作用</h3><p><img src="/posts/%E9%99%84%E4%BB%B6/7%E5%B1%82%E6%A8%A1%E5%9E%8B%E5%90%84%E8%87%AA%E7%9A%84%E4%BD%9C%E7%94%A8.png"></p>]]></description></item></channel></rss>

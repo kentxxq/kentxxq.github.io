@@ -1,0 +1,154 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>电子产品 - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81/</link><description>电子产品 - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 15 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81/" rel="self" type="application/rss+xml"/><item><title>手机选择</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E6%89%8B%E6%9C%BA%E9%80%89%E6%8B%A9/</link><pubDate>Fri, 15 Sep 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E6%89%8B%E6%9C%BA%E9%80%89%E6%8B%A9/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>记录我在手机选择过程中关注的点. 没有华为, 因为会有 <a href="https://www.zhihu.com/question/663121618?utm_psn=1803153658164150274" target="_blank" rel="noopener noreferrer">很多不方便</a></p>
+<h2 id="评分" class="headerLink">
+    <a href="#%e8%af%84%e5%88%86" class="header-mark"></a>评分</h2><table>
+	<thead>
+			<tr>
+					<th>对比项</th>
+					<th>看重程度</th>
+					<th>Android</th>
+					<th>IOS</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>自定义程度</td>
+					<td>4</td>
+					<td>3</td>
+					<td>3</td>
+					<td>自定义组件和 UI。icon，图标放在任意位置？<br>苹果有熄屏页编辑 + 堆叠小组件</td>
+			</tr>
+			<tr>
+					<td>特性</td>
+					<td>5</td>
+					<td>5</td>
+					<td>3</td>
+					<td>做更多的事情。跳过开屏广告。游戏模式, 双开，字幕，小窗,拍照好看, 交通卡, 散热？ <br> 苹果只有一个快捷指令能打</td>
+			</tr>
+			<tr>
+					<td>容易使用</td>
+					<td>5</td>
+					<td>3</td>
+					<td>5</td>
+					<td>推送好用. 应用商店 (chatgpt) 好用, 从第三方 apk 下载可能有病毒。同步游戏进度!不折腾？应用跳转和密码管理    <br> 缩放友好,小米开发友好?</td>
+			</tr>
+			<tr>
+					<td>更新支持</td>
+					<td>5</td>
+					<td>3</td>
+					<td>5</td>
+					<td>系统版本更新久, 约等于用的久. <br> 苹果对比小米更新时间久, 且统一更新. 而小米需要分批次</td>
+			</tr>
+			<tr>
+					<td>第三方 app 支持</td>
+					<td>5</td>
+					<td>3</td>
+					<td>5</td>
+					<td>carplay 等第三方 APP 对苹果支持度高。例如 office，谷歌，而且 bug 更少。还有灵动岛适配, 小组件适配等等</td>
+			</tr>
+			<tr>
+					<td>兴奋点</td>
+					<td>5</td>
+					<td>5</td>
+					<td>3</td>
+					<td>通常是新的功能. 开源应用? 快充? 信号? 折叠? 大模型?</td>
+			</tr>
+			<tr>
+					<td>生态连接</td>
+					<td>5</td>
+					<td>4</td>
+					<td>4</td>
+					<td>耳机 + 平板 + 电脑 + 汽车<br>虽然体验不如苹果, 但小米有 <code>iot</code> 和汽车.</td>
+			</tr>
+			<tr>
+					<td>成本</td>
+					<td>4</td>
+					<td>3</td>
+					<td>2</td>
+					<td>价格并不是 5 分满分因素, 因为作为科技最高产物之一. 购买却并不是那么吃力. <br> 价格安卓有优势, 但加上折旧和使用年限. 并没有很夸张的优势</td>
+			</tr>
+			<tr>
+					<td>合计</td>
+					<td></td>
+					<td>29</td>
+					<td>30</td>
+					<td></td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="苹果购买的权重" class="headerLink">
+    <a href="#%e8%8b%b9%e6%9e%9c%e8%b4%ad%e4%b9%b0%e7%9a%84%e6%9d%83%e9%87%8d" class="header-mark"></a>苹果购买的权重</h2><ul>
+<li>安全
+<ul>
+<li>安全无后门
+<ul>
+<li>可以通过这个 api 遍历, 查看是不是安装了特定 app <a href="https://developer.apple.com/documentation/uikit/uiapplication/canopenurl%28_:%29" target="_blank" rel="noopener noreferrer">canOpenURL(_:) | Apple Developer Documentation</a>, 但似乎要在 <code>Info.plist</code> 声明,  限制 50 个</li>
+</ul>
+</li>
+<li>全球生态</li>
+</ul>
+</li>
+<li>mac 比 win 本的优势
+<ul>
+<li>隐私. 输入法都需要用苹果的, 同步</li>
+<li>同步 iPhone</li>
+<li>性能 + 续航 - 使用年限更长. win 本的游戏领域也因为性能问题效果不佳</li>
+<li>外观设计</li>
+<li>开盖即用</li>
+</ul>
+</li>
+<li>appid 网站上查看是不是同一个 appid, 如果是的话, 就不用担心 app 在国区下架
+<ul>
+<li><code>microsoft-365-office</code> 这个应用在美国和中国下载都是一样的</li>
+<li><code>https://apps.apple.com/us/app/microsoft-365-office/id541164041</code></li>
+<li><code>https://apps.apple.com/cn/app/microsoft-365-office/id541164041</code></li>
+</ul>
+</li>
+<li>息屏显示&hellip;.</li>
+<li>输入法的密码集成. 和 mac 上的可以同步词库</li>
+<li>actions 按键实体按键</li>
+<li>苹果位置服务
+<ul>
+<li>基于位置的提醒</li>
+</ul>
+</li>
+<li>苹果统一推送. 无解
+<ul>
+<li>苹果的通知都是统一的，那么番茄钟开启屏蔽通知，就可以更加专注</li>
+<li>chrome 发送标签到手机的推送通知 (产品联动)</li>
+<li>微软二次验证可以收到</li>
+</ul>
+</li>
+<li>苹果可以信任根证书, 抓包有用. 安卓需要 root, 而 root 后又会被检测 <a href="https://reqable.com/zh-CN/docs/getting-started/installation/#android" target="_blank" rel="noopener noreferrer">安装证书 | Reqable · API抓包调试 + API测试一站式工具</a></li>
+<li>ipad 在保险业有独特的优势
+<ul>
+<li>便携</li>
+<li>清晰</li>
+<li>可以签字</li>
+<li>高大上, 谈业务需要苹果, huawei</li>
+<li>比电脑便宜点</li>
+</ul>
+</li>
+<li>苹果统一存储:
+<ul>
+<li>游戏存储,</li>
+<li>同步 obsidian</li>
+</ul>
+</li>
+<li>ipad 可以用 youtube kids, 学习编程相关内容 <a href="https://www.v2ex.com/t/1055306" target="_blank" rel="noopener noreferrer">想给 3+ 岁儿子买个 Pad 用于学习求推荐！ - V2EX</a></li>
+<li><a href="https://hzlzh6x.notion.site/hzlzh-3e9382ec7ffd4efca9c55cd856b8fa16" target="_blank" rel="noopener noreferrer">Notion – The all-in-one workspace for your notes, tasks, wikis, and databases.</a></li>
+</ul>
+<h2 id="生态" class="headerLink">
+    <a href="#%e7%94%9f%e6%80%81" class="header-mark"></a>生态</h2><h3 id="苹果" class="headerLink">
+    <a href="#%e8%8b%b9%e6%9e%9c" class="header-mark"></a>苹果</h3><p>苹果迭代周期</p>]]></description></item><item><title>手机周边生态</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E6%89%8B%E6%9C%BA%E5%91%A8%E8%BE%B9%E7%94%9F%E6%80%81/</link><pubDate>Sun, 10 Sep 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E6%89%8B%E6%9C%BA%E5%91%A8%E8%BE%B9%E7%94%9F%E6%80%81/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>为什么会有这篇文章? 因为手机是现代最为重要的移动载体.</p>
+<p>如何更好的使用它, 发挥它的最大的效力非常重要.</p>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+        <span class="icon"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/></svg></span>Info<span class="details-icon"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></span>
+    </div>
+    <div class="details-content">
+        <div class="admonition-content"><p>其实苹果的配件, 很多都可以套用在其他大销量机型上. 例如 <code>MagSafe手机壳/配件</code>, <code>贴膜</code> 等等.</p>]]></description></item></channel></rss>

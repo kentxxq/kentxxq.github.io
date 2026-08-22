@@ -1,0 +1,13 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Sqlite - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/sqlite/</link><description>Sqlite - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 08 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/sqlite/" rel="self" type="application/rss+xml"/><item><title>sqlite手册</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/sqlite%E6%89%8B%E5%86%8C/</link><pubDate>Mon, 08 Sep 2025 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/sqlite%E6%89%8B%E5%86%8C/</guid><description><![CDATA[<h2 id="下载" class="headerLink">
+    <a href="#%e4%b8%8b%e8%bd%bd" class="header-mark"></a>下载</h2><ul>
+<li><a href="https://www.sqlite.org/download.html" target="_blank" rel="noopener noreferrer">SQLite Download Page</a>
+<ul>
+<li>官网的 <a href="https://www.sqlite.org/2025/sqlite-tools-linux-x64-3500400.zip" target="_blank" rel="noopener noreferrer">sqlite-tools-linux-x64-3500400.zip</a> 支持 <code>.recover</code> 命令</li>
+<li>apt/yum 支持 <code>.dump</code> 命令</li>
+</ul>
+</li>
+</ul>
+<h2 id="操作命令" class="headerLink">
+    <a href="#%e6%93%8d%e4%bd%9c%e5%91%bd%e4%bb%a4" class="header-mark"></a>操作命令</h2><ul>
+<li><code>sqlite3 old.db &quot;.recover&quot; &gt;</code></li>
+</ul>]]></description></item></channel></rss>

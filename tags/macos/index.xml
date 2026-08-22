@@ -1,0 +1,12 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Macos - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/macos/</link><description>Macos - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 01 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/macos/" rel="self" type="application/rss+xml"/><item><title>mac-HEIC转JPG或PNG</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mac-heic%E8%BD%ACjpg%E6%88%96png/</link><pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/mac-heic%E8%BD%ACjpg%E6%88%96png/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>用 iPhone 拍出来的照片，传到 <a href="/posts/%E7%AC%94%E8%AE%B0/point/macos/">macos</a> 上显示结尾是 HEIC 的图片文件。在 markdown 中不支持，同样在 <a href="/posts/%E7%AC%94%E8%AE%B0/point/hugo/">hugo</a> 的 web 页面里也不支持。所以找了一下方法，发现 automator 这个功能可以一劳永逸的实现。之前一直没有用过。所以记录一下</p>]]></description></item><item><title>macos</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/macos/</link><pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/macos/</guid><description><![CDATA[<p><code>macos</code> 是苹果公司的电脑搭载的操作系统. 因为是苹果 mac 的专属系统, 日常 mac 也代表了 macos.</p>
+<p>要点:</p>
+<ul>
+<li>苹果专属系统</li>
+<li>可以开发 ios 应用</li>
+</ul>]]></description></item><item><title>macos问题处理</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/macos%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/</link><pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/macos%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这里记录在使用 <a href="/posts/%E7%AC%94%E8%AE%B0/point/macos/">macos</a> 过程中遇到的问题.</p>
+<h2 id="问题列表" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e5%88%97%e8%a1%a8" class="header-mark"></a>问题列表</h2><h3 id="zprofile-和-zshrc" class="headerLink">
+    <a href="#zprofile-%e5%92%8c-zshrc" class="header-mark"></a>zprofile 和 zshrc</h3><p><strong>使用</strong> <code>~/.zshrc</code></p>
+<p>mac 上有 <code>~/.zprofile</code> 和 <code>~/.zshrc</code>，zprofile 只会在新窗口的时候执行一次，进入子 zsh 不生效。zshrc 每次进入都会执行</p>]]></description></item></channel></rss>

@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Java - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/java/</link><description>Java - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 04 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/java/" rel="self" type="application/rss+xml"/><item><title>java</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/java/</link><pubDate>Tue, 04 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/java/</guid><description><![CDATA[<p><code>java</code> 是一种非常流行的编程语言, 基于 JVM 虚拟机.</p>
+<p>要点:</p>
+<ul>
+<li>开源, 社区庞大</li>
+<li>性能不错</li>
+<li>吃资源</li>
+</ul>]]></description></item><item><title>java配置和操作</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/java%E9%85%8D%E7%BD%AE%E5%92%8C%E6%93%8D%E4%BD%9C/</link><pubDate>Tue, 04 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/java%E9%85%8D%E7%BD%AE%E5%92%8C%E6%93%8D%E4%BD%9C/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>我不怎么写 <a href="/posts/%E7%AC%94%E8%AE%B0/point/java/">java</a> 代码, 但是国内一般都是 java 后台, 所以记录一些配置和操作, 方便复用.</p>
+<h2 id="安装" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85" class="header-mark"></a>安装</h2><ol>
+<li>下载对应版本的 jdk <a href="https://jdk.java.net/21/" target="_blank" rel="noopener noreferrer">OpenJDK JDK 21.0.2 GA Release</a>, 地址路径可以修改, 对应 jdk 的大版本</li>
+<li>配置环境变量
+<ul>
+<li><code>JAVA_HOME</code>: <code>/path/21-jdk</code></li>
+<li><code>CLASSPATH</code>: <code>/path/21-jdk/lib/tools.jar</code></li>
+<li><code>PATH</code> 新增路径 <code>/path/21-jdk/bin</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="jvm-启动参数" class="headerLink">
+    <a href="#jvm-%e5%90%af%e5%8a%a8%e5%8f%82%e6%95%b0" class="header-mark"></a>JVM 启动参数</h2><h3 id="jvm-内存配置" class="headerLink">
+    <a href="#jvm-%e5%86%85%e5%ad%98%e9%85%8d%e7%bd%ae" class="header-mark"></a>JVM 内存配置</h3><p>可以理解成 <code>java运行内存 = 堆内存 + 元空间 + 非堆内存</code>.</p>]]></description></item></channel></rss>

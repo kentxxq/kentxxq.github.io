@@ -1,0 +1,10 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Wsl - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/wsl/</link><description>Wsl - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 29 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/wsl/" rel="self" type="application/rss+xml"/><item><title>wsl</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/wsl/</link><pubDate>Thu, 29 Jun 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/wsl/</guid><description><![CDATA[<p><code>wsl</code> 是 <a href="/posts/%E7%AC%94%E8%AE%B0/point/windows/">windows</a> 下面的 <a href="/posts/%E7%AC%94%E8%AE%B0/point/linux/">linux</a> 子系统. 方便开发人员在 windows 上使用 linux.</p>
+<p>要点:</p>
+<ul>
+<li>打通了文件系统</li>
+<li>网络互通</li>
+<li>支持 linux 图形界面</li>
+</ul>
+<h2 id="相关内容" class="headerLink">
+    <a href="#%e7%9b%b8%e5%85%b3%e5%86%85%e5%ae%b9" class="header-mark"></a>相关内容</h2><h3 id="管理工具" class="headerLink">
+    <a href="#%e7%ae%a1%e7%90%86%e5%b7%a5%e5%85%b7" class="header-mark"></a>管理工具</h3><p><a href="https://github.com/bostrot/wsl2-distro-manager/wiki" target="_blank" rel="noopener noreferrer">wsl2-distro-manager简称WSL-Manager</a> 可以帮助操作</p>]]></description></item></channel></rss>

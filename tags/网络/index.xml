@@ -1,0 +1,10 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>网络 - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/%E7%BD%91%E7%BB%9C/</link><description>网络 - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 18 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml"/><item><title>虚拟局域网</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91/</link><pubDate>Wed, 18 Oct 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>起因是公司两个隔得很远的房间的两个电脑需要在同一个局域网. 公司很多条独立的宽带. 而走线麻烦还丑. 是一个临时需求. 所以就想起来了有虚拟局域网.</p>
+<p>有的几个方案:</p>
+<ul>
+<li><a href="https://github.com/ntop/n2n" target="_blank" rel="noopener noreferrer">ntop/n2n: Peer-to-peer VPN (github.com)</a></li>
+<li><a href="https://login.tailscale.com/admin/welcome" target="_blank" rel="noopener noreferrer">Tailscale</a></li>
+<li><a href="https://www.zerotier.com/" target="_blank" rel="noopener noreferrer">ZeroTier | Global Area Networking</a></li>
+<li><a href="https://github.com/fatedier/frp" target="_blank" rel="noopener noreferrer">fatedier/frp: A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet. (github.com)</a></li>
+</ul>
+<p>现阶段我简单对比了一下, <code>ZeroTier</code> 是比较简答直观的. 所以就它了</p>]]></description></item></channel></rss>

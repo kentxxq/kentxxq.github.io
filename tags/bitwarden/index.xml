@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Bitwarden - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/bitwarden/</link><description>Bitwarden - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 31 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/bitwarden/" rel="self" type="application/rss+xml"/><item><title>bitwarden</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/bitwarden/</link><pubDate>Mon, 31 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/bitwarden/</guid><description><![CDATA[<p><code>bitwarden</code> 是一款密码管理软件.</p>
+<p>要点:</p>
+<ul>
+<li>开源 <a href="https://github.com/bitwarden" target="_blank" rel="noopener noreferrer">Bitwarden · GitHub</a></li>
+<li>大部分功能免费, 自建全免费</li>
+<li>所有端的全覆盖</li>
+</ul>]]></description></item><item><title>自建bitwarden</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%87%AA%E5%BB%BAbitwarden/</link><pubDate>Mon, 31 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E8%87%AA%E5%BB%BAbitwarden/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这里是自建 <a href="/posts/%E7%AC%94%E8%AE%B0/point/bitwarden/">bitwarden</a> 的配置和记录.</p>
+<p>为什么要自建?</p>
+<ul>
+<li>完全免费, 不怕跑路</li>
+<li>上传附件需要收费, 例如 ssh-key</li>
+<li>自己使用 api 完成一些功能? 公共的可能有限制</li>
+</ul>
+<blockquote>
+  <p>我使用的是 <a href="https://github.com/dani-garcia/vaultwarden" target="_blank" rel="noopener noreferrer">vaultwarden</a>, 这是服务端的 rust 版本, 更加省内存.</p>]]></description></item></channel></rss>

@@ -1,0 +1,6 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>部署 - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/%E9%83%A8%E7%BD%B2/</link><description>部署 - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/%E9%83%A8%E7%BD%B2/" rel="self" type="application/rss+xml"/><item><title>微信小程序自动化部署</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</link><pubDate>Tue, 25 Feb 2020 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><blockquote>
+  <p>#todo 更新为 miniprogram-ci 的用法
+现在推荐使用官方的 miniprogram-ci 进行打包推送, 本文适用于想学学 ansible 的人</p>
+
+</blockquote><p>公司先阶段使用的是通过 <a href="/posts/%E7%AC%94%E8%AE%B0/point/ansible/">ansible</a> 来进行多服务器的部署。而微信小程序开发者工具官方只放出来了 <a href="/posts/%E7%AC%94%E8%AE%B0/point/windows/">windows</a> 和 <a href="/posts/%E7%AC%94%E8%AE%B0/point/macos/">mac</a> 版本。</p>]]></description></item></channel></rss>

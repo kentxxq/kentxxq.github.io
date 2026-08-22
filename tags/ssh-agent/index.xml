@@ -1,0 +1,8 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Ssh-Agent - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/ssh-agent/</link><description>Ssh-Agent - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 25 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/ssh-agent/" rel="self" type="application/rss+xml"/><item><title>ssh-agent</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/ssh-agent/</link><pubDate>Sun, 25 Jun 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/ssh-agent/</guid><description><![CDATA[<p><code>ssh-agent</code> 是 <a href="/posts/%E7%AC%94%E8%AE%B0/point/openssh/">ssh</a> 的一个代理软件. 用来保存秘钥, 方便你日常使用.</p>
+<p>要点:</p>
+<ul>
+<li>Windows 通常自带了此服务</li>
+</ul>]]></description></item><item><title>git-openssh的免密</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/git-openssh%E7%9A%84%E5%85%8D%E5%AF%86/</link><pubDate>Wed, 21 Jun 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/git-openssh%E7%9A%84%E5%85%8D%E5%AF%86/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>我的使用 <a href="/posts/%E7%AC%94%E8%AE%B0/point/git/">git</a> 操作代码. 而 git 的通信会用到 <a href="/posts/%E7%AC%94%E8%AE%B0/point/openssh/">openssh</a>.</p>
+<p>openssh 为了保证安全. 提供了私钥和公钥. 其中私钥可以密码加密, 保证安全性. 所以我就加密了.导致了什么问题呢?</p>
+<p>每次我用到 git 的时候, 都提示我输入密码. 所以我今天就来配置 <a href="/posts/%E7%AC%94%E8%AE%B0/point/ssh-agent/">ssh-agent</a>.</p>]]></description></item></channel></rss>

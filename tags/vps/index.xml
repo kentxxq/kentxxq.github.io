@@ -1,0 +1,11 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Vps - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/vps/</link><description>Vps - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 16 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/vps/" rel="self" type="application/rss+xml"/><item><title>home-server部署记录</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/home-server%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/</link><pubDate>Wed, 16 Aug 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/home-server%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>记录家里机器的应用部署.</p>
+<h2 id="内容" class="headerLink">
+    <a href="#%e5%86%85%e5%ae%b9" class="header-mark"></a>内容</h2><p>#todo/笔记</p>
+<ul>
+<li>Nginx</li>
+<li>Rclone</li>
+<li>Filebrowser</li>
+<li>Ddns-go</li>
+<li>jellyfin</li>
+</ul>]]></description></item></channel></rss>

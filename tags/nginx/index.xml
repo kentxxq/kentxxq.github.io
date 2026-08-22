@@ -1,0 +1,412 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Nginx - 标签 - 运维个人技术栈</title><link>https://kentxxq.com/tags/nginx/</link><description>Nginx - 标签 - 运维个人技术栈</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 06 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kentxxq.com/tags/nginx/" rel="self" type="application/rss+xml"/><item><title>nginx</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/nginx/</link><pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/point/nginx/</guid><description><![CDATA[<p><code>nginx</code> 是一个常见的负载均衡服务.</p>
+<p>要点:</p>
+<ul>
+<li>免费</li>
+<li>用户量大, 教程多</li>
+<li>性能强大</li>
+</ul>]]></description></item><item><title>nginx编译和升级</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E7%BC%96%E8%AF%91%E5%92%8C%E5%8D%87%E7%BA%A7/</link><pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E7%BC%96%E8%AF%91%E5%92%8C%E5%8D%87%E7%BA%A7/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p>这里记录 <a href="/posts/%E7%AC%94%E8%AE%B0/point/nginx/">nginx</a> 的模块编译和升级操作.</p>
+<h2 id="编译" class="headerLink">
+    <a href="#%e7%bc%96%e8%af%91" class="header-mark"></a>编译</h2><h3 id="正常编译" class="headerLink">
+    <a href="#%e6%ad%a3%e5%b8%b8%e7%bc%96%e8%af%91" class="header-mark"></a>正常编译</h3><p><a href="/posts/%E7%AC%94%E8%AE%B0/linux%E5%91%BD%E4%BB%A4%E4%B8%8E%E9%85%8D%E7%BD%AE/#c/c++%20%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96">装好依赖</a> 后开始编译</p>
+<div class="code-block highlight is-closed show-line-numbers  tw:group tw:my-2">
+  <div class="
+    
+    tw:flex 
+    tw:flex-row
+    tw:flex-1 
+    tw:justify-between 
+    tw:w-full tw:bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw:mx-2 
+        tw:flex
+        tw:flex-row
+        tw:flex-1"
+      aria-hidden="true">
+          <span class="tw:group-[.is-open]:rotate-90 tw:transition-[transform] tw:duration-500 tw:ease-in-out tw:print:hidden! tw:w-min tw:h-min tw:my-1 tw:mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></span>
+          <span class="tw:select-none tw:my-1! tw:block">shell</span>
+      </button>
+
+   <div class="tw:flex">
+      <button 
+        class="
+          line-number-button
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.show-line-numbers]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw:select-none 
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.is-wrap]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw:select-none
+          tw:mx-2 
+          tw:hidden
+          tw:group-[.is-open]:block
+          tw:hover:text-fgColor-link 
+          tw:print:hidden!"
+        title="Copy code">
+          <span class="copy-icon tw:block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw:hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw:select-none 
+          tw:mx-2 
+          tw:block 
+          tw:group-[.is-open]:hidden 
+          tw:print:hidden!" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw:block tw:m-0 tw:p-0"><code 
+    id="codeblock-id-1" 
+    class="
+      chroma 
+      tw:block! 
+      tw:p-0
+      tw:m-0
+      tw:transition-[max-height] 
+      tw:duration-500 
+      tw:ease-in-out 
+      tw:group-[.is-closed]:max-h-0! 
+      tw:group-[.is-wrap]:text-wrap
+      tw:overflow-y-hidden
+      tw:overflow-x-auto
+      tw:scrollbar-thin
+      "><span class="line"><span class="cl"><span class="c1"># 准备目录</span>
+</span></span><span class="line"><span class="cl">mkdir nginx <span class="p">;</span> <span class="nb">cd</span> nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># br压缩模块</span>
+</span></span><span class="line"><span class="cl">git clone --recurse-submodules -j8 https://gh-proxy.org/https://github.com/google/ngx_brotli.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ngx_brotli/deps/brotli
+</span></span><span class="line"><span class="cl">mkdir out <span class="o">&amp;&amp;</span> <span class="nb">cd</span> out
+</span></span><span class="line"><span class="cl">cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>Release -DBUILD_SHARED_LIBS<span class="o">=</span>OFF -DCMAKE_C_FLAGS<span class="o">=</span><span class="s2">&#34;-Ofast -m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections&#34;</span> -DCMAKE_CXX_FLAGS<span class="o">=</span><span class="s2">&#34;-Ofast -m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections&#34;</span> -DCMAKE_INSTALL_PREFIX<span class="o">=</span>./installed ..
+</span></span><span class="line"><span class="cl">cmake --build . --config Release --target brotlienc
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /root/nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&#34;-m64 -march=native -mtune=native -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&#34;-m64 -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载,解压 https://nginx.org/en/download.html</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 优先使用 mainline 版本，官方推荐 mainline，且 bug 修复比 stable 更及时</span>
+</span></span><span class="line"><span class="cl">curl http://nginx.org/download/nginx-1.31.0.tar.gz -o nginx-1.31.0.tar.gz
+</span></span><span class="line"><span class="cl">tar -xf nginx-1.31.0.tar.gz
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> nginx-1.31.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 监控信息 --with-http_stub_status_module </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ssl证书 --with-http_ssl_module</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># tcp代理和tcp代理证书 --with-stream --with-stream_ssl_module</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># tcp代理的时候，把客户端ip传到PROXY协议的header头部 --with-stream_realip_module和--with-http_realip_module建议开启,虽然我一直用header传输</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 启用http2  --with-http_v2_module</span>
+</span></span><span class="line"><span class="cl">./configure --user<span class="o">=</span>nginx --group<span class="o">=</span>nginx --prefix<span class="o">=</span>/usr/local/nginx --with-http_ssl_module --with-stream --with-stream_ssl_module --with-stream_realip_module --with-http_v2_module --with-http_stub_status_module --add-module<span class="o">=</span>/root/nginx/ngx_brotli
+</span></span><span class="line"><span class="cl">make <span class="o">&amp;&amp;</span> make install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 软连接</span>
+</span></span><span class="line"><span class="cl">ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 验证</span>
+</span></span><span class="line"><span class="cl">nginx -t
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动测试</span>
+</span></span><span class="line"><span class="cl">nginx
+</span></span><span class="line"><span class="cl"><span class="c1"># 报错 [emerg] getpwnam(&#34;nginx&#34;) failed</span>
+</span></span><span class="line"><span class="cl">useradd -s /bin/false nginx</span></span></code></pre>
+</div>
+<h4 id="支持-connection-请求" class="headerLink">
+    <a href="#%e6%94%af%e6%8c%81-connection-%e8%af%b7%e6%b1%82" class="header-mark"></a>支持 connection 请求</h4><p><a href="https://github.com/chobits/ngx_http_proxy_connect_module" target="_blank" rel="noopener noreferrer">GitHub - chobits/ngx_http_proxy_connect_module: A forward proxy module for CONNECT request handling</a> 作用是支持 connection 请求, 也就是正向代理</p>]]></description></item><item><title>nginx配置</title><link>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/</link><pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate><author><name>kentxxq</name></author><guid>https://kentxxq.com/posts/%E7%AC%94%E8%AE%B0/nginx%E9%85%8D%E7%BD%AE/</guid><description><![CDATA[<h2 id="简介" class="headerLink">
+    <a href="#%e7%ae%80%e4%bb%8b" class="header-mark"></a>简介</h2><p><a href="/posts/%E7%AC%94%E8%AE%B0/point/nginx/">nginx</a> 的配置示例, 文档中的配置文件, 目录结构最好结合 <a href="/posts/%E7%AC%94%E8%AE%B0/nginx%E7%BC%96%E8%AF%91%E5%92%8C%E5%8D%87%E7%BA%A7/">nginx编译和升级</a> 使用.</p>
+<h2 id="基础配置" class="headerLink">
+    <a href="#%e5%9f%ba%e7%a1%80%e9%85%8d%e7%bd%ae" class="header-mark"></a>基础配置</h2><h3 id="nginxconf-主配置" class="headerLink">
+    <a href="#nginxconf-%e4%b8%bb%e9%85%8d%e7%bd%ae" class="header-mark"></a>nginx.conf 主配置</h3><blockquote>
+  <p>日志格式解析可以参考 <a href="/posts/%E7%AC%94%E8%AE%B0/linux%E5%91%BD%E4%BB%A4%E4%B8%8E%E9%85%8D%E7%BD%AE/#jq%20%E5%A4%84%E7%90%86%20json">jq 处理 json</a></p>
+
+</blockquote><div class="code-block highlight is-closed show-line-numbers  tw:group tw:my-2">
+  <div class="
+    
+    tw:flex 
+    tw:flex-row
+    tw:flex-1 
+    tw:justify-between 
+    tw:w-full tw:bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw:mx-2 
+        tw:flex
+        tw:flex-row
+        tw:flex-1"
+      aria-hidden="true">
+          <span class="tw:group-[.is-open]:rotate-90 tw:transition-[transform] tw:duration-500 tw:ease-in-out tw:print:hidden! tw:w-min tw:h-min tw:my-1 tw:mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></span>
+          <span class="tw:select-none tw:my-1! tw:block">nginx</span>
+      </button>
+
+   <div class="tw:flex">
+      <button 
+        class="
+          line-number-button
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.show-line-numbers]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw:select-none 
+          tw:mx-2 
+          tw:hidden 
+          tw:group-[.is-open]:block 
+          tw:group-[.is-wrap]:text-fgColor-link 
+          tw:print:hidden!" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw:select-none
+          tw:mx-2 
+          tw:hidden
+          tw:group-[.is-open]:block
+          tw:hover:text-fgColor-link 
+          tw:print:hidden!"
+        title="Copy code">
+          <span class="copy-icon tw:block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw:hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw:select-none 
+          tw:mx-2 
+          tw:block 
+          tw:group-[.is-open]:hidden 
+          tw:print:hidden!" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw:block tw:m-0 tw:p-0"><code 
+    id="codeblock-id-1" 
+    class="
+      chroma 
+      tw:block! 
+      tw:p-0
+      tw:m-0
+      tw:transition-[max-height] 
+      tw:duration-500 
+      tw:ease-in-out 
+      tw:group-[.is-closed]:max-h-0! 
+      tw:group-[.is-wrap]:text-wrap
+      tw:overflow-y-hidden
+      tw:overflow-x-auto
+      tw:scrollbar-thin
+      "><span class="line"><span class="cl"><span class="c1"># user nobody;
+</span></span></span><span class="line"><span class="cl"><span class="c1"># 默认进入守护进程 daemon on; 这样就可以forking模式启动.
+</span></span></span><span class="line"><span class="cl"><span class="c1"># 默认打开 master_process on; 这样会创建worker进程. 这是一个开发人员选项,如果off将只存在master进程处理
+</span></span></span><span class="line"><span class="cl"><span class="k">worker_processes</span>  <span class="s">auto</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">worker_cpu_affinity</span> <span class="s">auto</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">error_log</span> <span class="s">/data/logs/nginx-error.log</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">pid</span>        <span class="s">/run/nginx.pid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">worker_rlimit_nofile</span> <span class="mi">65535</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 解决nginx-worker一直不退出的情况, worker process is shutting down
+</span></span></span><span class="line"><span class="cl"><span class="c1"># 需要重启nginx生效
+</span></span></span><span class="line"><span class="cl"><span class="k">worker_shutdown_timeout</span> <span class="s">5s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">events</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">use</span>     <span class="s">epoll</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">worker_connections</span>  <span class="mi">65535</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## tcp代理参考
+</span></span></span><span class="line"><span class="cl"><span class="k">stream</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">upstream</span> <span class="s">service-a</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">hash</span>   <span class="nv">$remote_addr</span> <span class="s">consistent</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server</span> <span class="n">1.1.1.1</span><span class="p">:</span><span class="mi">222</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kn">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">listen</span>  <span class="mi">10022</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_connect_timeout</span>   <span class="s">30s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_timeout</span> <span class="s">300s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_pass</span>  <span class="s">service-a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">http</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">include</span>       <span class="s">mime.types</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">default_type</span>  <span class="s">application/octet-stream</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 普通日志格式
+</span></span></span><span class="line"><span class="cl">    <span class="kn">log_format</span> <span class="s">main</span>  <span class="s">&#39;</span><span class="nv">$remote_addr</span> <span class="s">-</span> <span class="nv">$remote_user</span> <span class="s">[</span><span class="nv">$time_local]</span> <span class="s">&#34;</span><span class="nv">$request&#34;</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                     <span class="s">&#39;</span><span class="nv">$status</span> <span class="nv">$body_bytes_sent</span> <span class="s">&#34;</span><span class="nv">$http_referer&#34;</span> <span class="s">&#34;</span><span class="nv">$http_user_agent&#34;</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                     <span class="s">&#39;</span><span class="nv">$request_length</span> <span class="nv">$request_time</span> <span class="nv">$upstream_addr</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                     <span class="s">&#39;</span><span class="nv">$upstream_response_length</span> <span class="nv">$upstream_response_time</span> <span class="nv">$upstream_status&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># json日志格式
+</span></span></span><span class="line"><span class="cl">    <span class="kn">log_format</span> <span class="s">k-json</span> <span class="s">escape=json</span> <span class="s">&#39;</span><span class="p">{</span> <span class="kn">&#34;@timestamp&#34;:&#34;$time_iso8601&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;@fields&#34;:</span><span class="p">{</span> <span class="kn">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;request_uri&#34;:&#34;</span><span class="nv">$request_uri&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;url&#34;:&#34;</span><span class="nv">$uri&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;upstream_addr&#34;:&#34;</span><span class="nv">$upstream_addr&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;remote_addr&#34;:&#34;</span><span class="nv">$remote_addr&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;remote_user&#34;:&#34;</span><span class="nv">$remote_user&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;body_bytes_sent&#34;:&#34;</span><span class="nv">$body_bytes_sent&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;host&#34;:&#34;</span><span class="nv">$host&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;server_addr&#34;:&#34;</span><span class="nv">$server_addr&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;request_time&#34;:&#34;</span><span class="nv">$request_time&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;status&#34;:&#34;</span><span class="nv">$status&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;request&#34;:&#34;</span><span class="nv">$request&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;request_method&#34;:&#34;</span><span class="nv">$request_method&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;upstream_response_time&#34;:&#34;</span><span class="nv">$upstream_response_time&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;http_referrer&#34;:&#34;</span><span class="nv">$http_referer&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;http_x_forwarded_for&#34;:&#34;</span><span class="nv">$http_x_forwarded_for&#34;,</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                         <span class="s">&#39;&#34;http_user_agent&#34;:&#34;</span><span class="nv">$http_user_agent&#34;</span> <span class="err">}</span> <span class="err">}</span><span class="s">&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 允许配置很多的server_name
+</span></span></span><span class="line"><span class="cl">    <span class="kn">server_names_hash_max_size</span> <span class="mi">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 配置字符集
+</span></span></span><span class="line"><span class="cl">    <span class="kn">charset</span> <span class="s">utf-8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 访问日志
+</span></span></span><span class="line"><span class="cl">    <span class="kn">access_log</span>  <span class="s">/data/logs/nginx-access.log</span>  <span class="s">main</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 默认http 1.0, 改成1.1
+</span></span></span><span class="line"><span class="cl">    <span class="kn">proxy_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 内核完成文件发送,不需要read再write,没有上下文切换
+</span></span></span><span class="line"><span class="cl">    <span class="kn">sendfile</span>        <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># sendfile启用后才生效.累计一定大小后发送,减小额外开销,提高网络效率
+</span></span></span><span class="line"><span class="cl">    <span class="kn">tcp_nopush</span>     <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 尽快发送数据,禁用Nagle算法(等凑满一个MSS-Maximum Segment Size最大报文长度或收到确认再发送)
+</span></span></span><span class="line"><span class="cl">    <span class="kn">tcp_nodelay</span>         <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 可以看到 TCP_NOPUSH 是要等数据包累积到一定大小才发送, TCP_NODELAY 是要尽快发送, 二者相互矛盾. 
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># 实际上, 它们确实可以一起用.在传输文件的时候, 先填满包, 再尽快发送. 而其他的情况,都迅速发包,减少延迟.
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 优先使用服务器支持的加密套件
+</span></span></span><span class="line"><span class="cl">    <span class="kn">ssl_prefer_server_ciphers</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 加速性能
+</span></span></span><span class="line"><span class="cl">    <span class="kn">ssl_session_cache</span> <span class="s">shared:SSL:10m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 会话保持120秒
+</span></span></span><span class="line"><span class="cl">    <span class="kn">keepalive_timeout</span>   <span class="mi">120</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 默认1000,一个tcp长连接在处理1000次http请求以后,就强制销毁掉. 如果你10000qps,那么你需要每秒创建10个连接, 就需要调大这个值.
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># keepalive_requests 1000;
+</span></span></span><span class="line"><span class="cl">    <span class="kn">types_hash_max_size</span> <span class="mi">2048</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">server_tokens</span> <span class="no">off</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 超时时间
+</span></span></span><span class="line"><span class="cl">    <span class="kn">proxy_connect_timeout</span> <span class="mi">300</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_read_timeout</span> <span class="mi">300</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_send_timeout</span> <span class="mi">500</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 上传文件
+</span></span></span><span class="line"><span class="cl">    <span class="kn">client_max_body_size</span> <span class="s">2048M</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 大Header会导致502,解决
+</span></span></span><span class="line"><span class="cl">    <span class="kn">client_header_buffer_size</span>  <span class="mi">64k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffer_size
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># 特殊的区域,一般存放的是header信息 
+</span></span></span><span class="line"><span class="cl">    <span class="kn">proxy_buffer_size</span>          <span class="mi">256k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 默认开启 proxy_buffering on; 只影响下面2个,不影响上面
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># 缓冲区的个数和大小,ERR_INCOMPLETE_CHUNKED_ENCODING 加大这里
+</span></span></span><span class="line"><span class="cl">    <span class="kn">proxy_buffers</span>              <span class="mi">8</span> <span class="mi">256k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 在缓冲没有完全塞满的时候,需要划分一部分地方发送数据到客户端,这样可以加快响应.
+</span></span></span><span class="line"><span class="cl">    <span class="kn">proxy_busy_buffers_size</span>    <span class="mi">512k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 阿里云ingress
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># proxy_buffers: 4 256k
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># proxy-buffer-size: 256k
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># proxy-busy-buffers-size: 512k
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 不把buffer外的内容写入到硬盘临时文件,但是会消耗比较多的内存
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># 解决ERR_HTTP2_PROTOCOL_ERROR
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># proxy_max_temp_file_size 0;
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># header允许下划线
+</span></span></span><span class="line"><span class="cl">    <span class="kn">underscores_in_headers</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 网络&gt;硬盘&gt;内存&gt;cpu,所以尽量减少网络占用.
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># 1k内不压缩,因为1个数据包差不多能发送完.压缩也需要时间.
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># 然后我们尽量压榨cpu. 如果能1个数据包发完,那么传输速度提升了.
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># 打开br压缩
+</span></span></span><span class="line"><span class="cl">    <span class="kn">brotli</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">brotli_min_length</span> <span class="mi">1k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">brotli_comp_level</span> <span class="mi">6</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">brotli_types</span> <span class="s">application/atom+xml</span> <span class="s">application/javascript</span> <span class="s">application/json</span> <span class="s">application/vnd.api+json</span> <span class="s">application/rss+xml</span>
+</span></span><span class="line"><span class="cl">                 <span class="s">application/vnd.ms-fontobject</span> <span class="s">application/x-font-opentype</span> <span class="s">application/x-font-truetype</span>
+</span></span><span class="line"><span class="cl">                 <span class="s">application/x-font-ttf</span> <span class="s">application/x-javascript</span> <span class="s">application/xhtml+xml</span> <span class="s">application/xml</span>
+</span></span><span class="line"><span class="cl">                 <span class="s">font/eot</span> <span class="s">font/opentype</span> <span class="s">font/otf</span> <span class="s">font/truetype</span> <span class="s">image/svg+xml</span> <span class="s">image/vnd.microsoft.icon</span>
+</span></span><span class="line"><span class="cl">                 <span class="s">image/x-icon</span> <span class="s">image/x-win-bitmap</span> <span class="s">text/css</span> <span class="s">text/javascript</span> <span class="s">text/plain</span> <span class="s">text/xml</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 打开gzip
+</span></span></span><span class="line"><span class="cl">    <span class="kn">gzip</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">gzip_min_length</span> <span class="mi">1k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">gzip_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">gzip_comp_level</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 压缩类型，下面的配置压缩了接口。可配置项参考nginx目录下的mime.types
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># 参考google压缩了html,css,js,json. text/html 总是会压缩,加上去反而会报错.
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># 图片属于压缩过了的格式, 应该由专门的服务或CDN转换图片格式
+</span></span></span><span class="line"><span class="cl">    <span class="c1"># text/javascript 用于兼容html5之前写的项目
+</span></span></span><span class="line"><span class="cl">    <span class="kn">gzip_types</span> <span class="s">text/plain</span> <span class="s">text/xml</span> <span class="s">text/css</span> <span class="s">text/javascript</span> <span class="s">application/javascript</span> <span class="s">application/json</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">gzip_vary</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kn">gzip_disable</span> <span class="s">&#34;msie6&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 等价 gzip_disable &#34;MSIE[1-6]\.&#34; 但性能更好,匹配更合适;
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 包含目录
+</span></span></span><span class="line"><span class="cl">    <span class="kn">include</span> <span class="s">/usr/local/nginx/conf/hosts/*.conf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 默认配置,保留是为了不加自定义配置也能起nginx
+</span></span></span><span class="line"><span class="cl">    <span class="kn">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">listen</span>       <span class="mi">80</span> <span class="s">default_server</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server_name</span>  <span class="s">_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">root</span>   <span class="s">html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">index</span>  <span class="s">index.html</span> <span class="s">index.htm</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kn">error_page</span>   <span class="mi">500</span> <span class="mi">502</span> <span class="mi">503</span> <span class="mi">504</span>  <span class="s">/50x.html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">location</span> <span class="p">=</span> <span class="s">/50x.html</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kn">root</span>   <span class="s">html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre>
+</div>
+<h3 id="通用-header-配置" class="headerLink">
+    <a href="#%e9%80%9a%e7%94%a8-header-%e9%85%8d%e7%bd%ae" class="header-mark"></a>通用 Header 配置</h3><p><code>/usr/local/nginx/conf/options/normal.conf</code></p>]]></description></item></channel></rss>
