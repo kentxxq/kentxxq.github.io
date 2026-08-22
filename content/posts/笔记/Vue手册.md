@@ -1,0 +1,973 @@
+---
+title: Vue手册
+tags:
+  - blog
+  - vue
+  - 前端
+date: 2024-03-09
+lastmod: 2025-12-06
+categories:
+  - blog
+description: 
+---
+
+## 简介
+
+个人学习 [[笔记/point/Vue|Vue]] 的手册.
+
+开始前, 应该先搞定 [[笔记/前端迅速上手|前端迅速上手]] 里的 [[笔记/前端迅速上手#VUE 官网版本|vue项目创建]] 和 [[笔记/前端迅速上手#Vscode|vscode配置]],
+
+## 语法/概念
+
+### 定义对象 Person
+
+```ts
+export interface Person {
+  id: number
+  name: string
+  age: number
+  x?: string
+}
+
+type Persons = Array<Person>
+```
+
+### 路由 router
+
+#### 路由配置
+
+`router.ts` 文件内容
+
+```ts
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '@/views/HomeView.vue'
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'root',
+      // 重定向到 /home
+      redirect: '/home'
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: HomeView
+    },
+    {
+      path: '/about',
+      name: 'about',
+      // 懒加载
+      component: () => import('../views/AboutView.vue')
+    }
+  ]
+})
+
+export default router
+```
+
+子路径嵌套
+
+```json
+    // 子路径
+    {
+      path: '/home2',
+      name: 'home2',
+      component: HomeView,
+      children: [
+        {
+          name: 'p1'
+          path: 'p1',
+          component: Detail
+        }
+      ]
+    },
+```
+
+路由参数. 在路径 url 里传递参数.
+
+- `title?` 说明 title 可以不传
+- routerlink 写法为 `:to="{name: 'p1', params:{id: 1, title:2}}"`
+
+```json
+    {
+      path: '/home2',
+      name: 'home2',
+      component: HomeView,
+      children: [
+        {
+          name: 'p1'
+          // 传递参数
+          path: 'p1/:id/:title?',
+          component: Detail
+        }
+      ]
+    },
+```
+
+`props` 是配合上面路由参数使用的. 原因是有时候只配置了路由, 无法使用 `<Component a="1">` 传参
+
+```ts
+// 通过query传参的函数写法
+props(route){
+  return route.query
+  // 返回params不如用属性 props: true
+  // return route.params 
+}
+
+// 属性写法. 只能用来替代函数写法的 return route.params
+props: true
+
+// 对象写法
+props: {
+  id:1
+  title:2
+}
+
+// 接收方
+// defineProps(['id','title'])
+```
+
+#### 链接
+
+```html
+<!-- 传字符串 -->
+<RouterLink replace :to="url" active-class="active-link">{{ index }}-{{ url }}</RouterLink>
+
+<!-- 传对象 -->
+<RouterLink :to="{name: 'name', query:{a:1,b:2}}" active-class="active-link">{{ index }}-{{ url }}</RouterLink>
+```
+
+- 可以传递 url, 其实就是 path 路径
+- 传递对象的话, 可以写 router 里面的 name, 用 query 传递 url 参数
+- `replace` 属性, 使用户无法使用浏览器的返回按钮去到上一个页面
+
+css 内容
+
+```css
+.active-link {
+  background-color: skyblue;
+}
+```
+
+#### 编程路由
+
+```ts
+import { useRouter } from "vue-router"
+const router = useRouter()
+// 这里的push可以传递RouterLink里的 to 值
+router.push('/url1')
+```
+
+### 全局传递/状态管理 pinia
+
+定义一个 store
+
+```ts
+import { defineStore } from 'pinia'
+import axios from 'axios'
+import { computed, ref } from 'vue'
+
+export const useDogStore = defineStore('dog', {
+  state() {
+    return {
+      urls: [
+        'https://images.dog.ceo/breeds/pekinese/n02086079_10613.jpg',
+        'https://images.dog.ceo/breeds/cockapoo/bubbles1.jpg'
+      ]
+    }
+  },
+  // 用于把state计算一下,字符串拼接一下来用
+  getters: {
+    doubleUrls(state) {
+      return state.urls.concat(state.urls)
+    },
+    doubleUrls2: (state) => state.urls.concat(state.urls),
+    doubleUrls3(): Array<string> {
+      return this.urls.concat(this.urls)
+    }
+  },
+  actions: {
+    async addDog() {
+      const {
+        data: { message }
+      } = await axios.get('https://dog.ceo/api/breeds/image/random')
+      this.urls.push(message)
+    }
+  }
+})
+
+// 组合式
+// ref() 就是 state 属性
+// computed() 就是 getters
+// function() 就是 actions
+export const useDog2Store = defineStore('dog', () => {
+  let urls = ref([
+    'https://images.dog.ceo/breeds/pekinese/n02086079_10613.jpg',
+    'https://images.dog.ceo/breeds/cockapoo/bubbles1.jpg'
+  ])
+
+  const doubleUrls = computed(() => urls.value.concat(urls.value))
+  const doubleUrls2 = computed(() => urls.value.concat(urls.value))
+  const doubleUrls3 = computed(() => urls.value.concat(urls.value))
+
+  async function addDog2() {
+    const {
+      data: { message }
+    } = await axios.get('https://dog.ceo/api/breeds/image/random')
+    urls.value.push(message)
+  }
+
+  return { urls, doubleUrls, doubleUrls2, doubleUrls3, addDog2 }
+})
+```
+
+读取
+
+```ts
+const dogStore = useDogStore()
+// store的解构用storeToRefs, storeToRefs只会处理数据,而不会处理store里的函数
+const {urls} = storeToRefs(dogStore)
+
+<img v-for="url in dogStore.urls" :key="url" :src="url" mode="scaleToFill" />
+```
+
+修改
+
+```ts
+// 1 直接修改
+dogStore.urls = ['1','2']
+
+// 2 patch方式修改对象,一次提交多个修改
+counterStore.$patch({
+  urls: ['1','2']
+  b: 4
+})
+
+// 3 就是在store定义里, 用actions修改
+```
+
+订阅
+
+```ts
+// 订阅
+// mutate里有id和事件.没什么用.
+// state则可以拿到数据
+counterStore.$subscribe((mutate, state) => {
+  // 一旦数据发生了变化,就存起来
+  localStorage.setItem('counter', JSON.stringify(state.count))
+})
+```
+
+###  信息传递
+
+#### defineProps/父传子
+
+- 父传子 `使用props`.
+- 也可以子传父，但是通常用 emit 替代
+	- 子传父 1: `父传子一个函数,子接收并带上参数来调用函数`
+
+```ts
+// 父
+<子组件 :dataA="dataA" @click="fangfa">
+function fangfa(value:number){
+  consolo.log(value)
+}
+
+// 子
+// 接收特定key,例如字符串 <子组件 a="a" b="b">
+defineProps(['dataA','fangfa'])
+fangfa(1)
+// 接收父组件的Person对象
+defineProps<{dataA:Person}>()
+// 可以不传 
+defineProps<{dataA?:Person}>()
+// 默认值
+withDefaults(defineProps<{dataA?:Person}>(),{
+    dataA: ()=> [{id: 1,name: "ken",age: 1}]
+})
+```
+
+#### emit 自定义事件/子传父
+
+只能子传父 2:
+
+- 自定义一个函数名 haha, 传入一个函数
+- 子组件接收特定名称, 然后 emit 传回去
+
+```ts
+// 父
+<子组件 @haha="fangfa">
+function fangfa(value:number){
+  consolo.log(value)
+}
+
+// 子
+<button @click="emit('haha',a)"></button>
+var a = ref(1)
+const emit = defineEmits(['haha'])
+```
+
+#### v-model 底层原理/父与子
+
+推荐使用 `defineModel`，默认双向绑定！
+
+```ts
+// 父组件
+<MyInput v-model="username" />
+
+// 子组件
+<script setup lang="ts">
+const model = defineModel<string>()
+</script>
+
+<template>
+  <input v-model="model" />
+</template>
+
+
+// 父，多个 defineModel
+<UserForm v-model:name="user.name" v-model:age="user.age" />
+
+<!-- 子组件 UserForm.vue -->
+<script setup lang="ts">
+const name = defineModel<string>('name')
+const age = defineModel<number>('age')
+</script>
+
+<template>
+  <input v-model="name" placeholder="Name" />
+  <input type="number" v-model="age" placeholder="Age" />
+</template>
+```
+
+下面是以前的用法，用于了解底层原理。
+
+关于 `$event`
+
+- 如果是原始 html 对象, 例如 input . 那么 `$event` 就是 dom 元素, 需要去 `target.value` 获取值
+- 如果是自己定义的事情或对象, 那么 `$event` 就是你传递的对象
+
+```ts
+// 父
+// <A-Input v-model="aa"/> 其实是下面的简写
+<A-Input :modelValue="username" @update:modelValue="username = $event"></A-Input>
+let username = ref('ken')
+
+// 子
+<input type="text" :value="modelValue" @input="emit('update:modelValue',(<HTMLInput>)$event.target.value)">
+// 接收传入的值
+defineProps(['modelValue'])
+// 接受传递的事件
+const emit = defineEmits(['update:modelValue'])
+```
+
+#### $attr 父传子
+
+父传子的时候, 如果子没有使用 `defineProps` 接收. 就会到子组件的 `$attr` 里.
+
+常见于把用户的配置通过 `attrs` 传递到下层组件. 所以常见场景是: 二次封装组件
+
+```ts
+// 父
+// {c:1,d:2} 等于 :c="1" :d="2"
+<child :a="a" :b="func" v-bind="{c:1,d:2}">
+
+// 子 原封不动传递一下
+<sun v-bind:"$attr">
+
+// 孙 直接可以接收到
+defineProps(["a","func"])
+```
+
+#### $refs 父传子 && $parent 子传父
+
+```ts
+// 父 给子一个ref
+<child ref="z">
+// 拿到子
+let z = ref()
+// 子暴露的都可以拿到
+z.value.a = 2
+// 自己的数据,也暴露出去
+let q = ref(1)
+defineExpose({q})
+
+// 子 暴露出去a
+a = ref(1)
+defineExpose({a})
+// 通过$parent拿到父暴露的q
+console.log($parent.q)
+```
+
+#### mitt 事件订阅传递/任意组件
+
+```ts
+import mitt from 'mitt'
+const emitter = mitt()
+
+// 监听
+emitter.on('foo', e => console.log('foo', e) )
+// 触发
+emitter.emit('foo', { a: 'b' })
+// 去掉所有事件
+emitter.all.clear()
+
+unMounted(()=>{
+  // 销毁的时候去掉这个
+  emitter.off('foo')
+})
+```
+
+#### provide/inject 祖传
+
+祖辈向下一代传递
+
+```ts
+// 祖先
+let qian = ref(1)
+provide('money',qian)
+// 复杂的对象
+provide('money',{qian,func})
+
+// 子
+let q = inject('money',5) // 默认值5,顺便用来做类型推断
+// 复杂的对象
+let {qian,func} = inject('money',{q:5,f:()=>{}})  
+```
+
+###  for 循环
+
+- 循环遍历数组 `(person, index) in Persons`
+- 循环遍历对象 `v-for="(value, key, index) in object"`
+
+### computed 计算
+
+`computed`
+
+- 肯定有返回值
+- 依赖项不变, 就可以用缓存. 性能好
+- 不能异步.
+- 场景: 购物车结算, 字符串拼接
+
+```ts
+let price = ref(0)//$0 
+
+let p = computed<string>(()=>{ return `$` + price.value })
+```
+
+### watch 变化
+
+`watch`
+
+- 返回值是停止自己
+- 每次都重新执行整体
+- 可以异步
+- 场景: 搜索框匹配内容, 做一些计算内容的限制
+
+```ts
+const stopWatch = watch(sum, (newValue, oldValue) => {
+  console.log('sum变化了', newValue, oldValue)
+  if (newValue >= 10) {
+    // 停止
+    stopWatch()
+  }
+}, { immediate: false, deep: false })
+```
+
+### slot 插槽
+
+假设一个页面, 有一个热门推荐窗口.
+
+- 推荐图片
+- 推荐视频
+- 推荐文字
+
+那么用 `slot` 就可以传递不同的元素.
+
+```html
+// 父
+<h3>今日推荐</h3>
+<child>
+<img src="xxx">
+</child>
+
+// 子
+<template>
+<slot>默认没有内容</slot>
+</template>
+```
+
+`具名插槽` 给插槽一个名字, 对应插入内容.
+
+```html
+<!-- ParentComponent.vue -->
+<template>
+  <ChildComponent>
+    <template v-slot:header>
+      <h2>这是标题</h2>
+    </template>
+    <template v-slot:footer>
+      <p>这是页脚</p>
+    </template>
+  </ChildComponent>
+</template>
+
+<!-- ChildComponent.vue -->
+<template>
+  <div>
+    <header>
+      <slot name="header"></slot>
+    </header>
+    <main>
+      <slot></slot>
+    </main>
+    <footer>
+      <slot name="footer"></slot>
+    </footer>
+  </div>
+</template>
+```
+
+`作用域插槽`: 子组件有数据 `q={a:1}`. 而父组件需要定义如何展示. 就会用到 `q.a`. 就需要作用域插槽解决这个问题.
+
+常见于 ui 组件库.
+
+- 你在编写一个 ui 组件库的 table 组件, 有一个配套的搜索栏.
+- 这时候父组件就需要传入搜索的字段, 配置这个搜索框的样式.
+- 而可以使用哪些字段来搜索, 是 table 组件控制的.
+- 所以 table 子组件把可以用的字段通过 `slot` 传递给父组件.
+
+### lifetime 生命周期
+
+- `setup` 创建阶段
+- `onBeforeMounted`, `onMounted` 挂载阶段
+	- api 请求
+	- 获取 dom
+	- 启动定时器、事件监听
+- `onBeforeUpdated`, `onUpdated` 更新阶段
+- `onBeforeUpdated`, `onUnmounted` 卸载阶段
+	- 清理监听，定时器
+
+```ts
+// 并发请求，等待一起完成
+onMounted(async () => {
+  const [res1, res2, res3] = await Promise.all([
+    fetchData1(),
+    fetchData2(),
+    fetchData3()
+  ])
+
+  data1.value = res1
+  data2.value = res2
+  data3.value = res3
+})
+
+// 完全不阻塞
+onMounted(() => {
+  fetchData1().then(res => data1.value = res)
+  fetchData2().then(res => data2.value = res)
+  fetchData3().then(res => data3.value = res)
+})
+```
+
+### 其他
+
+- `shallowref({a:1,b:{c:2}})`: 包裹对象的第一层 `a` 响应式. 下级 `b` 不监测. 性能更好
+- `readonly({a:1,b:2})` 无法修改
+- `const rawObj = toRaw(reactiveObj)` 拿到 `reactive` 包装前的原对象.
+- `const nonReactiveObj = markRaw(copiedObj)` 相当于深拷贝一个新对象出来.
+- `teleport` 让一个组件渲染到不同的 dom 位置 (例如相对于 body 元素, 而不是当前位置)
+- `suspense` 自定义一个 loading 或加载失败时展示内容. 是占位符 + 加载状态展示
+- `customRef` 是 Vue 3 中的一个函数，用于创建一个自定义的 ref 对象。通过 `customRef`，你可以定义一个自定义的 getter 和 setter 函数来管理 ref 对象的值，并且可以手动控制依赖追踪和触发更新。这使得你可以更灵活地处理一些复杂的情况，例如惰性计算、异步更新等。
+
+```js
+import { customRef } from 'vue';
+
+function customComputedRef(getter, setter) {
+  let value = getter();
+  return customRef((track, trigger) => {
+    return {
+      get() {
+        track(); // 手动追踪依赖
+        return value;
+      },
+      set(newValue) {
+        setter(newValue);
+        value = newValue;
+        trigger(); // 手动触发更新
+      }
+    };
+  });
+}
+
+const myCustomRef = customComputedRef(
+  () => {
+    console.log('getter executed');
+    return 1;
+  },
+  (v) => {
+    console.log('setter executed', v);
+  }
+);
+
+console.log(myCustomRef.value); // 输出: "getter executed", 1
+
+myCustomRef.value = 2; // 输出: "setter executed", 2
+console.log(myCustomRef.value); // 输出: "getter executed", 2
+
+```
+
+## 工具
+
+### vite
+
+#### 相关资源
+
+- [vite文档地址](https://cn.vitejs.dev/guide/env-and-mode.html#env-variables)
+- [GitHub - vbenjs/vite-plugin-svg-icons: Vite Plugin for fast creating SVG sprites.](https://github.com/vbenjs/vite-plugin-svg-icons)
+- 打包个单个文件 `index.html` [GitHub - richardtallent/vite-plugin-singlefile: Vite plugin for inlining JavaScript and CSS resources](https://github.com/richardtallent/vite-plugin-singlefile)
+
+#### i18n
+
+```shell
+npm install vue-i18n@9
+```
+
+创建 `@/src/locales/cn.json`
+
+```json
+{
+  "nav": "导航",
+  "login": "登录"
+}
+```
+
+创建 `@/src/locales/index.ts`
+
+```ts
+import { createI18n } from 'vue-i18n'
+import cn from './cn.json'
+
+type MessageSchema = typeof cn
+
+// 英文直接用key表示
+const generateEnTranslations = (translations: MessageSchema) => {
+  const enTranslations = { ...translations }
+  Object.keys(translations).forEach((key) => {
+    Object.defineProperty(enTranslations, key, {
+      value: key,
+      writable: true,
+      enumerable: true,
+      configurable: true
+    })
+  })
+  console.log(enTranslations)
+  console.log(translations)
+  return enTranslations
+}
+
+const en = generateEnTranslations(cn)
+
+const i18n = createI18n<[MessageSchema], 'en' | 'cn'>({
+  locale: 'cn',
+  fallbackLocale: 'cn',
+  messages: {
+    cn,
+    en
+  }
+})
+
+export default i18n
+```
+
+引入 `main.ts`
+
+```ts
+import i18n from '@/locales'
+app.use(i18n)
+```
+
+#### iconify/tailwindcss 4
+
+先配置好 [[笔记/tailwindcss手册|tailwindcss4]]
+
+```shell
+pnpm add -D @iconify/tailwind4 @iconify/json
+
+# main.css
+@import 'tailwindcss';
+@plugin "@iconify/tailwind4";
+
+# 使用方法
+<span class="icon-[mdi--folder]"></span>
+```
+
+#### iconify/unplugin 使用中
+
+安装 [[笔记/point/vscode|vscode]] 插件 [Iconify IntelliSense](https://marketplace.visualstudio.com/items?itemName=antfu.iconify) - Iconify 图标插件
+
+安装配置
+
+```shell
+# 图标数据
+pnpm add -D @iconify/json
+
+# 安装配置插件
+pnpm add -D unplugin-icons unplugin-vue-components
+## vite.config.ts
+import Icons from 'unplugin-icons/vite'
+import Components from 'unplugin-vue-components/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+
+export default defineConfig({
+    plugins: [
+      Icons({
+        /* options */
+      }),
+      Components({
+        resolvers: [IconsResolver()],
+      }),
+    ],
+})
+```
+
+使用
+
+```ts
+// 上面如果使用了IconsResolver, 可以省略这一步
+// import IconAccountBox from '~icons/mdi/account-box'
+
+<icon-mdi-account-box class=" text-red-400 text-2xl" />
+```
+
+- 使用方法 `<i-图标名 />`
+    - 例如 `<i-ic:baseline-5mp class="size-4" />`
+    - [Icônes图标查找, 速度更快](https://icones.js.org/)
+    - [Iconify图标查找](https://icon-sets.iconify.design/)
+
+#### iconfont / svg 图标封装 / icon
+
+`iconfont` 是阿里的图标库. 这里介绍用法.
+
+安装插件
+
+```shell
+pnpm install vite-plugin-svg-icons -D
+```
+
+配置 `vite.config.ts`
+
+```ts
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import path from 'path'
+
+export default defineConfig({
+  plugins: [
+    // 关键内容
+    createSvgIconsPlugin({
+      iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+      symbolId: 'icon-[dir]-[name]'
+    })
+  ],
+})
+```
+
+配置 `main.ts`
+
+```ts
+// svg插件
+import 'virtual:svg-icons-register'
+```
+
+创建文件夹 `src/assets/icons`, 去 [iconfont](https://www.iconfont.cn/) 下载 svg 到这个文件夹.
+
+例如 `src/assets/icons/dollor.svg`
+
+使用方法:
+
+- `fill` 控制颜色
+- 样式控制大小
+
+```html
+<svg class="svg">
+    <use xlink:href="#icon-dollor" fill="red"></use>
+</svg>
+
+<style scoped>
+.svg {
+    width: 2rem;
+}
+</style>
+```
+
+封装一下 `src/components/SvgIcon/index.vue` 组件
+
+```html
+<template>
+    <svg :style="{ width: size, height: size }">
+        <use :xlink:href="prefix + name" :fill="fill"></use>
+    </svg>
+</template>
+
+<script lang="ts" setup>
+defineOptions({
+    name: "svg-component"
+})
+const prefix = "#icon-"
+
+withDefaults(defineProps<{ name?: string, size?: string, fill?: string }>(), {
+    // 默认图标
+    name: () => "info-circle",
+    // 大小
+    size: () => "1rem",
+    // 填充颜色
+    fill: () => ""
+})
+</script>
+```
+
+使用组件
+
+```html
+<svg-icon name="dollor" size="2rem" fill="red"></svg-icon>
+
+import SvgIcon from "@/components/SvgIcon/index.vue";
+```
+
+#### dotenv 环境变量
+
+`vite` 使用 `.env` 文件区分使用环境变量, 暴露在 `import.meta.env` 对象里.
+
+已有的变量:
+
+- `import.meta.env.MODE`: {string} 应用运行的 [模式](https://cn.vitejs.dev/guide/env-and-mode.html#modes)。
+- `import.meta.env.BASE_URL`: {string} 部署应用时候的基础 url, 默认 `/`
+- `import.meta.env.PROD`: {boolean} 是否生产环境. `NODE_ENV='production'` 决定这个值
+- `import.meta.env.DEV`: {boolean} 是不是开发环境
+- `import.meta.env.SSR`: {boolean} 应用是否运行在 SSR 模式
+
+使用场景
+
+```shell
+# "dev":"vite" 所以等同于直接执行 vite 命令
+# 读取 .env.development
+pnpm dev
+
+# 等于并行运行 vue-tsc --build --force && vite build
+# 读取 .env.prodution
+pnpm build
+
+# 使用 --mode 指定读取的文件 .env.staging
+vite build --mode staging
+```
+
+> `process.env.NODE_ENV` 和 `vite build --mode env` 不是一个东西.
+> 但是建议在 `.env` 文件里加入加上这个变量. 使得统一
+
+```shell
+# 示例如下
+# .env
+VITE_APP_TITLE = '我是名字'
+
+# .env.development
+NODE_ENV = 'development'
+VITE_KEN = 'development'
+VITE_SERVER_URL = 'http://127.0.0.1:5000/'
+
+# .env.production
+NODE_ENV = 'production'
+VITE_KEN = 'production'
+VITE_SERVER_URL = 'http://127.0.0.1:5000/'
+```
+
+代码使用
+
+```ts
+<script lang="ts" setup>
+...
+const title: string = import.meta.env.VITE_APP_TITLE
+...
+</script>
+```
+
+#### 自定义组件名
+
+**现在**可以这样指定名字
+
+```ts
+defineOptions({
+  name: 'Foo',
+  // ... 更多自定义属性
+})
+```
+
+**以前**写 vue 的时候组件名会是文件名. 无法配置组件名称, 可以使用 `vite-plugin-vue-setup-extend`.
+
+```ts
+import vueSetupExtend from 'vite-plugin-vue-setup-extend'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    vueSetupExtend() // 加入
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  }
+})
+```
+
+于是我们就可以像 xml 一样写 name 的值
+
+```ts
+<script setup lang="ts" name="自定义组件名">
+defineProps<{
+  msg: string
+}>()
+</script>
+```
+
+### ui 组件
+
+- 头像
+	- [DiceBear](https://www.dicebear.com/how-to-use/js-library/)
+- 图片预览
+	- [vue-easy-lightbox | vue-easy-lightbox](https://onycat.com/vue-easy-lightbox/guide/)
+	- v-viewer 下面是同一个人的仓库，代码和用法似乎是一致的
+		- 这个 star 多点 [mirari/v-viewer: Image viewer component for vue, supports rotation, scale, zoom and so on, based on viewer.js](https://github.com/mirari/v-viewer)
+		- [mirari/vue3-viewer: Image viewer component for vue 3.x, supports rotation, scale, zoom and so on, based on viewer.js](https://github.com/mirari/vue3-viewer)
+
+### 库
+
+#### 类型检测
+
+`vue-device-detect` 设备类型检测
+
+```ts
+import { isMobile } from 'vue-device-detect'
+```
+
+#### 防抖
+
+```ts
+// 防抖，300ms 内只触发一次
+import { debounce } from 'lodash-es'
+const debouncedGetMirrorStatus = debounce(getMirrorStatus, 300)
+
+// watch 一个不断变化的数据，通过防抖来确保只请求一次
+watch(historyDays, async () => {
+  await debouncedGetMirrorStatus()
+}, { immediate: false, deep: false })
+```
+
+### 格式化
+
+- prettier
+	- `pnpm add -D prettier`
+	- 添加命令到 `package.json/scripts` ， `"format": "prettier --write src/"`
+	- `pnpm format` 即可

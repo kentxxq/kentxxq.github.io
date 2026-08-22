@@ -1,0 +1,45 @@
+name: CICD
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Set core.quotePath false
+        run: git config --global core.quotepath false
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Setup Hugo
+        run: |
+          wget https://github.com/kentxxq/hugo/releases/download/latest/hugo-linux-amd64 -O hugo
+          chmod +x hugo
+          cp hugo /usr/local/bin/hugo
+          ls -al hugo 
+          ./hugo version
+          hugo version
+          pwd
+
+      - name: Build Static File
+        run: |
+          pwd
+          ls
+          hugo version
+          hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          cname: kentxxq.com
+          force_orphan: true

@@ -1,0 +1,54 @@
+---
+title: 鸡血和chill
+tags:
+  - blog
+date: 2023-12-24
+lastmod: 2025-12-09
+categories:
+  - blog
+description: 
+---
+
+## 简介
+
+本来只是想记录鸡血。但是觉得很多东西觉得想要收藏，收藏以后又应该分类。
+
+## 鸡血
+
+人生总有很多时候需要给自己打鸡血。而我现在 `2023/12/24` 就需要鸡血。于是看了一些相关的内容。
+
+这并不是我第一次看/搜索，所以决定记录下来。
+
+关于鸡血
+
+- 鸡汤是假大空. 鸡血不会.
+- 鸡血会让你想做点什么
+
+下面是视频
+
+- [黄仁勋小时候很困苦](https://v.douyin.com/tY40fg9g8fU/)
+- [人生第二次硬核的半佛仙人-纪录片-全集-高清正版在线观看-bilibili-哔哩哔哩](https://www.bilibili.com/bangumi/play/ep515452?spm_id_from=333.788.recommend_more_video.-1)
+- ["你没穷过，你不懂！"\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV13y4y1p7DD/?vd_source=3f8a7a9cfa796e140d94e90eb3af4c90)
+- [你没穷过，你不懂！\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1nD4y1X7Tx/?vd_source=3f8a7a9cfa796e140d94e90eb3af4c90)
+- [“明明应该愧疚的是我 你却......”\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1u84y1c7sx/?spm_id_from=333.788.recommend_more_video.2&vd_source=3f8a7a9cfa796e140d94e90eb3af4c90)
+- [这不比毒鸡汤好使？\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1gZ4y1L7ca/?spm_id_from=333.788.recommend_more_video.1&vd_source=3f8a7a9cfa796e140d94e90eb3af4c90)
+- [“你迷茫的原因，在于读书太少，而想的太多”\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1r341177AP/?spm_id_from=trigger_reload&vd_source=3f8a7a9cfa796e140d94e90eb3af4c90)
+- [985掉到211情绪低落，这是骂的最爽的一次\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1sa4y1m7Xt/?vd_source=3f8a7a9cfa796e140d94e90eb3af4c90)
+- [励志超燃演讲混剪：“学会对这个世界说去你妈的”_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1sK4y1e7fj/?spm_id_from=333.788.recommend_more_video.9&vd_source=3f8a7a9cfa796e140d94e90eb3af4c90)
+- https://v.douyin.com/iNC8UbAx/
+- [抖音主播-柯老师Chris](https://www.douyin.com/user/MS4wLjABAAAAaEFJtdE4vrkQd4FDJQBI1ccBi5Ltfke30ery9RLkMgan4WZDv-zsY2U6wVjUEV3X)
+- [【罗翔】这段话送给28岁的你，和曾经28岁的你！\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV12v42117bY/?buvid=XXC3928CFEE6D9DCE3E38095E1390144D3079&from_spmid=tm.recommend.0.0&is_story_h5=false&mid=PmrRaypEwkkLBL%2Fie%2Ft7JQ%3D%3D&p=1&plat_id=116&share_from=ugc&share_medium=android&share_plat=android&share_session_id=219edcd1-8e67-4615-92dc-e53403131598&share_source=GENERIC&share_tag=s_i&spmid=united.player-video-detail.0.0&timestamp=1707181717&unique_k=vS52N3l&up_id=1640095931&vd_source=3f8a7a9cfa796e140d94e90eb3af4c90)
+- [学生想要财富自由，张老师又掏心窝子了\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1q64y1V7Kg/?buvid=XXC3928CFEE6D9DCE3E38095E1390144D3079&from_spmid=main.my-history.0.0&is_story_h5=false&mid=PmrRaypEwkkLBL%2Fie%2Ft7JQ%3D%3D&p=1&plat_id=114&share_from=ugc&share_medium=android&share_plat=android&share_session_id=b6b60804-6dcf-4902-96e9-919cd75985b5&share_source=COPY&share_tag=s_i&spmid=united.player-video-detail.0.0&timestamp=1703409454&unique_k=8YxqTYk&up_id=652522840&vd_source=3f8a7a9cfa796e140d94e90eb3af4c90)
+
+分段
+
+- [𝐍𝐨 𝐑𝐢𝐬𝐤, 𝐍𝐨 𝐒𝐭𝐨𝐫𝐲.](https://www.youtube.com/watch?v=pyzy5Zek4i8)
+- [為什麼對自己越苛刻，就越容易失敗？► 大多數人做錯了這件事，越陷越深而不自知... - Dr. Kelly McGonigal 凱莉．麥高尼格博士（中英字幕） - YouTube](https://www.youtube.com/watch?v=bJIx96gQewI)
+- https://v.douyin.com/i5WVX3wQ/
+
+## chill
+
+- [douyin.com/video/7464116200880999716?previous\_page=app\_code\_link](https://v.douyin.com/iPoYPTQJ/)
+- https://v.douyin.com/iPwo1VND/
+- https://v.douyin.com/i5N9sNK7/
+- [douyin.com/note/7478614490871844153](https://v.douyin.com/i5Vm2DXA/)
